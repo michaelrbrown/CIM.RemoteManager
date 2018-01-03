@@ -29,6 +29,11 @@
     </NuGetPackageImportStamp>
     <AndroidTlsProvider>
     </AndroidTlsProvider>
+    <AndroidKeyStore>true</AndroidKeyStore>
+    <AndroidSigningKeyStore>D:\GitHub\Repos\DotComCoders\CIM.RemoteManager\Source\CIM.RemoteManager.App\CIM.RemoteManager.Android\dcc_keystore.keystore</AndroidSigningKeyStore>
+    <AndroidSigningStorePass>mb1991</AndroidSigningStorePass>
+    <AndroidSigningKeyAlias>dcc_keystore</AndroidSigningKeyAlias>
+    <AndroidSigningKeyPass>mb1991</AndroidSigningKeyPass>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
