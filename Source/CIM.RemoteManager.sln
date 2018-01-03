@@ -29,7 +29,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{712770
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{A06042F5-F69D-4191-875E-5ADE9CF42075}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CIM.RemoteManager.App", "CIM.RemoteManager.App", "{A06042F5-F69D-4191-875E-5ADE9CF42075}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugin.BLE", "Plugin.BLE\Plugin.BLE.csproj", "{951ED11D-D026-449C-90DC-5027BC41FB3B}"
 	ProjectSection(ProjectDependencies) = postProject
