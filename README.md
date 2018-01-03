@@ -9,8 +9,7 @@ CIMTechniques Remote Manager native iOS, and Android mobile application built on
 | Xamarin.Android | 4.3 |  |
 | Xamarin.iOS     | 7.0 |  |
 
-[Changelog](doc/changelog.md)
-
+[Changelog](docs/changelog.md)
 
 ## CIMTechniques Remote Manager
 
