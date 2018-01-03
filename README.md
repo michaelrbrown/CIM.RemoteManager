@@ -1,6 +1,6 @@
 # <img src="icon_small.png" /> CIMTechniques Remote Manager [![Build Status](https://www.bitrise.io/)]
 
-CIMTechniques Remote Manager native iOS, Android, and UWP mobile app built on the Xamarin platform using MVVMCross architecture.  
+CIMTechniques Remote Manager native iOS, and Android mobile application built on the Xamarin platform using MVVMCross architecture.  
 
 ## Support & Limitations
 
@@ -12,7 +12,7 @@ CIMTechniques Remote Manager native iOS, Android, and UWP mobile app built on th
 [Changelog](doc/changelog.md)
 
 
-## Sample app
+## CIMTechniques Remote Manager
 
 Cimtechniques Remote Manager app will search for Bluetooth LE remotes (DA-12-BTLE currently) and connect.  Sensor data will be displayed in real-time for all sensors on the remote chain. Features include:
 
@@ -25,8 +25,8 @@ Cimtechniques Remote Manager app will search for Bluetooth LE remotes (DA-12-BTL
 - Calibrate remote
 - View remote diagnostics
 
-## Licence
-
+## License
+Copyright (c)DotComCoders, Inc. - All Rights Reserved
 
 
 
