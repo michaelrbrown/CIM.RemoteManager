@@ -1,4 +1,4 @@
-# <img src="icon_small.png" /> CIMTechniques Remote Manager [![Build Status](https://www.bitrise.io/) 
+# <img src="icon_small.png" /> CIMTechniques Remote Manager [![Build Status](https://www.bitrise.io/) ]
 
 CIMTechniques Remote Manager native iOS, Android, and UWP mobile app built on the Xamarin platform using MVVMCross architecture.  
 
