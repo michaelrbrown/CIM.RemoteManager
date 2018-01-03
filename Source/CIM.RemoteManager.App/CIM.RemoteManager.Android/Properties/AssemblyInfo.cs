@@ -6,12 +6,12 @@ using Android.App;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("BLE.Client.Droid")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("CIM.RemoteManager.Android")]
+[assembly: AssemblyDescription("CIMTechniques Remote Manager app will search for Bluetooth LE remotes (DA-12-BTLE currently) and connect. Sensor data will be displayed in real-time for all sensors on the remote chain.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("BLE.Client.Droid")]
-[assembly: AssemblyCopyright("Copyright �  2014")]
+[assembly: AssemblyCompany("DotComCoders, Inc.")]
+[assembly: AssemblyProduct("CIM.RemoteManager.Android")]
+[assembly: AssemblyCopyright("Copyright DotComCoders, Inc.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]

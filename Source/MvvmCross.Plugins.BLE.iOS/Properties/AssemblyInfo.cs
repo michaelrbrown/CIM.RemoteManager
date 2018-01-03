@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("MvvmCross.Plugins.BLE.iOS")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Zuehlke Technology Group")]
+[assembly: AssemblyCompany("DotComCoders, Inc.")]
 [assembly: AssemblyProduct("MvvmCross.Plugins.BLE.iOS")]
-[assembly: AssemblyCopyright("Copyright � Zuehlke Technology Group 2015")]
+[assembly: AssemblyCopyright("Copyright DotComCoders, Inc.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

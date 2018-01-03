@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("BLE.Client.iOS")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("CIM.RemoteManager.iOS")]
+[assembly: AssemblyDescription("CIMTechniques Remote Manager app will search for Bluetooth LE remotes (DA-12-BTLE currently) and connect. Sensor data will be displayed in real-time for all sensors on the remote chain.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("BLE.Client.iOS")]
-[assembly: AssemblyCopyright("Copyright �  2014")]
+[assembly: AssemblyCompany("DotComCoders, Inc.")]
+[assembly: AssemblyProduct("CIM.RemoteManager.iOS")]
+[assembly: AssemblyCopyright("Copyright DotComCoders, Inc.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

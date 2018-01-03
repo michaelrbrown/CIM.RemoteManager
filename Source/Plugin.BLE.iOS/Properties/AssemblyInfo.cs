@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Plugin.BLE.iOS")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("DotComCoders, Inc.")]
 [assembly: AssemblyProduct("Plugin.BLE.iOS")]
-[assembly: AssemblyCopyright("Copyright �  2016")]
+[assembly: AssemblyCopyright("Copyright DotComCoders, Inc.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

@@ -7,12 +7,12 @@ using Xamarin.Forms.Xaml;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("BLE.Client")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("CIM.RemoteManager")]
+[assembly: AssemblyDescription("CIMTechniques Remote Manager app will search for Bluetooth LE remotes (DA-12-BTLE currently) and connect. Sensor data will be displayed in real-time for all sensors on the remote chain.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("DotComCoders, Inc.")]
 [assembly: AssemblyProduct("BLE.Client")]
-[assembly: AssemblyCopyright("Copyright �  2014")]
+[assembly: AssemblyCopyright("Copyright DotComCoders, Inc.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: NeutralResourcesLanguage("en")]
