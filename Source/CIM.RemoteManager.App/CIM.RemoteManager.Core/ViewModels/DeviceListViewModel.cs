@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Input;
 using Acr.UserDialogs;
 using CIM.RemoteManager.Core.Extensions;
 using MvvmCross.Core.ViewModels;
@@ -15,6 +14,7 @@ using Plugin.BLE.Abstractions.EventArgs;
 using Plugin.BLE.Abstractions.Extensions;
 using Plugin.Permissions.Abstractions;
 using Plugin.Settings.Abstractions;
+using Xamarin.Forms;
 
 namespace CIM.RemoteManager.Core.ViewModels
 {
@@ -28,7 +28,7 @@ namespace CIM.RemoteManager.Core.ViewModels
 
         public Guid PreviousGuid
         {
-            get { return _previousGuid; }
+            get => _previousGuid;
             set
             {
                 _previousGuid = value;
@@ -49,7 +49,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         public string StateText => GetStateText();
         public DeviceListItemViewModel SelectedDevice
         {
-            get { return null; }
+            get => null;
             set
             {
                 if (value != null)
@@ -64,10 +64,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         bool _useAutoConnect;
         public bool UseAutoConnect
         {
-            get
-            {
-                return _useAutoConnect;
-            }
+            get => _useAutoConnect;
 
             set
             {
@@ -85,19 +82,6 @@ namespace CIM.RemoteManager.Core.ViewModels
             CleanupCancellationToken();
             RaisePropertyChanged(() => IsRefreshing);
         }, () => _cancellationTokenSource != null);
-
-        public ICommand IsSearchingCommand
-        {
-            get
-            {
-                return new MvxCommand<bool>(isRefreshing =>
-                {
-                    var parameter = IsRefreshing;
-                });
-            }
-        }
-
-        // public MvxCommand IsSearching => new MvxCommand(() => return IsRefreshing);
 
         readonly IPermissions _permissions;
 
@@ -129,7 +113,6 @@ namespace CIM.RemoteManager.Core.ViewModels
         private void OnDeviceConnectionLost(object sender, DeviceErrorEventArgs e)
         {
             Devices.FirstOrDefault(d => d.Id == e.Device.Id)?.Update();
-
             _userDialogs.HideLoading();
             _userDialogs.ErrorToast("Error", $"Connection LOST {e.Device.Name}", TimeSpan.FromMilliseconds(6000));
         }
@@ -212,13 +195,14 @@ namespace CIM.RemoteManager.Core.ViewModels
                 // Avoid to loose already IDevice with a connection, otherwise you can't close it
                 // Keep the reference of already known devices and drop all not in returned list.
                 var pairedOrConnectedDeviceWithNullGatt = Adapter.GetSystemConnectedOrPairedDevices();
-                SystemDevices.RemoveAll(sd => !pairedOrConnectedDeviceWithNullGatt.Any(p => p.Id == sd.Id));
-                SystemDevices.AddRange(pairedOrConnectedDeviceWithNullGatt.Where(d => !SystemDevices.Any(sd => sd.Id == d.Id)).Select(d => new DeviceListItemViewModel(d)));
+                SystemDevices.RemoveAll(sd => pairedOrConnectedDeviceWithNullGatt.All(p => p.Id != sd.Id));
+                SystemDevices.AddRange(pairedOrConnectedDeviceWithNullGatt.Where(d => SystemDevices.All(sd => sd.Id != d.Id)).Select(d => new DeviceListItemViewModel(d)));
                 RaisePropertyChanged(() => SystemDevices);
             }
             catch (Exception ex)
             {
                 Trace.Message("Failed to retreive system connected devices. {0}", ex.Message);
+                _userDialogs.ErrorToast("Error", $"Failed to retreive system connected devices. {ex.Message}", TimeSpan.FromSeconds(5));
             }
         }
 
@@ -234,7 +218,7 @@ namespace CIM.RemoteManager.Core.ViewModels
 
         private async void TryStartScanning(bool refresh = false)
         {
-            if (Xamarin.Forms.Device.OS == Xamarin.Forms.TargetPlatform.Android)
+            if (Device.RuntimePlatform == Device.Android)
             {
                 var status = await _permissions.CheckPermissionStatusAsync(Permission.Location);
                 if (status != PermissionStatus.Granted)
@@ -243,7 +227,7 @@ namespace CIM.RemoteManager.Core.ViewModels
 
                     if (permissionResult.First().Value != PermissionStatus.Granted)
                     {
-                        _userDialogs.ShowError("Permission denied. Not scanning.");
+                        _userDialogs.ErrorToast("Error", "Permission denied. Not scanning.", TimeSpan.FromSeconds(5));
                         return;
                     }
                 }
@@ -269,7 +253,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 catch (Exception ex)
                 {
                     Mvx.Trace(ex.Message);
-                    _userDialogs.ShowError($"Failed to update RSSI for {connectedDevice.Name}");
+                    _userDialogs.ErrorToast("Error", $"Failed to update RSSI for {connectedDevice.Name}", TimeSpan.FromSeconds(5));
                 }
 
                 AddOrUpdateDevice(connectedDevice);
@@ -328,13 +312,12 @@ namespace CIM.RemoteManager.Core.ViewModels
                         device.RaisePropertyChanged(nameof(device.Rssi));
 
                         _userDialogs.HideLoading();
-
-                        _userDialogs.ShowSuccess($"RSSI updated {device.Rssi}", 1000);
+                        _userDialogs.Toast($"RSSI updated {device.Rssi}", TimeSpan.FromSeconds(2));
                     }
                     catch (Exception ex)
                     {
                         _userDialogs.HideLoading();
-                        _userDialogs.ShowError($"Failed to update rssi. Exception: {ex.Message}");
+                        _userDialogs.ErrorToast("Error", $"Failed to update rssi. Exception: {ex.Message}", TimeSpan.FromSeconds(5));
                     }
                 });
 
@@ -383,8 +366,8 @@ namespace CIM.RemoteManager.Core.ViewModels
 
                     await Adapter.ConnectToDeviceAsync(device.Device, new ConnectParameters(autoConnect: UseAutoConnect, forceBleTransport: false), tokenSource.Token);
                 }
-
-                _userDialogs.ShowSuccess($"Connected to {device.Device.Name}.");
+                
+                _userDialogs.Toast($"Connected to {device.Device.Name}.", TimeSpan.FromSeconds(3));
 
                 PreviousGuid = device.Device.Id;
                 return true;
@@ -429,7 +412,7 @@ namespace CIM.RemoteManager.Core.ViewModels
 
                 }
 
-                _userDialogs.ShowSuccess($"Connected to {device.Name}.");
+                _userDialogs.Toast($"Connected to {device.Name}.", TimeSpan.FromSeconds(3));
 
                 var deviceItem = Devices.FirstOrDefault(d => d.Device.Id == device.Id);
                 if (deviceItem == null)
@@ -444,7 +427,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             }
             catch (Exception ex)
             {
-                _userDialogs.ShowError(ex.Message, 5000);
+                _userDialogs.ErrorToast("Error", $"{ex.Message}", TimeSpan.FromSeconds(5));
                 return;
             }
         }
@@ -472,9 +455,10 @@ namespace CIM.RemoteManager.Core.ViewModels
                     System.Diagnostics.Debug.WriteLine($"Set Connection Interval. Result is {resultInterval}");
 
                     item.Update();
-                    _userDialogs.ShowSuccess($"Connected {item.Device.Name}");
 
+                    _userDialogs.Toast($"Connected to {item.Device.Name}.", TimeSpan.FromSeconds(3));
                     _userDialogs.HideLoading();
+
                     for (var i = 5; i >= 1; i--)
                     {
                         _userDialogs.ShowLoading($"Disconnect in {i}s...");

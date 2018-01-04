@@ -303,6 +303,12 @@
   <ItemGroup>
     <BundleResource Include="Resources\stop.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\connect-previous.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\stop-searching.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

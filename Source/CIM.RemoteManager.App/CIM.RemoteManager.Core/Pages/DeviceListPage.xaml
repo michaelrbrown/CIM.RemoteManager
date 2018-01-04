@@ -41,7 +41,7 @@
     </ResourceDictionary>
   </pages:BaseTabbedPage.Resources>
   <pages:BaseTabbedPage.Children>
-    <pages:BasePage Title="Search for Remotes" Icon="bluetooth-search.png">
+    <pages:BasePage Title="Search for All Devices" Icon="bluetooth-search.png">
       <Grid>
         <Grid.RowDefinitions>
           <RowDefinition Height="Auto"></RowDefinition>
@@ -50,8 +50,8 @@
           <RowDefinition Height="Auto"></RowDefinition>
           <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
-        <StackLayout BackgroundColor="#FF6969" Padding="10" IsVisible="{Binding IsStateOn}">
-          <Label Text="{Binding StateText}" FontSize="18" HorizontalTextAlignment="Center"></Label>
+        <StackLayout BackgroundColor="#AE2C3B" Padding="10" IsVisible="{Binding IsStateOn}">
+          <Label Text="{Binding StateText}" TextColor="#FFFFFF" FontSize="18" HorizontalTextAlignment="Center"></Label>
         </StackLayout>
 
         <ListView Grid.Row="1" ItemsSource="{Binding Devices}" SelectedItem="{Binding SelectedDevice, Mode=TwoWay}"
@@ -63,7 +63,7 @@
                  ItemTemplate="{StaticResource DeviceItemTemplate}">
         </ListView>
 
-        <Label Grid.Row="2" Text="{Binding PreviousGuid, StringFormat='GUID {0}'}" FontSize="Small" TextColor="#7B7B7B"  BackgroundColor="Red" VerticalTextAlignment="End" />
+        <Label Grid.Row="2" Text="{Binding PreviousGuid, StringFormat='GUID {0}'}" FontSize="Small" TextColor="#536559" VerticalTextAlignment="End" />
         <StackLayout Grid.Row="3" Orientation="Horizontal" HorizontalOptions="Fill">
           <StackLayout.IsVisible>
             <OnPlatform x:TypeArguments="x:Boolean" iOS="false" Android="true" />
@@ -71,8 +71,9 @@
           <Label Text="Use Android AutoConnect" HorizontalOptions="StartAndExpand" VerticalOptions="Center"/>
           <Switch IsToggled="{Binding UseAutoConnect}" HorizontalOptions="End"></Switch>
         </StackLayout>
-        <StackLayout Grid.Row="4" Orientation="Horizontal" Margin="0, 0, 0, 20">
-          <Button x:Name="SearchForRemotesButton" Text="Stop Searching for Remotes" Command="{Binding StopScanCommand}" IsVisible="{Binding IsSearchingCommand}" HorizontalOptions="CenterAndExpand" WidthRequest="245" BackgroundColor="#eeeeee" Image="stop.png" TextColor="#7B7B7B" />
+        <StackLayout Grid.Row="4" Orientation="Horizontal" Margin="0, 0, 0, 20" HorizontalOptions="CenterAndExpand">
+          <Button Text="Connect to Previous" Command="{Binding ConnectToPreviousCommand}" HorizontalOptions="CenterAndExpand" WidthRequest="185" BackgroundColor="#EDF2ED" Image="connect-previous.png" TextColor="#777777" />
+          <Button Text="Stop Searching" Command="{Binding StopScanCommand}" HorizontalOptions="CenterAndExpand" WidthRequest="155" BackgroundColor="#EDF2ED" Image="stop-searching.png" TextColor="#777777" />
           <ActivityIndicator IsRunning="{Binding IsRefreshing}"
                              HeightRequest="24"
                              WidthRequest="24"
@@ -82,9 +83,10 @@
 
       </Grid>
     </pages:BasePage>
-    <pages:BasePage Title="Previous Remotes" Icon="bluetooth-connected.png">
+    <pages:BasePage Title="Search for DA-12 Remotes" Icon="bluetooth-connected.png">
       <ListView ItemsSource="{Binding SystemDevices}" SelectedItem="{Binding SelectedDevice, Mode=TwoWay}"
-                RowHeight="80"
+                RowHeight="75" Margin="0,20,0,0"
+                SeparatorColor="Transparent"
                 ItemTemplate="{StaticResource DeviceItemTemplate}"/>
     </pages:BasePage>
   </pages:BaseTabbedPage.Children>
