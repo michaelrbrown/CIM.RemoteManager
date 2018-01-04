@@ -393,6 +393,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 _userDialogs.Toast($"Connected to {device.Device.Name}.", TimeSpan.FromSeconds(3));
 
                 PreviousGuid = device.Device.Id;
+                PreviousName = device.Device.Name;
                 return true;
 
             }
