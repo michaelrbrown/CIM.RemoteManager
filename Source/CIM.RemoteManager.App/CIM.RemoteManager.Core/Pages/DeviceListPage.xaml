@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:pages="clr-namespace:CIM.RemoteManager.Core.Pages;assembly=CIM.RemoteManager.Core"
              x:Class="CIM.RemoteManager.Core.Pages.DeviceListPage"
-             Title="Discover Devices"
+             Title="Discover DA-12-BTLE Remotes"
              x:Name="DevicePage">
 
   <pages:BaseTabbedPage.Resources>
@@ -11,25 +11,25 @@
       <DataTemplate x:Key="DeviceItemTemplate">
         <ViewCell>
           <ViewCell.ContextActions>
-            <MenuItem Command="{Binding Path=BindingContext.DisconnectCommand, Source={x:Reference DevicePage}}"
+            <MenuItem Command="{Binding Path=BindingContext.DisconnectCommand, Source={x:Reference DevicePage}}" 
                       CommandParameter="{Binding .}" IsDestructive="True"
                       Text="Disconnect"/>
           </ViewCell.ContextActions>
           <Grid>
             <Grid.ColumnDefinitions>
-              <ColumnDefinition></ColumnDefinition>
+              <ColumnDefinition Width="*"></ColumnDefinition>
               <ColumnDefinition Width="Auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid.Triggers>
               <DataTrigger TargetType="Grid"
                            Binding="{Binding IsConnected}"
                            Value="true">
-                <Setter Property="BackgroundColor" Value="#1A00FF00"></Setter>
+                <Setter Property="BackgroundColor" Value="#C1E2D5"></Setter>
               </DataTrigger>
             </Grid.Triggers>
-            <StackLayout Orientation="Vertical" VerticalOptions="Center">
-              <Label Text="{Binding Name}" FontSize="Large" />
-              <Label Text="{Binding Id, StringFormat='{0}'}" TextColor="Gray" FontSize="Small"/>
+            <StackLayout Orientation="Vertical" VerticalOptions="CenterAndExpand">
+              <Label Text="{Binding Name}" FontSize="22" />
+              <Label Text="{Binding Id, StringFormat='{0}'}" TextColor="#7B7B7B" FontSize="18"/>
             </StackLayout>
             <Label Grid.Column="1"
                    Margin="10"
@@ -41,7 +41,7 @@
     </ResourceDictionary>
   </pages:BaseTabbedPage.Resources>
   <pages:BaseTabbedPage.Children>
-    <pages:BasePage Title="Scan for devices">
+    <pages:BasePage Title="Search for Remotes" Icon="bluetooth-search.png">
       <Grid>
         <Grid.RowDefinitions>
           <RowDefinition Height="Auto"></RowDefinition>
@@ -50,7 +50,7 @@
           <RowDefinition Height="Auto"></RowDefinition>
           <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
-        <StackLayout BackgroundColor="#FF6969" Padding="10" IsVisible="{Binding IsStateOn, Converter={StaticResource InverseBoolean}}">
+        <StackLayout BackgroundColor="#FF6969" Padding="10" IsVisible="{Binding IsStateOn}">
           <Label Text="{Binding StateText}" FontSize="18" HorizontalTextAlignment="Center"></Label>
         </StackLayout>
 
@@ -58,12 +58,12 @@
                  IsPullToRefreshEnabled="True"
                  RefreshCommand="{Binding RefreshCommand}"
                  IsRefreshing="{Binding IsRefreshing, Mode=OneWay}"
-                 RowHeight="80"
+                 RowHeight="75" Margin="0,20,0,0" 
+                 SeparatorColor="Transparent"
                  ItemTemplate="{StaticResource DeviceItemTemplate}">
         </ListView>
 
-
-        <Label Grid.Row="2" Text="{Binding PreviousGuid, StringFormat='GUID {0}'}" FontSize="Small" TextColor="Gray" VerticalTextAlignment="End"/>
+        <Label Grid.Row="2" Text="{Binding PreviousGuid, StringFormat='GUID {0}'}" FontSize="Small" TextColor="#7B7B7B"  BackgroundColor="Red" VerticalTextAlignment="End" />
         <StackLayout Grid.Row="3" Orientation="Horizontal" HorizontalOptions="Fill">
           <StackLayout.IsVisible>
             <OnPlatform x:TypeArguments="x:Boolean" iOS="false" Android="true" />
@@ -71,9 +71,8 @@
           <Label Text="Use Android AutoConnect" HorizontalOptions="StartAndExpand" VerticalOptions="Center"/>
           <Switch IsToggled="{Binding UseAutoConnect}" HorizontalOptions="End"></Switch>
         </StackLayout>
-        <StackLayout Grid.Row="4" Orientation="Horizontal">
-          <Button Text="Connect to previous" Command="{Binding ConnectToPreviousCommand}" HorizontalOptions="FillAndExpand"/>
-          <Button Text="Stop Scan" Command="{Binding StopScanCommand}" HorizontalOptions="End"/>
+        <StackLayout Grid.Row="4" Orientation="Horizontal" Margin="0, 0, 0, 20">
+          <Button x:Name="SearchForRemotesButton" Text="Stop Searching for Remotes" Command="{Binding StopScanCommand}" IsVisible="{Binding IsSearchingCommand}" HorizontalOptions="CenterAndExpand" WidthRequest="245" BackgroundColor="#eeeeee" Image="stop.png" TextColor="#7B7B7B" />
           <ActivityIndicator IsRunning="{Binding IsRefreshing}"
                              HeightRequest="24"
                              WidthRequest="24"
@@ -83,7 +82,7 @@
 
       </Grid>
     </pages:BasePage>
-    <pages:BasePage Title="System devices">
+    <pages:BasePage Title="Previous Remotes" Icon="bluetooth-connected.png">
       <ListView ItemsSource="{Binding SystemDevices}" SelectedItem="{Binding SelectedDevice, Mode=TwoWay}"
                 RowHeight="80"
                 ItemTemplate="{StaticResource DeviceItemTemplate}"/>

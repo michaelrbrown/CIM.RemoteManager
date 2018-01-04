@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Acr.UserDialogs;
 using CIM.RemoteManager.Core.Extensions;
 using MvvmCross.Core.ViewModels;
@@ -85,6 +86,19 @@ namespace CIM.RemoteManager.Core.ViewModels
             RaisePropertyChanged(() => IsRefreshing);
         }, () => _cancellationTokenSource != null);
 
+        public ICommand IsSearchingCommand
+        {
+            get
+            {
+                return new MvxCommand<bool>(isRefreshing =>
+                {
+                    var parameter = IsRefreshing;
+                });
+            }
+        }
+
+        // public MvxCommand IsSearching => new MvxCommand(() => return IsRefreshing);
+
         readonly IPermissions _permissions;
 
         public DeviceListViewModel(IBluetoothLE bluetoothLe, IAdapter adapter, IUserDialogs userDialogs, ISettings settings, IPermissions permissions) : base(adapter)
@@ -153,7 +167,6 @@ namespace CIM.RemoteManager.Core.ViewModels
         private void Adapter_ScanTimeoutElapsed(object sender, EventArgs e)
         {
             RaisePropertyChanged(() => IsRefreshing);
-
             CleanupCancellationToken();
         }
 
@@ -184,9 +197,7 @@ namespace CIM.RemoteManager.Core.ViewModels
 
             await GetPreviousGuidAsync();
             //TryStartScanning();
-
             GetSystemConnectedOrPairedDevices();
-
         }
 
         private void GetSystemConnectedOrPairedDevices()
