@@ -59,6 +59,8 @@ namespace CIM.RemoteManager.Core.ViewModels
         public bool IsRefreshing => Adapter.IsScanning;
         public bool IsStateOn => _bluetoothLe.IsOn;
         public string StateText => GetStateText();
+        public bool FoundSystemDevices => SystemDevices.Any();
+        public bool CanConnectToPreviousDevice => _bluetoothLe.IsOn && PreviousGuid != Guid.Empty;
         public DeviceListItemViewModel SelectedDevice
         {
             get => null;
@@ -212,7 +214,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 //heart rate
                 var guid = Guid.Parse("0000180d-0000-1000-8000-00805f9b34fb");
 
-                // SystemDevices = Adapter.GetSystemConnectedOrPairedDevices(new[] { guid }).Select(d => new DeviceListItemViewModel(d)).ToList();
+                SystemDevices = Adapter.GetSystemConnectedOrPairedDevices(new[] { guid }).Select(d => new DeviceListItemViewModel(d)).ToList();
                 // remove the GUID filter for test
                 // Avoid to loose already IDevice with a connection, otherwise you can't close it
                 // Keep the reference of already known devices and drop all not in returned list.
@@ -220,6 +222,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 SystemDevices.RemoveAll(sd => pairedOrConnectedDeviceWithNullGatt.All(p => p.Id != sd.Id));
                 SystemDevices.AddRange(pairedOrConnectedDeviceWithNullGatt.Where(d => SystemDevices.All(sd => sd.Id != d.Id)).Select(d => new DeviceListItemViewModel(d)));
                 RaisePropertyChanged(() => SystemDevices);
+                if (SystemDevices.Any()) RaisePropertyChanged(nameof(FoundSystemDevices));
             }
             catch (Exception ex)
             {
