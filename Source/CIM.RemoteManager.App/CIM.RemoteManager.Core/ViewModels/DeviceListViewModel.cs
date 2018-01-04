@@ -150,21 +150,21 @@ namespace CIM.RemoteManager.Core.ViewModels
             switch (_bluetoothLe.State)
             {
                 case BluetoothState.Unknown:
-                    return "Unknown BLE state.";
+                    return "Unknown Bluetooth LE state.";
                 case BluetoothState.Unavailable:
-                    return "BLE is not available on this device.";
+                    return "Bluetooth LE is not available on this device.";
                 case BluetoothState.Unauthorized:
-                    return "You are not allowed to use BLE.";
+                    return "You are not allowed to use Bluetooth LE.";
                 case BluetoothState.TurningOn:
-                    return "BLE is warming up, please wait.";
+                    return "Bluetooth LE is warming up, please wait...";
                 case BluetoothState.On:
-                    return "BLE is on.";
+                    return "Bluetooth LE is on.";
                 case BluetoothState.TurningOff:
-                    return "BLE is turning off. That's sad!";
+                    return "Bluetooth LE is turning off...";
                 case BluetoothState.Off:
-                    return "BLE is off. Turn it on!";
+                    return "Bluetooth LE is off. Please enable on your device.";
                 default:
-                    return "Unknown BLE state.";
+                    return "Unknown Bluetooth LE state.";
             }
         }
 
