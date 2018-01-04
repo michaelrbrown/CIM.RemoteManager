@@ -24,6 +24,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         private readonly IUserDialogs _userDialogs;
         private readonly ISettings _settings;
         private Guid _previousGuid;
+        private string _previousName = string.Empty;
         private CancellationTokenSource _cancellationTokenSource;
 
         public Guid PreviousGuid
@@ -35,6 +36,17 @@ namespace CIM.RemoteManager.Core.ViewModels
                 _settings.AddOrUpdateValue("lastguid", _previousGuid.ToString());
                 RaisePropertyChanged();
                 RaisePropertyChanged(() => ConnectToPreviousCommand);
+            }
+        }
+
+        public string PreviousName
+        {
+            get => _previousName;
+            set
+            {
+                _previousName = value;
+                _settings.AddOrUpdateValue("lastname", _previousName.ToString());
+                RaisePropertyChanged();
             }
         }
 
@@ -110,6 +122,15 @@ namespace CIM.RemoteManager.Core.ViewModels
             });
         }
 
+        private Task GetPreviousNameAsync()
+        {
+            return Task.Run(() =>
+            {
+                var nameString = _settings.GetValueOrDefault("lastname", string.Empty);
+                PreviousName = !string.IsNullOrEmpty(nameString) ? nameString : string.Empty;
+            });
+        }
+
         private void OnDeviceConnectionLost(object sender, DeviceErrorEventArgs e)
         {
             Devices.FirstOrDefault(d => d.Id == e.Device.Id)?.Update();
@@ -179,6 +200,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             base.Resume();
 
             await GetPreviousGuidAsync();
+            await GetPreviousNameAsync();
             //TryStartScanning();
             GetSystemConnectedOrPairedDevices();
         }
@@ -202,7 +224,8 @@ namespace CIM.RemoteManager.Core.ViewModels
             catch (Exception ex)
             {
                 Trace.Message("Failed to retreive system connected devices. {0}", ex.Message);
-                _userDialogs.ErrorToast("Error", $"Failed to retreive system connected devices. {ex.Message}", TimeSpan.FromSeconds(5));
+                // In your face error if it can't find a system device which is common...so don't show this to end users.
+                //_userDialogs.ErrorToast("Error", $"Failed to retreive system connected devices. {ex.Message}", TimeSpan.FromSeconds(5));
             }
         }
 
@@ -245,7 +268,7 @@ namespace CIM.RemoteManager.Core.ViewModels
 
             foreach (var connectedDevice in Adapter.ConnectedDevices)
             {
-                //update rssi for already connected evices (so tha 0 is not shown in the list)
+                // update rssi for already connected devices (so tha 0 is not shown in the list)
                 try
                 {
                     await connectedDevice.UpdateRssiAsync();

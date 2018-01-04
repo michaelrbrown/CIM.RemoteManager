@@ -9,7 +9,7 @@
             SelectedItem="{Binding SelectedService, Mode=TwoWay}"
             RowHeight="70"
             SeparatorVisibility="Default"
-            SeparatorColor="Gray"
+            SeparatorColor="Transparent"
             CachingStrategy="RecycleElement">
     
     <ListView.ItemTemplate>
