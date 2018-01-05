@@ -113,6 +113,8 @@ namespace CIM.RemoteManager.Core.ViewModels
             Adapter.DeviceConnectionLost += OnDeviceConnectionLost;
             //Adapter.DeviceConnected += (sender, e) => Adapter.DisconnectDeviceAsync(e.Device);
 
+            // Kick off a scan on load
+            TryStartScanning(false);
         }
 
         private Task GetPreviousGuidAsync()
@@ -389,12 +391,12 @@ namespace CIM.RemoteManager.Core.ViewModels
                 using (var progress = _userDialogs.Progress(config))
                 {
                     progress.Show();
-
                     await Adapter.ConnectToDeviceAsync(device.Device, new ConnectParameters(autoConnect: UseAutoConnect, forceBleTransport: false), tokenSource.Token);
                 }
                 
                 _userDialogs.Toast($"Connected to {device.Device.Name}.", TimeSpan.FromSeconds(3));
 
+                // Set previous connected device info
                 PreviousGuid = device.Device.Id;
                 PreviousName = device.Device.Name;
                 return true;
@@ -425,7 +427,7 @@ namespace CIM.RemoteManager.Core.ViewModels
 
                 var config = new ProgressDialogConfig()
                 {
-                    Title = $"Searching for '{PreviousGuid}'",
+                    Title = $"Searching for '{PreviousName}'",
                     CancelText = "Cancel",
                     IsDeterministic = false,
                     OnCancel = tokenSource.Cancel

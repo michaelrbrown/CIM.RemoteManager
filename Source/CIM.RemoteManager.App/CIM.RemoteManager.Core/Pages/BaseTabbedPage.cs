@@ -9,8 +9,8 @@ namespace CIM.RemoteManager.Core.Pages
         {
             base.OnAppearing();
 
-            this.BarBackgroundColor = Color.FromHex("344E41");
-            this.BarTextColor = Color.FromHex("ffffff");
+            this.BarBackgroundColor = Color.FromHex("ffffff");
+            //this.BarTextColor = Color.FromHex("62B034");
 
             var viewModel = BindingContext as BaseViewModel;
             viewModel?.Resume();

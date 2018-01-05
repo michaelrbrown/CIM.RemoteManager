@@ -16,8 +16,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         public string DescriptorValue => Descriptor?.Value?.ToHexString().Replace("-", " ");
 
         public ObservableCollection<string> Messages { get; } = new ObservableCollection<string>();
-
-
+        
 
         public DescriptorDetailViewModel(IAdapter adapter, IUserDialogs userDialogs) : base(adapter)
         {
@@ -66,7 +65,6 @@ namespace CIM.RemoteManager.Core.ViewModels
                 _userDialogs.ShowError(ex.Message);
 
                 Messages.Insert(0, $"Error {ex.Message}");
-
             }
             finally
             {

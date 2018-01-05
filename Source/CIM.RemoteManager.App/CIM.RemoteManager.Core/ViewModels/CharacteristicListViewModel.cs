@@ -14,8 +14,8 @@ namespace CIM.RemoteManager.Core.ViewModels
 
         public IList<ICharacteristic> Characteristics
         {
-            get { return _characteristics; }
-            private set { SetProperty(ref _characteristics, value); }
+            get => _characteristics;
+            private set => SetProperty(ref _characteristics, value);
         }
 
         public CharacteristicListViewModel(IAdapter adapter, IUserDialogs userDialogs) : base(adapter)
@@ -62,7 +62,7 @@ namespace CIM.RemoteManager.Core.ViewModels
 
         public ICharacteristic SelectedCharacteristic
         {
-            get { return null; }
+            get => null;
             set
             {
                 if (value != null)

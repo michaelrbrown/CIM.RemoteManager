@@ -28,9 +28,10 @@
               </DataTrigger>
             </Grid.Triggers>
             <StackLayout Orientation="Vertical" VerticalOptions="CenterAndExpand">
-              <Label Text="{Binding Name}" FontSize="22" />
+              <Label Text="{Binding Name}" FontSize="22"  TextColor="#666666" />
               <Label Text="{Binding Id, StringFormat='{0}'}" TextColor="#7B7B7B" FontSize="18"/>
             </StackLayout>
+            <ProgressBar Grid.Column="1" Progress="0.6" HeightRequest="10" Width="50" />
             <Label Grid.Column="1"
                    Margin="10"
                    Text="{Binding Rssi}"

@@ -33,7 +33,7 @@ namespace CIM.RemoteManager.Core.ViewModels
 
             _characteristic = await GetCharacteristicFromBundleAsync(parameters);
 
-            Descriptors = await _characteristic?.GetDescriptorsAsync();
+            if (_characteristic != null) Descriptors = await _characteristic?.GetDescriptorsAsync();
             RaisePropertyChanged(nameof(Descriptors));
         }
 
