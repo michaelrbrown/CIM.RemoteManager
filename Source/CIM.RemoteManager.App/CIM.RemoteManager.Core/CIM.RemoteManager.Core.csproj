@@ -42,6 +42,9 @@
     <Compile Include="Converters\InverseBooleanValueConverter.cs" />
     <Compile Include="Extensions\IUserDialogsExtensions.cs" />
     <Compile Include="Helpers\Settings.cs" />
+    <Compile Include="Models\Device.cs" />
+    <Compile Include="Models\Sensor.cs" />
+    <Compile Include="Models\SensorStatisticsItem.cs" />
     <Compile Include="Pages\BasePage.cs" />
     <Compile Include="Pages\BaseTabbedPage.cs" />
     <Compile Include="Pages\CharacteristicDetailPage.xaml.cs">
