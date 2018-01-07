@@ -146,6 +146,12 @@ namespace CIM.RemoteManager.Core.ViewModels
         {
             RaisePropertyChanged(nameof(IsStateOn));
             RaisePropertyChanged(nameof(StateText));
+
+            AlertConfig alertConfig = new AlertConfig();
+            alertConfig.Message = StateText;
+            alertConfig.Title = "Bluetooth State";
+
+            _userDialogs.AlertAsync(alertConfig, new CancellationToken(false));
             //TryStartScanning();
         }
 
