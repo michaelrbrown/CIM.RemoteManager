@@ -40,9 +40,12 @@
       <DependentUpon>BleMvxFormsApp.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\InverseBooleanValueConverter.cs" />
+    <Compile Include="Extensions\GuidExtension.cs" />
     <Compile Include="Extensions\IUserDialogsExtensions.cs" />
+    <Compile Include="Helpers\AsciiStringConverter.cs" />
     <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Models\Device.cs" />
+    <Compile Include="Models\ISensor.cs" />
     <Compile Include="Models\Sensor.cs" />
     <Compile Include="Models\SensorStatisticsItem.cs" />
     <Compile Include="Pages\BasePage.cs" />
@@ -62,6 +65,9 @@
     <Compile Include="Pages\DeviceListPage.xaml.cs">
       <DependentUpon>DeviceListPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\SensorListPage.xaml.cs">
+      <DependentUpon>SensorListPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\ServiceListPage.xaml.cs">
       <DependentUpon>ServiceListPage.xaml</DependentUpon>
     </Compile>
@@ -73,6 +79,8 @@
     <Compile Include="ViewModels\DescriptorListViewModel.cs" />
     <Compile Include="ViewModels\DeviceListItemViewModel.cs" />
     <Compile Include="ViewModels\DeviceListViewModel.cs" />
+    <Compile Include="ViewModels\SensorListViewModel.cs" />
+    <Compile Include="ViewModels\SensorPlotViewModel.cs" />
     <Compile Include="ViewModels\ServiceListViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -186,6 +194,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Pages\DeviceListPage.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\SensorListPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>

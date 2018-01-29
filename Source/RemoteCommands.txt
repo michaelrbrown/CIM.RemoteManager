@@ -1,0 +1,103 @@
+///  Messages to and from the service tool are bounded by the "{" and "}" characters.
+///  The character immediately following the "{" identifies the type of message
+///  being transmitted. The possible types are described below (#=sensor index):
+///
+///  All numeric values are sent as ASCII hex bytes. Floating point numbers are
+///  appropriately scaled and converted to longs (4 bytes) before being sent.
+///  
+///  # = index into the sensor array
+///  | = tab character (0x09)
+///  
+///  "A" = full information
+///
+///        index (#)
+///        serial number
+///        name
+///        sensor type
+///        scale
+///        offset
+///        timestamp
+///        average value
+///        current value
+///        display conversion code
+///        decimal location
+///        statistics total calculation settings
+///
+///  "B" = average value for the sensor identified by #
+///        # | time | average value | alarm status
+///
+///  "C" = unfiltered (current) value
+///        # | time | current value 
+///     
+///  "D" = station settings (display only)
+///        setting_index | description | value
+///
+///  "E" = station settings (modification allowed)
+///        setting_index | description | value
+///
+///  "F" = message counters (packed as 9 sequential bytes in hex)
+///        total outgoing | retries | values | total incoming | errors | 
+///        time since last message in | active sensors | gOpBuffered measurements ( 2 bytes )
+/// 
+///  "G" = alarm settings
+///
+///		   index (#)
+///        alarm status
+///        alarms being processed (boolean)
+///        alarm dealy
+///        low alarm limit
+///        low warning limit
+///        high warning limit
+///        high alarm limit
+///
+///  "H" = statistics
+///	
+///        index (#)
+///        hourly maximum
+///        timestamp for max
+///        hourly minimum
+///        timestamp for min
+///        hourly average
+///        hourly total
+///	
+///  "I" = unfiltered (current) value from floating point
+///        # | time | current value (long x 1000)   
+///  
+///  Messages received from the service tool are also bounded by the "{" and "}"
+///  characters. The number immediately following the command contains either the
+///  sensor or setting index. This is followed by a tab character then the updated
+///  value.
+///  
+///  "A" + setting_index | station setting
+///  "B" + # | name
+///  "C" + # | scale
+///  "D" + # | offset
+///  "E" + # | units of measure conversion code
+///  "F" + # | display digits to right of DP
+///  "G" + # | statistics calculation setting
+///  "H" + # | alarm active flag
+///  "I" + # | alarm delay
+///  "J" + # | low alarm limit
+///  "K" + # | low warn
+///  "L" + # | high warn
+///  "M" + # | high alarm
+///  "N" + # | reset moving average
+///  "O" + # | reset hourly statistics
+///  "R" + # = remove selected sensor
+///  "S" + serial number = add a new sensor
+///  "T" = set the station time
+///  "V" = reset the station
+///  "W" = refresh OP-05
+///  "X" = refresh statistics
+///  "Y" = refresh all
+///  "Z" = revert back to OP-05 output
+///  "a" + # + new sn | change serial number (CT Sensors Only)
+///  "b" + # | set the lookup table base (CT Sensors Only)
+///
+///  CIMTechniques Inc.\n
+///  1215 Prince St.\n
+///  Beaufort, SC 29902 USA\n
+///  (843)521-9897
+///
+///
+////////////////////////////////////////////////////////////////////////////////

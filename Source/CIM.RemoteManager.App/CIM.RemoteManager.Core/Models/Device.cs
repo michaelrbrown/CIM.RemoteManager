@@ -25,7 +25,7 @@ namespace CIM.RemoteManager.Core.Models
             get => this._data;
             set
             {
-                if (this._data != value)
+                if (_data != value)
                 {
                     this._data = value;
                 }

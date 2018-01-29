@@ -14,6 +14,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         protected const string ServiceIdKey = "ServiceIdNavigationKey";
         protected const string CharacteristicIdKey = "CharacteristicIdNavigationKey";
         protected const string DescriptorIdKey = "DescriptorIdNavigationKey";
+        protected const string SensorIdKey = "SensorIdNavigationKey";
 
         public BaseViewModel(IAdapter adapter)
         {
