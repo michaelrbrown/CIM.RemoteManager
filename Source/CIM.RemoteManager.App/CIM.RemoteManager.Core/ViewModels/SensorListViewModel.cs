@@ -46,6 +46,8 @@ namespace CIM.RemoteManager.Core.ViewModels
 
         public ObservableCollection<string> Messages { get; } = new ObservableCollection<string>();
 
+        public string UpdateButtonText => _updatesStarted ? "Stop updates" : "Start updates";
+
         private IList<ISensor> _sensors;
 
         public IList<ISensor> Sensors
