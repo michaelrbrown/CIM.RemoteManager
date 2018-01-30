@@ -74,6 +74,18 @@ namespace CIM.RemoteManager.Core.ViewModels
             return await service.GetCharacteristicAsync(Guid.Parse(characteristicId));
         }
 
+        protected async Task<ICharacteristic> GetCharacteristicFromServiceAndBundleAsync(IMvxBundle parameters)
+        {
+            var service = await GetServiceFromBundleAsync(parameters);
+            if (service == null || !parameters.Data.ContainsKey(CharacteristicIdKey))
+            {
+                return null;
+            }
+
+            var characteristicId = parameters.Data[CharacteristicIdKey];
+            return await service.GetCharacteristicAsync(Guid.Parse(characteristicId));
+        }
+
         protected async Task<IDescriptor> GetDescriptorFromBundleAsync(IMvxBundle parameters)
         {
             var characteristic = await GetCharacteristicFromBundleAsync(parameters);

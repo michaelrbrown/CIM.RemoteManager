@@ -126,14 +126,20 @@ namespace CIM.RemoteManager.Core.ViewModels
 
                 // Show loading indicator
                 _userDialogs.ShowLoading("Loading DA-12 data...");
-                
+
                 // Get our adafruit bluetooth service (UART)
+                _service = await _device.GetServiceAsync(UartUuid);
+
+                Characteristic = await _service.GetCharacteristicAsync(RxUuid);
+
+
+                
                 //var service = await _device.GetServiceAsync(UartUuid);
 
                 // Get our adafruit bluetooth characteristic
                 // Tx (Write)
-               // _tx = await service.GetCharacteristicAsync(TxUuid);
-                
+                // _tx = await service.GetCharacteristicAsync(TxUuid);
+
                 // Write values async
                 //await _tx.WriteAsync("{Y}".StrToByteArray());
 
@@ -144,7 +150,7 @@ namespace CIM.RemoteManager.Core.ViewModels
 
                 // Start updates
                 //StartUpdates();
-                
+
                 // Hide loading...
                 _userDialogs.HideLoading();
 
@@ -172,18 +178,12 @@ namespace CIM.RemoteManager.Core.ViewModels
             
             _device = GetDeviceFromBundle(parameters);
 
-            var bundle = new MvxBundle(new Dictionary<string, string>(Bundle.Data) { { ServiceIdKey, UartUuid.ToString() } });
-            InitServiceFromBundle(bundle);
-            
+            InitRemote();
+
             if (_device == null)
             {
                 Close(this);
             }
-        }
-
-        protected async void InitServiceFromBundle(IMvxBundle parameters)
-        {
-            _service = await GetServiceFromBundleAsync(parameters);
         }
 
         public MvxCommand ToggleUpdatesCommand => new MvxCommand((() =>
