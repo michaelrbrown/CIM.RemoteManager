@@ -42,7 +42,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         private bool _updatesStarted;
         public ICharacteristic Characteristic { get; private set; }
 
-        public string CharacteristicValue => Characteristic?.Value.ToHexString().Replace("-", " ");
+        public string CharacteristicValue => Characteristic?.Value.ToHexString().Replace("-", " ").HexToAscii();
 
         public ObservableCollection<string> Messages { get; } = new ObservableCollection<string>();
 
