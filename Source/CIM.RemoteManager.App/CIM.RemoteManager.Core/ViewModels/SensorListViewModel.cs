@@ -59,7 +59,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             _userDialogs = userDialogs;
             
             // Send a refresh command to our remote to start pulling all our data
-            InitRemote();
+            //InitRemote();
         }
 
         public override void Resume()
