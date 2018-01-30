@@ -65,7 +65,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         {
             base.Resume();
 
-            LoadSensorData();
+            //LoadSensorData();
         }
 
         private async void LoadSensorData()
@@ -142,7 +142,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 //ICharacteristic _rx = await service.GetCharacteristicAsync(RxUuid);
 
                 // Start updates
-                StartUpdates();
+                //StartUpdates();
                 
                 // Hide loading...
                 _userDialogs.HideLoading();
@@ -178,6 +178,17 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
 
+        public MvxCommand ToggleUpdatesCommand => new MvxCommand((() =>
+        {
+            if (_updatesStarted)
+            {
+                StopUpdates();
+            }
+            else
+            {
+                StartUpdates();
+            }
+        }));
 
         public MvxCommand ReadCommand => new MvxCommand(ReadValueAsync);
 
