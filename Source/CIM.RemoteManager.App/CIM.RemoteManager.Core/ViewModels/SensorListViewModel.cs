@@ -131,10 +131,10 @@ namespace CIM.RemoteManager.Core.ViewModels
 
                 // Get our adafruit bluetooth characteristic
                 // Tx (Write)
-                _tx = await service.GetCharacteristicAsync(TxUuid);
+               // _tx = await service.GetCharacteristicAsync(TxUuid);
                 
                 // Write values async
-                await _tx.WriteAsync("{Y}".StrToByteArray());
+                //await _tx.WriteAsync("{Y}".StrToByteArray());
 
 
                 // Get our adafruit bluetooth characteristic
