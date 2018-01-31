@@ -33,5 +33,16 @@ namespace CIM.RemoteManager.Core.Helpers
             return encoding.GetBytes(strValue);
         }
 
+        /// <summary>
+        /// Convert a byte array to string
+        /// </summary>
+        /// <param name="strValue" />
+        /// <param name="bytes">Bytes to convert to string</param>
+        /// <returns></returns>
+        public static string ByteArrayToString(this byte[] bytes)
+        {
+            return BitConverter.ToString(bytes);
+        }
+
     }
 }
