@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Text;
 
 namespace CIM.RemoteManager.Core.Helpers
@@ -42,6 +43,18 @@ namespace CIM.RemoteManager.Core.Helpers
         public static string ByteArrayToString(this byte[] bytes)
         {
             return BitConverter.ToString(bytes);
+        }
+
+
+        public static string BytesToStringConverted(this byte[] bytes)
+        {
+            using (var stream = new MemoryStream(bytes))
+            {
+                using (var streamReader = new StreamReader(stream))
+                {
+                    return streamReader.ReadToEnd();
+                }
+            }
         }
 
     }
