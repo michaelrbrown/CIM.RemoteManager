@@ -63,12 +63,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         ///  "B" = average value for the sensor identified by #
         ///   # | time | average value | alarm status
         /// </summary>
-        private StringBuilder _averageSensorValue;
-        public StringBuilder AverageSensorValue
-        {
-            get => _averageSensorValue;
-            set { _averageSensorValue = value; }
-        }
+        StringBuilder AverageSensorValue = new StringBuilder("");
 
         public SensorListViewModel(IAdapter adapter, IUserDialogs userDialogs) : base(adapter)
         {
