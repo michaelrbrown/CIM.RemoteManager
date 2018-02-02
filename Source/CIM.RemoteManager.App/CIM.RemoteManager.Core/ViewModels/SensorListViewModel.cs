@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Acr.UserDialogs;
 using CIM.RemoteManager.Core.Extensions;
@@ -54,6 +55,19 @@ namespace CIM.RemoteManager.Core.ViewModels
         {
             get => _sensors;
             private set => SetProperty(ref _sensors, value);
+        }
+
+        public bool StartAverageSensorValueRecord { get; set; } = false;
+
+        /// <summary>
+        ///  "B" = average value for the sensor identified by #
+        ///   # | time | average value | alarm status
+        /// </summary>
+        private StringBuilder _averageSensorValue;
+        public StringBuilder AverageSensorValue
+        {
+            get => _averageSensorValue;
+            set { _averageSensorValue = value; }
         }
 
         public SensorListViewModel(IAdapter adapter, IUserDialogs userDialogs) : base(adapter)
@@ -302,8 +316,34 @@ namespace CIM.RemoteManager.Core.ViewModels
 
         private void CharacteristicOnValueUpdated(object sender, CharacteristicUpdatedEventArgs characteristicUpdatedEventArgs)
         {
-            Messages.Insert(0, $"Updated value: {CharacteristicValue}");
+            //Messages.Insert(0, $"Updated value: {CharacteristicValue}");
+
+            GetAverageSensorValues(CharacteristicValue);
+
+            //Messages.Insert(0, $"Updated value: {CharacteristicValue}");
+
             RaisePropertyChanged(() => CharacteristicValue);
+        }
+
+        private void GetAverageSensorValues(string characteristicValue)
+        {
+            // Start reading all "average sensor values"
+            if (characteristicValue.Contains("{B"))
+            {
+                StartAverageSensorValueRecord = true;
+            }
+            // If we hit an end char } then record all data up to it
+            if (characteristicValue.Contains("}"))
+            {
+                AverageSensorValue.Append(characteristicValue.GetUntilOrEmpty("}"));
+                StartAverageSensorValueRecord = false;
+                Messages.Insert(0, $"Average Sensor Value: {AverageSensorValue}");
+            }
+            // Read all characters in buffer while we are within the {}
+            if (StartAverageSensorValueRecord)
+            {
+                AverageSensorValue.Append(characteristicValue);
+            }
         }
 
         public IService SelectedSensor
@@ -322,5 +362,7 @@ namespace CIM.RemoteManager.Core.ViewModels
 
             }
         }
+
+        
     }
 }
