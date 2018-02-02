@@ -316,17 +316,34 @@ namespace CIM.RemoteManager.Core.ViewModels
 
         private void CharacteristicOnValueUpdated(object sender, CharacteristicUpdatedEventArgs characteristicUpdatedEventArgs)
         {
-            //Messages.Insert(0, $"Updated value: {CharacteristicValue}");
+            try
+            {
+                //Messages.Insert(0, $"Updated value: {CharacteristicValue}");
 
-            GetAverageSensorValues(CharacteristicValue);
+                // Get average sensor values
+                GetAverageSensorValues(CharacteristicValue);
+                // Get unfiltered (current) sensor values
+                //GetUnfilteredSensorValues(CharacteristicValue);
 
-            //Messages.Insert(0, $"Updated value: {CharacteristicValue}");
+                //Messages.Insert(0, $"Updated value: {CharacteristicValue}");
 
-            RaisePropertyChanged(() => CharacteristicValue);
+                RaisePropertyChanged(() => CharacteristicValue);
+            }
+            catch (Exception ex)
+            {
+                _userDialogs.ShowError(ex.Message);
+            }
+            
         }
 
+        /// <summary>
+        /// Get Average values for sensor from buffered data
+        /// </summary>
+        /// <param name="characteristicValue"></param>
         private void GetAverageSensorValues(string characteristicValue)
         {
+            if (String.IsNullOrEmpty(characteristicValue)) return;
+
             // Start reading all "average sensor values"
             if (characteristicValue.Contains("{B"))
             {
@@ -345,6 +362,34 @@ namespace CIM.RemoteManager.Core.ViewModels
                 AverageSensorValue.Append(characteristicValue);
             }
         }
+
+        /// <summary>
+        /// Get unfiltered (current) values for sensor from buffered data
+        /// </summary>
+        /// <param name="characteristicValue"></param>
+        private void GetUnfilteredSensorValues(string characteristicValue)
+        {
+            if (String.IsNullOrEmpty(characteristicValue)) return;
+
+            // Start reading all "average sensor values"
+            if (characteristicValue.ToLower().Contains("{C"))
+            {
+                StartAverageSensorValueRecord = true;
+            }
+            // If we hit an end char } then record all data up to it
+            if (characteristicValue.Contains("}"))
+            {
+                AverageSensorValue.Append(characteristicValue.GetUntilOrEmpty("}"));
+                StartAverageSensorValueRecord = false;
+                Messages.Insert(0, $"Current Sensor Value: {AverageSensorValue}");
+            }
+            // Read all characters in buffer while we are within the {}
+            if (StartAverageSensorValueRecord)
+            {
+                AverageSensorValue.Append(characteristicValue);
+            }
+        }
+
 
         public IService SelectedSensor
         {
