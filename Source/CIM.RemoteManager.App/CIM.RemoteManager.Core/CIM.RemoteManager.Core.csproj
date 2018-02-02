@@ -44,6 +44,7 @@
     <Compile Include="Extensions\IUserDialogsExtensions.cs" />
     <Compile Include="Helpers\AsciiStringConverter.cs" />
     <Compile Include="Helpers\Settings.cs" />
+    <Compile Include="Helpers\StringHelper.cs" />
     <Compile Include="Models\Device.cs" />
     <Compile Include="Models\ISensor.cs" />
     <Compile Include="Models\Sensor.cs" />
