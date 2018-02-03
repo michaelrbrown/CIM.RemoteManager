@@ -8,7 +8,7 @@ namespace CIM.RemoteManager.Core.Helpers
 {
     public static class StringHelper
     {
-        public static string GetUntilOrEmpty(this string text, string stopAt = "-")
+        public static string GetUntilOrEmpty(this string text, string stopAt = "}")
         {
             if (!String.IsNullOrWhiteSpace(text))
             {
