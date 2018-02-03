@@ -346,7 +346,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 // Get full sensor values
                 GetFullSensorValues(CharacteristicValue);
                 // Get average sensor values
-                GetAverageSensorValues(CharacteristicValue);
+                //GetAverageSensorValues(CharacteristicValue);
                 // Get unfiltered (current) sensor values
                 //GetUnfilteredSensorValues(CharacteristicValue);
 
