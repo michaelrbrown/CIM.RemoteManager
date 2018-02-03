@@ -313,7 +313,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         {
             try
             {
-                //Messages.Insert(0, $"Updated value: {CharacteristicValue}");
+                Messages.Insert(0, $"Updated value: {CharacteristicValue}");
 
                 // Get average sensor values
                 GetAverageSensorValues(CharacteristicValue);
