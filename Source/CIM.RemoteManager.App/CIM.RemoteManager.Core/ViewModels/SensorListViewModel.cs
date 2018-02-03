@@ -315,6 +315,8 @@ namespace CIM.RemoteManager.Core.ViewModels
             {
                 Messages.Insert(0, $"Updated value: {CharacteristicValue}");
 
+                // Get full sensor values
+                GetFullensorValues(CharacteristicValue);
                 // Get average sensor values
                 GetAverageSensorValues(CharacteristicValue);
                 // Get unfiltered (current) sensor values
@@ -329,6 +331,33 @@ namespace CIM.RemoteManager.Core.ViewModels
                 _userDialogs.ShowError(ex.Message);
             }
             
+        }
+
+        /// <summary>
+        /// Get Full values for sensor from buffered data
+        /// </summary>
+        /// <param name="characteristicValue"></param>
+        private void GetFullensorValues(string characteristicValue)
+        {
+            if (String.IsNullOrEmpty(characteristicValue)) return;
+
+            // Start reading all "average sensor values"
+            if (characteristicValue.Contains("{A"))
+            {
+                StartAverageSensorValueRecord = true;
+            }
+            // If we hit an end char } then record all data up to it
+            if (characteristicValue.Contains("}"))
+            {
+                AverageSensorValue.Append(characteristicValue.GetUntilOrEmpty("}"));
+                StartAverageSensorValueRecord = false;
+                Messages.Insert(0, $"Full Sensor Value: {AverageSensorValue}");
+            }
+            // Read all characters in buffer while we are within the {}
+            if (StartAverageSensorValueRecord)
+            {
+                AverageSensorValue.Append(characteristicValue);
+            }
         }
 
         /// <summary>
