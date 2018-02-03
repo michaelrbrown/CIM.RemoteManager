@@ -344,7 +344,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 Messages.Insert(0, $"Updated value: {CharacteristicValue}");
 
                 // Get full sensor values
-                GetFullensorValues(CharacteristicValue);
+                GetFullSensorValues(CharacteristicValue);
                 // Get average sensor values
                 GetAverageSensorValues(CharacteristicValue);
                 // Get unfiltered (current) sensor values
@@ -365,26 +365,43 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// Get Full values for sensor from buffered data
         /// </summary>
         /// <param name="characteristicValue"></param>
-        private void GetFullensorValues(string characteristicValue)
+        private void GetFullSensorValues(string characteristicValue)
         {
             if (String.IsNullOrEmpty(characteristicValue)) return;
 
             // Start reading all "average sensor values"
-            if (characteristicValue.Contains("{A"))
+            if (!StartFullSensorValueRecord && characteristicValue.Contains("{A"))
             {
-                StartFullSensorValueRecord = true;
+                // If we hit an end char } then record all data up to it
+                if (characteristicValue.Contains("}"))
+                {
+                    FullSensorValue.Append(characteristicValue.Replace("{", "").GetUntilOrEmpty("}"));
+                    Messages.Insert(0, $"Full Sensor Value: {FullSensorValue}");
+                    FullSensorValue.Clear();
+                    StartFullSensorValueRecord = false;
+                }
+                else
+                {
+                    // Read all characters in buffer while we are within the {}
+                    FullSensorValue.Append(characteristicValue);
+                    StartFullSensorValueRecord = true;
+                }
             }
-            // If we hit an end char } then record all data up to it
-            if (characteristicValue.Contains("}"))
+            else if (StartFullSensorValueRecord)
             {
-                FullSensorValue.Append(characteristicValue.GetUntilOrEmpty("}"));
-                StartFullSensorValueRecord = false;
-                Messages.Insert(0, $"Full Sensor Value: {FullSensorValue}");
-            }
-            // Read all characters in buffer while we are within the {}
-            if (StartFullSensorValueRecord)
-            {
-                FullSensorValue.Append(characteristicValue);
+                // If we hit an end char } then record all data up to it
+                if (characteristicValue.Contains("}"))
+                {
+                    FullSensorValue.Append(characteristicValue.GetUntilOrEmpty("}"));
+                    Messages.Insert(0, $"Full Sensor Value: {FullSensorValue}");
+                    FullSensorValue.Clear();
+                    StartFullSensorValueRecord = false;
+                }
+                else
+                {
+                    // Read all characters in buffer while we are within the {}
+                    FullSensorValue.Append(characteristicValue);
+                }
             }
         }
 
@@ -397,21 +414,38 @@ namespace CIM.RemoteManager.Core.ViewModels
             if (String.IsNullOrEmpty(characteristicValue)) return;
 
             // Start reading all "average sensor values"
-            if (characteristicValue.Contains("{B"))
+            if (!StartAverageSensorValueRecord && characteristicValue.Contains("{A"))
             {
-                StartAverageSensorValueRecord = true;
+                // If we hit an end char } then record all data up to it
+                if (characteristicValue.Contains("}"))
+                {
+                    AverageSensorValue.Append(characteristicValue.Replace("{", "").GetUntilOrEmpty("}"));
+                    Messages.Insert(0, $"Full Sensor Value: {AverageSensorValue}");
+                    AverageSensorValue.Clear();
+                    StartAverageSensorValueRecord = false;
+                }
+                else
+                {
+                    // Read all characters in buffer while we are within the {}
+                    AverageSensorValue.Append(characteristicValue);
+                    StartAverageSensorValueRecord = true;
+                }
             }
-            // If we hit an end char } then record all data up to it
-            if (characteristicValue.Contains("}"))
+            else if (StartAverageSensorValueRecord)
             {
-                AverageSensorValue.Append(characteristicValue.GetUntilOrEmpty("}"));
-                StartAverageSensorValueRecord = false;
-                Messages.Insert(0, $"Average Sensor Value: {AverageSensorValue}");
-            }
-            // Read all characters in buffer while we are within the {}
-            if (StartAverageSensorValueRecord)
-            {
-                AverageSensorValue.Append(characteristicValue);
+                // If we hit an end char } then record all data up to it
+                if (characteristicValue.Contains("}"))
+                {
+                    AverageSensorValue.Append(characteristicValue.GetUntilOrEmpty("}"));
+                    Messages.Insert(0, $"Full Sensor Value: {AverageSensorValue}");
+                    AverageSensorValue.Clear();
+                    StartAverageSensorValueRecord = false;
+                }
+                else
+                {
+                    // Read all characters in buffer while we are within the {}
+                    AverageSensorValue.Append(characteristicValue);
+                }
             }
         }
 
@@ -424,21 +458,38 @@ namespace CIM.RemoteManager.Core.ViewModels
             if (String.IsNullOrEmpty(characteristicValue)) return;
 
             // Start reading all "average sensor values"
-            if (characteristicValue.ToLower().Contains("{C"))
+            if (!StartUnfilteredSensorValueRecord && characteristicValue.Contains("{A"))
             {
-                StartUnfilteredSensorValueRecord = true;
+                // If we hit an end char } then record all data up to it
+                if (characteristicValue.Contains("}"))
+                {
+                    UnfilteredSensorValue.Append(characteristicValue.Replace("{", "").GetUntilOrEmpty("}"));
+                    Messages.Insert(0, $"Full Sensor Value: {UnfilteredSensorValue}");
+                    UnfilteredSensorValue.Clear();
+                    StartUnfilteredSensorValueRecord = false;
+                }
+                else
+                {
+                    // Read all characters in buffer while we are within the {}
+                    UnfilteredSensorValue.Append(characteristicValue);
+                    StartUnfilteredSensorValueRecord = true;
+                }
             }
-            // If we hit an end char } then record all data up to it
-            if (characteristicValue.Contains("}"))
+            else if (StartFullSensorValueRecord)
             {
-                UnfilteredSensorValue.Append(characteristicValue.GetUntilOrEmpty("}"));
-                StartUnfilteredSensorValueRecord = false;
-                Messages.Insert(0, $"Current Sensor Value: {UnfilteredSensorValue}");
-            }
-            // Read all characters in buffer while we are within the {}
-            if (StartUnfilteredSensorValueRecord)
-            {
-                UnfilteredSensorValue.Append(characteristicValue);
+                // If we hit an end char } then record all data up to it
+                if (characteristicValue.Contains("}"))
+                {
+                    UnfilteredSensorValue.Append(characteristicValue.GetUntilOrEmpty("}"));
+                    Messages.Insert(0, $"Full Sensor Value: {UnfilteredSensorValue}");
+                    UnfilteredSensorValue.Clear();
+                    StartUnfilteredSensorValueRecord = false;
+                }
+                else
+                {
+                    // Read all characters in buffer while we are within the {}
+                    UnfilteredSensorValue.Append(characteristicValue);
+                }
             }
         }
 
