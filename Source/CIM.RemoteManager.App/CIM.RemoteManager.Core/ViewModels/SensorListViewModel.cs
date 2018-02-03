@@ -414,7 +414,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             if (String.IsNullOrEmpty(characteristicValue)) return;
 
             // Start reading all "average sensor values"
-            if (!StartAverageSensorValueRecord && characteristicValue.Contains("{A"))
+            if (!StartAverageSensorValueRecord && characteristicValue.Contains("{B"))
             {
                 // If we hit an end char } then record all data up to it
                 if (characteristicValue.Contains("}"))
@@ -458,7 +458,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             if (String.IsNullOrEmpty(characteristicValue)) return;
 
             // Start reading all "average sensor values"
-            if (!StartUnfilteredSensorValueRecord && characteristicValue.Contains("{A"))
+            if (!StartUnfilteredSensorValueRecord && characteristicValue.Contains("{C"))
             {
                 // If we hit an end char } then record all data up to it
                 if (characteristicValue.Contains("}"))
