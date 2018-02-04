@@ -11,7 +11,7 @@
         </Grid.RowDefinitions>
 
         <StackLayout Orientation="Vertical">
-            <Label Text="{Binding CharacteristicValue, StringFormat='Value: {0}'}"></Label>
+            <Label Text="{Binding CharacteristicValue, StringFormat='Value: {0}'}" Margin="20"></Label>
 
             <Grid>
                 <Grid.ColumnDefinitions>

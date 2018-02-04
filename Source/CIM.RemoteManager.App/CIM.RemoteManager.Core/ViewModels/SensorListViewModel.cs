@@ -60,6 +60,8 @@ namespace CIM.RemoteManager.Core.ViewModels
         public bool StartFullSensorValueRecord { get; set; } = false;
         public bool StartAverageSensorValueRecord { get; set; } = false;
         public bool StartUnfilteredSensorValueRecord { get; set; } = false;
+        public bool StartUnfilteredFloatingPointSensorValueRecord { get; set; } = false;
+        
 
         /// <summary>
         ///  "A" = full information
@@ -76,19 +78,26 @@ namespace CIM.RemoteManager.Core.ViewModels
         ///   decimal location
         ///   statistics total calculation settings
         /// </summary>
-        StringBuilder FullSensorValue = new StringBuilder("");
+        public readonly StringBuilder FullSensorValue = new StringBuilder("");
 
         /// <summary>
         ///  "B" = average value for the sensor identified by #
         ///   # | time | average value | alarm status
         /// </summary>
-        StringBuilder AverageSensorValue = new StringBuilder("");
+        public readonly StringBuilder AverageSensorValue = new StringBuilder("");
 
         /// <summary>
         ///  "C" = unfiltered (current) value
         ///   # | time | current value 
         /// </summary>
-        StringBuilder UnfilteredSensorValue = new StringBuilder("");
+        public readonly StringBuilder UnfilteredSensorValue = new StringBuilder("");
+
+        /// <summary>
+        ///  "C" = unfiltered floating point (current) value
+        ///   # | time | current value 
+        /// </summary>
+        public readonly StringBuilder UnfilteredFloatingPointSensorValue = new StringBuilder("");
+        
 
         public SensorListViewModel(IAdapter adapter, IUserDialogs userDialogs) : base(adapter)
         {
@@ -162,11 +171,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 await _tx.WriteAsync("{Y}".StrToByteArray());
 
                 Characteristic = await _service.GetCharacteristicAsync(RxUuid);
-
                 
-
-
-
                 //var service = await _device.GetServiceAsync(UartUuid);
 
                 // Get our adafruit bluetooth characteristic
@@ -275,7 +280,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         {
             try
             {
-                Messages.Insert(0, $"Incoming value: {CharacteristicValue}");
+                //Messages.Insert(0, $"Incoming value: {CharacteristicValue}");
 
                 // Get full sensor values
                 GetFullSensorValues(CharacteristicValue);
@@ -283,6 +288,8 @@ namespace CIM.RemoteManager.Core.ViewModels
                 GetAverageSensorValues(CharacteristicValue);
                 // Get unfiltered (current) sensor values
                 GetUnfilteredSensorValues(CharacteristicValue);
+                // Get unfiltered floating point (current) sensor values
+                GetUnfilteredFloatingPointSensorValues(CharacteristicValue);
 
                 //Messages.Insert(0, $"Updated value: {CharacteristicValue}");
 
@@ -310,7 +317,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 if (characteristicValue.Contains("}"))
                 {
                     FullSensorValue.Append(characteristicValue);
-                    Messages.Insert(0, $"Full (A) Sensor Value: {FullSensorValue}");
+                    Messages.Insert(0, $"Full (A): {FullSensorValue}");
                     FullSensorValue.Clear();
                     StartFullSensorValueRecord = false;
                 }
@@ -327,7 +334,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 if (characteristicValue.Contains("}"))
                 {
                     FullSensorValue.Append(characteristicValue.GetUntilOrEmpty());
-                    Messages.Insert(0, $"Full Sensor Value: {FullSensorValue}");
+                    Messages.Insert(0, $"Full (A): {FullSensorValue}");
                     FullSensorValue.Clear();
                     StartFullSensorValueRecord = false;
                 }
@@ -353,8 +360,8 @@ namespace CIM.RemoteManager.Core.ViewModels
                 // If we hit an end char } then record all data up to it
                 if (characteristicValue.Contains("}"))
                 {
-                    AverageSensorValue.Append(characteristicValue.Replace("{", "").GetUntilOrEmpty("}"));
-                    Messages.Insert(0, $"Average (B) Sensor Value: {AverageSensorValue}");
+                    AverageSensorValue.Append(characteristicValue.Replace("{", "").GetUntilOrEmpty());
+                    Messages.Insert(0, $"Average (B): {AverageSensorValue}");
                     AverageSensorValue.Clear();
                     StartAverageSensorValueRecord = false;
                 }
@@ -371,7 +378,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 if (characteristicValue.Contains("}"))
                 {
                     AverageSensorValue.Append(characteristicValue.GetUntilOrEmpty());
-                    Messages.Insert(0, $"Full Sensor Value: {AverageSensorValue}");
+                    Messages.Insert(0, $"Average (B): {AverageSensorValue}");
                     AverageSensorValue.Clear();
                     StartAverageSensorValueRecord = false;
                 }
@@ -398,7 +405,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 if (characteristicValue.Contains("}"))
                 {
                     UnfilteredSensorValue.Append(characteristicValue.Replace("{", "").GetUntilOrEmpty());
-                    Messages.Insert(0, $"Unfiltered (C) Sensor Value: {UnfilteredSensorValue}");
+                    Messages.Insert(0, $"Unfiltered (C): {UnfilteredSensorValue}");
                     UnfilteredSensorValue.Clear();
                     StartUnfilteredSensorValueRecord = false;
                 }
@@ -415,7 +422,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 if (characteristicValue.Contains("}"))
                 {
                     UnfilteredSensorValue.Append(characteristicValue.GetUntilOrEmpty());
-                    Messages.Insert(0, $"Full Sensor Value: {UnfilteredSensorValue}");
+                    Messages.Insert(0, $"Unfiltered (C): {UnfilteredSensorValue}");
                     UnfilteredSensorValue.Clear();
                     StartUnfilteredSensorValueRecord = false;
                 }
@@ -427,6 +434,49 @@ namespace CIM.RemoteManager.Core.ViewModels
             }
         }
 
+        /// <summary>
+        /// Get unfiltered (current) values from floating point for sensor from buffered data
+        /// </summary>
+        /// <param name="characteristicValue"></param>
+        private void GetUnfilteredFloatingPointSensorValues(string characteristicValue)
+        {
+            if (String.IsNullOrEmpty(characteristicValue)) return;
+
+            // Start reading all "unfiltered (current) sensor values"
+            if (!StartUnfilteredFloatingPointSensorValueRecord && characteristicValue.Contains("{I"))
+            {
+                // If we hit an end char } then record all data up to it
+                if (characteristicValue.Contains("}"))
+                {
+                    UnfilteredFloatingPointSensorValue.Append(characteristicValue.Replace("{", "").GetUntilOrEmpty());
+                    Messages.Insert(0, $"Unfiltered (I): {UnfilteredFloatingPointSensorValue}");
+                    UnfilteredFloatingPointSensorValue.Clear();
+                    StartUnfilteredFloatingPointSensorValueRecord = false;
+                }
+                else
+                {
+                    // Read all characters in buffer while we are within the {}
+                    UnfilteredFloatingPointSensorValue.Append(characteristicValue.Trim(new Char[] { '{' }));
+                    StartUnfilteredFloatingPointSensorValueRecord = true;
+                }
+            }
+            else if (StartFullSensorValueRecord)
+            {
+                // If we hit an end char } then record all data up to it
+                if (characteristicValue.Contains("}"))
+                {
+                    UnfilteredFloatingPointSensorValue.Append(characteristicValue.GetUntilOrEmpty());
+                    Messages.Insert(0, $"Unfiltered (I): {UnfilteredFloatingPointSensorValue}");
+                    UnfilteredFloatingPointSensorValue.Clear();
+                    StartUnfilteredFloatingPointSensorValueRecord = false;
+                }
+                else
+                {
+                    // Read all characters in buffer while we are within the {}
+                    UnfilteredFloatingPointSensorValue.Append(characteristicValue);
+                }
+            }
+        }
 
         public IService SelectedSensor
         {
