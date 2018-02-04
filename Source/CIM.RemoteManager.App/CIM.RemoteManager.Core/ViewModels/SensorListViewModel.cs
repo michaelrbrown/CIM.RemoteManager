@@ -310,14 +310,14 @@ namespace CIM.RemoteManager.Core.ViewModels
                 if (characteristicValue.Contains("}"))
                 {
                     FullSensorValue.Append(characteristicValue);
-                    Messages.Insert(0, $"Full Sensor Value: {FullSensorValue}");
+                    Messages.Insert(0, $"Full (A) Sensor Value: {FullSensorValue}");
                     FullSensorValue.Clear();
                     StartFullSensorValueRecord = false;
                 }
                 else
                 {
                     // Read all characters in buffer while we are within the {}
-                    FullSensorValue.Append(characteristicValue.Replace("{", ""));
+                    FullSensorValue.Append(characteristicValue.Trim(new Char[] { '{' }));
                     StartFullSensorValueRecord = true;
                 }
             }
@@ -354,14 +354,14 @@ namespace CIM.RemoteManager.Core.ViewModels
                 if (characteristicValue.Contains("}"))
                 {
                     AverageSensorValue.Append(characteristicValue.Replace("{", "").GetUntilOrEmpty("}"));
-                    Messages.Insert(0, $"Full Sensor Value: {AverageSensorValue}");
+                    Messages.Insert(0, $"Average (B) Sensor Value: {AverageSensorValue}");
                     AverageSensorValue.Clear();
                     StartAverageSensorValueRecord = false;
                 }
                 else
                 {
                     // Read all characters in buffer while we are within the {}
-                    AverageSensorValue.Append(characteristicValue);
+                    AverageSensorValue.Append(characteristicValue.Trim(new Char[] { '{' }));
                     StartAverageSensorValueRecord = true;
                 }
             }
@@ -405,7 +405,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 else
                 {
                     // Read all characters in buffer while we are within the {}
-                    UnfilteredSensorValue.Append(characteristicValue.Replace("{", ""));
+                    UnfilteredSensorValue.Append(characteristicValue.Trim(new Char[] { '{' }));
                     StartUnfilteredSensorValueRecord = true;
                 }
             }
