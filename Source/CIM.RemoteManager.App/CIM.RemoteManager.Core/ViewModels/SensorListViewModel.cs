@@ -166,9 +166,13 @@ namespace CIM.RemoteManager.Core.ViewModels
                 // Get our adafruit bluetooth service (UART)
                 _service = await _device.GetServiceAsync(UartUuid);
 
+                _tx = await _service.GetCharacteristicAsync(TxUuid);
+
+                await _tx.WriteAsync("{Y}".StrToByteArray());
+
                 Characteristic = await _service.GetCharacteristicAsync(RxUuid);
 
-                await Characteristic.WriteAsync("{Y}".StrToByteArray());
+                
 
 
 
