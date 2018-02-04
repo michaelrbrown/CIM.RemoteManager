@@ -168,8 +168,10 @@ namespace CIM.RemoteManager.Core.ViewModels
 
                 Characteristic = await _service.GetCharacteristicAsync(RxUuid);
 
+                await Characteristic.WriteAsync("{Y}".StrToByteArray());
 
-                
+
+
                 //var service = await _device.GetServiceAsync(UartUuid);
 
                 // Get our adafruit bluetooth characteristic
@@ -341,7 +343,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         {
             try
             {
-                Messages.Insert(0, $"Updated value: {CharacteristicValue}");
+                Messages.Insert(0, $"Incoming value: {CharacteristicValue}");
 
                 // Get full sensor values
                 GetFullSensorValues(CharacteristicValue);
