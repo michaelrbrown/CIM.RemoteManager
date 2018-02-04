@@ -138,8 +138,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             return null;
 
         }
-
-
+        
 
         //public MvxCommand WriteCommand => new MvxCommand(WriteValueAsync);
 
@@ -150,16 +149,8 @@ namespace CIM.RemoteManager.Core.ViewModels
                 throw new ArgumentNullException(nameof(_device));
             }
 
-            //if (string.IsNullOrEmpty(characteristicValue))
-            //{
-            //    throw new ArgumentNullException(nameof(characteristicValue));
-            //}
-
-
             try
             {
-                //var data = GetBytes(result.Text);
-
                 // Show loading indicator
                 _userDialogs.ShowLoading("Loading DA-12 data...");
 
@@ -239,70 +230,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 StartUpdates();
             }
         }));
-
-        public MvxCommand ReadCommand => new MvxCommand(ReadValueAsync);
-
-        private async void ReadValueAsync()
-        {
-            if (Characteristic == null)
-                return;
-
-            try
-            {
-                _userDialogs.ShowLoading("Reading characteristic value...");
-
-                await Characteristic.ReadAsync();
-
-                RaisePropertyChanged(() => CharacteristicValue);
-
-                Messages.Insert(0, $"Read value {CharacteristicValue}");
-            }
-            catch (Exception ex)
-            {
-                _userDialogs.HideLoading();
-                _userDialogs.ShowError(ex.Message);
-
-                Messages.Insert(0, $"Error {ex.Message}");
-
-            }
-            finally
-            {
-                _userDialogs.HideLoading();
-            }
-
-        }
-
-        public MvxCommand WriteCommand => new MvxCommand(WriteValueAsync);
-
-        private async void WriteValueAsync()
-        {
-            try
-            {
-                var result =
-                    await
-                        _userDialogs.PromptAsync("Input a value (as hex whitespace separated)", "Write value",
-                            placeholder: CharacteristicValue);
-
-                if (!result.Ok)
-                    return;
-
-                var data = GetBytes(result.Text);
-
-                _userDialogs.ShowLoading("Write characteristic value");
-                await Characteristic.WriteAsync(data);
-                _userDialogs.HideLoading();
-
-                RaisePropertyChanged(() => CharacteristicValue);
-                Messages.Insert(0, $"Wrote value {CharacteristicValue}");
-            }
-            catch (Exception ex)
-            {
-                _userDialogs.HideLoading();
-                _userDialogs.ShowError(ex.Message);
-            }
-
-        }
-
+        
         private async void StartUpdates()
         {
             try
@@ -352,9 +280,9 @@ namespace CIM.RemoteManager.Core.ViewModels
                 // Get full sensor values
                 GetFullSensorValues(CharacteristicValue);
                 // Get average sensor values
-                //GetAverageSensorValues(CharacteristicValue);
+                GetAverageSensorValues(CharacteristicValue);
                 // Get unfiltered (current) sensor values
-                //GetUnfilteredSensorValues(CharacteristicValue);
+                GetUnfilteredSensorValues(CharacteristicValue);
 
                 //Messages.Insert(0, $"Updated value: {CharacteristicValue}");
 
