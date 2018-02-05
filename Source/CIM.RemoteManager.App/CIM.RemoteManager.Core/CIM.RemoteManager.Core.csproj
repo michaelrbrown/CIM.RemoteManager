@@ -43,6 +43,7 @@
     <Compile Include="Extensions\GuidExtension.cs" />
     <Compile Include="Extensions\IUserDialogsExtensions.cs" />
     <Compile Include="Helpers\AsciiStringConverter.cs" />
+    <Compile Include="Helpers\SensorTypeConverter.cs" />
     <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Helpers\StringHelper.cs" />
     <Compile Include="Models\Device.cs" />

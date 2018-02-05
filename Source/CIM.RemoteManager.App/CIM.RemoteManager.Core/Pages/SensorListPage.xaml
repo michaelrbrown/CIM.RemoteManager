@@ -24,7 +24,7 @@
 
         </StackLayout>
 
-        <ListView Grid.Row="1" ItemsSource="{Binding Messages}" CachingStrategy="RecycleElement">
+        <ListView Grid.Row="1" ItemsSource="{Binding Sensors}" CachingStrategy="RecycleElement">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell Height="50">

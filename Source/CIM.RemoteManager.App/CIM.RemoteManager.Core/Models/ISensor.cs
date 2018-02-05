@@ -9,7 +9,7 @@ namespace CIM.RemoteManager.Core.Models
     /// <summary>
     /// A DA-12 sensor.
     /// </summary>
-    public interface ISensor : IDisposable
+    public interface ISensor
     {
         int Index { get; set; }
         string SerialNumber { get; set; }
@@ -23,16 +23,5 @@ namespace CIM.RemoteManager.Core.Models
         int DisplayConversionCode { get; set; }
         int DecimalLocation { get; set; }
         string StatisticsTotalCalcSettings { get; set; }
-
-        /// <summary>
-        /// Gets the first characteristic with the Id <paramref name="id"/>. 
-        /// </summary>
-        /// <param name="id">The id of the searched characteristic.</param>
-        /// <returns>
-        /// A task that represents the asynchronous read operation. 
-        /// The Result property will contain the characteristic with the specified <paramref name="id"/>.
-        /// If the characteristic doesn't exist, the Result will be null.
-        /// </returns>
-        Task<ISensor> GetSensorDataAsync(Guid id);
     }
 }
