@@ -235,7 +235,7 @@ namespace CIM.RemoteManager.Core.ViewModels
 
                 Characteristic.ValueUpdated -= CharacteristicOnValueUpdated;
                 Characteristic.ValueUpdated += CharacteristicOnValueUpdated;
-                await Characteristic.StartUpdatesAsync();
+                await Characteristic.StartUpdatesAsync().ConfigureAwait(false);
 
                 Messages.Insert(0, $"Start updates");
 
@@ -253,7 +253,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             {
                 _updatesStarted = false;
 
-                await Characteristic.StopUpdatesAsync();
+                await Characteristic.StopUpdatesAsync().ConfigureAwait(false);
                 Characteristic.ValueUpdated -= CharacteristicOnValueUpdated;
 
                 Messages.Insert(0, $"Stop updates");
@@ -276,11 +276,11 @@ namespace CIM.RemoteManager.Core.ViewModels
                 // Get full sensor values
                 GetFullSensorValues(CharacteristicValue);
                 // Get average sensor values
-                GetAverageSensorValues(CharacteristicValue);
+                //GetAverageSensorValues(CharacteristicValue);
                 // Get unfiltered (current) sensor values
-                GetUnfilteredSensorValues(CharacteristicValue);
+                //GetUnfilteredSensorValues(CharacteristicValue);
                 // Get unfiltered floating point (current) sensor values
-                GetUnfilteredFloatingPointSensorValues(CharacteristicValue);
+                //GetUnfilteredFloatingPointSensorValues(CharacteristicValue);
 
                 //Messages.Insert(0, $"Updated value: {CharacteristicValue}");
 
@@ -484,7 +484,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// <param name="conversionType"></param>
         private void SerializeStringToSensor(string sensorValues, string conversionType)
         {
-            // Split by tab delimeter
+            // Split by tab delimiter
             string[] splitSensorValues = sensorValues.Split('\t');
             
             switch (conversionType)
@@ -497,12 +497,12 @@ namespace CIM.RemoteManager.Core.ViewModels
                         SerialNumber = splitSensorValues[1],
                         Name = splitSensorValues[2],
                         SensorType = splitSensorValues[3],
-                        Scale = splitSensorValues[4].SafeHexToDecimal(),
-                        Offset = splitSensorValues[5].SafeHexToDecimal(),
-                        TimeStamp = splitSensorValues[6].SafeHexToInt(),
-                        AverageValue = splitSensorValues[7].SafeHexToDecimal(),
-                        CurrentValue = splitSensorValues[8].SafeHexToDecimal(),
-                        DecimalLocation = splitSensorValues[9].SafeHexToInt(),
+                        Scale = splitSensorValues[4].SafeConvert<decimal>(0),
+                        Offset = splitSensorValues[5].SafeConvert<decimal>(0),
+                        TimeStamp = splitSensorValues[6].SafeConvert<int>(0),
+                        AverageValue = splitSensorValues[7].SafeConvert<decimal>(0),
+                        CurrentValue = splitSensorValues[8].SafeConvert<decimal>(0),
+                        DecimalLocation = splitSensorValues[9].SafeConvert<int>(0),
                         StatisticsTotalCalcSettings = splitSensorValues[10].SafeConvert<string>("")
                     };
                     // Add sensor to list
