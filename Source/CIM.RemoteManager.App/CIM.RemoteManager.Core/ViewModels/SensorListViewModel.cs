@@ -497,11 +497,11 @@ namespace CIM.RemoteManager.Core.ViewModels
                         SerialNumber = splitSensorValues[1],
                         Name = splitSensorValues[2],
                         SensorType = splitSensorValues[3],
-                        Scale = splitSensorValues[4].SafeHexToFloat(),
-                        Offset = splitSensorValues[5].SafeHexToFloat(),
+                        Scale = splitSensorValues[4].SafeHexToDecimal(),
+                        Offset = splitSensorValues[5].SafeHexToDecimal(),
                         TimeStamp = splitSensorValues[6].SafeHexToInt(),
-                        AverageValue = splitSensorValues[7].SafeHexToFloat(),
-                        CurrentValue = splitSensorValues[8].SafeHexToFloat(),
+                        AverageValue = splitSensorValues[7].SafeHexToDecimal(),
+                        CurrentValue = splitSensorValues[8].SafeHexToDecimal(),
                         DecimalLocation = splitSensorValues[9].SafeHexToInt(),
                         StatisticsTotalCalcSettings = splitSensorValues[10].SafeConvert<string>("")
                     };
@@ -514,8 +514,8 @@ namespace CIM.RemoteManager.Core.ViewModels
                     foreach (var sensorValue in Sensors.Where(s => s.Index == splitSensorValues[0].SafeConvert<int>(0)))
                     {
                         sensorValue.TimeStamp = splitSensorValues[0].SafeHexToInt();
-                        sensorValue.AverageValue = splitSensorValues[1].SafeHexToFloat();
-                        sensorValue.CurrentValue = splitSensorValues[2].SafeHexToFloat();
+                        sensorValue.AverageValue = splitSensorValues[1].SafeHexToDecimal();
+                        sensorValue.CurrentValue = splitSensorValues[2].SafeHexToDecimal();
                         sensorValue.DecimalLocation = splitSensorValues[3].SafeHexToInt();
                         sensorValue.StatisticsTotalCalcSettings = splitSensorValues[4];
                     }
@@ -526,7 +526,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                     foreach (var sensorValue in Sensors.Where(s => s.Index == splitSensorValues[0].SafeConvert<int>(0)))
                     {
                         sensorValue.TimeStamp = splitSensorValues[0].SafeHexToInt();
-                        sensorValue.CurrentValue = splitSensorValues[1].SafeHexToFloat();
+                        sensorValue.CurrentValue = splitSensorValues[1].SafeHexToDecimal();
                     }
                     break;
                 case "I":
@@ -535,7 +535,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                     foreach (var sensorValue in Sensors.Where(s => s.Index == splitSensorValues[0].SafeConvert<int>(0)))
                     {
                         sensorValue.TimeStamp = splitSensorValues[0].SafeHexToInt();
-                        sensorValue.CurrentValue = splitSensorValues[1].SafeHexToFloat();
+                        sensorValue.CurrentValue = splitSensorValues[1].SafeHexToDecimal();
                     }
                     break;
                 default:

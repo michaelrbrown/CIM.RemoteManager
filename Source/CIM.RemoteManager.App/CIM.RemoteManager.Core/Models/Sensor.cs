@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CIM.RemoteManager.Core.Models
+﻿namespace CIM.RemoteManager.Core.Models
 {
     /// <summary>
     /// A DA-12 sensor.
@@ -15,11 +9,11 @@ namespace CIM.RemoteManager.Core.Models
         public string SerialNumber { get; set; }
         public string Name { get; set; }
         public string SensorType { get; set; }
-        public float Scale { get; set; }
-        public float Offset { get; set; }
+        public decimal Scale { get; set; }
+        public decimal Offset { get; set; }
         public int TimeStamp { get; set; }
-        public float AverageValue { get; set; }
-        public float CurrentValue { get; set; }
+        public decimal AverageValue { get; set; }
+        public decimal CurrentValue { get; set; }
         public int DisplayConversionCode { get; set; }
         public int DecimalLocation { get; set; }
         public string StatisticsTotalCalcSettings { get; set; }
