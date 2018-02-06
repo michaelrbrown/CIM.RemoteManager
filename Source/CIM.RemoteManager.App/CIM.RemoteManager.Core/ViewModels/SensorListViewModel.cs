@@ -11,6 +11,7 @@ using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
 using Plugin.BLE.Abstractions.Contracts;
 using Plugin.BLE.Abstractions.EventArgs;
+using Xamarin.Forms;
 
 
 namespace CIM.RemoteManager.Core.ViewModels
@@ -288,7 +289,8 @@ namespace CIM.RemoteManager.Core.ViewModels
             }
             catch (Exception ex)
             {
-                _userDialogs.ShowError(ex.Message);
+                Application.Current.MainPage.DisplayAlert(ex.Message, ex.StackTrace, "Cancel");
+                //_userDialogs.ShowError(ex.Message);
             }
             
         }
