@@ -30,8 +30,10 @@ namespace CIM.RemoteManager.Core.Helpers
         public static float SafeHexToFloat(this string hexValue)
         {
             if (String.IsNullOrEmpty(hexValue)) return 0;
-            
-            return float.Parse(hexValue, System.Globalization.NumberStyles.HexNumber);
+
+            hexValue = hexValue.Replace("x", string.Empty);
+            float.TryParse(hexValue, System.Globalization.NumberStyles.HexNumber, null, out float result);
+            return result;
         }
 
         /// <summary>
@@ -43,7 +45,9 @@ namespace CIM.RemoteManager.Core.Helpers
         {
             if (String.IsNullOrEmpty(hexValue)) return 0;
 
-            return decimal.Parse(hexValue, System.Globalization.NumberStyles.HexNumber);
+            hexValue = hexValue.Replace("x", string.Empty);
+            decimal.TryParse(hexValue, System.Globalization.NumberStyles.HexNumber, null, out decimal result);
+            return result;
         }
 
     }
