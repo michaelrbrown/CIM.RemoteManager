@@ -33,7 +33,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         // UUID for the UART BTLE client characteristic which is necessary for notifications.
         public static Guid ClientUuid = Guid.Parse("6E400003-B5A3-F393-E0A9-E50E24DCCA9E");
 
-        // UUIDs for the Device Information service and associated characeristics.
+        // UUIDs for the Device Information service and associated characteristics.
         public static Guid DisUuid = Guid.Parse("0000180a-0000-1000-8000-00805f9b34fb");
         public static Guid DisManufUuid = Guid.Parse("00002a29-0000-1000-8000-00805f9b34fb");
         public static Guid DisModelUuid = Guid.Parse("00002a24-0000-1000-8000-00805f9b34fb");
@@ -480,7 +480,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
-        /// Serialize tab based sensor data to stronly typed Sensor
+        /// Serialize tab based sensor data to strongly typed Sensor
         /// </summary>
         /// <param name="sensorValues"></param>
         /// <param name="conversionType"></param>
@@ -492,34 +492,34 @@ namespace CIM.RemoteManager.Core.ViewModels
             switch (conversionType)
             {
                 case "A":
-                    Application.Current.MainPage.DisplayAlert("Index A", splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('A') + 1).SafeConvert<int>(0).ToString(), "Cancel");
+                    Application.Current.MainPage.DisplayAlert("Index A", splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('A') + 1), "Cancel");
                     Application.Current.MainPage.DisplayAlert("SerialNumber", splitSensorValues[1], "Cancel");
                     Application.Current.MainPage.DisplayAlert("Name", splitSensorValues[2], "Cancel");
                     Application.Current.MainPage.DisplayAlert("SensorType", splitSensorValues[3], "Cancel");
-                    Application.Current.MainPage.DisplayAlert("Scale", splitSensorValues[4].SafeConvert<decimal>(0).ToString(), "Cancel");
-                    Application.Current.MainPage.DisplayAlert("Offset", splitSensorValues[5].SafeConvert<decimal>(0).ToString(), "Cancel");
-                    Application.Current.MainPage.DisplayAlert("TimeStamp", splitSensorValues[6].SafeConvert<int>(0).ToString(), "Cancel");
-                    Application.Current.MainPage.DisplayAlert("AverageValue", splitSensorValues[7].SafeConvert<decimal>(0).ToString(), "Cancel");
-                    Application.Current.MainPage.DisplayAlert("CurrentValue", splitSensorValues[8].SafeConvert<decimal>(0).ToString(), "Cancel");
-                    Application.Current.MainPage.DisplayAlert("DecimalLocation", splitSensorValues[9].SafeConvert<int>(0).ToString(), "Cancel");
-                    Application.Current.MainPage.DisplayAlert("StatisticsTotalCalcSettings", splitSensorValues[10].SafeConvert<string>(""), "Cancel");
+                    Application.Current.MainPage.DisplayAlert("Scale", splitSensorValues[4], "Cancel");
+                    Application.Current.MainPage.DisplayAlert("Offset", splitSensorValues[5], "Cancel");
+                    Application.Current.MainPage.DisplayAlert("TimeStamp", splitSensorValues[6], "Cancel");
+                    Application.Current.MainPage.DisplayAlert("AverageValue", splitSensorValues[7], "Cancel");
+                    Application.Current.MainPage.DisplayAlert("CurrentValue", splitSensorValues[8], "Cancel");
+                    Application.Current.MainPage.DisplayAlert("DecimalLocation", splitSensorValues[9], "Cancel");
+                    Application.Current.MainPage.DisplayAlert("StatisticsTotalCalcSettings", splitSensorValues[10], "Cancel");
                     // "A" Sensor data serialization
-                    var sensor = new Sensor
-                    {
-                        Index = splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('A') + 1).SafeConvert<int>(0),
-                        SerialNumber = splitSensorValues[1],
-                        Name = splitSensorValues[2],
-                        SensorType = splitSensorValues[3],
-                        Scale = splitSensorValues[4].SafeConvert<decimal>(0),
-                        Offset = splitSensorValues[5].SafeConvert<decimal>(0),
-                        TimeStamp = splitSensorValues[6].SafeConvert<int>(0),
-                        AverageValue = splitSensorValues[7].SafeConvert<decimal>(0),
-                        CurrentValue = splitSensorValues[8].SafeConvert<decimal>(0),
-                        DecimalLocation = splitSensorValues[9].SafeConvert<int>(0),
-                        StatisticsTotalCalcSettings = splitSensorValues[10].SafeConvert<string>("")
-                    };
+                    //var sensor = new Sensor
+                    //{
+                    //    Index = splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('A') + 1).SafeConvert<int>(0),
+                    //    SerialNumber = splitSensorValues[1],
+                    //    Name = splitSensorValues[2],
+                    //    SensorType = splitSensorValues[3],
+                    //    Scale = splitSensorValues[4].SafeConvert<decimal>(0),
+                    //    Offset = splitSensorValues[5].SafeConvert<decimal>(0),
+                    //    TimeStamp = splitSensorValues[6].SafeConvert<int>(0),
+                    //    AverageValue = splitSensorValues[7].SafeConvert<decimal>(0),
+                    //    CurrentValue = splitSensorValues[8].SafeConvert<decimal>(0),
+                    //    DecimalLocation = splitSensorValues[9].SafeConvert<int>(0),
+                    //    StatisticsTotalCalcSettings = splitSensorValues[10].SafeConvert<string>("")
+                    //};
                     // Add sensor to list
-                    Sensors.Add(sensor);
+                    //Sensors.Add(sensor);
                     break;
                 case "B":
                     // "B" Sensor data serialization
