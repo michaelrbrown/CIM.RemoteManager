@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Xamarin.Forms;
 
 namespace CIM.RemoteManager.Core.Helpers
 {
@@ -43,11 +46,80 @@ namespace CIM.RemoteManager.Core.Helpers
         /// <returns>Float</returns>
         public static decimal SafeHexToDecimal(this string hexValue)
         {
-            if (String.IsNullOrEmpty(hexValue)) return 0;
+            List<int> dec = new List<int> { 0 };   // decimal result
 
-            hexValue = hexValue.Replace("x", string.Empty);
-            decimal.TryParse(hexValue, System.Globalization.NumberStyles.HexNumber, null, out decimal result);
-            return result;
+            foreach (char c in hexValue)
+            {
+                int carry = Convert.ToInt32(c.ToString(), 16);
+                // initially holds decimal value of current hex digit;
+                // subsequently holds carry-over for multiplication
+
+                for (int i = 0; i < dec.Count; ++i)
+                {
+                    int val = dec[i] * 16 + carry;
+                    dec[i] = val % 10;
+                    carry = val / 10;
+                }
+
+                while (carry > 0)
+                {
+                    dec.Add(carry % 10);
+                    carry /= 10;
+                }
+            }
+
+            var chars = dec.Select(d => (char)('0' + d));
+            var cArr = chars.Reverse().ToArray();
+
+            
+            try
+            {
+                return Convert.ToDecimal(cArr);
+            }
+            catch (OverflowException overflowException)
+            {
+                Application.Current.MainPage.DisplayAlert("OverflowException", overflowException.Message, "Ok");
+            }
+            catch (FormatException formatException)
+            {
+                Application.Current.MainPage.DisplayAlert("FormatException", formatException.Message, "Ok");
+            }
+            catch (ArgumentNullException argumentNullException)
+            {
+                Application.Current.MainPage.DisplayAlert("ArgumentNullException", argumentNullException.Message, "Ok");
+            }
+
+
+            return 0;
+        }
+
+        public static string HexToDecimal(string hex)
+        {
+            List<int> dec = new List<int> { 0 };   // decimal result
+
+            foreach (char c in hex)
+            {
+                int carry = Convert.ToInt32(c.ToString(), 16);
+                // initially holds decimal value of current hex digit;
+                // subsequently holds carry-over for multiplication
+
+                for (int i = 0; i < dec.Count; ++i)
+                {
+                    int val = dec[i] * 16 + carry;
+                    dec[i] = val % 10;
+                    carry = val / 10;
+                }
+
+                while (carry > 0)
+                {
+                    dec.Add(carry % 10);
+                    carry /= 10;
+                }
+            }
+
+            var chars = dec.Select(d => (char)('0' + d));
+            var cArr = chars.Reverse().ToArray();
+            return new string(cArr);
         }
 
     }
