@@ -15,6 +15,8 @@ namespace CIM.RemoteManager.Core.Pages
         public SensorListPage()
         {
             InitializeComponent();
+
+            BindingContext = this; // Note that I added this line
         }
     }
 }

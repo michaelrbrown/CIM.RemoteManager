@@ -28,7 +28,7 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell Height="50">
-                        <Label Text="{Binding .}" VerticalTextAlignment="Center" FontSize="Small"></Label>
+                        <Label Text="{Binding SerialNumber}" VerticalTextAlignment="Center" FontSize="Small"></Label>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
