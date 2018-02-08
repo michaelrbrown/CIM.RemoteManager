@@ -9,11 +9,11 @@
         string SerialNumber { get; set; }
         string Name { get; set; }
         string SensorType { get; set; }
-        decimal Scale { get; set; }
-        decimal Offset { get; set; }
+        double Scale { get; set; }
+        double Offset { get; set; }
         int TimeStamp { get; set; }
-        decimal AverageValue { get; set; }
-        decimal CurrentValue { get; set; }
+        double AverageValue { get; set; }
+        double CurrentValue { get; set; }
         int DisplayConversionCode { get; set; }
         int DecimalLocation { get; set; }
         string StatisticsTotalCalcSettings { get; set; }

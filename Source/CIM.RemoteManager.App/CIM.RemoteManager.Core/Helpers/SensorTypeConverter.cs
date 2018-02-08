@@ -26,17 +26,31 @@ namespace CIM.RemoteManager.Core.Helpers
         }
 
         /// <summary>
-        /// Safely convert hex values to float
+        /// Safely convert hex values to double
         /// </summary>
         /// <param name="hexValue">Hex value to convert</param>
-        /// <returns>Float</returns>
-        public static float SafeHexToFloat(this string hexValue)
+        /// <returns>double</returns>
+        public static double SafeHexToDouble(this string hexValue)
         {
             if (String.IsNullOrEmpty(hexValue)) return 0;
 
             hexValue = hexValue.Replace("x", string.Empty);
-            float.TryParse(hexValue, System.Globalization.NumberStyles.HexNumber, null, out float result);
-            return result;
+            int.TryParse(hexValue, System.Globalization.NumberStyles.HexNumber, null, out int result);
+            return Convert.ToDouble(result);
+        }
+
+        /// <summary>
+        /// Safely convert hex values to decimal
+        /// </summary>
+        /// <param name="hexValue">Hex value to convert</param>
+        /// <returns>decimal</returns>
+        public static decimal SafeHexToDecimal(this string hexValue)
+        {
+            if (String.IsNullOrEmpty(hexValue)) return 0;
+
+            hexValue = hexValue.Replace("x", string.Empty);
+            int.TryParse(hexValue, System.Globalization.NumberStyles.HexNumber, null, out int result);
+            return Convert.ToDecimal(result);
         }
 
         /// <summary>
@@ -44,7 +58,7 @@ namespace CIM.RemoteManager.Core.Helpers
         /// </summary>
         /// <param name="hexValue">Hex value to convert</param>
         /// <returns>Float</returns>
-        public static decimal SafeHexToDecimal(this string hexValue)
+        public static decimal SafeHexToDecimal2(this string hexValue)
         {
             List<int> dec = new List<int> { 0 };   // decimal result
 
