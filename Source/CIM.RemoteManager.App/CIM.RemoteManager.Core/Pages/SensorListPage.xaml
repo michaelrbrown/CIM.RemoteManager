@@ -1,6 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:transformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
              x:Class="CIM.RemoteManager.Core.Pages.SensorListPage" 
              Title="DA-12 Sensors">
 
@@ -27,13 +29,51 @@
         <ListView Grid.Row="1" ItemsSource="{Binding Sensors}" CachingStrategy="RecycleElement">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <ViewCell Height="50">
-                        <Label Text="{Binding SerialNumber}" VerticalTextAlignment="Center" FontSize="Small"></Label>
+                    <ViewCell>
+                        <Grid RowSpacing="5" ColumnSpacing="0" Margin="10,5" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="AUTO"/>
+                            </Grid.RowDefinitions>
+
+                            <Image Source="" Aspect="AspectFill" Grid.RowSpan="2" />
+                            <Image Source="ShadowOverlay" Grid.RowSpan="2"  Aspect="Fill" VerticalOptions="End" HorizontalOptions="Fill" />
+
+                            <Grid Margin="10" RowSpacing="10" ColumnSpacing="10" Grid.Row="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="AUTO"/>
+                                    <RowDefinition Height="25"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="25"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="AUTO"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Text="{Binding SerialNumber}"  Grid.Row="0" Grid.ColumnSpan="3" Style="{StaticResource TitleLabel}" LineBreakMode="NoWrap"/>
+
+                                <forms:CachedImage Source="" LoadingPlaceholder="NoImagePic.png" 
+                                                    Grid.Row="1" Grid.Column="0"
+                                                    Aspect="AspectFit" Margin="5" 
+                                                    HeightRequest="25" WidthRequest="25" 
+                                                    HorizontalOptions="Center" VerticalOptions="Center">
+                                    <forms:CachedImage.Transformations>
+                                        <transformations:RoundedTransformation Radius="25"/>
+                                    </forms:CachedImage.Transformations>
+                                </forms:CachedImage>
+
+                                <Label Text="{Binding TimeStamp}" Grid.Row="1" Grid.Column="1" VerticalOptions="Center" Style="{StaticResource HandleLabel}" />
+
+                                <StackLayout Orientation="Horizontal"  VerticalOptions="Center" Grid.Column="2" Grid.Row="1" Spacing="5">
+                                    <Label Text="{Binding AverageValue, StringFormat='{0:N0}'}" Style="{StaticResource HandleLabel}" />
+                                    <Label Text="average" Style="{StaticResource BodyLabel}"/>
+                                </StackLayout>
+                            </Grid>
+                        </Grid>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-
     </Grid>
 
 </ContentPage>

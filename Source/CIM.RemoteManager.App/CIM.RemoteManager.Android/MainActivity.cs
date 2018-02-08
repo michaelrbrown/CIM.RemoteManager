@@ -23,6 +23,8 @@ namespace CIM.RemoteManager.Android
             base.OnCreate(bundle);
 
             UserDialogs.Init(this);
+            // FFImageloading init
+            //CachedImageRenderer.Init(enableFastRenderer: true);
             Forms.Init(this, bundle);
             var formsApp = new CIM.RemoteManager.Core.BleMvxFormsApp();
             LoadApplication(formsApp);

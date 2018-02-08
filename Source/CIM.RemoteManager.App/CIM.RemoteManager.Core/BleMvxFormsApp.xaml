@@ -8,7 +8,48 @@
   <Application.Resources>
     <ResourceDictionary>
       <converters:InverseBooleanValueConverter x:Key="InverseBoolean"></converters:InverseBooleanValueConverter>
+      
+      <Color x:Key="BodyTextColor">#FFFFFF</Color>
+      
+      <!--  font families  -->
+      <OnPlatform
+          x:Key="RegularFontFamily"
+          x:TypeArguments="x:String"
+          Android="sans-serif"
+          iOS="HelveticaNeue" />
+      <OnPlatform
+          x:Key="LightFontFamily"
+          x:TypeArguments="x:String"
+          Android="sans-serif-light"
+          iOS="HelveticaNeue-Light" />
+      <OnPlatform
+          x:Key="MediumFontFamily"
+          x:TypeArguments="x:String"
+          Android="sans-serif-medium"
+          iOS="HelveticaNeue-Medium" />
+      <OnPlatform
+          x:Key="BoldFontFamily"
+          x:TypeArguments="x:String"
+          Android="sans-serif-medium"
+          iOS="HelveticaNeue-Bold" />
+
+      <!--  styles  -->
+      <Style x:Key="TitleLabel" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource BodyTextColor}" />
+        <Setter Property="FontSize" Value="20" />
+      </Style>
+
+      <Style x:Key="HandleLabel" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource BodyTextColor}" />
+        <Setter Property="FontSize" Value="12" />
+      </Style>
+
+      <Style x:Key="BodyLabel" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource BodyTextColor}" />
+        <Setter Property="FontSize" Value="11" />
+      </Style>
     </ResourceDictionary>
+    
   </Application.Resources>
   
 </mvx:MvxFormsApplication>

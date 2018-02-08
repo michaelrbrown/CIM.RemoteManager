@@ -49,7 +49,7 @@ namespace CIM.RemoteManager.Core.ViewModels
 
         public ObservableCollection<string> Messages { get; } = new ObservableCollection<string>();
         //public ObservableCollection<ISensor> Sensors { get; set; } = new ObservableCollection<ISensor>();
-
+        
         FullyObservableCollection<Sensor> _sensors;
         public FullyObservableCollection<Sensor> Sensors
         {
@@ -321,11 +321,11 @@ namespace CIM.RemoteManager.Core.ViewModels
                 // Get full sensor values
                 GetFullSensorValues(CharacteristicValue);
                 // Get average sensor values
-                //GetAverageSensorValues(CharacteristicValue);
+                GetAverageSensorValues(CharacteristicValue);
                 // Get unfiltered (current) sensor values
-                //GetUnfilteredSensorValues(CharacteristicValue);
+                GetUnfilteredSensorValues(CharacteristicValue);
                 // Get unfiltered floating point (current) sensor values
-                //GetUnfilteredFloatingPointSensorValues(CharacteristicValue);
+                GetUnfilteredFloatingPointSensorValues(CharacteristicValue);
 
                 //Messages.Insert(0, $"Updated value: {CharacteristicValue}");
 
