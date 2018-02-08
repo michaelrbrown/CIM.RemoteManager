@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -48,15 +50,15 @@ namespace CIM.RemoteManager.Core.ViewModels
         public ObservableCollection<string> Messages { get; } = new ObservableCollection<string>();
         //public ObservableCollection<ISensor> Sensors { get; set; } = new ObservableCollection<ISensor>();
 
-        MvxObservableCollection<ISensor> _sensors;
-        public MvxObservableCollection<ISensor> Sensors
+        FullyObservableCollection<Sensor> _sensors;
+        public FullyObservableCollection<Sensor> Sensors
         {
             get { return _sensors; }
-            set
-            {
-                _sensors = value;
-                RaisePropertyChanged(() => _sensors);
-            }
+            //set
+            //{
+            //    _sensors = value;
+            //    RaisePropertyChanged(() => _sensors);
+            //}
         }
 
         public string UpdateButtonText => _updatesStarted ? "Stop updates" : "Start updates";
@@ -101,12 +103,39 @@ namespace CIM.RemoteManager.Core.ViewModels
         ///   # | time | current value 
         /// </summary>
         public readonly StringBuilder UnfilteredFloatingPointSensorValue = new StringBuilder("");
-        
+
+        public void SensorPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            //This will get called when the property of an object inside the collection changes
+        }
+
+        //public void SensorCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        //{
+        //    if (e.Action == NotifyCollectionChangedAction.Remove)
+        //    {
+        //        foreach (Sensor item in e.OldItems)
+        //        {
+        //            //Removed items
+        //            item.PropertyChanged -= SensorPropertyChanged;
+        //        }
+        //    }
+        //    else if (e.Action == NotifyCollectionChangedAction.Add)
+        //    {
+        //        foreach (Sensor item in e.NewItems)
+        //        {
+        //            //Added items
+        //            item.PropertyChanged += SensorPropertyChanged;
+        //        }
+        //    }
+        //}
 
         public SensorListViewModel(IAdapter adapter, IUserDialogs userDialogs) : base(adapter)
         {
             _userDialogs = userDialogs;
-            Sensors = new MvxObservableCollection<ISensor>();
+            //Sensors = new MvxObservableCollection<ISensor>();
+
+            _sensors = new FullyObservableCollection<Sensor>();
+            //_sensors.CollectionChanged += SensorCollectionChanged;
 
             // Send a refresh command to our remote to start pulling all our data
             //InitRemote();
@@ -119,6 +148,9 @@ namespace CIM.RemoteManager.Core.ViewModels
             //LoadSensorData();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private async void LoadSensorData()
         {
             try

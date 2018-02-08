@@ -3,7 +3,7 @@
     /// <summary>
     /// A DA-12 sensor.
     /// </summary>
-    public class Sensor : ISensor
+    public class Sensor : BindableBase
     {
         public int Index { get; set; }
         public string SerialNumber { get; set; }
