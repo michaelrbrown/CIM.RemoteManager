@@ -46,7 +46,18 @@ namespace CIM.RemoteManager.Core.ViewModels
         public string CharacteristicValue => Characteristic?.Value.BytesToStringConverted();
 
         public ObservableCollection<string> Messages { get; } = new ObservableCollection<string>();
-        public ObservableCollection<ISensor> Sensors { get; set; } = new ObservableCollection<ISensor>();
+        //public ObservableCollection<ISensor> Sensors { get; set; } = new ObservableCollection<ISensor>();
+
+        MvxObservableCollection<ISensor> _sensors;
+        public MvxObservableCollection<ISensor> Sensors
+        {
+            get { return _sensors; }
+            set
+            {
+                _sensors = value;
+                RaisePropertyChanged(() => _sensors);
+            }
+        }
 
         public string UpdateButtonText => _updatesStarted ? "Stop updates" : "Start updates";
 
@@ -95,7 +106,8 @@ namespace CIM.RemoteManager.Core.ViewModels
         public SensorListViewModel(IAdapter adapter, IUserDialogs userDialogs) : base(adapter)
         {
             _userDialogs = userDialogs;
-            
+            Sensors = new MvxObservableCollection<ISensor>();
+
             // Send a refresh command to our remote to start pulling all our data
             //InitRemote();
         }
