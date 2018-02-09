@@ -577,15 +577,15 @@ namespace CIM.RemoteManager.Core.ViewModels
                     // "B" Sensor data serialization
                     // Update Sensor list by index
 
-                    //var sensorListItem = Sensors.FirstOrDefault(s => s.SensorIndex == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('A') + 1).SafeConvert<int>(0));
-                    //if (sensorListItem != null)
-                    //{
-                    //    sensorListItem.TimeStamp = splitSensorValues[0].SafeHexToInt();
-                    //    sensorListItem.AverageValue = splitSensorValues[1].SafeHexToDouble();
-                    //    sensorListItem.CurrentValue = splitSensorValues[2].SafeHexToDouble();
-                    //    sensorListItem.DecimalLocation = splitSensorValues[3].SafeHexToInt();
-                    //    sensorListItem.StatisticsTotalCalcSettings = splitSensorValues[4];
-                    //}
+                    var sensorListItem = Sensors.FirstOrDefault(s => s.SensorIndex == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('B') + 1).SafeConvert<int>(0));
+                    if (sensorListItem != null)
+                    {
+                        sensorListItem.TimeStamp = splitSensorValues[0].SafeHexToInt();
+                        sensorListItem.AverageValue = splitSensorValues[1].SafeHexToDouble();
+                        sensorListItem.CurrentValue = splitSensorValues[2].SafeHexToDouble();
+                        sensorListItem.DecimalLocation = splitSensorValues[3].SafeHexToInt();
+                        sensorListItem.StatisticsTotalCalcSettings = splitSensorValues[4];
+                    }
                     //foreach (var sensorValue in Sensors.Where(s => s.SensorIndex == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('A') + 1).SafeConvert<int>(0)))
                     //{
                     //    sensorValue.TimeStamp = splitSensorValues[0].SafeHexToInt();
