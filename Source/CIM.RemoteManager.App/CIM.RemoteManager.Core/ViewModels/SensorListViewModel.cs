@@ -53,12 +53,12 @@ namespace CIM.RemoteManager.Core.ViewModels
         FullyObservableCollection<Sensor> _sensors;
         public FullyObservableCollection<Sensor> Sensors
         {
-            get { return _sensors; }
-            //set
-            //{
-            //    _sensors = value;
-            //    RaisePropertyChanged(() => _sensors);
-            //}
+            get => _sensors;
+            set
+            {
+                _sensors = value;
+                RaisePropertyChanged(() => _sensors);
+            }
         }
 
         public string UpdateButtonText => _updatesStarted ? "Stop updates" : "Start updates";
@@ -109,25 +109,25 @@ namespace CIM.RemoteManager.Core.ViewModels
             //This will get called when the property of an object inside the collection changes
         }
 
-        //public void SensorCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        //{
-        //    if (e.Action == NotifyCollectionChangedAction.Remove)
-        //    {
-        //        foreach (Sensor item in e.OldItems)
-        //        {
-        //            //Removed items
-        //            item.PropertyChanged -= SensorPropertyChanged;
-        //        }
-        //    }
-        //    else if (e.Action == NotifyCollectionChangedAction.Add)
-        //    {
-        //        foreach (Sensor item in e.NewItems)
-        //        {
-        //            //Added items
-        //            item.PropertyChanged += SensorPropertyChanged;
-        //        }
-        //    }
-        //}
+        public void SensorCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.Action == NotifyCollectionChangedAction.Remove)
+            {
+                foreach (Sensor item in e.OldItems)
+                {
+                    //Removed items
+                    item.PropertyChanged -= SensorPropertyChanged;
+                }
+            }
+            else if (e.Action == NotifyCollectionChangedAction.Add)
+            {
+                foreach (Sensor item in e.NewItems)
+                {
+                    //Added items
+                    item.PropertyChanged += SensorPropertyChanged;
+                }
+            }
+        }
 
         public SensorListViewModel(IAdapter adapter, IUserDialogs userDialogs) : base(adapter)
         {
@@ -135,7 +135,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             //Sensors = new MvxObservableCollection<ISensor>();
 
             _sensors = new FullyObservableCollection<Sensor>();
-            //_sensors.CollectionChanged += SensorCollectionChanged;
+            _sensors.CollectionChanged += SensorCollectionChanged;
 
             // Send a refresh command to our remote to start pulling all our data
             //InitRemote();
