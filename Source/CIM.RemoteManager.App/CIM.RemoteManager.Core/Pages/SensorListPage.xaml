@@ -23,35 +23,27 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <Grid RowSpacing="5" ColumnSpacing="0" Margin="10,5" >
+
+                        <Grid Margin="10" RowSpacing="10" ColumnSpacing="10" Grid.Row="1">
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="AUTO"/>
+                                <RowDefinition Height="50"/>
+                                <RowDefinition Height="50"/>
+                                <RowDefinition Height="50"/>
                             </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="5"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="5"/>
+                            </Grid.ColumnDefinitions>
 
-                            <Image Source="ShadowOverlay" Grid.RowSpan="2"  Aspect="Fill" VerticalOptions="End" HorizontalOptions="Fill" />
+                            <Label Text="{Binding SerialNumber}"  Grid.Row="0" Grid.Column="1" Style="{StaticResource TitleLabel}" LineBreakMode="NoWrap"/>
 
-                            <Grid Margin="10" RowSpacing="10" ColumnSpacing="10" Grid.Row="1">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="AUTO"/>
-                                    <RowDefinition Height="25"/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="25"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="AUTO"/>
-                                </Grid.ColumnDefinitions>
+                            <Label Text="{Binding TimeStamp}" Grid.Row="1" Grid.Column="1" Style="{StaticResource HandleLabel}" />
 
-                                <Label Text="{Binding SerialNumber}"  Grid.Row="0" Grid.ColumnSpan="3" Style="{StaticResource TitleLabel}" LineBreakMode="NoWrap"/>
+                            <Label Text="{Binding AverageValue}" Grid.Row="2" Grid.Column="1" Style="{StaticResource HandleLabel}" />
 
-                                <Label Text="{Binding TimeStamp}" Grid.Row="1" Grid.Column="1" VerticalOptions="Center" Style="{StaticResource HandleLabel}" />
-
-                                <StackLayout Orientation="Horizontal"  VerticalOptions="Center" Grid.Column="2" Grid.Row="1" Spacing="5">
-                                    <Label Text="{Binding AverageValue, StringFormat='{0:N0}'}" Style="{StaticResource HandleLabel}" />
-                                    <Label Text="average" Style="{StaticResource BodyLabel}"/>
-                                </StackLayout>
-                            </Grid>
                         </Grid>
+
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
