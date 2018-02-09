@@ -5,7 +5,7 @@
     /// </summary>
     public class Sensor : BindableBase
     {
-        public int Index { get; set; }
+        public int SensorIndex { get; set; }
         public string SerialNumber { get; set; }
         public string Name { get; set; }
         public string SensorType { get; set; }

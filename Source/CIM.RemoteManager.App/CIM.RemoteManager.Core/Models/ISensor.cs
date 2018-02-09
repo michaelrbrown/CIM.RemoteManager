@@ -5,7 +5,7 @@
     /// </summary>
     public interface ISensor
     {
-        int Index { get; set; }
+        int SensorIndex { get; set; }
         string SerialNumber { get; set; }
         string Name { get; set; }
         string SensorType { get; set; }

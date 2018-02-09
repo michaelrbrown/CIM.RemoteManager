@@ -91,7 +91,7 @@ namespace CIM.RemoteManager.Core.Helpers
         /// Gets the index in the collection for which the property change has occurred.
         /// </summary>
         /// <value>
-        /// Index in parent collection.
+        /// SensorIndex in parent collection.
         /// </value>
         public int CollectionIndex { get; }
 
