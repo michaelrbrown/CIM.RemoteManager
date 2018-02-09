@@ -1,8 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:forms="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-             xmlns:transformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
              x:Class="CIM.RemoteManager.Core.Pages.SensorListPage" 
              Title="DA-12 Sensors">
 
@@ -51,16 +49,6 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Label Text="{Binding SerialNumber}"  Grid.Row="0" Grid.ColumnSpan="3" Style="{StaticResource TitleLabel}" LineBreakMode="NoWrap"/>
-
-                                <forms:CachedImage Source="" LoadingPlaceholder="NoImagePic.png" 
-                                                    Grid.Row="1" Grid.Column="0"
-                                                    Aspect="AspectFit" Margin="5" 
-                                                    HeightRequest="25" WidthRequest="25" 
-                                                    HorizontalOptions="Center" VerticalOptions="Center">
-                                    <forms:CachedImage.Transformations>
-                                        <transformations:RoundedTransformation Radius="25"/>
-                                    </forms:CachedImage.Transformations>
-                                </forms:CachedImage>
 
                                 <Label Text="{Binding TimeStamp}" Grid.Row="1" Grid.Column="1" VerticalOptions="Center" Style="{StaticResource HandleLabel}" />
 
