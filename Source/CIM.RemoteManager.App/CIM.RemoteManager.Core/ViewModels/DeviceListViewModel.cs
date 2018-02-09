@@ -222,7 +222,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 //heart rate
                 var guid = Guid.Parse("0000180d-0000-1000-8000-00805f9b34fb");
 
-                //SystemDevices = Adapter.GetSystemConnectedOrPairedDevices(new[] { guid }).Select(d => new DeviceListItemViewModel(d)).ToList();
+                SystemDevices = Adapter.GetSystemConnectedOrPairedDevices().Select(d => new DeviceListItemViewModel(d)).ToList();
                 // remove the GUID filter for test
                 // Avoid to loose already IDevice with a connection, otherwise you can't close it
                 // Keep the reference of already known devices and drop all not in returned list.

@@ -568,7 +568,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                     break;
                 case "B":
 
-                    //Application.Current.MainPage.DisplayAlert("B values", sensorValues, "Cancel");
+                    Application.Current.MainPage.DisplayAlert("B values", sensorValues, "Cancel");
 
                     //Application.Current.MainPage.DisplayAlert("B", splitSensorValues[0], "Cancel");
                     //Application.Current.MainPage.DisplayAlert("B1", splitSensorValues[1], "Cancel");
