@@ -567,9 +567,10 @@ namespace CIM.RemoteManager.Core.ViewModels
                     Sensors.Add(sensor);
                     break;
                 case "B":
+                    Application.Current.MainPage.DisplayAlert("B", splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('A') + 1).SafeConvert<int>(0).ToString(), "Cancel");
                     // "B" Sensor data serialization
                     // Update Sensor list by index
-                    foreach (var sensorValue in Sensors.Where(s => s.Index == splitSensorValues[0].SafeConvert<int>(0)))
+                    foreach (var sensorValue in Sensors.Where(s => s.Index == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('A') + 1).SafeConvert<int>(0)))
                     {
                         sensorValue.TimeStamp = splitSensorValues[0].SafeHexToInt();
                         sensorValue.AverageValue = splitSensorValues[1].SafeHexToDouble();
@@ -579,18 +580,20 @@ namespace CIM.RemoteManager.Core.ViewModels
                     }
                     break;
                 case "C":
+                    Application.Current.MainPage.DisplayAlert("C", splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('A') + 1).SafeConvert<int>(0).ToString(), "Cancel");
                     // "C" Sensor data serialization
                     // Update Sensor list by index
-                    foreach (var sensorValue in Sensors.Where(s => s.Index == splitSensorValues[0].SafeConvert<int>(0)))
+                    foreach (var sensorValue in Sensors.Where(s => s.Index == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('A') + 1).SafeConvert<int>(0)))
                     {
                         sensorValue.TimeStamp = splitSensorValues[0].SafeHexToInt();
                         sensorValue.CurrentValue = splitSensorValues[1].SafeHexToDouble();
                     }
                     break;
                 case "I":
+                    Application.Current.MainPage.DisplayAlert("I", splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('A') + 1).SafeConvert<int>(0).ToString(), "Cancel");
                     // "I" Sensor data serialization
                     // Update Sensor list by index
-                    foreach (var sensorValue in Sensors.Where(s => s.Index == splitSensorValues[0].SafeConvert<int>(0)))
+                    foreach (var sensorValue in Sensors.Where(s => s.Index == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('A') + 1).SafeConvert<int>(0)))
                     {
                         sensorValue.TimeStamp = splitSensorValues[0].SafeHexToInt();
                         sensorValue.CurrentValue = splitSensorValues[1].SafeHexToDouble();
