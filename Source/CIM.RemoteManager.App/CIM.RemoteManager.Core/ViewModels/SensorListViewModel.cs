@@ -567,19 +567,22 @@ namespace CIM.RemoteManager.Core.ViewModels
                     Sensors.Add(sensor);
                     break;
                 case "B":
-                    Application.Current.MainPage.DisplayAlert("B", splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('A') + 1).SafeConvert<int>(0).ToString(), "Cancel");
+                    Application.Current.MainPage.DisplayAlert("B", splitSensorValues[0], "Cancel");
+                    Application.Current.MainPage.DisplayAlert("B1", splitSensorValues[1], "Cancel");
+                    Application.Current.MainPage.DisplayAlert("B2", splitSensorValues[2], "Cancel");
+                    Application.Current.MainPage.DisplayAlert("B3", splitSensorValues[3], "Cancel");
                     // "B" Sensor data serialization
                     // Update Sensor list by index
 
-                    var sensorListItem = Sensors.FirstOrDefault(s => s.SensorIndex == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('A') + 1).SafeConvert<int>(0));
-                    if (sensorListItem != null)
-                    {
-                        sensorListItem.TimeStamp = splitSensorValues[0].SafeHexToInt();
-                        sensorListItem.AverageValue = splitSensorValues[1].SafeHexToDouble();
-                        sensorListItem.CurrentValue = splitSensorValues[2].SafeHexToDouble();
-                        sensorListItem.DecimalLocation = splitSensorValues[3].SafeHexToInt();
-                        sensorListItem.StatisticsTotalCalcSettings = splitSensorValues[4];
-                    }
+                    //var sensorListItem = Sensors.FirstOrDefault(s => s.SensorIndex == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('A') + 1).SafeConvert<int>(0));
+                    //if (sensorListItem != null)
+                    //{
+                    //    sensorListItem.TimeStamp = splitSensorValues[0].SafeHexToInt();
+                    //    sensorListItem.AverageValue = splitSensorValues[1].SafeHexToDouble();
+                    //    sensorListItem.CurrentValue = splitSensorValues[2].SafeHexToDouble();
+                    //    sensorListItem.DecimalLocation = splitSensorValues[3].SafeHexToInt();
+                    //    sensorListItem.StatisticsTotalCalcSettings = splitSensorValues[4];
+                    //}
                     //foreach (var sensorValue in Sensors.Where(s => s.SensorIndex == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('A') + 1).SafeConvert<int>(0)))
                     //{
                     //    sensorValue.TimeStamp = splitSensorValues[0].SafeHexToInt();
