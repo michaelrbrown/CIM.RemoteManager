@@ -532,7 +532,9 @@ namespace CIM.RemoteManager.Core.ViewModels
         {
             // Split by tab delimiter
             string[] splitSensorValues = sensorValues.Split('\t');
-            
+
+            Application.Current.MainPage.DisplayAlert("B values", sensorValues, "Cancel");
+
             switch (conversionType)
             {
                 case "A":
@@ -567,10 +569,10 @@ namespace CIM.RemoteManager.Core.ViewModels
                     Sensors.Add(sensor);
                     break;
                 case "B":
-                    Application.Current.MainPage.DisplayAlert("B", splitSensorValues[0], "Cancel");
-                    Application.Current.MainPage.DisplayAlert("B1", splitSensorValues[1], "Cancel");
-                    Application.Current.MainPage.DisplayAlert("B2", splitSensorValues[2], "Cancel");
-                    Application.Current.MainPage.DisplayAlert("B3", splitSensorValues[3], "Cancel");
+                    //Application.Current.MainPage.DisplayAlert("B", splitSensorValues[0], "Cancel");
+                    //Application.Current.MainPage.DisplayAlert("B1", splitSensorValues[1], "Cancel");
+                    //Application.Current.MainPage.DisplayAlert("B2", splitSensorValues[2], "Cancel");
+                    //Application.Current.MainPage.DisplayAlert("B3", splitSensorValues[3], "Cancel");
                     // "B" Sensor data serialization
                     // Update Sensor list by index
 
