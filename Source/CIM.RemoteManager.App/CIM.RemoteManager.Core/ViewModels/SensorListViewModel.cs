@@ -595,7 +595,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                     //}
                     break;
                 case "C":
-                    Application.Current.MainPage.DisplayAlert("C", splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('A') + 1).SafeConvert<int>(0).ToString(), "Cancel");
+                    //Application.Current.MainPage.DisplayAlert("C", splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('A') + 1).SafeConvert<int>(0).ToString(), "Cancel");
                     // "C" Sensor data serialization
                     // Update Sensor list by index
                     //foreach (var sensorValue in Sensors.Where(s => s.SensorIndex == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('A') + 1).SafeConvert<int>(0)))
@@ -605,7 +605,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                     //}
                     break;
                 case "I":
-                    Application.Current.MainPage.DisplayAlert("I", splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('A') + 1).SafeConvert<int>(0).ToString(), "Cancel");
+                    //Application.Current.MainPage.DisplayAlert("I", splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('A') + 1).SafeConvert<int>(0).ToString(), "Cancel");
                     // "I" Sensor data serialization
                     // Update Sensor list by index
                     //foreach (var sensorValue in Sensors.Where(s => s.SensorIndex == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('A') + 1).SafeConvert<int>(0)))
