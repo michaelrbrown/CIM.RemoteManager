@@ -200,11 +200,11 @@ namespace CIM.RemoteManager.Core.ViewModels
 
                 _tx = await _service.GetCharacteristicAsync(TxUuid);
 
-                await Task.Delay(TimeSpan.FromSeconds(1));
+                //await Task.Delay(TimeSpan.FromSeconds(1));
 
                 await _tx.WriteAsync("{Y}".StrToByteArray());
 
-                await Task.Delay(TimeSpan.FromSeconds(1));
+                await Task.Delay(500);
 
                 Characteristic = await _service.GetCharacteristicAsync(RxUuid);
                 
@@ -280,7 +280,7 @@ namespace CIM.RemoteManager.Core.ViewModels
 
                 Characteristic.ValueUpdated -= CharacteristicOnValueUpdated;
                 Characteristic.ValueUpdated += CharacteristicOnValueUpdated;
-                await Characteristic.StartUpdatesAsync().ConfigureAwait(false);
+                await Characteristic.StartUpdatesAsync();
 
                 Messages.Insert(0, $"Start updates");
 
@@ -298,7 +298,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             {
                 _updatesStarted = false;
 
-                await Characteristic.StopUpdatesAsync().ConfigureAwait(false);
+                await Characteristic.StopUpdatesAsync();
                 Characteristic.ValueUpdated -= CharacteristicOnValueUpdated;
 
                 Messages.Insert(0, $"Stop updates");
@@ -568,7 +568,12 @@ namespace CIM.RemoteManager.Core.ViewModels
                     break;
                 case "B":
 
-                    Application.Current.MainPage.DisplayAlert("B values", sensorValues, "Cancel");
+                    foreach (var sensorValue in Sensors)
+                    {
+                        Application.Current.MainPage.DisplayAlert("A indexes found: ", sensorValue.SensorIndex.ToString(), "Cancel");
+                    }
+
+                    //Application.Current.MainPage.DisplayAlert("B values", sensorValues, "Cancel");
 
                     //Application.Current.MainPage.DisplayAlert("B", splitSensorValues[0], "Cancel");
                     //Application.Current.MainPage.DisplayAlert("B1", splitSensorValues[1], "Cancel");

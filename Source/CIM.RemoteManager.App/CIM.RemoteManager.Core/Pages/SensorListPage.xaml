@@ -46,6 +46,10 @@
 
                                 <Label Text="{Binding TimeStamp}" Grid.Row="1" Grid.Column="1" VerticalOptions="Center" Style="{StaticResource HandleLabel}" />
 
+                                <StackLayout Orientation="Horizontal"  VerticalOptions="Center" Grid.Column="2" Grid.Row="1" Spacing="5">
+                                    <Label Text="{Binding AverageValue, StringFormat='{0:N0}'}" Style="{StaticResource HandleLabel}" />
+                                    <Label Text="average" Style="{StaticResource BodyLabel}"/>
+                                </StackLayout>
                             </Grid>
                         </Grid>
                     </ViewCell>

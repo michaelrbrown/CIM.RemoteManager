@@ -35,17 +35,17 @@
 
       <!--  styles  -->
       <Style x:Key="TitleLabel" TargetType="Label">
-        <Setter Property="TextColor" Value="{StaticResource BodyTextColor}" />
+        <Setter Property="TextColor" Value="#333333" />
         <Setter Property="FontSize" Value="20" />
       </Style>
 
       <Style x:Key="HandleLabel" TargetType="Label">
-        <Setter Property="TextColor" Value="{StaticResource BodyTextColor}" />
+        <Setter Property="TextColor" Value="#777777" />
         <Setter Property="FontSize" Value="12" />
       </Style>
 
       <Style x:Key="BodyLabel" TargetType="Label">
-        <Setter Property="TextColor" Value="{StaticResource BodyTextColor}" />
+        <Setter Property="TextColor" Value="#777777" />
         <Setter Property="FontSize" Value="11" />
       </Style>
     </ResourceDictionary>
