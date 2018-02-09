@@ -333,7 +333,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             }
             catch (Exception ex)
             {
-                Application.Current.MainPage.DisplayAlert(ex.Message, ex.StackTrace, "Cancel");
+                Application.Current.MainPage.DisplayAlert(ex.Message, "", "Cancel");
                 //_userDialogs.ShowError(ex.Message);
             }
             
@@ -568,12 +568,12 @@ namespace CIM.RemoteManager.Core.ViewModels
                     break;
                 case "B":
 
-                    foreach (var sensorValue in Sensors)
-                    {
-                        Application.Current.MainPage.DisplayAlert("A indexes found: ", sensorValue.SensorIndex.ToString(), "Cancel");
-                    }
+                    //foreach (var sensorValue in Sensors)
+                    //{
+                    //    Application.Current.MainPage.DisplayAlert("A indexes found: ", sensorValue.SensorIndex.ToString(), "Cancel");
+                    //}
 
-                    //Application.Current.MainPage.DisplayAlert("B values", sensorValues, "Cancel");
+                    Application.Current.MainPage.DisplayAlert("B index: ", splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('B') + 1).SafeConvert<int>(0).ToString(), "Cancel");
 
                     //Application.Current.MainPage.DisplayAlert("B", splitSensorValues[0], "Cancel");
                     //Application.Current.MainPage.DisplayAlert("B1", splitSensorValues[1], "Cancel");
@@ -582,20 +582,21 @@ namespace CIM.RemoteManager.Core.ViewModels
                     // "B" Sensor data serialization
                     // Update Sensor list by index
 
-                    //var sensorListItem = Sensors.FirstOrDefault(s => s.SensorIndex == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('B') + 1).SafeConvert<int>(0));
-                    //if (sensorListItem != null)
-                    //{
-                    //    sensorListItem.TimeStamp = splitSensorValues[0].SafeHexToInt();
-                    //    sensorListItem.AverageValue = splitSensorValues[1].SafeHexToDouble();
-                    //    sensorListItem.CurrentValue = splitSensorValues[2].SafeHexToDouble();
-                    //    sensorListItem.DecimalLocation = splitSensorValues[3].SafeHexToInt();
-                    //    sensorListItem.StatisticsTotalCalcSettings = splitSensorValues[4];
-                    //}
+                    var sensorListItem = Sensors.FirstOrDefault(s => s.SensorIndex == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('B') + 1).SafeConvert<int>(0));
+                    if (sensorListItem != null)
+                    {
+                        Application.Current.MainPage.DisplayAlert("Old value: ", sensorListItem.AverageValue.ToString(), "Cancel");
+                        Application.Current.MainPage.DisplayAlert("New value: ", splitSensorValues[1].SafeHexToDouble().ToString(), "Cancel");
+
+                        sensorListItem.TimeStamp = splitSensorValues[0].SafeHexToInt();
+                        sensorListItem.AverageValue = splitSensorValues[1].SafeHexToDouble();
+                        sensorListItem.DecimalLocation = splitSensorValues[2].SafeHexToInt();
+                        sensorListItem.StatisticsTotalCalcSettings = splitSensorValues[3];
+                    }
                     //foreach (var sensorValue in Sensors.Where(s => s.SensorIndex == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('A') + 1).SafeConvert<int>(0)))
                     //{
                     //    sensorValue.TimeStamp = splitSensorValues[0].SafeHexToInt();
                     //    sensorValue.AverageValue = splitSensorValues[1].SafeHexToDouble();
-                    //    sensorValue.CurrentValue = splitSensorValues[2].SafeHexToDouble();
                     //    sensorValue.DecimalLocation = splitSensorValues[3].SafeHexToInt();
                     //    sensorValue.StatisticsTotalCalcSettings = splitSensorValues[4];
                     //}
