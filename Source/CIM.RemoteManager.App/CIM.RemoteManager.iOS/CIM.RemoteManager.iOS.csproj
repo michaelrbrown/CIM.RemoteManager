@@ -197,12 +197,39 @@
     <Reference Include="Plugin.Settings.Abstractions, Version=3.1.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Xam.Plugins.Settings.3.1.1\lib\Xamarin.iOS10\Plugin.Settings.Abstractions.dll</HintPath>
     </Reference>
+    <Reference Include="SkiaSharp, Version=1.59.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\SkiaSharp.1.59.1\lib\XamariniOS\SkiaSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="SkiaSharp.Views.Forms, Version=1.59.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\SkiaSharp.Views.Forms.1.59.1\lib\XamariniOS\SkiaSharp.Views.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="SkiaSharp.Views.iOS, Version=1.59.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\SkiaSharp.Views.1.59.1\lib\XamariniOS\SkiaSharp.Views.iOS.dll</HintPath>
+    </Reference>
     <Reference Include="Splat, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Splat.2.0.0\lib\Xamarin.iOS10\Splat.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
+    <Reference Include="Telerik.Xamarin.iOS, Version=2018.1.202.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Telerik.UI.for.Xamarin.Common.2018.1.202.1\lib\xamarinios10\Telerik.Xamarin.iOS.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.XamarinForms.Common, Version=2018.1.202.240, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Telerik.UI.for.Xamarin.Common.2018.1.202.1\lib\xamarinios10\Telerik.XamarinForms.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.XamarinForms.DataControls, Version=2018.1.202.240, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Telerik.UI.for.Xamarin.DataControls.2018.1.202.1\lib\xamarinios10\Telerik.XamarinForms.DataControls.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.XamarinForms.Input, Version=2018.1.202.240, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Telerik.UI.for.Xamarin.Input.2018.1.202.1\lib\xamarinios10\Telerik.XamarinForms.Input.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.XamarinForms.Primitives, Version=2018.1.202.240, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Telerik.UI.for.Xamarin.Primitives.2018.1.202.1\lib\xamarinios10\Telerik.XamarinForms.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.XamarinForms.SkiaSharp, Version=2018.1.202.240, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Telerik.UI.for.Xamarin.SkiaSharp.2018.1.202.1\lib\xamarinios10\Telerik.XamarinForms.SkiaSharp.dll</HintPath>
+    </Reference>
     <Reference Include="WebP.Touch, Version=1.0.6551.26920, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\WebP.Touch.1.0.7\lib\Xamarin.iOS10\WebP.Touch.dll</HintPath>
     </Reference>
@@ -326,6 +353,27 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\bluetooth-info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\temperatureSensor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\baromicPressureSensor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\c02Sensor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\differentialPressureSensor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\fridgeTemperatureSensor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\humiditySensor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ovenTempSensor.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -39,6 +39,8 @@
     <Compile Include="BleMvxFormsApp.xaml.cs">
       <DependentUpon>BleMvxFormsApp.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Common\CoreConstants.cs" />
+    <Compile Include="Converters\CoreConverters.cs" />
     <Compile Include="Converters\InverseBooleanValueConverter.cs" />
     <Compile Include="Extensions\GuidExtension.cs" />
     <Compile Include="Extensions\IUserDialogsExtensions.cs" />
@@ -76,6 +78,7 @@
       <DependentUpon>ServiceListPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\CalculationService.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\CharacteristicDetailViewModel.cs" />
     <Compile Include="ViewModels\CharacteristicListViewModel.cs" />
@@ -86,6 +89,7 @@
     <Compile Include="ViewModels\SensorListViewModel.cs" />
     <Compile Include="ViewModels\SensorPlotViewModel.cs" />
     <Compile Include="ViewModels\ServiceListViewModel.cs" />
+    <Compile Include="ViewModels\SettingsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\MvvmCross.Plugins.BLE\MvvmCross.Plugins.BLE.csproj">
@@ -173,11 +177,29 @@
     <Reference Include="SkiaSharp, Version=1.59.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <HintPath>..\..\packages\SkiaSharp.1.59.1\lib\portable-net45+win8+wpa81+wp8\SkiaSharp.dll</HintPath>
     </Reference>
+    <Reference Include="SkiaSharp.Views.Forms, Version=1.59.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\SkiaSharp.Views.Forms.1.59.1\lib\portable-net45+win8+wpa81+wp8\SkiaSharp.Views.Forms.dll</HintPath>
+    </Reference>
     <Reference Include="SlideOverKit, Version=1.0.6507.24362, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\SlideOverKit.2.1.5\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\SlideOverKit.dll</HintPath>
     </Reference>
     <Reference Include="Splat, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Splat.2.0.0\lib\netstandard1.1\Splat.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.XamarinForms.Common, Version=2018.1.202.240, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Telerik.UI.for.Xamarin.Common.2018.1.202.1\lib\portable-net45+win8+wpa81+wp8\Telerik.XamarinForms.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.XamarinForms.DataControls, Version=2018.1.202.240, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Telerik.UI.for.Xamarin.DataControls.2018.1.202.1\lib\portable-net45+win8+wpa81+wp8\Telerik.XamarinForms.DataControls.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.XamarinForms.Input, Version=2018.1.202.240, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Telerik.UI.for.Xamarin.Input.2018.1.202.1\lib\portable-net45+win8+wpa81+wp8\Telerik.XamarinForms.Input.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.XamarinForms.Primitives, Version=2018.1.202.240, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Telerik.UI.for.Xamarin.Primitives.2018.1.202.1\lib\portable-net45+win8+wpa81+wp8\Telerik.XamarinForms.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.XamarinForms.SkiaSharp, Version=2018.1.202.240, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Telerik.UI.for.Xamarin.SkiaSharp.2018.1.202.1\lib\portable-net45+win8+wpa81+wp8\Telerik.XamarinForms.SkiaSharp.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Forms.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Xamarin.Forms.2.5.0.121934\lib\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.Core.dll</HintPath>
