@@ -10,21 +10,16 @@
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <StackLayout Orientation="Vertical">
-            <Label Text="{Binding CharacteristicValue, StringFormat='Value: {0}'}" Margin="20"></Label>
+        <StackLayout Orientation="Vertical" HeightRequest="150">
+            <Label Text="{Binding CharacteristicValue, StringFormat='Value: {0}'}" Margin="10"></Label>
 
             <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"></ColumnDefinition>
-                    <ColumnDefinition Width="Auto"></ColumnDefinition>
-                    <ColumnDefinition Width="Auto"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <Button Grid.Column="2" Text="{Binding UpdateButtonText}" Command="{Binding ToggleUpdatesCommand}"></Button>
+                <Button Text="{Binding UpdateButtonText}" Command="{Binding ToggleUpdatesCommand}"></Button>
             </Grid>
 
         </StackLayout>
 
-        <ListView Grid.Row="1" ItemsSource="{Binding Sensors}" CachingStrategy="RecycleElement">
+        <ListView Grid.Row="1" ItemsSource="{Binding Sensors}" SeparatorVisibility="None" CachingStrategy="RecycleElement">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
