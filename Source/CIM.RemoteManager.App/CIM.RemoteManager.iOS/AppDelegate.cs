@@ -22,7 +22,10 @@ namespace CIM.RemoteManager.iOS
             var startup = Mvx.Resolve<IMvxAppStart>();
             startup.Start();
 
-           
+            var manager = BITHockeyManager.SharedHockeyManager;
+            manager.Configure("7bbf2e7de05b4379a72711e0ba3c1e4a");
+            manager.StartManager();
+            manager.Authenticator.AuthenticateInstallation(); // This line is obsolete in crash only builds
 
             _window.MakeKeyAndVisible();
 

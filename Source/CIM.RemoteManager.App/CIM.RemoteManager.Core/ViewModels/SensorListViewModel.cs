@@ -49,9 +49,9 @@ namespace CIM.RemoteManager.Core.ViewModels
 
         public ObservableCollection<string> Messages { get; } = new ObservableCollection<string>();
         //public ObservableCollection<ISensor> Sensors { get; set; } = new ObservableCollection<ISensor>();
-        
-        FullyObservableCollection<Sensor> _sensors;
-        public FullyObservableCollection<Sensor> Sensors
+
+        MvxObservableCollection<Sensor> _sensors;
+        public MvxObservableCollection<Sensor> Sensors
         {
             get => _sensors;
             set
@@ -132,10 +132,10 @@ namespace CIM.RemoteManager.Core.ViewModels
         public SensorListViewModel(IAdapter adapter, IUserDialogs userDialogs) : base(adapter)
         {
             _userDialogs = userDialogs;
-            //Sensors = new MvxObservableCollection<ISensor>();
+            _sensors = new MvxObservableCollection<Sensor>();
 
-            _sensors = new FullyObservableCollection<Sensor>();
-            _sensors.CollectionChanged += SensorCollectionChanged;
+            //_sensors = new FullyObservableCollection<Sensor>();
+            //_sensors.CollectionChanged += SensorCollectionChanged;
 
             // Send a refresh command to our remote to start pulling all our data
             //InitRemote();
