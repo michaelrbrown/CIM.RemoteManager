@@ -204,6 +204,7 @@ namespace CIM.RemoteManager.Core.ViewModels
 
                 await _tx.WriteAsync("{Y}".StrToByteArray());
 
+                // Wait 500 miliseconds
                 await Task.Delay(500);
 
                 Characteristic = await _service.GetCharacteristicAsync(RxUuid);
