@@ -142,7 +142,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                _sensors.CollectionChanged += SensorCollectionChanged;
 
 
-               StartUpdates();
+               
             }
             catch (Exception ex)
             {
@@ -249,6 +249,8 @@ namespace CIM.RemoteManager.Core.ViewModels
 
                 // Init our DA-12
                 InitRemote();
+
+                StartUpdates();
 
                 if (_device == null)
                 {
