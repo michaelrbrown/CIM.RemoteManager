@@ -49,6 +49,7 @@
         <Style x:Key="CardStyle" TargetType="Grid">
           <Setter Property="HeightRequest" Value="60"/>
           <Setter Property="Padding" Value="5,10,0,10"/>
+          <Setter Property="Margin" Value="5,5,5,5"/>
           <Setter Property="BackgroundColor" Value="{StaticResource CardBackgroundColor}"/>
         </Style>
 
