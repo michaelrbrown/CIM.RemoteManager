@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using Acr.UserDialogs;
@@ -48,11 +46,11 @@ namespace CIM.RemoteManager.Core.ViewModels
 
         public string CharacteristicValue => Characteristic?.Value.BytesToStringConverted();
 
-        public ObservableCollection<string> Messages { get; } = new ObservableCollection<string>();
+        //public ObservableCollection<string> Messages { get; } = new ObservableCollection<string>();
         //public ObservableCollection<ISensor> Sensors { get; set; } = new ObservableCollection<ISensor>();
 
-        MvxObservableCollection<Sensor> _sensors;
-        public MvxObservableCollection<Sensor> Sensors
+        FullyObservableCollection<Sensor> _sensors;
+        public FullyObservableCollection<Sensor> Sensors
         {
             get => _sensors;
             set
@@ -134,11 +132,12 @@ namespace CIM.RemoteManager.Core.ViewModels
         {
             try
             {
+                HockeyApp.MetricsManager.TrackEvent("Sensors :: SensorListViewModel");
                 _userDialogs = userDialogs;
-                _sensors = new MvxObservableCollection<Sensor>();
+                //_sensors = new MvxObservableCollection<Sensor>();
 
-                //_sensors = new FullyObservableCollection<Sensor>();
-                //_sensors.CollectionChanged += SensorCollectionChanged;
+                _sensors = new FullyObservableCollection<Sensor>();
+               _sensors.CollectionChanged += SensorCollectionChanged;
             }
             catch (Exception ex)
             {
@@ -192,6 +191,8 @@ namespace CIM.RemoteManager.Core.ViewModels
 
         private async void InitRemote()
         {
+            HockeyApp.MetricsManager.TrackEvent("Sensors :: 1");
+
             if (_device == null)
             {
                 throw new ArgumentNullException(nameof(_device));
@@ -202,20 +203,30 @@ namespace CIM.RemoteManager.Core.ViewModels
                 // Show loading indicator
                 _userDialogs.ShowLoading("Loading DA-12 data...");
 
+                HockeyApp.MetricsManager.TrackEvent("Sensors :: 2");
+
                 // Get our adafruit bluetooth service (UART)
                 _service = await _device.GetServiceAsync(UartUuid);
 
+                HockeyApp.MetricsManager.TrackEvent("Sensors :: 3");
+
                 _tx = await _service.GetCharacteristicAsync(TxUuid);
+
+                HockeyApp.MetricsManager.TrackEvent("Sensors :: 4");
 
                 //await Task.Delay(TimeSpan.FromSeconds(1));
 
                 await _tx.WriteAsync("{Y}".StrToByteArray());
 
+                HockeyApp.MetricsManager.TrackEvent("Sensors :: 5");
+
                 // Wait 500 miliseconds
                 await Task.Delay(500);
 
                 Characteristic = await _service.GetCharacteristicAsync(RxUuid);
-                
+
+                HockeyApp.MetricsManager.TrackEvent("Sensors :: 6");
+
                 //var service = await _device.GetServiceAsync(UartUuid);
 
                 // Get our adafruit bluetooth characteristic
@@ -256,6 +267,8 @@ namespace CIM.RemoteManager.Core.ViewModels
         
         protected override void InitFromBundle(IMvxBundle parameters)
         {
+            HockeyApp.MetricsManager.TrackEvent("Sensors :: InitFromBundle");
+
             try
             {
                 base.InitFromBundle(parameters);
@@ -609,7 +622,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                         sensorListItemB.DecimalLocation = splitSensorValues[2].SafeHexToInt();
                         sensorListItemB.AlarmStatus = splitSensorValues[3].SafeHexToInt();
                     }
-                    RaisePropertyChanged(() => Sensors);
+                    ///RaisePropertyChanged(() => Sensors);
 
                     //foreach (var sensorValue in Sensors.Where(s => s.SensorIndex == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('A') + 1).SafeConvert<int>(0)))
                     //{
