@@ -192,21 +192,6 @@
     <Reference Include="Splat, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Splat.2.0.0\lib\netstandard1.1\Splat.dll</HintPath>
     </Reference>
-    <Reference Include="Telerik.XamarinForms.Common, Version=2018.1.202.240, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Telerik.UI.for.Xamarin.Common.2018.1.202.1\lib\portable-net45+win8+wpa81+wp8\Telerik.XamarinForms.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="Telerik.XamarinForms.DataControls, Version=2018.1.202.240, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Telerik.UI.for.Xamarin.DataControls.2018.1.202.1\lib\portable-net45+win8+wpa81+wp8\Telerik.XamarinForms.DataControls.dll</HintPath>
-    </Reference>
-    <Reference Include="Telerik.XamarinForms.Input, Version=2018.1.202.240, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Telerik.UI.for.Xamarin.Input.2018.1.202.1\lib\portable-net45+win8+wpa81+wp8\Telerik.XamarinForms.Input.dll</HintPath>
-    </Reference>
-    <Reference Include="Telerik.XamarinForms.Primitives, Version=2018.1.202.240, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Telerik.UI.for.Xamarin.Primitives.2018.1.202.1\lib\portable-net45+win8+wpa81+wp8\Telerik.XamarinForms.Primitives.dll</HintPath>
-    </Reference>
-    <Reference Include="Telerik.XamarinForms.SkiaSharp, Version=2018.1.202.240, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Telerik.UI.for.Xamarin.SkiaSharp.2018.1.202.1\lib\portable-net45+win8+wpa81+wp8\Telerik.XamarinForms.SkiaSharp.dll</HintPath>
-    </Reference>
     <Reference Include="Xamarin.Forms.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Xamarin.Forms.2.5.0.121934\lib\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.Core.dll</HintPath>
     </Reference>

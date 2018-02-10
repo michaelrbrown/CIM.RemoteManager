@@ -3,8 +3,7 @@ using MvvmCross.Platform.Plugins;
 
 namespace MvvmCross.Plugins.BLE
 {
-    public class PluginLoader
-      : IMvxPluginLoader
+    public class PluginLoader : IMvxPluginLoader
     {
         public static readonly PluginLoader Instance = new PluginLoader();
 

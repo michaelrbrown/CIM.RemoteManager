@@ -135,7 +135,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             //Sensors = new MvxObservableCollection<ISensor>();
 
             _sensors = new FullyObservableCollection<Sensor>();
-            //_sensors.CollectionChanged += SensorCollectionChanged;
+            _sensors.CollectionChanged += SensorCollectionChanged;
 
             // Send a refresh command to our remote to start pulling all our data
             //InitRemote();
@@ -593,7 +593,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                         sensorListItemB.DecimalLocation = splitSensorValues[2].SafeHexToInt();
                         sensorListItemB.StatisticsTotalCalcSettings = splitSensorValues[3];
                     }
-                    //RaisePropertyChanged(() => Sensors);
+                    RaisePropertyChanged(() => Sensors);
 
                     //foreach (var sensorValue in Sensors.Where(s => s.SensorIndex == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('A') + 1).SafeConvert<int>(0)))
                     //{
