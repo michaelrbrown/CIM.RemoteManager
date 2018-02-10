@@ -6,8 +6,7 @@ using System.ComponentModel;
 
 namespace CIM.RemoteManager.Core.Helpers
 {
-    public class FullyObservableCollection<T> : ObservableCollection<T>
-        where T : INotifyPropertyChanged
+    public class FullyObservableCollection<T> : ObservableCollection<T> where T : INotifyPropertyChanged
     {
         /// <summary>
         /// Occurs when a property is changed within an item.
