@@ -30,8 +30,91 @@
       <Color x:Key="IndicatorTextColor">#FF3C3C3C</Color>
       <Color x:Key="chartForeground">White</Color>
       <Color x:Key="chartForegroundSemiTransparent">#88FFFFFF</Color>
-      
-      <!--  font families  -->
+        <Color x:Key="CardBackgroundColor">#eceff1</Color>
+        <Color x:Key="FooterBackgroundColor">#D0EFEE</Color>
+
+        <Color x:Key="NameColor">#546e7a</Color>
+        <Color x:Key="SensorTypeColor">#90a4ae</Color>
+        <Color x:Key="TimeStampColor">#00A9A5</Color>
+        <Color x:Key="MoreIconColor">#00A9A5</Color>
+        <Color x:Key="ValueColor">#00A9A5</Color>
+        <Color x:Key="StatusColor">#43a047</Color>
+        <Color x:Key="OutlineColor">#eeeeee</Color>
+        <Color x:Key="SerialNumberColor">#546e7a</Color>
+
+        <Color x:Key="EntryBackgroundColor">#7778909c</Color>
+
+        <Style x:Key="CardStyle" TargetType="Grid">
+          <Setter Property="HeightRequest" Value="60"/>
+          <Setter Property="Padding" Value="5,10,0,10"/>
+          <Setter Property="BackgroundColor" Value="{StaticResource CardBackgroundColor}"/>
+        </Style>
+
+        <Style x:Key="Footer" TargetType="Grid">
+          <Setter Property="Padding" Value="10"/>
+          <Setter Property="BackgroundColor" Value="{StaticResource FooterBackgroundColor}"/>
+        </Style>
+
+        <Style x:Key="ShadowStyle" TargetType="BoxView">
+          <Setter Property="HeightRequest" Value=".8"/>
+          <Setter Property="BackgroundColor" Value="#888888"/>
+        </Style>
+
+        <Style x:Key="LightShadowStyle" TargetType="BoxView">
+          <Setter Property="HeightRequest" Value=".3"/>
+          <Setter Property="BackgroundColor" Value="#eeeeee"/>
+        </Style>
+
+        <Style x:Key="NameStyle" TargetType="Label">
+          <Setter Property="FontSize" Value="16"/>
+          <Setter Property="TextColor" Value="{StaticResource NameColor}"/>
+          <Setter Property="FontAttributes" Value="Bold"/>
+        </Style>
+
+        <Style x:Key="SensorTypeStyle" TargetType="Label">
+          <Setter Property="FontSize" Value="14"/>
+          <Setter Property="TextColor" Value="{StaticResource SensorTypeColor}"/>
+        </Style>
+
+        <Style x:Key="TimeStampStyle" TargetType="Label">
+          <Setter Property="FontSize" Value="14"/>
+          <Setter Property="TextColor" Value="{StaticResource TimeStampColor}"/>
+        </Style>
+
+        <Style x:Key="MoreStyle" TargetType="Label">
+          <Setter Property="FontSize" Value="10"/>
+          <Setter Property="TextColor" Value="{StaticResource MoreIconColor}"/>
+          <Setter Property="FontAttributes" Value="Bold"/>
+          <Setter Property="HorizontalTextAlignment" Value="End"/>
+        </Style>
+
+        <Style x:Key="ValueStyle" TargetType="Label">
+          <Setter Property="FontSize" Value="24"/>
+          <Setter Property="TextColor" Value="{StaticResource ValueColor}"/>
+        </Style>
+
+        <Style x:Key="ValueBoxStyle" TargetType="Grid">
+          <Setter Property="Padding" Value="15"/>
+          <Setter Property="BackgroundColor" Value="{StaticResource FooterBackgroundColor}"/>
+        </Style>
+
+        <Style x:Key="StatusStyle" TargetType="Label">
+          <Setter Property="FontAttributes" Value="None"/>
+          <Setter Property="FontSize" Value="14"/>
+          <Setter Property="VerticalOptions" Value="Center"/>
+          <Setter Property="TextColor" Value="{StaticResource StatusColor}"/>
+        </Style>
+
+        <Style x:Key="SerialNumberStyle" TargetType="Label">
+          <Setter Property="TextColor" Value="{StaticResource SerialNumberColor}"/>
+          <Setter Property="FontSize" Value="14"/>
+          <Setter Property="VerticalOptions" Value="Center"/>
+          <Setter Property="FontAttributes" Value="Italic"/>
+        </Style>
+
+
+
+        <!--  font families  -->
       <OnPlatform
           x:Key="RegularFontFamily"
           x:TypeArguments="x:String"

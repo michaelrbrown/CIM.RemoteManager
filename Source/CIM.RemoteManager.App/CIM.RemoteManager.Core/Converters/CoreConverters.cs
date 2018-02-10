@@ -7,23 +7,23 @@ using ImageSource = Xamarin.Forms.ImageSource;
 
 namespace CIM.RemoteManager.Core.Converters
 {
-    public class SuggestionItemSelectedEventArgsConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            if (!(value is Telerik.XamarinForms.Input.AutoComplete.SuggestionItemSelectedEventArgs eventArgs))
+    //public class SuggestionItemSelectedEventArgsConverter : IValueConverter
+    //{
+    //    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    //    {
+    //        if (!(value is Telerik.XamarinForms.Input.AutoComplete.SuggestionItemSelectedEventArgs eventArgs))
 
-                throw new ArgumentException("Expected SuggestionItemSelectedEventArgs as value", nameof(value));
+    //            throw new ArgumentException("Expected SuggestionItemSelectedEventArgs as value", nameof(value));
 
-            return eventArgs;
+    //        return eventArgs;
 
-        }
+    //    }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
+    //    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    //    {
+    //        throw new NotImplementedException();
+    //    }
+    //}
 
     public class SelectionChangedEventArgsConverter : IValueConverter
     {

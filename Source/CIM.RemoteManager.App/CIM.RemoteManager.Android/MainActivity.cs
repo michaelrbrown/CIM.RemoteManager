@@ -2,6 +2,8 @@ using Acr.UserDialogs;
 using Android.App;
 using Android.Content.PM;
 using Android.OS;
+using HockeyApp.Android;
+using HockeyApp.Android.Metrics;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.Forms.Droid.Presenters;
@@ -33,6 +35,40 @@ namespace CIM.RemoteManager.Android
             presenter.FormsApplication = formsApp;
 
             Mvx.Resolve<IMvxAppStart>().Start();
+
+            CheckForUpdates();
         }
+
+        protected override void OnResume()
+        {
+            base.OnResume();
+            CrashManager.Register(this, "7941bf481049476ca868b71fb4deadaa");
+            // in your main activity OnCreate-method add:
+            MetricsManager.Register(Application, "7941bf481049476ca868b71fb4deadaa");
+        }
+
+        private void CheckForUpdates()
+        {
+            // Remove this for store builds!
+            UpdateManager.Register(this, "7941bf481049476ca868b71fb4deadaa");
+        }
+
+        private void UnregisterManagers()
+        {
+            UpdateManager.Unregister();
+        }
+
+        protected override void OnPause()
+        {
+            base.OnPause();
+            UnregisterManagers();
+        }
+
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+            UnregisterManagers();
+        }
+
     }
 }

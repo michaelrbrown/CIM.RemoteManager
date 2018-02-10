@@ -49,9 +49,9 @@ namespace CIM.RemoteManager.Core.ViewModels
 
         public ObservableCollection<string> Messages { get; } = new ObservableCollection<string>();
         //public ObservableCollection<ISensor> Sensors { get; set; } = new ObservableCollection<ISensor>();
-        
-        FullyObservableCollection<Sensor> _sensors;
-        public FullyObservableCollection<Sensor> Sensors
+
+        MvxObservableCollection<Sensor> _sensors;
+        public MvxObservableCollection<Sensor> Sensors
         {
             get => _sensors;
             set
@@ -111,31 +111,31 @@ namespace CIM.RemoteManager.Core.ViewModels
 
         public void SensorCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            if (e.Action == NotifyCollectionChangedAction.Remove)
-            {
-                foreach (Sensor item in e.OldItems)
-                {
-                    //Removed items
-                    item.PropertyChanged -= SensorPropertyChanged;
-                }
-            }
-            else if (e.Action == NotifyCollectionChangedAction.Add)
-            {
-                foreach (Sensor item in e.NewItems)
-                {
-                    //Added items
-                    item.PropertyChanged += SensorPropertyChanged;
-                }
-            }
+            //if (e.Action == NotifyCollectionChangedAction.Remove)
+            //{
+            //    foreach (Sensor item in e.OldItems)
+            //    {
+            //        //Removed items
+            //        item.PropertyChanged -= SensorPropertyChanged;
+            //    }
+            //}
+            //else if (e.Action == NotifyCollectionChangedAction.Add)
+            //{
+            //    foreach (Sensor item in e.NewItems)
+            //    {
+            //        //Added items
+            //        item.PropertyChanged += SensorPropertyChanged;
+            //    }
+            //}
         }
 
         public SensorListViewModel(IAdapter adapter, IUserDialogs userDialogs) : base(adapter)
         {
             _userDialogs = userDialogs;
-            //Sensors = new MvxObservableCollection<ISensor>();
+            //_sensors = new MvxObservableCollection<Sensor>();
 
-            _sensors = new FullyObservableCollection<Sensor>();
-            _sensors.CollectionChanged += SensorCollectionChanged;
+            //_sensors = new FullyObservableCollection<Sensor>();
+            //_sensors.CollectionChanged += SensorCollectionChanged;
 
             // Send a refresh command to our remote to start pulling all our data
             //InitRemote();
@@ -543,8 +543,8 @@ namespace CIM.RemoteManager.Core.ViewModels
                     //Application.Current.MainPage.DisplayAlert("SensorType", splitSensorValues[3], "Cancel");
                     //Application.Current.MainPage.DisplayAlert("Scale", splitSensorValues[4], "Cancel");
                     //Application.Current.MainPage.DisplayAlert("Offset", splitSensorValues[5], "Cancel");
-                    Application.Current.MainPage.DisplayAlert("TimeStamp", splitSensorValues[6], "Cancel");
-                    Application.Current.MainPage.DisplayAlert("AverageValue", splitSensorValues[7], "Cancel");
+                    //Application.Current.MainPage.DisplayAlert("TimeStamp", splitSensorValues[6], "Cancel");
+                    //Application.Current.MainPage.DisplayAlert("AverageValue", splitSensorValues[7], "Cancel");
                     //Application.Current.MainPage.DisplayAlert("CurrentValue", splitSensorValues[8], "Cancel");
                     //Application.Current.MainPage.DisplayAlert("DecimalLocation", splitSensorValues[9].SafeConvert<int>(0).ToString(), "Cancel");
                     //Application.Current.MainPage.DisplayAlert("StatisticsTotalCalcSettings", splitSensorValues[10], "Cancel");
