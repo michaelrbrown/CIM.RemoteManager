@@ -282,7 +282,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 Characteristic.ValueUpdated += CharacteristicOnValueUpdated;
                 await Characteristic.StartUpdatesAsync();
 
-                Messages.Insert(0, $"Start updates");
+                //Messages.Insert(0, $"Start updates");
 
                 RaisePropertyChanged(() => UpdateButtonText);
             }
@@ -301,7 +301,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 await Characteristic.StopUpdatesAsync();
                 Characteristic.ValueUpdated -= CharacteristicOnValueUpdated;
 
-                Messages.Insert(0, $"Stop updates");
+                //Messages.Insert(0, $"Stop updates");
 
                 RaisePropertyChanged(() => UpdateButtonText);
 

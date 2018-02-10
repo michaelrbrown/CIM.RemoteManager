@@ -29,16 +29,7 @@
                                        SwipeOffset="50,0,50,0"
                                        BackgroundColor="#463003"
                                        Grid.Row="1">
-            <dataControls:RadListView.SelectedItemStyle>
-                <listView:ListViewItemStyle BackgroundColor="{StaticResource SelectedBackgroundColor}" BorderLocation="Bottom" BorderColor="#A0967D" BorderWidth="2"/>
-            </dataControls:RadListView.SelectedItemStyle>
-            <dataControls:RadListView.ItemStyle>
-                <listView:ListViewItemStyle BackgroundColor="{StaticResource BackgroundColor}" BorderLocation="Bottom" BorderColor="#A0967D" BorderWidth="2"/>
-            </dataControls:RadListView.ItemStyle>
-            <dataControls:RadListView.PressedItemStyle>
-                <listView:ListViewItemStyle BackgroundColor="{StaticResource BackgroundColor}" BorderLocation="Bottom" BorderColor="#A0967D" BorderWidth="2"/>
-            </dataControls:RadListView.PressedItemStyle>
-
+            
             <dataControls:RadListView.LayoutDefinition>
                 <listView:ListViewLinearLayout ItemLength="100" />
             </dataControls:RadListView.LayoutDefinition>
@@ -59,7 +50,7 @@
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
-                                        <Label Text="{Binding Name}" TextColor="#694A00" LineBreakMode="TailTruncation" FontSize="Large"/>
+                                        <Label Text="{Binding SerialNumber}" TextColor="#694A00" LineBreakMode="TailTruncation" FontSize="Large"/>
                                         <Image  Grid.Column="1"/>
                                     </Grid>
                                     <StackLayout Orientation="Horizontal" Padding="5,0,0,0">
@@ -76,23 +67,6 @@
                 </DataTemplate>
             </dataControls:RadListView.ItemTemplate>
 
-            <dataControls:RadListView.ItemSwipeContentTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid BackgroundColor="#33FFFFFF" Grid.Column="0">
-                            <Button Image="" Style="{StaticResource ButtonStyle}" />
-                        </Grid>
-                        <Grid BackgroundColor="#33FF0000" Grid.Column="2">
-                            <Button Image="trash.png" Style="{StaticResource ButtonStyle}" />
-                        </Grid>
-                    </Grid>
-                </DataTemplate>
-            </dataControls:RadListView.ItemSwipeContentTemplate>
         </dataControls:RadListView>
 
     </Grid>
