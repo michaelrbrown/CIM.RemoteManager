@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using Acr.UserDialogs;
@@ -131,14 +132,20 @@ namespace CIM.RemoteManager.Core.ViewModels
 
         public SensorListViewModel(IAdapter adapter, IUserDialogs userDialogs) : base(adapter)
         {
-            _userDialogs = userDialogs;
-            //_sensors = new MvxObservableCollection<Sensor>();
+            try
+            {
+                _userDialogs = userDialogs;
+                _sensors = new MvxObservableCollection<Sensor>();
 
-            //_sensors = new FullyObservableCollection<Sensor>();
-            //_sensors.CollectionChanged += SensorCollectionChanged;
+                //_sensors = new FullyObservableCollection<Sensor>();
+                //_sensors.CollectionChanged += SensorCollectionChanged;
+            }
+            catch (Exception ex)
+            {
+                _userDialogs.Alert(ex.Message, "Error while loading sensor data");
+                Mvx.Trace(ex.Message);
+            }
 
-            // Send a refresh command to our remote to start pulling all our data
-            //InitRemote();
         }
 
         public override void Resume()
@@ -249,15 +256,23 @@ namespace CIM.RemoteManager.Core.ViewModels
         
         protected override void InitFromBundle(IMvxBundle parameters)
         {
-            base.InitFromBundle(parameters);
-            
-            _device = GetDeviceFromBundle(parameters);
-
-            InitRemote();
-
-            if (_device == null)
+            try
             {
-                Close(this);
+                base.InitFromBundle(parameters);
+
+                _device = GetDeviceFromBundle(parameters);
+
+                InitRemote();
+
+                if (_device == null)
+                {
+                    Close(this);
+                }
+            }
+            catch (Exception ex)
+            {
+                _userDialogs.Alert(ex.Message, "Error while loading sensor data");
+                Mvx.Trace(ex.Message);
             }
         }
 
@@ -592,7 +607,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                         sensorListItemB.TimeStamp = splitSensorValues[0].SafeHexToInt();
                         sensorListItemB.AverageValue = splitSensorValues[1].SafeHexToDouble();
                         sensorListItemB.DecimalLocation = splitSensorValues[2].SafeHexToInt();
-                        sensorListItemB.StatisticsTotalCalcSettings = splitSensorValues[3];
+                        sensorListItemB.AlarmStatus = splitSensorValues[3].SafeHexToInt();
                     }
                     RaisePropertyChanged(() => Sensors);
 
