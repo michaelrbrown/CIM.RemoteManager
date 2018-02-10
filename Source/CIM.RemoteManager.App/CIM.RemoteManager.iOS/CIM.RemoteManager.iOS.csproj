@@ -104,6 +104,7 @@
     <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="Renderer\ViewCellRenderer.cs" />
     <Compile Include="Setup.cs" />
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />

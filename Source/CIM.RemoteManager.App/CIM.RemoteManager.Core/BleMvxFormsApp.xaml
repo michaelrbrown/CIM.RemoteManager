@@ -154,6 +154,7 @@
         <Setter Property="FontSize" Value="11" />
       </Style>
 
+        <converters:ListToLabelConverter x:Key="InverseBooleanValueConverter"/>
       <converters:ListToLabelConverter x:Key="ListToLabelConverter"/>
       <converters:LoadingOpacityConverter x:Key="LoadingOpacityConverter"/>
       <converters:IsSelectedBackgroundColorConverter x:Key="IsSelectedBackgroundColorConverter"/>
