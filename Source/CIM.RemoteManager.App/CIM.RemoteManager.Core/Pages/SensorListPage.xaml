@@ -22,7 +22,7 @@
             <Button Text="{Binding UpdateButtonText}" Command="{Binding ToggleUpdatesCommand}" HorizontalOptions="Center"></Button>
         </StackLayout>
 
-        <ListView ItemsSource="{Binding .}" Header="{Binding }"
+        <ListView Grid.Row="1" ItemsSource="{Binding .}" Header="{Binding .}"
                           SeparatorVisibility="Default" IsGroupingEnabled="False"
                           BackgroundColor="Transparent"
                           SeparatorColor="Transparent" 
