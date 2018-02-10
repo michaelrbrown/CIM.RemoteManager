@@ -111,28 +111,28 @@ namespace CIM.RemoteManager.Core.ViewModels
 
         public void SensorCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            if (e.Action == NotifyCollectionChangedAction.Remove)
-            {
-                foreach (Sensor item in e.OldItems)
-                {
-                    //Removed items
-                    item.PropertyChanged -= SensorPropertyChanged;
-                }
-            }
-            else if (e.Action == NotifyCollectionChangedAction.Add)
-            {
-                foreach (Sensor item in e.NewItems)
-                {
-                    //Added items
-                    item.PropertyChanged += SensorPropertyChanged;
-                }
-            }
+            //if (e.Action == NotifyCollectionChangedAction.Remove)
+            //{
+            //    foreach (Sensor item in e.OldItems)
+            //    {
+            //        //Removed items
+            //        item.PropertyChanged -= SensorPropertyChanged;
+            //    }
+            //}
+            //else if (e.Action == NotifyCollectionChangedAction.Add)
+            //{
+            //    foreach (Sensor item in e.NewItems)
+            //    {
+            //        //Added items
+            //        item.PropertyChanged += SensorPropertyChanged;
+            //    }
+            //}
         }
 
         public SensorListViewModel(IAdapter adapter, IUserDialogs userDialogs) : base(adapter)
         {
             _userDialogs = userDialogs;
-            _sensors = new MvxObservableCollection<Sensor>();
+            //_sensors = new MvxObservableCollection<Sensor>();
 
             //_sensors = new FullyObservableCollection<Sensor>();
             //_sensors.CollectionChanged += SensorCollectionChanged;
