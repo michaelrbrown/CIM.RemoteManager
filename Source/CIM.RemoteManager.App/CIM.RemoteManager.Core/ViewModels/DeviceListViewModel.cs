@@ -147,11 +147,11 @@ namespace CIM.RemoteManager.Core.ViewModels
             RaisePropertyChanged(nameof(IsStateOn));
             RaisePropertyChanged(nameof(StateText));
 
-            AlertConfig alertConfig = new AlertConfig();
-            alertConfig.Message = StateText;
-            alertConfig.Title = "Bluetooth State";
+            //AlertConfig alertConfig = new AlertConfig();
+            //alertConfig.Message = StateText;
+            //alertConfig.Title = "Bluetooth State";
 
-            _userDialogs.AlertAsync(alertConfig, new CancellationToken(false));
+            //_userDialogs.AlertAsync(alertConfig, new CancellationToken(false));
             //TryStartScanning();
         }
 
@@ -205,6 +205,22 @@ namespace CIM.RemoteManager.Core.ViewModels
             });
         }
 
+        private void AddOrUpdateSystemDevice(IDevice device)
+        {
+            InvokeOnMainThread(() =>
+            {
+                var vm = Devices.FirstOrDefault(d => d.Device.Name.IndexOf("adafruit", StringComparison.OrdinalIgnoreCase) > -1);
+                if (vm != null)
+                {
+                    vm.Update();
+                }
+                else
+                {
+                    Devices.Add(new DeviceListItemViewModel(device));
+                }
+            });
+        }
+
         public override async void Resume()
         {
             base.Resume();
@@ -222,15 +238,15 @@ namespace CIM.RemoteManager.Core.ViewModels
                 //heart rate
                 var guid = Guid.Parse("0000180d-0000-1000-8000-00805f9b34fb");
 
-                SystemDevices = Adapter.GetSystemConnectedOrPairedDevices().Select(d => new DeviceListItemViewModel(d)).ToList();
+                //SystemDevices = Adapter.GetSystemConnectedOrPairedDevices().Select(d => new DeviceListItemViewModel(d)).ToList();
                 // remove the GUID filter for test
                 // Avoid to loose already IDevice with a connection, otherwise you can't close it
                 // Keep the reference of already known devices and drop all not in returned list.
-                var pairedOrConnectedDeviceWithNullGatt = Adapter.GetSystemConnectedOrPairedDevices();
-                SystemDevices.RemoveAll(sd => pairedOrConnectedDeviceWithNullGatt.All(p => p.Id != sd.Id));
-                SystemDevices.AddRange(pairedOrConnectedDeviceWithNullGatt.Where(d => SystemDevices.All(sd => sd.Id != d.Id)).Select(d => new DeviceListItemViewModel(d)));
-                RaisePropertyChanged(() => SystemDevices);
-                if (SystemDevices.Any()) RaisePropertyChanged(nameof(FoundSystemDevices));
+                //var pairedOrConnectedDeviceWithNullGatt = Adapter.GetSystemConnectedOrPairedDevices();
+                //SystemDevices.RemoveAll(sd => pairedOrConnectedDeviceWithNullGatt.All(p => p.Id != sd.Id));
+                //SystemDevices.AddRange(pairedOrConnectedDeviceWithNullGatt.Where(d => SystemDevices.All(sd => sd.Id != d.Id)).Select(d => new DeviceListItemViewModel(d)));
+                //RaisePropertyChanged(() => SystemDevices);
+                //if (SystemDevices.Any()) RaisePropertyChanged(nameof(FoundSystemDevices));
             }
             catch (Exception ex)
             {
@@ -277,7 +293,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         {
             Devices.Clear();
 
-            foreach (var connectedDevice in Adapter.ConnectedDevices)
+            foreach (var connectedDevice in Adapter.ConnectedDevices.OrderBy(o => o.Rssi))
             {
                 // update rssi for already connected devices (so tha 0 is not shown in the list)
                 try
@@ -291,6 +307,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 }
 
                 AddOrUpdateDevice(connectedDevice);
+                AddOrUpdateSystemDevice(connectedDevice);
             }
 
             _cancellationTokenSource = new CancellationTokenSource();
