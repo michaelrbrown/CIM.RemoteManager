@@ -1,8 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:dataControls="clr-namespace:Telerik.XamarinForms.DataControls;assembly=Telerik.XamarinForms.DataControls"
-             xmlns:listView="clr-namespace:Telerik.XamarinForms.DataControls.ListView;assembly=Telerik.XamarinForms.DataControls"
+             xmlns:templates="clr-namespace:CIM.RemoteManager.Core.Templates;assembly=CIM.RemoteManager.Core"
              x:Class="CIM.RemoteManager.Core.Pages.SensorListPage" 
              Title="DA-12 Sensors">
     
@@ -23,49 +22,49 @@
             <Button Text="{Binding UpdateButtonText}" Command="{Binding ToggleUpdatesCommand}" HorizontalOptions="Center"></Button>
         </StackLayout>
 
-        <dataControls:RadListView x:Name="SensorsListView" ItemsSource="{Binding Sensors}"
-                                       SelectionMode="Single"
-                                       BackgroundColor="#463003"
-                                       Grid.Row="1">
-            
-            <dataControls:RadListView.LayoutDefinition>
-                <listView:ListViewLinearLayout ItemLength="100" />
-            </dataControls:RadListView.LayoutDefinition>
+        <ListView ItemsSource="{Binding .}" Header="{Binding .}"
+                          SeparatorVisibility="Default" IsGroupingEnabled="False"
+                          BackgroundColor="Transparent"
+                          SeparatorColor="Transparent" 
+                          HasUnevenRows="false"
+                          RowHeight="116" ItemTapped="ListView_OnItemTapped" ItemSelected="ListView_OnItemSelected" IsPullToRefreshEnabled="True">
 
-            <dataControls:RadListView.ItemTemplate>
+            <ListView.GroupHeaderTemplate>
                 <DataTemplate>
-                    <listView:ListViewTemplateCell>
-                        <listView:ListViewTemplateCell.View>
-                            <Grid Padding="10">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="90"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Image Source="fridgeTemperatureSensor.png"/>
-                                <StackLayout Padding="10,0,0,0" Grid.Column="1">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="Auto"/>
-                                        </Grid.ColumnDefinitions>
-                                        <Label Text="{Binding SerialNumber}" TextColor="#694A00" LineBreakMode="NoWrap" FontSize="Large"/>
-                                        <Image  Grid.Column="1"/>
-                                    </Grid>
-                                    <StackLayout Orientation="Horizontal" Padding="5,0,0,0">
-                                        <Label TextColor="#806015" Text="{Binding AverageValue}" LineBreakMode="NoWrap" FontSize="Medium"/>
-                                        <Label TextColor="#806015" Text="C" FontAttributes="Italic" FontSize="Medium"/>
-                                    </StackLayout>
-                                    <StackLayout Orientation="Horizontal" Padding="15,0,0,0">
-                                        <Label TextColor="#A0967D" Text="{Binding TimeStamp}" LineBreakMode="NoWrap" FontSize="Small"/>
-                                    </StackLayout>
-                                </StackLayout>
-                            </Grid>
-                        </listView:ListViewTemplateCell.View>
-                    </listView:ListViewTemplateCell>
+                    <TextCell Text="DA-12 Bluetooth {235235-23523}"
+                                      TextColor="#03a9f4"
+                                      DetailColor="#898989" />
                 </DataTemplate>
-            </dataControls:RadListView.ItemTemplate>
+            </ListView.GroupHeaderTemplate>
 
-        </dataControls:RadListView>
+            <ListView.HeaderTemplate>
+                <DataTemplate>
+                    <StackLayout Orientation="Horizontal" 
+                                     Padding="10,5,5,10"
+                                     BackgroundColor="#00A9A5">
+                        <Label Text="DA-12 Bluetooth - Sensors" TextColor="#ffffff" FontSize="20" />
+                    </StackLayout>
+                </DataTemplate>
+            </ListView.HeaderTemplate>
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+
+                        <ViewCell.ContextActions>
+                            <MenuItem Clicked="ListView_OnStats" CommandParameter="{Binding .}"
+                                              Text="Stats" />
+                            <MenuItem Clicked="ListView_OnSettings" CommandParameter="{Binding .}"
+                                              Text="Limits" IsDestructive="True" />
+                        </ViewCell.ContextActions>
+
+                        <templates:SensorItemTemplate  />
+
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+        </ListView>
 
     </Grid>
 

@@ -89,6 +89,13 @@
             get => _statisticsTotalCalcSettings;
             set => SetProperty(ref _statisticsTotalCalcSettings, value);
         }
-        
+
+        private int _alarmStatus;
+        public int AlarmStatus
+        {
+            get => _alarmStatus;
+            set => SetProperty(ref _alarmStatus, value);
+        }
+
     }
 }
