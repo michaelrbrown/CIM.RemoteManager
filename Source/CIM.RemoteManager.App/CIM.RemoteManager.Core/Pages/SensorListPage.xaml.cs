@@ -33,5 +33,10 @@ namespace CIM.RemoteManager.Core.Pages
         {
             //throw new NotImplementedException();
         }
+
+        private void SensorUpdatesSwitchToggled(object sender, ToggledEventArgs e)
+        {
+            //throw new NotImplementedException();
+        }
     }
 }

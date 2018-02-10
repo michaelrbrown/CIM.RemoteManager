@@ -12,13 +12,14 @@
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <StackLayout Grid.Row="0" Orientation="Vertical" HeightRequest="150">
+        <StackLayout Grid.Row="0" Orientation="Vertical" HeightRequest="75">
             <Label Text="{Binding CharacteristicValue, StringFormat='Value: {0}'}" Margin="10" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"></Label>
             <Button Text="{Binding UpdateButtonText}" Command="{Binding ToggleUpdatesCommand}" HorizontalOptions="Center"></Button>
+            <Switch IsToggled="True" Toggled="SensorUpdatesSwitchToggled" HorizontalOptions="Center"></Switch>
         </StackLayout>
 
-        <StackLayout Grid.Row="1" Orientation="Horizontal" Padding="10,5,5,10" BackgroundColor="#00A9A5">
-            <Label Text="{Binding Device.Name}" TextColor="#ffffff" FontSize="20" />
+        <StackLayout Grid.Row="1" Orientation="Horizontal" Padding="10,5,5,10" BackgroundColor="#eeeeee" HeightRequest="75">
+            <Label Text="{Binding DeviceName}" TextColor="#ffffff" FontSize="20" />
         </StackLayout>
 
         <ListView Grid.Row="2" 
@@ -30,7 +31,7 @@
                     RowHeight="116" 
                     ItemTapped="ListView_OnItemTapped" 
                     ItemSelected="ListView_OnItemSelected" 
-                    IsPullToRefreshEnabled="True">
+                    IsPullToRefreshEnabled="False">
 
                 <ListView.ItemTemplate>
                 <DataTemplate>
