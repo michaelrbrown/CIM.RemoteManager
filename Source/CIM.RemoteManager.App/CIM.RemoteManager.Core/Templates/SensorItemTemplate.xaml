@@ -46,7 +46,7 @@
                 </StackLayout>
 
                 <StackLayout Grid.Column="1" Spacing="0">
-                    <Label Text="{Binding AlarmStatus}" VerticalOptions="Center" Style="{DynamicResource StatusStyle}" HorizontalTextAlignment="End" VerticalTextAlignment="Center" />
+                    <Label Text="Online" VerticalOptions="Center" Style="{DynamicResource StatusStyle}" HorizontalTextAlignment="End" VerticalTextAlignment="Center" />
                 </StackLayout>
 
             </Grid>
