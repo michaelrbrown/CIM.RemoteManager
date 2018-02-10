@@ -22,7 +22,51 @@
             <Button Text="{Binding UpdateButtonText}" Command="{Binding ToggleUpdatesCommand}" HorizontalOptions="Center"></Button>
         </StackLayout>
 
-        
+        <ListView Grid.Row="1" 
+                    ItemsSource="{Binding .}" Header="{Binding .}"
+                    SeparatorVisibility="Default" IsGroupingEnabled="False"
+                    BackgroundColor="Transparent"
+                    SeparatorColor="Transparent" 
+                    HasUnevenRows="false"
+                    RowHeight="116" 
+                    ItemTapped="ListView_OnItemTapped" 
+                    ItemSelected="ListView_OnItemSelected" 
+                    IsPullToRefreshEnabled="True">
+
+            <ListView.GroupHeaderTemplate>
+                <DataTemplate>
+                    <TextCell Text="DA-12 Bluetooth" TextColor="#03a9f4" DetailColor="#898989" />
+                </DataTemplate>
+            </ListView.GroupHeaderTemplate>
+
+            <ListView.HeaderTemplate>
+                <DataTemplate>
+                    <StackLayout Orientation="Horizontal" Padding="10,5,5,10" BackgroundColor="#00A9A5">
+                        <Label Text="DA-12 Bluetooth - Sensors" TextColor="#ffffff" FontSize="20" />
+                    </StackLayout>
+                </DataTemplate>
+            </ListView.HeaderTemplate>
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+
+                        <!-- Context Actions -->
+                        <ViewCell.ContextActions>
+                            <MenuItem Clicked="ListView_OnStats" CommandParameter="{Binding .}"
+                                              Text="Stats" />
+                            <MenuItem Clicked="ListView_OnSettings" CommandParameter="{Binding .}"
+                                              Text="Limits" IsDestructive="True" />
+                        </ViewCell.ContextActions>
+
+                        <!-- Sensor Detail Template -->
+                        <templates:SensorItemTemplate  />
+
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+        </ListView>
 
     </Grid>
 
