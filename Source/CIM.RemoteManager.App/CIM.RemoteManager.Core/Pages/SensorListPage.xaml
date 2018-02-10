@@ -22,7 +22,7 @@
             <Button Text="{Binding UpdateButtonText}" Command="{Binding ToggleUpdatesCommand}" HorizontalOptions="Center"></Button>
         </StackLayout>
 
-        <ListView ItemsSource="{Binding .}" Header="{Binding .}"
+        <ListView ItemsSource="{Binding .}" Header="{Binding }"
                           SeparatorVisibility="Default" IsGroupingEnabled="False"
                           BackgroundColor="Transparent"
                           SeparatorColor="Transparent" 
@@ -31,9 +31,7 @@
 
             <ListView.GroupHeaderTemplate>
                 <DataTemplate>
-                    <TextCell Text="DA-12 Bluetooth {235235-23523}"
-                                      TextColor="#03a9f4"
-                                      DetailColor="#898989" />
+                    <TextCell Text="DA-12 Bluetooth" TextColor="#03a9f4" DetailColor="#898989" />
                 </DataTemplate>
             </ListView.GroupHeaderTemplate>
 
@@ -51,6 +49,7 @@
                 <DataTemplate>
                     <ViewCell>
 
+                        <!-- Context Actions -->
                         <ViewCell.ContextActions>
                             <MenuItem Clicked="ListView_OnStats" CommandParameter="{Binding .}"
                                               Text="Stats" />
@@ -58,6 +57,7 @@
                                               Text="Limits" IsDestructive="True" />
                         </ViewCell.ContextActions>
 
+                        <!-- Sensor Detail Template -->
                         <templates:SensorItemTemplate  />
 
                     </ViewCell>
