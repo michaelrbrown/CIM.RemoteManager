@@ -5,12 +5,6 @@
              x:Class="CIM.RemoteManager.Core.Pages.SensorListPage" 
              Title="DA-12 Sensors">
     
-    <ContentPage.Resources>
-        <Color x:Key="SelectedBackgroundColor">#FFEBC0</Color>
-        <Color x:Key="BackgroundColor">#FFF7E6</Color>
-        <Style x:Key="ButtonStyle" TargetType="Button" />
-    </ContentPage.Resources>
-    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
@@ -23,7 +17,7 @@
         </StackLayout>
 
         <ListView Grid.Row="1" 
-                    ItemsSource="{Binding .}" Header="{Binding .}"
+                    ItemsSource="{Binding Sensors}" 
                     SeparatorVisibility="Default" IsGroupingEnabled="False"
                     BackgroundColor="Transparent"
                     SeparatorColor="Transparent" 
@@ -32,12 +26,6 @@
                     ItemTapped="ListView_OnItemTapped" 
                     ItemSelected="ListView_OnItemSelected" 
                     IsPullToRefreshEnabled="True">
-
-            <ListView.GroupHeaderTemplate>
-                <DataTemplate>
-                    <TextCell Text="DA-12 Bluetooth" TextColor="#03a9f4" DetailColor="#898989" />
-                </DataTemplate>
-            </ListView.GroupHeaderTemplate>
 
             <ListView.HeaderTemplate>
                 <DataTemplate>

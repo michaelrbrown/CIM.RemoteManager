@@ -193,7 +193,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         {
             InvokeOnMainThread(() =>
             {
-                var vm = Devices.FirstOrDefault(d => d.Device.Id == device.Id);
+                var vm = Devices.OrderBy(o => o.Rssi).FirstOrDefault(d => d.Device.Id == device.Id);
                 if (vm != null)
                 {
                     vm.Update();
@@ -209,14 +209,14 @@ namespace CIM.RemoteManager.Core.ViewModels
         {
             InvokeOnMainThread(() =>
             {
-                var vm = Devices.FirstOrDefault(d => d.Device.Name.IndexOf("adafruit", StringComparison.OrdinalIgnoreCase) > -1);
+                var vm = Devices.OrderBy(o => o.Rssi).FirstOrDefault(d => d.Device.Name.IndexOf("adafruit", StringComparison.OrdinalIgnoreCase) > -1);
                 if (vm != null)
                 {
                     vm.Update();
                 }
                 else
                 {
-                    Devices.Add(new DeviceListItemViewModel(device));
+                    SystemDevices.Add(new DeviceListItemViewModel(device));
                 }
             });
         }
@@ -227,8 +227,8 @@ namespace CIM.RemoteManager.Core.ViewModels
 
             await GetPreviousGuidAsync();
             await GetPreviousNameAsync();
-            //TryStartScanning();
-            GetSystemConnectedOrPairedDevices();
+            TryStartScanning();
+            //GetSystemConnectedOrPairedDevices();
         }
 
         private void GetSystemConnectedOrPairedDevices()
@@ -293,7 +293,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         {
             Devices.Clear();
 
-            foreach (var connectedDevice in Adapter.ConnectedDevices.OrderBy(o => o.Rssi))
+            foreach (var connectedDevice in Adapter.ConnectedDevices)
             {
                 // update rssi for already connected devices (so tha 0 is not shown in the list)
                 try
