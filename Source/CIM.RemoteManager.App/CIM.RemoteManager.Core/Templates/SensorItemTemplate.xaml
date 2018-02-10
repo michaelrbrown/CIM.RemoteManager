@@ -19,7 +19,7 @@
                 <Image Grid.Column="0" Source="fridgeTemperatureSensor.png" Aspect="AspectFit" Scale="1" />
 
                 <StackLayout Grid.Column="1" Spacing="0" HeightRequest="100" VerticalOptions="Center">
-                    <Label Text="{Binding Name}" Style="{DynamicResource NameStyle}" VerticalOptions="Center" LineBreakMode="TailTruncation" />
+                    <Label Text="Fridge Temp" Style="{DynamicResource NameStyle}" VerticalOptions="Center" LineBreakMode="TailTruncation" />
                     <Label Text="{Binding SensorType}" Style="{DynamicResource SensorTypeStyle}" VerticalOptions="Center" LineBreakMode="TailTruncation" />
                     <Label Text="{Binding TimeStamp}" Style="{DynamicResource TimeStampStyle}" VerticalOptions="Center" LineBreakMode="TailTruncation" />
                 </StackLayout>

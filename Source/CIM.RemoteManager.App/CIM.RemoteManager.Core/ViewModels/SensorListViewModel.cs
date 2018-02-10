@@ -140,6 +140,9 @@ namespace CIM.RemoteManager.Core.ViewModels
 
                 _sensors = new FullyObservableCollection<Sensor>();
                _sensors.CollectionChanged += SensorCollectionChanged;
+
+
+               StartUpdates();
             }
             catch (Exception ex)
             {
@@ -152,44 +155,8 @@ namespace CIM.RemoteManager.Core.ViewModels
         public override void Resume()
         {
             base.Resume();
-
-            //LoadSensorData();
+            
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        private async void LoadSensorData()
-        {
-            try
-            {
-                _userDialogs.ShowLoading("Loading sensor data...");
-
-                Guid deviceGuid = _device.Id;
-                
-                //Sensors = await GetSensorsAsync();
-                
-                //RaisePropertyChanged(() => Sensors);
-
-                _userDialogs.HideLoading();
-
-            }
-            catch (Exception ex)
-            {
-                _userDialogs.Alert(ex.Message, "Error while loading sensor data");
-                Mvx.Trace(ex.Message);
-            }
-            finally
-            {
-                _userDialogs.HideLoading();
-            }
-        }
-
-        private Task<IList<ISensor>> GetSensorsAsync()
-        {
-            return null;
-        }
-        
 
         private async void InitRemote()
         {
