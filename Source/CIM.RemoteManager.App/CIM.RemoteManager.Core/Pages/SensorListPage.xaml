@@ -24,9 +24,7 @@
         </StackLayout>
 
         <dataControls:RadListView x:Name="SensorsListView" ItemsSource="{Binding Sensors}"
-                                       IsItemSwipeEnabled="True"
                                        SelectionMode="Single"
-                                       SwipeOffset="50,0,50,0"
                                        BackgroundColor="#463003"
                                        Grid.Row="1">
             
