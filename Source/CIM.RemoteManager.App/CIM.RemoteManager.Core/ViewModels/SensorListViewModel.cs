@@ -49,6 +49,8 @@ namespace CIM.RemoteManager.Core.ViewModels
         //public ObservableCollection<string> Messages { get; } = new ObservableCollection<string>();
         //public ObservableCollection<ISensor> Sensors { get; set; } = new ObservableCollection<ISensor>();
 
+        public string DeviceName { get; set; }
+
         FullyObservableCollection<Sensor> _sensors;
         public FullyObservableCollection<Sensor> Sensors
         {
@@ -275,6 +277,10 @@ namespace CIM.RemoteManager.Core.ViewModels
 
                 _device = GetDeviceFromBundle(parameters);
 
+                // Set device name
+                DeviceName = _device.Name;
+
+                // Init our DA-12
                 InitRemote();
 
                 if (_device == null)

@@ -16,7 +16,7 @@
                     <ColumnDefinition Width="10" />
                 </Grid.ColumnDefinitions>
 
-                <Image Grid.Column="0" Source="{Binding SensorType}" Aspect="AspectFit" Scale="1" />
+                <Image Grid.Column="0" Source="fridgeTemperatureSensor.png" Aspect="AspectFit" Scale="1" />
 
                 <StackLayout Grid.Column="1" Spacing="0" HeightRequest="100" VerticalOptions="Center">
                     <Label Text="{Binding Name}" Style="{DynamicResource NameStyle}" VerticalOptions="Center" LineBreakMode="TailTruncation" />
