@@ -224,6 +224,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             catch (Exception ex)
             {
                 _userDialogs.HideLoading();
+                HockeyApp.MetricsManager.TrackEvent($"(InitRemote) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
                 _userDialogs.ShowError(ex.Message);
             }
 
@@ -255,6 +256,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             }
             catch (Exception ex)
             {
+                HockeyApp.MetricsManager.TrackEvent($"(InitFromBundle) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
                 _userDialogs.Alert(ex.Message, "Error while loading sensor data");
                 Mvx.Trace(ex.Message);
             }
@@ -280,14 +282,15 @@ namespace CIM.RemoteManager.Core.ViewModels
 
                 Characteristic.ValueUpdated -= CharacteristicOnValueUpdated;
                 Characteristic.ValueUpdated += CharacteristicOnValueUpdated;
+
+                await _tx.WriteAsync("{Y}".StrToByteArray()).ConfigureAwait(true);
                 await Characteristic.StartUpdatesAsync().ConfigureAwait(true);
-
-                //Messages.Insert(0, $"Start updates");
-
+                
                 RaisePropertyChanged(() => UpdateButtonText);
             }
             catch (Exception ex)
             {
+                HockeyApp.MetricsManager.TrackEvent($"(StartUpdates) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
                 _userDialogs.ShowError(ex.Message);
             }
         }
@@ -300,14 +303,13 @@ namespace CIM.RemoteManager.Core.ViewModels
 
                 await Characteristic.StopUpdatesAsync().ConfigureAwait(true);
                 Characteristic.ValueUpdated -= CharacteristicOnValueUpdated;
-
-                //Messages.Insert(0, $"Stop updates");
-
+                
                 RaisePropertyChanged(() => UpdateButtonText);
 
             }
             catch (Exception ex)
             {
+                HockeyApp.MetricsManager.TrackEvent($"(StopUpdates) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
                 _userDialogs.ShowError(ex.Message);
             }
         }
@@ -333,7 +335,8 @@ namespace CIM.RemoteManager.Core.ViewModels
             }
             catch (Exception ex)
             {
-                Application.Current.MainPage.DisplayAlert(ex.Message, "", "Cancel");
+                HockeyApp.MetricsManager.TrackEvent($"(CharacteristicOnValueUpdated) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
+                //Application.Current.MainPage.DisplayAlert(ex.Message, "", "Cancel");
                 //_userDialogs.ShowError(ex.Message);
             }
             
@@ -593,7 +596,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                         sensorListItemB.DecimalLocation = splitSensorValues[2].SafeHexToInt();
                         sensorListItemB.AlarmStatus = splitSensorValues[3].SafeHexToInt();
                     }
-                    ///RaisePropertyChanged(() => Sensors);
+                    //RaisePropertyChanged(() => Sensors);
 
                     //foreach (var sensorValue in Sensors.Where(s => s.SensorIndex == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('A') + 1).SafeConvert<int>(0)))
                     //{

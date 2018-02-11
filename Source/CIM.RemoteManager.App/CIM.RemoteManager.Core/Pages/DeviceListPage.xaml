@@ -18,8 +18,9 @@
           
           <Grid>
             <Grid.ColumnDefinitions>
-              <ColumnDefinition Width="*"></ColumnDefinition>
-              <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="5"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             
@@ -27,18 +28,18 @@
               <DataTrigger TargetType="Grid"
                            Binding="{Binding IsConnected}"
                            Value="true">
-                <Setter Property="BackgroundColor" Value="#C1E2D5"></Setter>
+                <Setter Property="BackgroundColor" Value="#B9DEF5"></Setter>
               </DataTrigger>
             </Grid.Triggers>
+
+            <Frame Grid.Column="0" WidthRequest="5" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" BackgroundColor="#0097DF" HasShadow="False"></Frame>
             
-            <StackLayout Orientation="Vertical" VerticalOptions="CenterAndExpand">
-              <Label Text="{Binding Name}" FontSize="22"  TextColor="#666666" />
+            <StackLayout Grid.Column="1" Orientation="Vertical" VerticalOptions="CenterAndExpand">
+              <Label Text="{Binding Name}" FontSize="22" TextColor="#2A649B" />
               <Label Text="{Binding Id, StringFormat='{0}'}" TextColor="#7B7B7B" FontSize="18"/>
             </StackLayout>
-            <Label  Grid.Column="1"
-                   Margin="10"
-                   Text="{Binding Rssi}"
-                   VerticalTextAlignment="Center"></Label>
+            
+            <Label  Grid.Column="2" Margin="10" Text="{Binding Rssi}" VerticalTextAlignment="Center" TextColor="#2A649B"></Label>
           
           </Grid>
         </ViewCell>
