@@ -175,15 +175,15 @@ namespace CIM.RemoteManager.Core.ViewModels
                 //await Task.Delay(TimeSpan.FromSeconds(1));
 
                 // Make sure we can write characteristic data to remote
-                if (Characteristic.CanWrite)
-                {
+                //if (Characteristic.CanWrite)
+                //{
                     // Send a refresh command
                     await _tx.WriteAsync("{Y}".StrToByteArray()).ConfigureAwait(true);
-                }
-                else
-                {
-                    _userDialogs.Alert("Cannot write characteristic data to remote!", "CIMScan Remote Manager");
-                }
+                //}
+                //else
+                //{
+                   // _userDialogs.Alert("Cannot write characteristic data to remote!", "CIMScan Remote Manager");
+                //}
                 
                 // Wait 500 milliseconds
                 await Task.Delay(500).ConfigureAwait(true);

@@ -14,7 +14,7 @@
         <StackLayout Grid.Row="0" BackgroundColor="Transparent">
             <!-- Fast Swap Progress Indicators -->
             <!-- Margin: left, top, right, bottom -->
-            <Grid HorizontalOptions="Center" Padding="20" BackgroundColor="#E7F4FC">
+            <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="20" BackgroundColor="#E7F4FC">
                 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"></RowDefinition>
@@ -25,14 +25,14 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <Image Grid.Row="0" Grid.Column="0" Source="DA12.png" Aspect="AspectFill" WidthRequest="200" HeightRequest="200" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
+                <Image Grid.Row="0" Grid.Column="0" Source="DA12.png" Aspect="AspectFit" WidthRequest="200" HeightRequest="200" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
 
                 <StackLayout Grid.Row="0" Grid.Column="1" Orientation="Vertical" Spacing="0">
                     <Label Text="{Binding UpdateButtonText, Mode=TwoWay}" HorizontalOptions="Center" VerticalOptions="Center" />
                     <Switch IsToggled="{Binding UpdatesStarted, Mode=TwoWay}" Toggled="SensorUpdatesSwitchToggled" Margin="5" HorizontalOptions="Center" VerticalOptions="Center" />
                 </StackLayout>
 
-                <StackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="40" BackgroundColor="{DynamicResource AppAccentColor}">
+                <StackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" HeightRequest="40" BackgroundColor="{DynamicResource AppAccentColor}">
                     <Label Text="{Binding DeviceName}" TextColor="{DynamicResource AppLightColor}" FontSize="20" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" />
                 </StackLayout>
        
