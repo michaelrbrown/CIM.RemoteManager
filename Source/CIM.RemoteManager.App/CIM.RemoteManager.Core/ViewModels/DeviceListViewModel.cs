@@ -193,10 +193,10 @@ namespace CIM.RemoteManager.Core.ViewModels
         {
             InvokeOnMainThread(() =>
             {
-                var vm = Devices.OrderBy(o => o.Rssi).FirstOrDefault(d => d.Device.Id == device.Id);
-                if (vm != null)
+                var deviceListItemViewModel = Devices.OrderBy(o => o.Rssi).FirstOrDefault(d => d.Device.Id == device.Id);
+                if (deviceListItemViewModel != null)
                 {
-                    vm.Update();
+                    deviceListItemViewModel.Update();
                 }
                 else
                 {
@@ -209,10 +209,10 @@ namespace CIM.RemoteManager.Core.ViewModels
         {
             InvokeOnMainThread(() =>
             {
-                var vm = Devices.OrderBy(o => o.Rssi).FirstOrDefault(d => d.Device.Name.IndexOf("adafruit", StringComparison.OrdinalIgnoreCase) > -1);
-                if (vm != null)
+                var deviceListItemViewModel = Devices.OrderBy(o => o.Rssi).FirstOrDefault(d => d.Device.Id == device.Id);
+                if (deviceListItemViewModel != null)
                 {
-                    vm.Update();
+                    deviceListItemViewModel.Update();
                 }
                 else
                 {
@@ -225,8 +225,8 @@ namespace CIM.RemoteManager.Core.ViewModels
         {
             base.Resume();
 
-            await GetPreviousGuidAsync();
-            await GetPreviousNameAsync();
+            await GetPreviousGuidAsync().ConfigureAwait(true);
+            await GetPreviousNameAsync().ConfigureAwait(true);
             TryStartScanning();
             //GetSystemConnectedOrPairedDevices();
         }
@@ -270,10 +270,10 @@ namespace CIM.RemoteManager.Core.ViewModels
         {
             if (Device.RuntimePlatform == Device.Android)
             {
-                var status = await _permissions.CheckPermissionStatusAsync(Permission.Location);
+                var status = await _permissions.CheckPermissionStatusAsync(Permission.Location).ConfigureAwait(true);
                 if (status != PermissionStatus.Granted)
                 {
-                    var permissionResult = await _permissions.RequestPermissionsAsync(Permission.Location);
+                    var permissionResult = await _permissions.RequestPermissionsAsync(Permission.Location).ConfigureAwait(true);
 
                     if (permissionResult.First().Value != PermissionStatus.Granted)
                     {
@@ -298,7 +298,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 // update rssi for already connected devices (so tha 0 is not shown in the list)
                 try
                 {
-                    await connectedDevice.UpdateRssiAsync();
+                    await connectedDevice.UpdateRssiAsync().ConfigureAwait(true);
                 }
                 catch (Exception ex)
                 {
@@ -306,8 +306,16 @@ namespace CIM.RemoteManager.Core.ViewModels
                     _userDialogs.ErrorToast("Error", $"Failed to update RSSI for {connectedDevice.Name}", TimeSpan.FromSeconds(5));
                 }
 
-                AddOrUpdateDevice(connectedDevice);
-                AddOrUpdateSystemDevice(connectedDevice);
+                
+                // CIMScan devices
+                if (connectedDevice.Name.IndexOf("adafruit", StringComparison.OrdinalIgnoreCase) > -1)
+                {
+                    AddOrUpdateSystemDevice(connectedDevice);
+                }
+                else // All other devices
+                {
+                    AddOrUpdateDevice(connectedDevice);
+                }
             }
 
             _cancellationTokenSource = new CancellationTokenSource();
@@ -334,7 +342,7 @@ namespace CIM.RemoteManager.Core.ViewModels
 
                 _userDialogs.ShowLoading($"Disconnecting {device.Name}...");
 
-                await Adapter.DisconnectDeviceAsync(device.Device);
+                await Adapter.DisconnectDeviceAsync(device.Device).ConfigureAwait(false);
             }
             catch (Exception ex)
             {
@@ -359,7 +367,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                     {
                         _userDialogs.ShowLoading();
 
-                        await device.Device.UpdateRssiAsync();
+                        await device.Device.UpdateRssiAsync().ConfigureAwait(true);
                         device.RaisePropertyChanged(nameof(device.Rssi));
 
                         _userDialogs.HideLoading();
@@ -378,7 +386,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             {
                 config.Add("Connect", async () =>
                 {
-                    if (await ConnectDeviceAsync(device))
+                    if (await ConnectDeviceAsync(device).ConfigureAwait(true))
                     {
                         //ShowViewModel<ServiceListViewModel>(new MvxBundle(new Dictionary<string, string> { { DeviceIdKey, device.Device.Id.ToString() } }));
                         ShowViewModel<SensorListViewModel>(new MvxBundle(new Dictionary<string, string> { { DeviceIdKey, device.Device.Id.ToString() } }));

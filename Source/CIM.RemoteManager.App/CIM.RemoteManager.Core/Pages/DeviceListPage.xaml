@@ -15,45 +15,94 @@
                       CommandParameter="{Binding .}" IsDestructive="True"
                       Text="Disconnect"/>
           </ViewCell.ContextActions>
-          
-          <Grid>
-            
-            <Grid.Triggers>
-              <DataTrigger TargetType="Grid"
-                           Binding="{Binding IsConnected}"
-                           Value="true">
-                <Setter Property="BackgroundColor" Value="#B9DEF5"></Setter>
-              </DataTrigger>
-            </Grid.Triggers>
 
-              <StackLayout Margin="5" Orientation="Vertical" VerticalOptions="CenterAndExpand">
-                  <Grid>
-                      <Grid.ColumnDefinitions>
-                          <ColumnDefinition Width="5"></ColumnDefinition>
-                          <ColumnDefinition Width="*"></ColumnDefinition>
-                          <ColumnDefinition Width="Auto"></ColumnDefinition>
-                          <ColumnDefinition Width="Auto"></ColumnDefinition>
-                      </Grid.ColumnDefinitions>
+          <Frame Padding="0,0,0,3">
+              <Frame.Content>
+                  <Frame Padding="15,15,15,15"   OutlineColor="Gray" BackgroundColor="White">
+                      <Frame.Content>
+                          <StackLayout Padding="20,0,0,0"  Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                            
+                            <Grid>
+            
+                              <Grid.Triggers>
+                                <DataTrigger TargetType="Grid"
+                                             Binding="{Binding IsConnected}"
+                                             Value="true">
+                                  <Setter Property="BackgroundColor" Value="#B9DEF5"></Setter>
+                                </DataTrigger>
+                              </Grid.Triggers>
+
+                                <StackLayout Margin="5" Orientation="Vertical" VerticalOptions="CenterAndExpand">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="5"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
                     
-                      <Frame Grid.Column="0" WidthRequest="5" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" BackgroundColor="#0097DF" HasShadow="False"></Frame>
+                                        <Frame Grid.Column="0" WidthRequest="5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="#0097DF" HasShadow="False"></Frame>
             
-                      <StackLayout Grid.Column="1" Orientation="Vertical" VerticalOptions="CenterAndExpand">
-                        <Label Text="{Binding Name}" FontSize="22" TextColor="#2A649B" />
-                        <Label Text="{Binding Id, StringFormat='{0}'}" TextColor="#7B7B7B" FontSize="18"/>
-                      </StackLayout>
+                                        <StackLayout Grid.Column="1" Orientation="Vertical" VerticalOptions="CenterAndExpand">
+                                          <Label Text="{Binding Name}" FontSize="22" TextColor="#2A649B" />
+                                          <Label Text="{Binding Id, StringFormat='{0}'}" TextColor="#7B7B7B" FontSize="14"/>
+                                        </StackLayout>
             
-                      <Label  Grid.Column="2" Margin="10" Text="{Binding Rssi}" VerticalTextAlignment="Center" TextColor="#2A649B"></Label>
+                                        <Label  Grid.Column="2" Margin="10" Text="{Binding Rssi}" VerticalTextAlignment="Center" TextColor="#2A649B"></Label>
 
-                  </Grid>
-              </StackLayout>
+                                    </Grid>
+                                </StackLayout>
           
-          </Grid>
+                            </Grid>
+
+                          </StackLayout>
+
+                      </Frame.Content>
+
+                  </Frame>
+              </Frame.Content>
+
+          </Frame>
+          
         </ViewCell>
       </DataTemplate>
     </ResourceDictionary>
   </pages:BaseTabbedPage.Resources>
   
   <pages:BaseTabbedPage.Children>
+
+    <pages:BasePage Title="CIMScan Devices" Icon="bluetooth-connected.png">
+      <Grid>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto"></RowDefinition>
+          <RowDefinition Height="*"></RowDefinition>
+          <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <StackLayout Grid.Row="0" BackgroundColor="#AE2C3B" Padding="10" HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsStateOn, Converter={StaticResource BooleanToFalseConverter}}">
+          <Grid HorizontalOptions="Center">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="Auto" />
+              <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Image Source="bluetooth-info.png" VerticalOptions="Center" HorizontalOptions="End" />
+            <Label Grid.Column="1" Text="{Binding StateText}" TextColor="#FFFFFF" FontSize="18" VerticalOptions="Center"/>
+          </Grid>
+        </StackLayout>
+
+        <ListView Grid.Row="1" ItemsSource="{Binding SystemDevices}" SelectedItem="{Binding SelectedDevice, Mode=TwoWay}"
+                  RowHeight="75" Margin="0,20,0,0"
+                  SeparatorColor="Transparent"
+                  ItemTemplate="{StaticResource DeviceItemTemplate}"/>
+
+        <StackLayout Grid.Row="2" Orientation="Horizontal" Margin="0, 0, 0, 10" HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsStateOn}">
+          <Label Text="{Binding FoundSystemDevices, StringFormat='Found System Devices {0}'}"></Label>
+          <Label Text="{Binding PreviousGuid, StringFormat='Previous GUID {0}'}" FontSize="Small" TextColor="#536559" HorizontalTextAlignment="Center" VerticalTextAlignment="End" IsVisible="{Binding CanConnectToPreviousDevice}" />
+          <Button Image="connect-previous.png" Text="{Binding PreviousName, StringFormat='Connect to {0}'}" Command="{Binding ConnectToPreviousCommand}" IsVisible="{Binding CanConnectToPreviousDevice}" HorizontalOptions="FillAndExpand" WidthRequest="325" BackgroundColor="#EDF2ED" TextColor="#777777" />
+        </StackLayout>
+
+      </Grid>
+    </pages:BasePage>
     
     <pages:BasePage Title="Search for All Devices" Icon="bluetooth-search.png">
       <Grid>
@@ -94,39 +143,6 @@
         
         <StackLayout Grid.Row="3" Orientation="Horizontal" Margin="0, 0, 0, 10" HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsRefreshing}">
           <Button Image="stop-searching.png" Text="Stop Searching" Command="{Binding StopScanCommand}" HorizontalOptions="CenterAndExpand" WidthRequest="155" BackgroundColor="#EDF2ED" TextColor="#777777" />
-        </StackLayout>
-        
-      </Grid>
-    </pages:BasePage>
-    
-    <pages:BasePage Title="CIMScan Devices" Icon="bluetooth-connected.png">
-      <Grid>
-        <Grid.RowDefinitions>
-          <RowDefinition Height="Auto"></RowDefinition>
-          <RowDefinition Height="*"></RowDefinition>
-          <RowDefinition Height="Auto"></RowDefinition>
-        </Grid.RowDefinitions>
-
-        <StackLayout Grid.Row="0" BackgroundColor="#AE2C3B" Padding="10" HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsStateOn, Converter={StaticResource BooleanToFalseConverter}}">
-            <Grid HorizontalOptions="Center">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Image Source="bluetooth-info.png" VerticalOptions="Center" HorizontalOptions="End" />
-                <Label Grid.Column="1" Text="{Binding StateText}" TextColor="#FFFFFF" FontSize="18" VerticalOptions="Center"/>
-            </Grid>
-        </StackLayout>
-
-        <ListView Grid.Row="1" ItemsSource="{Binding SystemDevices}" SelectedItem="{Binding SelectedDevice, Mode=TwoWay}"
-                  RowHeight="75" Margin="0,20,0,0"
-                  SeparatorColor="Transparent"
-                  ItemTemplate="{StaticResource DeviceItemTemplate}"/>
-
-        <StackLayout Grid.Row="2" Orientation="Horizontal" Margin="0, 0, 0, 10" HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsStateOn}">
-          <Label Text="{Binding FoundSystemDevices, StringFormat='Found System Devices {0}'}"></Label>
-            <Label Text="{Binding PreviousGuid, StringFormat='Previous GUID {0}'}" FontSize="Small" TextColor="#536559" HorizontalTextAlignment="Center" VerticalTextAlignment="End" IsVisible="{Binding CanConnectToPreviousDevice}" />
-            <Button Image="connect-previous.png" Text="{Binding PreviousName, StringFormat='Connect to {0}'}" Command="{Binding ConnectToPreviousCommand}" IsVisible="{Binding CanConnectToPreviousDevice}" HorizontalOptions="FillAndExpand" WidthRequest="325" BackgroundColor="#EDF2ED" TextColor="#777777" />
         </StackLayout>
         
       </Grid>
