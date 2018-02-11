@@ -196,6 +196,11 @@ namespace CIM.RemoteManager.Core.ViewModels
 
                 HockeyApp.MetricsManager.TrackEvent("Sensors :: 6");
 
+                // Wait 500 miliseconds
+                await Task.Delay(1500);
+
+                StartUpdates();
+
                 //var service = await _device.GetServiceAsync(UartUuid);
 
                 // Get our adafruit bluetooth characteristic
@@ -249,9 +254,7 @@ namespace CIM.RemoteManager.Core.ViewModels
 
                 // Init our DA-12
                 InitRemote();
-
-                StartUpdates();
-
+                
                 if (_device == null)
                 {
                     Close(this);

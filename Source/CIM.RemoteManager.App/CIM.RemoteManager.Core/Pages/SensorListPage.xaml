@@ -25,7 +25,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Image Grid.Row="0" Grid.Column="0" Source="DA12.png" Aspect="AspectFit" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
+                <Image Grid.Row="0" Grid.Column="0" Source="DA12.png" Aspect="AspectFit" WidthRequest="100" HeightRequest="100" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
                 <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding DeviceName}" TextColor="{StaticResource NameColor}" FontSize="20" HorizontalOptions="Center" />
                 <Switch Grid.Row="0" Grid.Column="1" IsToggled="True" Toggled="SensorUpdatesSwitchToggled" HorizontalOptions="Center" VerticalOptions="Center"></Switch>
                 
