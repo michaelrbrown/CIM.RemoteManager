@@ -364,6 +364,9 @@
   <ItemGroup>
     <BundleResource Include="Resources\ovenTempSensor.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\DA12.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

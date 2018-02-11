@@ -134,15 +134,12 @@ namespace CIM.RemoteManager.Core.ViewModels
         {
             try
             {
-                HockeyApp.MetricsManager.TrackEvent("Sensors :: SensorListViewModel");
                 _userDialogs = userDialogs;
                 //_sensors = new MvxObservableCollection<Sensor>();
 
                 _sensors = new FullyObservableCollection<Sensor>();
                _sensors.CollectionChanged += SensorCollectionChanged;
-
-
-               
+                
             }
             catch (Exception ex)
             {
@@ -160,8 +157,6 @@ namespace CIM.RemoteManager.Core.ViewModels
 
         private async void InitRemote()
         {
-            HockeyApp.MetricsManager.TrackEvent("Sensors :: 1");
-
             if (_device == null)
             {
                 throw new ArgumentNullException(nameof(_device));
@@ -171,35 +166,37 @@ namespace CIM.RemoteManager.Core.ViewModels
             {
                 // Show loading indicator
                 _userDialogs.ShowLoading("Loading DA-12 data...");
-
-                HockeyApp.MetricsManager.TrackEvent("Sensors :: 2");
-
-                // Get our adafruit bluetooth service (UART)
-                _service = await _device.GetServiceAsync(UartUuid);
-
-                HockeyApp.MetricsManager.TrackEvent("Sensors :: 3");
-
-                _tx = await _service.GetCharacteristicAsync(TxUuid);
-
-                HockeyApp.MetricsManager.TrackEvent("Sensors :: 4");
-
+                
+                // Get our Adafruit bluetooth service (UART)
+                _service = await _device.GetServiceAsync(UartUuid).ConfigureAwait(true);
+                
+                _tx = await _service.GetCharacteristicAsync(TxUuid).ConfigureAwait(true);
+                
                 //await Task.Delay(TimeSpan.FromSeconds(1));
 
-                await _tx.WriteAsync("{Y}".StrToByteArray());
+                // Make sure we can write characteristic data to remote
+                if (Characteristic.CanWrite)
+                {
+                    // Send a refresh command
+                    await _tx.WriteAsync("{Y}".StrToByteArray()).ConfigureAwait(true);
+                }
+                else
+                {
+                    _userDialogs.Alert("Cannot write characteristic data to remote!", "CIMScan Remote Manager");
+                }
+                
+                // Wait 500 milliseconds
+                await Task.Delay(500).ConfigureAwait(true);
 
-                HockeyApp.MetricsManager.TrackEvent("Sensors :: 5");
+                // Get Characteristics service
+                Characteristic = await _service.GetCharacteristicAsync(RxUuid).ConfigureAwait(true);
 
-                // Wait 500 miliseconds
-                await Task.Delay(500);
+                // Wait 500 milliseconds
+                await Task.Delay(3500).ConfigureAwait(true);
 
-                Characteristic = await _service.GetCharacteristicAsync(RxUuid);
+                // Start updates
+                //StartUpdates();
 
-                HockeyApp.MetricsManager.TrackEvent("Sensors :: 6");
-
-                // Wait 500 miliseconds
-                await Task.Delay(1500);
-
-                StartUpdates();
 
                 //var service = await _device.GetServiceAsync(UartUuid);
 
@@ -215,8 +212,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 // RX (read)
                 //ICharacteristic _rx = await service.GetCharacteristicAsync(RxUuid);
 
-                // Start updates
-                //StartUpdates();
+
 
                 // Hide loading...
                 _userDialogs.HideLoading();
@@ -241,8 +237,6 @@ namespace CIM.RemoteManager.Core.ViewModels
         
         protected override void InitFromBundle(IMvxBundle parameters)
         {
-            HockeyApp.MetricsManager.TrackEvent("Sensors :: InitFromBundle");
-
             try
             {
                 base.InitFromBundle(parameters);
@@ -287,7 +281,7 @@ namespace CIM.RemoteManager.Core.ViewModels
 
                 Characteristic.ValueUpdated -= CharacteristicOnValueUpdated;
                 Characteristic.ValueUpdated += CharacteristicOnValueUpdated;
-                await Characteristic.StartUpdatesAsync();
+                await Characteristic.StartUpdatesAsync().ConfigureAwait(true);
 
                 //Messages.Insert(0, $"Start updates");
 
