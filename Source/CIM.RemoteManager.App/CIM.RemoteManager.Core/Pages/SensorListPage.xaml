@@ -30,7 +30,7 @@
                     <Switch IsToggled="{Binding UpdatesStarted, Mode=TwoWay}" Toggled="SensorUpdatesSwitchToggled" Margin="5" HorizontalOptions="Center" VerticalOptions="Center" />
                 </StackLayout>
 
-                <Image Grid.Row="0" Grid.Column="1" Source="DA12.png" Aspect="AspectFit" WidthRequest="160" HeightRequest="160" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
+                <Image Grid.Row="0" Grid.Column="1" Source="DA12.png" Aspect="AspectFit" WidthRequest="160" HeightRequest="160" Margin="5,20,5,5" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
 
                 <StackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="20">
                     <Label Text="{Binding CharacteristicValue, StringFormat='Value: {0}'}" TextColor="#3072B0" Margin="10" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"></Label>

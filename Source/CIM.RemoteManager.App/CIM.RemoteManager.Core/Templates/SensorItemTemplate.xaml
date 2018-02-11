@@ -7,8 +7,6 @@
 
         <StackLayout Spacing="0" Padding="0" Margin="0" Opacity=".95">
 
-            <Frame WidthRequest="5" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" BackgroundColor="{DynamicResource StatusColor}" HasShadow="False"></Frame>
-            
             <Grid Style="{DynamicResource CardStyle}">
 
                 <Grid.ColumnDefinitions>
@@ -19,6 +17,9 @@
                     <ColumnDefinition Width="10" />
                 </Grid.ColumnDefinitions>
 
+                <Frame Grid.Column="0" WidthRequest="5" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" BackgroundColor="{DynamicResource StatusColor}" HasShadow="False"></Frame>
+
+                <!-- Margin: left, top, right, bottom -->
                 <Image Grid.Column="1" Source="fridgeTemperatureSensor.png" Aspect="AspectFit" Scale="1" />
 
                 <StackLayout Grid.Column="2" Spacing="0" HeightRequest="100" VerticalOptions="Center">
