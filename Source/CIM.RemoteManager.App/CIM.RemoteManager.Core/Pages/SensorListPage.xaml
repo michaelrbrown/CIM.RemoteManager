@@ -14,11 +14,11 @@
         <StackLayout Grid.Row="0" BackgroundColor="Transparent">
             <!-- Fast Swap Progress Indicators -->
             <!-- Margin: left, top, right, bottom -->
-            <Grid HorizontalOptions="Center" Margin="20" BackgroundColor="#E7F4FC">
+            <Grid HorizontalOptions="Center" Padding="20" BackgroundColor="#E7F4FC">
                 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="40"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -27,13 +27,13 @@
 
                 <Image Grid.Row="0" Grid.Column="0" Source="DA12.png" Aspect="AspectFill" WidthRequest="200" HeightRequest="200" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
 
-                <StackLayout Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Spacing="0">
-                    <Switch IsToggled="{Binding UpdatesStarted, Mode=TwoWay}" Toggled="SensorUpdatesSwitchToggled" Margin="5,0,5,0" HorizontalOptions="Center" VerticalOptions="Center" />
-                    <Label Text="{Binding UpdateButtonText}" HorizontalOptions="Center" />
+                <StackLayout Grid.Row="0" Grid.Column="1" Orientation="Vertical" Spacing="0">
+                    <Label Text="{Binding UpdateButtonText, Mode=TwoWay}" HorizontalOptions="Center" VerticalOptions="Center" />
+                    <Switch IsToggled="{Binding UpdatesStarted, Mode=TwoWay}" Toggled="SensorUpdatesSwitchToggled" Margin="5" HorizontalOptions="Center" VerticalOptions="Center" />
                 </StackLayout>
 
                 <StackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="40" BackgroundColor="{DynamicResource AppAccentColor}">
-                    <Label Text="{Binding DeviceName}" TextColor="{DynamicResource NameColor}" FontSize="20" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" />
+                    <Label Text="{Binding DeviceName}" TextColor="{DynamicResource AppLightColor}" FontSize="20" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" />
                 </StackLayout>
        
             </Grid>
@@ -53,7 +53,6 @@
                 <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-
                         <!-- Context Actions -->
                         <ViewCell.ContextActions>
                             <MenuItem Clicked="ListView_OnStats" CommandParameter="{Binding .}"
@@ -64,7 +63,6 @@
 
                         <!-- Sensor Detail Template -->
                         <templates:SensorItemTemplate  />
-
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>

@@ -62,7 +62,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             }
         }
 
-        public string UpdateButtonText => UpdatesStarted ? "Stop updates" : "Start updates";
+        public string UpdateButtonText => UpdatesStarted ? "Updates On" : "Updates Off";
 
         public bool StartFullSensorValueRecord { get; set; } = false;
         public bool StartAverageSensorValueRecord { get; set; } = false;
@@ -192,10 +192,10 @@ namespace CIM.RemoteManager.Core.ViewModels
                 Characteristic = await _service.GetCharacteristicAsync(RxUuid).ConfigureAwait(true);
 
                 // Wait 500 milliseconds
-                await Task.Delay(3500).ConfigureAwait(true);
+                //await Task.Delay(3500).ConfigureAwait(true);
 
                 // Start updates
-                ToggleUpdatesCommand.Execute(null);
+                //ToggleUpdatesCommand.Execute(null);
                 
                 //var service = await _device.GetServiceAsync(UartUuid);
 
