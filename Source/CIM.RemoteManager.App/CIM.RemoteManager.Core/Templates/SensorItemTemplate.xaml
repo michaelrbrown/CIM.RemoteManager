@@ -17,7 +17,7 @@
                     <ColumnDefinition Width="10" />
                 </Grid.ColumnDefinitions>
 
-                <Frame Grid.Column="0" WidthRequest="5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{StaticResource StatusColor}"></Frame>
+                <Frame Grid.Column="0" WidthRequest="5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{DynamicResource StatusColor}"></Frame>
 
                 <Image Grid.Column="1" Source="fridgeTemperatureSensor.png" Aspect="AspectFit" Scale="1" />
 

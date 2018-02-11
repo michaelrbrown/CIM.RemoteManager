@@ -41,7 +41,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         public static Guid DisHwrevUuid = Guid.Parse("00002a26-0000-1000-8000-00805f9b34fb");
         public static Guid DisSwrevUuid = Guid.Parse("00002a28-0000-1000-8000-00805f9b34fb");
 
-        private bool _updatesStarted;
+        public bool UpdatesStarted;
         public ICharacteristic Characteristic { get; private set; }
 
         public string CharacteristicValue => Characteristic?.Value.BytesToStringConverted();
@@ -62,7 +62,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             }
         }
 
-        public string UpdateButtonText => _updatesStarted ? "Stop updates" : "Start updates";
+        public string UpdateButtonText => UpdatesStarted ? "Stop updates" : "Start updates";
 
         public bool StartFullSensorValueRecord { get; set; } = false;
         public bool StartAverageSensorValueRecord { get; set; } = false;
@@ -195,9 +195,8 @@ namespace CIM.RemoteManager.Core.ViewModels
                 await Task.Delay(3500).ConfigureAwait(true);
 
                 // Start updates
-                //StartUpdates();
-
-
+                ToggleUpdatesCommand.Execute(null);
+                
                 //var service = await _device.GetServiceAsync(UartUuid);
 
                 // Get our adafruit bluetooth characteristic
@@ -260,10 +259,10 @@ namespace CIM.RemoteManager.Core.ViewModels
                 Mvx.Trace(ex.Message);
             }
         }
-
+        
         public MvxCommand ToggleUpdatesCommand => new MvxCommand((() =>
         {
-            if (_updatesStarted)
+            if (UpdatesStarted)
             {
                 StopUpdates();
             }
@@ -277,7 +276,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         {
             try
             {
-                _updatesStarted = true;
+                UpdatesStarted = true;
 
                 Characteristic.ValueUpdated -= CharacteristicOnValueUpdated;
                 Characteristic.ValueUpdated += CharacteristicOnValueUpdated;
@@ -297,9 +296,9 @@ namespace CIM.RemoteManager.Core.ViewModels
         {
             try
             {
-                _updatesStarted = false;
+                UpdatesStarted = false;
 
-                await Characteristic.StopUpdatesAsync();
+                await Characteristic.StopUpdatesAsync().ConfigureAwait(true);
                 Characteristic.ValueUpdated -= CharacteristicOnValueUpdated;
 
                 //Messages.Insert(0, $"Stop updates");

@@ -4,11 +4,9 @@
     xmlns:mvx="clr-namespace:MvvmCross.Forms.Core;assembly=MvvmCross.Forms"
     xmlns:converters="clr-namespace:CIM.RemoteManager.Core.Converters;assembly=CIM.RemoteManager.Core"
     x:Class="CIM.RemoteManager.Core.BleMvxFormsApp">
-  
+
   <Application.Resources>
     <ResourceDictionary>
-      <converters:InverseBooleanValueConverter x:Key="InverseBoolean"></converters:InverseBooleanValueConverter>
-      
         <Color x:Key="BodyTextColor">#444444</Color>
         <Color x:Key="AppBaseColor">#003366</Color>
         <Color x:Key="AppAccentColor">#0097DF</Color>
@@ -28,8 +26,8 @@
         <Color x:Key="Tag3ColorSemiTransparent">#330097DF</Color>
         <Color x:Key="Tag3ColorLight">#FF0097DF</Color>
         <Color x:Key="IndicatorTextColor">#FF3C3C3C</Color>
-        <Color x:Key="chartForeground">White</Color>
-        <Color x:Key="chartForegroundSemiTransparent">#88FFFFFF</Color>
+        <Color x:Key="ChartForeground">White</Color>
+        <Color x:Key="ChartForegroundSemiTransparent">#88FFFFFF</Color>
       
       
         <Color x:Key="CardBackgroundColor">#eceff1</Color>
@@ -50,12 +48,12 @@
           <Setter Property="HeightRequest" Value="60"/>
           <Setter Property="Padding" Value="5,10,0,10"/>
           <Setter Property="Margin" Value="5,5,5,5"/>
-          <Setter Property="BackgroundColor" Value="{StaticResource CardBackgroundColor}"/>
+          <Setter Property="BackgroundColor" Value="{DynamicResource CardBackgroundColor}"/>
         </Style>
 
         <Style x:Key="Footer" TargetType="Grid">
           <Setter Property="Padding" Value="10"/>
-          <Setter Property="BackgroundColor" Value="{StaticResource FooterBackgroundColor}"/>
+          <Setter Property="BackgroundColor" Value="{DynamicResource FooterBackgroundColor}"/>
         </Style>
 
         <Style x:Key="ShadowStyle" TargetType="BoxView">
@@ -70,46 +68,46 @@
 
         <Style x:Key="NameStyle" TargetType="Label">
           <Setter Property="FontSize" Value="16"/>
-          <Setter Property="TextColor" Value="{StaticResource NameColor}"/>
+          <Setter Property="TextColor" Value="{DynamicResource NameColor}"/>
           <Setter Property="FontAttributes" Value="Bold"/>
         </Style>
 
         <Style x:Key="SensorTypeStyle" TargetType="Label">
           <Setter Property="FontSize" Value="14"/>
-          <Setter Property="TextColor" Value="{StaticResource SensorTypeColor}"/>
+          <Setter Property="TextColor" Value="{DynamicResource SensorTypeColor}"/>
         </Style>
 
         <Style x:Key="TimeStampStyle" TargetType="Label">
           <Setter Property="FontSize" Value="14"/>
-          <Setter Property="TextColor" Value="{StaticResource TimeStampColor}"/>
+          <Setter Property="TextColor" Value="{DynamicResource TimeStampColor}"/>
         </Style>
 
         <Style x:Key="MoreStyle" TargetType="Label">
           <Setter Property="FontSize" Value="10"/>
-          <Setter Property="TextColor" Value="{StaticResource MoreIconColor}"/>
+          <Setter Property="TextColor" Value="{DynamicResource MoreIconColor}"/>
           <Setter Property="FontAttributes" Value="Bold"/>
           <Setter Property="HorizontalTextAlignment" Value="End"/>
         </Style>
 
         <Style x:Key="ValueStyle" TargetType="Label">
           <Setter Property="FontSize" Value="24"/>
-          <Setter Property="TextColor" Value="{StaticResource ValueColor}"/>
+          <Setter Property="TextColor" Value="{DynamicResource ValueColor}"/>
         </Style>
 
         <Style x:Key="ValueBoxStyle" TargetType="Grid">
           <Setter Property="Padding" Value="15"/>
-          <Setter Property="BackgroundColor" Value="{StaticResource FooterBackgroundColor}"/>
+          <Setter Property="BackgroundColor" Value="{DynamicResource FooterBackgroundColor}"/>
         </Style>
 
         <Style x:Key="StatusStyle" TargetType="Label">
           <Setter Property="FontAttributes" Value="None"/>
           <Setter Property="FontSize" Value="14"/>
           <Setter Property="VerticalOptions" Value="Center"/>
-          <Setter Property="TextColor" Value="{StaticResource StatusColor}"/>
+          <Setter Property="TextColor" Value="{DynamicResource StatusColor}"/>
         </Style>
 
         <Style x:Key="SerialNumberStyle" TargetType="Label">
-          <Setter Property="TextColor" Value="{StaticResource SerialNumberColor}"/>
+          <Setter Property="TextColor" Value="{DynamicResource SerialNumberColor}"/>
           <Setter Property="FontSize" Value="14"/>
           <Setter Property="VerticalOptions" Value="Center"/>
           <Setter Property="FontAttributes" Value="Italic"/>
@@ -155,7 +153,9 @@
         <Setter Property="FontSize" Value="11" />
       </Style>
 
-        <converters:ListToLabelConverter x:Key="InverseBooleanValueConverter"/>
+
+      <converters:InverseBooleanValueConverter x:Key="InverseBoolean"></converters:InverseBooleanValueConverter>
+      <converters:ListToLabelConverter x:Key="InverseBooleanValueConverter"/>
       <converters:ListToLabelConverter x:Key="ListToLabelConverter"/>
       <converters:LoadingOpacityConverter x:Key="LoadingOpacityConverter"/>
       <converters:IsSelectedBackgroundColorConverter x:Key="IsSelectedBackgroundColorConverter"/>
@@ -169,7 +169,6 @@
       <converters:SelectionChangedEventArgsConverter x:Key="SelectionChangedEventArgsConverter"/>
 
     </ResourceDictionary>
-    
   </Application.Resources>
   
 </mvx:MvxFormsApplication>
