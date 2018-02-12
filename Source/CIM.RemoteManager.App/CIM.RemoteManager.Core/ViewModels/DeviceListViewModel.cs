@@ -186,15 +186,23 @@ namespace CIM.RemoteManager.Core.ViewModels
 
         private void OnDeviceDiscovered(object sender, DeviceEventArgs args)
         {
-            // CIMScan devices
-            if (args.Device.Name.IndexOf("adafruit", StringComparison.OrdinalIgnoreCase) > -1)
+            try
             {
-                AddOrUpdateSystemDevice(args.Device);
+                // CIMScan devices
+                if (args.Device.Name.IndexOf("adafruit", StringComparison.OrdinalIgnoreCase) > -1)
+                {
+                    AddOrUpdateSystemDevice(args.Device);
+                }
+                else // All other devices
+                {
+                    AddOrUpdateDevice(args.Device);
+                }
             }
-            else // All other devices
+            catch (Exception ex)
             {
-                AddOrUpdateDevice(args.Device);
+                Application.Current.MainPage.DisplayAlert(ex.Message, "", "Cancel");
             }
+            
         }
 
         private void AddOrUpdateDevice(IDevice device)

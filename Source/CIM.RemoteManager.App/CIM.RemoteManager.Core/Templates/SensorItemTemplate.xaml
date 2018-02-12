@@ -5,7 +5,7 @@
 
     <ContentView.Content>
 
-        <StackLayout Spacing="10" Padding="0" Margin="0" Opacity=".95">
+        <StackLayout Spacing="0" Padding="0" Margin="10" Opacity=".95">
 
             <Grid Style="{DynamicResource CardStyle}">
 
@@ -43,7 +43,7 @@
                 </Grid.ColumnDefinitions>
 
                 <StackLayout Grid.Column="0" Spacing="0">
-                    <Label Grid.Column="1" Text="{Binding SerialNumber}" Style="{DynamicResource SerialNumberStyle}"  HorizontalTextAlignment="Start" VerticalTextAlignment="Center" LineBreakMode="TailTruncation" />
+                    <Label Text="{Binding SerialNumber}" Style="{DynamicResource SerialNumberStyle}"  HorizontalTextAlignment="Start" VerticalTextAlignment="Center" LineBreakMode="TailTruncation" />
                 </StackLayout>
 
                 <StackLayout Grid.Column="1" Spacing="0">
@@ -51,7 +51,6 @@
                 </StackLayout>
 
             </Grid>
-
 
         </StackLayout>
 

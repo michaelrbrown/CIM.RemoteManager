@@ -552,22 +552,43 @@ namespace CIM.RemoteManager.Core.ViewModels
                     //Application.Current.MainPage.DisplayAlert("StatisticsTotalCalcSettings", splitSensorValues[10], "Cancel");
                     
                     // "A" Sensor data serialization
-                    var sensor = new Sensor
+                    var sensorListItemA = Sensors.FirstOrDefault(s => s.SensorIndex == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('A') + 1).SafeConvert<int>(0));
+                    if (sensorListItemA != null)
                     {
-                        SensorIndex = splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('A') + 1).SafeConvert<int>(0),
-                        SerialNumber = splitSensorValues[1],
-                        Name = splitSensorValues[2],
-                        SensorType = splitSensorValues[3],
-                        Scale = splitSensorValues[4].SafeConvert<double>(0),
-                        Offset = splitSensorValues[5].SafeConvert<double>(0),
-                        TimeStamp = splitSensorValues[6].SafeHexToInt(),
-                        AverageValue = splitSensorValues[7].SafeHexToDouble(),
-                        CurrentValue = splitSensorValues[8].SafeHexToDouble(),
-                        DecimalLocation = splitSensorValues[9].SafeConvert<int>(0),
-                        StatisticsTotalCalcSettings = splitSensorValues[10]
-                    };
-                    // Add sensor to list
-                    Sensors.Add(sensor);
+                        // Update sensor items in list
+                        sensorListItemA.SensorIndex = splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('A') + 1).SafeConvert<int>(0);
+                        sensorListItemA.SerialNumber = splitSensorValues[1];
+                        sensorListItemA.Name = splitSensorValues[2];
+                        sensorListItemA.SensorType = splitSensorValues[3];
+                        sensorListItemA.Scale = splitSensorValues[4].SafeConvert<double>(0);
+                        sensorListItemA.Offset = splitSensorValues[5].SafeConvert<double>(0);
+                        sensorListItemA.TimeStamp = splitSensorValues[6].SafeHexToInt();
+                        sensorListItemA.AverageValue = splitSensorValues[7].SafeHexToDouble();
+                        sensorListItemA.CurrentValue = splitSensorValues[8].SafeHexToDouble();
+                        sensorListItemA.DecimalLocation = splitSensorValues[9].SafeConvert<int>(0);
+                        sensorListItemA.StatisticsTotalCalcSettings = splitSensorValues[10];
+                    }
+                    else
+                    {
+                        var sensor = new Sensor
+                        {
+                            SensorIndex = splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('A') + 1).SafeConvert<int>(0),
+                            SerialNumber = splitSensorValues[1],
+                            Name = splitSensorValues[2],
+                            SensorType = splitSensorValues[3],
+                            Scale = splitSensorValues[4].SafeConvert<double>(0),
+                            Offset = splitSensorValues[5].SafeConvert<double>(0),
+                            TimeStamp = splitSensorValues[6].SafeHexToInt(),
+                            AverageValue = splitSensorValues[7].SafeHexToDouble(),
+                            CurrentValue = splitSensorValues[8].SafeHexToDouble(),
+                            DecimalLocation = splitSensorValues[9].SafeConvert<int>(0),
+                            StatisticsTotalCalcSettings = splitSensorValues[10]
+                        };
+                        // Add sensor to list
+                        Sensors.Add(sensor);
+                    }
+                    
+                    
                     break;
                 case "B":
 
