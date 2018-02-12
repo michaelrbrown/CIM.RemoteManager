@@ -30,7 +30,16 @@
         private string _sensorType;
         public string SensorType
         {
-            get => _sensorType;
+            get
+            {
+                // Try to lookup hex to string
+                if (!string.IsNullOrEmpty(_sensorType))
+                {
+                    return _sensorType.LookupNameByValue();
+                }
+                // Default
+                return string.Empty;
+            }
             set => SetProperty(ref _sensorType, value);
         }
 

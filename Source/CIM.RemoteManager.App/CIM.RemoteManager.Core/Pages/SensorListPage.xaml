@@ -31,13 +31,9 @@
                     <Switch IsToggled="{Binding UpdatesStarted, Mode=TwoWay}" Toggled="SensorUpdatesSwitchToggled" Margin="5" HorizontalOptions="Center" VerticalOptions="Center" />
                 </StackLayout>
 
-                <Frame Grid.Row="0" Grid.Column="1" Style="{DynamicResource ValueBoxStyle}" Opacity=".7" 
-                       HeightRequest="120" WidthRequest="120" CornerRadius="40" Margin="20"
-                       HasShadow="False" OutlineColor="{DynamicResource OutlineColor}" 
-                       VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
-                    <Image Source="DA12.png" Aspect="AspectFit" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
-                </Frame>
-
+       
+                    <Image Grid.Row="0" Grid.Column="1" Source="DA12.png" Aspect="AspectFit" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
+            
                 <StackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" HeightRequest="40" BackgroundColor="{DynamicResource RemoteNameBackgroundColor}">
                     <Label Text="{Binding DeviceName}" TextColor="{DynamicResource AppLightColor}" FontSize="20" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" />
                 </StackLayout>
