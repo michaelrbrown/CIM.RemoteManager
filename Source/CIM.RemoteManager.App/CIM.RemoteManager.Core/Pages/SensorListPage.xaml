@@ -31,10 +31,10 @@
                 </StackLayout>
 
                 <Frame Grid.Row="0" Grid.Column="1" Style="{DynamicResource ValueBoxStyle}" Opacity=".7" 
-                       HeightRequest="140" WidthRequest="140" CornerRadius="70" Margin="5,20,5,5"
+                       HeightRequest="120" WidthRequest="140" CornerRadius="70" Margin="5"
                        HasShadow="False" OutlineColor="{DynamicResource OutlineColor}" 
                        VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
-                    <Image Source="DA12.png" Aspect="AspectFit" WidthRequest="130" HeightRequest="130" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
+                    <Image Source="DA12.png" Aspect="AspectFit" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
                 </Frame>
 
                 <StackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="20">
