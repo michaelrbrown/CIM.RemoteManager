@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2010
+VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmCross.Plugins.BLE", "MvvmCross.Plugins.BLE\MvvmCross.Plugins.BLE.csproj", "{83F1DFFB-A653-45DD-BE81-C02374C6DB07}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -560,8 +560,8 @@ Global
 		{D0FBE2BA-799B-4071-A45D-8FB037006C9C}.Debug|iPhone.ActiveCfg = Debug|iPhone
 		{D0FBE2BA-799B-4071-A45D-8FB037006C9C}.Debug|iPhone.Build.0 = Debug|iPhone
 		{D0FBE2BA-799B-4071-A45D-8FB037006C9C}.Debug|iPhone.Deploy.0 = Debug|iPhone
-		{D0FBE2BA-799B-4071-A45D-8FB037006C9C}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhone
-		{D0FBE2BA-799B-4071-A45D-8FB037006C9C}.Debug|iPhoneSimulator.Build.0 = Debug|iPhone
+		{D0FBE2BA-799B-4071-A45D-8FB037006C9C}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{D0FBE2BA-799B-4071-A45D-8FB037006C9C}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
 		{D0FBE2BA-799B-4071-A45D-8FB037006C9C}.Debug|x64.ActiveCfg = Debug|iPhone
 		{D0FBE2BA-799B-4071-A45D-8FB037006C9C}.Debug|x86.ActiveCfg = Debug|iPhone
 		{D0FBE2BA-799B-4071-A45D-8FB037006C9C}.Release|Any CPU.ActiveCfg = Release|iPhone

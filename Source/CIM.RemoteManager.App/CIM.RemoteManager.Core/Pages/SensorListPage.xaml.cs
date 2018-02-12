@@ -11,7 +11,6 @@ namespace CIM.RemoteManager.Core.Pages
         public SensorListPage()
         {
             InitializeComponent();
-            NavigationPage.SetBackButtonTitle(Content, "Back");
             BindingContext = this; // Note that I added this line
         }
 
