@@ -6,8 +6,48 @@
              x:Class="CIM.RemoteManager.Core.Pages.SensorListPage" 
              BackgroundImage="BlueBackgroundVector.jpg"
              Title="Sensors">
-    
-        <ListView ItemsSource="{Binding Sensors}" 
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="175"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <StackLayout Grid.Row="0" BackgroundColor="Transparent">
+
+            <!-- Margin: left, top, right, bottom -->
+            <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Transparent">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="40"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackLayout Grid.Row="0" Grid.Column="0" Orientation="Vertical" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Spacing="0">
+                    <Label Text="{Binding UpdateButtonText, Mode=TwoWay}" TextColor="{DynamicResource AppLightColor}" HorizontalOptions="Center" VerticalOptions="Center" />
+                    <Switch IsToggled="{Binding UpdatesStarted, Mode=TwoWay}" Toggled="SensorUpdatesSwitchToggled" Margin="5" HorizontalOptions="Center" VerticalOptions="Center" />
+                </StackLayout>
+
+                <Frame Grid.Row="0" Grid.Column="1" Style="{DynamicResource ValueBoxStyle}" Opacity=".7" 
+                       HeightRequest="120" WidthRequest="120" CornerRadius="40" Margin="20"
+                       HasShadow="False" OutlineColor="{DynamicResource OutlineColor}" 
+                       VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                    <Image Source="DA12.png" Aspect="AspectFit" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
+                </Frame>
+
+                <StackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" HeightRequest="40" BackgroundColor="{DynamicResource RemoteNameBackgroundColor}">
+                    <Label Text="{Binding DeviceName}" TextColor="{DynamicResource AppLightColor}" FontSize="20" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" />
+                </StackLayout>
+
+            </Grid>
+        </StackLayout>
+
+        <ListView Grid.Row="1" 
+                    ItemsSource="{Binding Sensors}" 
                     SeparatorVisibility="Default" 
                     BackgroundColor="#01649D"
                     SeparatorColor="Transparent" 
@@ -16,41 +56,6 @@
                     ItemTapped="ListView_OnItemTapped" 
                     ItemSelected="ListView_OnItemSelected" 
                     IsPullToRefreshEnabled="False">
-
-            <ListView.Header>
-                <StackLayout HeightRequest="175" BackgroundColor="Transparent">
-
-                    <!-- Margin: left, top, right, bottom -->
-                    <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Transparent">
-
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"></RowDefinition>
-                            <RowDefinition Height="40"></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <StackLayout Grid.Row="0" Grid.Column="0" Orientation="Vertical" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Spacing="0">
-                            <Label Text="{Binding UpdateButtonText, Mode=TwoWay}" TextColor="{DynamicResource AppLightColor}" HorizontalOptions="Center" VerticalOptions="Center" />
-                            <Switch IsToggled="{Binding UpdatesStarted, Mode=TwoWay}" Toggled="SensorUpdatesSwitchToggled" Margin="5" HorizontalOptions="Center" VerticalOptions="Center" />
-                        </StackLayout>
-
-                        <Frame Grid.Row="0" Grid.Column="1" Style="{DynamicResource ValueBoxStyle}" Opacity=".7" 
-                       HeightRequest="120" WidthRequest="120" CornerRadius="40" Margin="20"
-                       HasShadow="False" OutlineColor="{DynamicResource OutlineColor}" 
-                       VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
-                            <Image Source="DA12.png" Aspect="AspectFit" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
-                        </Frame>
-
-                        <StackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" HeightRequest="40" BackgroundColor="{DynamicResource RemoteNameBackgroundColor}">
-                            <Label Text="{Binding DeviceName}" TextColor="{DynamicResource AppLightColor}" FontSize="20" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" />
-                        </StackLayout>
-
-                    </Grid>
-                </StackLayout>
-            </ListView.Header>
 
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -70,6 +75,8 @@
             </ListView.ItemTemplate>
 
         </ListView>
+
+    </Grid>
 
     <xForms:SfBusyIndicator x:Name="SensorBusyIndicator" AnimationType="ECG" Title="Loading Sensor Data..." BackgroundColor="Transparent" TextColor="White" />
 
