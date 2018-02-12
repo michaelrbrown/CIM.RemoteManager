@@ -77,12 +77,15 @@
 
         <!-- Margin: left, top, right, bottom -->
         <ListView Grid.Row="1" ItemsSource="{Binding SystemDevices}" SelectedItem="{Binding SelectedDevice, Mode=TwoWay}"
-                  RowHeight="75" Margin="0,20,0,0"
+                  IsPullToRefreshEnabled="True"
+                  RefreshCommand="{Binding RefreshCommand}"
+                  IsRefreshing="{Binding IsRefreshing, Mode=OneWay}"
+                  RowHeight="75" Margin="10"
                   SeparatorColor="Transparent"
-                  ItemTemplate="{StaticResource DeviceItemTemplate}"/>
-
+                  ItemTemplate="{StaticResource DeviceItemTemplate}">
+        </ListView>
+        
         <StackLayout Grid.Row="2" Orientation="Horizontal" Margin="0, 0, 0, 10" HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsStateOn}">
-          <Label Text="{Binding FoundSystemDevices, StringFormat='Found System Devices {0}'}"></Label>
           <Label Text="{Binding PreviousGuid, StringFormat='Previous GUID {0}'}" FontSize="Small" TextColor="#536559" HorizontalTextAlignment="Center" VerticalTextAlignment="End" IsVisible="{Binding CanConnectToPreviousDevice}" />
           <Button Image="connect-previous.png" Text="{Binding PreviousName, StringFormat='Connect to {0}'}" Command="{Binding ConnectToPreviousCommand}" IsVisible="{Binding CanConnectToPreviousDevice}" HorizontalOptions="FillAndExpand" WidthRequest="325" BackgroundColor="#EDF2ED" TextColor="#777777" />
         </StackLayout>

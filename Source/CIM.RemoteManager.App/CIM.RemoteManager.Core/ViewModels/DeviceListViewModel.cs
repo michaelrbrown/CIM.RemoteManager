@@ -205,7 +205,6 @@ namespace CIM.RemoteManager.Core.ViewModels
             {
                 //Application.Current.MainPage.DisplayAlert(ex.StackTrace, "", "Cancel");
             }
-            
         }
 
         private void AddOrUpdateDevice(IDevice device)
@@ -378,7 +377,7 @@ namespace CIM.RemoteManager.Core.ViewModels
 
             if (device.IsConnected)
             {
-                config.Add("Sensors", async () =>
+                config.Add("Navigate to Sensors", async () =>
                 {
                      ShowViewModel<SensorListViewModel>(new MvxBundle(new Dictionary<string, string> { { DeviceIdKey, device.Device.Id.ToString() } }));
                 });
@@ -406,7 +405,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             }
             else
             {
-                config.Add("Connect", async () =>
+                config.Add("Connect / Navigate to Sensors", async () =>
                 {
                     if (await ConnectDeviceAsync(device).ConfigureAwait(true))
                     {
@@ -426,7 +425,7 @@ namespace CIM.RemoteManager.Core.ViewModels
 
         private async Task<bool> ConnectDeviceAsync(DeviceListItemViewModel device, bool showPrompt = true)
         {
-            if (showPrompt && !await _userDialogs.ConfirmAsync($"Connect to device '{device.Name}'?"))
+            if (showPrompt && !await _userDialogs.ConfirmAsync($"Connect to device '{device.Name}'?").ConfigureAwait(true))
             {
                 return false;
             }
@@ -453,7 +452,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 using (var progress = _userDialogs.Progress(config))
                 {
                     progress.Show();
-                    await Adapter.ConnectToDeviceAsync(device.Device, new ConnectParameters(autoConnect: UseAutoConnect, forceBleTransport: false), tokenSource.Token);
+                    await Adapter.ConnectToDeviceAsync(device.Device, new ConnectParameters(autoConnect: UseAutoConnect, forceBleTransport: false), tokenSource.Token).ConfigureAwait(true);
                 }
                 
                 _userDialogs.Toast($"Connected to {device.Device.Name}.", TimeSpan.FromSeconds(3));
@@ -498,9 +497,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 using (var progress = _userDialogs.Progress(config))
                 {
                     progress.Show();
-
-                    device = await Adapter.ConnectToKnownDeviceAsync(PreviousGuid, new ConnectParameters(autoConnect: UseAutoConnect, forceBleTransport: false), tokenSource.Token);
-
+                    device = await Adapter.ConnectToKnownDeviceAsync(PreviousGuid, new ConnectParameters(autoConnect: UseAutoConnect, forceBleTransport: false), tokenSource.Token).ConfigureAwait(true);
                 }
 
                 _userDialogs.Toast($"Connected to {device.Name}.", TimeSpan.FromSeconds(3));
@@ -535,10 +532,10 @@ namespace CIM.RemoteManager.Core.ViewModels
                 using (item.Device)
                 {
                     _userDialogs.ShowLoading($"Connecting to {item.Name} ...");
-                    await Adapter.ConnectToDeviceAsync(item.Device);
+                    await Adapter.ConnectToDeviceAsync(item.Device).ConfigureAwait(true);
 
                     // TODO make this configurable
-                    var resultMTU = await item.Device.RequestMtuAsync(60);
+                    var resultMTU = await item.Device.RequestMtuAsync(60).ConfigureAwait(true);
                     System.Diagnostics.Debug.WriteLine($"Requested MTU. Result is {resultMTU}");
 
                     // TODO make this configurable
@@ -554,7 +551,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                     {
                         _userDialogs.ShowLoading($"Disconnect in {i}s...");
 
-                        await Task.Delay(1000);
+                        await Task.Delay(1000).ConfigureAwait(true);
 
                         _userDialogs.HideLoading();
                     }
@@ -568,8 +565,6 @@ namespace CIM.RemoteManager.Core.ViewModels
             {
                 _userDialogs.HideLoading();
             }
-
-
         }
 
         private void OnDeviceDisconnected(object sender, DeviceEventArgs e)

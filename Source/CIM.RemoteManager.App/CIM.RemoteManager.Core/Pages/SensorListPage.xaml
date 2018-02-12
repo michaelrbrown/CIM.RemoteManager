@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:templates="clr-namespace:CIM.RemoteManager.Core.Templates;assembly=CIM.RemoteManager.Core"
              x:Class="CIM.RemoteManager.Core.Pages.SensorListPage" 
-             Title="DA-12 Sensors">
+             Title="Sensors">
     
     <Grid>
         <Grid.RowDefinitions>
@@ -31,7 +31,7 @@
                 </StackLayout>
 
                 <Frame Grid.Row="0" Grid.Column="1" Style="{DynamicResource ValueBoxStyle}" Opacity=".7" 
-                       HeightRequest="140" WidthRequest="140" CornerRadius="80" Margin="5,20,5,5"
+                       HeightRequest="140" WidthRequest="140" CornerRadius="70" Margin="5,20,5,5"
                        HasShadow="False" OutlineColor="{DynamicResource OutlineColor}" 
                        VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
                     <Image Source="DA12.png" Aspect="AspectFit" WidthRequest="130" HeightRequest="130" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
