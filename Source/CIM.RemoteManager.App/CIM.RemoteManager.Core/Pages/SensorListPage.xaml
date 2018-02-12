@@ -31,14 +31,14 @@
                 </StackLayout>
 
                 <Frame Grid.Row="0" Grid.Column="1" Style="{DynamicResource ValueBoxStyle}" Opacity=".7" 
-                       HeightRequest="120" WidthRequest="140" CornerRadius="70" Margin="5"
+                       HeightRequest="120" WidthRequest="120" CornerRadius="60" Margin="5"
                        HasShadow="False" OutlineColor="{DynamicResource OutlineColor}" 
                        VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
                     <Image Source="DA12.png" Aspect="AspectFit" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
                 </Frame>
 
-                <StackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="20">
-                    <Label Text="{Binding CharacteristicValue, StringFormat='Value: {0}'}" TextColor="#3072B0" Margin="10" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"></Label>
+                <StackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="20" BackgroundColor="{DynamicResource FooterBackgroundColor}">
+                    <Label Text="{Binding CharacteristicValue, StringFormat='Incoming Value: {0}'}" TextColor="{DynamicResource FooterBackgroundColor}" Margin="10" VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"></Label>
                 </StackLayout>
 
                 <StackLayout Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="EndAndExpand" HeightRequest="40" BackgroundColor="{DynamicResource RemoteNameBackgroundColor}">
