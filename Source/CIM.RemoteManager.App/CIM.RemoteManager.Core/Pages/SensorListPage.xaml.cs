@@ -12,6 +12,8 @@ namespace CIM.RemoteManager.Core.Pages
         {
             InitializeComponent();
             BindingContext = this; // Note that I added this line
+
+            SensorBusyIndicator.IsBusy = false;
         }
 
         private void ListView_OnItemSelected(object sender, SelectedItemChangedEventArgs e)
