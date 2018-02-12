@@ -59,6 +59,7 @@
     <CodesignProvision>
     </CodesignProvision>
     <BuildIpa>true</BuildIpa>
+    <IOSDebugOverWiFi>true</IOSDebugOverWiFi>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>none</DebugType>
