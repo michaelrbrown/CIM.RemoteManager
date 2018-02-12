@@ -44,10 +44,11 @@
 
         <Color x:Key="EntryBackgroundColor">#7778909c</Color>
 
+        !-- Margin: left, top, right, bottom -->
         <Style x:Key="CardStyle" TargetType="Grid">
           <Setter Property="HeightRequest" Value="60"/>
           <Setter Property="Padding" Value="5,10,0,10"/>
-          <Setter Property="Margin" Value="5,5,5,5"/>
+          <Setter Property="Margin" Value="0,5,0,0"/>
           <Setter Property="BackgroundColor" Value="{DynamicResource CardBackgroundColor}"/>
         </Style>
 
@@ -58,7 +59,7 @@
 
         <Style x:Key="ShadowStyle" TargetType="BoxView">
           <Setter Property="HeightRequest" Value=".8"/>
-          <Setter Property="BackgroundColor" Value="#888888"/>
+          <Setter Property="BackgroundColor" Value="#333333"/>
         </Style>
 
         <Style x:Key="LightShadowStyle" TargetType="BoxView">
