@@ -5,30 +5,27 @@
 
     <ContentView.Content>
 
-        <StackLayout Spacing="0" Padding="0" Margin="0" Opacity=".95">
+        <StackLayout Spacing="10" Padding="0" Margin="0" Opacity=".95">
 
             <Grid Style="{DynamicResource CardStyle}">
 
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="5" />
                     <ColumnDefinition Width="90" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="110" />
                     <ColumnDefinition Width="10" />
                 </Grid.ColumnDefinitions>
 
-                <Frame Grid.Column="0" WidthRequest="5" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand" BackgroundColor="{DynamicResource StatusColor}" HasShadow="False"></Frame>
-
                 <!-- Margin: left, top, right, bottom -->
-                <Image Grid.Column="1" Source="fridgeTemperatureSensor.png" Aspect="AspectFit" Scale="1" />
+                <Image Grid.Column="0" Source="fridgeTemperatureSensor.png" Aspect="AspectFit" Scale="1" />
 
-                <StackLayout Grid.Column="2" Spacing="0" HeightRequest="100" VerticalOptions="Center">
+                <StackLayout Grid.Column="1" Spacing="0" HeightRequest="100" VerticalOptions="Center">
                     <Label Text="Fridge Temp" Style="{DynamicResource NameStyle}" VerticalOptions="Center" LineBreakMode="TailTruncation" />
                     <Label Text="{Binding SensorType}" Style="{DynamicResource SensorTypeStyle}" VerticalOptions="Center" LineBreakMode="TailTruncation" />
                     <Label Text="{Binding TimeStamp}" Style="{DynamicResource TimeStampStyle}" VerticalOptions="Center" LineBreakMode="TailTruncation" />
                 </StackLayout>
 
-                <StackLayout Grid.Column="3" Spacing="0">
+                <StackLayout Grid.Column="2" Spacing="0">
                     <Frame Style="{DynamicResource ValueBoxStyle}" Opacity=".7" HeightRequest="30" WidthRequest="80" CornerRadius="20" HasShadow="False" OutlineColor="{DynamicResource OutlineColor}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
                         <Label Text="{Binding AverageValue}" Style="{DynamicResource ValueStyle}" LineBreakMode="NoWrap" HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
                     </Frame>

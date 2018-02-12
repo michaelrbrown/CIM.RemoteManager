@@ -16,54 +16,39 @@
                       Text="Disconnect"/>
           </ViewCell.ContextActions>
 
-          <Frame Padding="0,0,0,3">
-              <Frame.Content>
-                  <Frame Padding="15,15,15,15"   OutlineColor="Gray" BackgroundColor="White">
-                      <Frame.Content>
-                          <StackLayout Padding="20,0,0,0"  Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                            
-                            <Grid>
+          <Grid>
             
-                              <Grid.Triggers>
-                                <DataTrigger TargetType="Grid"
-                                             Binding="{Binding IsConnected}"
-                                             Value="true">
-                                  <Setter Property="BackgroundColor" Value="#B9DEF5"></Setter>
-                                </DataTrigger>
-                              </Grid.Triggers>
+            <Grid.Triggers>
+              <DataTrigger TargetType="Grid"
+                            Binding="{Binding IsConnected}"
+                            Value="true">
+                <Setter Property="BackgroundColor" Value="#B9DEF5"></Setter>
+              </DataTrigger>
+            </Grid.Triggers>
 
-                                <StackLayout Margin="5" Orientation="Vertical" VerticalOptions="CenterAndExpand">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="5"></ColumnDefinition>
-                                            <ColumnDefinition Width="*"></ColumnDefinition>
-                                            <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                            <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                        </Grid.ColumnDefinitions>
+              <StackLayout Margin="5" Orientation="Vertical" VerticalOptions="CenterAndExpand">
+                  <Grid>
+                      <Grid.ColumnDefinitions>
+                          <ColumnDefinition Width="5"></ColumnDefinition>
+                          <ColumnDefinition Width="*"></ColumnDefinition>
+                          <ColumnDefinition Width="Auto"></ColumnDefinition>
+                          <ColumnDefinition Width="Auto"></ColumnDefinition>
+                      </Grid.ColumnDefinitions>
                     
-                                        <Frame Grid.Column="0" WidthRequest="5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="#0097DF" HasShadow="False"></Frame>
+                      <Frame Grid.Column="0" WidthRequest="5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="#0097DF" HasShadow="False"></Frame>
             
-                                        <StackLayout Grid.Column="1" Orientation="Vertical" VerticalOptions="CenterAndExpand">
-                                          <Label Text="{Binding Name}" FontSize="22" TextColor="#2A649B" />
-                                          <Label Text="{Binding Id, StringFormat='{0}'}" TextColor="#7B7B7B" FontSize="14"/>
-                                        </StackLayout>
+                      <StackLayout Grid.Column="1" Orientation="Vertical" VerticalOptions="CenterAndExpand">
+                        <Label Text="{Binding Name}" FontSize="22" TextColor="#2A649B" />
+                        <Label Text="{Binding Id, StringFormat='{0}'}" TextColor="#7B7B7B" FontSize="14"/>
+                      </StackLayout>
             
-                                        <Label  Grid.Column="2" Margin="10" Text="{Binding Rssi}" VerticalTextAlignment="Center" TextColor="#2A649B"></Label>
+                      <Label  Grid.Column="2" Margin="10" Text="{Binding Rssi}" VerticalTextAlignment="Center" TextColor="#2A649B"></Label>
 
-                                    </Grid>
-                                </StackLayout>
+                  </Grid>
+              </StackLayout>
           
-                            </Grid>
+          </Grid>
 
-                          </StackLayout>
-
-                      </Frame.Content>
-
-                  </Frame>
-              </Frame.Content>
-
-          </Frame>
-          
         </ViewCell>
       </DataTemplate>
     </ResourceDictionary>
@@ -90,6 +75,7 @@
           </Grid>
         </StackLayout>
 
+        <!-- Margin: left, top, right, bottom -->
         <ListView Grid.Row="1" ItemsSource="{Binding SystemDevices}" SelectedItem="{Binding SelectedDevice, Mode=TwoWay}"
                   RowHeight="75" Margin="0,20,0,0"
                   SeparatorColor="Transparent"
@@ -124,11 +110,12 @@
             </Grid>
         </StackLayout>
 
+        <!-- Margin: left, top, right, bottom -->
         <ListView Grid.Row="1" ItemsSource="{Binding Devices}" SelectedItem="{Binding SelectedDevice, Mode=TwoWay}"
                  IsPullToRefreshEnabled="True"
                  RefreshCommand="{Binding RefreshCommand}"
                  IsRefreshing="{Binding IsRefreshing, Mode=OneWay}"
-                 RowHeight="75" Margin="0"
+                 RowHeight="75" Margin="10"
                  SeparatorColor="Transparent"
                  ItemTemplate="{StaticResource DeviceItemTemplate}">
         </ListView>

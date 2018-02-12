@@ -596,7 +596,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                         sensorListItemB.DecimalLocation = splitSensorValues[2].SafeHexToInt();
                         sensorListItemB.AlarmStatus = splitSensorValues[3].SafeHexToInt();
                     }
-                    //RaisePropertyChanged(() => Sensors);
+                    RaisePropertyChanged(() => Sensors);
 
                     //foreach (var sensorValue in Sensors.Where(s => s.SensorIndex == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('A') + 1).SafeConvert<int>(0)))
                     //{
