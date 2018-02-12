@@ -6,7 +6,7 @@ using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.Forms.Droid.Presenters;
 using MvvmCross.Platform;
-using Syncfusion.SfBusyIndicator.XForms.iOS;
+using Syncfusion.SfBusyIndicator.XForms.Droid;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
