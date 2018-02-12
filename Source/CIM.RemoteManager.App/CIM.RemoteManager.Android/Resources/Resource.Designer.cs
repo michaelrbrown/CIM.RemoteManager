@@ -4037,16 +4037,19 @@ namespace CIM.RemoteManager.Android
 			public const int select_dialog_singlechoice_material = 2130903112;
 			
 			// aapt resource value: 0x7f030049
-			public const int SplashScreen = 2130903113;
+			public const int sfbusyindicator_layout = 2130903113;
 			
 			// aapt resource value: 0x7f03004a
-			public const int support_simple_spinner_dropdown_item = 2130903114;
+			public const int SplashScreen = 2130903114;
 			
 			// aapt resource value: 0x7f03004b
-			public const int tabs = 2130903115;
+			public const int support_simple_spinner_dropdown_item = 2130903115;
 			
 			// aapt resource value: 0x7f03004c
-			public const int toolbar = 2130903116;
+			public const int tabs = 2130903116;
+			
+			// aapt resource value: 0x7f03004d
+			public const int toolbar = 2130903117;
 			
 			static Layout()
 			{
