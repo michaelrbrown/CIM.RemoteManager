@@ -76,8 +76,8 @@
 
         </ListView>
 
-        <xForms:SfBusyIndicator x:Name="busyindicator" AnimationType="ECG" Title="Loading..." BackgroundColor="Transparent" TextColor="White" />
-
     </Grid>
+
+    <xForms:SfBusyIndicator x:Name="SensorBusyIndicator" AnimationType="ECG" Title="Loading..." BackgroundColor="Transparent" TextColor="White" />
 
 </ContentPage>

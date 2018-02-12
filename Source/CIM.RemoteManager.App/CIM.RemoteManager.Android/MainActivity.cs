@@ -6,14 +6,14 @@ using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.Forms.Droid.Presenters;
 using MvvmCross.Platform;
+using Syncfusion.SfBusyIndicator.XForms.iOS;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
 namespace CIM.RemoteManager.Android
 {
     [Activity(ScreenOrientation = ScreenOrientation.Portrait)]
-    public class MainActivity
-        : FormsAppCompatActivity
+    public class MainActivity : FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle bundle)
         {
@@ -33,6 +33,9 @@ namespace CIM.RemoteManager.Android
             presenter.FormsApplication = formsApp;
 
             Mvx.Resolve<IMvxAppStart>().Start();
+
+            // Init Syncfusion controls
+            new SfBusyIndicatorRenderer();
 
             CheckForUpdates();
         }
