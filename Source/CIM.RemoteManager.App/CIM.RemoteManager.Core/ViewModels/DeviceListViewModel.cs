@@ -56,6 +56,8 @@ namespace CIM.RemoteManager.Core.ViewModels
         public MvxCommand<DeviceListItemViewModel> ConnectDisposeCommand => new MvxCommand<DeviceListItemViewModel>(ConnectAndDisposeDevice);
 
         public ObservableCollection<DeviceListItemViewModel> Devices { get; set; } = new ObservableCollection<DeviceListItemViewModel>();
+        public ObservableCollection<DeviceListItemViewModel> SystemDevices { get; set; } = new ObservableCollection<DeviceListItemViewModel>();
+
         public bool IsRefreshing => Adapter.IsScanning;
         public bool IsStateOn => _bluetoothLe.IsOn;
         public string StateText => GetStateText();
@@ -138,6 +140,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         private void OnDeviceConnectionLost(object sender, DeviceErrorEventArgs e)
         {
             Devices.FirstOrDefault(d => d.Id == e.Device.Id)?.Update();
+            SystemDevices.FirstOrDefault(d => d.Id == e.Device.Id)?.Update();
             _userDialogs.HideLoading();
             _userDialogs.ErrorToast("Error", $"Connection LOST {e.Device.Name}", TimeSpan.FromMilliseconds(6000));
         }
@@ -200,7 +203,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             }
             catch (Exception ex)
             {
-                Application.Current.MainPage.DisplayAlert(ex.Message, "", "Cancel");
+                Application.Current.MainPage.DisplayAlert(ex.StackTrace, "", "Cancel");
             }
             
         }
@@ -209,7 +212,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         {
             InvokeOnMainThread(() =>
             {
-                var deviceListItemViewModel = Devices.OrderBy(o => o.Rssi).FirstOrDefault(d => d.Device.Id == device.Id);
+                var deviceListItemViewModel = Devices.FirstOrDefault(d => d.Device.Id == device.Id);
                 if (deviceListItemViewModel != null)
                 {
                     deviceListItemViewModel.Update();
@@ -225,7 +228,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         {
             InvokeOnMainThread(() =>
             {
-                var deviceListItemViewModel = Devices.OrderBy(o => o.Rssi).FirstOrDefault(d => d.Device.Id == device.Id);
+                var deviceListItemViewModel = Devices.FirstOrDefault(d => d.Device.Id == device.Id);
                 if (deviceListItemViewModel != null)
                 {
                     deviceListItemViewModel.Update();
@@ -271,9 +274,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 //_userDialogs.ErrorToast("Error", $"Failed to retreive system connected devices. {ex.Message}", TimeSpan.FromSeconds(5));
             }
         }
-
-        public List<DeviceListItemViewModel> SystemDevices { get; private set; } = new List<DeviceListItemViewModel>();
-
+        
         public override void Suspend()
         {
             base.Suspend();
@@ -308,6 +309,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         private async void ScanForDevices()
         {
             Devices.Clear();
+            SystemDevices.Clear();
 
             foreach (var connectedDevice in Adapter.ConnectedDevices)
             {
@@ -573,6 +575,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         private void OnDeviceDisconnected(object sender, DeviceEventArgs e)
         {
             Devices.FirstOrDefault(d => d.Id == e.Device.Id)?.Update();
+            SystemDevices.FirstOrDefault(d => d.Id == e.Device.Id)?.Update();
             _userDialogs.HideLoading();
             _userDialogs.Toast($"Disconnected {e.Device.Name}");
         }
