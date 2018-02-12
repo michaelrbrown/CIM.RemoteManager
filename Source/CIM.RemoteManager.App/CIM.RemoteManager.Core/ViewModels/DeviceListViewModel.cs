@@ -186,7 +186,15 @@ namespace CIM.RemoteManager.Core.ViewModels
 
         private void OnDeviceDiscovered(object sender, DeviceEventArgs args)
         {
-            AddOrUpdateDevice(args.Device);
+            // CIMScan devices
+            if (args.Device.Name.IndexOf("adafruit", StringComparison.OrdinalIgnoreCase) > -1)
+            {
+                AddOrUpdateSystemDevice(args.Device);
+            }
+            else // All other devices
+            {
+                AddOrUpdateDevice(args.Device);
+            }
         }
 
         private void AddOrUpdateDevice(IDevice device)
@@ -305,7 +313,6 @@ namespace CIM.RemoteManager.Core.ViewModels
                     Mvx.Trace(ex.Message);
                     _userDialogs.ErrorToast("Error", $"Failed to update RSSI for {connectedDevice.Name}", TimeSpan.FromSeconds(5));
                 }
-
                 
                 // CIMScan devices
                 if (connectedDevice.Name.IndexOf("adafruit", StringComparison.OrdinalIgnoreCase) > -1)
@@ -323,7 +330,7 @@ namespace CIM.RemoteManager.Core.ViewModels
 
             RaisePropertyChanged(() => IsRefreshing);
             Adapter.ScanMode = ScanMode.LowLatency;
-            await Adapter.StartScanningForDevicesAsync(_cancellationTokenSource.Token);
+            await Adapter.StartScanningForDevicesAsync(_cancellationTokenSource.Token).ConfigureAwait(true);
         }
 
         private void CleanupCancellationToken()
@@ -361,6 +368,11 @@ namespace CIM.RemoteManager.Core.ViewModels
 
             if (device.IsConnected)
             {
+                config.Add("Sensors", async () =>
+                {
+                     ShowViewModel<SensorListViewModel>(new MvxBundle(new Dictionary<string, string> { { DeviceIdKey, device.Device.Id.ToString() } }));
+                });
+
                 config.Add("Update RSSI", async () =>
                 {
                     try
@@ -393,10 +405,10 @@ namespace CIM.RemoteManager.Core.ViewModels
                     }
                 });
 
-                config.Add("Connect & Dispose", () => ConnectDisposeCommand.Execute(device));
+                //config.Add("Connect & Dispose", () => ConnectDisposeCommand.Execute(device));
             }
 
-            config.Add("Copy GUID", () => CopyGuidCommand.Execute(device));
+            //config.Add("Copy GUID", () => CopyGuidCommand.Execute(device));
             config.Cancel = new ActionSheetOption("Cancel");
             config.SetTitle("Device Options");
             _userDialogs.ActionSheet(config);
@@ -412,13 +424,21 @@ namespace CIM.RemoteManager.Core.ViewModels
             {
                 CancellationTokenSource tokenSource = new CancellationTokenSource();
 
-                var config = new ProgressDialogConfig()
+                var config = new ProgressDialogConfig();
+                if (!String.IsNullOrEmpty(device.Name))
                 {
-                    Title = $"Connecting to '{device.Id}'",
-                    CancelText = "Cancel",
-                    IsDeterministic = false,
-                    OnCancel = tokenSource.Cancel
-                };
+                    config.Title = $"Connecting to '{device.Name}'";
+                    config.CancelText = "Cancel";
+                    config.IsDeterministic = false;
+                    config.OnCancel = tokenSource.Cancel;
+                }
+                else
+                {
+                    config.Title = $"Connecting to '{device.Id}'";
+                    config.CancelText = "Cancel";
+                    config.IsDeterministic = false;
+                    config.OnCancel = tokenSource.Cancel;
+                }
 
                 using (var progress = _userDialogs.Progress(config))
                 {
