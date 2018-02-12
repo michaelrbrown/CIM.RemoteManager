@@ -78,6 +78,10 @@
 
     </Grid>
 
-    <xForms:SfBusyIndicator x:Name="SensorBusyIndicator" AnimationType="ECG" Title="Loading Sensor Data..." BackgroundColor="Transparent" TextColor="White" />
+    <xForms:SfBusyIndicator x:Name="SensorBusyIndicator" 
+                            AnimationType="ECG" 
+                            Title="Loading Sensor Data..." 
+                            IsBusy="False" IsVisible="False" 
+                            BackgroundColor="Transparent" TextColor="White" />
 
 </ContentPage>
