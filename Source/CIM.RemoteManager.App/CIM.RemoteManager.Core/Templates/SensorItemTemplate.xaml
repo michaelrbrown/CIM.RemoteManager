@@ -5,7 +5,7 @@
 
     <ContentView.Content>
 
-        <StackLayout Spacing="0" Padding="0" Margin="10" Opacity=".95">
+        <StackLayout Spacing="0" Padding="0" Margin="0" Opacity=".95">
 
             <Grid Style="{DynamicResource CardStyle}">
 
