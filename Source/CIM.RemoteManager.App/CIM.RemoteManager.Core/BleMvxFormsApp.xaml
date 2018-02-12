@@ -31,7 +31,7 @@
 
 
       
-        <Color x:Key="RemoteNameBackgroundColor">#495B66</Color>
+        <Color x:Key="RemoteNameBackgroundColor">#0097DE</Color>
         <Color x:Key="CardBackgroundColor">#eceff1</Color>
         <Color x:Key="FooterBackgroundColor">#B9DEF5</Color>
 

@@ -201,9 +201,9 @@ namespace CIM.RemoteManager.Core.ViewModels
                     AddOrUpdateDevice(args.Device);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Application.Current.MainPage.DisplayAlert(ex.StackTrace, "", "Cancel");
+                //Application.Current.MainPage.DisplayAlert(ex.StackTrace, "", "Cancel");
             }
             
         }
