@@ -7,7 +7,7 @@
             switch (value)
             {
                 case "2800":
-                    return "DS18B20 Temperature";
+                    return "DS18B20 Temperature (CI10/CZ11)";
 
                 case "7100":
                     return "-200 to 0 RTD *";
@@ -82,7 +82,7 @@
                     return "10.1\" Diff Pressure(CT-22A)";
 
                 case "8502":
-                    return "10.2\" Diff Pressure(CT-22B)";
+                    return "10.2\" Diff Pressure(CT-22B/C)";
 
                 case "8502.1":
                     return "10.5\" Diff Pressure(CT-22C)";

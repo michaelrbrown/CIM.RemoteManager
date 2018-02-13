@@ -43,8 +43,6 @@
                       </StackLayout>
                       
                       <Image Source="{Binding Rssi,  Converter={StaticResource RssiConverter}}"  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Grid.Column="2" HeightRequest="20" Margin="8,12,8,12" />
-                      <Label  Grid.Column="2" Margin="10" Text="{Binding Rssi}" VerticalTextAlignment="Center" TextColor="#2A649B" IsVisible="False"></Label>
-
                   </Grid>
               </StackLayout>
           

@@ -15,7 +15,8 @@ namespace CIM.RemoteManager.Core.Converters
             {
                 int.TryParse(value.ToString(), out int rssiValue);
                 // Get real RSSI by calculation
-                int realRssiValue = CalculateSignalLevel(rssiValue, 5);
+                //int realRssiValue = CalculateSignalLevel(rssiValue, 5);
+                int realRssiValue = rssiValue;
                 if (realRssiValue > -55)
                 {
                     return "rssi_5.png";
