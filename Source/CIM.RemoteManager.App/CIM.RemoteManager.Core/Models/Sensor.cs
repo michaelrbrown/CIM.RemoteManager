@@ -1,4 +1,7 @@
-﻿namespace CIM.RemoteManager.Core.Models
+﻿using System;
+using CIM.RemoteManager.Core.Helpers;
+
+namespace CIM.RemoteManager.Core.Models
 {
     /// <summary>
     /// A DA-12 sensor.
@@ -23,7 +26,16 @@
         private string _name;
         public string Name
         {
-            get => _name;
+            get
+            {
+                // Try to lookup hex to string
+                if (!string.IsNullOrEmpty(_name))
+                {
+                    return _sensorType.LookupNameByValue();
+                }
+                // Default
+                return string.Empty;
+            }
             set => SetProperty(ref _name, value);
         }
 
@@ -63,7 +75,12 @@
             get => _timeStamp;
             set => SetProperty(ref _timeStamp, value);
         }
-        
+
+        /// <summary>
+        /// Converting Unix to Windows DateTime
+        /// </summary>
+        public DateTime? DateTimeStamp => _timeStamp.UnixTimeStampToDateTime();
+
         private double _averageValue;
         public double AverageValue
         {

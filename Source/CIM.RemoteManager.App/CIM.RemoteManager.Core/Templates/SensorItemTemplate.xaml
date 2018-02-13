@@ -22,7 +22,7 @@
                 <StackLayout Grid.Column="1" Spacing="0" HeightRequest="100" VerticalOptions="Center">
                     <Label Text="Fridge Temp" Style="{DynamicResource NameStyle}" VerticalOptions="Center" LineBreakMode="TailTruncation" />
                     <Label Text="{Binding SensorType}" Style="{DynamicResource SensorTypeStyle}" VerticalOptions="Center" LineBreakMode="TailTruncation" />
-                    <Label Text="{Binding TimeStamp}" Style="{DynamicResource TimeStampStyle}" VerticalOptions="Center" LineBreakMode="TailTruncation" />
+                    <Label Text="{Binding DateTimeStamp}" Style="{DynamicResource TimeStampStyle}" VerticalOptions="Center" LineBreakMode="TailTruncation" />
                 </StackLayout>
 
                 <StackLayout Grid.Column="2" Spacing="0">
