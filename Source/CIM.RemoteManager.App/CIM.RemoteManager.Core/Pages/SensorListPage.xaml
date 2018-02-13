@@ -31,10 +31,7 @@
                     <Switch IsToggled="{Binding UpdatesStarted, Mode=TwoWay}" Toggled="SensorUpdatesSwitchToggled" Margin="5" HorizontalOptions="Center" VerticalOptions="Center" />
                 </StackLayout>
 
-                <Frame Grid.Row="0" Grid.Column="1" Style="{DynamicResource ValueBoxStyle}" Opacity=".95" 
-                       HeightRequest="120" WidthRequest="120" CornerRadius="40" Margin="20"
-                       HasShadow="False" OutlineColor="{DynamicResource OutlineColor}" 
-                       VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                <Frame Grid.Row="0" Grid.Column="1" Style="{DynamicResource RemoteBackgroundStyle}" HasShadow="False" OutlineColor="{DynamicResource OutlineColor}">
                     <Image Source="DA12.png" Aspect="AspectFit" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
                 </Frame>
 

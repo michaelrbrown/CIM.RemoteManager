@@ -29,7 +29,7 @@
         <Color x:Key="ChartForeground">White</Color>
         <Color x:Key="ChartForegroundSemiTransparent">#88FFFFFF</Color>
 
-        <Color x:Key="RemoteNameBackgroundColor">#1872A5</Color>
+        <Color x:Key="RemoteNameBackgroundColor">#0097DE</Color>
         <Color x:Key="CardBackgroundColor">#eceff1</Color>
         <Color x:Key="FooterBackgroundColor">#B9DEF5</Color>
 
@@ -43,6 +43,17 @@
         <Color x:Key="SerialNumberColor">#546e7a</Color>
 
         <Color x:Key="EntryBackgroundColor">#7778909c</Color>
+        
+        <Style x:Key="RemoteBackgroundStyle" TargetType="Frame">
+            <Setter Property="WidthRequest" Value="120"/>
+            <Setter Property="HeightRequest" Value="120"/>
+            <Setter Property="CornerRadius" Value="40"/>
+            <Setter Property="Margin" Value="20"/>
+            <Setter Property="Opacity" Value=".95"/>
+            <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+            <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
+            <Setter Property="TextColor" Value="{DynamicResource AppAccentColor}"/>
+        </Style>
 
         !-- Margin: left, top, right, bottom -->
         <Style x:Key="CardStyle" TargetType="Grid">
