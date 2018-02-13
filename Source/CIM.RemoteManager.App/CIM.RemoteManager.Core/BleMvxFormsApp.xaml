@@ -29,11 +29,11 @@
         <Color x:Key="ChartForeground">White</Color>
         <Color x:Key="ChartForegroundSemiTransparent">#88FFFFFF</Color>
 
-        <Color x:Key="RemoteNameBackgroundColor">#0097DE</Color>
+        <Color x:Key="RemoteNameBackgroundColor">#1872A5</Color>
         <Color x:Key="CardBackgroundColor">#eceff1</Color>
         <Color x:Key="FooterBackgroundColor">#B9DEF5</Color>
 
-        <Color x:Key="NameColor">#0097DE</Color>
+        <Color x:Key="NameColor">#01649D</Color>
         <Color x:Key="SensorTypeColor">#546e7a</Color>
         <Color x:Key="TimeStampColor">#546e7a</Color>
         <Color x:Key="MoreIconColor">#B9DEF5</Color>

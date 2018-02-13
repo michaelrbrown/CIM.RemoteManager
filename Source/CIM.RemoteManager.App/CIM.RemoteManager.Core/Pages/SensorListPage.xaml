@@ -48,7 +48,7 @@
         <ListView Grid.Row="1" 
                     ItemsSource="{Binding Sensors}" 
                     SeparatorVisibility="Default" 
-                    BackgroundColor="#01649D"
+                    BackgroundColor="#ffffff"
                     SeparatorColor="Transparent" 
                     HasUnevenRows="false"
                     RowHeight="116" 
