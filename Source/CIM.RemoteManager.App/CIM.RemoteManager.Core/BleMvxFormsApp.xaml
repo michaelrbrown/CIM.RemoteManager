@@ -53,7 +53,7 @@
             <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
             <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
             <Setter Property="BackgroundColor" Value="{DynamicResource AppAccentColor}"/>
-            <Setter Property="OutlineColor" Value="{DynamicResource AppAccentColor}"/>
+            <Setter Property="OutlineColor" Value="{DynamicResource OutlineColor}"/>
         </Style>
 
         !-- Margin: left, top, right, bottom -->

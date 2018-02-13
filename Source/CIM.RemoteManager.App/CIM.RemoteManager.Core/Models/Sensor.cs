@@ -34,7 +34,7 @@ namespace CIM.RemoteManager.Core.Models
                     return _name;
                 }
                 // Default
-                return "N/A";
+                return "CIMScan Sensor";
             }
             set => SetProperty(ref _name, value);
         }
