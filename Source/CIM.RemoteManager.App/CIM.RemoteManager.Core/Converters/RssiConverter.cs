@@ -11,9 +11,15 @@ namespace CIM.RemoteManager.Core.Converters
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            string rssiVal = "0";
             if (value != null)
             {
-                int.TryParse(value?.ToString(), out int rssiValue);
+                rssiVal = value.ToString();
+            }
+                
+            bool successParse = int.TryParse(rssiVal, out int rssiValue);
+            if (successParse)
+            {
                 // Get real RSSI by calculation
                 //int realRssiValue = CalculateSignalLevel(rssiValue, 5);
                 int realRssiValue = rssiValue;
