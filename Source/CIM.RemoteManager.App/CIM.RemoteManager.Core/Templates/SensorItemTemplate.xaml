@@ -10,10 +10,10 @@
             <Grid Style="{DynamicResource CardStyle}">
 
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="80" />
+                    <ColumnDefinition Width="75" />
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="110" />
-                    <ColumnDefinition Width="10" />
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="5" />
                 </Grid.ColumnDefinitions>
 
                 <!-- Margin: left, top, right, bottom -->
