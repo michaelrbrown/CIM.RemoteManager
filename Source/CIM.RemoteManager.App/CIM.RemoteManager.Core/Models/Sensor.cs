@@ -23,13 +23,13 @@ namespace CIM.RemoteManager.Core.Models
             set => SetProperty(ref _serialNumber, value);
         }
         
-        private string _name;
+        private string _name = "N/A";
         public string Name
         {
             get
             {
                 // Try to lookup hex to string
-                if (!string.IsNullOrEmpty(_name))
+                if (!string.IsNullOrWhiteSpace(_name))
                 {
                     return _name;
                 }
