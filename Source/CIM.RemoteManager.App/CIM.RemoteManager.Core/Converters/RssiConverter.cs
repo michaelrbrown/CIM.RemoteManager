@@ -13,30 +13,30 @@ namespace CIM.RemoteManager.Core.Converters
         {
             if (value != null)
             {
-                int.TryParse(value.ToString(), out int rssiValue);
+                int.TryParse(value?.ToString(), out int rssiValue);
                 // Get real RSSI by calculation
                 //int realRssiValue = CalculateSignalLevel(rssiValue, 5);
                 int realRssiValue = rssiValue;
-                if (realRssiValue > -55)
+                if (rssiValue > -55)
                 {
                     return "rssi_5.png";
                 }
-                else if (realRssiValue > -56 && realRssiValue < -66)
+                else if (rssiValue > -66 && rssiValue < -56)
                 {
                     return "rssi_4.png";
                 }
-                else if (realRssiValue > -67 && realRssiValue < -77)
+                else if (rssiValue > -77 && rssiValue < -67)
                 {
                     return "rssi_3.png";
                 }
-                else if (realRssiValue > -78 && realRssiValue < -88)
+                else if (rssiValue > -78 && rssiValue < -88)
                 {
                     return "rssi_2.png";
                 }
                 
             }
 
-            return "rssi_1";
+            return "rssi_1.png";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
