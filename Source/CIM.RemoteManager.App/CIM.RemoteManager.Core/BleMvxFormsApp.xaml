@@ -166,8 +166,8 @@
         <Setter Property="FontSize" Value="11" />
       </Style>
 
-
-      <converters:InverseBooleanValueConverter x:Key="InverseBoolean"></converters:InverseBooleanValueConverter>
+      <converters:RssiConverter x:Key="RssiConverter"/>
+      <converters:InverseBooleanValueConverter x:Key="InverseBoolean"/>
       <converters:ListToLabelConverter x:Key="InverseBooleanValueConverter"/>
       <converters:ListToLabelConverter x:Key="ListToLabelConverter"/>
       <converters:LoadingOpacityConverter x:Key="LoadingOpacityConverter"/>
