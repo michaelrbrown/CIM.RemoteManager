@@ -42,7 +42,7 @@
                         <Label Text="{Binding Id, StringFormat='{0}'}" TextColor="#7B7B7B" FontSize="14"/>
                       </StackLayout>
                       
-                      <Image Source="rssi_4.png"  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Grid.Column="2" HeightRequest="20" Margin="8,12,8,12" />
+                      <Image Source="rssi_4.png"  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Grid.Column="2" HeightRequest="40" Margin="8,12,8,12" />
                   </Grid>
               </StackLayout>
           
