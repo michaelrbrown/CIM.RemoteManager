@@ -97,5 +97,6 @@ namespace CIM.RemoteManager.Core.ViewModels
             var descriptorId = parameters.Data[DescriptorIdKey];
             return await characteristic.GetDescriptorAsync(Guid.Parse(descriptorId));
         }
+
     }
 }

@@ -23,8 +23,8 @@ namespace CIM.RemoteManager.Core.ViewModels
         private IDevice _device;
         private IService _service;
 
-        private ICharacteristic _tx;
-        private ICharacteristic _rx;
+        public ICharacteristic TxCharacteristic { get; private set; }
+        public ICharacteristic RxCharacteristic { get; private set; }
 
         // UUIDs for UART service and associated characteristics.
         public static Guid UartUuid = Guid.Parse("6E400001-B5A3-F393-E0A9-E50E24DCCA9E");
@@ -44,13 +44,13 @@ namespace CIM.RemoteManager.Core.ViewModels
         public bool UpdatesStarted;
         public ICharacteristic Characteristic { get; private set; }
 
-        public string CharacteristicValue => Characteristic?.Value.BytesToStringConverted();
-
-        //public ObservableCollection<string> Messages { get; } = new ObservableCollection<string>();
-        //public ObservableCollection<ISensor> Sensors { get; set; } = new ObservableCollection<ISensor>();
+        public string CharacteristicValue => RxCharacteristic?.Value.BytesToStringConverted();
 
         public string DeviceName { get; set; }
 
+        /// <summary>
+        /// Sensor collection
+        /// </summary>
         FullyObservableCollection<Sensor> _sensors;
         public FullyObservableCollection<Sensor> Sensors
         {
@@ -62,6 +62,9 @@ namespace CIM.RemoteManager.Core.ViewModels
             }
         }
 
+        /// <summary>
+        /// Show sensor updates mode
+        /// </summary>
         public string UpdateButtonText => UpdatesStarted ? "Updates On" : "Updates Off";
 
         public bool StartFullSensorValueRecord { get; set; } = false;
@@ -104,41 +107,18 @@ namespace CIM.RemoteManager.Core.ViewModels
         ///   # | time | current value 
         /// </summary>
         public readonly StringBuilder UnfilteredFloatingPointSensorValue = new StringBuilder("");
-
-        public void SensorPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            //This will get called when the property of an object inside the collection changes
-        }
-
-        public void SensorCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            //if (e.Action == NotifyCollectionChangedAction.Remove)
-            //{
-            //    foreach (Sensor item in e.OldItems)
-            //    {
-            //        //Removed items
-            //        item.PropertyChanged -= SensorPropertyChanged;
-            //    }
-            //}
-            //else if (e.Action == NotifyCollectionChangedAction.Add)
-            //{
-            //    foreach (Sensor item in e.NewItems)
-            //    {
-            //        //Added items
-            //        item.PropertyChanged += SensorPropertyChanged;
-            //    }
-            //}
-        }
-
+        
+        /// <summary>
+        /// Sensor view model constructor
+        /// </summary>
+        /// <param name="adapter"></param>
+        /// <param name="userDialogs"></param>
         public SensorListViewModel(IAdapter adapter, IUserDialogs userDialogs) : base(adapter)
         {
             try
             {
                 _userDialogs = userDialogs;
-                //_sensors = new MvxObservableCollection<Sensor>();
-
                 _sensors = new FullyObservableCollection<Sensor>();
-               _sensors.CollectionChanged += SensorCollectionChanged;
                 
             }
             catch (Exception ex)
@@ -146,9 +126,11 @@ namespace CIM.RemoteManager.Core.ViewModels
                 _userDialogs.Alert(ex.Message, "Error while loading sensor data");
                 Mvx.Trace(ex.Message);
             }
-
         }
 
+        /// <summary>
+        /// On Resume
+        /// </summary>
         public override void Resume()
         {
             base.Resume();
@@ -170,26 +152,25 @@ namespace CIM.RemoteManager.Core.ViewModels
                 // Get our Adafruit bluetooth service (UART)
                 _service = await _device.GetServiceAsync(UartUuid).ConfigureAwait(true);
                 
-                _tx = await _service.GetCharacteristicAsync(TxUuid).ConfigureAwait(true);
+                // Get write characteristic service
+                TxCharacteristic = await _service.GetCharacteristicAsync(TxUuid).ConfigureAwait(true);
                 
-                //await Task.Delay(TimeSpan.FromSeconds(1));
-
                 // Make sure we can write characteristic data to remote
-                //if (Characteristic.CanWrite)
-                //{
+                if (TxCharacteristic.CanWrite)
+                {
                     // Send a refresh command
-                    await _tx.WriteAsync("{Y}".StrToByteArray()).ConfigureAwait(true);
-                //}
-                //else
-                //{
-                   // _userDialogs.Alert("Cannot write characteristic data to remote!", "CIMScan Remote Manager");
-                //}
+                    await TxCharacteristic.WriteAsync("{Y}".StrToByteArray()).ConfigureAwait(true);
+                }
+                else
+                {
+                    _userDialogs.Alert("Cannot write characteristic data to remote!", "CIMScan Remote Manager");
+                }
                 
                 // Wait 500 milliseconds
                 await Task.Delay(500).ConfigureAwait(true);
 
                 // Get Characteristics service
-                Characteristic = await _service.GetCharacteristicAsync(RxUuid).ConfigureAwait(true);
+                RxCharacteristic = await _service.GetCharacteristicAsync(RxUuid).ConfigureAwait(true);
 
                 // Wait 500 milliseconds
                 //await Task.Delay(3500).ConfigureAwait(true);
@@ -197,50 +178,31 @@ namespace CIM.RemoteManager.Core.ViewModels
                 // Start updates
                 //ToggleUpdatesCommand.Execute(null);
                 
-                //var service = await _device.GetServiceAsync(UartUuid);
-
-                // Get our adafruit bluetooth characteristic
-                // Tx (Write)
-                // _tx = await service.GetCharacteristicAsync(TxUuid);
-
-                // Write values async
-                //await _tx.WriteAsync("{Y}".StrToByteArray());
-
-
-                // Get our adafruit bluetooth characteristic
-                // RX (read)
-                //ICharacteristic _rx = await service.GetCharacteristicAsync(RxUuid);
-
-
-
                 // Hide loading...
                 _userDialogs.HideLoading();
-
-                //RaisePropertyChanged(() => CharacteristicValue);
-
-               // _userDialogs.Toast($"Wrote value {characteristicValue}");
 
             }
             catch (Exception ex)
             {
                 _userDialogs.HideLoading();
                 HockeyApp.MetricsManager.TrackEvent($"(InitRemote) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
-                _userDialogs.ShowError(ex.Message);
+                _userDialogs.Alert(ex.Message);
             }
 
         }
-
-        private static byte[] GetBytes(string text)
-        {
-            return text.Split(' ').Where(token => !string.IsNullOrEmpty(token)).Select(token => Convert.ToByte(token, 16)).ToArray();
-        }
         
+        /// <summary>
+        /// MVVMCross init from bundle call from previous page.
+        /// Set's up bundle params for initialization.
+        /// </summary>
+        /// <param name="parameters"></param>
         protected override void InitFromBundle(IMvxBundle parameters)
         {
             try
             {
                 base.InitFromBundle(parameters);
 
+                // Get device from bundle
                 _device = GetDeviceFromBundle(parameters);
 
                 // Set device name
@@ -249,6 +211,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 // Init our DA-12
                 InitRemote();
                 
+                // Dispose
                 if (_device == null)
                 {
                     Close(this);
@@ -258,10 +221,12 @@ namespace CIM.RemoteManager.Core.ViewModels
             {
                 HockeyApp.MetricsManager.TrackEvent($"(InitFromBundle) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
                 _userDialogs.Alert(ex.Message, "Error while loading sensor data");
-                Mvx.Trace(ex.Message);
             }
         }
         
+        /// <summary>
+        /// Toggle sensor updates
+        /// </summary>
         public MvxCommand ToggleUpdatesCommand => new MvxCommand((() =>
         {
             if (UpdatesStarted)
@@ -273,48 +238,66 @@ namespace CIM.RemoteManager.Core.ViewModels
                 StartUpdates();
             }
         }));
-        
+
+        /// <summary>
+        /// Start bluetooth characteristics updating
+        /// </summary>
         private async void StartUpdates()
         {
             try
             {
                 UpdatesStarted = true;
 
-                Characteristic.ValueUpdated -= CharacteristicOnValueUpdated;
-                Characteristic.ValueUpdated += CharacteristicOnValueUpdated;
+                // Subscribe to value updated events
+                RxCharacteristic.ValueUpdated -= RxCharacteristicOnValueUpdated;
+                RxCharacteristic.ValueUpdated += RxCharacteristicOnValueUpdated;
 
-                await _tx.WriteAsync("{Y}".StrToByteArray()).ConfigureAwait(true);
-                await Characteristic.StartUpdatesAsync().ConfigureAwait(true);
-                
+                // Send refresh command to remote
+                await TxCharacteristic.WriteAsync("{Y}".StrToByteArray()).ConfigureAwait(true);
+                // Start updates from bluetooth service
+                await RxCharacteristic.StartUpdatesAsync().ConfigureAwait(true);
+
+                // Let UI know mode we are in
                 RaisePropertyChanged(() => UpdateButtonText);
             }
             catch (Exception ex)
             {
                 HockeyApp.MetricsManager.TrackEvent($"(StartUpdates) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
-                _userDialogs.ShowError(ex.Message);
+                _userDialogs.Alert(ex.Message);
             }
         }
 
+        /// <summary>
+        /// Stop bluetooth characteristics updating
+        /// </summary>
         private async void StopUpdates()
         {
             try
             {
                 UpdatesStarted = false;
 
-                await Characteristic.StopUpdatesAsync().ConfigureAwait(true);
-                Characteristic.ValueUpdated -= CharacteristicOnValueUpdated;
-                
-                RaisePropertyChanged(() => UpdateButtonText);
+                // Stop updates from bluetooth service
+                await RxCharacteristic.StopUpdatesAsync().ConfigureAwait(true);
 
+                // Subscribe to value updated events
+                RxCharacteristic.ValueUpdated -= RxCharacteristicOnValueUpdated;
+                
+                // Let UI know mode we are in
+                RaisePropertyChanged(() => UpdateButtonText);
             }
             catch (Exception ex)
             {
                 HockeyApp.MetricsManager.TrackEvent($"(StopUpdates) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
-                _userDialogs.ShowError(ex.Message);
+                _userDialogs.Alert(ex.Message);
             }
         }
 
-        private void CharacteristicOnValueUpdated(object sender, CharacteristicUpdatedEventArgs characteristicUpdatedEventArgs)
+        /// <summary>
+        /// Rx characteristic updated event
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="characteristicUpdatedEventArgs"></param>
+        private void RxCharacteristicOnValueUpdated(object sender, CharacteristicUpdatedEventArgs characteristicUpdatedEventArgs)
         {
             try
             {
@@ -333,8 +316,6 @@ namespace CIM.RemoteManager.Core.ViewModels
             catch (Exception ex)
             {
                 HockeyApp.MetricsManager.TrackEvent($"(CharacteristicOnValueUpdated) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
-                //Application.Current.MainPage.DisplayAlert(ex.Message, "", "Cancel");
-                //_userDialogs.ShowError(ex.Message);
             }
             
         }
@@ -567,6 +548,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                     }
                     else
                     {
+                        Application.Current.MainPage.DisplayAlert("(A) DecimalLocation: ", splitSensorValues[9].SafeConvert<int>(0).ToString(), "Cancel");
                         var sensor = new Sensor
                         {
                             SensorIndex = splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('A') + 1).SafeConvert<int>(0),
@@ -591,6 +573,9 @@ namespace CIM.RemoteManager.Core.ViewModels
                     var sensorListItemB = Sensors.FirstOrDefault(s => s.SensorIndex == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('B') + 1).SafeConvert<int>(0));
                     if (sensorListItemB != null)
                     {
+                        Application.Current.MainPage.DisplayAlert("(B) AverageValue: ", splitSensorValues[2].SafeHexToInt().ToString(), "Cancel");
+                        Application.Current.MainPage.DisplayAlert("(B) DecimalLocation: ", splitSensorValues[2].SafeHexToInt().ToString(), "Cancel");
+
                         sensorListItemB.TimeStamp = splitSensorValues[0].SafeHexToInt();
                         sensorListItemB.AverageValue = splitSensorValues[1].SafeHexToDouble();
                         sensorListItemB.DecimalLocation = splitSensorValues[2].SafeHexToInt();
@@ -628,25 +613,41 @@ namespace CIM.RemoteManager.Core.ViewModels
                     }
                     RaisePropertyChanged(() => Sensors);
                     break;
+                case "F":
+                    //Application.Current.MainPage.DisplayAlert("I", splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('A') + 1).SafeConvert<int>(0).ToString(), "Cancel");
+                    // "I" Sensor data serialization
+                    // Update Sensor list by index
+                    var sensorListItemF = Sensors.FirstOrDefault(s => s.SensorIndex == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('C') + 1).SafeConvert<int>(0));
+                    if (sensorListItemF != null)
+                    {
+                        //Application.Current.MainPage.DisplayAlert("Old value: ", sensorListItem.AverageValue.ToString(), "Cancel");
+                        //Application.Current.MainPage.DisplayAlert("New value: ", splitSensorValues[1].SafeHexToDouble().ToString(), "Cancel");
+
+                        sensorListItemF.TimeStamp = splitSensorValues[0].SafeHexToInt();
+                        sensorListItemF.CurrentValue = splitSensorValues[1].SafeHexToDouble();
+                    }
+                    RaisePropertyChanged(() => Sensors);
+                    break;
                 default:
                     throw new Exception($"nameof(conversionType) not defined");
             }
         }
 
+        /// <summary>
+        /// Sensor selected (navigate to sensor plot page)
+        /// </summary>
         public IService SelectedSensor
         {
-            get { return null; }
+            get => null;
             set
             {
                 if (value != null)
                 {
                     var bundle = new MvxBundle(new Dictionary<string, string>(Bundle.Data) { { SensorIdKey, value.Id.ToString() } });
-
+                    // Navigate to sensor plot
                     ShowViewModel<SensorPlotViewModel>(bundle);
                 }
-
                 RaisePropertyChanged();
-
             }
         }
 

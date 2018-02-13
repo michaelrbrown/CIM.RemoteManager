@@ -46,6 +46,7 @@
     <Compile Include="Extensions\GuidExtension.cs" />
     <Compile Include="Extensions\IUserDialogsExtensions.cs" />
     <Compile Include="Helpers\AsciiStringConverter.cs" />
+    <Compile Include="Helpers\ByteHelper.cs" />
     <Compile Include="Helpers\DateTimeHelper.cs" />
     <Compile Include="Helpers\SensorTypeConverter.cs" />
     <Compile Include="Helpers\Settings.cs" />
@@ -54,6 +55,7 @@
     <Compile Include="Models\BindableBase.cs" />
     <Compile Include="Models\Device.cs" />
     <Compile Include="Models\ISensor.cs" />
+    <Compile Include="Models\MessageCounters.cs" />
     <Compile Include="Models\Sensor.cs" />
     <Compile Include="Models\SensorStatisticsItem.cs" />
     <Compile Include="Models\SensorType.cs" />
