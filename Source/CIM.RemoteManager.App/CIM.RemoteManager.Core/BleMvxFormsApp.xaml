@@ -52,7 +52,8 @@
             <Setter Property="Opacity" Value=".95"/>
             <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
             <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
-            <Setter Property="TextColor" Value="{DynamicResource AppAccentColor}"/>
+            <Setter Property="BackgroundColor" Value="{DynamicResource AppAccentColor}"/>
+            <Setter Property="OutlineColor" Value="{DynamicResource AppAccentColor}"/>
         </Style>
 
         !-- Margin: left, top, right, bottom -->
