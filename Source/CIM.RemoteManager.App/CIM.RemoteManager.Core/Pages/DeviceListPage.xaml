@@ -37,13 +37,12 @@
                     
                       <Frame Grid.Column="0" WidthRequest="5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="#0097DF" HasShadow="False"></Frame>
             
-                      <StackLayout Grid.Column="1" Orientation="Vertical" VerticalOptions="CenterAndExpand">
+                      <StackLayout Grid.Column="1" Orientation="Vertical" VerticalOptions="CenterAndExpand" Margin="5,0,0,0">
                         <Label Text="{Binding Name}" FontSize="22" TextColor="#2A649B" />
                         <Label Text="{Binding Id, StringFormat='{0}'}" TextColor="#7B7B7B" FontSize="14"/>
                       </StackLayout>
                       
                       <Image Source="{Binding Rssi, Converter={StaticResource RssiConverter}}"  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Grid.Column="2" HeightRequest="40" Margin="8,12,8,12" />
-
                   </Grid>
               </StackLayout>
           
