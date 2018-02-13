@@ -31,10 +31,10 @@ namespace CIM.RemoteManager.Core.Models
                 // Try to lookup hex to string
                 if (!string.IsNullOrEmpty(_name))
                 {
-                    return _sensorType.LookupNameByValue();
+                    return _name;
                 }
                 // Default
-                return string.Empty;
+                return "N/A";
             }
             set => SetProperty(ref _name, value);
         }

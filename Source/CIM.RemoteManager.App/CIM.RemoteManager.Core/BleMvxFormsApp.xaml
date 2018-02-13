@@ -37,7 +37,7 @@
         <Color x:Key="SensorTypeColor">#546e7a</Color>
         <Color x:Key="TimeStampColor">#546e7a</Color>
         <Color x:Key="MoreIconColor">#B9DEF5</Color>
-        <Color x:Key="ValueColor">#0097DE</Color>
+        <Color x:Key="ValueColor">#01649D</Color>
         <Color x:Key="StatusColor">#43a047</Color>
         <Color x:Key="OutlineColor">#eeeeee</Color>
         <Color x:Key="SerialNumberColor">#546e7a</Color>
