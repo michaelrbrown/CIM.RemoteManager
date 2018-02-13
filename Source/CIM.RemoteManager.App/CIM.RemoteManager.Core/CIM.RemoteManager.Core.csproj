@@ -42,6 +42,7 @@
     <Compile Include="Common\CoreConstants.cs" />
     <Compile Include="Converters\CoreConverters.cs" />
     <Compile Include="Converters\InverseBooleanValueConverter.cs" />
+    <Compile Include="Converters\RssiConverter.cs" />
     <Compile Include="Extensions\GuidExtension.cs" />
     <Compile Include="Extensions\IUserDialogsExtensions.cs" />
     <Compile Include="Helpers\AsciiStringConverter.cs" />

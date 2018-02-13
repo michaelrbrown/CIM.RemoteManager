@@ -386,6 +386,24 @@
   <ItemGroup>
     <BundleResource Include="Resources\BlueBackgroundVector.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\remote512.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\rssi_5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\rssi_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\rssi_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\rssi_3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\rssi_4.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
