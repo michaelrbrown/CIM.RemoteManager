@@ -17,8 +17,6 @@ namespace CIM.RemoteManager.Core.ViewModels
         protected override async void InitFromBundle(IMvxBundle parameters)
         {
             base.InitFromBundle(parameters);
-            
         }
-
     }
 }

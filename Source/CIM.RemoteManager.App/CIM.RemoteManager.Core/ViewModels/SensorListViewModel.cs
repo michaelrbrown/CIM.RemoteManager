@@ -569,8 +569,8 @@ namespace CIM.RemoteManager.Core.ViewModels
                     }
                     else
                     {
-                        _userDialogs.Alert($"(A) Serial Number: {splitSensorValues[1]}", "CIMScan RemoteManager");
-                        _userDialogs.Alert($"(A) Average Value: {splitSensorValues[7].SafeHexToDouble().ToString()}", "CIMScan RemoteManager");
+                        //_userDialogs.Alert($"(A) Serial Number: {splitSensorValues[1]}", "CIMScan RemoteManager");
+                        //_userDialogs.Alert($"(A) Average Value: {splitSensorValues[7].SafeHexToDouble().ToString()}", "CIMScan RemoteManager");
 
                         // Create new sensor record for list
                         var sensor = new Sensor
@@ -597,8 +597,8 @@ namespace CIM.RemoteManager.Core.ViewModels
                     var sensorListItemB = Sensors.FirstOrDefault(s => s.SensorIndex == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('B') + 1).SafeConvert<int>(0));
                     if (sensorListItemB != null)
                     {
-                        _userDialogs.Alert($"(B) Sensor Index: {splitSensorValues[0]}", "CIMScan RemoteManager");
-                        _userDialogs.Alert($"(B) Average Value: {splitSensorValues[2].SafeHexToDouble().ToString()}", "CIMScan RemoteManager");
+                        //_userDialogs.Alert($"(B) Sensor Index: {splitSensorValues[0]}", "CIMScan RemoteManager");
+                        //_userDialogs.Alert($"(B) Average Value: {splitSensorValues[2].SafeHexToDouble().ToString()}", "CIMScan RemoteManager");
 
                         sensorListItemB.SensorIndex = splitSensorValues[0].SafeHexToInt();
                         sensorListItemB.TimeStamp = splitSensorValues[1].SafeHexToInt();
