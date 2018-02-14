@@ -32,6 +32,35 @@ namespace CIM.RemoteManager.Core.Converters
         {
             throw new NotImplementedException();
         }
+    }
 
+    public class AlarmStatusColorConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            bool successParse = int.TryParse(value.ToString(), out int alarmValue);
+            if (successParse)
+            {
+                switch (alarmValue)
+                {
+                    case 0:
+                        return Color.ForestGreen;
+                    case 1:
+                        return Color.Yellow;
+                    case 2:
+                        return Color.Red;
+                    case 3:
+                        return Color.Blue;
+                }
+
+            }
+            // Default
+            return Color.ForestGreen;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return null;
+        }
     }
 }

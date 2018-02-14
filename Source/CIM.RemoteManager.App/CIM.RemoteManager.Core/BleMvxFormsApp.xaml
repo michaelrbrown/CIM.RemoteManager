@@ -116,7 +116,6 @@
           <Setter Property="FontAttributes" Value="None"/>
           <Setter Property="FontSize" Value="14"/>
           <Setter Property="VerticalOptions" Value="Center"/>
-          <Setter Property="TextColor" Value="{DynamicResource StatusColor}"/>
         </Style>
 
         <Style x:Key="SerialNumberStyle" TargetType="Label">
@@ -125,8 +124,6 @@
           <Setter Property="VerticalOptions" Value="Center"/>
           <Setter Property="FontAttributes" Value="Italic"/>
         </Style>
-
-
 
         <!--  font families  -->
       <OnPlatform
@@ -168,6 +165,7 @@
 
       <converters:RssiConverter x:Key="RssiConverter"/>
       <converters:AlarmStatusConverter x:Key="AlarmStatusConverter"/>
+      <converters:AlarmStatusColorConverter x:Key="AlarmStatusColorConverter"/>
       <converters:InverseBooleanValueConverter x:Key="InverseBoolean"/>
       <converters:ListToLabelConverter x:Key="InverseBooleanValueConverter"/>
       <converters:ListToLabelConverter x:Key="ListToLabelConverter"/>

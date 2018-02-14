@@ -22,7 +22,7 @@
                 <StackLayout Grid.Column="1" Spacing="0" HeightRequest="100" VerticalOptions="Center">
                     <Label Text="{Binding Name}" Style="{DynamicResource NameStyle}" VerticalOptions="Center" LineBreakMode="TailTruncation" />
                     <Label Text="{Binding SensorType}" Style="{DynamicResource SensorTypeStyle}" VerticalOptions="Center" LineBreakMode="TailTruncation" />
-                    <Label Text="{Binding DateTimeStamp, StringFormat='{}{0:hh\\:mm}'}" Style="{DynamicResource TimeStampStyle}" VerticalOptions="Center" LineBreakMode="TailTruncation" />
+                    <Label Text="{Binding DateTimeStamp, StringFormat='{}{0:hh\\:mm\\:ss tt}'}" Style="{DynamicResource TimeStampStyle}" VerticalOptions="Center" LineBreakMode="TailTruncation" />
                 </StackLayout>
 
                 <StackLayout Grid.Column="2" Spacing="0">
@@ -47,7 +47,7 @@
                 </StackLayout>
 
                 <StackLayout Grid.Column="1" Spacing="0">
-                    <Label Text="{Binding AlarmStatus, Converter={StaticResource AlarmStatusConverter}}" VerticalOptions="Center" Style="{DynamicResource StatusStyle}" HorizontalTextAlignment="End" VerticalTextAlignment="Center" />
+                    <Label Text="{Binding AlarmStatus, Converter={StaticResource AlarmStatusConverter}}" VerticalOptions="Center" Style="{DynamicResource StatusStyle}" TextColor="{Binding AlarmStatus, Converter={StaticResource AlarmStatusColorConverter}}" HorizontalTextAlignment="End" VerticalTextAlignment="Center" />
                 </StackLayout>
 
             </Grid>
