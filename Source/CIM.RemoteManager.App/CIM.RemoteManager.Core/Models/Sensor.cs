@@ -81,10 +81,23 @@ namespace CIM.RemoteManager.Core.Models
         /// </summary>
         public DateTime? DateTimeStamp => _timeStamp.UnixTimeStampToDateTime();
 
+        /// <summary>
+        /// Average sensor value.
+        /// Make sure we divide by 10 to convert to appropriate value.
+        /// </summary>
         private double _averageValue;
         public double AverageValue
         {
-            get => _averageValue;
+            get
+            {
+                // Try to lookup hex to string
+                if (double.TryParse(_averageValue.ToString(), out double averageValueResult))
+                {
+                    return averageValueResult / 10;
+                }
+                // Default
+                return 0;
+            }
             set => SetProperty(ref _averageValue, value);
         }
 
