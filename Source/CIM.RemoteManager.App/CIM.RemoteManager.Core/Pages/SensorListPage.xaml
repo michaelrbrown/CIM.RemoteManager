@@ -40,36 +40,18 @@
             </Grid>
         </StackLayout>
 
-        <ListView Grid.Row="1" 
-                    Margin="0" 
-                    ItemsSource="{Binding Sensors}" 
-                    SeparatorVisibility="Default" 
-                    BackgroundColor="#ffffff"
-                    SeparatorColor="Transparent" 
-                    HasUnevenRows="false"
-                    RowHeight="116" 
-                    ItemTapped="ListView_OnItemTapped" 
-                    ItemSelected="ListView_OnItemSelected" 
-                    IsPullToRefreshEnabled="False">
-
-            <ListView.ItemTemplate>
+        <ui:Repeater x:Name="MainRepeater">
+            <ui:Repeater.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <!-- Context Actions -->
-                        <ViewCell.ContextActions>
-                            <MenuItem Clicked="ListView_OnStats" CommandParameter="{Binding .}"
-                                              Text="Stats" />
-                            <MenuItem Clicked="ListView_OnSettings" CommandParameter="{Binding .}"
-                                              Text="Limits" IsDestructive="True" />
-                        </ViewCell.ContextActions>
 
                         <!-- Sensor Detail Template -->
                         <templates:SensorItemTemplate  />
+
                     </ViewCell>
                 </DataTemplate>
-            </ListView.ItemTemplate>
-
-        </ListView>
+            </ui:Repeater.ItemTemplate>
+        </ui:Repeater>
 
     </Grid>
 
