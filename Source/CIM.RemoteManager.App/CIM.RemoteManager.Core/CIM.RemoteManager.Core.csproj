@@ -55,7 +55,6 @@
     <Compile Include="Helpers\TrulyObservableCollection.cs" />
     <Compile Include="Models\BindableBase.cs" />
     <Compile Include="Models\Device.cs" />
-    <Compile Include="Models\ISensor.cs" />
     <Compile Include="Models\MessageCounters.cs" />
     <Compile Include="Models\Sensor.cs" />
     <Compile Include="Models\SensorStatisticsItem.cs" />

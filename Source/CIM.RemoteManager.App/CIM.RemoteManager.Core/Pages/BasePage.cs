@@ -8,7 +8,6 @@ namespace CIM.RemoteManager.Core.Pages
         protected override void OnAppearing()
         {
             base.OnAppearing();
-
             var viewModel = BindingContext as BaseViewModel;
             viewModel?.Resume();
         }

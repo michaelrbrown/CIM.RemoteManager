@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +10,6 @@ using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
 using Plugin.BLE.Abstractions.Contracts;
 using Plugin.BLE.Abstractions.EventArgs;
-using Xamarin.Forms;
 
 
 namespace CIM.RemoteManager.Core.ViewModels
@@ -149,8 +146,8 @@ namespace CIM.RemoteManager.Core.ViewModels
             try
             {
                 _userDialogs = userDialogs;
+                // Sensor data
                 _sensors = new FullyObservableCollection<Sensor>();
-                
             }
             catch (Exception ex)
             {
@@ -341,9 +338,9 @@ namespace CIM.RemoteManager.Core.ViewModels
                 // Get average sensor values
                 GetAverageSensorValues(CharacteristicValue);
                 // Get unfiltered (current) sensor values
-                GetUnfilteredSensorValues(CharacteristicValue);
+                //GetUnfilteredSensorValues(CharacteristicValue);
                 // Get unfiltered floating point (current) sensor values
-                GetUnfilteredFloatingPointSensorValues(CharacteristicValue);
+                //GetUnfilteredFloatingPointSensorValues(CharacteristicValue);
                 
                 // Notify property changed
                 RaisePropertyChanged(() => CharacteristicValue);
@@ -572,6 +569,9 @@ namespace CIM.RemoteManager.Core.ViewModels
                     }
                     else
                     {
+                        _userDialogs.Alert($"(A) Serial Number: {splitSensorValues[1]}", "CIMScan RemoteManager");
+                        _userDialogs.Alert($"(A) Average Value: {splitSensorValues[7].SafeHexToDouble().ToString()}", "CIMScan RemoteManager");
+
                         // Create new sensor record for list
                         var sensor = new Sensor
                         {
@@ -597,6 +597,9 @@ namespace CIM.RemoteManager.Core.ViewModels
                     var sensorListItemB = Sensors.FirstOrDefault(s => s.SensorIndex == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('B') + 1).SafeConvert<int>(0));
                     if (sensorListItemB != null)
                     {
+                        _userDialogs.Alert($"(B) Sensor Index: {splitSensorValues[0]}", "CIMScan RemoteManager");
+                        _userDialogs.Alert($"(B) Average Value: {splitSensorValues[2].SafeHexToDouble().ToString()}", "CIMScan RemoteManager");
+
                         sensorListItemB.SensorIndex = splitSensorValues[0].SafeHexToInt();
                         sensorListItemB.TimeStamp = splitSensorValues[1].SafeHexToInt();
                         sensorListItemB.AverageValue = splitSensorValues[2].SafeHexToDouble();
@@ -629,7 +632,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                     RaisePropertyChanged(() => Sensors);
                     break;
                 case "F":
-                    // "I" Sensor data serialization
+                    // "F" Sensor data serialization
                     // Update Sensor list by index
                     var sensorListItemF = Sensors.FirstOrDefault(s => s.SensorIndex == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('F') + 1).SafeConvert<int>(0));
                     if (sensorListItemF != null)
