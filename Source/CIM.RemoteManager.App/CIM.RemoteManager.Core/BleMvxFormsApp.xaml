@@ -167,6 +167,7 @@
       </Style>
 
       <converters:RssiConverter x:Key="RssiConverter"/>
+      <converters:AlarmStatusConverter x:Key="AlarmStatusConverter"/>
       <converters:InverseBooleanValueConverter x:Key="InverseBoolean"/>
       <converters:ListToLabelConverter x:Key="InverseBooleanValueConverter"/>
       <converters:ListToLabelConverter x:Key="ListToLabelConverter"/>

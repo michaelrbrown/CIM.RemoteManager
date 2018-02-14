@@ -19,33 +19,62 @@ namespace CIM.RemoteManager.Core.ViewModels
 {
     public class SensorListViewModel : BaseViewModel
     {
+        /// <summary>
+        /// User dialogs
+        /// </summary>
         private readonly IUserDialogs _userDialogs;
+        /// <summary>
+        /// Bluetooth LE Device
+        /// </summary>
         private IDevice _device;
+        /// <summary>
+        /// Bluetooth LE Service
+        /// </summary>
         private IService _service;
 
+        /// <summary>
+        /// Write characteristic
+        /// </summary>
         public ICharacteristic TxCharacteristic { get; private set; }
+        /// <summary>
+        /// Read characteristic
+        /// </summary>
         public ICharacteristic RxCharacteristic { get; private set; }
 
-        // UUIDs for UART service and associated characteristics.
+        /// <summary>
+        /// UUIDs for UART service and associated characteristics.
+        /// </summary>
         public static Guid UartUuid = Guid.Parse("6E400001-B5A3-F393-E0A9-E50E24DCCA9E");
         public static Guid TxUuid = Guid.Parse("6E400002-B5A3-F393-E0A9-E50E24DCCA9E");
         public static Guid RxUuid = Guid.Parse("6E400003-B5A3-F393-E0A9-E50E24DCCA9E");
 
-        // UUID for the UART BTLE client characteristic which is necessary for notifications.
+        /// <summary>
+        /// UUID for the UART BTLE client characteristic which is necessary for notifications.
+        /// </summary>
         public static Guid ClientUuid = Guid.Parse("6E400003-B5A3-F393-E0A9-E50E24DCCA9E");
 
-        // UUIDs for the Device Information service and associated characteristics.
+        /// <summary>
+        /// UUIDs for the Device Information service and associated characteristics.
+        /// </summary>
         public static Guid DisUuid = Guid.Parse("0000180a-0000-1000-8000-00805f9b34fb");
         public static Guid DisManufUuid = Guid.Parse("00002a29-0000-1000-8000-00805f9b34fb");
         public static Guid DisModelUuid = Guid.Parse("00002a24-0000-1000-8000-00805f9b34fb");
         public static Guid DisHwrevUuid = Guid.Parse("00002a26-0000-1000-8000-00805f9b34fb");
         public static Guid DisSwrevUuid = Guid.Parse("00002a28-0000-1000-8000-00805f9b34fb");
 
+        /// <summary>
+        /// Let our UI know we have updates started / stopped
+        /// </summary>
         public bool UpdatesStarted;
-        public ICharacteristic Characteristic { get; private set; }
 
+        /// <summary>
+        /// Convert our characteristics values from bytes to string as they are incoming
+        /// </summary>
         public string CharacteristicValue => RxCharacteristic?.Value.BytesToStringConverted();
 
+        /// <summary>
+        /// Device name (from bluetooth name field)
+        /// </summary>
         public string DeviceName { get; set; }
 
         /// <summary>
@@ -67,12 +96,14 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// </summary>
         public string UpdateButtonText => UpdatesStarted ? "Updates On" : "Updates Off";
 
+        /// <summary>
+        /// Sensor record types (serialized into models later)
+        /// </summary>
         public bool StartFullSensorValueRecord { get; set; } = false;
         public bool StartAverageSensorValueRecord { get; set; } = false;
         public bool StartUnfilteredSensorValueRecord { get; set; } = false;
         public bool StartUnfilteredFloatingPointSensorValueRecord { get; set; } = false;
         
-
         /// <summary>
         ///  "A" = full information
         ///   index (#)
@@ -137,8 +168,15 @@ namespace CIM.RemoteManager.Core.ViewModels
             
         }
 
+        /// <summary>
+        /// Initialization of bluetooth service characteristics.
+        /// Refresh command sent to remote to start sensor data flow.
+        /// Reading in of A, B, and F sensor records and serializing 
+        /// to model for display in UI.
+        /// </summary>
         private async void InitRemote()
         {
+            // Validate
             if (_device == null)
             {
                 throw new ArgumentNullException(nameof(_device));
@@ -146,9 +184,6 @@ namespace CIM.RemoteManager.Core.ViewModels
 
             try
             {
-                // Show loading indicator
-                _userDialogs.ShowLoading("Loading DA-12 data...");
-                
                 // Get our Adafruit bluetooth service (UART)
                 _service = await _device.GetServiceAsync(UartUuid).ConfigureAwait(true);
                 
