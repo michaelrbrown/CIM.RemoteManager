@@ -608,7 +608,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                     var sensorListItemB = Sensors.FirstOrDefault(s => s.SensorIndex == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('B') + 1).SafeConvert<int>(0));
                     if (sensorListItemB != null)
                     {
-                        Application.Current.MainPage.DisplayAlert("(B) AverageValue: ", splitSensorValues[2].SafeHexToInt().ToString(), "Cancel");
+                        Application.Current.MainPage.DisplayAlert("(B) AverageValue: ", splitSensorValues[1].SafeHexToInt().ToString(), "Cancel");
                         Application.Current.MainPage.DisplayAlert("(B) DecimalLocation: ", splitSensorValues[2].SafeHexToInt().ToString(), "Cancel");
 
                         sensorListItemB.TimeStamp = splitSensorValues[0].SafeHexToInt();
