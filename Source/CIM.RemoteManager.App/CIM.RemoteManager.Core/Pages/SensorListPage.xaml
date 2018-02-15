@@ -47,12 +47,12 @@
                     Margin="0" 
                     ItemsSource="{Binding Sensors}" 
                     SeparatorVisibility="Default" 
-                    BackgroundColor="#ffffff"
+                    BackgroundColor="#ffffff" 
                     SeparatorColor="Transparent" 
                     HasUnevenRows="false"
                     RowHeight="116" 
                     ItemTapped="ListView_OnItemTapped" 
-                    ItemSelected="ListView_OnItemSelected" Scrolled="OnListViewScrolled"
+                    ItemSelected="ListView_OnItemSelected" Scrolled="OnListViewScrolled" 
                     IsPullToRefreshEnabled="False">
 
             <ListView.ItemTemplate>
