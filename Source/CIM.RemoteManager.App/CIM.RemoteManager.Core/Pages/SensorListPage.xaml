@@ -8,10 +8,7 @@
              BackgroundImage="BlueBackgroundVector.jpg"
              Title="Sensors">
 
-    <xfParallax:ParallaxView x:Name="MainParallax" BodyMargin="0,180,0,0" HeaderScrollSpeed="4" BackgroundColor="{DynamicResource AppBaseColor}">
-        <xfParallax:ParallaxView.HeaderContent>
-            
-            <ContentView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Transparent">
+    <StackLayout>
 
                     <!-- Margin: left, top, right, bottom -->
                     <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Transparent" HeightRequest="160">
@@ -25,6 +22,11 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
+                        <StackLayout Grid.Row="0" Grid.Column="0" Orientation="Vertical" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Spacing="0">
+                            <Label Text="{Binding UpdateButtonText, Mode=TwoWay}" TextColor="{DynamicResource AppLightColor}" HorizontalOptions="Center" VerticalOptions="Center" />
+                            <Switch IsToggled="{Binding UpdatesStarted, Mode=TwoWay}" Toggled="SensorUpdatesSwitchToggled" Margin="5" HorizontalOptions="Center" VerticalOptions="Center" />
+                        </StackLayout>
+
                         <Image Grid.Row="0" Grid.Column="1" Source="remote512.png" Margin="20" HeightRequest="120" WidthRequest="120" Aspect="AspectFit" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
 
                         <StackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Spacing="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="40" BackgroundColor="{DynamicResource RemoteNameBackgroundColor}">
@@ -33,23 +35,11 @@
 
                     </Grid>
 
-            </ContentView>
-            
-        </xfParallax:ParallaxView.HeaderContent>
-        <xfParallax:ParallaxView.BodyContent>
-            
-            <ContentView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="White">
-                <ContentView.Margin>
-                    <!-- need to add specific margin to  Windows to show header.-->
-                    <OnPlatform x:TypeArguments="Thickness" WinPhone="0,180,0,0"/>
-                </ContentView.Margin>
+    </StackLayout>
 
-                <StackLayout Orientation="Vertical" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Spacing="0">
-                    <Label Text="{Binding UpdateButtonText, Mode=TwoWay}" TextColor="{DynamicResource AppLightColor}" HorizontalOptions="Center" VerticalOptions="Center" />
-                    <Switch IsToggled="{Binding UpdatesStarted, Mode=TwoWay}" Toggled="SensorUpdatesSwitchToggled" Margin="5" HorizontalOptions="Center" VerticalOptions="Center" />
-                </StackLayout>
+    <StackLayout>
 
-                <controls:RepeaterView x:Name="MainRepeater" ItemsSource="{Binding Sensors}" Grid.Row="1">
+        <controls:RepeaterView x:Name="MainRepeater" ItemsSource="{Binding Sensors}">
                     <controls:RepeaterView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
@@ -62,9 +52,6 @@
                     </controls:RepeaterView.ItemTemplate>
                 </controls:RepeaterView>
 
-            </ContentView>
-            
-        </xfParallax:ParallaxView.BodyContent>
-    </xfParallax:ParallaxView>
+    </StackLayout>
 
 </ContentPage>
