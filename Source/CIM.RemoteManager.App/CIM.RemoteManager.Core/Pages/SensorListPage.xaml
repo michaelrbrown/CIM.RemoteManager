@@ -3,57 +3,66 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:templates="clr-namespace:CIM.RemoteManager.Core.Templates;assembly=CIM.RemoteManager.Core"
              xmlns:controls="clr-namespace:CIM.RemoteManager.Core.Controls;assembly=CIM.RemoteManager.Core"
+             xmlns:xfParallax="clr-namespace:DevsDNA.XFParallax;assembly=DevsDNA.XFParallax"
              x:Class="CIM.RemoteManager.Core.Pages.SensorListPage" 
              BackgroundImage="BlueBackgroundVector.jpg"
              Title="Sensors">
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="175"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-        </Grid.RowDefinitions>
+    <xfParallax:ParallaxView x:Name="MainParallax" BodyMargin="0,180,0,0" HeaderScrollSpeed="4">
+        <xfParallax:ParallaxView.HeaderContent>
+            <ContentView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Blue">
 
-        <StackLayout Grid.Row="0" BackgroundColor="Transparent">
+                <StackLayout Grid.Row="0" BackgroundColor="Transparent">
+                    <!-- Margin: left, top, right, bottom -->
+                    <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Transparent">
 
-            <!-- Margin: left, top, right, bottom -->
-            <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Transparent">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
 
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
+                        <StackLayout Grid.Row="0" Grid.Column="0" Orientation="Vertical" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Spacing="0">
+                            <Label Text="{Binding UpdateButtonText, Mode=TwoWay}" TextColor="{DynamicResource AppLightColor}" HorizontalOptions="Center" VerticalOptions="Center" />
+                            <Switch IsToggled="{Binding UpdatesStarted, Mode=TwoWay}" Toggled="SensorUpdatesSwitchToggled" Margin="5" HorizontalOptions="Center" VerticalOptions="Center" />
+                        </StackLayout>
 
-                <StackLayout Grid.Row="0" Grid.Column="0" Orientation="Vertical" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Spacing="0">
-                    <Label Text="{Binding UpdateButtonText, Mode=TwoWay}" TextColor="{DynamicResource AppLightColor}" HorizontalOptions="Center" VerticalOptions="Center" />
-                    <Switch IsToggled="{Binding UpdatesStarted, Mode=TwoWay}" Toggled="SensorUpdatesSwitchToggled" Margin="5" HorizontalOptions="Center" VerticalOptions="Center" />
+                        <Image Grid.Row="0" Grid.Column="1" Source="remote512.png" Margin="20" HeightRequest="120" WidthRequest="120" Aspect="AspectFit" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
+
+                        <StackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Spacing="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="40" BackgroundColor="{DynamicResource RemoteNameBackgroundColor}">
+                            <Label Text="{Binding DeviceName}" TextColor="{DynamicResource AppLightColor}" FontSize="20" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" />
+                        </StackLayout>
+
+                    </Grid>
                 </StackLayout>
 
-                <Image Grid.Row="0" Grid.Column="1" Source="remote512.png" Margin="20" HeightRequest="120" WidthRequest="120" Aspect="AspectFit" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
-        
-                <StackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Spacing="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="40" BackgroundColor="{DynamicResource RemoteNameBackgroundColor}">
-                    <Label Text="{Binding DeviceName}" TextColor="{DynamicResource AppLightColor}" FontSize="20" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" />
-                </StackLayout>
+            </ContentView>
+        </xfParallax:ParallaxView.HeaderContent>
+        <xfParallax:ParallaxView.BodyContent>
+            <ContentView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="White" HeightRequest="1300">
+                <ContentView.Margin>
+                    <!-- need to add specific margin to  Windows to show header.-->
+                    <OnPlatform x:TypeArguments="Thickness" WinPhone="0,180,0,0"/>
+                </ContentView.Margin>
 
-            </Grid>
-        </StackLayout>
+                <controls:RepeaterView x:Name="MainRepeater" Grid.Row="1">
+                    <controls:RepeaterView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
 
-        <controls:RepeaterView x:Name="MainRepeater" Grid.Row="1">
-            <controls:RepeaterView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
+                                <!-- Sensor Detail Template -->
+                                <templates:SensorItemTemplate  />
 
-                        <!-- Sensor Detail Template -->
-                        <templates:SensorItemTemplate  />
+                            </ViewCell>
+                        </DataTemplate>
+                    </controls:RepeaterView.ItemTemplate>
+                </controls:RepeaterView>
 
-                    </ViewCell>
-                </DataTemplate>
-            </controls:RepeaterView.ItemTemplate>
-        </controls:RepeaterView>
-
-    </Grid>
+            </ContentView>
+        </xfParallax:ParallaxView.BodyContent>
+    </xfParallax:ParallaxView>
 
 </ContentPage>
