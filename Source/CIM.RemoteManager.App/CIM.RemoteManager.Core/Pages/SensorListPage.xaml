@@ -60,8 +60,7 @@
             <syncfusion:SfListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <!-- Sensor Detail Template -->
-                        <templates:SensorItemTemplate  />
+                       
                     </ViewCell>
                 </DataTemplate>
             </syncfusion:SfListView.ItemTemplate>
