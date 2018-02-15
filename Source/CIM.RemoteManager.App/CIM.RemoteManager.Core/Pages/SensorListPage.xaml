@@ -13,6 +13,7 @@
                     SelectionBackgroundColor="Transparent" 
                     ItemTapped="ListView_OnItemTapped" 
                     ItemSize="116">
+        
         <syncfusion:SfListView.HeaderTemplate>
             <DataTemplate>
                 <!-- Margin: left, top, right, bottom -->
@@ -43,22 +44,31 @@
                 </Grid>
             </DataTemplate>
         </syncfusion:SfListView.HeaderTemplate>
+        
         <syncfusion:SfListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>
-                    <!-- Context Actions -->
-                    <ViewCell.ContextActions>
-                        <MenuItem Clicked="ListView_OnStats" CommandParameter="{Binding .}"
-                                              Text="Stats" />
-                        <MenuItem Clicked="ListView_OnSettings" CommandParameter="{Binding .}"
-                                              Text="Limits" IsDestructive="True" />
-                    </ViewCell.ContextActions>
-
                     <!-- Sensor Detail Template -->
                     <templates:SensorItemTemplate  />
                 </ViewCell>
             </DataTemplate>
         </syncfusion:SfListView.ItemTemplate>
+
+        <syncfusion:SfListView.RightSwipeTemplate>
+            <DataTemplate x:Name="RightSwipeTemplate">
+                <Grid BackgroundColor="{DynamicResource RemoteNameBackgroundColor}" HorizontalOptions="Fill" VerticalOptions="Fill">
+                    <Grid VerticalOptions="Center" HorizontalOptions="Center">
+                        <Image Grid.Column="0"
+                         Grid.Row="0"
+                         HeightRequest="35"
+                         WidthRequest="35"
+                         BackgroundColor="Transparent"
+                         Source="ic_sensor-settings.png" />
+                    </Grid>
+                </Grid>
+            </DataTemplate>
+        </syncfusion:SfListView.RightSwipeTemplate>
+        
     </syncfusion:SfListView>
 
 </ContentPage>
