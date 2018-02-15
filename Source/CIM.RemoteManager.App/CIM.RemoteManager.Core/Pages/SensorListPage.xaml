@@ -10,15 +10,14 @@
 
     <xfParallax:ParallaxView x:Name="MainParallax" BodyMargin="0,180,0,0" HeaderScrollSpeed="4">
         <xfParallax:ParallaxView.HeaderContent>
-            <ContentView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Blue">
+            <ContentView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Transparent">
 
-                <StackLayout Grid.Row="0" BackgroundColor="Transparent">
                     <!-- Margin: left, top, right, bottom -->
-                    <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Transparent">
+                    <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Transparent" HeightRequest="160">
 
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="*"></RowDefinition>
-                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="120"></RowDefinition>
+                            <RowDefinition Height="40"></RowDefinition>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -37,12 +36,11 @@
                         </StackLayout>
 
                     </Grid>
-                </StackLayout>
 
             </ContentView>
         </xfParallax:ParallaxView.HeaderContent>
         <xfParallax:ParallaxView.BodyContent>
-            <ContentView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="White" HeightRequest="1300">
+            <ContentView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="White">
                 <ContentView.Margin>
                     <!-- need to add specific margin to  Windows to show header.-->
                     <OnPlatform x:TypeArguments="Thickness" WinPhone="0,180,0,0"/>
