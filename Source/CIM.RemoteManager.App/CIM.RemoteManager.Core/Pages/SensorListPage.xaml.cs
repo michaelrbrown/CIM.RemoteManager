@@ -43,7 +43,7 @@ namespace CIM.RemoteManager.Core.Pages
         /// <param name="e">The event arguments.</param>
         private void OnListViewScrolled(object sender, ScrolledEventArgs args)
         {
-            _userDialogs.Alert($"Offset: {args.ScrollY}", "CIMScan RemoteManager");
+            DisplayAlert("CIMScan RemoteManager", $"Offset: {args.ScrollY}", "OK");
             ScrollOffset.Text = $"Offset = {args.ScrollY}";
         }
 
