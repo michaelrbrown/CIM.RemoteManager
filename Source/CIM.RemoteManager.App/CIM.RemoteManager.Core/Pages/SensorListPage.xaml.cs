@@ -37,6 +37,16 @@ namespace CIM.RemoteManager.Core.Pages
         }
 
         /// <summary>
+        /// Handle the scrolled event raised by the <see cref="Controls.Views.ListView"/>.
+        /// </summary>
+        /// <param name="sender">The sender that raised the event.</param>
+        /// <param name="e">The event arguments.</param>
+        private void OnListViewScrolled(object sender, ScrolledEventArgs args)
+        {
+            ScrollOffset.Text = $"Offset = {args.ScrollY}";
+        }
+
+        /// <summary>
         /// Handle toggling of sensor updates
         /// </summary>
         /// <param name="sender"></param>

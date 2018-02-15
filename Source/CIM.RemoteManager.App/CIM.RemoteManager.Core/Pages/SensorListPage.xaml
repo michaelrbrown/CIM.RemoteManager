@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:templates="clr-namespace:CIM.RemoteManager.Core.Templates;assembly=CIM.RemoteManager.Core"
+             xmlns:controls="clr-namespace:CIM.RemoteManager.Core.Controls;assembly=CIM.RemoteManager.Core"
              x:Class="CIM.RemoteManager.Core.Pages.SensorListPage" 
              BackgroundImage="BlueBackgroundVector.jpg"
              Title="Sensors">
@@ -36,12 +37,13 @@
 
                 <StackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Spacing="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="40" BackgroundColor="{DynamicResource RemoteNameBackgroundColor}">
                     <Label Text="{Binding DeviceName}" TextColor="{DynamicResource AppLightColor}" FontSize="20" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" />
+                    <Label x:Name="ScrollOffset" FontSize="Large" Text="" />
                 </StackLayout>
 
             </Grid>
         </StackLayout>
 
-        <ListView Grid.Row="1" 
+        <controls:EnhancedListView Grid.Row="1" 
                     Margin="0" 
                     ItemsSource="{Binding Sensors}" 
                     SeparatorVisibility="Default" 
@@ -50,7 +52,7 @@
                     HasUnevenRows="false"
                     RowHeight="116" 
                     ItemTapped="ListView_OnItemTapped" 
-                    ItemSelected="ListView_OnItemSelected" 
+                    ItemSelected="ListView_OnItemSelected" Scrolled="OnListViewScrolled"
                     IsPullToRefreshEnabled="False">
 
             <ListView.ItemTemplate>
@@ -70,7 +72,7 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
 
-        </ListView>
+        </controls:EnhancedListView>
 
     </Grid>
 
