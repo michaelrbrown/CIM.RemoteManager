@@ -8,7 +8,7 @@
              BackgroundImage="BlueBackgroundVector.jpg"
              Title="Sensors">
 
-    <xfParallax:ParallaxView x:Name="MainParallax" BodyMargin="0,180,0,0" HeaderScrollSpeed="4">
+    <xfParallax:ParallaxView x:Name="MainParallax" BodyMargin="0,180,0,0" HeaderScrollSpeed="4" BackgroundColor="{DynamicResource AppBaseColor}">
         <xfParallax:ParallaxView.HeaderContent>
             <ContentView HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Transparent">
 
