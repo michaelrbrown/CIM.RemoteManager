@@ -12,11 +12,7 @@ namespace CIM.RemoteManager.Core.Pages
         {
             InitializeComponent();
             BindingContext = this; // Note that I added this line
-
-            // Get instance of SensorListViewModel
-            var sensorListViewModel = (SensorListViewModel)this.BindingContext;
-            MainRepeater.ItemsSource = sensorListViewModel.Sensors;
-
+            
             //SensorBusyIndicator.IsBusy = false;
         }
 
