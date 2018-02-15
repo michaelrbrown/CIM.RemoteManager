@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:templates="clr-namespace:CIM.RemoteManager.Core.Templates;assembly=CIM.RemoteManager.Core"
+             xmlns:controls="clr-namespace:CIM.RemoteManager.Core.Controls;assembly=CIM.RemoteManager.Core"
              x:Class="CIM.RemoteManager.Core.Pages.SensorListPage" 
              BackgroundImage="BlueBackgroundVector.jpg"
              Title="Sensors">
@@ -40,8 +41,8 @@
             </Grid>
         </StackLayout>
 
-        <ui:Repeater x:Name="MainRepeater">
-            <ui:Repeater.ItemTemplate>
+        <controls:RepeaterView x:Name="MainRepeater" Grid.Row="1">
+            <controls:RepeaterView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
 
@@ -50,8 +51,8 @@
 
                     </ViewCell>
                 </DataTemplate>
-            </ui:Repeater.ItemTemplate>
-        </ui:Repeater>
+            </controls:RepeaterView.ItemTemplate>
+        </controls:RepeaterView>
 
     </Grid>
 
