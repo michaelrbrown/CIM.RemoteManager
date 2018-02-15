@@ -47,8 +47,8 @@
 
 
 
-        <controls:ItemsStack Grid.Row="1" x:Name="MainRepeater" ItemsSource="{Binding Sensors}">
-            <controls:ItemsStack.ItemTemplate>
+        <controls:BindableStackLayout Grid.Row="1" x:Name="MainRepeater" ItemsSource="{Binding Sensors}">
+            <controls:BindableStackLayout.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
 
@@ -57,8 +57,8 @@
 
                             </ViewCell>
                         </DataTemplate>
-                    </controls:ItemsStack.ItemTemplate>
-                </controls:ItemsStack>
+                    </controls:BindableStackLayout.ItemTemplate>
+                </controls:BindableStackLayout>
 
     </Grid>
 
