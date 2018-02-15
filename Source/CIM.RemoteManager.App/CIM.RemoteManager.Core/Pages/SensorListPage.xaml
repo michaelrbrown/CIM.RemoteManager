@@ -2,12 +2,9 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:templates="clr-namespace:CIM.RemoteManager.Core.Templates;assembly=CIM.RemoteManager.Core"
-             xmlns:controls="clr-namespace:CIM.RemoteManager.Core.Controls;assembly=CIM.RemoteManager.Core"
-             xmlns:xfParallax="clr-namespace:DevsDNA.XFParallax;assembly=DevsDNA.XFParallax"
              x:Class="CIM.RemoteManager.Core.Pages.SensorListPage" 
              BackgroundImage="BlueBackgroundVector.jpg"
              Title="Sensors">
-
 
     <Grid>
         <Grid.RowDefinitions>
@@ -17,48 +14,63 @@
 
         <StackLayout Grid.Row="0" BackgroundColor="Transparent">
 
-            
             <!-- Margin: left, top, right, bottom -->
-                    <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Transparent" HeightRequest="160">
+            <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Transparent">
 
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="120"></RowDefinition>
-                            <RowDefinition Height="40"></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="40"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
-                        <StackLayout Grid.Row="0" Grid.Column="0" Orientation="Vertical" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Spacing="0">
-                            <Label Text="{Binding UpdateButtonText, Mode=TwoWay}" TextColor="{DynamicResource AppLightColor}" HorizontalOptions="Center" VerticalOptions="Center" />
-                            <Switch IsToggled="{Binding UpdatesStarted, Mode=TwoWay}" Toggled="SensorUpdatesSwitchToggled" Margin="5" HorizontalOptions="Center" VerticalOptions="Center" />
-                        </StackLayout>
+                <StackLayout Grid.Row="0" Grid.Column="0" Orientation="Vertical" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Spacing="0">
+                    <Label Text="{Binding UpdateButtonText, Mode=TwoWay}" TextColor="{DynamicResource AppLightColor}" HorizontalOptions="Center" VerticalOptions="Center" />
+                    <Switch IsToggled="{Binding UpdatesStarted, Mode=TwoWay}" Toggled="SensorUpdatesSwitchToggled" Margin="5" HorizontalOptions="Center" VerticalOptions="Center" />
+                </StackLayout>
 
-                        <Image Grid.Row="0" Grid.Column="1" Source="remote512.png" Margin="20" HeightRequest="120" WidthRequest="120" Aspect="AspectFit" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
+                <Image Grid.Row="0" Grid.Column="1" Source="remote512.png" Margin="20" HeightRequest="120" WidthRequest="120" Aspect="AspectFit" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
 
-                        <StackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Spacing="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="40" BackgroundColor="{DynamicResource RemoteNameBackgroundColor}">
-                            <Label Text="{Binding DeviceName}" TextColor="{DynamicResource AppLightColor}" FontSize="20" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" />
-                        </StackLayout>
 
-                    </Grid>
+                <StackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Spacing="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="40" BackgroundColor="{DynamicResource RemoteNameBackgroundColor}">
+                    <Label Text="{Binding DeviceName}" TextColor="{DynamicResource AppLightColor}" FontSize="20" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" />
+                </StackLayout>
 
+            </Grid>
         </StackLayout>
 
+        <ListView Grid.Row="1" 
+                    Margin="0" 
+                    ItemsSource="{Binding Sensors}" 
+                    SeparatorVisibility="Default" 
+                    BackgroundColor="#ffffff"
+                    SeparatorColor="Transparent" 
+                    HasUnevenRows="false"
+                    RowHeight="116" 
+                    ItemTapped="ListView_OnItemTapped" 
+                    ItemSelected="ListView_OnItemSelected" 
+                    IsPullToRefreshEnabled="False">
 
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <!-- Context Actions -->
+                        <ViewCell.ContextActions>
+                            <MenuItem Clicked="ListView_OnStats" CommandParameter="{Binding .}"
+                                              Text="Stats" />
+                            <MenuItem Clicked="ListView_OnSettings" CommandParameter="{Binding .}"
+                                              Text="Limits" IsDestructive="True" />
+                        </ViewCell.ContextActions>
 
-        <controls:BindableStackLayout Grid.Row="1" x:Name="MainRepeater" ItemsSource="{Binding Sensors}">
-            <controls:BindableStackLayout.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
+                        <!-- Sensor Detail Template -->
+                        <templates:SensorItemTemplate  />
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
 
-                                <!-- Sensor Detail Template -->
-                                <templates:SensorItemTemplate  />
-
-                            </ViewCell>
-                        </DataTemplate>
-                    </controls:BindableStackLayout.ItemTemplate>
-                </controls:BindableStackLayout>
+        </ListView>
 
     </Grid>
 
