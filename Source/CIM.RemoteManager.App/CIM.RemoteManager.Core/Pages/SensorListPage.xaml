@@ -49,7 +49,7 @@
                     <Switch IsToggled="{Binding UpdatesStarted, Mode=TwoWay}" Toggled="SensorUpdatesSwitchToggled" Margin="5" HorizontalOptions="Center" VerticalOptions="Center" />
                 </StackLayout>
 
-                <controls:RepeaterView x:Name="MainRepeater" Grid.Row="1">
+                <controls:RepeaterView x:Name="MainRepeater" ItemsSource="{Binding Sensors}" Grid.Row="1">
                     <controls:RepeaterView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
