@@ -3,6 +3,7 @@ using HockeyApp.iOS;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.iOS.Platform;
 using MvvmCross.Platform;
+using Syncfusion.ListView.XForms.iOS;
 using Syncfusion.SfBusyIndicator.XForms.iOS;
 using UIKit;
 
@@ -32,6 +33,7 @@ namespace CIM.RemoteManager.iOS
 
             // Init Syncfusion controls
             new SfBusyIndicatorRenderer();
+            SfListViewRenderer.Init();
 
             // Make UIWindow they key window
             _window.MakeKeyAndVisible();
