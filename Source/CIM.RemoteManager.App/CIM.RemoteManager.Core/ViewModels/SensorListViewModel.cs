@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Acr.UserDialogs;
+using CIM.RemoteManager.Core.Extensions;
 using CIM.RemoteManager.Core.Helpers;
 using CIM.RemoteManager.Core.Models;
 using MvvmCross.Core.ViewModels;
@@ -142,6 +143,10 @@ namespace CIM.RemoteManager.Core.ViewModels
             try
             {
                 _userDialogs = userDialogs;
+
+                // Register event for device connection lost
+                Adapter.DeviceConnectionLost += OnDeviceConnectionLost;
+
                 // Sensor data
                 _sensors = new FullyObservableCollection<Sensor>();
             }
@@ -159,6 +164,15 @@ namespace CIM.RemoteManager.Core.ViewModels
         {
             base.Resume();
             
+        }
+
+        private void OnDeviceConnectionLost(object sender, DeviceErrorEventArgs e)
+        {
+            if (UpdatesStarted)
+            {
+                StopUpdates();
+            }
+
         }
 
         /// <summary>
