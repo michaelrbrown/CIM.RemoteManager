@@ -1,5 +1,6 @@
 ﻿using System;
 using CIM.RemoteManager.Core.ViewModels;
+using Syncfusion.ListView.XForms;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using ItemTappedEventArgs = Syncfusion.ListView.XForms.ItemTappedEventArgs;
@@ -48,6 +49,11 @@ namespace CIM.RemoteManager.Core.Pages
             var sensorListViewModel = (SensorListViewModel)this.BindingContext;
             // Toggle sensor updates
             sensorListViewModel.ToggleUpdatesCommand.Execute(null);
+        }
+
+        private void ListView_OnScrollStateChanged(object sender, ScrollStateChangedEventArgs e)
+        {
+            
         }
     }
 }

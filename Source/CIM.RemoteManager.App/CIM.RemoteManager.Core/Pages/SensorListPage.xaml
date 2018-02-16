@@ -1,67 +1,74 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
              xmlns:templates="clr-namespace:CIM.RemoteManager.Core.Templates;assembly=CIM.RemoteManager.Core"
+             xmlns:controls="clr-namespace:CIM.RemoteManager.Core.Controls;assembly=CIM.RemoteManager.Core"
              x:Class="CIM.RemoteManager.Core.Pages.SensorListPage" 
              BackgroundImage="BlueBackgroundVector.jpg"
              Title="Sensors">
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="175"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-        </Grid.RowDefinitions>
+    <syncfusion:SfListView x:Name="SensorLiistView" Margin="0" 
+                    ItemsSource="{Binding Sensors}" 
+                    AllowSwiping="True" HeaderSize="175" ScrollStateChanged="ListView_OnScrollStateChanged"
+                    SelectionBackgroundColor="Transparent" 
+                    ItemTapped="ListView_OnItemTapped" 
+                    ItemSize="116">
 
-        <StackLayout Grid.Row="0" BackgroundColor="Transparent">
+        <syncfusion:SfListView.HeaderTemplate>
+            <DataTemplate>
+                <!-- Margin: left, top, right, bottom -->
+                <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Transparent">
 
-            <!-- Margin: left, top, right, bottom -->
-            <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Transparent">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="40"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
 
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="40"></RowDefinition>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
+                    <StackLayout Grid.Row="0" Grid.Column="0" Orientation="Vertical" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Spacing="0">
+                        <Label Text="{Binding UpdateButtonText, Mode=TwoWay}" TextColor="{DynamicResource AppLightColor}" HorizontalOptions="Center" VerticalOptions="Center" />
+                        <Switch IsToggled="{Binding UpdatesStarted, Mode=TwoWay}" Toggled="SensorUpdatesSwitchToggled" Margin="5" HorizontalOptions="Center" VerticalOptions="Center" />
+                    </StackLayout>
 
-                <StackLayout Grid.Row="0" Grid.Column="0" Orientation="Vertical" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Spacing="0">
-                    <Label Text="{Binding UpdateButtonText, Mode=TwoWay}" TextColor="{DynamicResource AppLightColor}" HorizontalOptions="Center" VerticalOptions="Center" />
-                    <Switch IsToggled="{Binding UpdatesStarted, Mode=TwoWay}" Toggled="SensorUpdatesSwitchToggled" Margin="5" HorizontalOptions="Center" VerticalOptions="Center" />
-                </StackLayout>
-
-                <Image Grid.Row="0" Grid.Column="1" Source="remote512.png" Margin="20" HeightRequest="120" WidthRequest="120" Aspect="AspectFit" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
-
-
-                <StackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Spacing="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="40" BackgroundColor="{DynamicResource RemoteNameBackgroundColor}">
-                    <Label Text="{Binding DeviceName}" TextColor="{DynamicResource AppLightColor}" FontSize="20" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" />
-                    <Label x:Name="ScrollOffset" FontSize="Large" Text="" />
-                </StackLayout>
-
-            </Grid>
-
-        </StackLayout>
+                    <Image Grid.Row="0" Grid.Column="1" Source="remote512.png" Margin="20" HeightRequest="120" WidthRequest="120" Aspect="AspectFit" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
 
 
-        <syncfusion:SfListView Grid.Row="1" x:Name="listView" Margin="0" 
-                    ItemsSource="{Binding Sensors}" >
+                    <StackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Spacing="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="40" BackgroundColor="{DynamicResource RemoteNameBackgroundColor}">
+                        <Label Text="{Binding DeviceName}" TextColor="{DynamicResource AppLightColor}" FontSize="20" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" />
+                        <Label x:Name="ScrollOffset" FontSize="Large" Text="" />
+                    </StackLayout>
 
+                </Grid>
+            </DataTemplate>
+        </syncfusion:SfListView.HeaderTemplate>
 
-            <syncfusion:SfListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <!-- Sensor Detail Template -->
-                        <templates:SensorItemTemplate  />
-                    </ViewCell>
-                </DataTemplate>
-            </syncfusion:SfListView.ItemTemplate>
+        <syncfusion:SfListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <!-- Sensor Detail Template -->
+                    <templates:SensorItemTemplate  />
+                </ViewCell>
+            </DataTemplate>
+        </syncfusion:SfListView.ItemTemplate>
 
+        <syncfusion:SfListView.RightSwipeTemplate>
+            <DataTemplate x:Name="RightSwipeTemplate">
+                <Grid BackgroundColor="{DynamicResource RemoteNameBackgroundColor}" HorizontalOptions="Fill" VerticalOptions="Fill">
+                    <Grid VerticalOptions="Center" HorizontalOptions="Center">
+                        <Image Grid.Column="0"
+                         Grid.Row="0"
+                         HeightRequest="35"
+                         WidthRequest="35"
+                         BackgroundColor="Transparent"
+                         Source="ic_sensor-settings.png" />
+                    </Grid>
+                </Grid>
+            </DataTemplate>
+        </syncfusion:SfListView.RightSwipeTemplate>
 
-        </syncfusion:SfListView>
-
-
-    </Grid>
+    </syncfusion:SfListView>
 
 </ContentPage>
