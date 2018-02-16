@@ -2,6 +2,7 @@
 using CIM.RemoteManager.Core.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using ItemTappedEventArgs = Syncfusion.ListView.XForms.ItemTappedEventArgs;
 
 namespace CIM.RemoteManager.Core.Pages
 {
@@ -21,7 +22,7 @@ namespace CIM.RemoteManager.Core.Pages
             
         }
 
-        private void ListView_OnItemTapped(object sender, ItemTappedEventArgs e)
+        private void ListView_OnItemTapped(object sender, ItemTappedEventArgs itemTappedEventArgs)
         {
             
         }
