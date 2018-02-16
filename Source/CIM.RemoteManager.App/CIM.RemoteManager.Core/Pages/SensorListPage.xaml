@@ -9,7 +9,7 @@
     <syncfusion:SfListView x:Name="SensorLiistView" Margin="0" 
                     ItemsSource="{Binding Sensors}" 
                     AllowSwiping="True" 
-                    ItemSpacing="5"
+                    ItemSpacing="3"
                     HeaderSize="155" 
                     IsStickyFooter="True"
                     ScrollStateChanged="ListView_OnScrollStateChanged"
@@ -73,8 +73,8 @@
         <syncfusion:SfListView.FooterTemplate>
             <DataTemplate>
                 <!-- Margin: left, top, right, bottom -->
-                <StackLayout Spacing="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="40" BackgroundColor="{DynamicResource RemoteNameBackgroundColor}">
-                    <Label Text="{Binding CharacteristicValue, StringFormat='Incoming Value: {0:N}'}" TextColor="{DynamicResource AppLightColor}" FontSize="16" HeightRequest="40" HorizontalOptions="Center" VerticalOptions="Center" />
+                <StackLayout Spacing="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="50" BackgroundColor="{DynamicResource RemoteNameBackgroundColor}">
+                    <Label Text="{Binding CharacteristicValue, StringFormat='  Incoming Value: {0:N}'}" TextColor="{DynamicResource AppLightColor}" FontSize="16" HeightRequest="40" Margin="5" HorizontalOptions="StartAndExpand" VerticalOptions="Center" />
                 </StackLayout>
             </DataTemplate>
         </syncfusion:SfListView.FooterTemplate>
