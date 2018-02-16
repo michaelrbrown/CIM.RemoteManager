@@ -392,7 +392,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                         device.RaisePropertyChanged(nameof(device.Rssi));
 
                         _userDialogs.HideLoading();
-                        _userDialogs.Toast($" RSSI updated {device.Rssi}", TimeSpan.FromSeconds(2));
+                        _userDialogs.InfoToast($"RSSI updated {device.Rssi}.", TimeSpan.FromSeconds(2));
                     }
                     catch (Exception ex)
                     {
@@ -455,7 +455,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                     await Adapter.ConnectToDeviceAsync(device.Device, new ConnectParameters(autoConnect: UseAutoConnect, forceBleTransport: false), tokenSource.Token).ConfigureAwait(true);
                 }
                 
-                _userDialogs.Toast($" Connected to {device.Device.Name}.", TimeSpan.FromSeconds(3));
+                _userDialogs.InfoToast($"Connected to {device.Device.Name}.", TimeSpan.FromSeconds(3));
 
                 // Set previous connected device info
                 PreviousGuid = device.Device.Id;
@@ -500,8 +500,8 @@ namespace CIM.RemoteManager.Core.ViewModels
                     device = await Adapter.ConnectToKnownDeviceAsync(PreviousGuid, new ConnectParameters(autoConnect: UseAutoConnect, forceBleTransport: false), tokenSource.Token).ConfigureAwait(true);
                 }
 
-                _userDialogs.Toast($" Connected to {device.Name}.", TimeSpan.FromSeconds(3));
-
+                _userDialogs.InfoToast($"Connected to {device.Name}.", TimeSpan.FromSeconds(3));
+               
                 var deviceItem = Devices.FirstOrDefault(d => d.Device.Id == device.Id);
                 if (deviceItem == null)
                 {
@@ -544,7 +544,7 @@ namespace CIM.RemoteManager.Core.ViewModels
 
                     item.Update();
 
-                    _userDialogs.Toast($" Connected to {item.Device.Name}.", TimeSpan.FromSeconds(3));
+                    _userDialogs.InfoToast($"Connected to {item.Device.Name}.", TimeSpan.FromSeconds(3));
                     _userDialogs.HideLoading();
 
                     for (var i = 5; i >= 1; i--)
@@ -572,7 +572,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             Devices.FirstOrDefault(d => d.Id == e.Device.Id)?.Update();
             SystemDevices.FirstOrDefault(d => d.Id == e.Device.Id)?.Update();
             _userDialogs.HideLoading();
-            _userDialogs.Toast($" Disconnected {e.Device.Name}");
+            _userDialogs.InfoToast($"Disconnected {e.Device.Name}.", TimeSpan.FromSeconds(3));
         }
 
         public MvxCommand<DeviceListItemViewModel> CopyGuidCommand => new MvxCommand<DeviceListItemViewModel>(device =>

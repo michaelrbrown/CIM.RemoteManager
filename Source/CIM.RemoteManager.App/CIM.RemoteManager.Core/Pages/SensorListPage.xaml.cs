@@ -55,5 +55,10 @@ namespace CIM.RemoteManager.Core.Pages
         {
             
         }
+
+        private void SensorLiistView_OnItemDoubleTapped(object sender, ItemDoubleTappedEventArgs e)
+        {
+            
+        }
     }
 }
