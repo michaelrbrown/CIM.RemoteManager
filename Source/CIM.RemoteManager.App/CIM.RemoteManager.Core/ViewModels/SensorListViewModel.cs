@@ -81,11 +81,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         public FullyObservableCollection<Sensor> Sensors
         {
             get => _sensors;
-            set
-            {
-                _sensors = value;
-                RaisePropertyChanged(() => _sensors);
-            }
+            set => SetProperty(ref _sensors, value);
         }
 
         /// <summary>
