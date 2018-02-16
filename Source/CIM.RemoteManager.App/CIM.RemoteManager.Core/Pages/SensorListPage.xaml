@@ -46,39 +46,18 @@
 
 
         <syncfusion:SfListView Grid.Row="1" x:Name="listView" Margin="0" 
-                    ItemsSource="{Binding Sensors}" 
-                    SelectionBackgroundColor="Transparent" 
-                    ItemTapped="ListView_OnItemTapped" 
-                    ItemSize="116">
+                    ItemsSource="{Binding Sensors}" >
 
-            <syncfusion:SfListView.HeaderTemplate>
-                <DataTemplate>
-
-                </DataTemplate>
-            </syncfusion:SfListView.HeaderTemplate>
 
             <syncfusion:SfListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                       
+                        <!-- Sensor Detail Template -->
+                        <templates:SensorItemTemplate  />
                     </ViewCell>
                 </DataTemplate>
             </syncfusion:SfListView.ItemTemplate>
 
-            <syncfusion:SfListView.RightSwipeTemplate>
-                <DataTemplate x:Name="RightSwipeTemplate">
-                    <Grid BackgroundColor="{DynamicResource RemoteNameBackgroundColor}" HorizontalOptions="Fill" VerticalOptions="Fill">
-                        <Grid VerticalOptions="Center" HorizontalOptions="Center">
-                            <Image Grid.Column="0"
-                         Grid.Row="0"
-                         HeightRequest="35"
-                         WidthRequest="35"
-                         BackgroundColor="Transparent"
-                         Source="ic_sensor-settings.png" />
-                        </Grid>
-                    </Grid>
-                </DataTemplate>
-            </syncfusion:SfListView.RightSwipeTemplate>
 
         </syncfusion:SfListView>
 
