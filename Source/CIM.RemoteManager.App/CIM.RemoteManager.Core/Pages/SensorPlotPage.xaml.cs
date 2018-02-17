@@ -12,7 +12,7 @@ namespace CIM.RemoteManager.Core.Pages
         public SensorPlotPage()
         {
             InitializeComponent();
-            BindingContext = this; // Note that I added this line
+            BindingContext = this;
             
             //SensorBusyIndicator.IsBusy = false;
         }

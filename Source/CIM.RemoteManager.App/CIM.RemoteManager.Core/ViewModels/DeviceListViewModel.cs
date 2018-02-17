@@ -629,11 +629,13 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// </summary>
         private async void ConnectToPreviousDeviceAsync()
         {
-            IDevice device;
+            // System device instance (CIMScan device)
+            IDevice systemDevice;
             try
             {
-                CancellationTokenSource tokenSource = new CancellationTokenSource();
+                var tokenSource = new CancellationTokenSource();
 
+                // Setup progress dialog
                 var config = new ProgressDialogConfig()
                 {
                     Title = $"Searching for '{PreviousName}'",
@@ -642,24 +644,32 @@ namespace CIM.RemoteManager.Core.ViewModels
                     OnCancel = tokenSource.Cancel
                 };
 
+                // Show progress while we connect
                 using (var progress = _userDialogs.Progress(config))
                 {
                     progress.Show();
-                    device = await Adapter.ConnectToKnownDeviceAsync(PreviousGuid, new ConnectParameters(autoConnect: UseAutoConnect, forceBleTransport: false), tokenSource.Token).ConfigureAwait(true);
+                    systemDevice = await Adapter.ConnectToKnownDeviceAsync(PreviousGuid, new ConnectParameters(autoConnect: UseAutoConnect, forceBleTransport: false), tokenSource.Token).ConfigureAwait(true);
                 }
 
-                _userDialogs.InfoToast($"Connected to {device.Name}.", TimeSpan.FromSeconds(3));
+                // Notify end user of successful connection
+                _userDialogs.InfoToast($"Connected to {systemDevice.Name}.", TimeSpan.FromSeconds(3));
                
-                var deviceItem = Devices.FirstOrDefault(d => d.Device.Id == device.Id);
+                // Try to find our existing device by id
+                var deviceItem = SystemDevices.FirstOrDefault(d => d.Device.Id == systemDevice.Id);
                 if (deviceItem == null)
                 {
-                    deviceItem = new DeviceListItemViewModel(device);
+                    // Add system device
+                    deviceItem = new DeviceListItemViewModel(systemDevice);
                     Devices.Add(deviceItem);
                 }
                 else
                 {
-                    deviceItem.Update(device);
+                    // Update system device
+                    deviceItem.Update(systemDevice);
                 }
+
+                // Navigate to sensor list page
+                ShowViewModel<SensorListViewModel>(new MvxBundle(new Dictionary<string, string> { { DeviceIdKey, deviceItem.Device.Id.ToString() } }));
             }
             catch (Exception ex)
             {

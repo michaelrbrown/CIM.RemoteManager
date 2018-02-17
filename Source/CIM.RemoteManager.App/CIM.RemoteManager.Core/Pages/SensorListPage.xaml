@@ -12,7 +12,7 @@
         Aspect="AspectFill"
         RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width}"
         RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height}" 
-        Source="appbackground.jpg">
+        Source="app_bg_sensor.jpg">
     </Image>
 
     <xForms:SfBusyIndicator x:Name="SensorBusyIndicator" TextColor="{DynamicResource AppAccentColor}" IsBusy="true" AnimationType="ECG" ViewBoxWidth="150" ViewBoxHeight="150" />
@@ -47,7 +47,7 @@
 
                     <Image Grid.Row="0" Grid.Column="1" Source="remote512.png" Margin="10" HeightRequest="120" WidthRequest="120" Aspect="AspectFit" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
 
-                    <StackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Spacing="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="40" BackgroundColor="{DynamicResource RemoteNameBackgroundColor}" Opacity=".8">
+                    <StackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Spacing="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="40" BackgroundColor="{DynamicResource RemoteNameBackgroundColor}">
                         <Label Text="{Binding DeviceName}" TextColor="{DynamicResource AppLightColor}" FontSize="20" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" />
                     </StackLayout>
 
@@ -82,7 +82,7 @@
         <syncfusion:SfListView.FooterTemplate>
             <DataTemplate>
                 <!-- Margin: left, top, right, bottom -->
-                <StackLayout Spacing="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="60" BackgroundColor="{DynamicResource RemoteNameBackgroundColor}" Opacity=".8">
+                <StackLayout Spacing="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="60" BackgroundColor="{DynamicResource RemoteNameBackgroundColor}" Opacity=".6">
                     <Label Text="{Binding CharacteristicValue, StringFormat='  Incoming Value: {0:N}'}" TextColor="{DynamicResource AppLightColor}" FontSize="16" Margin="5"  HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" VerticalTextAlignment="Center" LineBreakMode="MiddleTruncation" />
                 </StackLayout>
             </DataTemplate>

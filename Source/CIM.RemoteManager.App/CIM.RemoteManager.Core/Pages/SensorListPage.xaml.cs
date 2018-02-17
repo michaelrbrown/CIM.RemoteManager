@@ -19,9 +19,9 @@ namespace CIM.RemoteManager.Core.Pages
         
         private void ListView_OnItemTapped(object sender, ItemTappedEventArgs itemTappedEventArgs)
         {
-            DisplayAlert("Item Double Tapped", "", "OK");
-            DisplayAlert("Item Double Tapped", "Sensor: " + itemTappedEventArgs.ItemData, "OK");
-            DisplayAlert("Item Double Tapped", "Sensor Index: " + ((Sensor)itemTappedEventArgs.ItemData).SensorIndex, "OK");
+            //DisplayAlert("Item Tapped", "", "OK");
+            //DisplayAlert("Item Tapped", "Sensor: " + itemTappedEventArgs.ItemData, "OK");
+            //DisplayAlert("Item Tapped", "Sensor Index: " + ((Sensor)itemTappedEventArgs.ItemData).SensorIndex, "OK");
         }
         
         /// <summary>
@@ -46,11 +46,26 @@ namespace CIM.RemoteManager.Core.Pages
         /// <param name="itemTappedEventArgs"></param>
         private void SensorLiistView_OnItemDoubleTapped(object sender, ItemDoubleTappedEventArgs itemTappedEventArgs)
         {
-            DisplayAlert("Item Double Tapped", "", "OK");
-            DisplayAlert("Item Double Tapped", "Sensor: " + itemTappedEventArgs.ItemData, "OK");
-            DisplayAlert("Item Double Tapped", "Sensor Index: " + ((Sensor)itemTappedEventArgs.ItemData).SensorIndex, "OK");
-        }
+            var item = itemTappedEventArgs.ItemData as Sensor;
+            var sensorPlotPage = new SensorPlotPage();
+            if (item != null)
+            {
+                sensorPlotPage.BindingContext = item;
+                // Get instance of SensorListViewModel
+                var sensorListViewModel = (SensorListViewModel)this.BindingContext;
 
+                DisplayAlert("Item Double Tapped", "Sensor Index: " + ((Sensor)itemTappedEventArgs.ItemData).SensorIndex, "OK");
+
+                // Navigate to sensor plot page passing bundle
+                sensorListViewModel.NavigateToSensorPlotPage(item.SensorIndex.ToString());
+                //Navigation.PushAsync(sensorPlotPage);
+            }
+
+            //DisplayAlert("Item Double Tapped", "", "OK");
+            //DisplayAlert("Item Double Tapped", "Sensor: " + itemTappedEventArgs.ItemData, "OK");
+            //DisplayAlert("Item Double Tapped", "Sensor Index: " + ((Sensor)itemTappedEventArgs.ItemData).SensorIndex, "OK");
+        }
+        
         private void ListView_SwipeEnded(object sender, SwipeEndedEventArgs e)
         {
             if (e.SwipeOffset >= 360)

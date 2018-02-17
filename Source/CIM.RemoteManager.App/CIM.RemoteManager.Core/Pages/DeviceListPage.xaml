@@ -60,9 +60,9 @@
         <Grid.RowDefinitions>
           <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition Height="75"></RowDefinition>
+            <RowDefinition Height="75"></RowDefinition>
         </Grid.RowDefinitions>
 
         <StackLayout Grid.Row="0" BackgroundColor="#AE2C3B" Padding="10" HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsStateOn, Converter={StaticResource BooleanToFalseConverter}}">
@@ -94,15 +94,14 @@
               <Switch IsToggled="{Binding UseAutoConnect}" HorizontalOptions="End"></Switch>
           </StackLayout>
 
-          <StackLayout Grid.Row="3" Orientation="Horizontal" Margin="0, 0, 0, 10" HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsRefreshing}">
-              <Button Image="ic_stop-searching.png" Text="Stop Searching" Command="{Binding StopScanCommand}" HorizontalOptions="CenterAndExpand" WidthRequest="155" BackgroundColor="#EDF2ED" TextColor="#777777" />
-          </StackLayout>
-        
-        <StackLayout Grid.Row="4" Orientation="Horizontal" Margin="0, 0, 0, 10" HorizontalOptions="CenterAndExpand" IsVisible="True">
-          <Label Text="{Binding PreviousGuid, StringFormat='Previous GUID {0}'}" FontSize="Small" TextColor="#536559" HorizontalTextAlignment="Center" VerticalTextAlignment="End" IsVisible="True" />
-          <Button Image="ic_connect-previous.png" Text="{Binding PreviousName, StringFormat='Connect to {0}'}" Command="{Binding ConnectToPreviousCommand}" IsVisible="True" HorizontalOptions="FillAndExpand" WidthRequest="325" BackgroundColor="#EDF2ED" TextColor="#777777" />
+        <StackLayout Grid.Row="3" Orientation="Horizontal" Margin="0, 0, 0, 10" HorizontalOptions="CenterAndExpand" IsVisible="{Binding CanConnectToPreviousDevice}">
+            <Button Image="ic_connect-previous.png" Text="{Binding PreviousName, StringFormat='Connect to {0}'}" Command="{Binding ConnectToPreviousCommand}" IsVisible="True" HorizontalOptions="FillAndExpand" WidthRequest="325" BackgroundColor="#F9F9F9" TextColor="#0097DF" />
         </StackLayout>
 
+          <StackLayout Grid.Row="4" Orientation="Horizontal" Margin="0, 0, 0, 10" HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsRefreshing}">
+              <Button Image="ic_stop-searching.png" Text="Stop Searching" Command="{Binding StopScanCommand}" HorizontalOptions="CenterAndExpand" WidthRequest="155" BackgroundColor="#F9F9F9" TextColor="#0097DF" />
+          </StackLayout>
+        
       </Grid>
     </pages:BasePage>
     
@@ -111,8 +110,8 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition Height="75"></RowDefinition>
         </Grid.RowDefinitions>
         
         <StackLayout Grid.Row="0" BackgroundColor="#AE2C3B" Padding="10" HorizontalOptions="CenterAndExpand" IsVisible="False">
@@ -145,7 +144,7 @@
         </StackLayout>
         
         <StackLayout Grid.Row="3" Orientation="Horizontal" Margin="0, 0, 0, 10" HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsRefreshing}">
-          <Button Image="ic_stop-searching.png" Text="Stop Searching" Command="{Binding StopScanCommand}" HorizontalOptions="CenterAndExpand" WidthRequest="155" BackgroundColor="#EDF2ED" TextColor="#777777" />
+          <Button Image="ic_stop-searching.png" Text="Stop Searching" Command="{Binding StopScanCommand}" HorizontalOptions="CenterAndExpand" WidthRequest="155" BackgroundColor="#F9F9F9" TextColor="#0097DF" />
         </StackLayout>
         
       </Grid>

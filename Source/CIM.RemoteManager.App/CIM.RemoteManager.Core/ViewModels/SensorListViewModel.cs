@@ -661,18 +661,13 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// <summary>
         /// Sensor selected (navigate to sensor plot page)
         /// </summary>
-        public IService SelectedSensor
+        public void NavigateToSensorPlotPage(string sensorIndex)
         {
-            get => null;
-            set
+            if (!string.IsNullOrEmpty(sensorIndex))
             {
-                if (value != null)
-                {
-                    var bundle = new MvxBundle(new Dictionary<string, string>(Bundle.Data) { { SensorIdKey, value.Id.ToString() } });
-                    // Navigate to sensor plot
-                    ShowViewModel<SensorPlotViewModel>(bundle);
-                }
-                RaisePropertyChanged();
+                var bundle = new MvxBundle(new Dictionary<string, string>(Bundle.Data) { { SensorIdKey, sensorIndex } });
+                // Navigate to sensor plot
+                ShowViewModel<SensorPlotViewModel>(bundle);
             }
         }
 
