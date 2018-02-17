@@ -1,4 +1,5 @@
 ﻿using System;
+using CIM.RemoteManager.Core.Models;
 using CIM.RemoteManager.Core.ViewModels;
 using Syncfusion.ListView.XForms;
 using Xamarin.Forms;
@@ -14,26 +15,9 @@ namespace CIM.RemoteManager.Core.Pages
         {
             InitializeComponent();
             BindingContext = this; // Note that I added this line
-            
-            //SensorBusyIndicator.IsBusy = false;
         }
-
-        private void ListView_OnItemSelected(object sender, SelectedItemChangedEventArgs e)
-        {
-            
-        }
-
+        
         private void ListView_OnItemTapped(object sender, ItemTappedEventArgs itemTappedEventArgs)
-        {
-            
-        }
-
-        private void ListView_OnStats(object sender, EventArgs e)
-        {
-            
-        }
-   
-        private void ListView_OnSettings(object sender, EventArgs e)
         {
             
         }
@@ -48,17 +32,19 @@ namespace CIM.RemoteManager.Core.Pages
             // Get instance of SensorListViewModel
             var sensorListViewModel = (SensorListViewModel)this.BindingContext;
             // Toggle sensor updates
+            SensorBusyIndicator.IsBusy = true;
             sensorListViewModel.ToggleUpdatesCommand.Execute(null);
+            SensorBusyIndicator.IsBusy = false;
         }
-
-        private void ListView_OnScrollStateChanged(object sender, ScrollStateChangedEventArgs e)
-        {
-            
-        }
-
+        
+        /// <summary>
+        /// Get sensor index on item double tapped
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SensorLiistView_OnItemDoubleTapped(object sender, ItemDoubleTappedEventArgs e)
         {
-            //DisplayAlert("Alert", "Selected Book number: " + (e.ItemData as SensorPlotViewModel)., "OK");
+            DisplayAlert("Item Double Tapped", "Sensor Index: " + ((Sensor) e.ItemData).SensorIndex, "OK");
         }
 
         private void ListView_SwipeEnded(object sender, SwipeEndedEventArgs e)

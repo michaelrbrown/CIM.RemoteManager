@@ -2,6 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
              xmlns:templates="clr-namespace:CIM.RemoteManager.Core.Templates;assembly=CIM.RemoteManager.Core"
+             xmlns:xForms="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
              x:Class="CIM.RemoteManager.Core.Pages.SensorListPage" 
              Title="Sensors">
 
@@ -10,16 +11,16 @@
         Aspect="AspectFill"
         RelativeLayout.WidthConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Width}"
         RelativeLayout.HeightConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Height}" 
-        Source = "bg_application3.png">
+        Source = "app_background.jpg">
     </Image>
 
+    <xForms:SfBusyIndicator x:Name="SensorBusyIndicator" TextColor="{DynamicResource AppAccentColor}" IsBusy="true" AnimationType="ECG" ViewBoxWidth="150" ViewBoxHeight="150" />
     <syncfusion:SfListView x:Name="SensorLiistView" Margin="0" 
                     ItemsSource="{Binding Sensors}" 
                     AllowSwiping="True" 
                     ItemSpacing="3"
                     HeaderSize="145" 
                     IsStickyFooter="True"
-                    ScrollStateChanged="ListView_OnScrollStateChanged"
                     SelectionBackgroundColor="Transparent" 
                     ItemTapped="ListView_OnItemTapped" ItemDoubleTapped="SensorLiistView_OnItemDoubleTapped" 
                     ItemSize="116">
