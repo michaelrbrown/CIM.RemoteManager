@@ -3,7 +3,7 @@
              xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
              xmlns:templates="clr-namespace:CIM.RemoteManager.Core.Templates;assembly=CIM.RemoteManager.Core"
              x:Class="CIM.RemoteManager.Core.Pages.SensorListPage" 
-             BackgroundImage="BlueBackgroundVector.jpg"
+             BackgroundImage="bg_app.jpg"
              Title="Sensors">
 
     <syncfusion:SfListView x:Name="SensorLiistView" Margin="0" 
@@ -74,7 +74,7 @@
             <DataTemplate>
                 <!-- Margin: left, top, right, bottom -->
                 <StackLayout Spacing="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="50" Padding="10" BackgroundColor="{DynamicResource RemoteNameBackgroundColor}">
-                    <Label Text="{Binding CharacteristicValue, StringFormat='  Incoming Value: {0:N}'}" TextColor="{DynamicResource AppLightColor}" FontSize="16" Margin="5,5,5,0" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" LineBreakMode="MiddleTruncation" />
+                    <Label Text="{Binding CharacteristicValue, StringFormat='  Incoming Value: {0:N}'}" TextColor="{DynamicResource AppLightColor}" FontSize="16" Margin="5,5,5,5" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" LineBreakMode="MiddleTruncation" />
                 </StackLayout>
             </DataTemplate>
         </syncfusion:SfListView.FooterTemplate>
