@@ -378,10 +378,10 @@
     <BundleResource Include="Resources\stop.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\connect-previous.png" />
+    <BundleResource Include="Resources\ic_connect-previous.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\stop-searching.png" />
+    <BundleResource Include="Resources\ic_stop-searching.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\bluetooth-info.png" />
@@ -409,9 +409,6 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\DA12.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\BlueBackgroundVector.jpg" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\remote512.2.png" />
@@ -448,9 +445,6 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\app_background.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\bg1.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\bg1.jpg" />

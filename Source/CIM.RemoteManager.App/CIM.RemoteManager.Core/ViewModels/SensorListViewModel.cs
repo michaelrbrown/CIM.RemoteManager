@@ -156,7 +156,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 Mvx.Trace(ex.Message);
             }
         }
-
+        
         /// <summary>
         /// On Resume
         /// </summary>

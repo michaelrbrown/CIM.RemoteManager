@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using CIM.RemoteManager.Core.ViewModels;
-using MvvmCross.Core.ViewModels;
 using Syncfusion.ListView.XForms;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -60,7 +58,19 @@ namespace CIM.RemoteManager.Core.Pages
 
         private void SensorLiistView_OnItemDoubleTapped(object sender, ItemDoubleTappedEventArgs e)
         {
-            
+            //DisplayAlert("Alert", "Selected Book number: " + (e.ItemData as SensorPlotViewModel)., "OK");
         }
+
+        private void ListView_SwipeEnded(object sender, SwipeEndedEventArgs e)
+        {
+            if (e.SwipeOffset >= 360)
+            {
+                //SensorPlotViewModel sensorPlotViewModel;
+                //BindingContext = (sensorPlotViewModel = new SensorPlotViewModel());
+                //sensorPlotViewModel.(e.ItemIndex);
+                //SensorLiistView.ResetSwipe();
+            }
+        }
+
     }
 }
