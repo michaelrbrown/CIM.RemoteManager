@@ -4,14 +4,15 @@
              xmlns:templates="clr-namespace:CIM.RemoteManager.Core.Templates;assembly=CIM.RemoteManager.Core"
              xmlns:xForms="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
              x:Class="CIM.RemoteManager.Core.Pages.SensorListPage" 
+             BackgroundColor="#193E5D"
              Title="Sensors">
 
     <!-- Background -->
     <Image
         Aspect="AspectFill"
-        RelativeLayout.WidthConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Width}"
-        RelativeLayout.HeightConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Height}" 
-        Source = "app_background.jpg">
+        RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width}"
+        RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height}" 
+        Source="appbackground.jpg">
     </Image>
 
     <xForms:SfBusyIndicator x:Name="SensorBusyIndicator" TextColor="{DynamicResource AppAccentColor}" IsBusy="true" AnimationType="ECG" ViewBoxWidth="150" ViewBoxHeight="150" />
