@@ -55,7 +55,7 @@
   
   <pages:BaseTabbedPage.Children>
 
-    <pages:BasePage Title="CIMScan Devices" Icon="bluetooth-connected.png">
+    <pages:BasePage Title="CIMScan Devices" Icon="ic_bluetooth-connected.png">
       <Grid>
         <Grid.RowDefinitions>
           <RowDefinition Height="Auto"></RowDefinition>
@@ -84,7 +84,7 @@
                   ItemTemplate="{StaticResource DeviceItemTemplate}">
         </ListView>
         
-        <StackLayout Grid.Row="2" Orientation="Horizontal" Margin="0, 0, 0, 10" HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsStateOn}">
+        <StackLayout Grid.Row="2" Orientation="Horizontal" Margin="0, 0, 0, 10" HorizontalOptions="CenterAndExpand" IsVisible="{Binding CanConnectToPreviousDevice}">
           <Label Text="{Binding PreviousGuid, StringFormat='Previous GUID {0}'}" FontSize="Small" TextColor="#536559" HorizontalTextAlignment="Center" VerticalTextAlignment="End" IsVisible="{Binding CanConnectToPreviousDevice}" />
           <Button Image="connect-previous.png" Text="{Binding PreviousName, StringFormat='Connect to {0}'}" Command="{Binding ConnectToPreviousCommand}" IsVisible="{Binding CanConnectToPreviousDevice}" HorizontalOptions="FillAndExpand" WidthRequest="325" BackgroundColor="#EDF2ED" TextColor="#777777" />
         </StackLayout>

@@ -369,7 +369,7 @@
     <BundleResource Include="Icon-Small-50%402x.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\bluetooth-connected.png" />
+    <BundleResource Include="Resources\ic_bluetooth-connected.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\ic_bluetooth-search.png" />
@@ -457,6 +457,12 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\ic_sensorplot.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\bg_application2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\bg_application3.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

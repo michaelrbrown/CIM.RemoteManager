@@ -10,7 +10,7 @@
         Aspect="AspectFill"
         RelativeLayout.WidthConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Width}"
         RelativeLayout.HeightConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Height}" 
-        Source = "bg_application2.png">
+        Source = "bg_application3.png">
     </Image>
 
     <syncfusion:SfListView x:Name="SensorLiistView" Margin="0" 
