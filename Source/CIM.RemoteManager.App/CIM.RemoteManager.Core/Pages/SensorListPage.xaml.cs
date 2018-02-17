@@ -46,20 +46,20 @@ namespace CIM.RemoteManager.Core.Pages
         /// <param name="itemTappedEventArgs"></param>
         private void SensorLiistView_OnItemDoubleTapped(object sender, ItemDoubleTappedEventArgs itemTappedEventArgs)
         {
-            var item = itemTappedEventArgs.ItemData as Sensor;
-            var sensorPlotPage = new SensorPlotPage();
-            if (item != null)
-            {
-                sensorPlotPage.BindingContext = item;
+            //var sensorItem = itemTappedEventArgs.ItemData as Sensor;
+            //var sensorPlotPage = new SensorPlotPage();
+            //if (sensorItem != null)
+            //{
+                //sensorPlotPage.BindingContext = sensorItem;
                 // Get instance of SensorListViewModel
                 var sensorListViewModel = (SensorListViewModel)this.BindingContext;
 
                 DisplayAlert("Item Double Tapped", "Sensor Index: " + ((Sensor)itemTappedEventArgs.ItemData).SensorIndex, "OK");
 
                 // Navigate to sensor plot page passing bundle
-                sensorListViewModel.NavigateToSensorPlotPage(item.SensorIndex.ToString());
+                //sensorListViewModel.NavigateToSensorPlotPage(item.SensorIndex.ToString());
                 //Navigation.PushAsync(sensorPlotPage);
-            }
+            //}
 
             //DisplayAlert("Item Double Tapped", "", "OK");
             //DisplayAlert("Item Double Tapped", "Sensor: " + itemTappedEventArgs.ItemData, "OK");
