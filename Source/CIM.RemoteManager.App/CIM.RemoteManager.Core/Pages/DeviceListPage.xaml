@@ -92,7 +92,7 @@
       </Grid>
     </pages:BasePage>
     
-    <pages:BasePage Title="Search for All Devices" Icon="bluetooth-search.png">
+    <pages:BasePage Title="Search for All Devices" Icon="ic_bluetooth-search.png">
       <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>

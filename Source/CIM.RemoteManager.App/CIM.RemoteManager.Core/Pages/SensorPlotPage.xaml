@@ -2,7 +2,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:pages="clr-namespace:CIM.RemoteManager.Core.Pages;assembly=CIM.RemoteManager.Core"
              x:Class="CIM.RemoteManager.Core.Pages.SensorPlotPage" 
-             BackgroundImage="bg_app.jpg"
              Title="Sensors">
 
     <pages:SensorPlotPage />
@@ -11,5 +10,47 @@
             <pages:SensorStatisticsPage />
         </x:Arguments>
     </NavigationPage>
+
+    <TabbedPage.ItemTemplate>
+        <DataTemplate>
+            <ContentPage Title="Sensor Plot" Icon="ic_sensorplot.png">
+
+                <!-- Background -->
+                <Image
+                    Aspect="AspectFill"
+                    RelativeLayout.WidthConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Width}"
+                    RelativeLayout.HeightConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Height}" 
+                    Source = "bg_application.png">
+                </Image>
+
+
+                <!-- Margin: left, top, right, bottom -->
+                <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Transparent">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="40"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackLayout Grid.Row="0" Grid.Column="0" Orientation="Vertical" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Spacing="0">
+                        <Label Text="{Binding UpdateButtonText, Mode=TwoWay}" TextColor="{DynamicResource AppLightColor}" HorizontalOptions="Center" VerticalOptions="Center" />
+                        <Switch IsToggled="{Binding UpdatesStarted, Mode=TwoWay}" Toggled="SensorUpdatesSwitchToggled" Margin="5" HorizontalOptions="Center" VerticalOptions="Center" />
+                    </StackLayout>
+
+                    <Image Grid.Row="0" Grid.Column="1" Source="remote512.png" Margin="10" HeightRequest="120" WidthRequest="120" Aspect="AspectFit" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
+
+                    <StackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Spacing="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="40" BackgroundColor="{DynamicResource RemoteNameBackgroundColor}" Opacity=".8">
+                        <Label Text="{Binding DeviceName}" TextColor="{DynamicResource AppLightColor}" FontSize="20" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" />
+                    </StackLayout>
+
+                </Grid>
+
+            </ContentPage>
+        </DataTemplate>
+    </TabbedPage.ItemTemplate>
 
 </TabbedPage>
