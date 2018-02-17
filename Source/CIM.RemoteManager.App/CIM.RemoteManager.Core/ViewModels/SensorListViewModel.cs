@@ -145,7 +145,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 _userDialogs = userDialogs;
 
                 // Register event for device connection lost
-                //Adapter.DeviceConnectionLost += OnDeviceConnectionLost;
+                Adapter.DeviceConnectionLost += OnDeviceConnectionLost;
 
                 // Sensor data
                 _sensors = new FullyObservableCollection<Sensor>();

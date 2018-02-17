@@ -455,7 +455,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                     await Adapter.ConnectToDeviceAsync(device.Device, new ConnectParameters(autoConnect: UseAutoConnect, forceBleTransport: false), tokenSource.Token).ConfigureAwait(true);
                 }
                 
-                _userDialogs.InfoToast($"Connected to {device.Device.Name}.", TimeSpan.FromSeconds(3));
+                //_userDialogs.InfoToast($"Connected to {device.Device.Name}.", TimeSpan.FromSeconds(3));
 
                 // Set previous connected device info
                 PreviousGuid = device.Device.Id;

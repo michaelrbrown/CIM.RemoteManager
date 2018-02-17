@@ -3,7 +3,7 @@
              xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
              xmlns:templates="clr-namespace:CIM.RemoteManager.Core.Templates;assembly=CIM.RemoteManager.Core"
              x:Class="CIM.RemoteManager.Core.Pages.SensorListPage" 
-             BackgroundImage="bg_app.jpg"
+             BackgroundImage="BlueBackgroundVector.jpg"
              Title="Sensors">
 
     <syncfusion:SfListView x:Name="SensorLiistView" Margin="0" 
