@@ -9,9 +9,14 @@ namespace CIM.RemoteManager.Core.Common
     public static class CoreConstants
     {
         public static string SampleImagesUrl = "https://tagit.blob.core.windows.net/sample-images/";
-
-        public static ulong ImageSizeLimit = 4194304; //THIS NUMBER IS THE COMPUTER VISION UPPER LIMIT
-        public static int ImageCountLimit = 100; //THIS NUMBER IS AN ARBITRARY LIMIT TO PREVENT MASSIVE IMAGE COUNTS
+        
+        public static string LocalizationNamespace = "CIM.RemoteManager.Core";
+        public static string RootFolderForResources = "Localization";
+        
+        public static string HockeyAppAndroidDebug = "";
+        public static string HockeyAppAndroidProd = "";
+        public static string HockeyAppiOSDebug = "";
+        public static string HockeyAppiOSProd = "";
     }
 
     public static class UiConstants
