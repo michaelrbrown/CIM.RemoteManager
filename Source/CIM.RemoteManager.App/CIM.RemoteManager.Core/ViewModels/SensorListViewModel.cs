@@ -97,7 +97,18 @@ namespace CIM.RemoteManager.Core.ViewModels
         public bool StartAverageSensorValueRecord { get; set; } = false;
         public bool StartUnfilteredSensorValueRecord { get; set; } = false;
         public bool StartUnfilteredFloatingPointSensorValueRecord { get; set; } = false;
-        
+
+        /// <summary>
+        /// Is loading indicator for view
+        /// </summary>
+        bool _isLoading = false;
+        public bool IsLoading
+        {
+            get => _isLoading;
+            set => SetProperty(ref _isLoading, value);
+        }
+
+
         /// <summary>
         ///  "A" = full information
         ///   index (#)
@@ -191,12 +202,15 @@ namespace CIM.RemoteManager.Core.ViewModels
 
             try
             {
+                // Loading indicator
+                IsLoading = true;
+
                 // Get our Adafruit bluetooth service (UART)
                 _service = await _device.GetServiceAsync(UartUuid).ConfigureAwait(true);
-                
+
                 // Get write characteristic service
                 TxCharacteristic = await _service.GetCharacteristicAsync(TxUuid).ConfigureAwait(true);
-                
+
                 // Make sure we can write characteristic data to remote
                 if (TxCharacteristic.CanWrite)
                 {
@@ -207,7 +221,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 {
                     _userDialogs.Alert("Cannot write characteristic data to remote!", "CIMScan Remote Manager");
                 }
-                
+
                 // Wait 500 milliseconds
                 await Task.Delay(500).ConfigureAwait(true);
 
@@ -219,7 +233,7 @@ namespace CIM.RemoteManager.Core.ViewModels
 
                 // Start updates
                 //ToggleUpdatesCommand.Execute(null);
-                
+
                 // Hide loading...
                 //_userDialogs.HideLoading();
 
@@ -229,6 +243,11 @@ namespace CIM.RemoteManager.Core.ViewModels
                 _userDialogs.HideLoading();
                 HockeyApp.MetricsManager.TrackEvent($"(InitRemote) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
                 _userDialogs.Alert(ex.Message);
+            }
+            finally
+            {
+                // Loading indicator (make sure it turns off even with exception thrown)
+                IsLoading = false;
             }
 
         }

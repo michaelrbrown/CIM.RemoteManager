@@ -34,9 +34,7 @@ namespace CIM.RemoteManager.Core.Pages
             // Get instance of SensorListViewModel
             var sensorListViewModel = (SensorListViewModel)this.BindingContext;
             // Toggle sensor updates
-            SensorBusyIndicator.IsBusy = true;
             sensorListViewModel.ToggleUpdatesCommand.Execute(null);
-            SensorBusyIndicator.IsBusy = false;
         }
 
         /// <summary>
@@ -54,18 +52,31 @@ namespace CIM.RemoteManager.Core.Pages
                 // Get instance of SensorListViewModel
                 var sensorListViewModel = (SensorListViewModel)this.BindingContext;
 
-                DisplayAlert("Item Double Tapped", "Sensor Index: " + ((Sensor)itemTappedEventArgs.ItemData).SensorIndex, "OK");
 
-                // Navigate to sensor plot page passing bundle
-                //sensorListViewModel.NavigateToSensorPlotPage(item.SensorIndex.ToString());
-                //Navigation.PushAsync(sensorPlotPage);
+           
+
+
+            DisplayAlert("Item Double Tapped", "Sensor Index1: " + ((Sensor)itemTappedEventArgs.ItemData).SensorIndex, "OK");
+
+                
+                DisplayAlert("Item Tapped", "Sensor Index2: " + ((Sensor)itemTappedEventArgs.ItemData).SensorIndex, "OK");
+
+            var sensorItem = itemTappedEventArgs.ItemData as Sensor;
+
+            if (sensorItem != null) DisplayAlert("Item Tapped", "Sensor Index3: " + sensorItem.SensorIndex, "OK");
+
+            if (itemTappedEventArgs.ItemData != null)
+                DisplayAlert("Item Tapped", "Sensor: " + itemTappedEventArgs.ItemData.ToString(), "OK");
+            // Navigate to sensor plot page passing bundle
+            //sensorListViewModel.NavigateToSensorPlotPage(item.SensorIndex.ToString());
+            //Navigation.PushAsync(sensorPlotPage);
             //}
 
             //DisplayAlert("Item Double Tapped", "", "OK");
             //DisplayAlert("Item Double Tapped", "Sensor: " + itemTappedEventArgs.ItemData, "OK");
             //DisplayAlert("Item Double Tapped", "Sensor Index: " + ((Sensor)itemTappedEventArgs.ItemData).SensorIndex, "OK");
         }
-        
+
         private void ListView_SwipeEnded(object sender, SwipeEndedEventArgs e)
         {
             if (e.SwipeOffset >= 360)
