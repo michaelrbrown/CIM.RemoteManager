@@ -10,7 +10,7 @@
         Aspect="AspectFill"
         RelativeLayout.WidthConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Width}"
         RelativeLayout.HeightConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Height}" 
-        Source = "bg1.png">
+        Source = "bg1.jpg">
     </Image>
 
     <syncfusion:SfListView x:Name="SensorLiistView" Margin="0" 
@@ -21,7 +21,7 @@
                     IsStickyFooter="True"
                     ScrollStateChanged="ListView_OnScrollStateChanged"
                     SelectionBackgroundColor="Transparent" 
-                    ItemTapped="ListView_OnItemTapped" ItemDoubleTapped="SensorLiistView_OnItemDoubleTapped"
+                    ItemTapped="ListView_OnItemTapped" ItemDoubleTapped="SensorLiistView_OnItemDoubleTapped" 
                     ItemSize="116">
 
         <syncfusion:SfListView.HeaderTemplate>

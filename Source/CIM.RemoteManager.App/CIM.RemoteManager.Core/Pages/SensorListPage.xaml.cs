@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using CIM.RemoteManager.Core.ViewModels;
+using MvvmCross.Core.ViewModels;
 using Syncfusion.ListView.XForms;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;

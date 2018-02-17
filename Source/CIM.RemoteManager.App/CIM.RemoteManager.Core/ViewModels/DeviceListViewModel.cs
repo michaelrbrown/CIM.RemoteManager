@@ -579,5 +579,6 @@ namespace CIM.RemoteManager.Core.ViewModels
         {
             PreviousGuid = device.Id;
         });
+
     }
 }
