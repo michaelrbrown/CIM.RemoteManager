@@ -3,8 +3,15 @@
              xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
              xmlns:templates="clr-namespace:CIM.RemoteManager.Core.Templates;assembly=CIM.RemoteManager.Core"
              x:Class="CIM.RemoteManager.Core.Pages.SensorListPage" 
-             BackgroundImage="bg_app.jpg"
              Title="Sensors">
+
+    <!-- Background -->
+    <Image
+        Aspect="AspectFill"
+        RelativeLayout.WidthConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Width}"
+        RelativeLayout.HeightConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Height}" 
+        Source = "bg1.png">
+    </Image>
 
     <syncfusion:SfListView x:Name="SensorLiistView" Margin="0" 
                     ItemsSource="{Binding Sensors}" 
@@ -38,7 +45,7 @@
 
                     <Image Grid.Row="0" Grid.Column="1" Source="remote512.png" Margin="10" HeightRequest="120" WidthRequest="120" Aspect="AspectFit" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
 
-                    <StackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Spacing="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="40" BackgroundColor="{DynamicResource RemoteNameBackgroundColor}">
+                    <StackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Spacing="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="40" BackgroundColor="{DynamicResource RemoteNameBackgroundColor}" Opacity=".8">
                         <Label Text="{Binding DeviceName}" TextColor="{DynamicResource AppLightColor}" FontSize="20" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" />
                     </StackLayout>
 
@@ -73,8 +80,8 @@
         <syncfusion:SfListView.FooterTemplate>
             <DataTemplate>
                 <!-- Margin: left, top, right, bottom -->
-                <StackLayout Spacing="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="50" Padding="10" BackgroundColor="{DynamicResource RemoteNameBackgroundColor}">
-                    <Label Text="{Binding CharacteristicValue, StringFormat='  Incoming Value: {0:N}'}" TextColor="{DynamicResource AppLightColor}" FontSize="16" Margin="5,10,5,10" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" LineBreakMode="MiddleTruncation" />
+                <StackLayout Spacing="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="60" BackgroundColor="{DynamicResource RemoteNameBackgroundColor}" Opacity=".8">
+                    <Label Text="{Binding CharacteristicValue, StringFormat='  Incoming Value: {0:N}'}" TextColor="{DynamicResource AppLightColor}" FontSize="16" Margin="5"  HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" VerticalTextAlignment="Center" LineBreakMode="MiddleTruncation" />
                 </StackLayout>
             </DataTemplate>
         </syncfusion:SfListView.FooterTemplate>
