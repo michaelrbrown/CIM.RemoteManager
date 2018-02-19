@@ -75,6 +75,11 @@ namespace CIM.RemoteManager.Core.ViewModels
         public string DeviceName { get; set; }
 
         /// <summary>
+        /// Sensor serial number (unique id)
+        /// </summary>
+        public string SensorSerialNumber { get; set; }
+
+        /// <summary>
         /// Sensor collection
         /// </summary>
         FullyObservableCollection<Sensor> _sensors;
