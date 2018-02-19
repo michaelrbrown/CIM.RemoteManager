@@ -56,14 +56,14 @@ namespace CIM.RemoteManager.Core.Pages
            
 
 
-            DisplayAlert("Item Double Tapped", "Sensor Index1: " + ((Sensor)itemTappedEventArgs.ItemData).SensorIndex, "OK");
+            DisplayAlert("Item Double Tapped", "Sensor Index: " + ((Sensor)itemTappedEventArgs.ItemData).SensorIndex, "OK");
 
                 
-                DisplayAlert("Item Tapped", "Sensor Index2: " + ((Sensor)itemTappedEventArgs.ItemData).SensorIndex, "OK");
+                DisplayAlert("Item Tapped", "Sensor SerialNumber: " + ((Sensor)itemTappedEventArgs.ItemData).SerialNumber, "OK");
 
             var sensorItem = itemTappedEventArgs.ItemData as Sensor;
 
-            if (sensorItem != null) DisplayAlert("Item Tapped", "Sensor Index3: " + sensorItem.SensorIndex, "OK");
+            if (sensorItem != null) DisplayAlert("Item Tapped", "Sensor SensorType: " + sensorItem.SensorType, "OK");
 
             if (itemTappedEventArgs.ItemData != null)
                 DisplayAlert("Item Tapped", "Sensor: " + itemTappedEventArgs.ItemData.ToString(), "OK");
