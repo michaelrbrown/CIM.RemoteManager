@@ -50,7 +50,7 @@ namespace CIM.RemoteManager.Core.Pages
             //{
                 //sensorPlotPage.BindingContext = sensorItem;
                 // Get instance of SensorListViewModel
-                var sensorListViewModel = (SensorListViewModel)this.BindingContext;
+                //var sensorListViewModel = (SensorListViewModel)this.BindingContext;
 
 
            
@@ -59,14 +59,14 @@ namespace CIM.RemoteManager.Core.Pages
             DisplayAlert("Item Double Tapped", "Sensor Index: " + ((Sensor)itemTappedEventArgs.ItemData).SensorIndex, "OK");
 
                 
-                DisplayAlert("Item Tapped", "Sensor SerialNumber: " + ((Sensor)itemTappedEventArgs.ItemData).SerialNumber, "OK");
+               // DisplayAlert("Item Tapped", "Sensor SerialNumber: " + ((Sensor)itemTappedEventArgs.ItemData).SerialNumber, "OK");
 
-            var sensorItem = itemTappedEventArgs.ItemData as Sensor;
+            //var sensorItem = itemTappedEventArgs.ItemData as Sensor;
 
-            if (sensorItem != null) DisplayAlert("Item Tapped", "Sensor SensorType: " + sensorItem.SensorType, "OK");
+            //if (sensorItem != null) DisplayAlert("Item Tapped", "Sensor SensorType: " + sensorItem.SensorType, "OK");
 
-            if (itemTappedEventArgs.ItemData != null)
-                DisplayAlert("Item Tapped", "Sensor: " + itemTappedEventArgs.ItemData.ToString(), "OK");
+            //if (itemTappedEventArgs.ItemData != null)
+               // DisplayAlert("Item Tapped", "Sensor: " + itemTappedEventArgs.ItemData.ToString(), "OK");
             // Navigate to sensor plot page passing bundle
             //sensorListViewModel.NavigateToSensorPlotPage(item.SensorIndex.ToString());
             //Navigation.PushAsync(sensorPlotPage);
