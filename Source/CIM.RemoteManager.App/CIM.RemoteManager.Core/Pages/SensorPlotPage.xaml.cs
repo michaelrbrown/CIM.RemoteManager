@@ -4,7 +4,7 @@ using Xamarin.Forms.Xaml;
 namespace CIM.RemoteManager.Core.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class SensorPlotPage : TabbedPage
+    public partial class SensorPlotPage
     {
         public SensorPlotPage()
         {
