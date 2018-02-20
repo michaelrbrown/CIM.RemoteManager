@@ -147,7 +147,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             try
             {
                 _userDialogs = userDialogs;
-
+                
                 // Register event for device connection lost
                 //Adapter.DeviceConnectionLost += OnDeviceConnectionLost;
 
@@ -247,6 +247,8 @@ namespace CIM.RemoteManager.Core.ViewModels
             try
             {
                 base.InitFromBundle(parameters);
+
+                _userDialogs.Alert($"Serial Number: {parameters.Data[SensorIdKey]}", "CIMScan Remote Manager");
 
                 // Get device from bundle
                 _device = GetDeviceFromBundle(parameters);
