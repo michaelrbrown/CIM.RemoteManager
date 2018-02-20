@@ -4,30 +4,5 @@
              x:Class="CIM.RemoteManager.Core.Pages.SensorPlotPage" 
              Title="Sensors">
 
-    <pages:SensorPlotPage />
-    <NavigationPage Title="Schedule" Icon="schedule.png">
-        <x:Arguments>
-            <pages:SensorStatisticsPage />
-        </x:Arguments>
-    </NavigationPage>
-
-    <TabbedPage.ItemTemplate>
-        <DataTemplate>
-            <ContentPage Title="Sensor Plot" Icon="ic_sensorplot.png">
-
-                <!-- Background -->
-                <Image
-                    Aspect="AspectFill"
-                    RelativeLayout.WidthConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Width}"
-                    RelativeLayout.HeightConstraint= "{ConstraintExpression Type=RelativeToParent, Property=Height}" 
-                    Source = "bg_application.png">
-                </Image>
-
-
-             
-
-            </ContentPage>
-        </DataTemplate>
-    </TabbedPage.ItemTemplate>
 
 </pages:BaseTabbedPage>

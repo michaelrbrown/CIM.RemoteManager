@@ -52,6 +52,8 @@ namespace CIM.RemoteManager.Core.Pages
                 // Get instance of SensorListViewModel
             var sensorListViewModel = (SensorListViewModel)this.BindingContext;
 
+            DisplayAlert("Item Double Tapped", "Sensor Index: " + ((Sensor)itemTappedEventArgs.ItemData).SerialNumber, "OK");
+
             sensorListViewModel.NavigateToSensorPlotPage(((Sensor)itemTappedEventArgs.ItemData).SerialNumber);
 
 
