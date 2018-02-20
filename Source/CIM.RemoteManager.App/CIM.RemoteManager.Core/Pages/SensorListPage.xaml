@@ -4,7 +4,7 @@
              xmlns:templates="clr-namespace:CIM.RemoteManager.Core.Templates;assembly=CIM.RemoteManager.Core"
              xmlns:xForms="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
              x:Class="CIM.RemoteManager.Core.Pages.SensorListPage" 
-             BackgroundImage="app_bg_sensor.jpg" BackgroundColor="#255886" 
+             BackgroundImage="bgapplication.png" BackgroundColor="#255886" 
              Title="Sensors">
 
     <!-- Background -->
