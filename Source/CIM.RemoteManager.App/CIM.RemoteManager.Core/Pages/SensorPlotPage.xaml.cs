@@ -1,7 +1,4 @@
-﻿using System;
-using CIM.RemoteManager.Core.ViewModels;
-using Syncfusion.ListView.XForms;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace CIM.RemoteManager.Core.Pages
@@ -12,7 +9,7 @@ namespace CIM.RemoteManager.Core.Pages
         public SensorPlotPage()
         {
             InitializeComponent();
-            BindingContext = this;
+            //BindingContext = this;
             
             //SensorBusyIndicator.IsBusy = false;
         }
@@ -25,9 +22,9 @@ namespace CIM.RemoteManager.Core.Pages
         private void SensorUpdatesSwitchToggled(object sender, ToggledEventArgs e)
         {
             // Get instance of SensorListViewModel
-            var sensorListViewModel = (SensorListViewModel)this.BindingContext;
+            //var sensorListViewModel = (SensorListViewModel)this.BindingContext;
             // Toggle sensor updates
-            sensorListViewModel.ToggleUpdatesCommand.Execute(null);
+            //sensorListViewModel.ToggleUpdatesCommand.Execute(null);
         }
 
     }

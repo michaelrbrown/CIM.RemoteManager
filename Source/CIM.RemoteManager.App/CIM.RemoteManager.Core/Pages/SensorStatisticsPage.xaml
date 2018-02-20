@@ -3,10 +3,10 @@
              xmlns:pages="clr-namespace:CIM.RemoteManager.Core.Pages;assembly=CIM.RemoteManager.Core"
              x:Class="CIM.RemoteManager.Core.Pages.SensorStatisticsPage" 
              BackgroundImage="bg_app.jpg"
-             Title="Sensors">
+             Title="Sensor Statistics">
 
-    <pages:SensorPlotPage />
-    <NavigationPage Title="Schedule" Icon="schedule.png">
+    <pages:SensorPlotPage Title="Sensor Plot" />
+    <NavigationPage Title="Sensor Statistics" Icon="schedule.png">
         <x:Arguments>
             <pages:SensorStatisticsPage />
         </x:Arguments>
