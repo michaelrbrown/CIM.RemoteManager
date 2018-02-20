@@ -16,6 +16,29 @@ namespace CIM.RemoteManager.Core.ViewModels
         protected const string DescriptorIdKey = "DescriptorIdNavigationKey";
         protected const string SensorIdKey = "SensorIdNavigationKey";
 
+        /// <summary>
+        /// UUIDs for UART service and associated characteristics.
+        /// </summary>
+        protected static Guid UartUuid = Guid.Parse("6E400001-B5A3-F393-E0A9-E50E24DCCA9E");
+
+        protected static Guid TxUuid = Guid.Parse("6E400002-B5A3-F393-E0A9-E50E24DCCA9E");
+        protected static Guid RxUuid = Guid.Parse("6E400003-B5A3-F393-E0A9-E50E24DCCA9E");
+
+        /// <summary>
+        /// UUID for the UART BTLE client characteristic which is necessary for notifications.
+        /// </summary>
+        public static Guid ClientUuid = Guid.Parse("6E400003-B5A3-F393-E0A9-E50E24DCCA9E");
+
+        /// <summary>
+        /// UUIDs for the Device Information service and associated characteristics.
+        /// </summary>
+        public static Guid DisUuid = Guid.Parse("0000180a-0000-1000-8000-00805f9b34fb");
+
+        public static Guid DisManufUuid = Guid.Parse("00002a29-0000-1000-8000-00805f9b34fb");
+        public static Guid DisModelUuid = Guid.Parse("00002a24-0000-1000-8000-00805f9b34fb");
+        public static Guid DisHwrevUuid = Guid.Parse("00002a26-0000-1000-8000-00805f9b34fb");
+        public static Guid DisSwrevUuid = Guid.Parse("00002a28-0000-1000-8000-00805f9b34fb");
+
         public BaseViewModel(IAdapter adapter)
         {
             Adapter = adapter;
@@ -96,6 +119,5 @@ namespace CIM.RemoteManager.Core.ViewModels
             var descriptorId = parameters.Data[DescriptorIdKey];
             return await characteristic.GetDescriptorAsync(Guid.Parse(descriptorId));
         }
-
     }
 }
