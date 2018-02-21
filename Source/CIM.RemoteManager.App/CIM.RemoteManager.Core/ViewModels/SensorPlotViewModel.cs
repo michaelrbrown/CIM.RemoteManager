@@ -286,7 +286,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             {
                 base.InitFromBundle(parameters);
 
-                _userDialogs.Alert($"Serial Number: {parameters.Data[SensorIdKey]}", "CIMScan Remote Manager");
+                //_userDialogs.Alert($"Serial Number: {parameters.Data[SensorIdKey]}", "CIMScan Remote Manager");
 
                 // Get device from bundle
                 _device = GetSensorDeviceBundle(parameters);
@@ -294,7 +294,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 // Set device name
                 DeviceName = _device.Name;
 
-                _userDialogs.Alert($"Device Name: {DeviceName}", "CIMScan Remote Manager");
+                //_userDialogs.Alert($"Device Name: {DeviceName}", "CIMScan Remote Manager");
 
                 // Init our DA-12
                 //InitRemote();
