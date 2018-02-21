@@ -82,6 +82,7 @@
                   RefreshCommand="{Binding RefreshCommand}"
                   IsRefreshing="{Binding IsRefreshing, Mode=OneWay}"
                   RowHeight="75" Margin="10"
+                  BackgroundColor="Transparent"
                   SeparatorColor="Transparent"
                   ItemTemplate="{StaticResource DeviceItemTemplate}">
         </ListView>
@@ -105,7 +106,7 @@
       </Grid>
     </pages:BasePage>
     
-    <pages:BasePage Title="Search for All Devices" Icon="ic_bluetooth-search.png">
+    <pages:BasePage Title="Search for All Devices" BackgroundColor="#255886" BackgroundImage="bg_app.jpg" Icon="ic_bluetooth-search.png">
       <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
@@ -131,6 +132,7 @@
                  RefreshCommand="{Binding RefreshCommand}"
                  IsRefreshing="{Binding IsRefreshing, Mode=OneWay}"
                  RowHeight="75" Margin="10"
+                 BackgroundColor="Transparent" 
                  SeparatorColor="Transparent"
                  ItemTemplate="{StaticResource DeviceItemTemplate}">
         </ListView>
