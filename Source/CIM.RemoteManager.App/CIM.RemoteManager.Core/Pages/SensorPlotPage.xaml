@@ -1,15 +1,16 @@
 ﻿<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CIM.RemoteManager.Core.Pages.SensorPlotPage" 
-             BackgroundColor="#255886">
+             BackgroundColor="#255886" 
+             Title="Sensor Plot">
 
-    <ContentPage Title="Sensor Plot">
+    <ContentPage Title="Sensor Plot" Icon="ic_sensor-plot.png">
         <!-- Background -->
         <Image
             Aspect="AspectFill"
             RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width}"
             RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height}" 
-            Source="appbackground.jpg">
+            Source="bgapplication.jpg">
         </Image>
 
         <StackLayout BackgroundColor="#AE2C3B" Padding="10" HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsStateOn, Converter={StaticResource BooleanToFalseConverter}}">

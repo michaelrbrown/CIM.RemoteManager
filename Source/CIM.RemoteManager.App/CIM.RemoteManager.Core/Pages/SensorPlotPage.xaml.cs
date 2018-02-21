@@ -10,7 +10,15 @@ namespace CIM.RemoteManager.Core.Pages
         {
             InitializeComponent();
             BindingContext = this;
-            
+
+            // Add sensor statistics tabbed page
+            var sensorStatisticsPage = new SensorStatisticsPage
+            {
+                Title = "Sensor Statistics",
+                Icon = "ic_sensor-statistics.png"
+            };
+            Children.Add(sensorStatisticsPage);
+
             //SensorBusyIndicator.IsBusy = false;
         }
 
