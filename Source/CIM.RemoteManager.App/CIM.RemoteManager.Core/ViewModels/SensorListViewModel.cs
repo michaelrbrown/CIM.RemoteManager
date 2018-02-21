@@ -729,7 +729,9 @@ namespace CIM.RemoteManager.Core.ViewModels
             {
                 //var bundle = new MvxBundle(new Dictionary<string, string>(Bundle.Data) { { SensorIdKey, serialNumber } });
                 // Navigate to sensor plot
-                ShowViewModel<SensorPlotViewModel>(new MvxBundle(new Dictionary<string, string>(Bundle.Data) { { SensorIdKey, serialNumber } }));
+                //ShowViewModel<SensorPlotViewModel>(new MvxBundle(new Dictionary<string, string>(Bundle.Data) { { SensorIdKey, serialNumber } }));
+                var bundle = new MvxBundle(new Dictionary<string, string>(Bundle.Data) { { SensorIdKey, serialNumber } });
+                ShowViewModel<SensorPlotViewModel>(bundle);
             }
         }
 
