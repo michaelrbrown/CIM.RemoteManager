@@ -80,7 +80,6 @@ namespace CIM.RemoteManager.Core.ViewModels
 
         protected Task<IService> GetServiceFromBundleAsync(IMvxBundle parameters)
         {
-
             var device = GetDeviceFromBundle(parameters);
             if (device == null || !parameters.Data.ContainsKey(ServiceIdKey))
             {
