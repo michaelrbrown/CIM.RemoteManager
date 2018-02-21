@@ -71,6 +71,13 @@ namespace CIM.RemoteManager.Core.ViewModels
             return Adapter.ConnectedDevices.FirstOrDefault(d => d.Id.ToString().Equals(deviceId));
         }
 
+        protected IDevice GetSensorDeviceBundle(IMvxBundle parameters)
+        {
+            var deviceId = parameters.Data[DeviceIdKey];
+
+            return Adapter.ConnectedDevices.FirstOrDefault(d => d.Id.ToString().Equals(deviceId));
+        }
+
         protected Task<IService> GetServiceFromBundleAsync(IMvxBundle parameters)
         {
 
@@ -95,19 +102,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             var characteristicId = parameters.Data[CharacteristicIdKey];
             return await service.GetCharacteristicAsync(Guid.Parse(characteristicId));
         }
-
-        protected async Task<ICharacteristic> GetSensorBundleAsync(IMvxBundle parameters)
-        {
-            var service = await GetServiceFromBundleAsync(parameters);
-            if (service == null || !parameters.Data.ContainsKey(CharacteristicIdKey))
-            {
-                return null;
-            }
-
-            var characteristicId = parameters.Data[CharacteristicIdKey];
-            return await service.GetCharacteristicAsync(Guid.Parse(characteristicId));
-        }
-
+        
         protected async Task<IDescriptor> GetDescriptorFromBundleAsync(IMvxBundle parameters)
         {
             var characteristic = await GetCharacteristicFromBundleAsync(parameters);

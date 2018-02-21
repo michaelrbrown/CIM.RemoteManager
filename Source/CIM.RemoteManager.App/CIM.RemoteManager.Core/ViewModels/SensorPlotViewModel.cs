@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -290,7 +289,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 _userDialogs.Alert($"Serial Number: {parameters.Data[SensorIdKey]}", "CIMScan Remote Manager");
 
                 // Get device from bundle
-                _device = GetDeviceFromBundle(parameters);
+                _device = GetSensorDeviceBundle(parameters);
 
                 // Set device name
                 DeviceName = _device.Name;
