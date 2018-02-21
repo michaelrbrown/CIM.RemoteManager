@@ -15,13 +15,16 @@
         Source="appbackground.jpg">
     </Image>
 
-    <!-- Activity Indicator -->
-    <xForms:SfBusyIndicator x:Name="SensorBusyIndicator" 
-                            TextColor="{DynamicResource AppAccentColor}" 
-                            IsVisible="{Binding IsLoading,Mode=TwoWay}" 
-                            IsBusy="{Binding IsLoading,Mode=TwoWay}"  
-                            AnimationType="ECG" 
-                            ViewBoxWidth="150" ViewBoxHeight="150" />
+    <StackLayout BackgroundColor="#AE2C3B" Padding="10" HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsStateOn, Converter={StaticResource BooleanToFalseConverter}}">
+        <Grid HorizontalOptions="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Image Source="bluetooth-info.png" VerticalOptions="Center" HorizontalOptions="End" />
+            <Label Grid.Column="1" Text="{Binding StateText}" TextColor="#FFFFFF" FontSize="18" VerticalOptions="Center"/>
+        </Grid>
+    </StackLayout>
 
     <!-- Sensor ListView -->
     <syncfusion:SfListView x:Name="SensorLiistView" Margin="0" 

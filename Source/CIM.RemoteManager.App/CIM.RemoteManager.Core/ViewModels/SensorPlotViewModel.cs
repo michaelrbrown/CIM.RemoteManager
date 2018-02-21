@@ -17,6 +17,10 @@ namespace CIM.RemoteManager.Core.ViewModels
     public class SensorPlotViewModel : BaseViewModel
     {
         /// <summary>
+        /// Bluetooth LE device
+        /// </summary>
+        private readonly IBluetoothLE _bluetoothLe;
+        /// <summary>
         /// User dialogs
         /// </summary>
         private readonly IUserDialogs _userDialogs;
@@ -42,6 +46,16 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// Let our UI know we have updates started / stopped
         /// </summary>
         public bool UpdatesStarted;
+
+        /// <summary>
+        /// Is Bluetooth LE state on?
+        /// </summary>
+        public bool IsStateOn => _bluetoothLe.IsOn;
+
+        /// <summary>
+        /// Bluetooth LE states
+        /// </summary>
+        public string StateText => GetStateText();
 
         /// <summary>
         /// Convert our characteristics values from bytes to string as they are incoming
@@ -119,16 +133,20 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// <summary>
         /// Sensor view model constructor
         /// </summary>
+        /// <param name="bluetoothLe"></param>
         /// <param name="adapter"></param>
         /// <param name="userDialogs"></param>
-        public SensorPlotViewModel(IAdapter adapter, IUserDialogs userDialogs) : base(adapter)
+        public SensorPlotViewModel(IBluetoothLE bluetoothLe, IAdapter adapter, IUserDialogs userDialogs) : base(adapter)
         {
             try
             {
+                _bluetoothLe = bluetoothLe;
                 _userDialogs = userDialogs;
-                
+                // Events
+                _bluetoothLe.StateChanged += OnStateChanged;
+
                 // Register event for device connection lost
-                //Adapter.DeviceConnectionLost += OnDeviceConnectionLost;
+                Adapter.DeviceConnectionLost += OnDeviceConnectionLost;
 
                 // Sensor data
                 _sensors = new FullyObservableCollection<Sensor>();
@@ -149,6 +167,22 @@ namespace CIM.RemoteManager.Core.ViewModels
 
         }
 
+        /// <summary>
+        /// Event to handle Bluetooth LE state changed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnStateChanged(object sender, BluetoothStateChangedArgs e)
+        {
+            RaisePropertyChanged(nameof(IsStateOn));
+            RaisePropertyChanged(nameof(StateText));
+        }
+
+        /// <summary>
+        /// Event to handle Bluetooth connection changes
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnDeviceConnectionLost(object sender, DeviceErrorEventArgs e)
         {
             if (UpdatesStarted)
@@ -158,6 +192,33 @@ namespace CIM.RemoteManager.Core.ViewModels
 
         }
 
+        /// <summary>
+        /// Setup all the possible Bluetooth LE states
+        /// </summary>
+        /// <returns></returns>
+        private string GetStateText()
+        {
+            switch (_bluetoothLe.State)
+            {
+                case BluetoothState.Unknown:
+                    return "Unknown Bluetooth LE state.";
+                case BluetoothState.Unavailable:
+                    return "Bluetooth LE is not available on this device.";
+                case BluetoothState.Unauthorized:
+                    return "You are not allowed to use Bluetooth LE.";
+                case BluetoothState.TurningOn:
+                    return "Bluetooth LE is warming up, please wait...";
+                case BluetoothState.On:
+                    return "Bluetooth LE is on.";
+                case BluetoothState.TurningOff:
+                    return "Bluetooth LE is turning off...";
+                case BluetoothState.Off:
+                    return "Bluetooth LE is off. Please enable on your device.";
+                default:
+                    return "Unknown Bluetooth LE state.";
+            }
+        }
+        
         /// <summary>
         /// Initialization of bluetooth service characteristics.
         /// Refresh command sent to remote to start sensor data flow.

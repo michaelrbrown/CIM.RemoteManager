@@ -1,12 +1,7 @@
-﻿<pages:BaseTabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:pages="clr-namespace:CIM.RemoteManager.Core.Pages;assembly=CIM.RemoteManager.Core"
              x:Class="CIM.RemoteManager.Core.Pages.SensorPlotPage" 
              Title="Sensor Plot">
 
-    <TabbedPage.Children>
-        <pages:SensorPlotPage Title="Sensor Plot" />
-        <pages:SensorStatisticsPage Title="Sensor Statistics" />
-    </TabbedPage.Children>
 
-</pages:BaseTabbedPage>
+</ContentPage>

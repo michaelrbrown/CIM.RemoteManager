@@ -246,7 +246,6 @@ namespace CIM.RemoteManager.Core.ViewModels
         {
             RaisePropertyChanged(nameof(IsStateOn));
             RaisePropertyChanged(nameof(StateText));
-            //TryStartScanning();
         }
 
         /// <summary>

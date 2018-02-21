@@ -18,6 +18,10 @@ namespace CIM.RemoteManager.Core.ViewModels
     public class SensorListViewModel : BaseViewModel
     {
         /// <summary>
+        /// Bluetooth LE device
+        /// </summary>
+        private readonly IBluetoothLE _bluetoothLe;
+        /// <summary>
         /// User dialogs
         /// </summary>
         private readonly IUserDialogs _userDialogs;
@@ -43,6 +47,16 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// Let our UI know we have updates started / stopped
         /// </summary>
         public bool UpdatesStarted;
+
+        /// <summary>
+        /// Is Bluetooth LE state on?
+        /// </summary>
+        public bool IsStateOn => _bluetoothLe.IsOn;
+
+        /// <summary>
+        /// Bluetooth LE states
+        /// </summary>
+        public string StateText => GetStateText();
 
         /// <summary>
         /// Convert our characteristics values from bytes to string as they are incoming
@@ -126,13 +140,17 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// <summary>
         /// Sensor view model constructor
         /// </summary>
+        /// <param name="bluetoothLe"></param>
         /// <param name="adapter"></param>
         /// <param name="userDialogs"></param>
-        public SensorListViewModel(IAdapter adapter, IUserDialogs userDialogs) : base(adapter)
+        public SensorListViewModel(IBluetoothLE bluetoothLe, IAdapter adapter, IUserDialogs userDialogs) : base(adapter)
         {
             try
             {
+                _bluetoothLe = bluetoothLe;
                 _userDialogs = userDialogs;
+                // Events
+                _bluetoothLe.StateChanged += OnStateChanged;
 
                 // Register event for device connection lost
                 Adapter.DeviceConnectionLost += OnDeviceConnectionLost;
@@ -155,7 +173,23 @@ namespace CIM.RemoteManager.Core.ViewModels
             base.Resume();
             
         }
+        
+        /// <summary>
+        /// Event to handle Bluetooth LE state changed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnStateChanged(object sender, BluetoothStateChangedArgs e)
+        {
+            RaisePropertyChanged(nameof(IsStateOn));
+            RaisePropertyChanged(nameof(StateText));
+        }
 
+        /// <summary>
+        /// Event to handle Bluetooth connection changes
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnDeviceConnectionLost(object sender, DeviceErrorEventArgs e)
         {
             if (UpdatesStarted)
@@ -163,6 +197,33 @@ namespace CIM.RemoteManager.Core.ViewModels
                 StopUpdates();
             }
 
+        }
+
+        /// <summary>
+        /// Setup all the possible Bluetooth LE states
+        /// </summary>
+        /// <returns></returns>
+        private string GetStateText()
+        {
+            switch (_bluetoothLe.State)
+            {
+                case BluetoothState.Unknown:
+                    return "Unknown Bluetooth LE state.";
+                case BluetoothState.Unavailable:
+                    return "Bluetooth LE is not available on this device.";
+                case BluetoothState.Unauthorized:
+                    return "You are not allowed to use Bluetooth LE.";
+                case BluetoothState.TurningOn:
+                    return "Bluetooth LE is warming up, please wait...";
+                case BluetoothState.On:
+                    return "Bluetooth LE is on.";
+                case BluetoothState.TurningOff:
+                    return "Bluetooth LE is turning off...";
+                case BluetoothState.Off:
+                    return "Bluetooth LE is off. Please enable on your device.";
+                default:
+                    return "Unknown Bluetooth LE state.";
+            }
         }
 
         /// <summary>
@@ -562,7 +623,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                     var sensorListItemA = Sensors.FirstOrDefault(s => s.SensorIndex == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('A') + 1).SafeConvert<int>(0));
                     if (sensorListItemA != null)
                     {
-                        _userDialogs.Alert($"(A) Sensor Index: { splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('A') + 1).SafeConvert<int>(0).ToString()}", "CIMScan RemoteManager");
+                        //_userDialogs.Alert($"(A) Sensor Index: { splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('A') + 1).SafeConvert<int>(0).ToString()}", "CIMScan RemoteManager");
                        
                         // Update sensor items in list
                         sensorListItemA.SensorIndex = splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('A') + 1).SafeConvert<int>(0);
@@ -579,7 +640,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                     }
                     else
                     {
-                        _userDialogs.Alert($"(A) (NEW REC) Sensor Index: {splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('A') + 1).SafeConvert<int>(0).ToString()}", "CIMScan RemoteManager");
+                        //_userDialogs.Alert($"(A) (NEW REC) Sensor Index: {splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('A') + 1).SafeConvert<int>(0).ToString()}", "CIMScan RemoteManager");
                         //_userDialogs.Alert($"(A) Serial Number: {splitSensorValues[1]}", "CIMScan RemoteManager");
                         //_userDialogs.Alert($"(A) Average Value: {splitSensorValues[7].SafeHexToDouble().ToString()}", "CIMScan RemoteManager");
 
@@ -608,7 +669,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                     var sensorListItemB = Sensors.FirstOrDefault(s => s.SensorIndex == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('B') + 1).SafeConvert<int>(0));
                     if (sensorListItemB != null)
                     {
-                        _userDialogs.Alert($"(B) Sensor Index: {splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('B') + 1).SafeConvert<int>(0).ToString()}", "CIMScan RemoteManager");
+                        //_userDialogs.Alert($"(B) Sensor Index: {splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('B') + 1).SafeConvert<int>(0).ToString()}", "CIMScan RemoteManager");
                         //_userDialogs.Alert($"(B) Sensor Index: {splitSensorValues[0]}", "CIMScan RemoteManager");
                         //_userDialogs.Alert($"(B) Average Value: {splitSensorValues[2].SafeHexToDouble().ToString()}", "CIMScan RemoteManager");
 

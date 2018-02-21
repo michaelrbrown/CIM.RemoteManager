@@ -1,15 +1,8 @@
-﻿<pages:BaseTabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:pages="clr-namespace:CIM.RemoteManager.Core.Pages;assembly=CIM.RemoteManager.Core"
              x:Class="CIM.RemoteManager.Core.Pages.SensorStatisticsPage" 
              BackgroundImage="bg_app.jpg"
              Title="Sensor Statistics">
 
-    <pages:SensorPlotPage Title="Sensor Plot" />
-    <NavigationPage Title="Sensor Statistics" Icon="schedule.png">
-        <x:Arguments>
-            <pages:SensorStatisticsPage />
-        </x:Arguments>
-    </NavigationPage>
 
-</pages:BaseTabbedPage>
+</ContentPage>
