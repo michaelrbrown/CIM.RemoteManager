@@ -1,7 +1,7 @@
 ﻿<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CIM.RemoteManager.Core.Pages.SensorPlotPage" 
-             BackgroundColor="#255886" 
+             BackgroundColor="#255886" BackgroundImage="bg_app.jpg" 
              Title="Sensor Plot">
 
     <ContentPage Title="Sensor Plot" Icon="ic_sensor-plot.png">

@@ -468,13 +468,13 @@
     <BundleResource Include="Resources\app_bg_sensor.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_sensor-plot.png" />
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="Resources\bgapplication.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\ic_sensor-statistics.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_sensor-plot.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -2,7 +2,8 @@
 <pages:BaseTabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:pages="clr-namespace:CIM.RemoteManager.Core.Pages;assembly=CIM.RemoteManager.Core"
-             x:Class="CIM.RemoteManager.Core.Pages.DeviceListPage"
+             x:Class="CIM.RemoteManager.Core.Pages.DeviceListPage" 
+             BackgroundColor="#255886" BackgroundImage="bg_app.jpg" 
              Title="Discover Devices"
              x:Name="DevicePage">
 
