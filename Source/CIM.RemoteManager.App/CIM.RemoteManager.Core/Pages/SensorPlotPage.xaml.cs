@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using System;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace CIM.RemoteManager.Core.Pages
@@ -11,6 +12,8 @@ namespace CIM.RemoteManager.Core.Pages
             InitializeComponent();
             BindingContext = this;
 
+            this.CurrentPageChanged += CurrentPageHasChanged;
+
             // Add sensor statistics tabbed page
             var sensorStatisticsPage = new SensorStatisticsPage
             {
@@ -20,6 +23,11 @@ namespace CIM.RemoteManager.Core.Pages
             Children.Add(sensorStatisticsPage);
 
             //SensorBusyIndicator.IsBusy = false;
+        }
+
+        private void CurrentPageHasChanged(object sender, EventArgs e)
+        {
+            this.Title = this.CurrentPage.Title;
         }
 
         /// <summary>

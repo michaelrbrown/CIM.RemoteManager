@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:pages="clr-namespace:CIM.RemoteManager.Core.Pages;assembly=CIM.RemoteManager.Core"
              x:Class="CIM.RemoteManager.Core.Pages.DeviceListPage" 
-             BackgroundColor="#255886" BackgroundImage="bg_app.jpg" 
              Title="Discover Devices"
              x:Name="DevicePage">
 
@@ -56,7 +55,7 @@
   
   <pages:BaseTabbedPage.Children>
 
-    <pages:BasePage Title="CIMScan Devices" Icon="ic_bluetooth-connected.png">
+    <pages:BasePage Title="CIMScan Devices" BackgroundColor="#255886" BackgroundImage="bg_app.jpg" Icon="ic_bluetooth-connected.png">
       <Grid>
         <Grid.RowDefinitions>
           <RowDefinition Height="Auto"></RowDefinition>

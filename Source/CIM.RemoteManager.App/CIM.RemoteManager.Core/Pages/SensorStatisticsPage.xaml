@@ -4,5 +4,6 @@
              BackgroundImage="bg_app.jpg"
              Title="Sensor Statistics">
 
+    <Label Text="stats page"></Label>
 
 </ContentPage>
