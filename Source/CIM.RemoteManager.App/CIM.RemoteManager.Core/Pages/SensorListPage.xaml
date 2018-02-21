@@ -97,7 +97,7 @@
             <DataTemplate>
                 <!-- Margin: left, top, right, bottom -->
                 <StackLayout Spacing="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="60" BackgroundColor="{DynamicResource RemoteNameBackgroundColor}" Opacity=".6">
-                    <Label Text="{Binding CharacteristicValue, StringFormat='  Incoming Value: {0:N}'}" TextColor="{DynamicResource AppLightColor}" FontSize="16" Margin="5"  HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" VerticalTextAlignment="Center" LineBreakMode="MiddleTruncation" />
+                    <Label Text="{Binding CharacteristicValue, StringFormat=' Incoming Value: {0:N}'}" TextColor="{DynamicResource AppLightColor}" FontSize="16" Margin="5"  HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" VerticalTextAlignment="Center" LineBreakMode="MiddleTruncation" />
                 </StackLayout>
             </DataTemplate>
         </syncfusion:SfListView.FooterTemplate>

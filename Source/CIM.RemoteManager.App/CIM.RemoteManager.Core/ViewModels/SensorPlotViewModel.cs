@@ -189,7 +189,6 @@ namespace CIM.RemoteManager.Core.ViewModels
             {
                 StopUpdates();
             }
-
         }
 
         /// <summary>

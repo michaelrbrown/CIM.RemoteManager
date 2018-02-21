@@ -246,6 +246,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         {
             RaisePropertyChanged(nameof(IsStateOn));
             RaisePropertyChanged(nameof(StateText));
+            RaisePropertyChanged(nameof(CanConnectToPreviousDevice));
         }
 
         /// <summary>

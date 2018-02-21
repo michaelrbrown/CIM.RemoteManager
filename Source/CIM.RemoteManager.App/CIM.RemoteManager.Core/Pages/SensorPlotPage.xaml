@@ -3,5 +3,15 @@
              x:Class="CIM.RemoteManager.Core.Pages.SensorPlotPage" 
              Title="Sensor Plot">
 
+    <StackLayout BackgroundColor="#AE2C3B" Padding="10" HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsStateOn, Converter={StaticResource BooleanToFalseConverter}}">
+        <Grid HorizontalOptions="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Image Source="bluetooth-info.png" VerticalOptions="Center" HorizontalOptions="End" />
+            <Label Grid.Column="1" Text="{Binding StateText}" TextColor="#FFFFFF" FontSize="18" VerticalOptions="Center"/>
+        </Grid>
+    </StackLayout>
 
 </ContentPage>
