@@ -24,6 +24,21 @@
             </Grid>
         </StackLayout>
 
+        <!-- Margin: left, top, right, bottom -->
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Transparent">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackLayout Grid.Row="0" Grid.Column="0" Spacing="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="40" BackgroundColor="{DynamicResource RemoteNameBackgroundColor}">
+                <Label Text="{Binding SensorSerialNumber}" TextColor="{DynamicResource AppLightColor}" FontSize="20" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" />
+            </StackLayout>
+
+        </Grid>
 
         <Label Text="plots page"></Label>
 
