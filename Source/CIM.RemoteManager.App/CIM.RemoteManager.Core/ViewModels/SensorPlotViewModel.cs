@@ -287,7 +287,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             {
                 base.InitFromBundle(parameters);
 
-                //_userDialogs.Alert($"Serial Number: {parameters.Data[SensorIdKey]}", "CIMScan Remote Manager");
+                _userDialogs.Alert($"Serial Number: {parameters.Data[SensorIdKey]}", "CIMScan Remote Manager");
 
                 // Get device from bundle
                 _device = GetDeviceFromBundle(parameters);
