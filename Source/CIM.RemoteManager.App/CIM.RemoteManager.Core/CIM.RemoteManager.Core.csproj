@@ -58,7 +58,7 @@
     <Compile Include="Models\BindableBase.cs" />
     <Compile Include="Models\Device.cs" />
     <Compile Include="Models\MessageCounters.cs" />
-    <Compile Include="Models\SensorPlotData.cs" />
+    <Compile Include="Models\SensorPlot.cs" />
     <Compile Include="Models\Sensor.cs" />
     <Compile Include="Models\SensorStatisticsItem.cs" />
     <Compile Include="Models\SensorType.cs" />

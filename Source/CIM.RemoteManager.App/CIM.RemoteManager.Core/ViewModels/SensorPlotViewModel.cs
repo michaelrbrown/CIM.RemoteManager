@@ -67,18 +67,28 @@ namespace CIM.RemoteManager.Core.ViewModels
         public string DeviceName { get; set; }
 
         /// <summary>
+        /// Sensor index (unique id)
+        /// </summary>
+        public string SensorIndex { get; set; }
+
+        /// <summary>
         /// Sensor serial number (unique id)
         /// </summary>
         public string SensorSerialNumber { get; set; }
 
         /// <summary>
+        /// Sensor
+        /// </summary>
+        public Sensor Sensor { get; set; }
+
+        /// <summary>
         /// Sensor collection
         /// </summary>
-        FullyObservableCollection<Sensor> _sensors;
-        public FullyObservableCollection<Sensor> Sensors
+        FullyObservableCollection<SensorPlot> _sensorPlotCollection;
+        public FullyObservableCollection<SensorPlot> SensorPlotCollection
         {
-            get => _sensors;
-            set => SetProperty(ref _sensors, value);
+            get => _sensorPlotCollection;
+            set => SetProperty(ref _sensorPlotCollection, value);
         }
 
         /// <summary>
@@ -119,7 +129,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 Adapter.DeviceConnectionLost += OnDeviceConnectionLost;
 
                 // Sensor data
-                _sensors = new FullyObservableCollection<Sensor>();
+                _sensorPlotCollection = new FullyObservableCollection<SensorPlot>();
             }
             catch (Exception ex)
             {
@@ -253,9 +263,9 @@ namespace CIM.RemoteManager.Core.ViewModels
             {
                 base.InitFromBundle(parameters);
 
-                //_userDialogs.Alert($"Serial Number: {parameters.Data[SensorIdKey]}", "CIMScan Remote Manager");
+                _userDialogs.Alert($"Sensor Index: {SensorIndex}", "CIMScan Remote Manager");
 
-                RaisePropertyChanged(nameof(SensorSerialNumber));
+                RaisePropertyChanged(nameof(SensorIndex));
 
                 // Get device from bundle
                 _device = GetSensorDeviceBundle(parameters);
@@ -368,7 +378,6 @@ namespace CIM.RemoteManager.Core.ViewModels
             {
                 HockeyApp.MetricsManager.TrackEvent($"(CharacteristicOnValueUpdated) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
             }
-
         }
 
         /// <summary>
@@ -427,17 +436,17 @@ namespace CIM.RemoteManager.Core.ViewModels
             _userDialogs.Alert($"(J) Buffered Data: {sensorValues}", "CIMScan RemoteManager");
 
 
-            // "J" Sensor data serialization
-            //var SensorPlotData = new SensorPlotData
-            //{
-            //    Points = splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('J') + 1).SafeConvert<int>(0),
-            //    TimeStamp = splitSensorValues[6].SafeHexToInt(),
-            //    CurrentValue = splitSensorValues[8].SafeHexToDouble()
-            //};
+            // "J" Sensor plot data serialization
+            var sensorPlot = new SensorPlot
+            {
+                Points = splitSensorValues[0].SafeHexToInt(),
+                TimeStamp = splitSensorValues[6].SafeHexToInt(),
+                CurrentValue = splitSensorValues[8].SafeHexToDouble()
+            };
             // Add sensor to list
-            //Sensors.Add(SensorPlotData);
+            SensorPlotCollection.Add(sensorPlot);
 
         }
-        
+
     }
 }

@@ -1,9 +1,12 @@
-﻿namespace CIM.RemoteManager.Core.Models
+﻿using System;
+using CIM.RemoteManager.Core.Helpers;
+
+namespace CIM.RemoteManager.Core.Models
 {
     /// <summary>
     /// A DA-12 sensor plot data
     /// </summary>
-    public class SensorPlotData : BindableBase
+    public class SensorPlot : BindableBase
     {
        
         private int _points;
@@ -19,14 +22,17 @@
             get => _timeStamp;
             set => SetProperty(ref _timeStamp, value);
         }
-        
+
+        /// <summary>
+        /// Converting Unix to Windows DateTime
+        /// </summary>
+        public DateTime? DateTimeStamp => _timeStamp.UnixTimeStampToDateTime();
+
         private double _currentValue;
         public double CurrentValue
         {
             get => _currentValue;
             set => SetProperty(ref _currentValue, value);
         }
-        
-
     }
 }

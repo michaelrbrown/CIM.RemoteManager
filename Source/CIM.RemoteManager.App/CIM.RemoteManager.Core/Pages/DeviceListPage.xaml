@@ -26,7 +26,7 @@
               </DataTrigger>
             </Grid.Triggers>
 
-              <StackLayout Margin="5" Orientation="Vertical" VerticalOptions="CenterAndExpand">
+              <StackLayout Margin="5" Orientation="Vertical" VerticalOptions="CenterAndExpand" BackgroundColor="#FFFFFF">
                   <Grid>
                       <Grid.ColumnDefinitions>
                           <ColumnDefinition Width="5"></ColumnDefinition>

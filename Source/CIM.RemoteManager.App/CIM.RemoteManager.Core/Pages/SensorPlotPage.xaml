@@ -1,5 +1,7 @@
 ﻿<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:chart="clr-namespace:Telerik.XamarinForms.Chart;assembly=Telerik.XamarinForms.Chart"
+             xmlns:viewModels="clr-namespace:CIM.RemoteManager.Core.ViewModels;assembly=CIM.RemoteManager.Core"
              x:Class="CIM.RemoteManager.Core.Pages.SensorPlotPage" 
              BackgroundColor="#255886" BackgroundImage="bg_app.jpg" 
              Title="Sensor Plot">
@@ -40,7 +42,24 @@
 
         </Grid>
 
-        <Label Text="plots page"></Label>
+        <chart:RadCartesianChart SelectionPaletteName="LightSelected">
+            <chart:RadCartesianChart.HorizontalAxis>
+                <chart:DateTimeContinuousAxis LabelFormat="yy" GapLength="0.5" PlotMode="BetweenTicks" MajorStepUnit="Year" MajorStep="2" />
+            </chart:RadCartesianChart.HorizontalAxis>
+            <chart:RadCartesianChart.VerticalAxis>
+                <chart:NumericalAxis/>
+            </chart:RadCartesianChart.VerticalAxis>
+            <chart:RadCartesianChart.Series>
+                <chart:BarSeries ItemsSource="{Binding SensorPlotCollection}">
+                    <chart:BarSeries.ValueBinding>
+                        <chart:PropertyNameDataPointBinding PropertyName="CurrentValue"/>
+                    </chart:BarSeries.ValueBinding>
+                    <chart:BarSeries.CategoryBinding>
+                        <chart:PropertyNameDataPointBinding PropertyName="DateTimeStamp"/>
+                    </chart:BarSeries.CategoryBinding>
+                </chart:BarSeries>
+            </chart:RadCartesianChart.Series>
+        </chart:RadCartesianChart>
 
     </ContentPage>
     
