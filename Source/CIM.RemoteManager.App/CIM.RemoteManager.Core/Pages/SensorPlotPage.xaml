@@ -2,6 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:chart="clr-namespace:Telerik.XamarinForms.Chart;assembly=Telerik.XamarinForms.Chart"
              xmlns:viewModels="clr-namespace:CIM.RemoteManager.Core.ViewModels;assembly=CIM.RemoteManager.Core"
+             xmlns:xForms="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms"
              x:Class="CIM.RemoteManager.Core.Pages.SensorPlotPage" 
              BackgroundColor="#ABB6BB" 
              Title="Sensor Plot">
@@ -14,6 +15,8 @@
             RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height}" 
             Source="bgapplication.jpg">
         </Image>
+
+
 
         <StackLayout BackgroundColor="#AE2C3B" Padding="10" HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsStateOn, Converter={StaticResource BooleanToFalseConverter}}">
             <Grid HorizontalOptions="Center">
@@ -29,8 +32,13 @@
         <!-- Margin: left, top, right, bottom -->
         <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Transparent">
 
+            <Grid.RowDefinitions>
+                <RowDefinition Height="75"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
             <!-- Margin: left, top, right, bottom -->
-            <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Transparent">
+            <Grid Grid.Row="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Transparent">
 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"></RowDefinition>
@@ -54,27 +62,18 @@
 
             </Grid>
 
+            <xForms:SfChart x:Name="SensorPlotChart" Grid.Row="1">
+
+                <xForms:SfChart.Series>
+
+                    <xForms:ColumnSeries ItemsSource="{Binding SensorPlotCollection}"/>
+
+                </xForms:SfChart.Series>
+
+            </xForms:SfChart>
+
         </Grid>
 
-        <chart:RadCartesianChart SelectionPaletteName="LightSelected">
-            <chart:RadCartesianChart.HorizontalAxis>
-                <chart:DateTimeContinuousAxis LabelFormat="yy" GapLength="0.5" PlotMode="BetweenTicks" MajorStepUnit="Year" MajorStep="2" />
-            </chart:RadCartesianChart.HorizontalAxis>
-            <chart:RadCartesianChart.VerticalAxis>
-                <chart:NumericalAxis/>
-            </chart:RadCartesianChart.VerticalAxis>
-            <chart:RadCartesianChart.Series>
-                <chart:BarSeries ItemsSource="{Binding SensorPlotCollection}">
-                    <chart:BarSeries.ValueBinding>
-                        <chart:PropertyNameDataPointBinding PropertyName="CurrentValue"/>
-                    </chart:BarSeries.ValueBinding>
-                    <chart:BarSeries.CategoryBinding>
-                        <chart:PropertyNameDataPointBinding PropertyName="DateTimeStamp"/>
-                    </chart:BarSeries.CategoryBinding>
-                </chart:BarSeries>
-            </chart:RadCartesianChart.Series>
-        </chart:RadCartesianChart>
-
     </ContentPage>
-    
+
 </TabbedPage>

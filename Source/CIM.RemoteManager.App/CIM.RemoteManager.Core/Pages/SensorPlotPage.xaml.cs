@@ -1,5 +1,6 @@
 ﻿using System;
 using CIM.RemoteManager.Core.ViewModels;
+using Syncfusion.SfChart.XForms;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -22,6 +23,8 @@ namespace CIM.RemoteManager.Core.Pages
                 Icon = "ic_sensor-statistics.png"
             };
             Children.Add(sensorStatisticsPage);
+
+           
 
             //SensorBusyIndicator.IsBusy = false;
         }
