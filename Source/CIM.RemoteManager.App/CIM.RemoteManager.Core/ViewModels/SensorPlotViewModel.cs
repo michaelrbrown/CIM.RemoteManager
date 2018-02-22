@@ -263,7 +263,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             {
                 base.InitFromBundle(parameters);
 
-                _userDialogs.Alert($"Sensor Index: {parameters.Data[SensorIdKey]}", "CIMScan Remote Manager");
+                //_userDialogs.Alert($"Sensor Index: {parameters.Data[SensorIdKey]}", "CIMScan Remote Manager");
 
                 SensorIndex = parameters.Data[SensorIdKey];
 

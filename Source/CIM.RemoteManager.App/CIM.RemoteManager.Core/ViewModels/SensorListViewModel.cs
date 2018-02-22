@@ -556,7 +556,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                         //_userDialogs.Alert($"(B) Sensor Index: {splitSensorValues[0]}", "CIMScan RemoteManager");
                         //_userDialogs.Alert($"(B) Average Value: {splitSensorValues[2].SafeHexToDouble().ToString()}", "CIMScan RemoteManager");
 
-                        sensorListItemB.SensorIndex = splitSensorValues[0].SafeHexToInt();
+                        //sensorListItemB.SensorIndex = splitSensorValues[0].SafeHexToInt();
                         sensorListItemB.TimeStamp = splitSensorValues[1].SafeHexToInt();
                         sensorListItemB.AverageValue = splitSensorValues[2].SafeHexToDouble();
                         sensorListItemB.AlarmStatus = splitSensorValues[3].SafeHexToInt();
