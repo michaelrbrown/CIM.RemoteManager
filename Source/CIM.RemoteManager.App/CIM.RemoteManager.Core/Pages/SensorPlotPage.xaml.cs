@@ -1,4 +1,5 @@
 ﻿using System;
+using CIM.RemoteManager.Core.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -37,10 +38,10 @@ namespace CIM.RemoteManager.Core.Pages
         /// <param name="e"></param>
         private void SensorUpdatesSwitchToggled(object sender, ToggledEventArgs e)
         {
-            // Get instance of SensorListViewModel
-            //var sensorListViewModel = (SensorListViewModel)this.BindingContext;
+            // Get instance of SensorPlotViewModel
+            var sensorPlotViewModel = (SensorPlotViewModel)this.BindingContext;
             // Toggle sensor updates
-            //sensorListViewModel.ToggleUpdatesCommand.Execute(null);
+            sensorPlotViewModel.ToggleUpdatesCommand.Execute(null);
         }
 
     }
