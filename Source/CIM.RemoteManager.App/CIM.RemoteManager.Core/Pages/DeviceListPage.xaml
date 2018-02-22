@@ -16,7 +16,7 @@
                       Text="Disconnect"/>
           </ViewCell.ContextActions>
 
-          <Grid>
+          <Grid Padding="10">
             
             <Grid.Triggers>
               <DataTrigger TargetType="Grid"
@@ -82,6 +82,7 @@
                   RefreshCommand="{Binding RefreshCommand}"
                   IsRefreshing="{Binding IsRefreshing, Mode=OneWay}"
                   RowHeight="75" Margin="10"
+                  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
                   BackgroundColor="Transparent"
                   SeparatorColor="Transparent"
                   ItemTemplate="{StaticResource DeviceItemTemplate}">
@@ -131,7 +132,8 @@
                  IsPullToRefreshEnabled="True"
                  RefreshCommand="{Binding RefreshCommand}"
                  IsRefreshing="{Binding IsRefreshing, Mode=OneWay}"
-                 RowHeight="75" Margin="10"
+                 RowHeight="75" Margin="10" 
+                 HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
                  BackgroundColor="Transparent" 
                  SeparatorColor="Transparent"
                  ItemTemplate="{StaticResource DeviceItemTemplate}">

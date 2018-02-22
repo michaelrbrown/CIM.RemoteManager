@@ -576,7 +576,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             if (sensor != null)
             {
                 // Navigate to sensor plot
-                var bundle = new MvxBundle(new Dictionary<string, string>(Bundle.Data) { { SensorIdKey, sensor.SerialNumber } });
+                var bundle = new MvxBundle(new Dictionary<string, string>(Bundle.Data) { { SensorIdKey, sensor.SensorIndex.ToString() } });
                 ShowViewModel<SensorPlotViewModel>(bundle);
             }
         }
