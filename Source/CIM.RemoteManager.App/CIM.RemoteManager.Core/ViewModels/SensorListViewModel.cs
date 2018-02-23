@@ -520,6 +520,8 @@ namespace CIM.RemoteManager.Core.ViewModels
                         sensorListItemA.CurrentValue = splitSensorValues[8].SafeHexToDouble();
                         sensorListItemA.DecimalLocation = splitSensorValues[9].SafeConvert<int>(0);
                         sensorListItemA.StatisticsTotalCalcSettings = splitSensorValues[10];
+                        // Notify property changed to update UI
+                        RaisePropertyChanged(() => SensorCollection);
                     }
                     else
                     {
@@ -561,6 +563,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                         sensorListItemB.AverageValue = splitSensorValues[2].SafeHexToDouble();
                         sensorListItemB.AlarmStatus = splitSensorValues[3].SafeHexToInt();
                     }
+                    // Notify property changed to update UI
                     RaisePropertyChanged(() => SensorCollection);
                     break;
                 default:

@@ -439,6 +439,8 @@ namespace CIM.RemoteManager.Core.ViewModels
             // Split by tab delimiter
             string[] splitSensorValues = sensorValues.Split('\t');
 
+            _userDialogs.Alert($"(H) Sensor Values: {sensorValues}", "CIMScan RemoteManager");
+
             // "H" Sensor data serialization
             SensorStatistics.SensorIndex = splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('H') + 1).SafeConvert<int>(0);
             SensorStatistics.MaximumValue = splitSensorValues[1].SafeHexToDouble();
@@ -447,6 +449,8 @@ namespace CIM.RemoteManager.Core.ViewModels
             SensorStatistics.MinimumOccuranceTimeStamp = splitSensorValues[4].SafeHexToInt();
             SensorStatistics.AverageValue = splitSensorValues[5].SafeHexToDouble();
             SensorStatistics.TimeStamp = splitSensorValues[6].SafeHexToInt();
+            // Notify property changed to update UI
+            RaisePropertyChanged(()=> SensorStatistics);
         }
         
     }
