@@ -223,8 +223,9 @@ namespace CIM.RemoteManager.Core.ViewModels
                 // Make sure we can write characteristic data to remote
                 if (TxCharacteristic.CanWrite)
                 {
+                    string updateValue = "{c" + SensorIndex + "}";
                     // Send a refresh command
-                    await TxCharacteristic.WriteAsync("{Y}".StrToByteArray()).ConfigureAwait(true);
+                    await TxCharacteristic.WriteAsync(updateValue.StrToByteArray()).ConfigureAwait(true);
                 }
                 else
                 {
@@ -322,7 +323,8 @@ namespace CIM.RemoteManager.Core.ViewModels
                 RxCharacteristic.ValueUpdated += RxCharacteristicOnValueUpdated;
 
                 // Send refresh command to remote
-                await TxCharacteristic.WriteAsync("{Y}".StrToByteArray()).ConfigureAwait(true);
+                string updateValue = "{c" + SensorIndex + "}";
+                await TxCharacteristic.WriteAsync(updateValue.StrToByteArray()).ConfigureAwait(true);
                 // Start updates from bluetooth service
                 await RxCharacteristic.StartUpdatesAsync().ConfigureAwait(true);
 

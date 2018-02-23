@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms.Xaml;
+﻿using CIM.RemoteManager.Core.ViewModels;
+using Xamarin.Forms.Xaml;
 
 namespace CIM.RemoteManager.Core.Pages
 {
@@ -8,9 +9,12 @@ namespace CIM.RemoteManager.Core.Pages
         public SensorStatisticsPage()
         {
             InitializeComponent();
-            BindingContext = this; // Note that I added this line
+            //BindingContext = this; // Note that I added this line
 
-            StatisticsDataForm.Source = this;
+            // Get instance of SensorPlotViewModel
+            var sensorStatisticsViewModel = (SensorStatisticsViewModel)this.BindingContext;
+
+            StatisticsDataForm.Source = sensorStatisticsViewModel.SensorStatisticsCollection;
 
             //SensorBusyIndicator.IsBusy = false;
         }
