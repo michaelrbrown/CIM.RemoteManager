@@ -124,6 +124,18 @@
           <Setter Property="VerticalOptions" Value="Center"/>
           <Setter Property="FontAttributes" Value="Italic"/>
         </Style>
+        
+        <Style x:Key="FormLabelStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="TextColor" Value="{DynamicResource BodyTextColor}"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+        </Style>
+        
+        <Style x:Key="FormValueStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="TextColor" Value="{DynamicResource BodyTextColor}"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+        </Style>
 
         <!--  font families  -->
       <OnPlatform

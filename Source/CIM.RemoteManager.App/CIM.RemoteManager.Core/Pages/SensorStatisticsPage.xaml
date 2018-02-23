@@ -5,7 +5,53 @@
              BackgroundColor="#003366" 
              Title="Sensor Statistics">
 
-    <input:RadDataForm x:Name="StatisticsDataForm">
-    </input:RadDataForm>
+
+    <!-- Grid layout for Statistics form -->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="auto" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Average -->
+        <Label Grid.Row="0" Grid.Column="0" Text="Average: " HorizontalTextAlignment="End" Style="{DynamicResource FormLabelStyle}" />
+        <Label Grid.Row="0" Grid.Column="1" Text="{Binding AverageValue}" HorizontalTextAlignment="Start" Style="{DynamicResource FormValueStyle}" />
+
+        <!-- Average Since -->
+        <Label Grid.Row="1" Grid.Column="0" Text="Since: " HorizontalTextAlignment="End" Style="{DynamicResource FormLabelStyle}" />
+        <Label Grid.Row="1" Grid.Column="1" Text="{Binding SinceDateTimeStamp}" HorizontalTextAlignment="Start" Style="{DynamicResource FormValueStyle}" />
+
+        <!-- Minimum -->
+        <Label Grid.Row="2" Grid.Column="0" Text="Minimum: " HorizontalTextAlignment="End" Style="{DynamicResource FormLabelStyle}" />
+        <Label Grid.Row="2" Grid.Column="1" Text="{Binding MinimumValue}" HorizontalTextAlignment="Start" Style="{DynamicResource FormValueStyle}" />
+
+        <!-- Minimum Occurrence -->
+        <Label Grid.Row="3" Grid.Column="0" Text="Occurrence: " HorizontalTextAlignment="End" Style="{DynamicResource FormLabelStyle}" />
+        <Label Grid.Row="3" Grid.Column="1" Text="{Binding MinimumOccuranceTimeStamp}" HorizontalTextAlignment="Start" Style="{DynamicResource FormValueStyle}" />
+
+        <!-- Maximum -->
+        <Label Grid.Row="4" Grid.Column="0" Text="Maximum: " HorizontalTextAlignment="End" Style="{DynamicResource FormLabelStyle}" />
+        <Label Grid.Row="4" Grid.Column="1" Text="{Binding MaximumValue}" HorizontalTextAlignment="Start" Style="{DynamicResource FormValueStyle}" />
+
+        <!-- Maximum Occurrence -->
+        <Label Grid.Row="5" Grid.Column="0" Text="Occurrence: " HorizontalTextAlignment="End"  Style="{DynamicResource FormLabelStyle}"/>
+        <Label Grid.Row="5" Grid.Column="1" Text="{Binding MaximumOccuranceTimeStamp}" HorizontalTextAlignment="Start" Style="{DynamicResource FormValueStyle}" />
+
+        <!-- Variance -->
+        <Label Grid.Row="6" Grid.Column="0" Text="Variance: " HorizontalTextAlignment="End" Style="{DynamicResource FormLabelStyle}" />
+        <Label Grid.Row="6" Grid.Column="1" Text="{Binding VarianceValue}" HorizontalTextAlignment="Start" Style="{DynamicResource FormValueStyle}" />
+
+    </Grid>
+
 
 </ContentPage>
