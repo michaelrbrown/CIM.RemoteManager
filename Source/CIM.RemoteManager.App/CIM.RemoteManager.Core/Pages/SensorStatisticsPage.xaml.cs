@@ -1,5 +1,4 @@
-﻿using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
+﻿using Xamarin.Forms.Xaml;
 
 namespace CIM.RemoteManager.Core.Pages
 {
@@ -9,8 +8,10 @@ namespace CIM.RemoteManager.Core.Pages
         public SensorStatisticsPage()
         {
             InitializeComponent();
-            //BindingContext = this; // Note that I added this line
-            
+            BindingContext = this; // Note that I added this line
+
+            StatisticsDataForm.Source = this;
+
             //SensorBusyIndicator.IsBusy = false;
         }
     }

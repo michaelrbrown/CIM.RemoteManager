@@ -6,7 +6,7 @@
              Title="Sensor Plot">
 
 
-    <ContentPage Title="Sensor Plot" BackgroundColor="#255886" BackgroundImage="bg_app.jpg" Icon="ic_sensor-plot.png">
+    <ContentPage Title="Sensor Plot" BackgroundColor="#003366" Icon="ic_sensor-plot.png">
         <!-- Background -->
         <Image
             Aspect="AspectFill"

@@ -60,7 +60,7 @@
     <Compile Include="Models\MessageCounters.cs" />
     <Compile Include="Models\SensorPlot.cs" />
     <Compile Include="Models\Sensor.cs" />
-    <Compile Include="Models\SensorStatisticsItem.cs" />
+    <Compile Include="Models\SensorStatistics.cs" />
     <Compile Include="Models\SensorType.cs" />
     <Compile Include="Pages\BasePage.cs" />
     <Compile Include="Pages\BaseTabbedPage.cs" />
@@ -103,6 +103,7 @@
     <Compile Include="ViewModels\DescriptorListViewModel.cs" />
     <Compile Include="ViewModels\DeviceListItemViewModel.cs" />
     <Compile Include="ViewModels\DeviceListViewModel.cs" />
+    <Compile Include="ViewModels\SensorStatisticsViewModel.cs" />
     <Compile Include="ViewModels\SensorListViewModel.cs" />
     <Compile Include="ViewModels\SensorPlotViewModel.cs" />
     <Compile Include="ViewModels\ServiceListViewModel.cs" />

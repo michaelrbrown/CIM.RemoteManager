@@ -14,7 +14,7 @@ using Plugin.BLE.Abstractions.EventArgs;
 
 namespace CIM.RemoteManager.Core.ViewModels
 {
-    public class SensorListViewModel : BaseViewModel
+    public class SensorStatisticsViewModel : BaseViewModel
     {
         /// <summary>
         /// Bluetooth LE device
@@ -68,13 +68,13 @@ namespace CIM.RemoteManager.Core.ViewModels
         public string DeviceName { get; set; }
 
         /// <summary>
-        /// Sensor collection
+        /// Sensor sttistics collection
         /// </summary>
-        FullyObservableCollection<Sensor> _sensorCollection;
-        public FullyObservableCollection<Sensor> SensorCollection
+        FullyObservableCollection<SensorStatistics> _sensorStatisticsCollection;
+        public FullyObservableCollection<SensorStatistics> SensorStatisticsCollection
         {
-            get => _sensorCollection;
-            set => SetProperty(ref _sensorCollection, value);
+            get => _sensorStatisticsCollection;
+            set => SetProperty(ref _sensorStatisticsCollection, value);
         }
 
         /// <summary>
@@ -85,8 +85,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// <summary>
         /// Sensor record types (serialized into models later)
         /// </summary>
-        public bool StartFullSensorValueRecord { get; set; } = false;
-        public bool StartAverageSensorValueRecord { get; set; } = false;
+        public bool StartStatisticsSensorValueRecord { get; set; } = false;
 
         /// <summary>
         /// Is loading indicator for view
@@ -100,27 +99,16 @@ namespace CIM.RemoteManager.Core.ViewModels
 
 
         /// <summary>
-        ///  "A" = full information
+        ///  "H" = full information
         ///   index (#)
-        ///   serial number
-        ///   name
-        ///   sensor type
-        ///   scale
-        ///   offset
-        ///   timestamp
-        ///   average value
-        ///   current value
-        ///   display conversion code
-        ///   decimal location
-        ///   statistics total calculation settings
+        ///   hourly maximum
+        ///   timestamp for max
+        ///   hourly minimum
+        ///   timestamp for min
+        ///   hourly average
+        ///   hourly total
         /// </summary>
-        public readonly StringBuilder FullSensorValue = new StringBuilder("");
-
-        /// <summary>
-        ///  "B" = average value for the sensor identified by #
-        ///   # | time | average value | alarm status
-        /// </summary>
-        public readonly StringBuilder AverageSensorValue = new StringBuilder("");
+        public readonly StringBuilder StatisticsSensorValue = new StringBuilder("");
 
         /// <summary>
         /// Sensor view model constructor
@@ -128,7 +116,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// <param name="bluetoothLe"></param>
         /// <param name="adapter"></param>
         /// <param name="userDialogs"></param>
-        public SensorListViewModel(IBluetoothLE bluetoothLe, IAdapter adapter, IUserDialogs userDialogs) : base(adapter)
+        public SensorStatisticsViewModel(IBluetoothLE bluetoothLe, IAdapter adapter, IUserDialogs userDialogs) : base(adapter)
         {
             try
             {
@@ -141,7 +129,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 Adapter.DeviceConnectionLost += OnDeviceConnectionLost;
 
                 // Sensor data
-                _sensorCollection = new FullyObservableCollection<Sensor>();
+                _sensorStatisticsCollection = new FullyObservableCollection<SensorStatistics>();
             }
             catch (Exception ex)
             {
@@ -385,10 +373,8 @@ namespace CIM.RemoteManager.Core.ViewModels
         {
             try
             {
-                // Get full sensor values
-                GetFullSensorValues(CharacteristicValue);
-                // Get average sensor values
-                GetAverageSensorValues(CharacteristicValue);
+                // Get statistics sensor values
+                GetStatisticsSensorValues(CharacteristicValue);
 
                 // Notify property changed
                 RaisePropertyChanged(() => CharacteristicValue);
@@ -401,186 +387,88 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
-        /// Get Full values for sensor from buffered data
+        /// Get Statistics values for sensor from buffered data
         /// </summary>
         /// <param name="characteristicValue"></param>
-        private void GetFullSensorValues(string characteristicValue)
+        private void GetStatisticsSensorValues(string characteristicValue)
         {
             if (String.IsNullOrEmpty(characteristicValue)) return;
 
             // Start reading all "full sensor values"
-            if (!StartFullSensorValueRecord && characteristicValue.Contains("{A"))
+            if (!StartStatisticsSensorValueRecord && characteristicValue.Contains("{H"))
             {
                 // If we hit an end char } then record all data up to it
                 if (characteristicValue.Contains("}"))
                 {
-                    FullSensorValue.Append(characteristicValue);
-                    SerializeStringToSensor(FullSensorValue.ToString(), "A");
-                    FullSensorValue.Clear();
-                    StartFullSensorValueRecord = false;
+                    StatisticsSensorValue.Append(characteristicValue);
+                    SerializeStringToSensor(StatisticsSensorValue.ToString());
+                    StatisticsSensorValue.Clear();
+                    StartStatisticsSensorValueRecord = false;
                 }
                 else
                 {
                     // Read all characters in buffer while we are within the {}
-                    FullSensorValue.Append(characteristicValue.Trim(new Char[] { '{' }));
-                    StartFullSensorValueRecord = true;
+                    StatisticsSensorValue.Append(characteristicValue.Trim(new Char[] { '{' }));
+                    StartStatisticsSensorValueRecord = true;
                 }
             }
-            else if (StartFullSensorValueRecord)
+            else if (StartStatisticsSensorValueRecord)
             {
                 // If we hit an end char } then record all data up to it
                 if (characteristicValue.Contains("}"))
                 {
-                    FullSensorValue.Append(characteristicValue.GetUntilOrEmpty());
-                    SerializeStringToSensor(FullSensorValue.ToString(), "A");
-                    FullSensorValue.Clear();
-                    StartFullSensorValueRecord = false;
+                    StatisticsSensorValue.Append(characteristicValue.GetUntilOrEmpty());
+                    SerializeStringToSensor(StatisticsSensorValue.ToString());
+                    StatisticsSensorValue.Clear();
+                    StartStatisticsSensorValueRecord = false;
                 }
                 else
                 {
                     // Read all characters in buffer while we are within the {}
-                    FullSensorValue.Append(characteristicValue);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Get Average values for sensor from buffered data
-        /// </summary>
-        /// <param name="characteristicValue"></param>
-        private void GetAverageSensorValues(string characteristicValue)
-        {
-            if (String.IsNullOrEmpty(characteristicValue)) return;
-
-            // Start reading all "average sensor values"
-            if (!StartAverageSensorValueRecord && characteristicValue.Contains("{B"))
-            {
-                // If we hit an end char } then record all data up to it
-                if (characteristicValue.Contains("}"))
-                {
-                    AverageSensorValue.Append(characteristicValue.Replace("{", "").GetUntilOrEmpty());
-                    SerializeStringToSensor(AverageSensorValue.ToString(), "B");
-                    AverageSensorValue.Clear();
-                    StartAverageSensorValueRecord = false;
-                }
-                else
-                {
-                    // Read all characters in buffer while we are within the {}
-                    AverageSensorValue.Append(characteristicValue.Trim(new Char[] { '{' }));
-                    StartAverageSensorValueRecord = true;
-                }
-            }
-            else if (StartAverageSensorValueRecord)
-            {
-                // If we hit an end char } then record all data up to it
-                if (characteristicValue.Contains("}"))
-                {
-                    AverageSensorValue.Append(characteristicValue.GetUntilOrEmpty());
-                    SerializeStringToSensor(AverageSensorValue.ToString(), "B");
-                    AverageSensorValue.Clear();
-                    StartAverageSensorValueRecord = false;
-                }
-                else
-                {
-                    // Read all characters in buffer while we are within the {}
-                    AverageSensorValue.Append(characteristicValue.Replace("{", ""));
+                    StatisticsSensorValue.Append(characteristicValue);
                 }
             }
         }
-
+        
         /// <summary>
         /// Serialize tab based sensor data to strongly typed Sensor model
         /// </summary>
         /// <param name="sensorValues"></param>
-        /// <param name="conversionType"></param>
-        private void SerializeStringToSensor(string sensorValues, string conversionType)
+        private void SerializeStringToSensor(string sensorValues)
         {
             // Split by tab delimiter
             string[] splitSensorValues = sensorValues.Split('\t');
             
-            // What type of record are we parsing / serializing?
-            switch (conversionType)
+            // "H" Sensor data serialization
+            var sensorListItemH = SensorStatisticsCollection.FirstOrDefault(s => s.SensorIndex == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('H') + 1).SafeConvert<int>(0));
+            if (sensorListItemH != null)
             {
-                case "A":
-                    // "A" Sensor data serialization
-                    var sensorListItemA = SensorCollection.FirstOrDefault(s => s.SensorIndex == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('A') + 1).SafeConvert<int>(0));
-                    if (sensorListItemA != null)
-                    {
-                        //_userDialogs.Alert($"(A) Sensor Index: { splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('A') + 1).SafeConvert<int>(0)}", "CIMScan RemoteManager");
-                       
-                        // Update sensor items in list
-                        //sensorListItemA.SensorIndex = splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('A') + 1).SafeConvert<int>(0);
-                        sensorListItemA.SerialNumber = splitSensorValues[1];
-                        sensorListItemA.Name = splitSensorValues[2];
-                        sensorListItemA.SensorType = splitSensorValues[3];
-                        sensorListItemA.Scale = splitSensorValues[4].SafeConvert<double>(0);
-                        sensorListItemA.Offset = splitSensorValues[5].SafeConvert<double>(0);
-                        sensorListItemA.TimeStamp = splitSensorValues[6].SafeHexToInt();
-                        sensorListItemA.AverageValue = splitSensorValues[7].SafeHexToDouble();
-                        sensorListItemA.CurrentValue = splitSensorValues[8].SafeHexToDouble();
-                        sensorListItemA.DecimalLocation = splitSensorValues[9].SafeConvert<int>(0);
-                        sensorListItemA.StatisticsTotalCalcSettings = splitSensorValues[10];
-                    }
-                    else
-                    {
-                        //_userDialogs.Alert($"(A) (NEW REC) Sensor Index: {splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('A') + 1).SafeConvert<int>(0)}", "CIMScan RemoteManager");
-                        //_userDialogs.Alert($"(A) Serial Number: {splitSensorValues[1]}", "CIMScan RemoteManager");
-                        //_userDialogs.Alert($"(A) Average Value: {splitSensorValues[7].SafeHexToDouble().ToString()}", "CIMScan RemoteManager");
-
-                        // Create new sensor record for list
-                        var sensor = new Sensor
-                        {
-                            SensorIndex = splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('A') + 1).SafeConvert<int>(0),
-                            SerialNumber = splitSensorValues[1],
-                            Name = splitSensorValues[2],
-                            SensorType = splitSensorValues[3],
-                            Scale = splitSensorValues[4].SafeConvert<double>(0),
-                            Offset = splitSensorValues[5].SafeConvert<double>(0),
-                            TimeStamp = splitSensorValues[6].SafeHexToInt(),
-                            AverageValue = splitSensorValues[7].SafeHexToDouble(),
-                            CurrentValue = splitSensorValues[8].SafeHexToDouble(),
-                            DecimalLocation = splitSensorValues[9].SafeConvert<int>(0),
-                            StatisticsTotalCalcSettings = splitSensorValues[10]
-                        };
-                        // Add sensor to list
-                        SensorCollection.Add(sensor);
-                    }
-                    break;
-                case "B":
-                    // "B" Sensor data serialization
-                    // Update Sensor list by index
-                    var sensorListItemB = SensorCollection.FirstOrDefault(s => s.SensorIndex == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('B') + 1).SafeConvert<int>(0));
-                    if (sensorListItemB != null)
-                    {
-                        //_userDialogs.Alert($"(B) Sensor Index: {splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('B') + 1).SafeConvert<int>(0).ToString()}", "CIMScan RemoteManager");
-                        //_userDialogs.Alert($"(B) Sensor Index: {splitSensorValues[0]}", "CIMScan RemoteManager");
-                        //_userDialogs.Alert($"(B) Average Value: {splitSensorValues[2].SafeHexToDouble().ToString()}", "CIMScan RemoteManager");
-
-                        //sensorListItemB.SensorIndex = splitSensorValues[0].SafeHexToInt();
-                        sensorListItemB.TimeStamp = splitSensorValues[1].SafeHexToInt();
-                        sensorListItemB.AverageValue = splitSensorValues[2].SafeHexToDouble();
-                        sensorListItemB.AlarmStatus = splitSensorValues[3].SafeHexToInt();
-                    }
-                    RaisePropertyChanged(() => SensorCollection);
-                    break;
-                default:
-                    throw new Exception($"nameof(conversionType) not defined");
+                // Update sensor items in list
+                //sensorListItemA.SensorIndex = splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('A') + 1).SafeConvert<int>(0);
+                sensorListItemH.MaximumValue = splitSensorValues[1].SafeHexToDouble();
+                sensorListItemH.MaximumOccuranceTimeStamp = splitSensorValues[2].SafeHexToInt();
+                sensorListItemH.MinimumValue = splitSensorValues[3].SafeHexToDouble();
+                sensorListItemH.MinimumOccuranceTimeStamp = splitSensorValues[4].SafeHexToInt();
+                sensorListItemH.AverageValue = splitSensorValues[5].SafeHexToDouble();
+                sensorListItemH.TimeStamp = splitSensorValues[6].SafeHexToInt();
+            }
+            else
+            {
+                // Create new sensor record for list
+                var sensorStatistics = new SensorStatistics()
+                {
+                    SensorIndex = splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('H') + 1).SafeConvert<int>(0),
+                    MaximumValue = splitSensorValues[1].SafeHexToDouble(),
+                    MaximumOccuranceTimeStamp = splitSensorValues[2].SafeHexToInt(),
+                    MinimumValue = splitSensorValues[3].SafeHexToDouble(),
+                    MinimumOccuranceTimeStamp = splitSensorValues[4].SafeHexToInt(),
+                    AverageValue = splitSensorValues[5].SafeHexToDouble(),
+                    TimeStamp = splitSensorValues[6].SafeHexToInt(),
+                };
+                // Add sensor to list
+                SensorStatisticsCollection.Add(sensorStatistics);
             }
         }
-
-        /// <summary>
-        /// Sensor selected (navigate to sensor plot page)
-        /// </summary>
-        public void NavigateToSensorPlotPage(Sensor sensor)
-        {
-            if (sensor != null)
-            {
-                // Navigate to sensor plot
-                var bundle = new MvxBundle(new Dictionary<string, string>(Bundle.Data) { { SensorIdKey, sensor.SensorIndex.ToString() } });
-                ShowViewModel<SensorPlotViewModel>(bundle);
-            }
-        }
-
         
     }
 }

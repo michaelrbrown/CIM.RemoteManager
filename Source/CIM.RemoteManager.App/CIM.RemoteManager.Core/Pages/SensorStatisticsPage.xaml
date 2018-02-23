@@ -1,9 +1,11 @@
 ﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:input="clr-namespace:Telerik.XamarinForms.Input;assembly=Telerik.XamarinForms.Input"
              x:Class="CIM.RemoteManager.Core.Pages.SensorStatisticsPage" 
-             BackgroundImage="bg_app.jpg"
+             BackgroundColor="#003366" 
              Title="Sensor Statistics">
 
-    <Label Text="stats page"></Label>
+    <input:RadDataForm x:Name="StatisticsDataForm">
+    </input:RadDataForm>
 
 </ContentPage>

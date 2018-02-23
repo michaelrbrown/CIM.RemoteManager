@@ -27,7 +27,7 @@
 
     <!-- Sensor ListView -->
     <syncfusion:SfListView x:Name="SensorLiistView" Margin="0" 
-                    ItemsSource="{Binding Sensors}" 
+                    ItemsSource="{Binding SensorCollection}" 
                     AllowSwiping="True" 
                     ItemSpacing="3"
                     HeaderSize="145" 
