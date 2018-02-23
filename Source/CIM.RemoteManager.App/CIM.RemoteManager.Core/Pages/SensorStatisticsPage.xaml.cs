@@ -12,9 +12,9 @@ namespace CIM.RemoteManager.Core.Pages
             //BindingContext = this; // Note that I added this line
 
             // Get instance of SensorPlotViewModel
-            var sensorStatisticsViewModel = (SensorStatisticsViewModel)this.BindingContext;
+           // var sensorStatisticsViewModel = (SensorStatisticsViewModel)this.BindingContext;
 
-            StatisticsDataForm.Source = sensorStatisticsViewModel.SensorStatisticsCollection;
+           // StatisticsDataForm.Source = sensorStatisticsViewModel.SensorStatisticsCollection;
 
             //SensorBusyIndicator.IsBusy = false;
         }
