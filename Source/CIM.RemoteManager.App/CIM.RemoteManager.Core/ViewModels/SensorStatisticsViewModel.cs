@@ -68,13 +68,13 @@ namespace CIM.RemoteManager.Core.ViewModels
         public string DeviceName { get; set; }
 
         /// <summary>
-        /// Sensor sttistics collection
+        /// Sensor sttistics
         /// </summary>
-        FullyObservableCollection<SensorStatistics> _sensorStatisticsCollection;
-        public FullyObservableCollection<SensorStatistics> SensorStatisticsCollection
+        SensorStatistics _sensorStatistics;
+        public SensorStatistics SensorStatistics
         {
-            get => _sensorStatisticsCollection;
-            set => SetProperty(ref _sensorStatisticsCollection, value);
+            get => _sensorStatistics;
+            set => SetProperty(ref _sensorStatistics, value);
         }
 
         /// <summary>
@@ -128,8 +128,8 @@ namespace CIM.RemoteManager.Core.ViewModels
                 // Register event for device connection lost
                 Adapter.DeviceConnectionLost += OnDeviceConnectionLost;
 
-                // Sensor data
-                _sensorStatisticsCollection = new FullyObservableCollection<SensorStatistics>();
+                // New instance of sensor statistics
+                _sensorStatistics = new SensorStatistics();
             }
             catch (Exception ex)
             {
@@ -438,36 +438,15 @@ namespace CIM.RemoteManager.Core.ViewModels
         {
             // Split by tab delimiter
             string[] splitSensorValues = sensorValues.Split('\t');
-            
+
             // "H" Sensor data serialization
-            var sensorListItemH = SensorStatisticsCollection.FirstOrDefault(s => s.SensorIndex == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('H') + 1).SafeConvert<int>(0));
-            if (sensorListItemH != null)
-            {
-                // Update sensor items in list
-                //sensorListItemA.SensorIndex = splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('A') + 1).SafeConvert<int>(0);
-                sensorListItemH.MaximumValue = splitSensorValues[1].SafeHexToDouble();
-                sensorListItemH.MaximumOccuranceTimeStamp = splitSensorValues[2].SafeHexToInt();
-                sensorListItemH.MinimumValue = splitSensorValues[3].SafeHexToDouble();
-                sensorListItemH.MinimumOccuranceTimeStamp = splitSensorValues[4].SafeHexToInt();
-                sensorListItemH.AverageValue = splitSensorValues[5].SafeHexToDouble();
-                sensorListItemH.TimeStamp = splitSensorValues[6].SafeHexToInt();
-            }
-            else
-            {
-                // Create new sensor record for list
-                var sensorStatistics = new SensorStatistics()
-                {
-                    SensorIndex = splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('H') + 1).SafeConvert<int>(0),
-                    MaximumValue = splitSensorValues[1].SafeHexToDouble(),
-                    MaximumOccuranceTimeStamp = splitSensorValues[2].SafeHexToInt(),
-                    MinimumValue = splitSensorValues[3].SafeHexToDouble(),
-                    MinimumOccuranceTimeStamp = splitSensorValues[4].SafeHexToInt(),
-                    AverageValue = splitSensorValues[5].SafeHexToDouble(),
-                    TimeStamp = splitSensorValues[6].SafeHexToInt(),
-                };
-                // Add sensor to list
-                SensorStatisticsCollection.Add(sensorStatistics);
-            }
+            SensorStatistics.SensorIndex = splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('H') + 1).SafeConvert<int>(0);
+            SensorStatistics.MaximumValue = splitSensorValues[1].SafeHexToDouble();
+            SensorStatistics.MaximumOccuranceTimeStamp = splitSensorValues[2].SafeHexToInt();
+            SensorStatistics.MinimumValue = splitSensorValues[3].SafeHexToDouble();
+            SensorStatistics.MinimumOccuranceTimeStamp = splitSensorValues[4].SafeHexToInt();
+            SensorStatistics.AverageValue = splitSensorValues[5].SafeHexToDouble();
+            SensorStatistics.TimeStamp = splitSensorValues[6].SafeHexToInt();
         }
         
     }
