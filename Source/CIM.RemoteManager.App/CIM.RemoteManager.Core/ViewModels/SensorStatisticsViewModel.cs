@@ -244,7 +244,8 @@ namespace CIM.RemoteManager.Core.ViewModels
                 await Task.Delay(4500).ConfigureAwait(true);
 
                 // Start updates
-                ToggleUpdatesCommand.Execute(null);
+                StartUpdates();
+                //ToggleUpdatesCommand.Execute(null);
 
                 // Hide loading...
                 //_userDialogs.HideLoading();
