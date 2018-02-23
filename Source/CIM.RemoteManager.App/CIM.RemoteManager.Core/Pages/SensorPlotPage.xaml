@@ -7,6 +7,18 @@
              BackgroundColor="#ABB6BB" 
              Title="Sensor Plot">
 
+    <TabbedPage.Resources>
+        <ResourceDictionary>
+            <xForms:ChartColorCollection x:Key="Colors">
+                <Color>#0097DF</Color>
+                <Color>Gray</Color>
+                <Color>#003366</Color>
+                <Color>#FF96C912</Color>
+                <Color>#546e7a</Color>
+            </xForms:ChartColorCollection>
+        </ResourceDictionary>
+    </TabbedPage.Resources>
+
     <ContentPage Title="Sensor Plot" BackgroundColor="#255886" BackgroundImage="bg_app.jpg" Icon="ic_sensor-plot.png">
         <!-- Background -->
         <Image
@@ -15,8 +27,6 @@
             RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height}" 
             Source="bgapplication.jpg">
         </Image>
-
-
 
         <StackLayout BackgroundColor="#AE2C3B" Padding="10" HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsStateOn, Converter={StaticResource BooleanToFalseConverter}}">
             <Grid HorizontalOptions="Center">
@@ -33,7 +43,7 @@
         <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Transparent">
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="75"></RowDefinition>
+                <RowDefinition Height="120"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
 
@@ -62,11 +72,11 @@
 
             </Grid>
 
-            <xForms:SfChart x:Name="SensorPlotChart" Grid.Row="1">
+            <xForms:SfChart x:Name="SensorPlotChart" Grid.Row="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
 
                 <xForms:SfChart.Series>
 
-                    <xForms:ColumnSeries ItemsSource="{Binding SensorPlotCollection}"/>
+                    <xForms:ColumnSeries ItemsSource="{Binding SensorPlotCollection}" XBindingPath="DateTimeStamp" YBindingPath="CurrentValue" />
 
                 </xForms:SfChart.Series>
 

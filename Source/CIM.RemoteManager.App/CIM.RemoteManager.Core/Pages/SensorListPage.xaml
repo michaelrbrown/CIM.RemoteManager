@@ -3,7 +3,7 @@
              xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
              xmlns:templates="clr-namespace:CIM.RemoteManager.Core.Templates;assembly=CIM.RemoteManager.Core"
              x:Class="CIM.RemoteManager.Core.Pages.SensorListPage" 
-             BackgroundColor="#3580C6" 
+             BackgroundColor="#003366" 
              Title="Sensors">
 
     <!-- Background -->
