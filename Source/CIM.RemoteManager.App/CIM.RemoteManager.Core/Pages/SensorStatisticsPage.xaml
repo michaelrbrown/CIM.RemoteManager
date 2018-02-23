@@ -6,7 +6,6 @@
     
     <ContentPage.Resources>
         <ResourceDictionary>
-
             <Style x:Key="FormLabelStyle" TargetType="Label">
                 <Setter Property="FontSize" Value="18"/>
                 <Setter Property="TextColor" Value="#444444"/>
@@ -25,6 +24,7 @@
     <!-- Grid layout for Statistics form -->
     <Grid Margin="20,60,20,20">
         <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
             <RowDefinition Height="50" />
             <RowDefinition Height="50" />
             <RowDefinition Height="50" />
@@ -67,12 +67,14 @@
         <Label Grid.Row="6" Grid.Column="0" Text="Variance: " HorizontalTextAlignment="End" Style="{DynamicResource FormLabelStyle}" />
         <Label Grid.Row="6" Grid.Column="1" Text="{Binding VarianceValue}" HorizontalTextAlignment="Start" Style="{DynamicResource FormValueStyle}" />
 
+        <!-- Margin: left, top, right, bottom -->
+        <StackLayout Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Spacing="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="60" BackgroundColor="{DynamicResource RemoteNameBackgroundColor}" Opacity=".6">
+            <Label Text="{Binding CharacteristicValue, StringFormat=' Incoming Value: {0:N}'}" TextColor="{DynamicResource AppLightColor}" FontSize="16" Margin="5"  HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" VerticalTextAlignment="Center" LineBreakMode="MiddleTruncation" />
+        </StackLayout>
+
     </Grid>
 
-    <!-- Margin: left, top, right, bottom -->
-    <StackLayout Spacing="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="60" BackgroundColor="{DynamicResource RemoteNameBackgroundColor}" Opacity=".6">
-        <Label Text="{Binding CharacteristicValue, StringFormat=' Incoming Value: {0:N}'}" TextColor="{DynamicResource AppLightColor}" FontSize="16" Margin="5"  HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" VerticalTextAlignment="Center" LineBreakMode="MiddleTruncation" />
-    </StackLayout>
+    
 
 
 </ContentPage>
