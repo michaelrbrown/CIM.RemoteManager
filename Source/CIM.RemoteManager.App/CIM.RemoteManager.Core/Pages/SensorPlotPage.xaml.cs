@@ -1,6 +1,5 @@
 ﻿using System;
 using CIM.RemoteManager.Core.ViewModels;
-using Syncfusion.SfChart.XForms;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 

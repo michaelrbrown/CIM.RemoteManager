@@ -1,23 +1,10 @@
 ﻿<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:chart="clr-namespace:Telerik.XamarinForms.Chart;assembly=Telerik.XamarinForms.Chart"
-             xmlns:viewModels="clr-namespace:CIM.RemoteManager.Core.ViewModels;assembly=CIM.RemoteManager.Core"
-             xmlns:xForms="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms"
              x:Class="CIM.RemoteManager.Core.Pages.SensorPlotPage" 
-             BackgroundColor="#ABB6BB" 
+             BackgroundColor="#003366" 
              Title="Sensor Plot">
 
-    <TabbedPage.Resources>
-        <ResourceDictionary>
-            <xForms:ChartColorCollection x:Key="Colors">
-                <Color>#0097DF</Color>
-                <Color>Gray</Color>
-                <Color>#003366</Color>
-                <Color>#FF96C912</Color>
-                <Color>#546e7a</Color>
-            </xForms:ChartColorCollection>
-        </ResourceDictionary>
-    </TabbedPage.Resources>
 
     <ContentPage Title="Sensor Plot" BackgroundColor="#255886" BackgroundImage="bg_app.jpg" Icon="ic_sensor-plot.png">
         <!-- Background -->
@@ -72,15 +59,24 @@
 
             </Grid>
 
-            <xForms:SfChart x:Name="SensorPlotChart" Grid.Row="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-
-                <xForms:SfChart.Series>
-
-                    <xForms:ColumnSeries ItemsSource="{Binding SensorPlotCollection}" XBindingPath="DateTimeStamp" YBindingPath="CurrentValue" />
-
-                </xForms:SfChart.Series>
-
-            </xForms:SfChart>
+            <chart:RadCartesianChart Grid.Row="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <chart:RadCartesianChart.HorizontalAxis>
+                    <chart:CategoricalAxis/>
+                </chart:RadCartesianChart.HorizontalAxis>
+                <chart:RadCartesianChart.VerticalAxis>
+                    <chart:NumericalAxis/>
+                </chart:RadCartesianChart.VerticalAxis>
+                <chart:RadCartesianChart.Series>
+                    <chart:AreaSeries ItemsSource="{Binding SensorPlotCollection}">
+                        <chart:AreaSeries.ValueBinding>
+                            <chart:PropertyNameDataPointBinding PropertyName="CurrentValue"/>
+                        </chart:AreaSeries.ValueBinding>
+                        <chart:AreaSeries.CategoryBinding>
+                            <chart:PropertyNameDataPointBinding PropertyName="DateTimeStamp"/>
+                        </chart:AreaSeries.CategoryBinding>
+                    </chart:AreaSeries>
+                </chart:RadCartesianChart.Series>
+            </chart:RadCartesianChart>
 
         </Grid>
 

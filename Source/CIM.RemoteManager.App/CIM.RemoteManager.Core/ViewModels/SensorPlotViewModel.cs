@@ -436,8 +436,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             string[] splitSensorValues = sensorValues.Split('\t');
 
             _userDialogs.Alert($"(J) Buffered Data: {sensorValues}", "CIMScan RemoteManager");
-
-
+            
             // "J" Sensor plot data serialization
             var sensorPlot = new SensorPlot
             {
