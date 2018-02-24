@@ -11,7 +11,7 @@
                 <Setter Property="FontSize" Value="18"/>
                 <Setter Property="TextColor" Value="#444444"/>
                 <Setter Property="FontAttributes" Value="Bold"/>
-                <Setter Property="VerticalTextAlignment" Value="End"></Setter>
+                <Setter Property="HorizontalTextAlignment" Value="End"></Setter>
                 <Setter Property="VerticalTextAlignment" Value="Center"></Setter>
             </Style>
 
@@ -19,12 +19,11 @@
                 <Setter Property="FontSize" Value="18"/>
                 <Setter Property="TextColor" Value="#444444"/>
                 <Setter Property="FontAttributes" Value="Bold"/>
-                <Setter Property="VerticalTextAlignment" Value="Start"></Setter>
+                <Setter Property="HorizontalTextAlignment" Value="Start"></Setter>
                 <Setter Property="VerticalTextAlignment" Value="Center"></Setter>
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
-
 
     <!-- Grid layout for Statistics form -->
     <Grid Margin="20,60,20,20">

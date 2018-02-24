@@ -144,8 +144,8 @@ namespace CIM.RemoteManager.Core.ViewModels
         public override void Resume()
         {
             base.Resume();
-            // 
-            StartUpdates();
+            // Init from bundle which grabs our device and kicks things off
+            InitFromBundle(Bundle);
         }
         
         /// <summary>
@@ -245,7 +245,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 await Task.Delay(4500).ConfigureAwait(true);
 
                 // Start updates
-                //ToggleUpdatesCommand.Execute(null);
+                ToggleUpdatesCommand.Execute(null);
 
                 // Hide loading...
                 //_userDialogs.HideLoading();
