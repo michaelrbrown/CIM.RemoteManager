@@ -11,12 +11,16 @@
                 <Setter Property="FontSize" Value="18"/>
                 <Setter Property="TextColor" Value="#444444"/>
                 <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="VerticalTextAlignment" Value="End"></Setter>
+                <Setter Property="VerticalTextAlignment" Value="Center"></Setter>
             </Style>
 
-            <Style x:Key="FormValueStyle" TargetType="Label">
+            <Style x:Key="FormValueStyle" TargetType="Entry">
                 <Setter Property="FontSize" Value="18"/>
                 <Setter Property="TextColor" Value="#444444"/>
                 <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="VerticalTextAlignment" Value="Start"></Setter>
+                <Setter Property="VerticalTextAlignment" Value="Center"></Setter>
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -41,32 +45,32 @@
         </Grid.ColumnDefinitions>
 
         <!-- Average -->
-        <Label Grid.Row="0" Grid.Column="0" Text="Average: " HorizontalTextAlignment="End" Style="{DynamicResource FormLabelStyle}" />
-        <Entry Grid.Row="0" Grid.Column="1" Text="{Binding AverageValue}" IsEnabled="false" HorizontalTextAlignment="Start" Style="{DynamicResource FormValueStyle}" />
+        <Label Grid.Row="0" Grid.Column="0" Text="Average: " Style="{DynamicResource FormLabelStyle}" />
+        <Entry Grid.Row="0" Grid.Column="1" Text="{Binding AverageValue}" IsEnabled="false" Style="{DynamicResource FormValueStyle}" />
 
         <!-- Average Since -->
-        <Label Grid.Row="1" Grid.Column="0" Text="Since: " HorizontalTextAlignment="End" Style="{DynamicResource FormLabelStyle}" />
-        <Entry Grid.Row="1" Grid.Column="1" Text="{Binding SinceDateTimeStamp}" IsEnabled="false" HorizontalTextAlignment="Start" Style="{DynamicResource FormValueStyle}" />
+        <Label Grid.Row="1" Grid.Column="0" Text="Since: " Style="{DynamicResource FormLabelStyle}" />
+        <Entry Grid.Row="1" Grid.Column="1" Text="{Binding SinceDateTimeStamp}" IsEnabled="false" Style="{DynamicResource FormValueStyle}" />
 
         <!-- Minimum -->
-        <Label Grid.Row="2" Grid.Column="0" Text="Minimum: " HorizontalTextAlignment="End" Style="{DynamicResource FormLabelStyle}" />
-        <Entry Grid.Row="2" Grid.Column="1" Text="{Binding MinimumValue}" IsEnabled="false" HorizontalTextAlignment="Start" Style="{DynamicResource FormValueStyle}" />
+        <Label Grid.Row="2" Grid.Column="0" Text="Minimum: " Style="{DynamicResource FormLabelStyle}" />
+        <Entry Grid.Row="2" Grid.Column="1" Text="{Binding MinimumValue}" IsEnabled="false" Style="{DynamicResource FormValueStyle}" />
 
         <!-- Minimum Occurrence -->
-        <Label Grid.Row="3" Grid.Column="0" Text="Occurrence: " HorizontalTextAlignment="End" Style="{DynamicResource FormLabelStyle}" />
-        <Entry Grid.Row="3" Grid.Column="1" Text="{Binding MinimumOccuranceTimeStamp}" IsEnabled="false" HorizontalTextAlignment="Start" Style="{DynamicResource FormValueStyle}" />
+        <Label Grid.Row="3" Grid.Column="0" Text="Occurrence: " Style="{DynamicResource FormLabelStyle}" />
+        <Entry Grid.Row="3" Grid.Column="1" Text="{Binding MinimumOccuranceTimeStamp}" IsEnabled="false" Style="{DynamicResource FormValueStyle}" />
 
         <!-- Maximum -->
-        <Label Grid.Row="4" Grid.Column="0" Text="Maximum: " HorizontalTextAlignment="End" Style="{DynamicResource FormLabelStyle}" />
-        <Entry Grid.Row="4" Grid.Column="1" Text="{Binding MaximumValue}" IsEnabled="false" HorizontalTextAlignment="Start" Style="{DynamicResource FormValueStyle}" />
+        <Label Grid.Row="4" Grid.Column="0" Text="Maximum: " Style="{DynamicResource FormLabelStyle}" />
+        <Entry Grid.Row="4" Grid.Column="1" Text="{Binding MaximumValue}" IsEnabled="false" Style="{DynamicResource FormValueStyle}" />
 
         <!-- Maximum Occurrence -->
-        <Label Grid.Row="5" Grid.Column="0" Text="Occurrence: " HorizontalTextAlignment="End"  Style="{DynamicResource FormLabelStyle}"/>
-        <Entry Grid.Row="5" Grid.Column="1" Text="{Binding MaximumOccuranceTimeStamp}" IsEnabled="false" HorizontalTextAlignment="Start" Style="{DynamicResource FormValueStyle}" />
+        <Label Grid.Row="5" Grid.Column="0" Text="Occurrence: "  Style="{DynamicResource FormLabelStyle}"/>
+        <Entry Grid.Row="5" Grid.Column="1" Text="{Binding MaximumOccuranceTimeStamp}" IsEnabled="false" Style="{DynamicResource FormValueStyle}" />
 
         <!-- Variance -->
-        <Label Grid.Row="6" Grid.Column="0" Text="Variance: " HorizontalTextAlignment="End" Style="{DynamicResource FormLabelStyle}" />
-        <Entry Grid.Row="6" Grid.Column="1" Text="{Binding VarianceValue}" IsEnabled="false" HorizontalTextAlignment="Start" Style="{DynamicResource FormValueStyle}" />
+        <Label Grid.Row="6" Grid.Column="0" Text="Variance: " Style="{DynamicResource FormLabelStyle}" />
+        <Entry Grid.Row="6" Grid.Column="1" Text="{Binding VarianceValue}" IsEnabled="false" Style="{DynamicResource FormValueStyle}" />
 
         <!-- Margin: left, top, right, bottom -->
         <StackLayout Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Spacing="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="60" BackgroundColor="{DynamicResource RemoteNameBackgroundColor}" Opacity=".6">

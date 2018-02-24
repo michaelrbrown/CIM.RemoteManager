@@ -144,7 +144,8 @@ namespace CIM.RemoteManager.Core.ViewModels
         public override void Resume()
         {
             base.Resume();
-            
+            // 
+            StartUpdates();
         }
         
         /// <summary>
@@ -244,7 +245,6 @@ namespace CIM.RemoteManager.Core.ViewModels
                 await Task.Delay(4500).ConfigureAwait(true);
 
                 // Start updates
-                StartUpdates();
                 //ToggleUpdatesCommand.Execute(null);
 
                 // Hide loading...
