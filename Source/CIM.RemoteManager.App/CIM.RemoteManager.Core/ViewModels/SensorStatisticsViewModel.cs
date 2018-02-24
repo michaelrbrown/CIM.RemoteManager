@@ -319,6 +319,8 @@ namespace CIM.RemoteManager.Core.ViewModels
         {
             try
             {
+                _userDialogs.Alert("Starting updates...", "CIMScan Remote Manager");
+
                 UpdatesStarted = true;
 
                 // Subscribe to value updated events
@@ -331,7 +333,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 await RxCharacteristic.StartUpdatesAsync().ConfigureAwait(true);
 
                 // Let UI know mode we are in
-                RaisePropertyChanged(() => UpdateButtonText);
+                //RaisePropertyChanged(() => UpdateButtonText);
             }
             catch (Exception ex)
             {
@@ -356,7 +358,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 RxCharacteristic.ValueUpdated -= RxCharacteristicOnValueUpdated;
                 
                 // Let UI know mode we are in
-                RaisePropertyChanged(() => UpdateButtonText);
+                //RaisePropertyChanged(() => UpdateButtonText);
             }
             catch (Exception ex)
             {
@@ -374,6 +376,8 @@ namespace CIM.RemoteManager.Core.ViewModels
         {
             try
             {
+                _userDialogs.Alert($"CharacteristicValue: {CharacteristicValue}", "CIMScan Remote Manager");
+
                 // Get statistics sensor values
                 GetStatisticsSensorValues(CharacteristicValue);
 
