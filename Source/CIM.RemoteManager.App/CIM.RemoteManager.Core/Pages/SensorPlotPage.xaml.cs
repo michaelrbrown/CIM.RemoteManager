@@ -32,7 +32,12 @@ namespace CIM.RemoteManager.Core.Pages
         {
             if (this.CurrentPage is SensorStatisticsPage)
             {
-                var viewModel = BindingContext as BaseViewModel;
+                var viewModel = BindingContext as SensorStatisticsViewModel;
+                viewModel?.Resume();
+            }
+            else if (this.CurrentPage is SensorPlotPage)
+            {
+                var viewModel = BindingContext as SensorPlotViewModel;
                 viewModel?.Resume();
             }
         }
