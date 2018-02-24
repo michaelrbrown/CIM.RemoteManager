@@ -15,6 +15,11 @@ namespace CIM.RemoteManager.Core.Pages
             InitializeComponent();
             // Set binding context
             BindingContext = this;
+
+            ToolbarItems.Add(new ToolbarItem("Device Settings", "ic_sensor-settings.png", () =>
+            {
+                
+            }));
         }
         
         private void ListView_OnItemTapped(object sender, ItemTappedEventArgs itemTappedEventArgs)

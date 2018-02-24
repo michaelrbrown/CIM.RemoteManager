@@ -451,7 +451,32 @@ namespace CIM.RemoteManager.Core.ViewModels
             };
             // Add sensor to list
             SensorPlotCollection.Add(sensorPlot);
+        }
 
+        /// <summary>
+        /// Sensor selected (navigate to sensor plot page)
+        /// </summary>
+        public void NavigateToSensorPlotPage(Sensor sensor)
+        {
+            if (sensor != null)
+            {
+                // Navigate to sensor plot
+                var bundle = new MvxBundle(new Dictionary<string, string>(Bundle.Data) { { SensorIdKey, sensor.SensorIndex.ToString() } });
+                ShowViewModel<SensorPlotViewModel>(bundle);
+            }
+        }
+
+        /// <summary>
+        /// Sensor selected (navigate to sensor statistics page)
+        /// </summary>
+        public void NavigateToSensorStatisticsPage(Sensor sensor)
+        {
+            if (sensor != null)
+            {
+                // Navigate to sensor plot
+                var bundle = new MvxBundle(new Dictionary<string, string>(Bundle.Data) { { SensorIdKey, sensor.SensorIndex.ToString() } });
+                ShowViewModel<SensorStatisticsViewModel>(bundle);
+            }
         }
 
     }
