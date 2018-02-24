@@ -32,11 +32,16 @@ namespace CIM.RemoteManager.Core.Pages
         {
             if (this.CurrentPage is SensorStatisticsPage)
             {
+                DisplayAlert("SensorStts", "onapprea", "Ok");
                 //sensorPlotPage.BindingContext = sensorItem;
-                var viewModel = BindingContext as SensorPlotViewModel;
+                //var viewModel = BindingContext as SensorPlotViewModel;
 
                 var sensorPlotViewModel = (SensorPlotViewModel)this.BindingContext;
-                sensorPlotViewModel.NavigateToSensorStatisticsPage(viewModel?.Sensor);
+
+                DisplayAlert("SensorStts", sensorPlotViewModel?.Sensor.SensorIndex.ToString(), "Ok");
+
+
+                sensorPlotViewModel?.NavigateToSensorStatisticsPage(sensorPlotViewModel?.Sensor);
             }
             else if (this.CurrentPage is SensorPlotPage)
             {

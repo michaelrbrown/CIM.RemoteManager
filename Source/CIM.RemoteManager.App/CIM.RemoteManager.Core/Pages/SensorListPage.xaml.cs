@@ -16,7 +16,7 @@ namespace CIM.RemoteManager.Core.Pages
             // Set binding context
             BindingContext = this;
 
-            ToolbarItems.Add(new ToolbarItem("Device Settings", "ic_sensor-settings.png", () =>
+            ToolbarItems.Add(new ToolbarItem("Device Settings", "ic_remote-settings.png", () =>
             {
                 
             }));
