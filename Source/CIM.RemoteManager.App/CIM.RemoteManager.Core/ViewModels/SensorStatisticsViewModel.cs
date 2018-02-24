@@ -125,6 +125,8 @@ namespace CIM.RemoteManager.Core.ViewModels
                 // Events
                 _bluetoothLe.StateChanged += OnStateChanged;
 
+                _userDialogs.Alert("SensorStats :: SensorStatisticsViewModel");
+
                 // Register event for device connection lost
                 Adapter.DeviceConnectionLost += OnDeviceConnectionLost;
 
@@ -144,6 +146,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         public override void Resume()
         {
             base.Resume();
+            _userDialogs.Alert("SensorStats :: Resume");
             // Init from bundle which grabs our device and kicks things off
             InitFromBundle(Bundle);
         }
