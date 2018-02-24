@@ -1,5 +1,6 @@
-﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+﻿<pages:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pages="clr-namespace:CIM.RemoteManager.Core.Pages;assembly=CIM.RemoteManager.Core"
              x:Class="CIM.RemoteManager.Core.Pages.SensorStatisticsPage" 
              BackgroundColor="#FFFFFF" 
              Title="Sensor Statistics">
@@ -41,31 +42,31 @@
 
         <!-- Average -->
         <Label Grid.Row="0" Grid.Column="0" Text="Average: " HorizontalTextAlignment="End" Style="{DynamicResource FormLabelStyle}" />
-        <Entry Grid.Row="0" Grid.Column="1" Text="{Binding AverageValue}" HorizontalTextAlignment="Start" Style="{DynamicResource FormValueStyle}" />
+        <Entry Grid.Row="0" Grid.Column="1" Text="{Binding AverageValue}" IsEnabled="false" HorizontalTextAlignment="Start" Style="{DynamicResource FormValueStyle}" />
 
         <!-- Average Since -->
         <Label Grid.Row="1" Grid.Column="0" Text="Since: " HorizontalTextAlignment="End" Style="{DynamicResource FormLabelStyle}" />
-        <Entry Grid.Row="1" Grid.Column="1" Text="{Binding SinceDateTimeStamp}" HorizontalTextAlignment="Start" Style="{DynamicResource FormValueStyle}" />
+        <Entry Grid.Row="1" Grid.Column="1" Text="{Binding SinceDateTimeStamp}" IsEnabled="false" HorizontalTextAlignment="Start" Style="{DynamicResource FormValueStyle}" />
 
         <!-- Minimum -->
         <Label Grid.Row="2" Grid.Column="0" Text="Minimum: " HorizontalTextAlignment="End" Style="{DynamicResource FormLabelStyle}" />
-        <Entry Grid.Row="2" Grid.Column="1" Text="{Binding MinimumValue}" HorizontalTextAlignment="Start" Style="{DynamicResource FormValueStyle}" />
+        <Entry Grid.Row="2" Grid.Column="1" Text="{Binding MinimumValue}" IsEnabled="false" HorizontalTextAlignment="Start" Style="{DynamicResource FormValueStyle}" />
 
         <!-- Minimum Occurrence -->
         <Label Grid.Row="3" Grid.Column="0" Text="Occurrence: " HorizontalTextAlignment="End" Style="{DynamicResource FormLabelStyle}" />
-        <Entry Grid.Row="3" Grid.Column="1" Text="{Binding MinimumOccuranceTimeStamp}" HorizontalTextAlignment="Start" Style="{DynamicResource FormValueStyle}" />
+        <Entry Grid.Row="3" Grid.Column="1" Text="{Binding MinimumOccuranceTimeStamp}" IsEnabled="false" HorizontalTextAlignment="Start" Style="{DynamicResource FormValueStyle}" />
 
         <!-- Maximum -->
         <Label Grid.Row="4" Grid.Column="0" Text="Maximum: " HorizontalTextAlignment="End" Style="{DynamicResource FormLabelStyle}" />
-        <Entry Grid.Row="4" Grid.Column="1" Text="{Binding MaximumValue}" HorizontalTextAlignment="Start" Style="{DynamicResource FormValueStyle}" />
+        <Entry Grid.Row="4" Grid.Column="1" Text="{Binding MaximumValue}" IsEnabled="false" HorizontalTextAlignment="Start" Style="{DynamicResource FormValueStyle}" />
 
         <!-- Maximum Occurrence -->
         <Label Grid.Row="5" Grid.Column="0" Text="Occurrence: " HorizontalTextAlignment="End"  Style="{DynamicResource FormLabelStyle}"/>
-        <Entry Grid.Row="5" Grid.Column="1" Text="{Binding MaximumOccuranceTimeStamp}" HorizontalTextAlignment="Start" Style="{DynamicResource FormValueStyle}" />
+        <Entry Grid.Row="5" Grid.Column="1" Text="{Binding MaximumOccuranceTimeStamp}" IsEnabled="false" HorizontalTextAlignment="Start" Style="{DynamicResource FormValueStyle}" />
 
         <!-- Variance -->
         <Label Grid.Row="6" Grid.Column="0" Text="Variance: " HorizontalTextAlignment="End" Style="{DynamicResource FormLabelStyle}" />
-        <Entry Grid.Row="6" Grid.Column="1" Text="{Binding VarianceValue}" HorizontalTextAlignment="Start" Style="{DynamicResource FormValueStyle}" />
+        <Entry Grid.Row="6" Grid.Column="1" Text="{Binding VarianceValue}" IsEnabled="false" HorizontalTextAlignment="Start" Style="{DynamicResource FormValueStyle}" />
 
         <!-- Margin: left, top, right, bottom -->
         <StackLayout Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Spacing="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="60" BackgroundColor="{DynamicResource RemoteNameBackgroundColor}" Opacity=".6">
@@ -74,7 +75,4 @@
 
     </Grid>
 
-    
-
-
-</ContentPage>
+</pages:BasePage>

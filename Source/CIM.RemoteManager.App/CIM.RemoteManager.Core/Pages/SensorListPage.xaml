@@ -1,7 +1,8 @@
-﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+﻿<pages:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
              xmlns:templates="clr-namespace:CIM.RemoteManager.Core.Templates;assembly=CIM.RemoteManager.Core"
+             xmlns:pages="clr-namespace:CIM.RemoteManager.Core.Pages;assembly=CIM.RemoteManager.Core"
              x:Class="CIM.RemoteManager.Core.Pages.SensorListPage" 
              BackgroundColor="#003366" 
              Title="Sensors">
@@ -103,4 +104,4 @@
 
     </syncfusion:SfListView>
 
-</ContentPage>
+</pages:BasePage>

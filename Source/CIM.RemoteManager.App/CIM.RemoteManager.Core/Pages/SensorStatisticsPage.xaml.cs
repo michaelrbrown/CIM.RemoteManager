@@ -3,7 +3,7 @@
 namespace CIM.RemoteManager.Core.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class SensorStatisticsPage
+    public partial class SensorStatisticsPage : BasePage
     {
         public SensorStatisticsPage()
         {
