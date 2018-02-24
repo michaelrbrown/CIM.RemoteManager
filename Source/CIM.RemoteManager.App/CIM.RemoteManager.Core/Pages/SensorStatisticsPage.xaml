@@ -20,7 +20,7 @@
                 <Setter Property="TextColor" Value="#444444"/>
                 <Setter Property="FontAttributes" Value="Bold"/>
                 <Setter Property="HorizontalTextAlignment" Value="Start"></Setter>
-                <Setter Property="VerticalTextAlignment" Value="Center"></Setter>
+                <Setter Property="VerticalOptions" Value="Center"></Setter>
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
