@@ -28,6 +28,15 @@ namespace CIM.RemoteManager.Core.Pages
             //SensorBusyIndicator.IsBusy = false;
         }
 
+        protected override void OnCurrentPageChanged()
+        {
+            if (this.CurrentPage is SensorStatisticsPage)
+            {
+                var viewModel = BindingContext as BaseViewModel;
+                viewModel?.Resume();
+            }
+        }
+
         private void CurrentPageHasChanged(object sender, EventArgs e)
         {
             this.Title = this.CurrentPage.Title;
