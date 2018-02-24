@@ -125,9 +125,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 _userDialogs = userDialogs;
                 // Events
                 _bluetoothLe.StateChanged += OnStateChanged;
-
-                _userDialogs.Alert("SensorPlot :: SensorPlotViewModel");
-
+                
                 // Register event for device connection lost
                 Adapter.DeviceConnectionLost += OnDeviceConnectionLost;
 
