@@ -125,9 +125,9 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// <summary>
         /// Sensor view model constructor
         /// </summary>
-        /// <param name="bluetoothLe"></param>
-        /// <param name="adapter"></param>
-        /// <param name="userDialogs"></param>
+        /// <param name="bluetoothLe">Bluetooth LE obj</param>
+        /// <param name="adapter">Bluetooth LE adapter</param>
+        /// <param name="userDialogs">User dialogs</param>
         public SensorListViewModel(IBluetoothLE bluetoothLe, IAdapter adapter, IUserDialogs userDialogs) : base(adapter)
         {
             try

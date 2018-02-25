@@ -111,11 +111,11 @@ namespace CIM.RemoteManager.Core.ViewModels
         public readonly StringBuilder StatisticsSensorValue = new StringBuilder("");
 
         /// <summary>
-        /// Sensor view model constructor
+        /// Sensor statistics view model constructor
         /// </summary>
-        /// <param name="bluetoothLe"></param>
-        /// <param name="adapter"></param>
-        /// <param name="userDialogs"></param>
+        /// <param name="bluetoothLe">Bluetooth LE obj</param>
+        /// <param name="adapter">Bluetooth LE adapter</param>
+        /// <param name="userDialogs">User dialogs</param>
         public SensorStatisticsViewModel(IBluetoothLE bluetoothLe, IAdapter adapter, IUserDialogs userDialogs) : base(adapter)
         {
             try
