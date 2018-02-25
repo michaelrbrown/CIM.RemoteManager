@@ -1,7 +1,5 @@
-﻿using Acr.UserDialogs;
-using CIM.RemoteManager.Core.ViewModels;
-using MvvmCross.Plugins.Messenger;
-using Plugin.BLE.Abstractions.Contracts;
+﻿using CIM.RemoteManager.Core.ViewModels;
+using MvvmCross.Platform;
 using Xamarin.Forms.Xaml;
 
 namespace CIM.RemoteManager.Core.Pages
@@ -12,7 +10,9 @@ namespace CIM.RemoteManager.Core.Pages
         public SensorStatisticsPage()
         {
             InitializeComponent();
-            this.BindingContext = new SensorStatisticsViewModel(MvxMessenger, null, null, UserDialogs.Instance);
+            Mvx.IocConstruct<SensorStatisticsViewModel>();
+
+            this.BindingContext = this;
             //BindingContext = this; // Note that I added this line
 
             // Get instance of SensorPlotViewModel
