@@ -22,12 +22,12 @@ namespace CIM.RemoteManager.Core.Pages
             this.CurrentPageChanged += CurrentPageHasChanged;
 
             // Add sensor statistics tabbed page
-            var sensorStatisticsPage = new NavigationPage(new SensorStatisticsPage())
-            {
-                Title = "Sensor Statistics",
-                Icon = "ic_sensor-statistics.png"
-            };
-            Children.Add(sensorStatisticsPage);
+            //var sensorStatisticsPage = new NavigationPage(new SensorStatisticsPage())
+            //{
+            //    Title = "Sensor Statistics",
+            //    Icon = "ic_sensor-statistics.png"
+            //};
+            //Children.Add(sensorStatisticsPage);
 
 
 

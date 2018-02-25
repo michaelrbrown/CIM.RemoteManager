@@ -1,4 +1,8 @@
-﻿using Xamarin.Forms.Xaml;
+﻿using Acr.UserDialogs;
+using CIM.RemoteManager.Core.ViewModels;
+using MvvmCross.Plugins.Messenger;
+using Plugin.BLE.Abstractions.Contracts;
+using Xamarin.Forms.Xaml;
 
 namespace CIM.RemoteManager.Core.Pages
 {
@@ -8,7 +12,8 @@ namespace CIM.RemoteManager.Core.Pages
         public SensorStatisticsPage()
         {
             InitializeComponent();
-            BindingContext = this; // Note that I added this line
+            this.BindingContext = new SensorStatisticsViewModel(MvxMessenger, null, null, UserDialogs.Instance);
+            //BindingContext = this; // Note that I added this line
 
             // Get instance of SensorPlotViewModel
            // var sensorStatisticsViewModel = (SensorStatisticsViewModel)this.BindingContext;
