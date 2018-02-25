@@ -61,8 +61,8 @@ namespace CIM.RemoteManager.Core.Pages
                 _messenger.Publish(message);
 
                 //sensorPlotPage.BindingContext = sensorItem;
-                var sensorListViewModel = (SensorListViewModel)this.BindingContext;
-                sensorListViewModel.NavigateToSensorPlotPage(sensorItem);
+                //var sensorListViewModel = (SensorListViewModel)this.BindingContext;
+                //sensorListViewModel.NavigateToSensorPlotPage(sensorItem);
                 //sensorListViewModel.NavigateToSensorPlotPage(((Sensor)itemTappedEventArgs.ItemData).SerialNumber);
             }
 
