@@ -8,6 +8,7 @@ using CIM.RemoteManager.Core.Helpers;
 using CIM.RemoteManager.Core.Models;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
+using MvvmCross.Plugins.Messenger;
 using Plugin.BLE.Abstractions.Contracts;
 using Plugin.BLE.Abstractions.EventArgs;
 
@@ -16,6 +17,8 @@ namespace CIM.RemoteManager.Core.ViewModels
 {
     public class SensorPlotViewModel : BaseViewModel
     {
+        private readonly MvxSubscriptionToken _subscriptionToken;
+
         /// <summary>
         /// Bluetooth LE device
         /// </summary>
@@ -117,10 +120,11 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// <param name="bluetoothLe"></param>
         /// <param name="adapter"></param>
         /// <param name="userDialogs"></param>
-        public SensorPlotViewModel(IBluetoothLE bluetoothLe, IAdapter adapter, IUserDialogs userDialogs) : base(adapter)
+        public SensorPlotViewModel(IMvxMessenger messenger, IBluetoothLE bluetoothLe, IAdapter adapter, IUserDialogs userDialogs) : base(adapter)
         {
             try
             {
+                _subscriptionToken = messenger.Subscribe<SensorMessage>(OnSensorMessage);
                 _bluetoothLe = bluetoothLe;
                 _userDialogs = userDialogs;
                 // Events
@@ -137,6 +141,17 @@ namespace CIM.RemoteManager.Core.ViewModels
                 _userDialogs.Alert(ex.Message, "Error while loading sensor data");
                 Mvx.Trace(ex.Message);
             }
+        }
+
+        private void OnSensorMessage(SensorMessage sensorMessage)
+        {
+            // Set sensor values
+            Sensor = sensorMessage.Sensor;
+
+            _userDialogs.Alert($"Sensor OnSensorMessage: {Sensor.SensorIndex.ToString()}", "CIMScan Remote Manager");
+
+
+            SensorIndex = Sensor.SensorIndex.ToString();
         }
 
         /// <summary>
