@@ -1,5 +1,6 @@
 ﻿using CIM.RemoteManager.Core.ViewModels;
 using MvvmCross.Platform;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace CIM.RemoteManager.Core.Pages
@@ -24,5 +25,19 @@ namespace CIM.RemoteManager.Core.Pages
 
             //SensorBusyIndicator.IsBusy = false;
         }
+
+        /// <summary>
+        /// Handle toggling of sensor updates
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SensorUpdatesSwitchToggled(object sender, ToggledEventArgs e)
+        {
+            // Get instance of SensorStatisticsViewModel
+            var sensorStatisticsViewModel = (SensorStatisticsViewModel)this.BindingContext;
+            // Toggle sensor updates
+            sensorStatisticsViewModel.ToggleUpdatesCommand.Execute(null);
+        }
+
     }
 }

@@ -171,12 +171,7 @@ namespace CIM.RemoteManager.Core.ViewModels
 
             SensorIndex = Sensor.SensorIndex.ToString();
         }
-
-        public override void Start()
-        {
-            _userDialogs.Alert("SensorStats :: Start");
-        }
-
+        
         /// <summary>
         /// On Resume
         /// </summary>
@@ -282,10 +277,10 @@ namespace CIM.RemoteManager.Core.ViewModels
                 RxCharacteristic = await _service.GetCharacteristicAsync(RxUuid).ConfigureAwait(true);
 
                 // Wait 500 milliseconds
-                await Task.Delay(4500).ConfigureAwait(true);
+                //await Task.Delay(4500).ConfigureAwait(true);
 
                 // Start updates
-                ToggleUpdatesCommand.Execute(null);
+                //ToggleUpdatesCommand.Execute(null);
 
                 // Hide loading...
                 //_userDialogs.HideLoading();
