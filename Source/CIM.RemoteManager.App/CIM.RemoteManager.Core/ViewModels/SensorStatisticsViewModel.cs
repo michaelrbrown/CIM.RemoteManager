@@ -131,6 +131,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// <summary>
         /// Sensor statistics view model constructor
         /// </summary>
+        /// <param name="messenger">Sensor message subscription</param>
         /// <param name="bluetoothLe">Bluetooth LE obj</param>
         /// <param name="adapter">Bluetooth LE adapter</param>
         /// <param name="userDialogs">User dialogs</param>
@@ -145,7 +146,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 // Events
                 _bluetoothLe.StateChanged += OnStateChanged;
 
-                _userDialogs.Alert("SensorStats :: SensorStatisticsViewModel");
+                //_userDialogs.Alert("SensorStats :: SensorStatisticsViewModel");
 
                 // Register event for device connection lost
                 Adapter.DeviceConnectionLost += OnDeviceConnectionLost;
