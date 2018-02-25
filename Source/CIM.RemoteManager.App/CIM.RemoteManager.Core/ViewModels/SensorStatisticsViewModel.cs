@@ -8,6 +8,7 @@ using CIM.RemoteManager.Core.Helpers;
 using CIM.RemoteManager.Core.Models;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
+using MvvmCross.Plugins.Messenger;
 using Plugin.BLE.Abstractions.Contracts;
 using Plugin.BLE.Abstractions.EventArgs;
 
@@ -16,6 +17,8 @@ namespace CIM.RemoteManager.Core.ViewModels
 {
     public class SensorStatisticsViewModel : BaseViewModel
     {
+        private readonly MvxSubscriptionToken _subscriptionToken;
+
         /// <summary>
         /// Bluetooth LE device
         /// </summary>
@@ -68,6 +71,21 @@ namespace CIM.RemoteManager.Core.ViewModels
         public string DeviceName { get; set; }
 
         /// <summary>
+        /// Sensor index (unique id)
+        /// </summary>
+        public string SensorIndex { get; set; }
+
+        /// <summary>
+        /// Sensor serial number (unique id)
+        /// </summary>
+        public string SensorSerialNumber { get; set; }
+
+        /// <summary>
+        /// Sensor
+        /// </summary>
+        public Sensor Sensor { get; set; }
+
+        /// <summary>
         /// Sensor sttistics
         /// </summary>
         SensorStatistics _sensorStatistics;
@@ -116,12 +134,14 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// <param name="bluetoothLe">Bluetooth LE obj</param>
         /// <param name="adapter">Bluetooth LE adapter</param>
         /// <param name="userDialogs">User dialogs</param>
-        public SensorStatisticsViewModel(IBluetoothLE bluetoothLe, IAdapter adapter, IUserDialogs userDialogs) : base(adapter)
+        public SensorStatisticsViewModel(IMvxMessenger messenger, IBluetoothLE bluetoothLe, IAdapter adapter, IUserDialogs userDialogs) : base(adapter)
         {
             try
             {
+                _subscriptionToken = messenger.Subscribe<SensorMessage>(OnSensorMessage);
                 _bluetoothLe = bluetoothLe;
                 _userDialogs = userDialogs;
+
                 // Events
                 _bluetoothLe.StateChanged += OnStateChanged;
 
@@ -139,7 +159,23 @@ namespace CIM.RemoteManager.Core.ViewModels
                 Mvx.Trace(ex.Message);
             }
         }
-        
+
+        private void OnSensorMessage(SensorMessage sensorMessage)
+        {
+            // Set sensor values
+            Sensor = sensorMessage.Sensor;
+
+            _userDialogs.Alert($"Sensor Stats OnSensorMessage: {Sensor.SensorIndex.ToString()}", "CIMScan Remote Manager");
+
+
+            SensorIndex = Sensor.SensorIndex.ToString();
+        }
+
+        public override async void Start()
+        {
+
+        }
+
         /// <summary>
         /// On Resume
         /// </summary>

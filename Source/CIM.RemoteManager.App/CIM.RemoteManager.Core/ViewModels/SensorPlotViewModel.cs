@@ -128,6 +128,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 _subscriptionToken = messenger.Subscribe<SensorMessage>(OnSensorMessage);
                 _bluetoothLe = bluetoothLe;
                 _userDialogs = userDialogs;
+
                 // Events
                 _bluetoothLe.StateChanged += OnStateChanged;
                 

@@ -134,6 +134,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             {
                 _bluetoothLe = bluetoothLe;
                 _userDialogs = userDialogs;
+
                 // Events
                 _bluetoothLe.StateChanged += OnStateChanged;
 

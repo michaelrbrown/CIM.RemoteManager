@@ -1,4 +1,5 @@
 ﻿using System;
+using CIM.RemoteManager.Core.Models;
 using CIM.RemoteManager.Core.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -8,52 +9,63 @@ namespace CIM.RemoteManager.Core.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SensorPlotPage
     {
+
+
         public SensorPlotPage()
         {
             InitializeComponent();
             BindingContext = this;
 
-            this.CurrentPageChanged += CurrentPageHasChanged;
+            //this.CurrentPageChanged += CurrentPageHasChanged;
 
             // Add sensor statistics tabbed page
-            var sensorStatisticsPage = new SensorStatisticsPage
-            {
-                Title = "Sensor Statistics",
-                Icon = "ic_sensor-statistics.png"
-            };
-            Children.Add(sensorStatisticsPage);
+            //var sensorStatisticsPage = new SensorStatisticsPage
+            //{
+            //    Title = "Sensor Statistics",
+            //    Icon = "ic_sensor-statistics.png"
+            //};
+            //Children.Add(sensorStatisticsPage);
 
            
 
             //SensorBusyIndicator.IsBusy = false;
         }
 
-        protected override void OnCurrentPageChanged()
-        {
-            if (this.CurrentPage is SensorStatisticsPage)
-            {
-                DisplayAlert("SensorStts", "onapprea", "Ok");
-                //sensorPlotPage.BindingContext = sensorItem;
-                //var viewModel = BindingContext as SensorPlotViewModel;
+        //protected override void OnCurrentPageChanged()
+        //{
+        //    if (this.CurrentPage is SensorStatisticsPage)
+        //    {
+        //        DisplayAlert("SensorStats", "onapprea", "Ok");
+        //        //sensorPlotPage.BindingContext = sensorItem;
+        //        //var viewModel = BindingContext as SensorPlotViewModel;
 
-                var sensorPlotViewModel = (SensorPlotViewModel)this.BindingContext;
+        //        var sensorPlotViewModel = (SensorPlotViewModel)this.BindingContext;
 
-                DisplayAlert("SensorStts", sensorPlotViewModel?.Sensor.SensorIndex.ToString(), "Ok");
+        //        // Send our Sensor object as message
+        //        var message = new SensorMessage(this, sensorPlotViewModel.Sensor);
+
+        //        var sensorStatisticsViewModel = (SensorStatisticsViewModel)this.BindingContext;
+
+        //        // Publish our message
+        //        MvxMessenger.Publish<SensorMessage>(message);
+
+                
+        //        //DisplayAlert("SensorStts", sensorPlotViewModel?.Sensor.SensorIndex.ToString(), "Ok");
 
 
-                sensorPlotViewModel?.NavigateToSensorStatisticsPage(sensorPlotViewModel?.Sensor);
-            }
-            else if (this.CurrentPage is SensorPlotPage)
-            {
-                var viewModel = BindingContext as SensorPlotViewModel;
-                viewModel?.Resume();
-            }
-        }
+        //        sensorPlotViewModel?.NavigateToSensorStatisticsPage(sensorPlotViewModel?.Sensor);
+        //    }
+        //    else if (this.CurrentPage is SensorPlotPage)
+        //    {
+        //        var viewModel = BindingContext as SensorPlotViewModel;
+        //        viewModel?.Resume();
+        //    }
+        //}
 
-        private void CurrentPageHasChanged(object sender, EventArgs e)
-        {
-            this.Title = this.CurrentPage.Title;
-        }
+        //private void CurrentPageHasChanged(object sender, EventArgs e)
+        //{
+        //    this.Title = this.CurrentPage.Title;
+        //}
 
         /// <summary>
         /// Handle toggling of sensor updates

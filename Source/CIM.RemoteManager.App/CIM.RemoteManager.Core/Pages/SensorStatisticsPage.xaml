@@ -2,7 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:pages="clr-namespace:CIM.RemoteManager.Core.Pages;assembly=CIM.RemoteManager.Core"
              x:Class="CIM.RemoteManager.Core.Pages.SensorStatisticsPage" 
-             BackgroundColor="#FFFFFF" 
+             BackgroundColor="#FFFFFF" Icon="ic_sensor-statistics.png"
              Title="Sensor Statistics">
     
     <ContentPage.Resources>
