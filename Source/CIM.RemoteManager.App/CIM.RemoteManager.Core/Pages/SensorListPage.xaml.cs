@@ -1,5 +1,6 @@
 ﻿using CIM.RemoteManager.Core.Models;
 using CIM.RemoteManager.Core.ViewModels;
+using MvvmCross.Platform;
 using MvvmCross.Plugins.Messenger;
 using Syncfusion.ListView.XForms;
 using Xamarin.Forms;
@@ -11,8 +12,6 @@ namespace CIM.RemoteManager.Core.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SensorListPage
     {
-        private IMvxMessenger _messenger;
-
         public SensorListPage()
         {
             InitializeComponent();
@@ -58,11 +57,11 @@ namespace CIM.RemoteManager.Core.Pages
                 // Send our Sensor object as message
                 var message = new SensorMessage(this, sensorItem);
                 // Publish our message
-                _messenger.Publish(message);
+                MvxMessenger.Publish<SensorMessage>(message);
 
                 //sensorPlotPage.BindingContext = sensorItem;
-                //var sensorListViewModel = (SensorListViewModel)this.BindingContext;
-                //sensorListViewModel.NavigateToSensorPlotPage(sensorItem);
+                var sensorListViewModel = (SensorListViewModel)this.BindingContext;
+                sensorListViewModel.NavigateToSensorPlotPage(sensorItem);
                 //sensorListViewModel.NavigateToSensorPlotPage(((Sensor)itemTappedEventArgs.ItemData).SerialNumber);
             }
 
