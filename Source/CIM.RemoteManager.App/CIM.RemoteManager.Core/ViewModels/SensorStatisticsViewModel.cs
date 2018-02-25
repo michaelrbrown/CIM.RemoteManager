@@ -171,9 +171,9 @@ namespace CIM.RemoteManager.Core.ViewModels
             SensorIndex = Sensor.SensorIndex.ToString();
         }
 
-        public override async void Start()
+        public override void Start()
         {
-
+            _userDialogs.Alert("SensorStats :: Start");
         }
 
         /// <summary>

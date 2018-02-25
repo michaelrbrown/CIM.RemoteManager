@@ -83,6 +83,5 @@
 
     </ContentPage>
 
-    <pages:SensorStatisticsPage Title="Sensor Statistics" Icon="ic_sensor-statistics.png" />
-
+  
 </pages:BaseTabbedPage>

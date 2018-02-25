@@ -22,12 +22,12 @@ namespace CIM.RemoteManager.Core.Pages
             this.CurrentPageChanged += CurrentPageHasChanged;
 
             // Add sensor statistics tabbed page
-            //var sensorStatisticsPage = new SensorStatisticsPage
-            //{
-            //    Title = "Sensor Statistics",
-            //    Icon = "ic_sensor-statistics.png"
-            //};
-            //Children.Add(sensorStatisticsPage);
+            var sensorStatisticsPage = new NavigationPage(new SensorStatisticsPage())
+            {
+                Title = "Sensor Statistics",
+                Icon = "ic_sensor-statistics.png"
+            };
+            Children.Add(sensorStatisticsPage);
 
 
 
@@ -38,7 +38,7 @@ namespace CIM.RemoteManager.Core.Pages
         {
             if (this.CurrentPage is SensorStatisticsPage)
             {
-                DisplayAlert("SensorStats", "onapprea", "Ok");
+                //DisplayAlert("SensorStats", "onapprea", "Ok");
                 //sensorPlotPage.BindingContext = sensorItem;
                 //var viewModel = BindingContext as SensorPlotViewModel;
 
