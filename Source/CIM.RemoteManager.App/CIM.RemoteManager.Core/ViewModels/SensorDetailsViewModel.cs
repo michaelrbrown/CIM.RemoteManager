@@ -197,8 +197,8 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// <param name="e"></param>
         private void OnStateChanged(object sender, BluetoothStateChangedArgs e)
         {
-            RaisePropertyChanged(nameof(IsStateOn));
-            RaisePropertyChanged(nameof(StateText));
+            RaisePropertyChanged(() => IsStateOn);
+            RaisePropertyChanged(() => StateText);
         }
 
         /// <summary>
@@ -276,9 +276,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                         updateValue = "{X}";
                         _userDialogs.Alert($"Update Command1: {updateValue}", "CIMScan RemoteManager");
                     }
-
-                    SensorSerialNumber = updateValue;
-                    RaisePropertyChanged(() => SensorSerialNumber);
+                    
 
                     // Send a refresh command
                     await TxCharacteristic.WriteAsync(updateValue.StrToByteArray()).ConfigureAwait(true);
@@ -347,6 +345,26 @@ namespace CIM.RemoteManager.Core.ViewModels
             {
                 HockeyApp.MetricsManager.TrackEvent($"(InitFromBundle) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
                 _userDialogs.Alert(ex.Message, "Error while loading sensor data");
+            }
+        }
+
+        public void SetSensorCommandType(SensorCommand sensorCommandType)
+        {
+            // Set sensor command type
+            SensorCommandType = sensorCommandType;
+            RaisePropertyChanged(() => SensorCommandType);
+            // Start updates for sensor based on command type
+            if (!UpdatesStarted)
+            {
+                //StartUpdates();
+            }
+        }
+
+        public void StopSensorUpdates()
+        {
+            if (UpdatesStarted)
+            {
+                //StopUpdates();
             }
         }
 
