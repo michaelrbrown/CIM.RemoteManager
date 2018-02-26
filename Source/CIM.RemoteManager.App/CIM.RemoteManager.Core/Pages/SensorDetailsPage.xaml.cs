@@ -17,60 +17,43 @@ namespace CIM.RemoteManager.Core.Pages
         public SensorDetailsPage()
         {
             InitializeComponent();
+
+            // Set binding context to viewmodel
             BindingContext = this;
 
+            // Set current paged changed event to handle sensor update types
             this.CurrentPageChanged += CurrentPageHasChanged;
-
-            // Add sensor statistics tabbed page
-            //var sensorStatisticsPage = new NavigationPage(new SensorStatisticsPage())
-            //{
-            //    Title = "Sensor Statistics",
-            //    Icon = "ic_sensor-statistics.png"
-            //};
-            //Children.Add(sensorStatisticsPage);
-
-
-
-            //SensorBusyIndicator.IsBusy = false;
         }
 
+        /// <summary>
+        /// Tabbed current page changed event to handle setting sensor update type.
+        /// Also handles starting sensor updates based on type.
+        /// </summary>
         protected override void OnCurrentPageChanged()
         {
             if (this.CurrentPage is SensorStatisticsPage)
             {
-                //DisplayAlert("SensorStats", "onapprea", "Ok");
-                //sensorPlotPage.BindingContext = sensorItem;
-                //var viewModel = BindingContext as SensorPlotViewModel;
-
                 var sensorDetailsViewModel = (SensorDetailsViewModel)this.BindingContext;
                 // Set sensor command type to pull Statistics Characteristics
                 sensorDetailsViewModel.SensorCommandType = SensorDetailsViewModel.SensorCommand.Statistics;
                 sensorDetailsViewModel?.StopUpdatesCommand.Execute();
-                sensorDetailsViewModel?.StartUpdatesCommand.Execute();
-
-                // Send our Sensor object as message
-                //var message = new SensorMessage(this, sensorPlotViewModel.Sensor);
-
-                //var sensorStatisticsViewModel = (SensorStatisticsViewModel)this.BindingContext;
-
-                // Publish our message
-                //MvxMessenger.Publish<SensorMessage>(message);
-
-
-                //DisplayAlert("SensorStts", sensorPlotViewModel?.Sensor.SensorIndex.ToString(), "Ok");
-
-
-                //sensorPlotViewModel?.NavigateToSensorStatisticsPage(sensorPlotViewModel?.Sensor);
+                sensorDetailsViewModel?.StartSensorUpdates(SensorDetailsViewModel.SensorCommand.Statistics);
             }
             else if (this.CurrentPage is SensorDetailsPage)
             {
                 var sensorDetailsViewModel = (SensorDetailsViewModel)this.BindingContext;
                 // Set sensor command type to pull Statistics Characteristics
                 sensorDetailsViewModel.SensorCommandType = SensorDetailsViewModel.SensorCommand.Plot;
-                sensorDetailsViewModel?.StartUpdatesCommand.Execute();
+                sensorDetailsViewModel?.StopUpdatesCommand.Execute();
+                sensorDetailsViewModel?.StartSensorUpdates(SensorDetailsViewModel.SensorCommand.Plot);
             }
         }
 
+        /// <summary>
+        /// Tabbed current page change (handle setting page title)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CurrentPageHasChanged(object sender, EventArgs e)
         {
             this.Title = this.CurrentPage.Title;
@@ -84,9 +67,9 @@ namespace CIM.RemoteManager.Core.Pages
         private void SensorUpdatesSwitchToggled(object sender, ToggledEventArgs e)
         {
             // Get instance of SensorPlotViewModel
-            var sensorPlotViewModel = (SensorDetailsViewModel)this.BindingContext;
+            var sensorDetailsViewModel = (SensorDetailsViewModel)this.BindingContext;
             // Toggle sensor updates
-            sensorPlotViewModel.ToggleUpdatesCommand.Execute(null);
+            sensorDetailsViewModel.ToggleUpdatesCommand.Execute(null);
         }
 
     }

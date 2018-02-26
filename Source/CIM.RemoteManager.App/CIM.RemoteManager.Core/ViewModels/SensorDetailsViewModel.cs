@@ -256,34 +256,34 @@ namespace CIM.RemoteManager.Core.ViewModels
                 _service = await _device.GetServiceAsync(UartUuid).ConfigureAwait(true);
 
                 // Get write characteristic service
-                TxCharacteristic = await _service.GetCharacteristicAsync(TxUuid).ConfigureAwait(true);
+                //TxCharacteristic = await _service.GetCharacteristicAsync(TxUuid).ConfigureAwait(true);
 
-                // Make sure we can write characteristic data to remote
-                if (TxCharacteristic.CanWrite)
-                {
-                    string updateValue = string.Empty;
-                    if (SensorCommandType == SensorCommand.Plot)
-                    {
-                        updateValue = "{c" + SensorIndex + "}";
-                    }
-                    else if (SensorCommandType == SensorCommand.Statistics)
-                    {
-                        updateValue = "{X}";
-                        _userDialogs.Alert($"Update Command1: {updateValue}", "CIMScan RemoteManager");
-                    }
-                    // Send a refresh command
-                    await TxCharacteristic.WriteAsync(updateValue.StrToByteArray()).ConfigureAwait(true);
-                }
-                else
-                {
-                    _userDialogs.Alert("Cannot write characteristic data to remote!", "CIMScan Remote Manager");
-                }
+                //// Make sure we can write characteristic data to remote
+                //if (TxCharacteristic.CanWrite)
+                //{
+                //    string updateValue = string.Empty;
+                //    if (SensorCommandType == SensorCommand.Plot)
+                //    {
+                //        updateValue = "{c" + SensorIndex + "}";
+                //    }
+                //    else if (SensorCommandType == SensorCommand.Statistics)
+                //    {
+                //        updateValue = "{X}";
+                //        _userDialogs.Alert($"Update Command1: {updateValue}", "CIMScan RemoteManager");
+                //    }
+                //    // Send a refresh command
+                //    await TxCharacteristic.WriteAsync(updateValue.StrToByteArray()).ConfigureAwait(true);
+                //}
+                //else
+                //{
+                //    _userDialogs.Alert("Cannot write characteristic data to remote!", "CIMScan Remote Manager");
+                //}
 
-                // Wait 500 milliseconds
-                await Task.Delay(500).ConfigureAwait(true);
+                //// Wait 500 milliseconds
+                //await Task.Delay(500).ConfigureAwait(true);
 
-                // Get Characteristics service
-                RxCharacteristic = await _service.GetCharacteristicAsync(RxUuid).ConfigureAwait(true);
+                //// Get Characteristics service
+                //RxCharacteristic = await _service.GetCharacteristicAsync(RxUuid).ConfigureAwait(true);
 
                 // Wait 500 milliseconds
                 //await Task.Delay(1000).ConfigureAwait(true);
@@ -341,32 +341,51 @@ namespace CIM.RemoteManager.Core.ViewModels
             }
         }
 
-        /// <summary>
-        /// Start sensor updates
-        /// </summary>
-        public MvxCommand StartUpdatesCommand => new MvxCommand((() =>
+        public void StartSensorUpdates(SensorCommand sensorCommandType)
         {
+            // Set sensor command type
+            SensorCommandType = sensorCommandType;
+            // Start updates for sensor based on command type
             if (!UpdatesStarted)
             {
                 StartUpdates();
             }
-        }));
+        }
 
-        /// <summary>
-        /// Stop sensor updates
-        /// </summary>
-        public MvxCommand StopUpdatesCommand => new MvxCommand((() =>
+        public void StopSensorUpdates()
         {
             if (UpdatesStarted)
             {
                 StopUpdates();
             }
-        }));
+        }
+
+        /// <summary>
+        /// Start sensor updates
+        /// </summary>
+        public MvxCommand StartUpdatesCommand => new MvxCommand(() =>
+        {
+            if (!UpdatesStarted)
+            {
+                StartUpdates();
+            }
+        });
+
+        /// <summary>
+        /// Stop sensor updates
+        /// </summary>
+        public MvxCommand StopUpdatesCommand => new MvxCommand(() =>
+        {
+            if (UpdatesStarted)
+            {
+                StopUpdates();
+            }
+        });
 
         /// <summary>
         /// Toggle sensor updates
         /// </summary>
-        public MvxCommand ToggleUpdatesCommand => new MvxCommand((() =>
+        public MvxCommand ToggleUpdatesCommand => new MvxCommand(() =>
         {
             if (UpdatesStarted)
             {
@@ -376,7 +395,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             {
                 StartUpdates();
             }
-        }));
+        });
 
         /// <summary>
         /// Start bluetooth characteristics updating

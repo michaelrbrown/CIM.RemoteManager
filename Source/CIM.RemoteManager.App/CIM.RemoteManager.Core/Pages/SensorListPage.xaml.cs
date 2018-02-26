@@ -1,7 +1,5 @@
 ﻿using CIM.RemoteManager.Core.Models;
 using CIM.RemoteManager.Core.ViewModels;
-using MvvmCross.Platform;
-using MvvmCross.Plugins.Messenger;
 using Syncfusion.ListView.XForms;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -15,9 +13,11 @@ namespace CIM.RemoteManager.Core.Pages
         public SensorListPage()
         {
             InitializeComponent();
-            // Set binding context
+
+            // Set binding context to viewmodel
             BindingContext = this;
 
+            // Add device settings toolbar icon and handle selection
             ToolbarItems.Add(new ToolbarItem("Device Settings", "ic_remote-settings.png", () =>
             {
                 
@@ -56,58 +56,8 @@ namespace CIM.RemoteManager.Core.Pages
             {
                 //sensorPlotPage.BindingContext = sensorItem;
                 var sensorListViewModel = (SensorListViewModel)this.BindingContext;
-
-                // Send our Sensor object as message
-                //var message = new SensorMessage(this, sensorItem);
-                // Publish our message
-                //MvxMessenger.Publish<SensorMessage>(message);
-
-               
+                // Navigate to sensor details view model (for plot, statistics, limits, and sensor settings)
                 sensorListViewModel.NavigateToSensorDetailsPage(sensorItem);
-                //sensorListViewModel.NavigateToSensorPlotPage(((Sensor)itemTappedEventArgs.ItemData).SerialNumber);
-            }
-
-            // Get instance of SensorListViewModel
-            
-
-            //DisplayAlert("Item Double Tapped", "Sensor Index: " + ((Sensor)itemTappedEventArgs.ItemData).SerialNumber, "OK");
-
-            
-            //Navigation.PushAsync(new SensorPlotPage());
-
-
-
-
-            //DisplayAlert("Item Double Tapped", "Sensor Index: " + ((Sensor)itemTappedEventArgs.ItemData).SensorIndex, "OK");
-
-
-            // DisplayAlert("Item Tapped", "Sensor SerialNumber: " + ((Sensor)itemTappedEventArgs.ItemData).SerialNumber, "OK");
-
-            //var sensorItem = itemTappedEventArgs.ItemData as Sensor;
-
-            //if (sensorItem != null) DisplayAlert("Item Tapped", "Sensor SensorType: " + sensorItem.SensorType, "OK");
-
-            //if (itemTappedEventArgs.ItemData != null)
-            // DisplayAlert("Item Tapped", "Sensor: " + itemTappedEventArgs.ItemData.ToString(), "OK");
-            // Navigate to sensor plot page passing bundle
-            //sensorListViewModel.NavigateToSensorPlotPage(item.SensorIndex.ToString());
-            //Navigation.PushAsync(sensorPlotPage);
-            //}
-
-            //DisplayAlert("Item Double Tapped", "", "OK");
-            //DisplayAlert("Item Double Tapped", "Sensor: " + itemTappedEventArgs.ItemData, "OK");
-            //DisplayAlert("Item Double Tapped", "Sensor Index: " + ((Sensor)itemTappedEventArgs.ItemData).SensorIndex, "OK");
-        }
-
-        private void ListView_SwipeEnded(object sender, SwipeEndedEventArgs e)
-        {
-            if (e.SwipeOffset >= 360)
-            {
-                DisplayAlert("Item swipe ended...", "", "OK");
-                //SensorPlotViewModel sensorPlotViewModel;
-                //BindingContext = (sensorPlotViewModel = new SensorPlotViewModel());
-                //sensorPlotViewModel.(e.ItemIndex);
-                //SensorLiistView.ResetSwipe();
             }
         }
 
