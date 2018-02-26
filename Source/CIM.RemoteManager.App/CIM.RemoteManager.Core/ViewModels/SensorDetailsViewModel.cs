@@ -269,8 +269,8 @@ namespace CIM.RemoteManager.Core.ViewModels
                     else if (SensorCommandType == SensorCommand.Statistics)
                     {
                         updateValue = "{X}";
+                        _userDialogs.Alert($"Update Command1: {updateValue}", "CIMScan RemoteManager");
                     }
-                    _userDialogs.Alert($"Update Command1: {updateValue}", "CIMScan RemoteManager");
                     // Send a refresh command
                     await TxCharacteristic.WriteAsync(updateValue.StrToByteArray()).ConfigureAwait(true);
                 }
@@ -400,11 +400,9 @@ namespace CIM.RemoteManager.Core.ViewModels
                 else if (SensorCommandType == SensorCommand.Statistics)
                 {
                     updateValue = "{X}";
+                    _userDialogs.Alert($"Update Command2: {updateValue}", "CIMScan RemoteManager");
                 }
-
-                _userDialogs.Alert($"Update Command2: {updateValue}", "CIMScan RemoteManager");
-
-
+                
                 // Send a refresh command
                 await TxCharacteristic.WriteAsync(updateValue.StrToByteArray()).ConfigureAwait(true);
                 // Start updates from bluetooth service
