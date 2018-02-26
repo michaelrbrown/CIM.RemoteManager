@@ -271,6 +271,10 @@ namespace CIM.RemoteManager.Core.ViewModels
                         updateValue = "{X}";
                         _userDialogs.Alert($"Update Command1: {updateValue}", "CIMScan RemoteManager");
                     }
+
+                    SensorSerialNumber = updateValue;
+                    RaisePropertyChanged(() => SensorSerialNumber);
+
                     // Send a refresh command
                     await TxCharacteristic.WriteAsync(updateValue.StrToByteArray()).ConfigureAwait(true);
                 }
@@ -417,7 +421,10 @@ namespace CIM.RemoteManager.Core.ViewModels
                     updateValue = "{X}";
                     _userDialogs.Alert($"Update Command2: {updateValue}", "CIMScan RemoteManager");
                 }
-                
+
+                SensorSerialNumber = updateValue;
+                RaisePropertyChanged(() => SensorSerialNumber);
+
                 // Send a refresh command
                 await TxCharacteristic.WriteAsync(updateValue.StrToByteArray()).ConfigureAwait(true);
                 // Start updates from bluetooth service
