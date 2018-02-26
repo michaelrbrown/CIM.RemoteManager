@@ -270,6 +270,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                     {
                         updateValue = "{X}";
                     }
+                    _userDialogs.Alert($"Update Command1: {updateValue}", "CIMScan RemoteManager");
                     // Send a refresh command
                     await TxCharacteristic.WriteAsync(updateValue.StrToByteArray()).ConfigureAwait(true);
                 }
@@ -391,8 +392,21 @@ namespace CIM.RemoteManager.Core.ViewModels
                 RxCharacteristic.ValueUpdated += RxCharacteristicOnValueUpdated;
 
                 // Send refresh command to remote
-                //string updateValue = "{c" + SensorIndex + "}";
-                //await TxCharacteristic.WriteAsync(updateValue.StrToByteArray()).ConfigureAwait(true);
+                string updateValue = string.Empty;
+                if (SensorCommandType == SensorCommand.Plot)
+                {
+                    updateValue = "{c" + SensorIndex + "}";
+                }
+                else if (SensorCommandType == SensorCommand.Statistics)
+                {
+                    updateValue = "{X}";
+                }
+
+                _userDialogs.Alert($"Update Command2: {updateValue}", "CIMScan RemoteManager");
+
+
+                // Send a refresh command
+                await TxCharacteristic.WriteAsync(updateValue.StrToByteArray()).ConfigureAwait(true);
                 // Start updates from bluetooth service
                 await RxCharacteristic.StartUpdatesAsync().ConfigureAwait(true);
 

@@ -45,6 +45,7 @@ namespace CIM.RemoteManager.Core.Pages
                 var sensorDetailsViewModel = (SensorDetailsViewModel)this.BindingContext;
                 // Set sensor command type to pull Statistics Characteristics
                 sensorDetailsViewModel.SensorCommandType = SensorDetailsViewModel.SensorCommand.Statistics;
+                sensorDetailsViewModel?.StopUpdatesCommand.Execute();
                 sensorDetailsViewModel?.StartUpdatesCommand.Execute();
 
                 // Send our Sensor object as message
