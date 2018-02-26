@@ -282,8 +282,8 @@ namespace CIM.RemoteManager.Core.ViewModels
                 //// Wait 500 milliseconds
                 //await Task.Delay(500).ConfigureAwait(true);
 
-                //// Get Characteristics service
-                //RxCharacteristic = await _service.GetCharacteristicAsync(RxUuid).ConfigureAwait(true);
+                // Get Characteristics service
+                RxCharacteristic = await _service.GetCharacteristicAsync(RxUuid).ConfigureAwait(true);
 
                 // Wait 500 milliseconds
                 //await Task.Delay(1000).ConfigureAwait(true);
@@ -405,11 +405,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             try
             {
                 UpdatesStarted = true;
-
-                // Subscribe to value updated events
-                RxCharacteristic.ValueUpdated -= RxCharacteristicOnValueUpdated;
-                RxCharacteristic.ValueUpdated += RxCharacteristicOnValueUpdated;
-
+                
                 // Send refresh command to remote
                 string updateValue = string.Empty;
                 if (SensorCommandType == SensorCommand.Plot)
@@ -426,6 +422,10 @@ namespace CIM.RemoteManager.Core.ViewModels
                 await TxCharacteristic.WriteAsync(updateValue.StrToByteArray()).ConfigureAwait(true);
                 // Start updates from bluetooth service
                 await RxCharacteristic.StartUpdatesAsync().ConfigureAwait(true);
+
+                // Subscribe to value updated events
+                RxCharacteristic.ValueUpdated -= RxCharacteristicOnValueUpdated;
+                RxCharacteristic.ValueUpdated += RxCharacteristicOnValueUpdated;
 
                 // Let UI know mode we are in
                 RaisePropertyChanged(() => UpdateButtonText);
@@ -449,7 +449,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 // Stop updates from bluetooth service
                 await RxCharacteristic.StopUpdatesAsync().ConfigureAwait(true);
 
-                // Subscribe to value updated events
+                // Unsubscribe to value updated events
                 RxCharacteristic.ValueUpdated -= RxCharacteristicOnValueUpdated;
 
                 // Let UI know mode we are in
