@@ -125,7 +125,6 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// <summary>
         /// Sensor view model constructor
         /// </summary>
-        /// <param name="messenger">Sensor message subscription</param>
         /// <param name="bluetoothLe">Bluetooth LE obj</param>
         /// <param name="adapter">Bluetooth LE adapter</param>
         /// <param name="userDialogs">User dialogs</param>
@@ -576,7 +575,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// <summary>
         /// Sensor selected (navigate to sensor plot page)
         /// </summary>
-        public void NavigateToSensorPlotPage(Sensor sensor)
+        public void NavigateToSensorDetailsPage(Sensor sensor)
         {
             if (sensor != null)
             {

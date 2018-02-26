@@ -58,12 +58,12 @@ namespace CIM.RemoteManager.Core.Pages
                 var sensorListViewModel = (SensorListViewModel)this.BindingContext;
 
                 // Send our Sensor object as message
-                var message = new SensorMessage(this, sensorItem);
+                //var message = new SensorMessage(this, sensorItem);
                 // Publish our message
-                MvxMessenger.Publish<SensorMessage>(message);
+                //MvxMessenger.Publish<SensorMessage>(message);
 
                
-                sensorListViewModel.NavigateToSensorPlotPage(sensorItem);
+                sensorListViewModel.NavigateToSensorDetailsPage(sensorItem);
                 //sensorListViewModel.NavigateToSensorPlotPage(((Sensor)itemTappedEventArgs.ItemData).SerialNumber);
             }
 
