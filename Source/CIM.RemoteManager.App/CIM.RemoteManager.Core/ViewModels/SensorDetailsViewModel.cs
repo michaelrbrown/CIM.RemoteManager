@@ -286,10 +286,10 @@ namespace CIM.RemoteManager.Core.ViewModels
                 RxCharacteristic = await _service.GetCharacteristicAsync(RxUuid).ConfigureAwait(true);
 
                 // Wait 500 milliseconds
-                await Task.Delay(1000).ConfigureAwait(true);
+                //await Task.Delay(1000).ConfigureAwait(true);
 
                 // Start updates
-                StartUpdatesCommand.Execute(null);
+                //StartUpdatesCommand.Execute(null);
             }
             catch (Exception ex)
             {
