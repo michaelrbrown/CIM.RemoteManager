@@ -11,11 +11,10 @@ namespace CIM.RemoteManager.Core.Pages
         public SensorStatisticsPage()
         {
             InitializeComponent();
-            Mvx.IocConstruct<SensorStatisticsViewModel>();
+           // Mvx.IocConstruct<SensorStatisticsViewModel>();
             
             //var sensorStatisticsViewModel = Mvx.Resolve<SensorStatisticsViewModel>();
-
-            this.BindingContext = this;
+            BindingContext = this;
             //BindingContext = this; // Note that I added this line
 
             // Get instance of SensorPlotViewModel

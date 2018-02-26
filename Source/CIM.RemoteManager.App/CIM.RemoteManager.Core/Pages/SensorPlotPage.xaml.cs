@@ -42,7 +42,7 @@ namespace CIM.RemoteManager.Core.Pages
                 //sensorPlotPage.BindingContext = sensorItem;
                 //var viewModel = BindingContext as SensorPlotViewModel;
 
-                var sensorPlotViewModel = (SensorPlotViewModel)this.BindingContext;
+               // var sensorPlotViewModel = (SensorPlotViewModel)this.BindingContext;
 
                 // Send our Sensor object as message
                 //var message = new SensorMessage(this, sensorPlotViewModel.Sensor);
@@ -56,7 +56,7 @@ namespace CIM.RemoteManager.Core.Pages
                 //DisplayAlert("SensorStts", sensorPlotViewModel?.Sensor.SensorIndex.ToString(), "Ok");
 
 
-                sensorPlotViewModel?.NavigateToSensorStatisticsPage(sensorPlotViewModel?.Sensor);
+                //sensorPlotViewModel?.NavigateToSensorStatisticsPage(sensorPlotViewModel?.Sensor);
             }
             else if (this.CurrentPage is SensorPlotPage)
             {
