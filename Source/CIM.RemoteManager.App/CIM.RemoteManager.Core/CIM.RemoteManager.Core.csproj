@@ -83,8 +83,8 @@
     <Compile Include="Pages\SensorStatisticsPage.xaml.cs">
       <DependentUpon>SensorStatisticsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\SensorPlotPage.xaml.cs">
-      <DependentUpon>SensorPlotPage.xaml</DependentUpon>
+    <Compile Include="Pages\SensorDetailsPage.xaml.cs">
+      <DependentUpon>SensorDetailsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\SensorListPage.xaml.cs">
       <DependentUpon>SensorListPage.xaml</DependentUpon>
@@ -106,7 +106,7 @@
     <Compile Include="ViewModels\DeviceListViewModel.cs" />
     <Compile Include="ViewModels\SensorStatisticsViewModel.cs" />
     <Compile Include="ViewModels\SensorListViewModel.cs" />
-    <Compile Include="ViewModels\SensorPlotViewModel.cs" />
+    <Compile Include="ViewModels\SensorDetailsViewModel.cs" />
     <Compile Include="ViewModels\ServiceListViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
   </ItemGroup>
@@ -306,7 +306,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Pages\SensorPlotPage.xaml">
+    <EmbeddedResource Include="Pages\SensorDetailsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

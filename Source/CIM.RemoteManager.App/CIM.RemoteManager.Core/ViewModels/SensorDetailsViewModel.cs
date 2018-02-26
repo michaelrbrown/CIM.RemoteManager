@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Acr.UserDialogs;
@@ -8,17 +7,14 @@ using CIM.RemoteManager.Core.Helpers;
 using CIM.RemoteManager.Core.Models;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
-using MvvmCross.Plugins.Messenger;
 using Plugin.BLE.Abstractions.Contracts;
 using Plugin.BLE.Abstractions.EventArgs;
 
 
 namespace CIM.RemoteManager.Core.ViewModels
 {
-    public class SensorPlotViewModel : BaseViewModel
+    public class SensorDetailsViewModel : BaseViewModel
     {
-        private readonly MvxSubscriptionToken _subscriptionToken;
-
         /// <summary>
         /// Bluetooth LE device
         /// </summary>
@@ -85,6 +81,17 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// </summary>
         public Sensor Sensor { get; set; }
 
+        public enum SensorCommand
+        {
+            Plot,
+            Statistics
+        };
+
+        /// <summary>
+        /// Sensor
+        /// </summary>
+        public SensorCommand SensorCommandType { get; set; }
+
         /// <summary>
         /// Sensor collection
         /// </summary>
@@ -117,15 +124,13 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// <summary>
         /// Sensor plot view model constructor
         /// </summary>
-        /// <param name="messenger">Sensor message subscription</param>
         /// <param name="bluetoothLe">Bluetooth LE obj</param>
         /// <param name="adapter">Bluetooth LE adapter</param>
         /// <param name="userDialogs">User dialogs</param>
-        public SensorPlotViewModel(IMvxMessenger messenger, IBluetoothLE bluetoothLe, IAdapter adapter, IUserDialogs userDialogs) : base(adapter)
+        public SensorDetailsViewModel(IBluetoothLE bluetoothLe, IAdapter adapter, IUserDialogs userDialogs) : base(adapter)
         {
             try
             {
-                _subscriptionToken = messenger.Subscribe<SensorMessage>(OnSensorMessage);
                 _bluetoothLe = bluetoothLe;
                 _userDialogs = userDialogs;
 
@@ -144,18 +149,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 Mvx.Trace(ex.Message);
             }
         }
-
-        private void OnSensorMessage(SensorMessage sensorMessage)
-        {
-            // Set sensor values
-            Sensor = sensorMessage.Sensor;
-
-            _userDialogs.Alert($"Sensor OnSensorMessage: {Sensor.SensorIndex.ToString()}", "CIMScan Remote Manager");
-
-
-            SensorIndex = Sensor.SensorIndex.ToString();
-        }
-
+        
         /// <summary>
         /// On Resume
         /// </summary>
@@ -243,7 +237,15 @@ namespace CIM.RemoteManager.Core.ViewModels
                 // Make sure we can write characteristic data to remote
                 if (TxCharacteristic.CanWrite)
                 {
-                    string updateValue = "{c" + SensorIndex + "}";
+                    string updateValue = string.Empty;
+                    if (SensorCommandType == SensorCommand.Plot)
+                    {
+                        updateValue = "{c" + SensorIndex + "}";
+                    }
+                    else if (SensorCommandType == SensorCommand.Statistics)
+                    {
+                        updateValue = "{X}";
+                    }
                     // Send a refresh command
                     await TxCharacteristic.WriteAsync(updateValue.StrToByteArray()).ConfigureAwait(true);
                 }
@@ -259,10 +261,10 @@ namespace CIM.RemoteManager.Core.ViewModels
                 RxCharacteristic = await _service.GetCharacteristicAsync(RxUuid).ConfigureAwait(true);
 
                 // Wait 500 milliseconds
-                await Task.Delay(4500).ConfigureAwait(true);
+                await Task.Delay(1000).ConfigureAwait(true);
 
                 // Start updates
-                ToggleUpdatesCommand.Execute(null);
+                StartUpdatesCommand.Execute(null);
             }
             catch (Exception ex)
             {
@@ -315,6 +317,28 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
+        /// Start sensor updates
+        /// </summary>
+        public MvxCommand StartUpdatesCommand => new MvxCommand((() =>
+        {
+            if (!UpdatesStarted)
+            {
+                StartUpdates();
+            }
+        }));
+
+        /// <summary>
+        /// Stop sensor updates
+        /// </summary>
+        public MvxCommand StopUpdatesCommand => new MvxCommand((() =>
+        {
+            if (UpdatesStarted)
+            {
+                StopUpdates();
+            }
+        }));
+
+        /// <summary>
         /// Toggle sensor updates
         /// </summary>
         public MvxCommand ToggleUpdatesCommand => new MvxCommand((() =>
@@ -343,8 +367,8 @@ namespace CIM.RemoteManager.Core.ViewModels
                 RxCharacteristic.ValueUpdated += RxCharacteristicOnValueUpdated;
 
                 // Send refresh command to remote
-                string updateValue = "{c" + SensorIndex + "}";
-                await TxCharacteristic.WriteAsync(updateValue.StrToByteArray()).ConfigureAwait(true);
+                //string updateValue = "{c" + SensorIndex + "}";
+                //await TxCharacteristic.WriteAsync(updateValue.StrToByteArray()).ConfigureAwait(true);
                 // Start updates from bluetooth service
                 await RxCharacteristic.StartUpdatesAsync().ConfigureAwait(true);
 
@@ -479,7 +503,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             {
                 // Navigate to sensor plot
                 var bundle = new MvxBundle(new Dictionary<string, string>(Bundle.Data) { { SensorIdKey, sensor.SensorIndex.ToString() } });
-                ShowViewModel<SensorPlotViewModel>(bundle);
+                ShowViewModel<SensorDetailsViewModel>(bundle);
             }
         }
 

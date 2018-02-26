@@ -42,7 +42,10 @@ namespace CIM.RemoteManager.Core.Pages
                 //sensorPlotPage.BindingContext = sensorItem;
                 //var viewModel = BindingContext as SensorPlotViewModel;
 
-               // var sensorPlotViewModel = (SensorPlotViewModel)this.BindingContext;
+                var sensorDetailsViewModel = (SensorDetailsViewModel)this.BindingContext;
+                // Set sensor command type to pull Statistics Characteristics
+                sensorDetailsViewModel.SensorCommandType = SensorDetailsViewModel.SensorCommand.Statistics;
+                sensorDetailsViewModel?.StartUpdatesCommand.Execute();
 
                 // Send our Sensor object as message
                 //var message = new SensorMessage(this, sensorPlotViewModel.Sensor);
@@ -60,8 +63,10 @@ namespace CIM.RemoteManager.Core.Pages
             }
             else if (this.CurrentPage is SensorPlotPage)
             {
-                var viewModel = BindingContext as SensorPlotViewModel;
-                viewModel?.Resume();
+                var sensorDetailsViewModel = (SensorDetailsViewModel)this.BindingContext;
+                // Set sensor command type to pull Statistics Characteristics
+                sensorDetailsViewModel.SensorCommandType = SensorDetailsViewModel.SensorCommand.Plot;
+                sensorDetailsViewModel?.StartUpdatesCommand.Execute();
             }
         }
 
@@ -78,7 +83,7 @@ namespace CIM.RemoteManager.Core.Pages
         private void SensorUpdatesSwitchToggled(object sender, ToggledEventArgs e)
         {
             // Get instance of SensorPlotViewModel
-            var sensorPlotViewModel = (SensorPlotViewModel)this.BindingContext;
+            var sensorPlotViewModel = (SensorDetailsViewModel)this.BindingContext;
             // Toggle sensor updates
             sensorPlotViewModel.ToggleUpdatesCommand.Execute(null);
         }
