@@ -26,6 +26,14 @@
     </ContentPage.Resources>
 
     <!-- Margin: left, top, right, bottom -->
+    <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Transparent">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="120"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <!-- Margin: left, top, right, bottom -->
     <Grid Grid.Row="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="#003366">
 
         <Grid.RowDefinitions>
@@ -51,7 +59,7 @@
     </Grid>
 
     <!-- Grid layout for Statistics form -->
-    <Grid Margin="20,60,20,20">
+    <Grid Grid.Row="1" Margin="20,60,20,20">
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />
             <RowDefinition Height="50" />
@@ -100,6 +108,8 @@
         <StackLayout Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Spacing="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="60" BackgroundColor="{DynamicResource RemoteNameBackgroundColor}" Opacity=".6">
             <Label Text="{Binding CharacteristicValue, StringFormat=' Incoming Value: {0:N}'}" TextColor="{DynamicResource AppLightColor}" FontSize="16" Margin="5"  HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" VerticalTextAlignment="Center" LineBreakMode="MiddleTruncation" />
         </StackLayout>
+
+    </Grid>
 
     </Grid>
 
