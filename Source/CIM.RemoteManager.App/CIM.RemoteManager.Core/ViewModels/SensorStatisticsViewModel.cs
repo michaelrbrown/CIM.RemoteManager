@@ -368,7 +368,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 await RxCharacteristic.StartUpdatesAsync().ConfigureAwait(true);
 
                 // Let UI know mode we are in
-                //RaisePropertyChanged(() => UpdateButtonText);
+                RaisePropertyChanged(() => UpdateButtonText);
             }
             catch (Exception ex)
             {
@@ -393,7 +393,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 RxCharacteristic.ValueUpdated -= RxCharacteristicOnValueUpdated;
                 
                 // Let UI know mode we are in
-                //RaisePropertyChanged(() => UpdateButtonText);
+                RaisePropertyChanged(() => UpdateButtonText);
             }
             catch (Exception ex)
             {
@@ -482,15 +482,15 @@ namespace CIM.RemoteManager.Core.ViewModels
             _userDialogs.Alert($"(H) Sensor Values: {sensorValues}", "CIMScan RemoteManager");
 
             // "H" Sensor data serialization
-            SensorStatistics.SensorIndex = splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('H') + 1).SafeConvert<int>(0);
-            SensorStatistics.MaximumValue = splitSensorValues[1].SafeHexToDouble();
-            SensorStatistics.MaximumOccuranceTimeStamp = splitSensorValues[2].SafeHexToInt();
-            SensorStatistics.MinimumValue = splitSensorValues[3].SafeHexToDouble();
-            SensorStatistics.MinimumOccuranceTimeStamp = splitSensorValues[4].SafeHexToInt();
-            SensorStatistics.AverageValue = splitSensorValues[5].SafeHexToDouble();
-            SensorStatistics.TimeStamp = splitSensorValues[6].SafeHexToInt();
-            // Notify property changed to update UI
-            RaisePropertyChanged(()=> SensorStatistics);
+            //SensorStatistics.SensorIndex = splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('H') + 1).SafeConvert<int>(0);
+            //SensorStatistics.MaximumValue = splitSensorValues[1].SafeHexToDouble();
+            //SensorStatistics.MaximumOccuranceTimeStamp = splitSensorValues[2].SafeHexToInt();
+            //SensorStatistics.MinimumValue = splitSensorValues[3].SafeHexToDouble();
+            //SensorStatistics.MinimumOccuranceTimeStamp = splitSensorValues[4].SafeHexToInt();
+            //SensorStatistics.AverageValue = splitSensorValues[5].SafeHexToDouble();
+            //SensorStatistics.TimeStamp = splitSensorValues[6].SafeHexToInt();
+            //// Notify property changed to update UI
+            //RaisePropertyChanged(()=> SensorStatistics);
         }
         
     }
