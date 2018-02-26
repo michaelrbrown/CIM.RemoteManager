@@ -31,9 +31,10 @@ namespace CIM.RemoteManager.Core.Pages
         /// </summary>
         protected override void OnCurrentPageChanged()
         {
-            DisplayAlert("Current Page", this.CurrentPage.ToString(), "Ok");
+            DisplayAlert("Current Page", this.CurrentPage.Title, "Ok");
             if (this.CurrentPage is SensorStatisticsPage)
             {
+                DisplayAlert("Current Page", "stats", "Ok");
                 var sensorDetailsViewModel = (SensorDetailsViewModel)this.BindingContext;
                 // Set sensor command type to pull Statistics Characteristics
                 sensorDetailsViewModel.SensorCommandType = SensorDetailsViewModel.SensorCommand.Statistics;
@@ -43,6 +44,7 @@ namespace CIM.RemoteManager.Core.Pages
             }
             else if (this.CurrentPage is SensorDetailsPage)
             {
+                DisplayAlert("Current Page", "plot", "Ok");
                 var sensorDetailsViewModel = (SensorDetailsViewModel)this.BindingContext;
                 // Set sensor command type to pull Statistics Characteristics
                 sensorDetailsViewModel.SensorCommandType = SensorDetailsViewModel.SensorCommand.Plot;

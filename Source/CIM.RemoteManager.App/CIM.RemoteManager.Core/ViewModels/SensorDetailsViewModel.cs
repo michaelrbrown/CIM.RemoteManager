@@ -256,28 +256,28 @@ namespace CIM.RemoteManager.Core.ViewModels
                 _service = await _device.GetServiceAsync(UartUuid).ConfigureAwait(true);
 
                 // Get write characteristic service
-                //TxCharacteristic = await _service.GetCharacteristicAsync(TxUuid).ConfigureAwait(true);
+                TxCharacteristic = await _service.GetCharacteristicAsync(TxUuid).ConfigureAwait(true);
 
                 //// Make sure we can write characteristic data to remote
-                //if (TxCharacteristic.CanWrite)
-                //{
-                //    string updateValue = string.Empty;
-                //    if (SensorCommandType == SensorCommand.Plot)
-                //    {
-                //        updateValue = "{c" + SensorIndex + "}";
-                //    }
-                //    else if (SensorCommandType == SensorCommand.Statistics)
-                //    {
-                //        updateValue = "{X}";
-                //        _userDialogs.Alert($"Update Command1: {updateValue}", "CIMScan RemoteManager");
-                //    }
-                //    // Send a refresh command
-                //    await TxCharacteristic.WriteAsync(updateValue.StrToByteArray()).ConfigureAwait(true);
-                //}
-                //else
-                //{
-                //    _userDialogs.Alert("Cannot write characteristic data to remote!", "CIMScan Remote Manager");
-                //}
+                if (TxCharacteristic.CanWrite)
+                {
+                    string updateValue = string.Empty;
+                    if (SensorCommandType == SensorCommand.Plot)
+                    {
+                        updateValue = "{c" + SensorIndex + "}";
+                    }
+                    else if (SensorCommandType == SensorCommand.Statistics)
+                    {
+                        updateValue = "{X}";
+                        _userDialogs.Alert($"Update Command1: {updateValue}", "CIMScan RemoteManager");
+                    }
+                    // Send a refresh command
+                    await TxCharacteristic.WriteAsync(updateValue.StrToByteArray()).ConfigureAwait(true);
+                }
+                else
+                {
+                    _userDialogs.Alert("Cannot write characteristic data to remote!", "CIMScan Remote Manager");
+                }
 
                 //// Wait 500 milliseconds
                 //await Task.Delay(500).ConfigureAwait(true);
