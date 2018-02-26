@@ -350,6 +350,7 @@ namespace CIM.RemoteManager.Core.ViewModels
 
         public void SetSensorCommandType(SensorCommand sensorCommandType)
         {
+            _userDialogs.Alert(sensorCommandType.ToString(), "SensorCommand");
             // Set sensor command type
             SensorCommandType = sensorCommandType;
             RaisePropertyChanged(() => SensorCommandType);
