@@ -90,7 +90,12 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// <summary>
         /// Sensor
         /// </summary>
-        public SensorCommand SensorCommandType { get; set; }
+        private SensorCommand _sensorCommand;
+        public SensorCommand SensorCommandType
+        {
+            get => _sensorCommand;
+            set => SetProperty(ref _sensorCommand, value);
+        }
 
         /// <summary>
         /// Sensor collection
@@ -319,7 +324,7 @@ namespace CIM.RemoteManager.Core.ViewModels
 
                 SensorIndex = parameters.Data[SensorIdKey];
 
-                RaisePropertyChanged(nameof(SensorIndex));
+                RaisePropertyChanged(() => SensorIndex);
 
                 // Get device from bundle
                 _device = GetSensorDeviceBundle(parameters);
@@ -342,25 +347,6 @@ namespace CIM.RemoteManager.Core.ViewModels
             {
                 HockeyApp.MetricsManager.TrackEvent($"(InitFromBundle) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
                 _userDialogs.Alert(ex.Message, "Error while loading sensor data");
-            }
-        }
-
-        public void SetSensorCommandType(SensorCommand sensorCommandType)
-        {
-            // Set sensor command type
-            SensorCommandType = sensorCommandType;
-            // Start updates for sensor based on command type
-            if (!UpdatesStarted)
-            {
-                //StartUpdates();
-            }
-        }
-
-        public void StopSensorUpdates()
-        {
-            if (UpdatesStarted)
-            {
-                //StopUpdates();
             }
         }
 
