@@ -341,14 +341,14 @@ namespace CIM.RemoteManager.Core.ViewModels
             }
         }
 
-        public void StartSensorUpdates(SensorCommand sensorCommandType)
+        public void SetSensorCommandType(SensorCommand sensorCommandType)
         {
             // Set sensor command type
             SensorCommandType = sensorCommandType;
             // Start updates for sensor based on command type
             if (!UpdatesStarted)
             {
-                StartUpdates();
+                //StartUpdates();
             }
         }
 
@@ -356,7 +356,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         {
             if (UpdatesStarted)
             {
-                StopUpdates();
+                //StopUpdates();
             }
         }
 

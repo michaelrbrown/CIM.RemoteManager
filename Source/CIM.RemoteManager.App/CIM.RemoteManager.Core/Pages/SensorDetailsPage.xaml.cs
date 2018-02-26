@@ -31,13 +31,15 @@ namespace CIM.RemoteManager.Core.Pages
         /// </summary>
         protected override void OnCurrentPageChanged()
         {
+            DisplayAlert("Current Page", this.CurrentPage.ToString(), "Ok");
             if (this.CurrentPage is SensorStatisticsPage)
             {
                 var sensorDetailsViewModel = (SensorDetailsViewModel)this.BindingContext;
                 // Set sensor command type to pull Statistics Characteristics
                 sensorDetailsViewModel.SensorCommandType = SensorDetailsViewModel.SensorCommand.Statistics;
                 sensorDetailsViewModel?.StopUpdatesCommand.Execute();
-                sensorDetailsViewModel?.StartSensorUpdates(SensorDetailsViewModel.SensorCommand.Statistics);
+                sensorDetailsViewModel?.SetSensorCommandType(SensorDetailsViewModel.SensorCommand.Statistics);
+                sensorDetailsViewModel?.StartUpdatesCommand.Execute();
             }
             else if (this.CurrentPage is SensorDetailsPage)
             {
@@ -45,7 +47,8 @@ namespace CIM.RemoteManager.Core.Pages
                 // Set sensor command type to pull Statistics Characteristics
                 sensorDetailsViewModel.SensorCommandType = SensorDetailsViewModel.SensorCommand.Plot;
                 sensorDetailsViewModel?.StopUpdatesCommand.Execute();
-                sensorDetailsViewModel?.StartSensorUpdates(SensorDetailsViewModel.SensorCommand.Plot);
+                sensorDetailsViewModel?.SetSensorCommandType(SensorDetailsViewModel.SensorCommand.Plot);
+                sensorDetailsViewModel?.StartUpdatesCommand.Execute();
             }
         }
 
