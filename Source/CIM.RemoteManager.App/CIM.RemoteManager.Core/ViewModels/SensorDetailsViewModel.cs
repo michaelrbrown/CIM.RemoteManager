@@ -182,7 +182,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             base.Resume();
             //_userDialogs.Alert("SensorPlot :: Resume");
             // Init from bundle which grabs our device and kicks things off
-            InitFromBundle(Bundle);
+            //InitFromBundle(Bundle);
         }
 
         /// <summary>
