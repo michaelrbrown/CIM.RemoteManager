@@ -164,7 +164,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         private void OnSensorMessage(SensorMessage sensorMessage)
         {
             // Set sensor values
-            Sensor = sensorMessage.Sensor;
+            //Sensor = sensorMessage.Sensor;
 
             _userDialogs.Alert($"Sensor Stats OnSensorMessage: {Sensor.SensorIndex.ToString()}", "CIMScan Remote Manager");
 

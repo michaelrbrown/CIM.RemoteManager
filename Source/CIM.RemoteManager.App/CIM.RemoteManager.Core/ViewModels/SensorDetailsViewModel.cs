@@ -7,6 +7,7 @@ using CIM.RemoteManager.Core.Helpers;
 using CIM.RemoteManager.Core.Models;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
+using MvvmCross.Plugins.Messenger;
 using Plugin.BLE.Abstractions.Contracts;
 using Plugin.BLE.Abstractions.EventArgs;
 
@@ -15,6 +16,7 @@ namespace CIM.RemoteManager.Core.ViewModels
 {
     public class SensorDetailsViewModel : BaseViewModel
     {
+        private readonly MvxSubscriptionToken _subscriptionToken;
         /// <summary>
         /// Bluetooth LE device
         /// </summary>
@@ -153,13 +155,15 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// <summary>
         /// Sensor plot view model constructor
         /// </summary>
+        /// <param name="messenger">Sensor message subscription</param>
         /// <param name="bluetoothLe">Bluetooth LE obj</param>
         /// <param name="adapter">Bluetooth LE adapter</param>
         /// <param name="userDialogs">User dialogs</param>
-        public SensorDetailsViewModel(IBluetoothLE bluetoothLe, IAdapter adapter, IUserDialogs userDialogs) : base(adapter)
+        public SensorDetailsViewModel(IMvxMessenger messenger, IBluetoothLE bluetoothLe, IAdapter adapter, IUserDialogs userDialogs) : base(adapter)
         {
             try
             {
+                _subscriptionToken = messenger.Subscribe<SensorMessage>(OnSensorMessage);
                 _bluetoothLe = bluetoothLe;
                 _userDialogs = userDialogs;
 
@@ -178,7 +182,14 @@ namespace CIM.RemoteManager.Core.ViewModels
                 Mvx.Trace(ex.Message);
             }
         }
-        
+
+        private void OnSensorMessage(SensorMessage sensorMessage)
+        {
+            // Set sensor command type
+            SensorCommandType = sensorMessage.SensorCommand;
+            _userDialogs.Alert($"Sensor OnSensorMessage: {SensorCommandType.ToString()}", "CIMScan Remote Manager");
+        }
+
         /// <summary>
         /// On Resume
         /// </summary>

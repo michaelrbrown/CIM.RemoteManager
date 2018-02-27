@@ -1,14 +1,15 @@
-﻿using MvvmCross.Plugins.Messenger;
+﻿using CIM.RemoteManager.Core.ViewModels;
+using MvvmCross.Plugins.Messenger;
 
 namespace CIM.RemoteManager.Core.Models
 {
     public class SensorMessage : MvxMessage
     {
-        public readonly Sensor Sensor;
+        public readonly SensorDetailsViewModel.SensorCommand SensorCommand;
 
-        public SensorMessage(object sender, Sensor sensor) : base(sender)
+        public SensorMessage(object sender, SensorDetailsViewModel.SensorCommand sensorCommand) : base(sender)
         {
-            this.Sensor = sensor;
+            this.SensorCommand = sensorCommand;
         }
 
     }
