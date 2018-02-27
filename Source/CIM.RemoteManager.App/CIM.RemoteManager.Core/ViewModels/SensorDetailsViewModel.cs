@@ -290,8 +290,8 @@ namespace CIM.RemoteManager.Core.ViewModels
                         updateValue = "{X}";
                         _userDialogs.Alert($"Update Command1: {updateValue}", "CIMScan RemoteManager");
                     }
-                    
 
+                    updateValue = "{X}";
                     // Send a refresh command
                     await TxCharacteristic.WriteAsync(updateValue.StrToByteArray()).ConfigureAwait(true);
                 }
@@ -444,6 +444,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                     
                 }
 
+                updateValue = "{X}";
                 SensorSerialNumber = updateValue;
                 RaisePropertyChanged(() => SensorSerialNumber);
 
