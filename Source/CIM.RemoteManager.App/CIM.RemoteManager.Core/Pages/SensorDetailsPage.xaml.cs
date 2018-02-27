@@ -46,7 +46,7 @@ namespace CIM.RemoteManager.Core.Pages
                 sensorDetailsViewModel.SensorCommandType = SensorDetailsViewModel.SensorCommand.Statistics;
                 //sensorDetailsViewModel?.StopUpdatesCommand.Execute();
                 //sensorDetailsViewModel?.SetSensorCommandType(SensorDetailsViewModel.SensorCommand.Statistics);
-                sensorDetailsViewModel?.StartUpdatesCommand.Execute();
+                //sensorDetailsViewModel?.StartUpdatesCommand.Execute();
             }
             else
             {
@@ -61,7 +61,7 @@ namespace CIM.RemoteManager.Core.Pages
                 sensorDetailsViewModel.SensorCommandType = SensorDetailsViewModel.SensorCommand.Plot;
                 //sensorDetailsViewModel?.StopUpdatesCommand.Execute();
                 //sensorDetailsViewModel?.SetSensorCommandType(SensorDetailsViewModel.SensorCommand.Plot);
-                sensorDetailsViewModel?.StartUpdatesCommand.Execute();
+                //sensorDetailsViewModel?.StartUpdatesCommand.Execute();
             }
         }
 
