@@ -90,13 +90,19 @@ namespace CIM.RemoteManager.Core.ViewModels
         };
 
         /// <summary>
-        /// Sensor
+        /// Sensor command type
         /// </summary>
-        private SensorCommand _sensorCommand;
+        SensorCommand _sensorCommand;
         public SensorCommand SensorCommandType
         {
             get => _sensorCommand;
-            set => SetProperty(ref _sensorCommand, value);
+            set
+            {
+                if (_sensorCommand == value) return;
+                // Set sensor command value then raise prop changed
+                _sensorCommand = value;
+                RaisePropertyChanged();
+            }
         }
 
         /// <summary>
@@ -631,7 +637,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             }
             else if (SensorCommandType == SensorCommand.Statistics)
             {
-                _userDialogs.Alert($"(H) Sensor Values: {sensorValues}", "CIMScan RemoteManager");
+                //_userDialogs.Alert($"(H) Sensor Values: {sensorValues}", "CIMScan RemoteManager");
 
                 // "H" Sensor data serialization
                 SensorStatistics.SensorIndex = splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('H') + 1).SafeConvert<int>(0);

@@ -44,9 +44,9 @@ namespace CIM.RemoteManager.Core.Pages
 
                 var sensorDetailsViewModel = (SensorDetailsViewModel)this.BindingContext;
                 // Set sensor command type to pull Statistics Characteristics
-                //sensorDetailsViewModel.SensorCommandType = SensorDetailsViewModel.SensorCommand.Statistics;
+                sensorDetailsViewModel.SensorCommandType = SensorDetailsViewModel.SensorCommand.Statistics;
                 sensorDetailsViewModel?.StopUpdatesCommand.Execute();
-                sensorDetailsViewModel?.SetSensorCommandType(SensorDetailsViewModel.SensorCommand.Statistics);
+                //sensorDetailsViewModel?.SetSensorCommandType(SensorDetailsViewModel.SensorCommand.Statistics);
                 sensorDetailsViewModel?.StartUpdatesCommand.Execute();
             }
             else
@@ -59,10 +59,10 @@ namespace CIM.RemoteManager.Core.Pages
                 //MvxMessenger.Publish<SensorMessage>(message);
 
                 // Set sensor command type to pull Statistics Characteristics
-                //sensorDetailsViewModel.SensorCommandType = SensorDetailsViewModel.SensorCommand.Plot;
-                //sensorDetailsViewModel?.StopUpdatesCommand.Execute();
+                sensorDetailsViewModel.SensorCommandType = SensorDetailsViewModel.SensorCommand.Plot;
+                sensorDetailsViewModel?.StopUpdatesCommand.Execute();
                 //sensorDetailsViewModel?.SetSensorCommandType(SensorDetailsViewModel.SensorCommand.Plot);
-                //sensorDetailsViewModel?.StartUpdatesCommand.Execute();
+                sensorDetailsViewModel?.StartUpdatesCommand.Execute();
             }
         }
 
