@@ -35,7 +35,7 @@ namespace CIM.RemoteManager.Core.Pages
             {
                 
 
-                DisplayAlert("details page type", "sensor details page", "ok");
+                //DisplayAlert("details page type", "sensor details page", "ok");
 
                 // Send our Sensor object as message
                 //var message = new SensorMessage(this, SensorDetailsViewModel.SensorCommand.Statistics);
@@ -45,9 +45,9 @@ namespace CIM.RemoteManager.Core.Pages
                 var sensorDetailsViewModel = (SensorDetailsViewModel)this.BindingContext;
                 // Set sensor command type to pull Statistics Characteristics
                 //sensorDetailsViewModel.SensorCommandType = SensorDetailsViewModel.SensorCommand.Statistics;
-                //sensorDetailsViewModel?.StopUpdatesCommand.Execute();
-                //sensorDetailsViewModel?.SetSensorCommandType(SensorDetailsViewModel.SensorCommand.Statistics);
-                //sensorDetailsViewModel?.StartUpdatesCommand.Execute();
+                sensorDetailsViewModel?.StopUpdatesCommand.Execute();
+                sensorDetailsViewModel?.SetSensorCommandType(SensorDetailsViewModel.SensorCommand.Statistics);
+                sensorDetailsViewModel?.StartUpdatesCommand.Execute();
             }
             else
             {
