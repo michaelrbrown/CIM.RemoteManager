@@ -90,19 +90,13 @@ namespace CIM.RemoteManager.Core.ViewModels
         };
 
         /// <summary>
-        /// Sensor command type
+        /// Sensor
         /// </summary>
-        SensorCommand _sensorCommand;
+        private SensorCommand _sensorCommand;
         public SensorCommand SensorCommandType
         {
             get => _sensorCommand;
-            set
-            {
-                if (_sensorCommand == value) return;
-                // Set sensor command value then raise prop changed
-                _sensorCommand = value;
-                RaisePropertyChanged();
-            }
+            set => SetProperty(ref _sensorCommand, value);
         }
 
         /// <summary>
@@ -637,7 +631,9 @@ namespace CIM.RemoteManager.Core.ViewModels
             }
             else if (SensorCommandType == SensorCommand.Statistics)
             {
-                //_userDialogs.Alert($"(H) Sensor Values: {sensorValues}", "CIMScan RemoteManager");
+                _userDialogs.Alert($"(H) Sensor MaximumValue: {splitSensorValues[1].SafeHexToDouble().ToString()}", "CIMScan RemoteManager");
+                _userDialogs.Alert($"(H) Sensor MaximumOccuranceTimeStamp: {splitSensorValues[2].SafeHexToInt().ToString()}", "CIMScan RemoteManager");
+                _userDialogs.Alert($"(H) Sensor MinimumValue: {splitSensorValues[3].SafeHexToDouble().ToString()}", "CIMScan RemoteManager");
 
                 // "H" Sensor data serialization
                 SensorStatistics.SensorIndex = splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('H') + 1).SafeConvert<int>(0);
