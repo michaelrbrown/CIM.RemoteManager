@@ -290,8 +290,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                         updateValue = "{X}";
                         _userDialogs.Alert($"Update Command1: {updateValue}", "CIMScan RemoteManager");
                     }
-
-                    updateValue = "{X}";
+                    
                     // Send a refresh command
                     await TxCharacteristic.WriteAsync(updateValue.StrToByteArray()).ConfigureAwait(true);
                 }
@@ -444,7 +443,6 @@ namespace CIM.RemoteManager.Core.ViewModels
                     
                 }
 
-                updateValue = "{X}";
                 SensorSerialNumber = updateValue;
                 RaisePropertyChanged(() => SensorSerialNumber);
 
@@ -504,16 +502,14 @@ namespace CIM.RemoteManager.Core.ViewModels
                 if (SensorCommandType == SensorCommand.Plot)
                 {
                     // Get buffered sensor data
-                    //GetBufferedSensorValues(CharacteristicValue);
+                    GetBufferedSensorValues(CharacteristicValue);
                 }
                 else if (SensorCommandType == SensorCommand.Statistics)
                 {
                     // Get buffered sensor data
                     GetStatisticsSensorValues(CharacteristicValue);
                 }
-
-                GetStatisticsSensorValues(CharacteristicValue);
-
+                
                 // Notify property changed
                 RaisePropertyChanged(() => CharacteristicValue);
             }
@@ -574,8 +570,6 @@ namespace CIM.RemoteManager.Core.ViewModels
         private void GetStatisticsSensorValues(string characteristicValue)
         {
             if (String.IsNullOrEmpty(characteristicValue)) return;
-
-            _userDialogs.Alert($"CharacteristicValue Value: {characteristicValue}", "CIMScan RemoteManager");
 
             // Start reading all "full sensor values"
             if (!StartStatisticsSensorValueRecord && characteristicValue.Contains("{H"))

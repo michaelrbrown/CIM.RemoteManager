@@ -31,17 +31,17 @@ namespace CIM.RemoteManager.Core.Pages
         /// </summary>
         protected override void OnCurrentPageChanged()
         {
-            if (this.CurrentPage is SensorStatisticsPage)
+            if (this.CurrentPage is SensorDetailsPage)
             {
                 var sensorDetailsViewModel = (SensorDetailsViewModel)this.BindingContext;
 
                 // Send our Sensor object as message
-                var message = new SensorMessage(this, SensorDetailsViewModel.SensorCommand.Statistics);
+                //var message = new SensorMessage(this, SensorDetailsViewModel.SensorCommand.Statistics);
                 // Publish our message
-                MvxMessenger.Publish<SensorMessage>(message);
+               // MvxMessenger.Publish<SensorMessage>(message);
                 
                 // Set sensor command type to pull Statistics Characteristics
-                //sensorDetailsViewModel.SensorCommandType = SensorDetailsViewModel.SensorCommand.Statistics;
+                sensorDetailsViewModel.SensorCommandType = SensorDetailsViewModel.SensorCommand.Statistics;
                 sensorDetailsViewModel?.StopUpdatesCommand.Execute();
                 //sensorDetailsViewModel?.SetSensorCommandType(SensorDetailsViewModel.SensorCommand.Statistics);
                 sensorDetailsViewModel?.StartUpdatesCommand.Execute();
@@ -51,12 +51,12 @@ namespace CIM.RemoteManager.Core.Pages
                 var sensorDetailsViewModel = (SensorDetailsViewModel)this.BindingContext;
 
                 // Send our Sensor object as message
-                var message = new SensorMessage(this, SensorDetailsViewModel.SensorCommand.Statistics);
+                //var message = new SensorMessage(this, SensorDetailsViewModel.SensorCommand.Statistics);
                 // Publish our message
-                MvxMessenger.Publish<SensorMessage>(message);
+                //MvxMessenger.Publish<SensorMessage>(message);
 
                 // Set sensor command type to pull Statistics Characteristics
-                //sensorDetailsViewModel.SensorCommandType = SensorDetailsViewModel.SensorCommand.Plot;
+                sensorDetailsViewModel.SensorCommandType = SensorDetailsViewModel.SensorCommand.Plot;
                 sensorDetailsViewModel?.StopUpdatesCommand.Execute();
                 //sensorDetailsViewModel?.SetSensorCommandType(SensorDetailsViewModel.SensorCommand.Plot);
                 sensorDetailsViewModel?.StartUpdatesCommand.Execute();
