@@ -573,6 +573,8 @@ namespace CIM.RemoteManager.Core.ViewModels
         {
             if (String.IsNullOrEmpty(characteristicValue)) return;
 
+            _userDialogs.Alert($"CharacteristicValue Value: {characteristicValue}", "CIMScan RemoteManager");
+
             // Start reading all "full sensor values"
             if (!StartStatisticsSensorValueRecord && characteristicValue.Contains("{H"))
             {
