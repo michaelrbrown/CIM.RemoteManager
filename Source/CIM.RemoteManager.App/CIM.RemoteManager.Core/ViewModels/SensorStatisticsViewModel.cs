@@ -178,7 +178,10 @@ namespace CIM.RemoteManager.Core.ViewModels
         public override void Resume()
         {
             base.Resume();
-            _userDialogs.Alert("SensorStats :: Resume");
+            InvokeOnMainThread(() => {
+                _userDialogs.Alert("SensorStats :: Resume");
+            });
+            
             // Init from bundle which grabs our device and kicks things off
             InitFromBundle(Bundle);
         }
@@ -354,7 +357,9 @@ namespace CIM.RemoteManager.Core.ViewModels
         {
             try
             {
-                _userDialogs.Alert("Starting updates...", "CIMScan Remote Manager");
+                InvokeOnMainThread(() => {
+                    _userDialogs.Alert("Starting updates...", "CIMScan Remote Manager");
+                });
 
                 UpdatesStarted = true;
 

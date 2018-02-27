@@ -187,7 +187,10 @@ namespace CIM.RemoteManager.Core.ViewModels
         {
             // Set sensor command type
             SensorCommandType = sensorMessage.SensorCommand;
-            _userDialogs.Alert($"Sensor OnSensorMessage: {SensorCommandType.ToString()}", "CIMScan Remote Manager");
+            InvokeOnMainThread(() => {
+                _userDialogs.Alert($"Sensor OnSensorMessage: {SensorCommandType.ToString()}", "CIMScan Remote Manager");
+            });
+           
         }
 
         /// <summary>
@@ -435,7 +438,10 @@ namespace CIM.RemoteManager.Core.ViewModels
                 else if (SensorCommandType == SensorCommand.Statistics)
                 {
                     updateValue = "{X}";
-                    _userDialogs.Alert($"Update Command2: {updateValue}", "CIMScan RemoteManager");
+                    InvokeOnMainThread(() => {
+                        _userDialogs.Alert($"Update Command2: {updateValue}", "CIMScan RemoteManager");
+                    });
+                    
                 }
 
                 SensorSerialNumber = updateValue;
