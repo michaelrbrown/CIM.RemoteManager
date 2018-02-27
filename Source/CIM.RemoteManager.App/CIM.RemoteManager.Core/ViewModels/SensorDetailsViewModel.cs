@@ -504,14 +504,16 @@ namespace CIM.RemoteManager.Core.ViewModels
                 if (SensorCommandType == SensorCommand.Plot)
                 {
                     // Get buffered sensor data
-                    GetBufferedSensorValues(CharacteristicValue);
+                    //GetBufferedSensorValues(CharacteristicValue);
                 }
                 else if (SensorCommandType == SensorCommand.Statistics)
                 {
                     // Get buffered sensor data
                     GetStatisticsSensorValues(CharacteristicValue);
                 }
-                
+
+                GetStatisticsSensorValues(CharacteristicValue);
+
                 // Notify property changed
                 RaisePropertyChanged(() => CharacteristicValue);
             }
