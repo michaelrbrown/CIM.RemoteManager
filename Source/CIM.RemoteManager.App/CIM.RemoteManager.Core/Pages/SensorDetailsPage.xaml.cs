@@ -31,9 +31,11 @@ namespace CIM.RemoteManager.Core.Pages
         /// </summary>
         protected override void OnCurrentPageChanged()
         {
-            if (this.CurrentPage is SensorDetailsPage)
+            if (this.CurrentPage.Title == "Sensor Statistics")
             {
                 var sensorDetailsViewModel = (SensorDetailsViewModel)this.BindingContext;
+
+                DisplayAlert("details page type", "sensor details page", "ok");
 
                 // Send our Sensor object as message
                 var message = new SensorMessage(this, SensorDetailsViewModel.SensorCommand.Statistics);
@@ -46,7 +48,7 @@ namespace CIM.RemoteManager.Core.Pages
                 //sensorDetailsViewModel?.SetSensorCommandType(SensorDetailsViewModel.SensorCommand.Statistics);
                 sensorDetailsViewModel?.StartUpdatesCommand.Execute();
             }
-            else if (this.CurrentPage is SensorDetailsPage)
+            else
             {
                 var sensorDetailsViewModel = (SensorDetailsViewModel)this.BindingContext;
 
