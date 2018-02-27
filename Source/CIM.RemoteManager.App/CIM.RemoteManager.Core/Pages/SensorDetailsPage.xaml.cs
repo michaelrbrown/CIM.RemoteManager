@@ -36,9 +36,9 @@ namespace CIM.RemoteManager.Core.Pages
                 var sensorDetailsViewModel = (SensorDetailsViewModel)this.BindingContext;
 
                 // Send our Sensor object as message
-                //var message = new SensorMessage(this, SensorDetailsViewModel.SensorCommand.Statistics);
+                var message = new SensorMessage(this, SensorDetailsViewModel.SensorCommand.Statistics);
                 // Publish our message
-               // MvxMessenger.Publish<SensorMessage>(message);
+                MvxMessenger.Publish<SensorMessage>(message);
                 
                 // Set sensor command type to pull Statistics Characteristics
                 sensorDetailsViewModel.SensorCommandType = SensorDetailsViewModel.SensorCommand.Statistics;
@@ -51,9 +51,9 @@ namespace CIM.RemoteManager.Core.Pages
                 var sensorDetailsViewModel = (SensorDetailsViewModel)this.BindingContext;
 
                 // Send our Sensor object as message
-                //var message = new SensorMessage(this, SensorDetailsViewModel.SensorCommand.Statistics);
+                var message = new SensorMessage(this, SensorDetailsViewModel.SensorCommand.Statistics);
                 // Publish our message
-                //MvxMessenger.Publish<SensorMessage>(message);
+                MvxMessenger.Publish<SensorMessage>(message);
 
                 // Set sensor command type to pull Statistics Characteristics
                 sensorDetailsViewModel.SensorCommandType = SensorDetailsViewModel.SensorCommand.Plot;

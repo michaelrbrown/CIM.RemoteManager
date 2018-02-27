@@ -563,10 +563,10 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// <returns></returns>
         private async Task<bool> ConnectDeviceAsync(DeviceListItemViewModel device, bool showPrompt = true)
         {
-            if (showPrompt && !await _userDialogs.ConfirmAsync($"Connect to device '{device.Name}'?").ConfigureAwait(true))
-            {
-                return false;
-            }
+            //if (showPrompt && !await _userDialogs.ConfirmAsync($"Connect to device '{device.Name}'?").ConfigureAwait(true))
+            //{
+            //    return false;
+            //}
             try
             {
                 var tokenSource = new CancellationTokenSource();
@@ -577,7 +577,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 {
                     config.Title = $"Connecting to '{device.Name}'";
                     config.CancelText = "Cancel";
-                    config.SetMaskType(MaskType.Gradient);
+                    config.SetMaskType(MaskType.Clear);
                     config.IsDeterministic = false;
                     config.OnCancel = tokenSource.Cancel;
                 }
@@ -585,7 +585,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 {
                     config.Title = $"Connecting to '{device.Id}'";
                     config.CancelText = "Cancel";
-                    config.SetMaskType(MaskType.Gradient);
+                    config.SetMaskType(MaskType.Clear);
                     config.IsDeterministic = false;
                     config.OnCancel = tokenSource.Cancel;
                 }

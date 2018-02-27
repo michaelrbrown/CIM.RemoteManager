@@ -437,10 +437,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 else if (SensorCommandType == SensorCommand.Statistics)
                 {
                     updateValue = "{X}";
-                    InvokeOnMainThread(() => {
-                        _userDialogs.Alert($"Update Command2: {updateValue}", "CIMScan RemoteManager");
-                    });
-                    
+                    _userDialogs.Alert($"Update Command2: {updateValue}", "CIMScan RemoteManager");
                 }
 
                 SensorSerialNumber = updateValue;
