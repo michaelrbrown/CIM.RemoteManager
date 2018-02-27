@@ -32,6 +32,8 @@ namespace CIM.RemoteManager.Core.Pages
         protected override void OnCurrentPageChanged()
         {
             DisplayAlert("details page type", this.CurrentPage.Title, "ok");
+
+            return;
             if (this.CurrentPage.Title == "Sensor Statistics")
             {
                 var sensorDetailsViewModel = (SensorDetailsViewModel)this.BindingContext;
