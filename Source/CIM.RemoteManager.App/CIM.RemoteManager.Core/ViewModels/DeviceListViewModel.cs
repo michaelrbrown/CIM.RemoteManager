@@ -577,7 +577,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 {
                     config.Title = $"Connecting to '{device.Name}'";
                     config.CancelText = "Cancel";
-                    config.SetMaskType(MaskType.Clear);
+                    config.SetMaskType(MaskType.Black);
                     config.IsDeterministic = false;
                     config.OnCancel = tokenSource.Cancel;
                 }
@@ -585,7 +585,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 {
                     config.Title = $"Connecting to '{device.Id}'";
                     config.CancelText = "Cancel";
-                    config.SetMaskType(MaskType.Clear);
+                    config.SetMaskType(MaskType.Black);
                     config.IsDeterministic = false;
                     config.OnCancel = tokenSource.Cancel;
                 }

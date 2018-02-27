@@ -16,7 +16,7 @@ namespace CIM.RemoteManager.Core.ViewModels
 {
     public class SensorDetailsViewModel : BaseViewModel
     {
-        private readonly MvxSubscriptionToken _subscriptionToken;
+        //private readonly MvxSubscriptionToken _subscriptionToken;
         /// <summary>
         /// Bluetooth LE device
         /// </summary>
@@ -159,11 +159,11 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// <param name="bluetoothLe">Bluetooth LE obj</param>
         /// <param name="adapter">Bluetooth LE adapter</param>
         /// <param name="userDialogs">User dialogs</param>
-        public SensorDetailsViewModel(IMvxMessenger messenger, IBluetoothLE bluetoothLe, IAdapter adapter, IUserDialogs userDialogs) : base(adapter)
+        public SensorDetailsViewModel(IBluetoothLE bluetoothLe, IAdapter adapter, IUserDialogs userDialogs) : base(adapter)
         {
             try
             {
-                _subscriptionToken = messenger.Subscribe<SensorMessage>(OnSensorMessage);
+                //_subscriptionToken = messenger.Subscribe<SensorMessage>(OnSensorMessage);
                 _bluetoothLe = bluetoothLe;
                 _userDialogs = userDialogs;
 
@@ -288,7 +288,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                     else if (SensorCommandType == SensorCommand.Statistics)
                     {
                         updateValue = "{X}";
-                        _userDialogs.Alert($"Update Command1: {updateValue}", "CIMScan RemoteManager");
+                        //_userDialogs.Alert($"Update Command1: {updateValue}", "CIMScan RemoteManager");
                     }
                     
                     // Send a refresh command

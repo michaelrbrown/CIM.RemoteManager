@@ -33,7 +33,7 @@ namespace CIM.RemoteManager.Core.Pages
         {
             if (this.CurrentPage.Title == "Sensor Statistics")
             {
-                var sensorDetailsViewModel = (SensorDetailsViewModel)this.BindingContext;
+                
 
                 DisplayAlert("details page type", "sensor details page", "ok");
 
@@ -41,7 +41,8 @@ namespace CIM.RemoteManager.Core.Pages
                 //var message = new SensorMessage(this, SensorDetailsViewModel.SensorCommand.Statistics);
                 // Publish our message
                 //MvxMessenger.Publish<SensorMessage>(message);
-                
+
+                var sensorDetailsViewModel = (SensorDetailsViewModel)this.BindingContext;
                 // Set sensor command type to pull Statistics Characteristics
                 sensorDetailsViewModel.SensorCommandType = SensorDetailsViewModel.SensorCommand.Statistics;
                 //sensorDetailsViewModel?.StopUpdatesCommand.Execute();
