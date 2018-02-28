@@ -110,6 +110,16 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
+        /// Sensor collection
+        /// </summary>
+        FullyObservableCollection<SensorStatistics> _sensorStatisticsCollection;
+        public FullyObservableCollection<SensorStatistics> SensorStatisticsCollection
+        {
+            get => _sensorStatisticsCollection;
+            set => SetProperty(ref _sensorStatisticsCollection, value);
+        }
+
+        /// <summary>
         /// Sensor sttistics
         /// </summary>
         SensorStatistics _sensorStatistics;
@@ -607,16 +617,21 @@ namespace CIM.RemoteManager.Core.ViewModels
                 //_userDialogs.Alert($"(H) Sensor MaximumOccuranceTimeStamp: {splitSensorValues[2].SafeHexToInt().ToString()}", "CIMScan RemoteManager");
                 //_userDialogs.Alert($"(H) Sensor MinimumValue: {splitSensorValues[3].SafeHexToDouble().ToString()}", "CIMScan RemoteManager");
 
-                // "H" Sensor data serialization
-                SensorStatistics.SensorIndex = splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('H') + 1).SafeConvert<int>(0);
-                SensorStatistics.MaximumValue = splitSensorValues[1].SafeHexToDouble();
-                SensorStatistics.MaximumOccuranceTimeStamp = splitSensorValues[2].SafeHexToInt();
-                SensorStatistics.MinimumValue = splitSensorValues[3].SafeHexToDouble();
-                SensorStatistics.MinimumOccuranceTimeStamp = splitSensorValues[4].SafeHexToInt();
-                SensorStatistics.AverageValue = splitSensorValues[5].SafeHexToDouble();
-                SensorStatistics.TimeStamp = splitSensorValues[6].SafeHexToInt();
+                var sensorStatistics = new SensorStatistics
+                {
+                    // "H" Sensor data serialization
+                    SensorIndex = splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('H') + 1).SafeConvert<int>(0),
+                    MaximumValue = splitSensorValues[1].SafeHexToDouble(),
+                    MaximumOccuranceTimeStamp = splitSensorValues[2].SafeHexToInt(),
+                    MinimumValue = splitSensorValues[3].SafeHexToDouble(),
+                    MinimumOccuranceTimeStamp = splitSensorValues[4].SafeHexToInt(),
+                    AverageValue = splitSensorValues[5].SafeHexToDouble(),
+                    TimeStamp = splitSensorValues[6].SafeHexToInt()
+                };
+                SensorStatisticsCollection.Add(sensorStatistics);
+
                 // Notify property changed to update UI
-                RaisePropertyChanged(()=> SensorStatistics);
+                RaisePropertyChanged(()=> SensorStatisticsCollection);
                 //RaisePropertyChanged(() => SensorStatistics.SensorIndex);
                 //RaisePropertyChanged(() => SensorStatistics.MaximumValue);
                 //RaisePropertyChanged(() => SensorStatistics.MaximumOccuranceTimeStamp);

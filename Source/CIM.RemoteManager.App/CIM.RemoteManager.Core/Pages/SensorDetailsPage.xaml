@@ -126,19 +126,19 @@
 
             <!-- Average -->
             <Label Grid.Row="0" Grid.Column="0" Text="Average: " Style="{DynamicResource FormLabelStyle}" />
-          <Entry Grid.Row="0" Grid.Column="1" Text="{Binding AverageValue, Source={x:Static models:SensorStatistics.Current}}" IsEnabled="True" Style="{DynamicResource FormValueStyle}" />
+            <Entry Grid.Row="0" Grid.Column="1" Text="{Binding AverageValue, Source={x:Static models:SensorStatistics.Current}}" IsEnabled="True" Style="{DynamicResource FormValueStyle}" />
 
             <!-- Average Since -->
             <Label Grid.Row="1" Grid.Column="0" Text="Since: " Style="{DynamicResource FormLabelStyle}" />
-          <Entry Grid.Row="1" Grid.Column="1" Text="{Binding SinceDateTimeStamp, Source={x:Static models:SensorStatistics.Current}}" IsEnabled="True" Style="{DynamicResource FormValueStyle}" />
+            <Entry Grid.Row="1" Grid.Column="1" Text="{Binding SinceDateTimeStamp, Source={x:Static models:SensorStatistics.Current}}" IsEnabled="True" Style="{DynamicResource FormValueStyle}" />
 
             <!-- Minimum -->
             <Label Grid.Row="2" Grid.Column="0" Text="Minimum: " Style="{DynamicResource FormLabelStyle}" />
-            <Entry Grid.Row="2" Grid.Column="1" Text="{Binding MinimumValue, Source={x:Static models:SensorStatistics.Current}}" IsEnabled="False" Style="{DynamicResource FormValueStyle}" />
+            <Entry Grid.Row="2" Grid.Column="1" Text="{Binding SensorStatisticsCollection[0].MinimumValue}" IsEnabled="False" Style="{DynamicResource FormValueStyle}" />
 
             <!-- Minimum Occurrence -->
             <Label Grid.Row="3" Grid.Column="0" Text="Occurrence: " Style="{DynamicResource FormLabelStyle}" />
-            <Entry Grid.Row="3" Grid.Column="1" Text="{Binding MinimumOccuranceTimeStamp, Source={x:Static models:SensorStatistics.Current}}" IsEnabled="False" Style="{DynamicResource FormValueStyle}" />
+            <Entry Grid.Row="3" Grid.Column="1" Text="{Binding SensorStatisticsCollection[0].MinimumOccuranceTimeStamp}" IsEnabled="False" Style="{DynamicResource FormValueStyle}" />
 
             <!-- Maximum -->
             <Label Grid.Row="4" Grid.Column="0" Text="Maximum: " Style="{DynamicResource FormLabelStyle}" />
