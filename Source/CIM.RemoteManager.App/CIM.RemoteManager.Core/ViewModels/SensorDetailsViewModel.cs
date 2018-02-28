@@ -78,6 +78,30 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// </summary>
         public string SensorSerialNumber { get; set; }
 
+
+
+        /// <summary>
+        /// Average sensor value.
+        /// Make sure we divide by 10 to convert to appropriate value.
+        /// </summary>
+        private double _averageValue;
+        public double AverageValue
+        {
+            get
+            {
+                // Try to lookup hex to string
+                if (double.TryParse(_averageValue.ToString(), out double averageValueResult))
+                {
+                    return averageValueResult / 10;
+                }
+                // Default
+                return 0;
+            }
+            set => SetProperty(ref _averageValue, value);
+        }
+
+
+
         /// <summary>
         /// Sensor
         /// </summary>
@@ -615,7 +639,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 SensorStatistics.MaximumOccuranceTimeStamp = splitSensorValues[2].SafeHexToInt();
                 SensorStatistics.MinimumValue = splitSensorValues[3].SafeHexToDouble();
                 SensorStatistics.MinimumOccuranceTimeStamp = splitSensorValues[4].SafeHexToInt();
-                SensorStatistics.AverageValue = splitSensorValues[5].SafeHexToDouble();
+                AverageValue = splitSensorValues[5].SafeHexToDouble();
                 SensorStatistics.TimeStamp = splitSensorValues[6].SafeHexToInt();
                 // Notify property changed to update UI
                 RaisePropertyChanged(()=> SensorStatistics);
@@ -624,7 +648,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 RaisePropertyChanged(() => SensorStatistics.MaximumOccuranceTimeStamp);
                 RaisePropertyChanged(() => SensorStatistics.MinimumValue);
                 RaisePropertyChanged(() => SensorStatistics.MinimumOccuranceTimeStamp);
-                RaisePropertyChanged(() => SensorStatistics.AverageValue);
+                RaisePropertyChanged(() => AverageValue);
                 RaisePropertyChanged(() => SensorStatistics.TimeStamp);
             }
         }

@@ -61,6 +61,7 @@
     <Compile Include="Models\SensorMessage.cs" />
     <Compile Include="Models\SensorPlot.cs" />
     <Compile Include="Models\Sensor.cs" />
+    <Compile Include="Models\SensorLimits.cs" />
     <Compile Include="Models\SensorStatistics.cs" />
     <Compile Include="Models\SensorType.cs" />
     <Compile Include="Pages\BasePage.cs" />

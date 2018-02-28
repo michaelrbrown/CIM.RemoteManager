@@ -159,5 +159,79 @@
         </Grid>
 
     </pages:BasePage>
+
+    <pages:BasePage Title="Sensor Limits" BackgroundColor="#FFFFFF" Icon="ic_sensor-limits.png">
+
+            <ContentPage.Resources>
+                <ResourceDictionary>
+                    <Style x:Key="FormLabelStyle" TargetType="Label">
+                        <Setter Property="FontSize" Value="18"/>
+                        <Setter Property="TextColor" Value="#444444"/>
+                        <Setter Property="FontAttributes" Value="Bold"/>
+                        <Setter Property="HorizontalTextAlignment" Value="End"></Setter>
+                        <Setter Property="VerticalTextAlignment" Value="Center"></Setter>
+                    </Style>
+
+                    <Style x:Key="FormValueStyle" TargetType="Entry">
+                        <Setter Property="FontSize" Value="18"/>
+                        <Setter Property="TextColor" Value="#444444"/>
+                        <Setter Property="FontAttributes" Value="Bold"/>
+                        <Setter Property="HorizontalTextAlignment" Value="Start"></Setter>
+                        <Setter Property="VerticalOptions" Value="Center"></Setter>
+                    </Style>
+                </ResourceDictionary>
+            </ContentPage.Resources>
+
+            <!-- Margin: left, top, right, bottom -->
+            <!-- Grid layout for Statistics form -->
+            <Grid Margin="20,60,20,20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Alarms Active -->
+                <Label Grid.Row="0" Grid.Column="0" Text="Alarms Active: " Style="{DynamicResource FormLabelStyle}" />
+                <Entry Grid.Row="0" Grid.Column="1" Text="{Binding AverageValue}" IsEnabled="False" Style="{DynamicResource FormValueStyle}" />
+
+                <!-- Alarm Delay -->
+                <Label Grid.Row="1" Grid.Column="0" Text="Alarm Delay: " Style="{DynamicResource FormLabelStyle}" />
+                <Entry Grid.Row="1" Grid.Column="1" Text="{Binding SensorStatistics.SinceDateTimeStamp}" IsEnabled="False" Style="{DynamicResource FormValueStyle}" />
+
+                <!-- High Alarm -->
+                <Label Grid.Row="2" Grid.Column="0" Text="High Alarm: " Style="{DynamicResource FormLabelStyle}" />
+                <Entry Grid.Row="2" Grid.Column="1" Text="{Binding SensorStatistics.MinimumValue}" IsEnabled="False" Style="{DynamicResource FormValueStyle}" />
+
+                <!-- High Warning -->
+                <Label Grid.Row="3" Grid.Column="0" Text="High Warning: " Style="{DynamicResource FormLabelStyle}" />
+                <Entry Grid.Row="3" Grid.Column="1" Text="{Binding SensorStatistics.MinimumOccuranceTimeStamp}" IsEnabled="False" Style="{DynamicResource FormValueStyle}" />
+
+                <!-- Low Warning -->
+                <Label Grid.Row="4" Grid.Column="0" Text="Low Warning: " Style="{DynamicResource FormLabelStyle}" />
+                <Entry Grid.Row="4" Grid.Column="1" Text="{Binding SensorStatistics.MaximumValue}" IsEnabled="False" Style="{DynamicResource FormValueStyle}" />
+
+                <!-- Low Alarm -->
+                <Label Grid.Row="5" Grid.Column="0" Text="Low Alarm: "  Style="{DynamicResource FormLabelStyle}"/>
+                <Entry Grid.Row="5" Grid.Column="1" Text="{Binding SensorStatistics.MaximumOccuranceTimeStamp}" IsEnabled="False" Style="{DynamicResource FormValueStyle}" />
+
+                <!-- Margin: left, top, right, bottom -->
+                <StackLayout Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Spacing="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="60" BackgroundColor="{DynamicResource RemoteNameBackgroundColor}" Opacity=".6">
+                    <Label Text="{Binding CharacteristicValue, StringFormat=' Incoming Value: {0:N}'}" TextColor="{DynamicResource AppLightColor}" FontSize="16" Margin="5"  HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" VerticalTextAlignment="Center" LineBreakMode="MiddleTruncation" />
+                </StackLayout>
+
+            </Grid>
+
+        </pages:BasePage>
     
 </pages:BaseTabbedPage>
