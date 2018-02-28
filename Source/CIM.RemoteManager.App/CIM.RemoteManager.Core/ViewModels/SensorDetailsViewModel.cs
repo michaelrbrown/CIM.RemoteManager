@@ -67,21 +67,145 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// Device name (from bluetooth name field)
         /// </summary>
         public string DeviceName { get; set; }
-
-        /// <summary>
-        /// Sensor index (unique id)
-        /// </summary>
-        public string SensorIndex { get; set; }
-
+        
         /// <summary>
         /// Sensor serial number (unique id)
         /// </summary>
         public string SensorSerialNumber { get; set; }
 
+        private int _sensorIndex;
+        public int SensorIndex
+        {
+            get => _sensorIndex;
+            set => SetProperty(ref _sensorIndex, value);
+        }
+
         /// <summary>
-        /// Sensor
+        /// Average sensor value.
+        /// Make sure we divide by 10 to convert to appropriate value.
         /// </summary>
-        public Sensor Sensor { get; set; }
+        private double _averageValue;
+        public double AverageValue
+        {
+            get
+            {
+                // Try to lookup hex to string
+                if (double.TryParse(_averageValue.ToString(), out double averageValueResult))
+                {
+                    return averageValueResult / 10;
+                }
+                // Default
+                return 0;
+            }
+            set => SetProperty(ref _averageValue, value);
+        }
+
+        /// <summary>
+        /// Converting Unix to Windows DateTime
+        /// </summary>
+        private double _sinceTimeStamp;
+        public double TimeStamp
+        {
+            get => _sinceTimeStamp;
+            set => SetProperty(ref _sinceTimeStamp, value);
+        }
+
+        /// <summary>
+        /// Converting Unix to Windows DateTime
+        /// </summary>
+        public DateTime? SinceDateTimeStamp => _sinceTimeStamp.UnixTimeStampToDateTime();
+        
+        /// <summary>
+        /// Average sensor value.
+        /// Make sure we divide by 10 to convert to appropriate value.
+        /// </summary>
+        private double _minimumValue;
+        public double MinimumValue
+        {
+            get
+            {
+                // Try to lookup hex to string
+                if (double.TryParse(_minimumValue.ToString(), out double minimumValueResult))
+                {
+                    return minimumValueResult / 10;
+                }
+                // Default
+                return 0;
+            }
+            set => SetProperty(ref _minimumValue, value);
+        }
+
+        /// <summary>
+        /// Converting Unix to Windows DateTime
+        /// </summary>
+        private double _minimumOccuranceTimeStamp;
+        public double MinimumOccuranceTimeStamp
+        {
+            get => _minimumOccuranceTimeStamp;
+            set => SetProperty(ref _minimumOccuranceTimeStamp, value);
+        }
+
+        /// <summary>
+        /// Converting Unix to Windows DateTime
+        /// </summary>
+        public DateTime? MinimumOccuranceDateTimeStamp => _minimumOccuranceTimeStamp.UnixTimeStampToDateTime();
+
+        /// <summary>
+        /// Average sensor value.
+        /// Make sure we divide by 10 to convert to appropriate value.
+        /// </summary>
+        private double _maximumValue;
+        public double MaximumValue
+        {
+            get
+            {
+                // Try to lookup hex to string
+                if (double.TryParse(_maximumValue.ToString(), out double maximumValueResult))
+                {
+                    return maximumValueResult / 10;
+                }
+                // Default
+                return 0;
+            }
+            set => SetProperty(ref _maximumValue, value);
+        }
+
+        /// <summary>
+        /// Converting Unix to Windows DateTime
+        /// </summary>
+        private double _maximumOccuranceTimeStamp;
+        public double MaximumOccuranceTimeStamp
+        {
+            get => _maximumOccuranceTimeStamp;
+            set => SetProperty(ref _maximumOccuranceTimeStamp, value);
+        }
+
+        /// <summary>
+        /// Converting Unix to Windows DateTime
+        /// </summary>
+        public DateTime? MaximumOccuranceDateTimeStamp => _maximumOccuranceTimeStamp.UnixTimeStampToDateTime();
+
+        /// <summary>
+        /// Average sensor value.
+        /// Make sure we divide by 10 to convert to appropriate value.
+        /// </summary>
+        private double _varianceValue;
+        public double VarianceValue
+        {
+            get
+            {
+                // Try to lookup hex to string
+                if (double.TryParse(_maximumValue.ToString(), out double maximumValueResult) && (double.TryParse(_minimumValue.ToString(), out double minimumValueResult)))
+                {
+                    return maximumValueResult - minimumValueResult;
+                }
+                // Default
+                return 0;
+            }
+            set => SetProperty(ref _varianceValue, value);
+        }
+
+
 
         public enum SensorCommand
         {
@@ -340,9 +464,9 @@ namespace CIM.RemoteManager.Core.ViewModels
                 
                 //_userDialogs.Alert($"Sensor Index: {parameters.Data[SensorIdKey]}", "CIMScan Remote Manager");
 
-                SensorIndex = parameters.Data[SensorIdKey];
+                SensorIndex = Convert.ToInt32(parameters.Data[SensorIdKey]);
 
-                RaisePropertyChanged(() => SensorIndex);
+                //RaisePropertyChanged(() => SensorIndex);
 
                 // Get device from bundle
                 _device = GetSensorDeviceBundle(parameters);
@@ -617,24 +741,34 @@ namespace CIM.RemoteManager.Core.ViewModels
                 //_userDialogs.Alert($"(H) Sensor MaximumOccuranceTimeStamp: {splitSensorValues[2].SafeHexToInt().ToString()}", "CIMScan RemoteManager");
                 //_userDialogs.Alert($"(H) Sensor MinimumValue: {splitSensorValues[3].SafeHexToDouble().ToString()}", "CIMScan RemoteManager");
 
-                var sensorStatistics = new SensorStatistics
-                {
-                    // "H" Sensor data serialization
-                    SensorIndex = splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('H') + 1).SafeConvert<int>(0),
-                    MaximumValue = splitSensorValues[1].SafeHexToDouble(),
-                    MaximumOccuranceTimeStamp = splitSensorValues[2].SafeHexToInt(),
-                    MinimumValue = splitSensorValues[3].SafeHexToDouble(),
-                    MinimumOccuranceTimeStamp = splitSensorValues[4].SafeHexToInt(),
-                    AverageValue = splitSensorValues[5].SafeHexToDouble(),
-                    TimeStamp = splitSensorValues[6].SafeHexToInt()
-                };
-                // Remove data from collection
-                SensorStatisticsCollection.Clear();
-                // Add new data
-                SensorStatisticsCollection.Add(sensorStatistics);
+                // "H" Sensor data serialization
+                SensorIndex = splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('H') + 1).SafeConvert<int>(0);
+                MaximumValue = splitSensorValues[1].SafeHexToDouble();
+                MaximumOccuranceTimeStamp = splitSensorValues[2].SafeHexToInt();
+                MinimumValue = splitSensorValues[3].SafeHexToDouble();
+                MinimumOccuranceTimeStamp = splitSensorValues[4].SafeHexToInt();
+                AverageValue = splitSensorValues[5].SafeHexToDouble();
+                TimeStamp = splitSensorValues[6].SafeHexToInt();
 
-                // Notify property changed to update UI
-                RaisePropertyChanged(()=> SensorStatisticsCollection);
+
+                //var sensorStatistics = new SensorStatistics
+                //{
+                //    // "H" Sensor data serialization
+                //    SensorIndex = splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('H') + 1).SafeConvert<int>(0),
+                //    MaximumValue = splitSensorValues[1].SafeHexToDouble(),
+                //    MaximumOccuranceTimeStamp = splitSensorValues[2].SafeHexToInt(),
+                //    MinimumValue = splitSensorValues[3].SafeHexToDouble(),
+                //    MinimumOccuranceTimeStamp = splitSensorValues[4].SafeHexToInt(),
+                //    AverageValue = splitSensorValues[5].SafeHexToDouble(),
+                //    TimeStamp = splitSensorValues[6].SafeHexToInt()
+                //};
+                //// Remove data from collection
+                //SensorStatisticsCollection.Clear();
+                //// Add new data
+                //SensorStatisticsCollection.Add(sensorStatistics);
+
+                //// Notify property changed to update UI
+                //RaisePropertyChanged(()=> SensorStatisticsCollection);
                 //RaisePropertyChanged(() => SensorStatistics.SensorIndex);
                 //RaisePropertyChanged(() => SensorStatistics.MaximumValue);
                 //RaisePropertyChanged(() => SensorStatistics.MaximumOccuranceTimeStamp);

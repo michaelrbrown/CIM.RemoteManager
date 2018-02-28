@@ -1,6 +1,7 @@
 ﻿using System;
 using CIM.RemoteManager.Core.Models;
 using CIM.RemoteManager.Core.ViewModels;
+using MvvmCross.Core.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
