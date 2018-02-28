@@ -628,6 +628,9 @@ namespace CIM.RemoteManager.Core.ViewModels
                     AverageValue = splitSensorValues[5].SafeHexToDouble(),
                     TimeStamp = splitSensorValues[6].SafeHexToInt()
                 };
+                // Remove data from collection
+                SensorStatisticsCollection.Clear();
+                // Add new data
                 SensorStatisticsCollection.Add(sensorStatistics);
 
                 // Notify property changed to update UI
