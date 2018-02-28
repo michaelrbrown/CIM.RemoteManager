@@ -125,31 +125,31 @@
 
             <!-- Average -->
             <Label Grid.Row="0" Grid.Column="0" Text="Average: " Style="{DynamicResource FormLabelStyle}" />
-            <Entry Grid.Row="0" Grid.Column="1" Text="{Binding AverageValue}" IsEnabled="True" Style="{DynamicResource FormValueStyle}" />
+            <Entry Grid.Row="0" Grid.Column="1" Text="{Binding SensorStatistics.AverageValue}" IsEnabled="True" Style="{DynamicResource FormValueStyle}" />
 
             <!-- Average Since -->
             <Label Grid.Row="1" Grid.Column="0" Text="Since: " Style="{DynamicResource FormLabelStyle}" />
-            <Entry Grid.Row="1" Grid.Column="1" Text="{Binding SinceDateTimeStamp}" IsEnabled="True" Style="{DynamicResource FormValueStyle}" />
+            <Entry Grid.Row="1" Grid.Column="1" Text="{Binding SensorStatistics.SinceDateTimeStamp}" IsEnabled="True" Style="{DynamicResource FormValueStyle}" />
 
             <!-- Minimum -->
             <Label Grid.Row="2" Grid.Column="0" Text="Minimum: " Style="{DynamicResource FormLabelStyle}" />
-            <Entry Grid.Row="2" Grid.Column="1" Text="{Binding MinimumValue}" IsEnabled="False" Style="{DynamicResource FormValueStyle}" />
+            <Entry Grid.Row="2" Grid.Column="1" Text="{Binding SensorStatistics.MinimumValue}" IsEnabled="False" Style="{DynamicResource FormValueStyle}" />
 
             <!-- Minimum Occurrence -->
             <Label Grid.Row="3" Grid.Column="0" Text="Occurrence: " Style="{DynamicResource FormLabelStyle}" />
-            <Entry Grid.Row="3" Grid.Column="1" Text="{Binding MinimumOccuranceTimeStamp}" IsEnabled="False" Style="{DynamicResource FormValueStyle}" />
+            <Entry Grid.Row="3" Grid.Column="1" Text="{Binding SensorStatistics.MinimumOccuranceTimeStamp}" IsEnabled="False" Style="{DynamicResource FormValueStyle}" />
 
             <!-- Maximum -->
             <Label Grid.Row="4" Grid.Column="0" Text="Maximum: " Style="{DynamicResource FormLabelStyle}" />
-            <Entry Grid.Row="4" Grid.Column="1" Text="{Binding MaximumValue}" IsEnabled="False" Style="{DynamicResource FormValueStyle}" />
+            <Entry Grid.Row="4" Grid.Column="1" Text="{Binding SensorStatistics.MaximumValue}" IsEnabled="False" Style="{DynamicResource FormValueStyle}" />
 
             <!-- Maximum Occurrence -->
             <Label Grid.Row="5" Grid.Column="0" Text="Occurrence: "  Style="{DynamicResource FormLabelStyle}"/>
-            <Entry Grid.Row="5" Grid.Column="1" Text="{Binding MaximumOccuranceTimeStamp}" IsEnabled="False" Style="{DynamicResource FormValueStyle}" />
+            <Entry Grid.Row="5" Grid.Column="1" Text="{Binding SensorStatistics.MaximumOccuranceTimeStamp}" IsEnabled="False" Style="{DynamicResource FormValueStyle}" />
 
             <!-- Variance -->
             <Label Grid.Row="6" Grid.Column="0" Text="Variance: " Style="{DynamicResource FormLabelStyle}" />
-            <Entry Grid.Row="6" Grid.Column="1" Text="{Binding VarianceValue}" IsEnabled="False" Style="{DynamicResource FormValueStyle}" />
+            <Entry Grid.Row="6" Grid.Column="1" Text="{Binding SensorStatistics.VarianceValue}" IsEnabled="False" Style="{DynamicResource FormValueStyle}" />
 
             <!-- Margin: left, top, right, bottom -->
             <StackLayout Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Spacing="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="60" BackgroundColor="{DynamicResource RemoteNameBackgroundColor}" Opacity=".6">
