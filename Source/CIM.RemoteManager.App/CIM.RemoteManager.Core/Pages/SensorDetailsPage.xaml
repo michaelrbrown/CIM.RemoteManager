@@ -2,6 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:chart="clr-namespace:Telerik.XamarinForms.Chart;assembly=Telerik.XamarinForms.Chart"
              xmlns:pages="clr-namespace:CIM.RemoteManager.Core.Pages;assembly=CIM.RemoteManager.Core"
+             xmlns:models="clr-namespace:CIM.RemoteManager.Core.Models;assembly=CIM.RemoteManager.Core"
              x:Class="CIM.RemoteManager.Core.Pages.SensorDetailsPage" 
              BackgroundColor="#FFFFFF">
 
@@ -129,7 +130,7 @@
 
             <!-- Average Since -->
             <Label Grid.Row="1" Grid.Column="0" Text="Since: " Style="{DynamicResource FormLabelStyle}" />
-            <Label Grid.Row="1" Grid.Column="1" Text="{Binding SensorStatistics.SinceDateTimeStamp}" IsEnabled="True"  />
+            <Label Grid.Row="1" Grid.Column="1" Text="{Binding SinceDateTimeStamp, Source={x:Static models:SensorStatistics.Current}}" IsEnabled="True"  />
 
             <!-- Minimum -->
             <Label Grid.Row="2" Grid.Column="0" Text="Minimum: " Style="{DynamicResource FormLabelStyle}" />
@@ -207,7 +208,7 @@
 
                 <!-- Alarm Delay -->
                 <Label Grid.Row="1" Grid.Column="0" Text="Alarm Delay: " Style="{DynamicResource FormLabelStyle}" />
-                <Entry Grid.Row="1" Grid.Column="1" Text="{Binding SensorStatistics.SinceDateTimeStamp}" IsEnabled="False" Style="{DynamicResource FormValueStyle}" />
+                <Entry Grid.Row="1" Grid.Column="1" Text="" IsEnabled="False" Style="{DynamicResource FormValueStyle}" />
 
                 <!-- High Alarm -->
                 <Label Grid.Row="2" Grid.Column="0" Text="High Alarm: " Style="{DynamicResource FormLabelStyle}" />

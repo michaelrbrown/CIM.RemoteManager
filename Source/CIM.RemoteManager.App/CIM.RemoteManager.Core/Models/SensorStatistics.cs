@@ -6,6 +6,10 @@ namespace CIM.RemoteManager.Core.Models
 {
     public class SensorStatistics : BindableBase
     {
+        // Singleton
+        private static SensorStatistics _current;
+        public static SensorStatistics Current => _current ?? (_current = new SensorStatistics());
+
         private int _sensorIndex;
         public int SensorIndex
         {
