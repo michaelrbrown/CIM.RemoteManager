@@ -7,7 +7,6 @@ namespace CIM.RemoteManager.Core.Models
     public class SensorStatistics : BindableBase
     {
         private int _sensorIndex;
-        [Ignore]
         public int SensorIndex
         {
             get => _sensorIndex;
@@ -19,7 +18,6 @@ namespace CIM.RemoteManager.Core.Models
         /// Make sure we divide by 10 to convert to appropriate value.
         /// </summary>
         private double _averageValue;
-        [DisplayOptions(Header = "Average")]
         public double AverageValue
         {
             get
@@ -39,7 +37,6 @@ namespace CIM.RemoteManager.Core.Models
         /// Converting Unix to Windows DateTime
         /// </summary>
         private double _sinceTimeStamp;
-        [Ignore]
         public double TimeStamp
         {
             get => _sinceTimeStamp;
@@ -49,7 +46,6 @@ namespace CIM.RemoteManager.Core.Models
         /// <summary>
         /// Converting Unix to Windows DateTime
         /// </summary>
-        [DisplayOptions(Header = "Since")]
         public DateTime? SinceDateTimeStamp => _sinceTimeStamp.UnixTimeStampToDateTime();
 
 
@@ -58,7 +54,6 @@ namespace CIM.RemoteManager.Core.Models
         /// Make sure we divide by 10 to convert to appropriate value.
         /// </summary>
         private double _minimumValue;
-        [DisplayOptions(Header = "Minimum")]
         public double MinimumValue
         {
             get
@@ -78,7 +73,6 @@ namespace CIM.RemoteManager.Core.Models
         /// Converting Unix to Windows DateTime
         /// </summary>
         private double _minimumOccuranceTimeStamp;
-        [Ignore]
         public double MinimumOccuranceTimeStamp
         {
             get => _minimumOccuranceTimeStamp;
@@ -88,7 +82,6 @@ namespace CIM.RemoteManager.Core.Models
         /// <summary>
         /// Converting Unix to Windows DateTime
         /// </summary>
-        [DisplayOptions(Header = "Occurance")]
         public DateTime? MinimumOccuranceDateTimeStamp => _minimumOccuranceTimeStamp.UnixTimeStampToDateTime();
 
         /// <summary>
@@ -96,7 +89,6 @@ namespace CIM.RemoteManager.Core.Models
         /// Make sure we divide by 10 to convert to appropriate value.
         /// </summary>
         private double _maximumValue;
-        [DisplayOptions(Header = "Maximum")]
         public double MaximumValue
         {
             get
@@ -116,7 +108,6 @@ namespace CIM.RemoteManager.Core.Models
         /// Converting Unix to Windows DateTime
         /// </summary>
         private double _maximumOccuranceTimeStamp;
-        [Ignore]
         public double MaximumOccuranceTimeStamp
         {
             get => _maximumOccuranceTimeStamp;
@@ -126,7 +117,6 @@ namespace CIM.RemoteManager.Core.Models
         /// <summary>
         /// Converting Unix to Windows DateTime
         /// </summary>
-        [DisplayOptions(Header = "Occurance")]
         public DateTime? MaximumOccuranceDateTimeStamp => _maximumOccuranceTimeStamp.UnixTimeStampToDateTime();
 
         /// <summary>
@@ -134,7 +124,6 @@ namespace CIM.RemoteManager.Core.Models
         /// Make sure we divide by 10 to convert to appropriate value.
         /// </summary>
         private double _varianceValue;
-        [DisplayOptions(Header = "Variance")]
         public double VarianceValue
         {
             get
