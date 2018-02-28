@@ -78,30 +78,6 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// </summary>
         public string SensorSerialNumber { get; set; }
 
-
-
-        /// <summary>
-        /// Average sensor value.
-        /// Make sure we divide by 10 to convert to appropriate value.
-        /// </summary>
-        private double _averageValue;
-        public double AverageValue
-        {
-            get
-            {
-                // Try to lookup hex to string
-                if (double.TryParse(_averageValue.ToString(), out double averageValueResult))
-                {
-                    return averageValueResult / 10;
-                }
-                // Default
-                return 0;
-            }
-            set => SetProperty(ref _averageValue, value);
-        }
-
-
-
         /// <summary>
         /// Sensor
         /// </summary>
@@ -179,7 +155,6 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// <summary>
         /// Sensor plot view model constructor
         /// </summary>
-        /// <param name="messenger">Sensor message subscription</param>
         /// <param name="bluetoothLe">Bluetooth LE obj</param>
         /// <param name="adapter">Bluetooth LE adapter</param>
         /// <param name="userDialogs">User dialogs</param>
@@ -187,7 +162,6 @@ namespace CIM.RemoteManager.Core.ViewModels
         {
             try
             {
-                //_subscriptionToken = messenger.Subscribe<SensorMessage>(OnSensorMessage);
                 _bluetoothLe = bluetoothLe;
                 _userDialogs = userDialogs;
 
@@ -631,7 +605,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             {
                 //_userDialogs.Alert($"(H) Sensor MaximumValue: {splitSensorValues[1].SafeHexToDouble().ToString()}", "CIMScan RemoteManager");
                 //_userDialogs.Alert($"(H) Sensor MaximumOccuranceTimeStamp: {splitSensorValues[2].SafeHexToInt().ToString()}", "CIMScan RemoteManager");
-                //_userDialogs.Alert($"(H) Sensor MinimumValue: {splitSensorValues[3].SafeHexToDouble().ToString()}", "CIMScan RemoteManager");
+                _userDialogs.Alert($"(H) Sensor MinimumValue: {splitSensorValues[3].SafeHexToDouble().ToString()}", "CIMScan RemoteManager");
 
                 // "H" Sensor data serialization
                 SensorStatistics.SensorIndex = splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('H') + 1).SafeConvert<int>(0);
@@ -639,17 +613,17 @@ namespace CIM.RemoteManager.Core.ViewModels
                 SensorStatistics.MaximumOccuranceTimeStamp = splitSensorValues[2].SafeHexToInt();
                 SensorStatistics.MinimumValue = splitSensorValues[3].SafeHexToDouble();
                 SensorStatistics.MinimumOccuranceTimeStamp = splitSensorValues[4].SafeHexToInt();
-                AverageValue = splitSensorValues[5].SafeHexToDouble();
+                SensorStatistics.AverageValue = splitSensorValues[5].SafeHexToDouble();
                 SensorStatistics.TimeStamp = splitSensorValues[6].SafeHexToInt();
                 // Notify property changed to update UI
                 RaisePropertyChanged(()=> SensorStatistics);
-                RaisePropertyChanged(() => SensorStatistics.SensorIndex);
-                RaisePropertyChanged(() => SensorStatistics.MaximumValue);
-                RaisePropertyChanged(() => SensorStatistics.MaximumOccuranceTimeStamp);
-                RaisePropertyChanged(() => SensorStatistics.MinimumValue);
-                RaisePropertyChanged(() => SensorStatistics.MinimumOccuranceTimeStamp);
-                RaisePropertyChanged(() => AverageValue);
-                RaisePropertyChanged(() => SensorStatistics.TimeStamp);
+                //RaisePropertyChanged(() => SensorStatistics.SensorIndex);
+                //RaisePropertyChanged(() => SensorStatistics.MaximumValue);
+                //RaisePropertyChanged(() => SensorStatistics.MaximumOccuranceTimeStamp);
+                //RaisePropertyChanged(() => SensorStatistics.MinimumValue);
+                //RaisePropertyChanged(() => SensorStatistics.MinimumOccuranceTimeStamp);
+                //RaisePropertyChanged(() => SensorStatistics.AverageValue);
+                //RaisePropertyChanged(() => SensorStatistics.TimeStamp);
             }
         }
 
