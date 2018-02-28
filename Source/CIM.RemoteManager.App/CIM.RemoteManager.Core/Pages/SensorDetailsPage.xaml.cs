@@ -51,6 +51,8 @@ namespace CIM.RemoteManager.Core.Pages
                     sensorDetailsViewModel.StopUpdatesCommand.Execute();
                     //sensorDetailsViewModel.SetSensorCommandType(SensorDetailsViewModel.SensorCommand.Statistics);
                     sensorDetailsViewModel.StartUpdatesCommand.Execute();
+                    // Set binding context to viewmodel
+                    BindingContext = this;
                 }
 
                 
@@ -65,6 +67,9 @@ namespace CIM.RemoteManager.Core.Pages
                     sensorDetailsViewModel.StopUpdatesCommand.Execute();
                     //sensorDetailsViewModel.SetSensorCommandType(SensorDetailsViewModel.SensorCommand.Plot);
                     sensorDetailsViewModel.StartUpdatesCommand.Execute();
+                    // Set binding context to viewmodel
+                    BindingContext = this;
+
                 }
 
                 // Send our Sensor object as message

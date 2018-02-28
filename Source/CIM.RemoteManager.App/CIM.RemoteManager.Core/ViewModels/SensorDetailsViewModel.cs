@@ -605,7 +605,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             {
                 //_userDialogs.Alert($"(H) Sensor MaximumValue: {splitSensorValues[1].SafeHexToDouble().ToString()}", "CIMScan RemoteManager");
                 //_userDialogs.Alert($"(H) Sensor MaximumOccuranceTimeStamp: {splitSensorValues[2].SafeHexToInt().ToString()}", "CIMScan RemoteManager");
-                _userDialogs.Alert($"(H) Sensor MinimumValue: {splitSensorValues[3].SafeHexToDouble().ToString()}", "CIMScan RemoteManager");
+                //_userDialogs.Alert($"(H) Sensor MinimumValue: {splitSensorValues[3].SafeHexToDouble().ToString()}", "CIMScan RemoteManager");
 
                 // "H" Sensor data serialization
                 SensorStatistics.SensorIndex = splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('H') + 1).SafeConvert<int>(0);
