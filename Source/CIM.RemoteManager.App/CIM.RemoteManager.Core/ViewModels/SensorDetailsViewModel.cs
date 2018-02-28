@@ -288,7 +288,6 @@ namespace CIM.RemoteManager.Core.ViewModels
                     else if (SensorCommandType == SensorCommand.Statistics)
                     {
                         updateValue = "{X}";
-                        //_userDialogs.Alert($"Update Command1: {updateValue}", "CIMScan RemoteManager");
                     }
                     
                     // Send a refresh command
@@ -343,8 +342,6 @@ namespace CIM.RemoteManager.Core.ViewModels
                 // Set device name
                 DeviceName = _device.Name;
 
-                //_userDialogs.Alert($"Device Name: {DeviceName}", "CIMScan Remote Manager");
-
                 // Init our DA-12
                 InitRemote();
 
@@ -358,27 +355,6 @@ namespace CIM.RemoteManager.Core.ViewModels
             {
                 HockeyApp.MetricsManager.TrackEvent($"(InitFromBundle) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
                 _userDialogs.Alert(ex.Message, "Error while loading sensor data");
-            }
-        }
-
-        public void SetSensorCommandType(SensorCommand sensorCommandType)
-        {
-            //_userDialogs.Alert(sensorCommandType.ToString(), "SensorCommand");
-            // Set sensor command type
-            SensorCommandType = sensorCommandType;
-            //RaisePropertyChanged(() => SensorCommandType);
-            // Start updates for sensor based on command type
-            if (!UpdatesStarted)
-            {
-                //StartUpdates();
-            }
-        }
-
-        public void StopSensorUpdates()
-        {
-            if (UpdatesStarted)
-            {
-                //StopUpdates();
             }
         }
 
@@ -439,9 +415,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                     updateValue = "{X}";
                     
                 }
-
-                _userDialogs.Alert($"Update Command2: {updateValue}", "CIMScan RemoteManager");
-
+                
                 SensorSerialNumber = updateValue;
                 RaisePropertyChanged(() => SensorSerialNumber);
 
@@ -645,6 +619,13 @@ namespace CIM.RemoteManager.Core.ViewModels
                 SensorStatistics.TimeStamp = splitSensorValues[6].SafeHexToInt();
                 // Notify property changed to update UI
                 RaisePropertyChanged(()=> SensorStatistics);
+                RaisePropertyChanged(() => SensorStatistics.SensorIndex);
+                RaisePropertyChanged(() => SensorStatistics.MaximumValue);
+                RaisePropertyChanged(() => SensorStatistics.MaximumOccuranceTimeStamp);
+                RaisePropertyChanged(() => SensorStatistics.MinimumValue);
+                RaisePropertyChanged(() => SensorStatistics.MinimumOccuranceTimeStamp);
+                RaisePropertyChanged(() => SensorStatistics.AverageValue);
+                RaisePropertyChanged(() => SensorStatistics.TimeStamp);
             }
         }
 
