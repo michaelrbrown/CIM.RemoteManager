@@ -125,11 +125,11 @@
 
             <!-- Average -->
             <Label Grid.Row="0" Grid.Column="0" Text="Average: " Style="{DynamicResource FormLabelStyle}" />
-            <Entry Grid.Row="0" Grid.Column="1" Text="{Binding SensorStatistics.AverageValue}" IsEnabled="True" Style="{DynamicResource FormValueStyle}" />
+            <Label Grid.Row="0" Grid.Column="1" Text="{Binding AverageValue}" IsEnabled="True" />
 
             <!-- Average Since -->
             <Label Grid.Row="1" Grid.Column="0" Text="Since: " Style="{DynamicResource FormLabelStyle}" />
-            <Entry Grid.Row="1" Grid.Column="1" Text="{Binding SensorStatistics.SinceDateTimeStamp}" IsEnabled="True" Style="{DynamicResource FormValueStyle}" />
+            <Label Grid.Row="1" Grid.Column="1" Text="{Binding SensorStatistics.SinceDateTimeStamp}" IsEnabled="True"  />
 
             <!-- Minimum -->
             <Label Grid.Row="2" Grid.Column="0" Text="Minimum: " Style="{DynamicResource FormLabelStyle}" />
