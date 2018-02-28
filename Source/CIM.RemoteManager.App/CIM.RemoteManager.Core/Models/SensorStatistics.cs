@@ -70,7 +70,11 @@ namespace CIM.RemoteManager.Core.Models
                 // Default
                 return 0;
             }
-            set => SetProperty(ref _minimumValue, value);
+            set
+            {
+                SetProperty(ref _minimumValue, value);
+                base.OnPropertyChanged();
+            }
         }
 
         /// <summary>
