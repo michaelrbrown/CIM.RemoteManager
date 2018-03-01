@@ -69,6 +69,11 @@ namespace CIM.RemoteManager.Core.ViewModels
         public string DeviceName { get; set; }
 
         /// <summary>
+        /// Sensor index selected from device (unique id)
+        /// </summary>
+        public int SensorIndexSelected { get; set; }
+
+        /// <summary>
         /// Sensor index (unique id)
         /// </summary>
         public int SensorIndex { get; set; }
@@ -377,25 +382,12 @@ namespace CIM.RemoteManager.Core.ViewModels
             }
         }
 
-        private void OnSensorMessage(SensorMessage sensorMessage)
-        {
-            // Set sensor command type
-            SensorCommandType = sensorMessage.SensorCommand;
-            InvokeOnMainThread(() => {
-                _userDialogs.Alert($"Sensor OnSensorMessage: {SensorCommandType.ToString()}", "CIMScan Remote Manager");
-            });
-           
-        }
-
         /// <summary>
         /// On Resume
         /// </summary>
         public override void Resume()
         {
             base.Resume();
-            //_userDialogs.Alert("SensorPlot :: Resume");
-            // Init from bundle which grabs our device and kicks things off
-            //InitFromBundle(Bundle);
         }
 
         /// <summary>
@@ -496,17 +488,8 @@ namespace CIM.RemoteManager.Core.ViewModels
                     _userDialogs.Alert("Cannot write characteristic data to remote!", "CIMScan Remote Manager");
                 }
 
-                //// Wait 500 milliseconds
-                //await Task.Delay(500).ConfigureAwait(true);
-
                 // Get Characteristics service
                 RxCharacteristic = await _service.GetCharacteristicAsync(RxUuid).ConfigureAwait(true);
-
-                // Wait 500 milliseconds
-                //await Task.Delay(1000).ConfigureAwait(true);
-
-                // Start updates
-                //StartUpdatesCommand.Execute(null);
             }
             catch (Exception ex)
             {
@@ -527,12 +510,11 @@ namespace CIM.RemoteManager.Core.ViewModels
             try
             {
                 base.InitFromBundle(parameters);
-                
-                //_userDialogs.Alert($"Sensor Index: {parameters.Data[SensorIdKey]}", "CIMScan Remote Manager");
 
-                SensorIndex = Convert.ToInt32(parameters.Data[SensorIdKey]);
-
-                RaisePropertyChanged(() => SensorIndex);
+                // Get selected sensor index from device
+                SensorIndexSelected = Convert.ToInt32(parameters.Data[SensorIdKey]);
+                // Notify property changed
+                RaisePropertyChanged(() => SensorIndexSelected);
 
                 // Get device from bundle
                 _device = GetSensorDeviceBundle(parameters);
@@ -616,10 +598,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 {
                     updateValue = "{G}";
                 }
-
-                SensorSerialNumber = updateValue;
-                RaisePropertyChanged(() => SensorSerialNumber);
-
+                
                 // Send a refresh command
                 await TxCharacteristic.WriteAsync(updateValue.StrToByteArray()).ConfigureAwait(true);
                 // Start updates from bluetooth service
@@ -855,28 +834,34 @@ namespace CIM.RemoteManager.Core.ViewModels
             {
                 //_userDialogs.Alert($"(H) Statistics Data: {sensorValues}", "CIMScan RemoteManager");
 
-                // "H" Sensor data serialization
-                SensorIndex = splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('H') + 1).SafeConvert<int>(0);
-                MaximumValue = splitSensorValues[1].SafeHexToDouble();
-                MaximumOccuranceTimeStamp = splitSensorValues[2].SafeHexToInt();
-                MinimumValue = splitSensorValues[3].SafeHexToDouble();
-                MinimumOccuranceTimeStamp = splitSensorValues[4].SafeHexToInt();
-                AverageValue = splitSensorValues[5].SafeHexToDouble();
-                TimeStamp = splitSensorValues[6].SafeHexToInt();
+                // Only update the values if we have a match
+                if (SensorIndexSelected == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('G') + 1).SafeConvert<int>(0))
+                {
+                    // "H" Sensor data serialization
+                    MaximumValue = splitSensorValues[1].SafeHexToDouble();
+                    MaximumOccuranceTimeStamp = splitSensorValues[2].SafeHexToInt();
+                    MinimumValue = splitSensorValues[3].SafeHexToDouble();
+                    MinimumOccuranceTimeStamp = splitSensorValues[4].SafeHexToInt();
+                    AverageValue = splitSensorValues[5].SafeHexToDouble();
+                    TimeStamp = splitSensorValues[6].SafeHexToInt();
+                }
             }
             else if (SensorCommandType == SensorCommand.Limits)
             {
-                _userDialogs.Alert($"(G) Limits Data: {sensorValues}", "CIMScan RemoteManager");
+                //_userDialogs.Alert($"(G) Limits Data: {sensorValues}", "CIMScan RemoteManager");
 
-                // "G" Sensor data serialization
-                SensorIndex = splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('G') + 1).SafeConvert<int>(0);
-                AlarmStatus = splitSensorValues[1].SafeHexToInt();
-                AlarmBeingProcessed = splitSensorValues[2].SafeHexToInt();
-                AlarmDelay = splitSensorValues[3].SafeHexToDouble();
-                LowAlarmLimit = splitSensorValues[4].SafeHexToInt();
-                LowWarningLimit = splitSensorValues[5].SafeHexToDouble();
-                HighWarningLimit = splitSensorValues[6].SafeHexToInt();
-                HighAlarmLimit = splitSensorValues[7].SafeHexToDouble();
+                // Only update the values if we have a match
+                if (SensorIndexSelected == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('G') + 1).SafeConvert<int>(0))
+                {
+                    // "G" Sensor data serialization
+                    AlarmStatus = splitSensorValues[1].SafeHexToInt();
+                    AlarmBeingProcessed = splitSensorValues[2].SafeHexToInt();
+                    AlarmDelay = splitSensorValues[3].SafeHexToDouble();
+                    LowAlarmLimit = splitSensorValues[4].SafeHexToInt();
+                    LowWarningLimit = splitSensorValues[5].SafeHexToDouble();
+                    HighWarningLimit = splitSensorValues[6].SafeHexToInt();
+                    HighAlarmLimit = splitSensorValues[7].SafeHexToDouble();
+                }
             }
         }
 
