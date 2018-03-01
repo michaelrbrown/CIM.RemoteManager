@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
-using System.Threading.Tasks;
 using Acr.UserDialogs;
 using CIM.RemoteManager.Core.Helpers;
 using CIM.RemoteManager.Core.Models;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
-using MvvmCross.Plugins.Messenger;
 using Plugin.BLE.Abstractions.Contracts;
 using Plugin.BLE.Abstractions.EventArgs;
 
@@ -513,8 +510,11 @@ namespace CIM.RemoteManager.Core.ViewModels
 
                 // Get selected sensor index from device
                 SensorIndexSelected = Convert.ToInt32(parameters.Data[SensorIdKey]);
+
+                _userDialogs.Alert(SensorIndexSelected.ToString(), "Sensor Index Selected");
+
                 // Notify property changed
-                RaisePropertyChanged(() => SensorIndexSelected);
+                //RaisePropertyChanged(() => SensorIndexSelected);
 
                 // Get device from bundle
                 _device = GetSensorDeviceBundle(parameters);
@@ -853,6 +853,11 @@ namespace CIM.RemoteManager.Core.ViewModels
             else if (SensorCommandType == SensorCommand.Limits)
             {
                 //_userDialogs.Alert($"(G) Limits Data: {sensorValues}", "CIMScan RemoteManager");
+
+                _userDialogs.Alert($"(G) SensorIndexSelected: {SensorIndexSelected}", "CIMScan RemoteManager");
+
+                _userDialogs.Alert($"(G) Sensor Index: {splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('G') + 1).SafeConvert<int>(0)}", "CIMScan RemoteManager");
+
 
                 // Only update the values if we have a match
                 if (SensorIndexSelected == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('G') + 1).SafeConvert<int>(0))
