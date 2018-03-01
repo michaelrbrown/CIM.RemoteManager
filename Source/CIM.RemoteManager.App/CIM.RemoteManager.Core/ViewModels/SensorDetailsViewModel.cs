@@ -86,7 +86,8 @@ namespace CIM.RemoteManager.Core.ViewModels
         public enum SensorCommand
         {
             Plot,
-            Statistics
+            Statistics,
+            Limits
         };
 
         /// <summary>
@@ -273,6 +274,79 @@ namespace CIM.RemoteManager.Core.ViewModels
 
         #endregion
 
+        #region Sensor Limits
+
+        /// <summary>
+        /// Alarm status
+        /// </summary>
+        private int _alarmStatus;
+        public int AlarmStatus
+        {
+            get => _alarmStatus;
+            set => SetProperty(ref _alarmStatus, value);
+        }
+
+        /// <summary>
+        /// Alarm being processed
+        /// </summary>
+        private int _alarmBeingProcessed;
+        public int AlarmBeingProcessed
+        {
+            get => _alarmBeingProcessed;
+            set => SetProperty(ref _alarmBeingProcessed, value);
+        }
+
+        /// <summary>
+        /// Alarm delay
+        /// </summary>
+        private double _alarmDeley;
+        public double AlarmDelay
+        {
+            get => _alarmDeley;
+            set => SetProperty(ref _alarmDeley, value);
+        }
+
+        /// <summary>
+        /// Low alarm limit
+        /// </summary>
+        private double _lowAlarmLimit;
+        public double LowAlarmLimit
+        {
+            get => _lowAlarmLimit;
+            set => SetProperty(ref _lowAlarmLimit, value);
+        }
+
+        /// <summary>
+        /// Low warning limit
+        /// </summary>
+        private double _lowWarningLimit;
+        public double LowWarningLimit
+        {
+            get => _lowWarningLimit;
+            set => SetProperty(ref _lowWarningLimit, value);
+        }
+
+        /// <summary>
+        /// High alarm limit
+        /// </summary>
+        private double _highAlarmLimit;
+        public double HighAlarmLimit
+        {
+            get => _highAlarmLimit;
+            set => SetProperty(ref _highAlarmLimit, value);
+        }
+
+        /// <summary>
+        /// High warning limit
+        /// </summary>
+        private double _highWarningLimit;
+        public double HighWarningLimit
+        {
+            get => _highWarningLimit;
+            set => SetProperty(ref _highWarningLimit, value);
+        }
+
+        #endregion
 
         /// <summary>
         /// Sensor plot view model constructor
@@ -409,7 +483,11 @@ namespace CIM.RemoteManager.Core.ViewModels
                     {
                         updateValue = "{X}";
                     }
-                    
+                    else if (SensorCommandType == SensorCommand.Limits)
+                    {
+                        updateValue = "{G}";
+                    }
+
                     // Send a refresh command
                     await TxCharacteristic.WriteAsync(updateValue.StrToByteArray()).ConfigureAwait(true);
                 }
@@ -533,9 +611,12 @@ namespace CIM.RemoteManager.Core.ViewModels
                 else if (SensorCommandType == SensorCommand.Statistics)
                 {
                     updateValue = "{X}";
-                    
                 }
-                
+                else if (SensorCommandType == SensorCommand.Limits)
+                {
+                    updateValue = "{G}";
+                }
+
                 SensorSerialNumber = updateValue;
                 RaisePropertyChanged(() => SensorSerialNumber);
 
@@ -592,17 +673,20 @@ namespace CIM.RemoteManager.Core.ViewModels
         {
             try
             {
+                // Get data based on tab selected
                 if (SensorCommandType == SensorCommand.Plot)
                 {
-                    // Get buffered sensor data
-                    GetBufferedSensorValues(CharacteristicValue);
+                    GetSensorPlotValues(CharacteristicValue);
                 }
                 else if (SensorCommandType == SensorCommand.Statistics)
                 {
-                    // Get buffered sensor data
-                    GetStatisticsSensorValues(CharacteristicValue);
+                    GetSensorStatisticsValues(CharacteristicValue);
                 }
-                
+                else if (SensorCommandType == SensorCommand.Limits)
+                {
+                    GetSensorLimitsValues(CharacteristicValue);
+                }
+
                 // Notify property changed
                 RaisePropertyChanged(() => CharacteristicValue);
             }
@@ -613,14 +697,14 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
-        /// Get Buffered values for sensor from characteristic data
+        /// Get sensot plot (buffered) data from remote
         /// </summary>
         /// <param name="characteristicValue"></param>
-        private void GetBufferedSensorValues(string characteristicValue)
+        private void GetSensorPlotValues(string characteristicValue)
         {
             if (String.IsNullOrEmpty(characteristicValue)) return;
 
-            // Start reading all "buffered sensor values"
+            // Start reading all "sensor plot values"
             if (!StartBufferedSensorValueRecord && characteristicValue.Contains("{J"))
             {
                 // If we hit an end char } then record all data up to it
@@ -657,14 +741,14 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
-        /// Get Statistics values for sensor from buffered data
+        /// Get sensor statistics values from remote
         /// </summary>
         /// <param name="characteristicValue"></param>
-        private void GetStatisticsSensorValues(string characteristicValue)
+        private void GetSensorStatisticsValues(string characteristicValue)
         {
             if (String.IsNullOrEmpty(characteristicValue)) return;
 
-            // Start reading all "full sensor values"
+            // Start reading all "sensor statistics values"
             if (!StartStatisticsSensorValueRecord && characteristicValue.Contains("{H"))
             {
                 // If we hit an end char } then record all data up to it
@@ -699,7 +783,51 @@ namespace CIM.RemoteManager.Core.ViewModels
                 }
             }
         }
-        
+
+        /// <summary>
+        /// Get sensor limits values from remote
+        /// </summary>
+        /// <param name="characteristicValue"></param>
+        private void GetSensorLimitsValues(string characteristicValue)
+        {
+            if (String.IsNullOrEmpty(characteristicValue)) return;
+
+            // Start reading all "sensor limits values"
+            if (!StartStatisticsSensorValueRecord && characteristicValue.Contains("{G"))
+            {
+                // If we hit an end char } then record all data up to it
+                if (characteristicValue.Contains("}"))
+                {
+                    StatisticsSensorValue.Append(characteristicValue);
+                    SerializeStringToSensor(StatisticsSensorValue.ToString());
+                    StatisticsSensorValue.Clear();
+                    StartStatisticsSensorValueRecord = false;
+                }
+                else
+                {
+                    // Read all characters in buffer while we are within the {}
+                    StatisticsSensorValue.Append(characteristicValue.Trim(new Char[] { '{' }));
+                    StartStatisticsSensorValueRecord = true;
+                }
+            }
+            else if (StartStatisticsSensorValueRecord)
+            {
+                // If we hit an end char } then record all data up to it
+                if (characteristicValue.Contains("}"))
+                {
+                    StatisticsSensorValue.Append(characteristicValue.GetUntilOrEmpty());
+                    SerializeStringToSensor(StatisticsSensorValue.ToString());
+                    StatisticsSensorValue.Clear();
+                    StartStatisticsSensorValueRecord = false;
+                }
+                else
+                {
+                    // Read all characters in buffer while we are within the {}
+                    StatisticsSensorValue.Append(characteristicValue);
+                }
+            }
+        }
+
         /// <summary>
         /// Serialize tab based sensor data to strongly typed Sensor model
         /// </summary>
@@ -725,9 +853,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             }
             else if (SensorCommandType == SensorCommand.Statistics)
             {
-                //_userDialogs.Alert($"(H) Sensor MaximumValue: {splitSensorValues[1].SafeHexToDouble().ToString()}", "CIMScan RemoteManager");
-                //_userDialogs.Alert($"(H) Sensor MaximumOccuranceTimeStamp: {splitSensorValues[2].SafeHexToInt().ToString()}", "CIMScan RemoteManager");
-                //_userDialogs.Alert($"(H) Sensor MinimumValue: {splitSensorValues[3].SafeHexToDouble().ToString()}", "CIMScan RemoteManager");
+                _userDialogs.Alert($"(H) Statistics Data: {sensorValues}", "CIMScan RemoteManager");
 
                 // "H" Sensor data serialization
                 SensorIndex = splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('H') + 1).SafeConvert<int>(0);
@@ -737,16 +863,20 @@ namespace CIM.RemoteManager.Core.ViewModels
                 MinimumOccuranceTimeStamp = splitSensorValues[4].SafeHexToInt();
                 AverageValue = splitSensorValues[5].SafeHexToDouble();
                 TimeStamp = splitSensorValues[6].SafeHexToInt();
+            }
+            else if (SensorCommandType == SensorCommand.Limits)
+            {
+                _userDialogs.Alert($"(G) Limits Data: {sensorValues}", "CIMScan RemoteManager");
 
-                // Notify property changed to update UI
-                //RaisePropertyChanged(()=> SensorStatistics);
-                //RaisePropertyChanged(() => SensorStatistics.SensorIndex);
-                //RaisePropertyChanged(() => SensorStatistics.MaximumValue);
-                //RaisePropertyChanged(() => SensorStatistics.MaximumOccuranceTimeStamp);
-                //RaisePropertyChanged(() => SensorStatistics.MinimumValue);
-                //RaisePropertyChanged(() => SensorStatistics.MinimumOccuranceTimeStamp);
-                //RaisePropertyChanged(() => SensorStatistics.AverageValue);
-                //RaisePropertyChanged(() => SensorStatistics.TimeStamp);
+                // "G" Sensor data serialization
+                SensorIndex = splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('G') + 1).SafeConvert<int>(0);
+                AlarmStatus = splitSensorValues[1].SafeHexToInt();
+                AlarmBeingProcessed = splitSensorValues[2].SafeHexToInt();
+                AlarmDelay = splitSensorValues[3].SafeHexToDouble();
+                LowAlarmLimit = splitSensorValues[4].SafeHexToInt();
+                LowWarningLimit = splitSensorValues[5].SafeHexToDouble();
+                HighWarningLimit = splitSensorValues[6].SafeHexToInt();
+                HighAlarmLimit = splitSensorValues[7].SafeHexToDouble();
             }
         }
 

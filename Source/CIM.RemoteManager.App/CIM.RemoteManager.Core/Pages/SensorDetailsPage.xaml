@@ -202,6 +202,29 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
+                <!-- Alarms Active -->
+                <Label Grid.Row="0" Grid.Column="0" Text="Alarms Active: " Style="{DynamicResource FormLabelStyle}" />
+                <Entry Grid.Row="0" Grid.Column="1" Text="{Binding AlarmStatus}" IsEnabled="False" Style="{DynamicResource FormValueStyle}" />
+
+                <!-- Alarm Delay -->
+                <Label Grid.Row="1" Grid.Column="0" Text="Alarm Delay: " Style="{DynamicResource FormLabelStyle}" />
+                <Entry Grid.Row="1" Grid.Column="1" Text="{Binding AlarmDelay}" IsEnabled="False" Style="{DynamicResource FormValueStyle}" />
+
+                <!-- High Alarm -->
+                <Label Grid.Row="2" Grid.Column="0" Text="High Alarm: " Style="{DynamicResource FormLabelStyle}" />
+                <Entry Grid.Row="2" Grid.Column="1" Text="{Binding HighAlarmLimit}" IsEnabled="False" Style="{DynamicResource FormValueStyle}" />
+
+                <!-- High Warning -->
+                <Label Grid.Row="3" Grid.Column="0" Text="High Warning: " Style="{DynamicResource FormLabelStyle}" />
+                <Entry Grid.Row="3" Grid.Column="1" Text="{Binding HighWarningLimit}" IsEnabled="False" Style="{DynamicResource FormValueStyle}" />
+
+                <!-- Low Warning -->
+                <Label Grid.Row="4" Grid.Column="0" Text="Low Warning: " Style="{DynamicResource FormLabelStyle}" />
+                <Entry Grid.Row="4" Grid.Column="1" Text="{Binding LowAlarmLimit}" IsEnabled="False" Style="{DynamicResource FormValueStyle}" />
+
+                <!-- Low Alarm -->
+                <Label Grid.Row="5" Grid.Column="0" Text="Low Alarm: " Style="{DynamicResource FormLabelStyle}"/>
+                <Entry Grid.Row="5" Grid.Column="1" Text="{Binding LowWarningLimit}" IsEnabled="False" Style="{DynamicResource FormValueStyle}" />
               
                 <!-- Margin: left, top, right, bottom -->
                 <StackLayout Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Spacing="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="60" BackgroundColor="{DynamicResource RemoteNameBackgroundColor}" Opacity=".6">
