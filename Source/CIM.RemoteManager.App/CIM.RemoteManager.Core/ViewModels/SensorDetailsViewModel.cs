@@ -834,8 +834,12 @@ namespace CIM.RemoteManager.Core.ViewModels
             {
                 //_userDialogs.Alert($"(H) Statistics Data: {sensorValues}", "CIMScan RemoteManager");
 
+                _userDialogs.Alert($"(H) SensorIndexSelected: {SensorIndexSelected}", "CIMScan RemoteManager");
+
+                _userDialogs.Alert($"(H) Sensor Index: {splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('H') + 1).SafeConvert<int>(0)}", "CIMScan RemoteManager");
+
                 // Only update the values if we have a match
-                if (SensorIndexSelected == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('G') + 1).SafeConvert<int>(0))
+                if (SensorIndexSelected == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('H') + 1).SafeConvert<int>(0))
                 {
                     // "H" Sensor data serialization
                     MaximumValue = splitSensorValues[1].SafeHexToDouble();
