@@ -71,7 +71,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// <summary>
         /// Sensor index (unique id)
         /// </summary>
-        public string SensorIndex { get; set; }
+        public int SensorIndex { get; set; }
 
         /// <summary>
         /// Sensor serial number (unique id)
@@ -108,19 +108,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             get => _sensorPlotCollection;
             set => SetProperty(ref _sensorPlotCollection, value);
         }
-
-        public SensorStatistics SensorStatistics { get; set; }
-
-        /// <summary>
-        /// Sensor sttistics
-        /// </summary>
-        //SensorStatistics _sensorStatistics;
-        //public SensorStatistics SensorStatistics
-        //{
-        //    get => _sensorStatistics;
-        //    set => SetProperty(ref _sensorStatistics, value);
-        //}
-
+        
         /// <summary>
         /// Show sensor updates mode
         /// </summary>
@@ -153,6 +141,138 @@ namespace CIM.RemoteManager.Core.ViewModels
         ///   hourly total
         /// </summary>
         public readonly StringBuilder StatisticsSensorValue = new StringBuilder("");
+
+
+        #region Sensor Statistics
+        
+        /// <summary>
+        /// Average sensor value.
+        /// Make sure we divide by 10 to convert to appropriate value.
+        /// </summary>
+        private double _averageValue;
+        public double AverageValue
+        {
+            get
+            {
+                // Try to lookup hex to string
+                if (double.TryParse(_averageValue.ToString(), out double averageValueResult))
+                {
+                    return averageValueResult / 10;
+                }
+                // Default
+                return 0;
+            }
+            set => SetProperty(ref _averageValue, value);
+        }
+
+        /// <summary>
+        /// Converting Unix to Windows DateTime
+        /// </summary>
+        private double _sinceTimeStamp;
+        public double TimeStamp
+        {
+            get => _sinceTimeStamp;
+            set => SetProperty(ref _sinceTimeStamp, value);
+        }
+
+        /// <summary>
+        /// Converting Unix to Windows DateTime
+        /// </summary>
+        public DateTime? SinceDateTimeStamp => _sinceTimeStamp.UnixTimeStampToDateTime();
+
+
+        /// <summary>
+        /// Average sensor value.
+        /// Make sure we divide by 10 to convert to appropriate value.
+        /// </summary>
+        private double _minimumValue;
+        public double MinimumValue
+        {
+            get
+            {
+                // Try to lookup hex to string
+                if (double.TryParse(_minimumValue.ToString(), out double minimumValueResult))
+                {
+                    return minimumValueResult / 10;
+                }
+                // Default
+                return 0;
+            }
+            set => SetProperty(ref _minimumValue, value);
+        }
+
+        /// <summary>
+        /// Converting Unix to Windows DateTime
+        /// </summary>
+        private double _minimumOccuranceTimeStamp;
+        public double MinimumOccuranceTimeStamp
+        {
+            get => _minimumOccuranceTimeStamp;
+            set => SetProperty(ref _minimumOccuranceTimeStamp, value);
+        }
+
+        /// <summary>
+        /// Converting Unix to Windows DateTime
+        /// </summary>
+        public DateTime? MinimumOccuranceDateTimeStamp => _minimumOccuranceTimeStamp.UnixTimeStampToDateTime();
+
+        /// <summary>
+        /// Average sensor value.
+        /// Make sure we divide by 10 to convert to appropriate value.
+        /// </summary>
+        private double _maximumValue;
+        public double MaximumValue
+        {
+            get
+            {
+                // Try to lookup hex to string
+                if (double.TryParse(_maximumValue.ToString(), out double maximumValueResult))
+                {
+                    return maximumValueResult / 10;
+                }
+                // Default
+                return 0;
+            }
+            set => SetProperty(ref _maximumValue, value);
+        }
+
+        /// <summary>
+        /// Converting Unix to Windows DateTime
+        /// </summary>
+        private double _maximumOccuranceTimeStamp;
+        public double MaximumOccuranceTimeStamp
+        {
+            get => _maximumOccuranceTimeStamp;
+            set => SetProperty(ref _maximumOccuranceTimeStamp, value);
+        }
+
+        /// <summary>
+        /// Converting Unix to Windows DateTime
+        /// </summary>
+        public DateTime? MaximumOccuranceDateTimeStamp => _maximumOccuranceTimeStamp.UnixTimeStampToDateTime();
+
+        /// <summary>
+        /// Average sensor value.
+        /// Make sure we divide by 10 to convert to appropriate value.
+        /// </summary>
+        private double _varianceValue;
+        public double VarianceValue
+        {
+            get
+            {
+                // Try to lookup hex to string
+                if (double.TryParse(_maximumValue.ToString(), out double maximumValueResult) && (double.TryParse(_minimumValue.ToString(), out double minimumValueResult)))
+                {
+                    return maximumValueResult - minimumValueResult;
+                }
+                // Default
+                return 0;
+            }
+            set => SetProperty(ref _varianceValue, value);
+        }
+
+        #endregion
+
 
         /// <summary>
         /// Sensor plot view model constructor
@@ -332,7 +452,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 
                 //_userDialogs.Alert($"Sensor Index: {parameters.Data[SensorIdKey]}", "CIMScan Remote Manager");
 
-                SensorIndex = parameters.Data[SensorIdKey];
+                SensorIndex = Convert.ToInt32(parameters.Data[SensorIdKey]);
 
                 RaisePropertyChanged(() => SensorIndex);
 
@@ -610,16 +730,16 @@ namespace CIM.RemoteManager.Core.ViewModels
                 //_userDialogs.Alert($"(H) Sensor MinimumValue: {splitSensorValues[3].SafeHexToDouble().ToString()}", "CIMScan RemoteManager");
 
                 // "H" Sensor data serialization
-                SensorStatistics.SensorIndex = splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('H') + 1).SafeConvert<int>(0);
-                SensorStatistics.MaximumValue = splitSensorValues[1].SafeHexToDouble();
-                SensorStatistics.MaximumOccuranceTimeStamp = splitSensorValues[2].SafeHexToInt();
-                SensorStatistics.MinimumValue = splitSensorValues[3].SafeHexToDouble();
-                SensorStatistics.MinimumOccuranceTimeStamp = splitSensorValues[4].SafeHexToInt();
-                SensorStatistics.AverageValue = splitSensorValues[5].SafeHexToDouble();
-                SensorStatistics.TimeStamp = splitSensorValues[6].SafeHexToInt();
+                SensorIndex = splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('H') + 1).SafeConvert<int>(0);
+                MaximumValue = splitSensorValues[1].SafeHexToDouble();
+                MaximumOccuranceTimeStamp = splitSensorValues[2].SafeHexToInt();
+                MinimumValue = splitSensorValues[3].SafeHexToDouble();
+                MinimumOccuranceTimeStamp = splitSensorValues[4].SafeHexToInt();
+                AverageValue = splitSensorValues[5].SafeHexToDouble();
+                TimeStamp = splitSensorValues[6].SafeHexToInt();
 
                 // Notify property changed to update UI
-                RaisePropertyChanged(()=> SensorStatistics);
+                //RaisePropertyChanged(()=> SensorStatistics);
                 //RaisePropertyChanged(() => SensorStatistics.SensorIndex);
                 //RaisePropertyChanged(() => SensorStatistics.MaximumValue);
                 //RaisePropertyChanged(() => SensorStatistics.MaximumOccuranceTimeStamp);
