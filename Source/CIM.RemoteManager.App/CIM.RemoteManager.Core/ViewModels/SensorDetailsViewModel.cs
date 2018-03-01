@@ -853,7 +853,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             }
             else if (SensorCommandType == SensorCommand.Statistics)
             {
-                _userDialogs.Alert($"(H) Statistics Data: {sensorValues}", "CIMScan RemoteManager");
+                //_userDialogs.Alert($"(H) Statistics Data: {sensorValues}", "CIMScan RemoteManager");
 
                 // "H" Sensor data serialization
                 SensorIndex = splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('H') + 1).SafeConvert<int>(0);
