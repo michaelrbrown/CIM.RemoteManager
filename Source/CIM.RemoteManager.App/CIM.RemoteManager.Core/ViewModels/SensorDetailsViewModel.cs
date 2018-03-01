@@ -511,7 +511,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 // Get selected sensor index from device
                 SensorIndexSelected = Convert.ToInt32(parameters.Data[SensorIdKey]);
 
-                _userDialogs.Alert(SensorIndexSelected.ToString(), "Sensor Index Selected");
+                //_userDialogs.Alert(SensorIndexSelected.ToString(), "Sensor Index Selected");
 
                 // Notify property changed
                 //RaisePropertyChanged(() => SensorIndexSelected);
