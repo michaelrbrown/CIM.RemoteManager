@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using CIM.RemoteManager.Core.Helpers;
 using Telerik.XamarinForms.Common.DataAnnotations;
 
@@ -6,6 +8,13 @@ namespace CIM.RemoteManager.Core.Models
 {
     public class SensorStatistics : BindableBase
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void OnPropertyChanged([CallerMemberName]string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
         // Singleton
         private static SensorStatistics _current;
         public static SensorStatistics Current => _current ?? (_current = new SensorStatistics());
@@ -34,7 +43,11 @@ namespace CIM.RemoteManager.Core.Models
                 // Default
                 return 0;
             }
-            set => SetProperty(ref _averageValue, value);
+            set
+            {
+                _averageValue = 235;
+                OnPropertyChanged();
+            }
         }
 
         /// <summary>
