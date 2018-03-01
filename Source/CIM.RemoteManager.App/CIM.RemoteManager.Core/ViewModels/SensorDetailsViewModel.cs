@@ -463,6 +463,10 @@ namespace CIM.RemoteManager.Core.ViewModels
                 //// Make sure we can write characteristic data to remote
                 if (TxCharacteristic.CanWrite)
                 {
+                    // Send refresh command to remote
+                    await TxCharacteristic.WriteAsync("{Y}".StrToByteArray()).ConfigureAwait(true);
+
+                    // Now setup plot, statistics, and limits commands
                     string updateValue = string.Empty;
                     if (SensorCommandType == SensorCommand.Plot)
                     {
@@ -484,7 +488,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 {
                     _userDialogs.Alert("Cannot write characteristic data to remote!", "CIMScan Remote Manager");
                 }
-
+                
                 // Get Characteristics service
                 RxCharacteristic = await _service.GetCharacteristicAsync(RxUuid).ConfigureAwait(true);
             }
@@ -514,7 +518,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 //_userDialogs.Alert(SensorIndexSelected.ToString(), "Sensor Index Selected");
 
                 // Notify property changed
-                //RaisePropertyChanged(() => SensorIndexSelected);
+                RaisePropertyChanged(() => SensorIndexSelected);
 
                 // Get device from bundle
                 _device = GetSensorDeviceBundle(parameters);
@@ -834,7 +838,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             {
                 //_userDialogs.Alert($"(H) Statistics Data: {sensorValues}", "CIMScan RemoteManager");
 
-                _userDialogs.Alert($"(H) SensorIndexSelected: {SensorIndexSelected}", "CIMScan RemoteManager");
+                //_userDialogs.Alert($"(H) SensorIndexSelected: {SensorIndexSelected}", "CIMScan RemoteManager");
 
                 _userDialogs.Alert($"(H) Sensor Index: {splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('H') + 1).SafeConvert<int>(0)}", "CIMScan RemoteManager");
 
@@ -854,7 +858,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             {
                 //_userDialogs.Alert($"(G) Limits Data: {sensorValues}", "CIMScan RemoteManager");
 
-                _userDialogs.Alert($"(G) SensorIndexSelected: {SensorIndexSelected}", "CIMScan RemoteManager");
+                //_userDialogs.Alert($"(G) SensorIndexSelected: {SensorIndexSelected}", "CIMScan RemoteManager");
 
                 _userDialogs.Alert($"(G) Sensor Index: {splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('G') + 1).SafeConvert<int>(0)}", "CIMScan RemoteManager");
 
