@@ -109,15 +109,17 @@ namespace CIM.RemoteManager.Core.ViewModels
             set => SetProperty(ref _sensorPlotCollection, value);
         }
 
+        public SensorStatistics SensorStatistics { get; set; }
+
         /// <summary>
         /// Sensor sttistics
         /// </summary>
-        SensorStatistics _sensorStatistics;
-        public SensorStatistics SensorStatistics
-        {
-            get => _sensorStatistics;
-            set => SetProperty(ref _sensorStatistics, value);
-        }
+        //SensorStatistics _sensorStatistics;
+        //public SensorStatistics SensorStatistics
+        //{
+        //    get => _sensorStatistics;
+        //    set => SetProperty(ref _sensorStatistics, value);
+        //}
 
         /// <summary>
         /// Show sensor updates mode
