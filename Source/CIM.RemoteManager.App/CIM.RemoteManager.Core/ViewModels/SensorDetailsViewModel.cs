@@ -587,7 +587,9 @@ namespace CIM.RemoteManager.Core.ViewModels
             try
             {
                 UpdatesStarted = true;
-                
+
+                _userDialogs.Alert(SensorCommandType.ToString());
+
                 // Send refresh command to remote
                 string updateValue = string.Empty;
                 if (SensorCommandType == SensorCommand.Plot)
