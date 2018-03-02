@@ -7,152 +7,151 @@
             switch (value)
             {
                 case "2800":
-                    return "DS18B20 Temperature (CI10/CZ11)";
+                    return "CI10/CZ11 Temp.";
 
                 case "7100":
-                    return "-200 to 0 RTD *";
+                    return "CI13 Temp.";
 
                 case "7000":
-                    return "Temp/RH *";
+                    return "CI15 Temp.";
 
                 case "7001":
-                    return "Humidity portion of Temp/RH *";
+                    return "CI15H Humidity";
 
                 case "6900":
-                    return "0 to +200 RTD *";
+                    return "CI18 Temp.";
 
                 case "6800":
-                    return "differential pressure *";
+                    return "CI22 Diff. Pres. ";
 
                 case "6700":
-                    return "RTD temperature";
+                    return "CI19 Temp.";
 
                 case "1200":
-                    return "DS2406-based on/off (CI-20/24/50/70)";
+                    return "CI2X Value";
 
                 case "1220":
-                    return "CI-20 agitator motion";
+                    return "CI20 Value";
 
                 case "1224":
-                    return "CI-24 door ajar";
+                    return "CI24 Value";
 
                 case "1250":
-                    return "CI-50 contact closure";
+                    return "CI50 Value";
 
                 case "1270":
-                    return "CI-70 120VAC detector";
+                    return "CI70 Value";
 
                 case "9100":
-                    return "Contact Closure *";
+                    return "CI91 State";
 
                 case "8000":
-                    return "Cryo Freezer (CT-13)";
+                    return "CT13 Temp.";
 
                 case "8100":
-                    return "Room Temp Sensors (CT-14)";
+                    return "CT14 Temp.";
 
                 case "8200":
-                    return "Room Temp/Humidity Sensors (CT-15)";
+                    return "CT15 Temp.";
 
                 case "8201":
-                    return "Humidity Value (CT-15)";
+                    return "CT15H Humidity";
 
                 case "8300":
-                    return "Thermistor Temp (CT-16)";
+                    return "CT16 Temp.";
 
                 case "8301":
-                    return "Thermistor Temp (CT-17)";
+                    return "CT17 Temp.";
 
                 case "8001":
-                    return "Oven Temp (CT-18)";
+                    return "CT18 Temp.";
 
                 case "8002":
-                    return "Wide Range Temp (CT-19)";
+                    return "CT19 Temp.";
 
                 case "8400":
-                    return "CO2(CT-21)";
+                    return "CT21 CO2";
 
                 case "8410":
-                    return "O2 (CT-29)";
+                    return "CT29 O2";
 
                 case "8500":
-                    return "10.1\" Diff Pressure(CT-22A)";
+                    return "10.1\" CT22 Diff. Pres.";
 
                 case "8501":
-                    return "10.1\" Diff Pressure(CT-22A)";
+                    return "10.1\" CT22A Diff. Pres.";
 
                 case "8502":
-                    return "10.2\" Diff Pressure(CT-22B/C)";
+                    return "10.2\" CT22B Diff. Pres.";
 
-                case "8502.1":
-                    return "10.5\" Diff Pressure(CT-22C)";
+                case "8503":
+                    return "10.5\" CT22C Diff. Pres.";
 
                 case "8504":
-                    return "11.0\" Diff Pressure(CT-22D)";
+                    return "11.0\" CT22D Diff. Pres.";
 
                 case "8505":
-                    return "12.0\" Diff Pressure(CT-22E)";
+                    return "12.0\" CT22E Diff. Pres.";
 
                 case "8506":
-                    return "Air Flow(CT-21)";
+                    return "CT23 Air Flow";
 
                 case "8600":
-                    return "Particle Counter(CT-21)";
+                    return "CT27 Particles";
 
                 case "8700":
-                    return "0-5V Analog Input (CT-30)";
+                    return "CT30 Value";
 
                 case "8701":
-                    return "0-10V Analog Input (CT-31)";
+                    return "CT31 Value";
 
                 case "8702":
-                    return "4-20 ma Analog Input (CT-32)";
+                    return "CT32 Value";
 
                 case "8800":
-                    return "Contact Closure (CT-50)";
+                    return "CT50 Count";
 
                 case "8801":
-                    return "Magnetic Door Ajar (CT-24)";
+                    return "CT24 Count";
 
                 case "8802":
-                    return "Bottled Gas Pressure Switch (CT-25)";
+                    return "CT25 Count";
 
                 case "8803":
-                    return "LN2 Level Detector (CT-26)";
+                    return "CT26 Count";
 
                 case "8900":
-                    return "Counter (CT-40/41)";
+                    return "CT4X Count";
 
                 case "8A00":
-                    return "CZ-25 temp/RH";
+                    return "CZ25 Temp.";
 
                 case "8A01":
-                    return "CZ-25 Humidity value";
+                    return "CZ25H Humidity";
 
                 case "8B00":
-                    return "CZ-15 temp/RH";
+                    return "CZ15 Temp.";
 
                 case "8B01":
-                    return "CZ-15 Humidity value";
+                    return "CZ15H Humidity";
 
                 case "8C00":
-                    return "10.1\" Diff Pressure(CZ-22A)";
+                    return "10.1\" CZ22 Diff. Pres.";
 
                 case "8C01":
-                    return "10.1\" Diff Pressure(CZ-22A)";
+                    return "10.1\" CZ22A Diff. Pres.";
 
                 case "8C02":
-                    return "10.2\" Diff Pressure(CC-22B)";
+                    return "10.2\" CZ22B Diff. Pres.";
 
                 case "8C03":
-                    return "10.5\" Diff Pressure(CZ-22C)";
+                    return "10.5\" CZ22C Diff. Pres.";
 
                 case "8C04":
-                    return "11.0\" Diff Pressure(CZ-22D)";
+                    return "11.0\" CZ22D Diff. Pres.";
 
                 case "8C05":
-                    return "12.0\" Diff Pressure(CZ-22E)";
-
+                    return "12.0\" CZ22E Diff. Pres.";
                 default:
                     return "";
             }
