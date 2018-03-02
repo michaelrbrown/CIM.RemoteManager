@@ -185,7 +185,7 @@
 
                 <!-- Alarms Active -->
                 <Label Grid.Row="0" Grid.Column="0" Text="Alarms Active: " Style="{DynamicResource FormLabelStyle}" />
-                <Entry Grid.Row="0" Grid.Column="1" Text="{Binding AlarmStatus}" IsEnabled="False" Style="{DynamicResource FormValueStyle}" />
+                <Entry Grid.Row="0" Grid.Column="1" Text="{Binding AlarmStatusBool}" IsEnabled="False" Style="{DynamicResource FormValueStyle}" />
 
                 <!-- Alarm Delay -->
                 <Label Grid.Row="1" Grid.Column="0" Text="Alarm Delay: " Style="{DynamicResource FormLabelStyle}" />

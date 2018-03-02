@@ -1,4 +1,6 @@
 ﻿
+using System;
+
 namespace CIM.RemoteManager.Core.Models
 {
     public class SensorLimits : BindableBase
@@ -18,6 +20,23 @@ namespace CIM.RemoteManager.Core.Models
         {
             get => _alarmStatus;
             set => SetProperty(ref _alarmStatus, value);
+        }
+
+        /// <summary>
+        /// Alarm status boolean
+        /// </summary>
+        public bool AlarmStatusBool
+        {
+            get
+            {
+                // Try to lookup hex to string
+                if (int.TryParse(_alarmStatus.ToString(), out int alarmStatusResult))
+                {
+                    return Convert.ToBoolean(alarmStatusResult);
+                }
+                // Default
+                return false;
+            }
         }
 
         /// <summary>
