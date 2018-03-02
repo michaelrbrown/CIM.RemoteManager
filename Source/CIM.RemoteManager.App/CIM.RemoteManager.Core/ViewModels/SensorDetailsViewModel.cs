@@ -463,22 +463,15 @@ namespace CIM.RemoteManager.Core.ViewModels
                 //// Make sure we can write characteristic data to remote
                 if (TxCharacteristic.CanWrite)
                 {
-                    // Send refresh command to remote
-                    await TxCharacteristic.WriteAsync("{Y}".StrToByteArray()).ConfigureAwait(true);
-
                     // Now setup plot, statistics, and limits commands
                     string updateValue = string.Empty;
                     if (SensorCommandType == SensorCommand.Plot)
                     {
                         updateValue = "{c" + SensorIndex + "}";
                     }
-                    else if (SensorCommandType == SensorCommand.Statistics)
+                    else if (SensorCommandType == SensorCommand.Statistics || SensorCommandType == SensorCommand.Limits)
                     {
-                        updateValue = "{X}";
-                    }
-                    else if (SensorCommandType == SensorCommand.Limits)
-                    {
-                        updateValue = "{G}";
+                        updateValue = "{Y}";
                     }
 
                     // Send a refresh command
@@ -596,15 +589,11 @@ namespace CIM.RemoteManager.Core.ViewModels
                 {
                     updateValue = "{c" + SensorIndex + "}";
                 }
-                else if (SensorCommandType == SensorCommand.Statistics)
+                else if (SensorCommandType == SensorCommand.Statistics || SensorCommandType == SensorCommand.Limits)
                 {
-                    updateValue = "{X}";
+                    updateValue = "{Y}";
                 }
-                else if (SensorCommandType == SensorCommand.Limits)
-                {
-                    updateValue = "{G}";
-                }
-                
+
                 // Send a refresh command
                 await TxCharacteristic.WriteAsync(updateValue.StrToByteArray()).ConfigureAwait(true);
                 // Start updates from bluetooth service
@@ -663,12 +652,9 @@ namespace CIM.RemoteManager.Core.ViewModels
                 {
                     GetSensorPlotValues(CharacteristicValue);
                 }
-                else if (SensorCommandType == SensorCommand.Statistics)
+                else if (SensorCommandType == SensorCommand.Statistics || SensorCommandType == SensorCommand.Limits)
                 {
                     GetSensorStatisticsValues(CharacteristicValue);
-                }
-                else if (SensorCommandType == SensorCommand.Limits)
-                {
                     GetSensorLimitsValues(CharacteristicValue);
                 }
 
@@ -839,10 +825,8 @@ namespace CIM.RemoteManager.Core.ViewModels
             else if (SensorCommandType == SensorCommand.Statistics)
             {
                 //_userDialogs.Alert($"(H) Statistics Data: {sensorValues}", "CIMScan RemoteManager");
-
                 //_userDialogs.Alert($"(H) SensorIndexSelected: {SensorIndexSelected}", "CIMScan RemoteManager");
-
-                _userDialogs.Alert($"(H) Sensor Index: {splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('H') + 1).SafeConvert<int>(0)}", "CIMScan RemoteManager");
+                //_userDialogs.Alert($"(H) Sensor Index: {splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('H') + 1).SafeConvert<int>(0)}", "CIMScan RemoteManager");
 
                 // Only update the values if we have a match
                 if (SensorIndexSelected == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('H') + 1).SafeConvert<int>(0))
@@ -859,11 +843,8 @@ namespace CIM.RemoteManager.Core.ViewModels
             else if (SensorCommandType == SensorCommand.Limits)
             {
                 //_userDialogs.Alert($"(G) Limits Data: {sensorValues}", "CIMScan RemoteManager");
-
                 //_userDialogs.Alert($"(G) SensorIndexSelected: {SensorIndexSelected}", "CIMScan RemoteManager");
-
-                _userDialogs.Alert($"(G) Sensor Index: {splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('G') + 1).SafeConvert<int>(0)}", "CIMScan RemoteManager");
-
+                //_userDialogs.Alert($"(G) Sensor Index: {splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('G') + 1).SafeConvert<int>(0)}", "CIMScan RemoteManager");
 
                 // Only update the values if we have a match
                 if (SensorIndexSelected == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('G') + 1).SafeConvert<int>(0))

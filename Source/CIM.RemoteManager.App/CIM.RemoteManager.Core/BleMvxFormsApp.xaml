@@ -124,9 +124,27 @@
           <Setter Property="VerticalOptions" Value="Center"/>
           <Setter Property="FontAttributes" Value="Italic"/>
         </Style>
-        
-       
 
+      <Style x:Key="FormLabelStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="TextColor" Value="#444444"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="HorizontalTextAlignment" Value="End"></Setter>
+            <Setter Property="VerticalTextAlignment" Value="Center"></Setter>
+            <!-- Margin: left, top, right, bottom -->
+            <Setter Property="Margin" Value="10,0,2,0"/>
+        </Style>
+
+        <Style x:Key="FormValueStyle" TargetType="Entry">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="TextColor" Value="#444444"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="HorizontalTextAlignment" Value="Start"></Setter>
+            <Setter Property="VerticalOptions" Value="Center"></Setter>
+            <!-- Margin: left, top, right, bottom -->
+            <Setter Property="Margin" Value="2,0,10,0"/>
+        </Style>
+        
         <!--  font families  -->
       <OnPlatform
           x:Key="RegularFontFamily"
