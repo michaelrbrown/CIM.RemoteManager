@@ -23,14 +23,14 @@ namespace CIM.RemoteManager.Core.Models
         }
 
         /// <summary>
-        /// Alarm status boolean
+        /// Alarm status byte to boolean
         /// </summary>
-        public bool AlarmStatusBool
+        public bool? AlarmStatusBool
         {
             get
             {
                 // Try to lookup hex to string
-                if (int.TryParse(_alarmStatus.ToString(), out int alarmStatusResult))
+                if (byte.TryParse(_alarmStatus.ToString(), out byte alarmStatusResult))
                 {
                     return Convert.ToBoolean(alarmStatusResult);
                 }
