@@ -463,19 +463,22 @@ namespace CIM.RemoteManager.Core.ViewModels
                 //// Make sure we can write characteristic data to remote
                 if (TxCharacteristic.CanWrite)
                 {
+                    // Send a refresh command
+                    await TxCharacteristic.WriteAsync("{Y}".StrToByteArray()).ConfigureAwait(true);
+
                     // Now setup plot, statistics, and limits commands
-                    string updateValue = string.Empty;
-                    if (SensorCommandType == SensorCommand.Plot)
-                    {
-                        updateValue = "{c" + SensorIndex + "}";
-                    }
-                    else if (SensorCommandType == SensorCommand.Statistics || SensorCommandType == SensorCommand.Limits)
-                    {
-                        updateValue = "{Y}";
-                    }
+                    //string updateValue = string.Empty;
+                    //if (SensorCommandType == SensorCommand.Plot)
+                    //{
+                    //    updateValue = "{c" + SensorIndex + "}";
+                    //}
+                    //else if (SensorCommandType == SensorCommand.Statistics || SensorCommandType == SensorCommand.Limits)
+                    //{
+                    //    updateValue = "{Y}";
+                    //}
 
                     // Send a refresh command
-                    await TxCharacteristic.WriteAsync(updateValue.StrToByteArray()).ConfigureAwait(true);
+                    //await TxCharacteristic.WriteAsync(updateValue.StrToByteArray()).ConfigureAwait(true);
                 }
                 else
                 {
@@ -580,9 +583,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             try
             {
                 UpdatesStarted = true;
-
-                _userDialogs.Alert(SensorCommandType.ToString());
-
+                
                 // Send refresh command to remote
                 string updateValue = string.Empty;
                 if (SensorCommandType == SensorCommand.Plot)

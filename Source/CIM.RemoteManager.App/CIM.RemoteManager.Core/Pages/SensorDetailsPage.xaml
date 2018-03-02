@@ -29,7 +29,7 @@
         <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Transparent">
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="120"></RowDefinition>
+                <RowDefinition Height="80"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
 
@@ -73,7 +73,7 @@
         <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Transparent">
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="120"></RowDefinition>
+                <RowDefinition Height="80"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
 
@@ -151,7 +151,7 @@
         <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Transparent">
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="120"></RowDefinition>
+                <RowDefinition Height="80"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
 
