@@ -20,27 +20,17 @@ namespace CIM.RemoteManager.Core.Pages
             // Set current paged changed event to handle sensor update types
             this.CurrentPageChanged += CurrentPageHasChanged;
 
-            var sensorDetailsViewModel = this.BindingContext as SensorDetailsViewModel;
-            // Validate
-            if (sensorDetailsViewModel != null)
-            {
-                sensorDetailsViewModel.SensorCommandType = SensorDetailsViewModel.SensorCommand.Plot;
-                sensorDetailsViewModel.StopUpdatesCommand.Execute();
-                sensorDetailsViewModel.StartUpdatesCommand.Execute();
+            //var sensorDetailsViewModel = this.BindingContext as SensorDetailsViewModel;
+            //// Validate
+            //if (sensorDetailsViewModel != null)
+            //{
+            //    sensorDetailsViewModel.SensorCommandType = SensorDetailsViewModel.SensorCommand.Plot;
+            //    sensorDetailsViewModel.StopUpdatesCommand.Execute();
+            //    sensorDetailsViewModel.StartUpdatesCommand.Execute();
 
-            }
+            //}
 
-            // Add device settings toolbar icon and handle selection
-            ToolbarItems.Add(new ToolbarItem("Refresh Sensor Data", "ic_refresh-sensordata.png", () =>
-            {
-                // Validate
-                if (sensorDetailsViewModel != null)
-                {
-                    // Refresh sensor data
-                    sensorDetailsViewModel.StopUpdatesCommand.Execute();
-                    sensorDetailsViewModel.StartUpdatesCommand.Execute();
-                }
-            }));
+            
         }
 
         /// <summary>
@@ -76,12 +66,23 @@ namespace CIM.RemoteManager.Core.Pages
             else
             {
                 var sensorDetailsViewModel = (SensorDetailsViewModel)this.BindingContext;
+                // Add device settings toolbar icon and handle selection
+                ToolbarItems.Add(new ToolbarItem("Refresh Sensor Data", "ic_refresh-sensordata.png", () =>
+                {
+                    // Validate
+                    if (sensorDetailsViewModel != null)
+                    {
+                        // Refresh sensor data
+                        sensorDetailsViewModel.StopUpdatesCommand.Execute();
+                        sensorDetailsViewModel.StartUpdatesCommand.Execute();
+                    }
+                }));
                 // Validate
                 if (sensorDetailsViewModel != null)
                 {
                     sensorDetailsViewModel.SensorCommandType = SensorDetailsViewModel.SensorCommand.Plot;
-                    //sensorDetailsViewModel.StopUpdatesCommand.Execute();
-                    //sensorDetailsViewModel.StartUpdatesCommand.Execute();
+                    sensorDetailsViewModel.StopUpdatesCommand.Execute();
+                    sensorDetailsViewModel.StartUpdatesCommand.Execute();
 
                 }
             }
