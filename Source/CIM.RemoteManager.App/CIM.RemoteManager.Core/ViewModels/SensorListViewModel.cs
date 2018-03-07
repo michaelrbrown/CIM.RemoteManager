@@ -10,6 +10,7 @@ using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
 using Plugin.BLE.Abstractions.Contracts;
 using Plugin.BLE.Abstractions.EventArgs;
+using Xamarin.Forms;
 
 
 namespace CIM.RemoteManager.Core.ViewModels
@@ -579,6 +580,14 @@ namespace CIM.RemoteManager.Core.ViewModels
         {
             if (sensor != null)
             {
+                // Clear old sensor name
+                if (Application.Current.Properties.ContainsKey("CurrentSensorName"))
+                {
+                    Application.Current.Properties.Remove("CurrentSensorName");
+                }
+                // Set sensor name for details page
+                Application.Current.Properties["CurrentSensorName"] = sensor.Name;
+
                 // Navigate to sensor plot
                 var bundle = new MvxBundle(new Dictionary<string, string>(Bundle.Data) { { SensorIdKey, sensor.SensorIndex.ToString() } });
                 ShowViewModel<SensorDetailsViewModel>(bundle);

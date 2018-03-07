@@ -7,6 +7,7 @@ using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
 using Plugin.BLE.Abstractions.Contracts;
 using Plugin.BLE.Abstractions.EventArgs;
+using Xamarin.Forms;
 
 
 namespace CIM.RemoteManager.Core.ViewModels
@@ -74,6 +75,11 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// Sensor index (unique id)
         /// </summary>
         public int SensorIndex { get; set; }
+
+        /// <summary>
+        /// Sensor name
+        /// </summary>
+        public string SensorName { get; set; }
 
         /// <summary>
         /// Sensor serial number (unique id)
@@ -510,6 +516,12 @@ namespace CIM.RemoteManager.Core.ViewModels
 
                 // Get selected sensor index from device
                 SensorIndexSelected = Convert.ToInt32(parameters.Data[SensorIdKey]);
+
+                // Get sensor name from app context
+                if (Application.Current.Properties.ContainsKey("CurrentSensorName"))
+                {
+                    SensorName = Convert.ToString(Application.Current.Properties["CurrentSensorName"]);
+                }
 
                 //_userDialogs.Alert(SensorIndexSelected.ToString(), "Sensor Index Selected");
 

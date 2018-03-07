@@ -492,6 +492,9 @@
   <ItemGroup>
     <BundleResource Include="Resources\ic_sensor-limits.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_refresh-sensordata.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
