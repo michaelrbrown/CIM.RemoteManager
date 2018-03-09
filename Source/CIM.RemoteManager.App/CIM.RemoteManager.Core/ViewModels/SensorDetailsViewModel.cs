@@ -521,6 +521,8 @@ namespace CIM.RemoteManager.Core.ViewModels
                 if (Application.Current.Properties.ContainsKey("CurrentSensorName"))
                 {
                     SensorName = Convert.ToString(Application.Current.Properties["CurrentSensorName"]);
+                    // Notify property changed
+                    RaisePropertyChanged(() => SensorName);
                 }
 
                 //_userDialogs.Alert(SensorIndexSelected.ToString(), "Sensor Index Selected");
