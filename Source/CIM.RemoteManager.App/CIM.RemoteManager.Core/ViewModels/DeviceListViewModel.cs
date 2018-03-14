@@ -508,7 +508,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             if (device.IsConnected)
             {
                 // We are already connected so give option to navigate back to sensors
-                config.Add("Navigate to Sensors", async () =>
+                config.Add("Navigate to Sensors", () =>
                 {
                      ShowViewModel<SensorListViewModel>(new MvxBundle(new Dictionary<string, string> { { DeviceIdKey, device.Device.Id.ToString() } }));
                 });

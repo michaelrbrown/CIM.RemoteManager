@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using CIM.RemoteManager.Core.Models;
+﻿using CIM.RemoteManager.Core.Models;
 
 namespace CIM.RemoteManager.Core.ViewModels
 {
@@ -25,9 +24,9 @@ namespace CIM.RemoteManager.Core.ViewModels
             set => SetProperty(ref _isBusy, value);
         }
         
-        private async Task ShowDocumentationAsync()
-        {
+        //private async Task ShowDocumentationAsync()
+        //{
             //await App.NavigationService.PushAsync(new DocumentationPage());
-        }
+        //}
     }
 }
