@@ -240,6 +240,8 @@ namespace CIM.RemoteManager.Core.ViewModels
                 // Make sure we can write characteristic data to remote
                 if (TxCharacteristic.CanWrite)
                 {
+                    // Send acquire sensors command to remote
+                    await TxCharacteristic.WriteAsync("{A00400000001}".StrToByteArray()).ConfigureAwait(true);
                     // Send a refresh command
                     await TxCharacteristic.WriteAsync("{Y}".StrToByteArray()).ConfigureAwait(true);
                 }
