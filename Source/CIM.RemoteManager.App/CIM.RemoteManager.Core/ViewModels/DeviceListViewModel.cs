@@ -27,6 +27,8 @@ namespace CIM.RemoteManager.Core.ViewModels
     /// <seealso cref="CIM.RemoteManager.Core.ViewModels.BaseViewModel" />
     public class DeviceListViewModel : BaseViewModel
     {
+        #region Properties
+
         /// <summary>
         /// Bluetooth LE permissions.
         /// </summary>
@@ -86,18 +88,6 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
-        /// Refresh searching command.
-        /// </summary>
-        public MvxCommand RefreshCommand => new MvxCommand(() => TryStartScanning(true));
-        /// <summary>
-        /// Disconnect device command.
-        /// </summary>
-        public MvxCommand<DeviceListItemViewModel> DisconnectCommand => new MvxCommand<DeviceListItemViewModel>(DisconnectDevice);
-
-        // TODO: remove after finished debugging
-        public MvxCommand<DeviceListItemViewModel> ConnectDisposeCommand => new MvxCommand<DeviceListItemViewModel>(ConnectAndDisposeDevice);
-
-        /// <summary>
         /// All other devices ObservableCollection.
         /// </summary>
         public ObservableCollection<DeviceListItemViewModel> Devices { get; set; } = new ObservableCollection<DeviceListItemViewModel>();
@@ -155,11 +145,27 @@ namespace CIM.RemoteManager.Core.ViewModels
             {
                 if (_useAutoConnect == value)
                     return;
-                
+
                 _useAutoConnect = value;
                 RaisePropertyChanged();
             }
         }
+
+        #endregion
+        
+        #region Commands
+
+        /// <summary>
+        /// Refresh searching command.
+        /// </summary>
+        public MvxCommand RefreshCommand => new MvxCommand(() => TryStartScanning(true));
+        /// <summary>
+        /// Disconnect device command.
+        /// </summary>
+        public MvxCommand<DeviceListItemViewModel> DisconnectCommand => new MvxCommand<DeviceListItemViewModel>(DisconnectDevice);
+
+        // TODO: remove after finished debugging
+        public MvxCommand<DeviceListItemViewModel> ConnectDisposeCommand => new MvxCommand<DeviceListItemViewModel>(ConnectAndDisposeDevice);
 
         /// <summary>
         /// Stop scanning command
@@ -175,59 +181,6 @@ namespace CIM.RemoteManager.Core.ViewModels
         }, () => _cancellationTokenSource != null);
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DeviceListViewModel"/> class.
-        /// Device list viewmodel constructor.
-        /// </summary>
-        /// <param name="bluetoothLe">The bluetooth le.</param>
-        /// <param name="adapter">The adapter.</param>
-        /// <param name="userDialogs">The user dialogs.</param>
-        /// <param name="settings">The settings.</param>
-        /// <param name="permissions">The permissions.</param>
-        public DeviceListViewModel(IBluetoothLE bluetoothLe, IAdapter adapter, IUserDialogs userDialogs, ISettings settings, IPermissions permissions) : base(adapter)
-        {
-            _permissions = permissions;
-            _bluetoothLe = bluetoothLe;
-            _userDialogs = userDialogs;
-            _settings = settings;
-            // Setup event handlers
-            _bluetoothLe.StateChanged += OnStateChanged;
-            Adapter.DeviceDiscovered += OnDeviceDiscovered;
-            Adapter.ScanTimeoutElapsed += Adapter_ScanTimeoutElapsed;
-            Adapter.DeviceDisconnected += OnDeviceDisconnected;
-            Adapter.DeviceConnectionLost += OnDeviceConnectionLost;
-            //Adapter.DeviceConnected += (sender, e) => Adapter.DisconnectDeviceAsync(e.Device);
-
-            // Kick off a scan on load
-            TryStartScanning(false);
-        }
-
-        /// <summary>
-        /// Get previous connected device guid.
-        /// </summary>
-        /// <returns></returns>
-        private Task GetPreviousGuidAsync()
-        {
-            return Task.Run(() =>
-            {
-                var guidString = _settings.GetValueOrDefault("lastguid", string.Empty);
-                PreviousGuid = !string.IsNullOrEmpty(guidString) ? Guid.Parse(guidString) : Guid.Empty;
-            });
-        }
-
-        /// <summary>
-        /// Gets the previous name asynchronous.
-        /// </summary>
-        /// <returns>Task</returns>
-        private Task GetPreviousNameAsync()
-        {
-            return Task.Run(() =>
-            {
-                var nameString = _settings.GetValueOrDefault("lastname", string.Empty);
-                PreviousName = !string.IsNullOrEmpty(nameString) ? nameString : string.Empty;
-            });
-        }
-
-        /// <summary>
         /// Gets the copy unique identifier command.
         /// </summary>
         /// <value>
@@ -237,6 +190,18 @@ namespace CIM.RemoteManager.Core.ViewModels
         {
             PreviousGuid = device.Id;
         });
+
+        /// <summary>
+        /// Command to connect to previous device.
+        /// </summary>
+        /// <value>
+        /// The connect to previous command.
+        /// </value>
+        public MvxCommand ConnectToPreviousCommand => new MvxCommand(ConnectToPreviousDeviceAsync, CanConnectToPrevious);
+
+        #endregion
+
+        #region Event Handlers
 
         /// <summary>
         /// Called when [device connection lost]. Event to handle Bluetooth LE device disconnects.
@@ -263,32 +228,6 @@ namespace CIM.RemoteManager.Core.ViewModels
             RaisePropertyChanged(nameof(CanConnectToPreviousDevice));
         }
 
-        /// <summary>
-        /// Gets the state text. Setup all the possible Bluetooth LE states.
-        /// </summary>
-        /// <returns></returns>
-        private string GetStateText()
-        {
-            switch (_bluetoothLe.State)
-            {
-                case BluetoothState.Unknown:
-                    return "Unknown Bluetooth LE state.";
-                case BluetoothState.Unavailable:
-                    return "Bluetooth LE is not available on this device.";
-                case BluetoothState.Unauthorized:
-                    return "You are not allowed to use Bluetooth LE.";
-                case BluetoothState.TurningOn:
-                    return "Bluetooth LE is warming up, please wait...";
-                case BluetoothState.On:
-                    return "Bluetooth LE is on.";
-                case BluetoothState.TurningOff:
-                    return "Bluetooth LE is turning off...";
-                case BluetoothState.Off:
-                    return "Bluetooth LE is off. Please enable on your device.";
-                default:
-                    return "Unknown Bluetooth LE state.";
-            }
-        }
 
         /// <summary>
         /// Handles the ScanTimeoutElapsed event of the Adapter control. Updates refreshing prop when timeout elapsed.
@@ -327,44 +266,45 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
-        /// Add or update non-CIMScan devices in list (we want to do this b/c we may not find CIMScan
-        /// devices by name (adafruit).
+        /// Called when [device disconnected].
         /// </summary>
-        /// <param name="device">The device.</param>
-        private void AddOrUpdateDevice(IDevice device)
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="DeviceEventArgs"/> instance containing the event data.</param>
+        private void OnDeviceDisconnected(object sender, DeviceEventArgs e)
         {
-            InvokeOnMainThread(() =>
-            {
-                var deviceListItemViewModel = Devices.FirstOrDefault(d => d.Device.Id == device.Id);
-                if (deviceListItemViewModel != null)
-                {
-                    deviceListItemViewModel.Update();
-                }
-                else
-                {
-                    Devices.Add(new DeviceListItemViewModel(device));
-                }
-            });
+            Devices.FirstOrDefault(d => d.Id == e.Device.Id)?.Update();
+            SystemDevices.FirstOrDefault(d => d.Id == e.Device.Id)?.Update();
+            _userDialogs.HideLoading();
+            _userDialogs.InfoToast($"Disconnected {e.Device.Name}.", TimeSpan.FromSeconds(3));
         }
 
+        #endregion
+
         /// <summary>
-        /// Add or update our CIMScan devices in list.
+        /// Initializes a new instance of the <see cref="DeviceListViewModel"/> class.
+        /// Device list viewmodel constructor.
         /// </summary>
-        /// <param name="device">The device.</param>
-        private void AddOrUpdateSystemDevice(IDevice device)
+        /// <param name="bluetoothLe">The bluetooth le.</param>
+        /// <param name="adapter">The adapter.</param>
+        /// <param name="userDialogs">The user dialogs.</param>
+        /// <param name="settings">The settings.</param>
+        /// <param name="permissions">The permissions.</param>
+        public DeviceListViewModel(IBluetoothLE bluetoothLe, IAdapter adapter, IUserDialogs userDialogs, ISettings settings, IPermissions permissions) : base(adapter)
         {
-            InvokeOnMainThread(() =>
-            {
-                var deviceListItemViewModel = Devices.FirstOrDefault(d => d.Device.Id == device.Id);
-                if (deviceListItemViewModel != null)
-                {
-                    deviceListItemViewModel.Update();
-                }
-                else
-                {
-                    SystemDevices.Add(new DeviceListItemViewModel(device));
-                }
-            });
+            _permissions = permissions;
+            _bluetoothLe = bluetoothLe;
+            _userDialogs = userDialogs;
+            _settings = settings;
+            // Setup event handlers
+            _bluetoothLe.StateChanged += OnStateChanged;
+            Adapter.DeviceDiscovered += OnDeviceDiscovered;
+            Adapter.ScanTimeoutElapsed += Adapter_ScanTimeoutElapsed;
+            Adapter.DeviceDisconnected += OnDeviceDisconnected;
+            Adapter.DeviceConnectionLost += OnDeviceConnectionLost;
+            //Adapter.DeviceConnected += (sender, e) => Adapter.DisconnectDeviceAsync(e.Device);
+
+            // Kick off a scan on load
+            TryStartScanning(false);
         }
 
         /// <summary>
@@ -438,7 +378,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                     Mvx.Trace(ex.Message);
                     _userDialogs.ErrorToast("Error", $" Failed to update RSSI for {connectedDevice.Name}", TimeSpan.FromSeconds(5));
                 }
-                
+
                 // CIMScan devices
                 if (connectedDevice.Name.IndexOf("adafruit", StringComparison.OrdinalIgnoreCase) > -1)
                 {
@@ -461,6 +401,101 @@ namespace CIM.RemoteManager.Core.ViewModels
             await Adapter.StartScanningForDevicesAsync(_cancellationTokenSource.Token).ConfigureAwait(true);
         }
 
+        /// <summary>
+        /// Get previous connected device guid.
+        /// </summary>
+        /// <returns></returns>
+        private Task GetPreviousGuidAsync()
+        {
+            return Task.Run(() =>
+            {
+                var guidString = _settings.GetValueOrDefault("lastguid", string.Empty);
+                PreviousGuid = !string.IsNullOrEmpty(guidString) ? Guid.Parse(guidString) : Guid.Empty;
+            });
+        }
+
+        /// <summary>
+        /// Gets the previous name asynchronous.
+        /// </summary>
+        /// <returns>Task</returns>
+        private Task GetPreviousNameAsync()
+        {
+            return Task.Run(() =>
+            {
+                var nameString = _settings.GetValueOrDefault("lastname", string.Empty);
+                PreviousName = !string.IsNullOrEmpty(nameString) ? nameString : string.Empty;
+            });
+        }
+        
+       
+        /// <summary>
+        /// Gets the state text. Setup all the possible Bluetooth LE states.
+        /// </summary>
+        /// <returns></returns>
+        private string GetStateText()
+        {
+            switch (_bluetoothLe.State)
+            {
+                case BluetoothState.Unknown:
+                    return "Unknown Bluetooth LE state.";
+                case BluetoothState.Unavailable:
+                    return "Bluetooth LE is not available on this device.";
+                case BluetoothState.Unauthorized:
+                    return "You are not allowed to use Bluetooth LE.";
+                case BluetoothState.TurningOn:
+                    return "Bluetooth LE is warming up, please wait...";
+                case BluetoothState.On:
+                    return "Bluetooth LE is on.";
+                case BluetoothState.TurningOff:
+                    return "Bluetooth LE is turning off...";
+                case BluetoothState.Off:
+                    return "Bluetooth LE is off. Please enable on your device.";
+                default:
+                    return "Unknown Bluetooth LE state.";
+            }
+        }
+        
+        /// <summary>
+        /// Add or update non-CIMScan devices in list (we want to do this b/c we may not find CIMScan
+        /// devices by name (adafruit).
+        /// </summary>
+        /// <param name="device">The device.</param>
+        private void AddOrUpdateDevice(IDevice device)
+        {
+            InvokeOnMainThread(() =>
+            {
+                var deviceListItemViewModel = Devices.FirstOrDefault(d => d.Device.Id == device.Id);
+                if (deviceListItemViewModel != null)
+                {
+                    deviceListItemViewModel.Update();
+                }
+                else
+                {
+                    Devices.Add(new DeviceListItemViewModel(device));
+                }
+            });
+        }
+
+        /// <summary>
+        /// Add or update our CIMScan devices in list.
+        /// </summary>
+        /// <param name="device">The device.</param>
+        private void AddOrUpdateSystemDevice(IDevice device)
+        {
+            InvokeOnMainThread(() =>
+            {
+                var deviceListItemViewModel = Devices.FirstOrDefault(d => d.Device.Id == device.Id);
+                if (deviceListItemViewModel != null)
+                {
+                    deviceListItemViewModel.Update();
+                }
+                else
+                {
+                    SystemDevices.Add(new DeviceListItemViewModel(device));
+                }
+            });
+        }
+        
         /// <summary>
         /// Cleanups the cancellation token.
         /// </summary>
@@ -496,20 +531,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 _userDialogs.HideLoading();
             }
         }
-
-        /// <summary>
-        /// Called when [device disconnected].
-        /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="DeviceEventArgs"/> instance containing the event data.</param>
-        private void OnDeviceDisconnected(object sender, DeviceEventArgs e)
-        {
-            Devices.FirstOrDefault(d => d.Id == e.Device.Id)?.Update();
-            SystemDevices.FirstOrDefault(d => d.Id == e.Device.Id)?.Update();
-            _userDialogs.HideLoading();
-            _userDialogs.InfoToast($"Disconnected {e.Device.Name}.", TimeSpan.FromSeconds(3));
-        }
-
+        
         /// <summary>
         /// Handles the selected device. Handle selected device by providing options to connect, disconnect, and navigate to sensors page.
         /// </summary>
@@ -631,16 +653,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 device.Update();
             }
         }
-
-
-        /// <summary>
-        /// Command to connect to previous device.
-        /// </summary>
-        /// <value>
-        /// The connect to previous command.
-        /// </value>
-        public MvxCommand ConnectToPreviousCommand => new MvxCommand(ConnectToPreviousDeviceAsync, CanConnectToPrevious);
-
+        
         /// <summary>
         /// Handles connecting to previous device, which allows faster connection by eliminating searching and prompts.
         /// </summary>

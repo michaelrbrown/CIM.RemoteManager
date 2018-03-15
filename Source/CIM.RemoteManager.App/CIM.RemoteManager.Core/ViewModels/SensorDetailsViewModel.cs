@@ -14,7 +14,8 @@ namespace CIM.RemoteManager.Core.ViewModels
 {
     public class SensorDetailsViewModel : BaseViewModel
     {
-        //private readonly MvxSubscriptionToken _subscriptionToken;
+        #region Properties
+
         /// <summary>
         /// Bluetooth LE device
         /// </summary>
@@ -40,7 +41,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// Read characteristic
         /// </summary>
         public ICharacteristic RxCharacteristic { get; private set; }
-        
+
         /// <summary>
         /// Let our UI know we have updates started / stopped
         /// </summary>
@@ -117,7 +118,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             get => _sensorPlotCollection;
             set => SetProperty(ref _sensorPlotCollection, value);
         }
-        
+
         /// <summary>
         /// Show sensor updates mode
         /// </summary>
@@ -138,7 +139,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// <summary>
         /// Sensor record types (serialized into models later)
         /// </summary>
-        public bool StartSensorMessageValueRecord { get; set; } = false;
+        public bool StartMessageCounterValueRecord { get; set; } = false;
 
         /// <summary>
         ///  "J" = buffered sensor data
@@ -170,8 +171,9 @@ namespace CIM.RemoteManager.Core.ViewModels
         ///   buffered measurements
         ///   current date/time
         /// </summary>
-        public readonly StringBuilder MessageSensorValue = new StringBuilder("");
+        public readonly StringBuilder MessageCounterValue = new StringBuilder("");
 
+        #endregion
 
         #region Sensor Statistics
 
@@ -465,374 +467,48 @@ namespace CIM.RemoteManager.Core.ViewModels
 
         #endregion
 
-        /// <summary>
-        /// Sensor plot view model constructor.
-        /// </summary>
-        /// <param name="bluetoothLe">Bluetooth LE obj</param>
-        /// <param name="adapter">Bluetooth LE adapter</param>
-        /// <param name="userDialogs">User dialogs</param>
-        public SensorDetailsViewModel(IBluetoothLE bluetoothLe, IAdapter adapter, IUserDialogs userDialogs) : base(adapter)
-        {
-            try
-            {
-                _bluetoothLe = bluetoothLe;
-                _userDialogs = userDialogs;
-
-                // Events
-                _bluetoothLe.StateChanged += OnStateChanged;
-                
-                // Register event for device connection lost
-                Adapter.DeviceConnectionLost += OnDeviceConnectionLost;
-
-                // Sensor data
-                _sensorPlotCollection = new FullyObservableCollection<SensorPlot>();
-            }
-            catch (Exception ex)
-            {
-                _userDialogs.Alert(ex.Message, "Error while loading sensor data");
-                Mvx.Trace(ex.Message);
-            }
-        }
+        #region Parsing Routines
 
         /// <summary>
-        /// On Resume
-        /// </summary>
-        public override void Resume()
-        {
-            base.Resume();
-        }
-
-        /// <summary>
-        /// Event to handle Bluetooth LE state changed.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void OnStateChanged(object sender, BluetoothStateChangedArgs e)
-        {
-            RaisePropertyChanged(() => IsStateOn);
-            RaisePropertyChanged(() => StateText);
-        }
-
-        /// <summary>
-        /// Event to handle Bluetooth connection changes.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void OnDeviceConnectionLost(object sender, DeviceErrorEventArgs e)
-        {
-            if (UpdatesStarted)
-            {
-                StopUpdates();
-            }
-        }
-
-        /// <summary>
-        /// Setup all the possible Bluetooth LE states.
-        /// </summary>
-        /// <returns></returns>
-        private string GetStateText()
-        {
-            switch (_bluetoothLe.State)
-            {
-                case BluetoothState.Unknown:
-                    return "Unknown Bluetooth LE state.";
-                case BluetoothState.Unavailable:
-                    return "Bluetooth LE is not available on this device.";
-                case BluetoothState.Unauthorized:
-                    return "You are not allowed to use Bluetooth LE.";
-                case BluetoothState.TurningOn:
-                    return "Bluetooth LE is warming up, please wait...";
-                case BluetoothState.On:
-                    return "Bluetooth LE is on.";
-                case BluetoothState.TurningOff:
-                    return "Bluetooth LE is turning off...";
-                case BluetoothState.Off:
-                    return "Bluetooth LE is off. Please enable on your device.";
-                default:
-                    return "Unknown Bluetooth LE state.";
-            }
-        }
-        
-        /// <summary>
-        /// Initialization of bluetooth service characteristics.
-        /// Refresh command sent to remote to start sensor data flow.
-        /// Reading in of A, B, and F sensor records and serializing 
-        /// to model for display in UI.
-        /// </summary>
-        private async void InitRemote()
-        {
-            // Validate
-            if (_device == null)
-            {
-                throw new ArgumentNullException(nameof(_device));
-            }
-
-            try
-            {
-                // Get our Adafruit bluetooth service (UART)
-                _service = await _device.GetServiceAsync(UartUuid).ConfigureAwait(true);
-
-                // Get write characteristic service
-                TxCharacteristic = await _service.GetCharacteristicAsync(TxUuid).ConfigureAwait(true);
-
-                //// Make sure we can write characteristic data to remote
-                if (TxCharacteristic.CanWrite)
-                {
-                    // Send a refresh command
-                    await TxCharacteristic.WriteAsync("{Y}".StrToByteArray()).ConfigureAwait(true);
-
-                    // Now setup plot, statistics, and limits commands
-                    //string updateValue = string.Empty;
-                    //if (SensorCommandType == SensorCommand.Plot)
-                    //{
-                    //    updateValue = "{c" + SensorIndex + "}";
-                    //}
-                    //else if (SensorCommandType == SensorCommand.Statistics || SensorCommandType == SensorCommand.Limits)
-                    //{
-                    //    updateValue = "{Y}";
-                    //}
-
-                    // Send a refresh command
-                    //await TxCharacteristic.WriteAsync(updateValue.StrToByteArray()).ConfigureAwait(true);
-                }
-                else
-                {
-                    _userDialogs.Alert("Cannot write characteristic data to remote!", "CIMScan Remote Manager");
-                }
-                
-                // Get Characteristics service
-                RxCharacteristic = await _service.GetCharacteristicAsync(RxUuid).ConfigureAwait(true);
-            }
-            catch (Exception ex)
-            {
-                _userDialogs.HideLoading();
-                HockeyApp.MetricsManager.TrackEvent($"(InitRemote) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
-                _userDialogs.Alert(ex.Message);
-            }
-
-        }
-        
-        /// <summary>
-        /// MVVMCross init from bundle call from previous page.
-        /// Set's up bundle params for initialization.
-        /// </summary>
-        /// <param name="parameters"></param>
-        protected override void InitFromBundle(IMvxBundle parameters)
-        {
-            try
-            {
-                base.InitFromBundle(parameters);
-
-                // Get selected sensor index from device
-                SensorIndexSelected = Convert.ToInt32(parameters.Data[SensorIdKey]);
-
-                // Get sensor name from app context
-                if (Application.Current.Properties.ContainsKey("CurrentSensorName"))
-                {
-                    SensorName = Convert.ToString(Application.Current.Properties["CurrentSensorName"]);
-                    // Notify property changed
-                    RaisePropertyChanged(() => SensorName);
-                }
-
-                //_userDialogs.Alert(SensorIndexSelected.ToString(), "Sensor Index Selected");
-
-                // Notify property changed
-                RaisePropertyChanged(() => SensorIndexSelected);
-
-                // Get device from bundle
-                _device = GetSensorDeviceBundle(parameters);
-
-                // Set device name
-                DeviceName = _device.Name;
-
-                // Init our DA-12
-                InitRemote();
-
-                // Dispose
-                if (_device == null)
-                {
-                    Close(this);
-                }
-            }
-            catch (Exception ex)
-            {
-                HockeyApp.MetricsManager.TrackEvent($"(InitFromBundle) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
-                _userDialogs.Alert(ex.Message, "Error while loading sensor data");
-            }
-        }
-
-        /// <summary>
-        /// Start sensor updates.
-        /// </summary>
-        public MvxCommand StartUpdatesCommand => new MvxCommand(() =>
-        {
-            if (!UpdatesStarted)
-            {
-                StartUpdates();
-            }
-        });
-
-        /// <summary>
-        /// Stop sensor updates.
-        /// </summary>
-        public MvxCommand StopUpdatesCommand => new MvxCommand(() =>
-        {
-            if (UpdatesStarted)
-            {
-                StopUpdates();
-            }
-        });
-
-        /// <summary>
-        /// Toggle sensor updates.
-        /// </summary>
-        public MvxCommand ToggleUpdatesCommand => new MvxCommand(() =>
-        {
-            if (UpdatesStarted)
-            {
-                StopUpdates();
-            }
-            else
-            {
-                StartUpdates();
-            }
-        });
-
-        /// <summary>
-        /// Start bluetooth characteristics updating.
-        /// </summary>
-        private async void StartUpdates()
-        {
-            try
-            {
-                UpdatesStarted = true;
-                
-                // Send refresh command to remote
-                string updateValue = string.Empty;
-                if (SensorCommandType == SensorCommand.Plot)
-                {
-                    updateValue = "{c" + SensorIndex + "}";
-                }
-                else if (SensorCommandType == SensorCommand.Statistics || SensorCommandType == SensorCommand.Limits)
-                {
-                    updateValue = "{Y}";
-                }
-
-                // Send a refresh command
-                await TxCharacteristic.WriteAsync(updateValue.StrToByteArray()).ConfigureAwait(true);
-                // Start updates from bluetooth service
-                await RxCharacteristic.StartUpdatesAsync().ConfigureAwait(true);
-
-                // Subscribe to value updated events
-                RxCharacteristic.ValueUpdated -= RxCharacteristicOnValueUpdated;
-                RxCharacteristic.ValueUpdated += RxCharacteristicOnValueUpdated;
-
-                // Let UI know mode we are in
-                RaisePropertyChanged(() => UpdateButtonText);
-            }
-            catch (Exception ex)
-            {
-                HockeyApp.MetricsManager.TrackEvent($"(StartUpdates) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
-                _userDialogs.Alert(ex.Message);
-            }
-        }
-
-        /// <summary>
-        /// Stop bluetooth characteristics updating.
-        /// </summary>
-        private async void StopUpdates()
-        {
-            try
-            {
-                UpdatesStarted = false;
-
-                // Stop updates from bluetooth service
-                await RxCharacteristic.StopUpdatesAsync().ConfigureAwait(true);
-
-                // Unsubscribe to value updated events
-                RxCharacteristic.ValueUpdated -= RxCharacteristicOnValueUpdated;
-
-                // Let UI know mode we are in
-                RaisePropertyChanged(() => UpdateButtonText);
-            }
-            catch (Exception ex)
-            {
-                HockeyApp.MetricsManager.TrackEvent($"(StopUpdates) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
-                _userDialogs.Alert(ex.Message);
-            }
-        }
-
-        /// <summary>
-        /// Rx characteristic updated event.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="characteristicUpdatedEventArgs"></param>
-        private void RxCharacteristicOnValueUpdated(object sender, CharacteristicUpdatedEventArgs characteristicUpdatedEventArgs)
-        {
-            try
-            {
-                // Get data based on tab selected
-                if (SensorCommandType == SensorCommand.Plot)
-                {
-                    GetSensorPlotValues(CharacteristicValue);
-                }
-                else if (SensorCommandType == SensorCommand.Statistics || SensorCommandType == SensorCommand.Limits)
-                {
-                    GetSensorStatisticsValues(CharacteristicValue);
-                    GetSensorLimitsValues(CharacteristicValue);
-                }
-
-                GetSensorMessageValues(CharacteristicValue);
-
-                // Notify property changed
-                RaisePropertyChanged(() => CharacteristicValue);
-            }
-            catch (Exception ex)
-            {
-                HockeyApp.MetricsManager.TrackEvent($"(CharacteristicOnValueUpdated) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
-            }
-        }
-
-        /// <summary>
-        /// Get sensor message counters from remote.
+        /// Get message counters from remote.
         /// </summary>
         /// <param name="characteristicValue"></param>
-        private void GetSensorMessageValues(string characteristicValue)
+        private void GetMessageCounterValues(string characteristicValue)
         {
             if (String.IsNullOrEmpty(characteristicValue)) return;
 
-            // Start reading all "sensor plot values"
-            if (!StartSensorMessageValueRecord && characteristicValue.Contains("{F"))
+            // Start reading all "message counter values"
+            if (!StartMessageCounterValueRecord && characteristicValue.Contains("{F"))
             {
                 // If we hit an end char } then record all data up to it
                 if (characteristicValue.Contains("}"))
                 {
-                    MessageSensorValue.Append(characteristicValue);
-                    SerializeStringToSensor(MessageSensorValue.ToString(), "F");
-                    MessageSensorValue.Clear();
-                    StartSensorMessageValueRecord = false;
+                    MessageCounterValue.Append(characteristicValue);
+                    SerializeStringToSensor(MessageCounterValue.ToString(), "F");
+                    MessageCounterValue.Clear();
+                    StartMessageCounterValueRecord = false;
                 }
                 else
                 {
                     // Read all characters in buffer while we are within the {}
-                    MessageSensorValue.Append(characteristicValue.Trim(new Char[] { '{' }));
-                    StartSensorMessageValueRecord = true;
+                    MessageCounterValue.Append(characteristicValue.Trim(new Char[] { '{' }));
+                    StartMessageCounterValueRecord = true;
                 }
             }
-            else if (StartSensorMessageValueRecord)
+            else if (StartMessageCounterValueRecord)
             {
                 // If we hit an end char } then record all data up to it
                 if (characteristicValue.Contains("}"))
                 {
-                    MessageSensorValue.Append(characteristicValue.GetUntilOrEmpty());
-                    SerializeStringToSensor(MessageSensorValue.ToString(), "F");
-                    MessageSensorValue.Clear();
-                    StartSensorMessageValueRecord = false;
+                    MessageCounterValue.Append(characteristicValue.GetUntilOrEmpty());
+                    SerializeStringToSensor(MessageCounterValue.ToString(), "F");
+                    MessageCounterValue.Clear();
+                    StartMessageCounterValueRecord = false;
                 }
                 else
                 {
                     // Read all characters in buffer while we are within the {}
-                    MessageSensorValue.Append(characteristicValue);
+                    MessageCounterValue.Append(characteristicValue);
                 }
             }
         }
@@ -1050,8 +726,352 @@ namespace CIM.RemoteManager.Core.ViewModels
                     }
                     break;
             }
-            
+
         }
 
+        #endregion
+
+        #region Event Handlers
+
+        /// <summary>
+        /// Event to handle Bluetooth LE state changed.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnStateChanged(object sender, BluetoothStateChangedArgs e)
+        {
+            RaisePropertyChanged(() => IsStateOn);
+            RaisePropertyChanged(() => StateText);
+        }
+
+        /// <summary>
+        /// Event to handle Bluetooth connection changes.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnDeviceConnectionLost(object sender, DeviceErrorEventArgs e)
+        {
+            if (UpdatesStarted)
+            {
+                StopUpdates();
+            }
+        }
+
+        /// <summary>
+        /// Rx characteristic updated event.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="characteristicUpdatedEventArgs"></param>
+        private void RxCharacteristicOnValueUpdated(object sender, CharacteristicUpdatedEventArgs characteristicUpdatedEventArgs)
+        {
+            try
+            {
+                // Get data based on tab selected
+                if (SensorCommandType == SensorCommand.Plot)
+                {
+                    GetSensorPlotValues(CharacteristicValue);
+                }
+                else if (SensorCommandType == SensorCommand.Statistics || SensorCommandType == SensorCommand.Limits)
+                {
+                    GetSensorStatisticsValues(CharacteristicValue);
+                    GetSensorLimitsValues(CharacteristicValue);
+                }
+
+                // Get message counter values from remote to determine if
+                // we have acquired or lost sensors.  Also grabs time stamp.
+                GetMessageCounterValues(CharacteristicValue);
+
+                // Notify property changed
+                RaisePropertyChanged(() => CharacteristicValue);
+            }
+            catch (Exception ex)
+            {
+                HockeyApp.MetricsManager.TrackEvent($"(CharacteristicOnValueUpdated) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
+            }
+        }
+
+        #endregion
+
+        #region Commands
+
+        /// <summary>
+        /// Start sensor updates.
+        /// </summary>
+        public MvxCommand StartUpdatesCommand => new MvxCommand(() =>
+        {
+            if (!UpdatesStarted)
+            {
+                StartUpdates();
+            }
+        });
+
+        /// <summary>
+        /// Stop sensor updates.
+        /// </summary>
+        public MvxCommand StopUpdatesCommand => new MvxCommand(() =>
+        {
+            if (UpdatesStarted)
+            {
+                StopUpdates();
+            }
+        });
+
+        /// <summary>
+        /// Toggle sensor updates.
+        /// </summary>
+        public MvxCommand ToggleUpdatesCommand => new MvxCommand(() =>
+        {
+            if (UpdatesStarted)
+            {
+                StopUpdates();
+            }
+            else
+            {
+                StartUpdates();
+            }
+        });
+
+        #endregion
+
+        /// <summary>
+        /// Sensor plot view model constructor.
+        /// </summary>
+        /// <param name="bluetoothLe">Bluetooth LE obj</param>
+        /// <param name="adapter">Bluetooth LE adapter</param>
+        /// <param name="userDialogs">User dialogs</param>
+        public SensorDetailsViewModel(IBluetoothLE bluetoothLe, IAdapter adapter, IUserDialogs userDialogs) : base(adapter)
+        {
+            try
+            {
+                _bluetoothLe = bluetoothLe;
+                _userDialogs = userDialogs;
+
+                // Events
+                _bluetoothLe.StateChanged += OnStateChanged;
+                
+                // Register event for device connection lost
+                Adapter.DeviceConnectionLost += OnDeviceConnectionLost;
+
+                // Sensor data
+                _sensorPlotCollection = new FullyObservableCollection<SensorPlot>();
+            }
+            catch (Exception ex)
+            {
+                _userDialogs.Alert(ex.Message, "Error while loading sensor data");
+                Mvx.Trace(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Initialization of bluetooth service characteristics.
+        /// Refresh command sent to remote to start sensor data flow.
+        /// Reading in of A, B, and F sensor records and serializing 
+        /// to model for display in UI.
+        /// </summary>
+        private async void InitRemote()
+        {
+            // Validate
+            if (_device == null)
+            {
+                throw new ArgumentNullException(nameof(_device));
+            }
+
+            try
+            {
+                // Get our Adafruit bluetooth service (UART)
+                _service = await _device.GetServiceAsync(UartUuid).ConfigureAwait(true);
+
+                // Get write characteristic service
+                TxCharacteristic = await _service.GetCharacteristicAsync(TxUuid).ConfigureAwait(true);
+
+                //// Make sure we can write characteristic data to remote
+                if (TxCharacteristic.CanWrite)
+                {
+                    // Send a refresh command
+                    await TxCharacteristic.WriteAsync("{Y}".StrToByteArray()).ConfigureAwait(true);
+
+                    // Now setup plot, statistics, and limits commands
+                    //string updateValue = string.Empty;
+                    //if (SensorCommandType == SensorCommand.Plot)
+                    //{
+                    //    updateValue = "{c" + SensorIndex + "}";
+                    //}
+                    //else if (SensorCommandType == SensorCommand.Statistics || SensorCommandType == SensorCommand.Limits)
+                    //{
+                    //    updateValue = "{Y}";
+                    //}
+
+                    // Send a refresh command
+                    //await TxCharacteristic.WriteAsync(updateValue.StrToByteArray()).ConfigureAwait(true);
+                }
+                else
+                {
+                    _userDialogs.Alert("Cannot write characteristic data to remote!", "CIMScan Remote Manager");
+                }
+
+                // Get Characteristics service
+                RxCharacteristic = await _service.GetCharacteristicAsync(RxUuid).ConfigureAwait(true);
+            }
+            catch (Exception ex)
+            {
+                _userDialogs.HideLoading();
+                HockeyApp.MetricsManager.TrackEvent($"(InitRemote) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
+                _userDialogs.Alert(ex.Message);
+            }
+
+        }
+
+        /// <summary>
+        /// MVVMCross init from bundle call from previous page.
+        /// Set's up bundle params for initialization.
+        /// </summary>
+        /// <param name="parameters"></param>
+        protected override void InitFromBundle(IMvxBundle parameters)
+        {
+            try
+            {
+                base.InitFromBundle(parameters);
+
+                // Get selected sensor index from device
+                SensorIndexSelected = Convert.ToInt32(parameters.Data[SensorIdKey]);
+
+                // Get sensor name from app context
+                if (Application.Current.Properties.ContainsKey("CurrentSensorName"))
+                {
+                    SensorName = Convert.ToString(Application.Current.Properties["CurrentSensorName"]);
+                    // Notify property changed
+                    RaisePropertyChanged(() => SensorName);
+                }
+
+                //_userDialogs.Alert(SensorIndexSelected.ToString(), "Sensor Index Selected");
+
+                // Notify property changed
+                RaisePropertyChanged(() => SensorIndexSelected);
+
+                // Get device from bundle
+                _device = GetSensorDeviceBundle(parameters);
+
+                // Set device name
+                DeviceName = _device.Name;
+
+                // Init our DA-12
+                InitRemote();
+
+                // Dispose
+                if (_device == null)
+                {
+                    Close(this);
+                }
+            }
+            catch (Exception ex)
+            {
+                HockeyApp.MetricsManager.TrackEvent($"(InitFromBundle) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
+                _userDialogs.Alert(ex.Message, "Error while loading sensor data");
+            }
+        }
+
+        /// <summary>
+        /// On Resume
+        /// </summary>
+        public override void Resume()
+        {
+            base.Resume();
+            if (!UpdatesStarted)
+            {
+                StartUpdates();
+            }
+        }
+        
+        /// <summary>
+        /// Setup all the possible Bluetooth LE states.
+        /// </summary>
+        /// <returns></returns>
+        private string GetStateText()
+        {
+            switch (_bluetoothLe.State)
+            {
+                case BluetoothState.Unknown:
+                    return "Unknown Bluetooth LE state.";
+                case BluetoothState.Unavailable:
+                    return "Bluetooth LE is not available on this device.";
+                case BluetoothState.Unauthorized:
+                    return "You are not allowed to use Bluetooth LE.";
+                case BluetoothState.TurningOn:
+                    return "Bluetooth LE is warming up, please wait...";
+                case BluetoothState.On:
+                    return "Bluetooth LE is on.";
+                case BluetoothState.TurningOff:
+                    return "Bluetooth LE is turning off...";
+                case BluetoothState.Off:
+                    return "Bluetooth LE is off. Please enable on your device.";
+                default:
+                    return "Unknown Bluetooth LE state.";
+            }
+        }
+        
+        /// <summary>
+        /// Start bluetooth characteristics updating.
+        /// </summary>
+        private async void StartUpdates()
+        {
+            try
+            {
+                UpdatesStarted = true;
+                
+                // Send refresh command to remote
+                string updateValue = string.Empty;
+                if (SensorCommandType == SensorCommand.Plot)
+                {
+                    updateValue = "{c" + SensorIndex + "}";
+                }
+                else if (SensorCommandType == SensorCommand.Statistics || SensorCommandType == SensorCommand.Limits)
+                {
+                    updateValue = "{Y}";
+                }
+
+                // Send a refresh command
+                await TxCharacteristic.WriteAsync(updateValue.StrToByteArray()).ConfigureAwait(true);
+                // Start updates from bluetooth service
+                await RxCharacteristic.StartUpdatesAsync().ConfigureAwait(true);
+
+                // Subscribe to value updated events
+                RxCharacteristic.ValueUpdated -= RxCharacteristicOnValueUpdated;
+                RxCharacteristic.ValueUpdated += RxCharacteristicOnValueUpdated;
+
+                // Let UI know mode we are in
+                RaisePropertyChanged(() => UpdateButtonText);
+            }
+            catch (Exception ex)
+            {
+                HockeyApp.MetricsManager.TrackEvent($"(StartUpdates) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
+                _userDialogs.Alert(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Stop bluetooth characteristics updating.
+        /// </summary>
+        private async void StopUpdates()
+        {
+            try
+            {
+                UpdatesStarted = false;
+
+                // Stop updates from bluetooth service
+                await RxCharacteristic.StopUpdatesAsync().ConfigureAwait(true);
+
+                // Unsubscribe to value updated events
+                RxCharacteristic.ValueUpdated -= RxCharacteristicOnValueUpdated;
+
+                // Let UI know mode we are in
+                RaisePropertyChanged(() => UpdateButtonText);
+            }
+            catch (Exception ex)
+            {
+                HockeyApp.MetricsManager.TrackEvent($"(StopUpdates) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
+                _userDialogs.Alert(ex.Message);
+            }
+        }
+        
     }
 }
