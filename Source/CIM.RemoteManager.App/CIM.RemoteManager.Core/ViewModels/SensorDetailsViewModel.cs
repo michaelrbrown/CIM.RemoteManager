@@ -126,12 +126,20 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// <summary>
         /// Sensor record types (serialized into models later)
         /// </summary>
-        public bool StartBufferedSensorValueRecord { get; set; } = false;
+        public bool StartSensorBufferedValueRecord { get; set; } = false;
         /// <summary>
         /// Sensor record types (serialized into models later)
         /// </summary>
-        public bool StartStatisticsSensorValueRecord { get; set; } = false;
-        
+        public bool StartSensorStatisticsValueRecord { get; set; } = false;
+        /// <summary>
+        /// Sensor record types (serialized into models later)
+        /// </summary>
+        public bool StartSensorLimitValueRecord { get; set; } = false;
+        /// <summary>
+        /// Sensor record types (serialized into models later)
+        /// </summary>
+        public bool StartSensorMessageValueRecord { get; set; } = false;
+
         /// <summary>
         ///  "J" = buffered sensor data
         ///   number of points
@@ -150,10 +158,23 @@ namespace CIM.RemoteManager.Core.ViewModels
         ///   hourly total
         /// </summary>
         public readonly StringBuilder StatisticsSensorValue = new StringBuilder("");
+        /// <summary>
+        ///  "F" = full information
+        ///   total outgoing
+        ///   retries
+        ///   values
+        ///   total incoming
+        ///   errors
+        ///   time since last message
+        ///   active sensors
+        ///   buffered measurements
+        ///   current date/time
+        /// </summary>
+        public readonly StringBuilder MessageSensorValue = new StringBuilder("");
 
 
         #region Sensor Statistics
-        
+
         /// <summary>
         /// Average sensor value.
         /// Make sure we divide by 10 to convert to appropriate value.
@@ -356,8 +377,96 @@ namespace CIM.RemoteManager.Core.ViewModels
 
         #endregion
 
+        #region Message Counters
+
+        private int _totalOutgoingMessages;
+        public int TotalOutgoingMessages
+        {
+            get => _totalOutgoingMessages;
+            set => SetProperty(ref _totalOutgoingMessages, value);
+        }
+
+        private int _totalOutgoingRetries;
+        public int TotalOutgoingRetries
+        {
+            get => _totalOutgoingRetries;
+            set => SetProperty(ref _totalOutgoingRetries, value);
+        }
+
+        private int _totalOutgoingValues;
+        public int TotalOutgoingValues
+        {
+            get => _totalOutgoingValues;
+            set => SetProperty(ref _totalOutgoingValues, value);
+        }
+
+        private int _totalIncomingMessages;
+        public int TotalIncomingMessages
+        {
+            get => _totalIncomingMessages;
+            set => SetProperty(ref _totalIncomingMessages, value);
+        }
+
+        private int _totalIncomingErrors;
+        public int TotalIncomingErrors
+        {
+            get => _totalIncomingErrors;
+            set => SetProperty(ref _totalIncomingErrors, value);
+        }
+
         /// <summary>
-        /// Sensor plot view model constructor
+        /// Time in minutes
+        /// </summary>
+        private int _lastServerMessageReceived;
+        public int LastServerMessageReceived
+        {
+            get => _lastServerMessageReceived;
+            set => SetProperty(ref _lastServerMessageReceived, value);
+        }
+
+        /// <summary>
+        /// Total number of sensors attached to remote
+        /// </summary>
+        private int _totalActiveSensors;
+        public int TotalActiveSensors
+        {
+            get => _totalActiveSensors;
+            set => SetProperty(ref _totalActiveSensors, value);
+        }
+
+        /// <summary>
+        /// Number of records in history buffer (this value is divided by 256)
+        /// </summary>
+        private int _totalRecordsInHistoryBuffer;
+        public int TotalRecordsInHistoryBuffer
+        {
+            get
+            {
+                // Try to lookup hex to string
+                if (int.TryParse(_totalRecordsInHistoryBuffer.ToString(), out int totalRecordsInHistoryBufferResult))
+                {
+                    return totalRecordsInHistoryBufferResult / 256;
+                }
+                // Default
+                return _totalRecordsInHistoryBuffer;
+            }
+            set => SetProperty(ref _totalRecordsInHistoryBuffer, value);
+        }
+
+        /// <summary>
+        /// Present unix time
+        /// </summary>
+        private string _currentDateTime;
+        public string CurrentDateTime
+        {
+            get => _currentDateTime;
+            set => SetProperty(ref _currentDateTime, value);
+        }
+
+        #endregion
+
+        /// <summary>
+        /// Sensor plot view model constructor.
         /// </summary>
         /// <param name="bluetoothLe">Bluetooth LE obj</param>
         /// <param name="adapter">Bluetooth LE adapter</param>
@@ -394,7 +503,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
-        /// Event to handle Bluetooth LE state changed
+        /// Event to handle Bluetooth LE state changed.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -405,7 +514,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
-        /// Event to handle Bluetooth connection changes
+        /// Event to handle Bluetooth connection changes.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -418,7 +527,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
-        /// Setup all the possible Bluetooth LE states
+        /// Setup all the possible Bluetooth LE states.
         /// </summary>
         /// <returns></returns>
         private string GetStateText()
@@ -553,7 +662,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
-        /// Start sensor updates
+        /// Start sensor updates.
         /// </summary>
         public MvxCommand StartUpdatesCommand => new MvxCommand(() =>
         {
@@ -564,7 +673,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         });
 
         /// <summary>
-        /// Stop sensor updates
+        /// Stop sensor updates.
         /// </summary>
         public MvxCommand StopUpdatesCommand => new MvxCommand(() =>
         {
@@ -575,7 +684,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         });
 
         /// <summary>
-        /// Toggle sensor updates
+        /// Toggle sensor updates.
         /// </summary>
         public MvxCommand ToggleUpdatesCommand => new MvxCommand(() =>
         {
@@ -590,7 +699,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         });
 
         /// <summary>
-        /// Start bluetooth characteristics updating
+        /// Start bluetooth characteristics updating.
         /// </summary>
         private async void StartUpdates()
         {
@@ -629,7 +738,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
-        /// Stop bluetooth characteristics updating
+        /// Stop bluetooth characteristics updating.
         /// </summary>
         private async void StopUpdates()
         {
@@ -654,7 +763,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
-        /// Rx characteristic updated event
+        /// Rx characteristic updated event.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="characteristicUpdatedEventArgs"></param>
@@ -673,6 +782,8 @@ namespace CIM.RemoteManager.Core.ViewModels
                     GetSensorLimitsValues(CharacteristicValue);
                 }
 
+                GetSensorMessageValues(CharacteristicValue);
+
                 // Notify property changed
                 RaisePropertyChanged(() => CharacteristicValue);
             }
@@ -683,7 +794,51 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
-        /// Get sensot plot (buffered) data from remote
+        /// Get sensor message counters from remote.
+        /// </summary>
+        /// <param name="characteristicValue"></param>
+        private void GetSensorMessageValues(string characteristicValue)
+        {
+            if (String.IsNullOrEmpty(characteristicValue)) return;
+
+            // Start reading all "sensor plot values"
+            if (!StartSensorMessageValueRecord && characteristicValue.Contains("{F"))
+            {
+                // If we hit an end char } then record all data up to it
+                if (characteristicValue.Contains("}"))
+                {
+                    MessageSensorValue.Append(characteristicValue);
+                    SerializeStringToSensor(MessageSensorValue.ToString(), "F");
+                    MessageSensorValue.Clear();
+                    StartSensorMessageValueRecord = false;
+                }
+                else
+                {
+                    // Read all characters in buffer while we are within the {}
+                    MessageSensorValue.Append(characteristicValue.Trim(new Char[] { '{' }));
+                    StartSensorMessageValueRecord = true;
+                }
+            }
+            else if (StartSensorMessageValueRecord)
+            {
+                // If we hit an end char } then record all data up to it
+                if (characteristicValue.Contains("}"))
+                {
+                    MessageSensorValue.Append(characteristicValue.GetUntilOrEmpty());
+                    SerializeStringToSensor(MessageSensorValue.ToString(), "F");
+                    MessageSensorValue.Clear();
+                    StartSensorMessageValueRecord = false;
+                }
+                else
+                {
+                    // Read all characters in buffer while we are within the {}
+                    MessageSensorValue.Append(characteristicValue);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Get sensor plot (buffered) data from remote.
         /// </summary>
         /// <param name="characteristicValue"></param>
         private void GetSensorPlotValues(string characteristicValue)
@@ -691,7 +846,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             if (String.IsNullOrEmpty(characteristicValue)) return;
 
             // Start reading all "sensor plot values"
-            if (!StartBufferedSensorValueRecord && characteristicValue.Contains("{J"))
+            if (!StartSensorBufferedValueRecord && characteristicValue.Contains("{J"))
             {
                 // If we hit an end char } then record all data up to it
                 if (characteristicValue.Contains("}"))
@@ -699,16 +854,16 @@ namespace CIM.RemoteManager.Core.ViewModels
                     BufferedSensorValue.Append(characteristicValue);
                     SerializeStringToSensor(BufferedSensorValue.ToString());
                     BufferedSensorValue.Clear();
-                    StartBufferedSensorValueRecord = false;
+                    StartSensorBufferedValueRecord = false;
                 }
                 else
                 {
                     // Read all characters in buffer while we are within the {}
                     BufferedSensorValue.Append(characteristicValue.Trim(new Char[] { '{' }));
-                    StartBufferedSensorValueRecord = true;
+                    StartSensorBufferedValueRecord = true;
                 }
             }
-            else if (StartBufferedSensorValueRecord)
+            else if (StartSensorBufferedValueRecord)
             {
                 // If we hit an end char } then record all data up to it
                 if (characteristicValue.Contains("}"))
@@ -716,7 +871,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                     BufferedSensorValue.Append(characteristicValue.GetUntilOrEmpty());
                     SerializeStringToSensor(BufferedSensorValue.ToString());
                     BufferedSensorValue.Clear();
-                    StartBufferedSensorValueRecord = false;
+                    StartSensorBufferedValueRecord = false;
                 }
                 else
                 {
@@ -727,7 +882,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
-        /// Get sensor statistics values from remote
+        /// Get sensor statistics values from remote.
         /// </summary>
         /// <param name="characteristicValue"></param>
         private void GetSensorStatisticsValues(string characteristicValue)
@@ -735,7 +890,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             if (String.IsNullOrEmpty(characteristicValue)) return;
 
             // Start reading all "sensor statistics values"
-            if (!StartStatisticsSensorValueRecord && characteristicValue.Contains("{H"))
+            if (!StartSensorStatisticsValueRecord && characteristicValue.Contains("{H"))
             {
                 // If we hit an end char } then record all data up to it
                 if (characteristicValue.Contains("}"))
@@ -743,16 +898,16 @@ namespace CIM.RemoteManager.Core.ViewModels
                     StatisticsSensorValue.Append(characteristicValue);
                     SerializeStringToSensor(StatisticsSensorValue.ToString());
                     StatisticsSensorValue.Clear();
-                    StartStatisticsSensorValueRecord = false;
+                    StartSensorStatisticsValueRecord = false;
                 }
                 else
                 {
                     // Read all characters in buffer while we are within the {}
                     StatisticsSensorValue.Append(characteristicValue.Trim(new Char[] { '{' }));
-                    StartStatisticsSensorValueRecord = true;
+                    StartSensorStatisticsValueRecord = true;
                 }
             }
-            else if (StartStatisticsSensorValueRecord)
+            else if (StartSensorStatisticsValueRecord)
             {
                 // If we hit an end char } then record all data up to it
                 if (characteristicValue.Contains("}"))
@@ -760,7 +915,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                     StatisticsSensorValue.Append(characteristicValue.GetUntilOrEmpty());
                     SerializeStringToSensor(StatisticsSensorValue.ToString());
                     StatisticsSensorValue.Clear();
-                    StartStatisticsSensorValueRecord = false;
+                    StartSensorStatisticsValueRecord = false;
                 }
                 else
                 {
@@ -771,7 +926,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
-        /// Get sensor limits values from remote
+        /// Get sensor limits values from remote.
         /// </summary>
         /// <param name="characteristicValue"></param>
         private void GetSensorLimitsValues(string characteristicValue)
@@ -779,7 +934,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             if (String.IsNullOrEmpty(characteristicValue)) return;
 
             // Start reading all "sensor limits values"
-            if (!StartStatisticsSensorValueRecord && characteristicValue.Contains("{G"))
+            if (!StartSensorLimitValueRecord && characteristicValue.Contains("{G"))
             {
                 // If we hit an end char } then record all data up to it
                 if (characteristicValue.Contains("}"))
@@ -787,16 +942,16 @@ namespace CIM.RemoteManager.Core.ViewModels
                     StatisticsSensorValue.Append(characteristicValue);
                     SerializeStringToSensor(StatisticsSensorValue.ToString());
                     StatisticsSensorValue.Clear();
-                    StartStatisticsSensorValueRecord = false;
+                    StartSensorLimitValueRecord = false;
                 }
                 else
                 {
                     // Read all characters in buffer while we are within the {}
                     StatisticsSensorValue.Append(characteristicValue.Trim(new Char[] { '{' }));
-                    StartStatisticsSensorValueRecord = true;
+                    StartSensorLimitValueRecord = true;
                 }
             }
-            else if (StartStatisticsSensorValueRecord)
+            else if (StartSensorLimitValueRecord)
             {
                 // If we hit an end char } then record all data up to it
                 if (characteristicValue.Contains("}"))
@@ -804,7 +959,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                     StatisticsSensorValue.Append(characteristicValue.GetUntilOrEmpty());
                     SerializeStringToSensor(StatisticsSensorValue.ToString());
                     StatisticsSensorValue.Clear();
-                    StartStatisticsSensorValueRecord = false;
+                    StartSensorLimitValueRecord = false;
                 }
                 else
                 {
@@ -815,65 +970,87 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
-        /// Serialize tab based sensor data to strongly typed Sensor model
+        /// Serialize tab based sensor data to strongly typed Sensor model.
         /// </summary>
         /// <param name="sensorValues"></param>
-        private void SerializeStringToSensor(string sensorValues)
+        /// <param name="conversionType"></param>
+        private void SerializeStringToSensor(string sensorValues, string conversionType = "")
         {
-            // Split by tab delimiter
-            string[] splitSensorValues = sensorValues.Split('\t');
-
-            if (SensorCommandType == SensorCommand.Plot)
+            switch (conversionType)
             {
-                _userDialogs.Alert($"(J) Buffered Data: {sensorValues}", "CIMScan RemoteManager");
+                case "F":
+                    _userDialogs.Alert($"(F) Message Counters Data: {sensorValues}", "CIMScan RemoteManager");
 
-                // "J" Sensor plot data serialization
-                var sensorPlot = new SensorPlot
-                {
-                    Points = splitSensorValues[0].SafeHexToInt(),
-                    TimeStamp = splitSensorValues[6].SafeHexToInt(),
-                    CurrentValue = splitSensorValues[8].SafeHexToDouble()
-                };
-                // Add sensor to list
-                SensorPlotCollection.Add(sensorPlot);
-            }
-            else if (SensorCommandType == SensorCommand.Statistics)
-            {
-                //_userDialogs.Alert($"(H) Statistics Data: {sensorValues}", "CIMScan RemoteManager");
-                //_userDialogs.Alert($"(H) SensorIndexSelected: {SensorIndexSelected}", "CIMScan RemoteManager");
-                //_userDialogs.Alert($"(H) Sensor Index: {splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('H') + 1).SafeConvert<int>(0)}", "CIMScan RemoteManager");
+                    // "F" Message counter data serialization
+                    TotalOutgoingMessages = sensorValues.Substring(2, 2).SafeHexToInt();
+                    TotalOutgoingRetries = sensorValues.Substring(4, 2).SafeHexToInt();
+                    TotalOutgoingValues = sensorValues.Substring(6, 2).SafeHexToInt();
+                    TotalIncomingMessages = sensorValues.Substring(8, 2).SafeHexToInt();
+                    TotalIncomingErrors = sensorValues.Substring(10, 2).SafeHexToInt();
+                    LastServerMessageReceived = sensorValues.Substring(12, 2).SafeHexToInt();
+                    TotalActiveSensors = sensorValues.Substring(14, 2).SafeHexToInt();
+                    TotalRecordsInHistoryBuffer = sensorValues.Substring(16, 2).SafeHexToInt();
+                    CurrentDateTime = sensorValues.Substring(20, 8).SafeConvert<string>("");
+                    break;
+                default:
+                    // Split by tab delimiter
+                    string[] splitSensorValues = sensorValues.Split('\t');
 
-                // Only update the values if we have a match
-                if (SensorIndexSelected == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('H') + 1).SafeConvert<int>(0))
-                {
-                    // "H" Sensor data serialization
-                    MaximumValue = splitSensorValues[1].SafeHexToDouble();
-                    MaximumOccuranceTimeStamp = splitSensorValues[2].SafeHexToInt();
-                    MinimumValue = splitSensorValues[3].SafeHexToDouble();
-                    MinimumOccuranceTimeStamp = splitSensorValues[4].SafeHexToInt();
-                    AverageValue = splitSensorValues[5].SafeHexToDouble();
-                    TimeStamp = splitSensorValues[6].SafeHexToInt();
-                }
-            }
-            else if (SensorCommandType == SensorCommand.Limits)
-            {
-                //_userDialogs.Alert($"(G) Limits Data: {sensorValues}", "CIMScan RemoteManager");
-                //_userDialogs.Alert($"(G) SensorIndexSelected: {SensorIndexSelected}", "CIMScan RemoteManager");
-                //_userDialogs.Alert($"(G) Sensor Index: {splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('G') + 1).SafeConvert<int>(0)}", "CIMScan RemoteManager");
+                    if (SensorCommandType == SensorCommand.Plot)
+                    {
+                        _userDialogs.Alert($"(J) Buffered Data: {sensorValues}", "CIMScan RemoteManager");
 
-                // Only update the values if we have a match
-                if (SensorIndexSelected == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('G') + 1).SafeConvert<int>(0))
-                {
-                    // "G" Sensor data serialization
-                    AlarmStatus = splitSensorValues[1].SafeHexToInt();
-                    AlarmBeingProcessed = splitSensorValues[2].SafeHexToInt();
-                    AlarmDelay = splitSensorValues[3].SafeHexToDouble();
-                    LowAlarmLimit = splitSensorValues[4].SafeHexToInt();
-                    LowWarningLimit = splitSensorValues[5].SafeHexToDouble();
-                    HighWarningLimit = splitSensorValues[6].SafeHexToInt();
-                    HighAlarmLimit = splitSensorValues[7].SafeHexToDouble();
-                }
+                        // "J" Sensor plot data serialization
+                        var sensorPlot = new SensorPlot
+                        {
+                            Points = splitSensorValues[0].SafeHexToInt(),
+                            TimeStamp = splitSensorValues[6].SafeHexToInt(),
+                            CurrentValue = splitSensorValues[8].SafeHexToDouble()
+                        };
+                        // Add sensor to list
+                        SensorPlotCollection.Add(sensorPlot);
+                    }
+                    else if (SensorCommandType == SensorCommand.Statistics)
+                    {
+                        //_userDialogs.Alert($"(H) Statistics Data: {sensorValues}", "CIMScan RemoteManager");
+                        //_userDialogs.Alert($"(H) SensorIndexSelected: {SensorIndexSelected}", "CIMScan RemoteManager");
+                        //_userDialogs.Alert($"(H) Sensor Index: {splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('H') + 1).SafeConvert<int>(0)}", "CIMScan RemoteManager");
+
+                        // Only update the values if we have a match
+                        if (SensorIndexSelected == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('H') + 1).SafeConvert<int>(0))
+                        {
+                            // "H" Sensor data serialization
+                            MaximumValue = splitSensorValues[1].SafeHexToDouble();
+                            MaximumOccuranceTimeStamp = splitSensorValues[2].SafeHexToInt();
+                            MinimumValue = splitSensorValues[3].SafeHexToDouble();
+                            MinimumOccuranceTimeStamp = splitSensorValues[4].SafeHexToInt();
+                            AverageValue = splitSensorValues[5].SafeHexToDouble();
+                            TimeStamp = splitSensorValues[6].SafeHexToInt();
+                        }
+                    }
+                    else if (SensorCommandType == SensorCommand.Limits)
+                    {
+                        //_userDialogs.Alert($"(G) Limits Data: {sensorValues}", "CIMScan RemoteManager");
+                        //_userDialogs.Alert($"(G) SensorIndexSelected: {SensorIndexSelected}", "CIMScan RemoteManager");
+                        //_userDialogs.Alert($"(G) Sensor Index: {splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('G') + 1).SafeConvert<int>(0)}", "CIMScan RemoteManager");
+
+                        // Only update the values if we have a match
+                        if (SensorIndexSelected == splitSensorValues[0]
+                                .Substring(splitSensorValues[0].LastIndexOf('G') + 1).SafeConvert<int>(0))
+                        {
+                            // "G" Sensor data serialization
+                            AlarmStatus = splitSensorValues[1].SafeHexToInt();
+                            AlarmBeingProcessed = splitSensorValues[2].SafeHexToInt();
+                            AlarmDelay = splitSensorValues[3].SafeHexToDouble();
+                            LowAlarmLimit = splitSensorValues[4].SafeHexToInt();
+                            LowWarningLimit = splitSensorValues[5].SafeHexToDouble();
+                            HighWarningLimit = splitSensorValues[6].SafeHexToInt();
+                            HighAlarmLimit = splitSensorValues[7].SafeHexToDouble();
+                        }
+                    }
+                    break;
             }
+            
         }
 
     }
