@@ -18,39 +18,46 @@ using Xamarin.Forms;
 
 namespace CIM.RemoteManager.Core.ViewModels
 {
+    /// <summary>
+    /// Device list viewmodel for handling connecting to BlueTooth devices, sorting and listing CimScan devices 
+    /// in a separate list.  Connections and disposing, as well as navigating to sensor list page all contained 
+    /// within the logic of this viewmodel. Inherits from the base viewmodel for shared core functions such as
+    /// device bundle identifiers, suspending and resuming connections.
+    /// </summary>
+    /// <seealso cref="CIM.RemoteManager.Core.ViewModels.BaseViewModel" />
     public class DeviceListViewModel : BaseViewModel
     {
         /// <summary>
-        /// Bluetooth LE permissions
+        /// Bluetooth LE permissions.
         /// </summary>
         readonly IPermissions _permissions;
         /// <summary>
-        /// Bluetooth LE device
+        /// Bluetooth LE device.
         /// </summary>
         private readonly IBluetoothLE _bluetoothLe;
         /// <summary>
-        /// User dialogs
+        /// User dialogs.
         /// </summary>
         private readonly IUserDialogs _userDialogs;
         /// <summary>
-        /// App Settings
+        /// App Settings.
         /// </summary>
         private readonly ISettings _settings;
         /// <summary>
-        /// Previous Guid
+        /// Previous Guid.
         /// </summary>
         private Guid _previousGuid;
         /// <summary>
-        /// Previous Name
+        /// Previous Name.
         /// </summary>
         private string _previousName = string.Empty;
         /// <summary>
-        /// Cancellation token source (for async issues)
+        /// Cancellation token source (for async issues).
         /// </summary>
         private CancellationTokenSource _cancellationTokenSource;
 
         /// <summary>
-        /// Previous device guid
+        /// Previous device guid.
         /// </summary>
         public Guid PreviousGuid
         {
@@ -65,7 +72,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
-        /// Previous device name
+        /// Previous device name.
         /// </summary>
         public string PreviousName
         {
@@ -79,11 +86,11 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
-        /// Refresh searching command
+        /// Refresh searching command.
         /// </summary>
         public MvxCommand RefreshCommand => new MvxCommand(() => TryStartScanning(true));
         /// <summary>
-        /// Disconnect device command
+        /// Disconnect device command.
         /// </summary>
         public MvxCommand<DeviceListItemViewModel> DisconnectCommand => new MvxCommand<DeviceListItemViewModel>(DisconnectDevice);
 
@@ -91,11 +98,11 @@ namespace CIM.RemoteManager.Core.ViewModels
         public MvxCommand<DeviceListItemViewModel> ConnectDisposeCommand => new MvxCommand<DeviceListItemViewModel>(ConnectAndDisposeDevice);
 
         /// <summary>
-        /// All other devices ObservableCollection
+        /// All other devices ObservableCollection.
         /// </summary>
         public ObservableCollection<DeviceListItemViewModel> Devices { get; set; } = new ObservableCollection<DeviceListItemViewModel>();
         /// <summary>
-        /// CIMScan ObservableCollection
+        /// CIMScan ObservableCollection.
         /// </summary>
         public ObservableCollection<DeviceListItemViewModel> SystemDevices { get; set; } = new ObservableCollection<DeviceListItemViewModel>();
 
@@ -116,11 +123,11 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// </summary>
         public bool FoundSystemDevices => SystemDevices.Any();
         /// <summary>
-        /// Can connect to previous device
+        /// Can connect to previous device.
         /// </summary>
         public bool CanConnectToPreviousDevice => _bluetoothLe.IsOn && PreviousGuid != Guid.Empty;
         /// <summary>
-        /// Selected device
+        /// Selected device.
         /// </summary>
         public DeviceListItemViewModel SelectedDevice
         {
@@ -137,7 +144,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
-        /// Use Android auto connect
+        /// Use Android auto connect.
         /// </summary>
         bool _useAutoConnect;
         public bool UseAutoConnect
@@ -157,28 +164,32 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// <summary>
         /// Stop scanning command
         /// </summary>
+        /// <value>
+        /// The stop scan command.
+        /// </value>
         public MvxCommand StopScanCommand => new MvxCommand(() =>
         {
             _cancellationTokenSource.Cancel();
             CleanupCancellationToken();
             RaisePropertyChanged(() => IsRefreshing);
         }, () => _cancellationTokenSource != null);
-        
+
         /// <summary>
-        /// Device list viewmodel constructor
+        /// Initializes a new instance of the <see cref="DeviceListViewModel"/> class.
+        /// Device list viewmodel constructor.
         /// </summary>
-        /// <param name="bluetoothLe"></param>
-        /// <param name="adapter"></param>
-        /// <param name="userDialogs"></param>
-        /// <param name="settings"></param>
-        /// <param name="permissions"></param>
+        /// <param name="bluetoothLe">The bluetooth le.</param>
+        /// <param name="adapter">The adapter.</param>
+        /// <param name="userDialogs">The user dialogs.</param>
+        /// <param name="settings">The settings.</param>
+        /// <param name="permissions">The permissions.</param>
         public DeviceListViewModel(IBluetoothLE bluetoothLe, IAdapter adapter, IUserDialogs userDialogs, ISettings settings, IPermissions permissions) : base(adapter)
         {
             _permissions = permissions;
             _bluetoothLe = bluetoothLe;
             _userDialogs = userDialogs;
             _settings = settings;
-            // quick and dirty :>
+            // Setup event handlers
             _bluetoothLe.StateChanged += OnStateChanged;
             Adapter.DeviceDiscovered += OnDeviceDiscovered;
             Adapter.ScanTimeoutElapsed += Adapter_ScanTimeoutElapsed;
@@ -191,7 +202,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
-        /// Get previous connected device guid
+        /// Get previous connected device guid.
         /// </summary>
         /// <returns></returns>
         private Task GetPreviousGuidAsync()
@@ -204,9 +215,9 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
-        /// Get previous connected device name
+        /// Gets the previous name asynchronous.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Task</returns>
         private Task GetPreviousNameAsync()
         {
             return Task.Run(() =>
@@ -217,18 +228,21 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
-        /// Copy guid command
+        /// Gets the copy unique identifier command.
         /// </summary>
+        /// <value>
+        /// The copy unique identifier command.
+        /// </value>
         public MvxCommand<DeviceListItemViewModel> CopyGuidCommand => new MvxCommand<DeviceListItemViewModel>(device =>
         {
             PreviousGuid = device.Id;
         });
 
         /// <summary>
-        /// Event to handle Bluetooth LE device disconnects
+        /// Called when [device connection lost]. Event to handle Bluetooth LE device disconnects.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="DeviceErrorEventArgs"/> instance containing the event data.</param>
         private void OnDeviceConnectionLost(object sender, DeviceErrorEventArgs e)
         {
             Devices.FirstOrDefault(d => d.Id == e.Device.Id)?.Update();
@@ -238,10 +252,10 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
-        /// Event to handle Bluetooth LE state changed
+        /// Called when [state changed].
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The e.</param>
         private void OnStateChanged(object sender, BluetoothStateChangedArgs e)
         {
             RaisePropertyChanged(nameof(IsStateOn));
@@ -250,7 +264,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
-        /// Setup all the possible Bluetooth LE states
+        /// Gets the state text. Setup all the possible Bluetooth LE states.
         /// </summary>
         /// <returns></returns>
         private string GetStateText()
@@ -275,12 +289,12 @@ namespace CIM.RemoteManager.Core.ViewModels
                     return "Unknown Bluetooth LE state.";
             }
         }
- 
+
         /// <summary>
-        /// Updates refreshing prop when timeout elapsed
+        /// Handles the ScanTimeoutElapsed event of the Adapter control. Updates refreshing prop when timeout elapsed.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void Adapter_ScanTimeoutElapsed(object sender, EventArgs e)
         {
             RaisePropertyChanged(() => IsRefreshing);
@@ -288,10 +302,10 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
-        /// Event which handles discovered devices
+        /// Called when [device discovered].
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="args"></param>
+        /// <param name="sender">The sender.</param>
+        /// <param name="args">The <see cref="DeviceEventArgs"/> instance containing the event data.</param>
         private void OnDeviceDiscovered(object sender, DeviceEventArgs args)
         {
             try
@@ -316,7 +330,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// Add or update non-CIMScan devices in list (we want to do this b/c we may not find CIMScan
         /// devices by name (adafruit).
         /// </summary>
-        /// <param name="device"></param>
+        /// <param name="device">The device.</param>
         private void AddOrUpdateDevice(IDevice device)
         {
             InvokeOnMainThread(() =>
@@ -334,9 +348,9 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
-        /// Add or update our CIMScan devices in list
+        /// Add or update our CIMScan devices in list.
         /// </summary>
-        /// <param name="device"></param>
+        /// <param name="device">The device.</param>
         private void AddOrUpdateSystemDevice(IDevice device)
         {
             InvokeOnMainThread(() =>
@@ -352,9 +366,9 @@ namespace CIM.RemoteManager.Core.ViewModels
                 }
             });
         }
-        
+
         /// <summary>
-        /// Resume searching for Bluetooth LE devices
+        /// Resume searching for Bluetooth LE devices.
         /// </summary>
         public override async void Resume()
         {
@@ -366,7 +380,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
-        /// Stop scanning when in progress
+        /// Stop scanning when in progress.
         /// </summary>
         public override void Suspend()
         {
@@ -377,9 +391,9 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
-        /// Kick off scanning
+        /// Tries the start scanning.
         /// </summary>
-        /// <param name="refresh"></param>
+        /// <param name="refresh">if set to <c>true</c> [refresh].</param>
         private async void TryStartScanning(bool refresh = false)
         {
             if (Device.RuntimePlatform == Device.Android)
@@ -404,7 +418,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
-        /// Clear devices then start scanning through found devices and sort CIMScan from all others
+        /// Clear devices then start scanning through found devices and sort CIMScan from all others.
         /// </summary>
         private async void ScanForDevices()
         {
@@ -446,9 +460,9 @@ namespace CIM.RemoteManager.Core.ViewModels
             Adapter.ScanMode = ScanMode.LowLatency;
             await Adapter.StartScanningForDevicesAsync(_cancellationTokenSource.Token).ConfigureAwait(true);
         }
-        
+
         /// <summary>
-        /// Handle device connection disposing
+        /// Cleanups the cancellation token.
         /// </summary>
         private void CleanupCancellationToken()
         {
@@ -458,9 +472,9 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
-        /// Disconnect from device
+        /// Disconnects the device.
         /// </summary>
-        /// <param name="device"></param>
+        /// <param name="device">The device.</param>
         private async void DisconnectDevice(DeviceListItemViewModel device)
         {
             try
@@ -484,10 +498,10 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
-        /// Event to handle device disconnected
+        /// Called when [device disconnected].
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="DeviceEventArgs"/> instance containing the event data.</param>
         private void OnDeviceDisconnected(object sender, DeviceEventArgs e)
         {
             Devices.FirstOrDefault(d => d.Id == e.Device.Id)?.Update();
@@ -497,9 +511,9 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
-        /// Handle selected device by providing options to connect, disconnect, and navigate to sensors page
+        /// Handles the selected device. Handle selected device by providing options to connect, disconnect, and navigate to sensors page.
         /// </summary>
-        /// <param name="device"></param>
+        /// <param name="device">The device.</param>
         private void HandleSelectedDevice(DeviceListItemViewModel device)
         {
             // ActionSheet for handling selected device options
@@ -556,10 +570,10 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
-        /// Handles connecting to device on selection
+        /// Connects the device asynchronous. Handles connecting to device on selection.
         /// </summary>
-        /// <param name="device"></param>
-        /// <param name="showPrompt">Show prompt</param>
+        /// <param name="device">The device.</param>
+        /// <param name="showPrompt">if set to <c>true</c> [show prompt].</param>
         /// <returns></returns>
         private async Task<bool> ConnectDeviceAsync(DeviceListItemViewModel device, bool showPrompt = true)
         {
@@ -620,12 +634,15 @@ namespace CIM.RemoteManager.Core.ViewModels
 
 
         /// <summary>
-        /// Command to connect to previous device
+        /// Command to connect to previous device.
         /// </summary>
+        /// <value>
+        /// The connect to previous command.
+        /// </value>
         public MvxCommand ConnectToPreviousCommand => new MvxCommand(ConnectToPreviousDeviceAsync, CanConnectToPrevious);
 
         /// <summary>
-        /// Handles connecting to previous device, which allows faster connection by eliminating searching and prompts
+        /// Handles connecting to previous device, which allows faster connection by eliminating searching and prompts.
         /// </summary>
         private async void ConnectToPreviousDeviceAsync()
         {
