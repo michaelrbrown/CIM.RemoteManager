@@ -17,6 +17,20 @@ namespace CIM.RemoteManager.Core.Pages
             // Set binding context to viewmodel
             BindingContext = this;
 
+            // Get instance of sensor details viewmodel
+            var sensorDetailsViewModel = this.BindingContext as SensorDetailsViewModel;
+            // Add device settings toolbar icon and handle selection
+            ToolbarItems.Add(new ToolbarItem("Refresh Sensor Data", "ic_remote-settings.png", () =>
+            {
+                // Validate
+                if (sensorDetailsViewModel != null)
+                {
+                    // Refresh sensor data
+                    sensorDetailsViewModel.StopUpdatesCommand.Execute();
+                    sensorDetailsViewModel.StartUpdatesCommand.Execute();
+                }
+            }, ToolbarItemOrder.Primary, 0));
+
             // Set current paged changed event to handle sensor update types
             this.CurrentPageChanged += CurrentPageHasChanged;
 
@@ -30,19 +44,7 @@ namespace CIM.RemoteManager.Core.Pages
 
             //}
 
-            // Get instance of sensor details viewmodel
-            var sensorDetailsViewModel = this.BindingContext as SensorDetailsViewModel;
-            // Add device settings toolbar icon and handle selection
-            ToolbarItems.Add(new ToolbarItem("Refresh Sensor Data", "ic_refresh-sensordata.png", () =>
-            {
-                // Validate
-                if (sensorDetailsViewModel != null)
-                {
-                    // Refresh sensor data
-                    sensorDetailsViewModel.StopUpdatesCommand.Execute();
-                    sensorDetailsViewModel.StartUpdatesCommand.Execute();
-                }
-            }, ToolbarItemOrder.Primary, 0));
+           
 
         }
 
