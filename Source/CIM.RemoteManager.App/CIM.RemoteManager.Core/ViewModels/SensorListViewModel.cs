@@ -48,7 +48,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// <summary>
         /// Let our UI know we have updates started / stopped
         /// </summary>
-        public bool UpdatesStarted { get; private set; }
+        public bool UpdatesStarted { get; set; }
 
         /// <summary>
         /// Is Bluetooth LE state on?
@@ -664,7 +664,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         {
             base.Resume();
 
-            _userDialogs.Alert("resume", "Error while loading sensor data");
+            _userDialogs.Alert("resume", "loading sensor data");
 
             if (!UpdatesStarted)
             {
@@ -724,6 +724,10 @@ namespace CIM.RemoteManager.Core.ViewModels
             }
             catch (Exception ex)
             {
+                UpdatesStarted = false;
+                // Notify property changed
+                RaisePropertyChanged(() => UpdatesStarted);
+
                 HockeyApp.MetricsManager.TrackEvent($"(StartUpdates) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
                 _userDialogs.Alert(ex.Message);
             }
@@ -751,6 +755,10 @@ namespace CIM.RemoteManager.Core.ViewModels
             }
             catch (Exception ex)
             {
+                UpdatesStarted = false;
+                // Notify property changed
+                RaisePropertyChanged(() => UpdatesStarted);
+
                 HockeyApp.MetricsManager.TrackEvent($"(StopUpdates) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
                 _userDialogs.Alert(ex.Message);
             }

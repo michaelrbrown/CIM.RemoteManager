@@ -24,13 +24,6 @@ namespace CIM.RemoteManager.Core.Pages
             }, ToolbarItemOrder.Primary, 0));
         }
         
-        private void ListView_OnItemTapped(object sender, ItemTappedEventArgs itemTappedEventArgs)
-        {
-            //DisplayAlert("Item Tapped", "", "OK");
-            //DisplayAlert("Item Tapped", "Sensor: " + itemTappedEventArgs.ItemData, "OK");
-            //DisplayAlert("Item Tapped", "Sensor Index: " + ((Sensor)itemTappedEventArgs.ItemData).SensorIndex, "OK");
-        }
-        
         /// <summary>
         /// Handle toggling of sensor updates
         /// </summary>
@@ -49,7 +42,7 @@ namespace CIM.RemoteManager.Core.Pages
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="itemTappedEventArgs"></param>
-        private void SensorLiistView_OnItemDoubleTapped(object sender, ItemDoubleTappedEventArgs itemTappedEventArgs)
+        private void SensorListView_OnItemDoubleTapped(object sender, ItemDoubleTappedEventArgs itemTappedEventArgs)
         {
             //var sensorPlotPage = new SensorPlotPage();
             if (itemTappedEventArgs.ItemData is Sensor sensorItem)
