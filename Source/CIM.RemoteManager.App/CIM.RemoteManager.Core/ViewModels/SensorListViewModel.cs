@@ -48,7 +48,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// <summary>
         /// Let our UI know we have updates started / stopped
         /// </summary>
-        public bool UpdatesStarted;
+        public bool UpdatesStarted { get; private set; }
 
         /// <summary>
         /// Is Bluetooth LE state on?
@@ -479,8 +479,8 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// <param name="e"></param>
         private void OnStateChanged(object sender, BluetoothStateChangedArgs e)
         {
-            RaisePropertyChanged(nameof(IsStateOn));
-            RaisePropertyChanged(nameof(StateText));
+            RaisePropertyChanged(() => IsStateOn);
+            RaisePropertyChanged(() => StateText);
         }
 
         /// <summary>
@@ -520,7 +520,6 @@ namespace CIM.RemoteManager.Core.ViewModels
             {
                 HockeyApp.MetricsManager.TrackEvent($"(CharacteristicOnValueUpdated) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
             }
-
         }
 
         #endregion

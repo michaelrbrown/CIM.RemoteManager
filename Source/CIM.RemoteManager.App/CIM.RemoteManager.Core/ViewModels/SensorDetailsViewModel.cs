@@ -45,7 +45,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// <summary>
         /// Let our UI know we have updates started / stopped
         /// </summary>
-        public bool UpdatesStarted;
+        public bool UpdatesStarted { get; private set; }
 
         /// <summary>
         /// Is Bluetooth LE state on?
