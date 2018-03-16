@@ -30,7 +30,20 @@ namespace CIM.RemoteManager.Core.Pages
 
             //}
 
-            
+            // Get instance of sensor details viewmodel
+            var sensorDetailsViewModel = this.BindingContext as SensorDetailsViewModel;
+            // Add device settings toolbar icon and handle selection
+            ToolbarItems.Add(new ToolbarItem("Refresh Sensor Data", "ic_refresh-sensordata.png", () =>
+            {
+                // Validate
+                if (sensorDetailsViewModel != null)
+                {
+                    // Refresh sensor data
+                    sensorDetailsViewModel.StopUpdatesCommand.Execute();
+                    sensorDetailsViewModel.StartUpdatesCommand.Execute();
+                }
+            }, ToolbarItemOrder.Primary, 0));
+
         }
 
         /// <summary>
@@ -66,17 +79,6 @@ namespace CIM.RemoteManager.Core.Pages
             else
             {
                 var sensorDetailsViewModel = (SensorDetailsViewModel)this.BindingContext;
-                // Add device settings toolbar icon and handle selection
-                ToolbarItems.Add(new ToolbarItem("Refresh Sensor Data", "ic_refresh-sensordata.png", () =>
-                {
-                    // Validate
-                    if (sensorDetailsViewModel != null)
-                    {
-                        // Refresh sensor data
-                        sensorDetailsViewModel.StopUpdatesCommand.Execute();
-                        sensorDetailsViewModel.StartUpdatesCommand.Execute();
-                    }
-                }));
                 // Validate
                 if (sensorDetailsViewModel != null)
                 {

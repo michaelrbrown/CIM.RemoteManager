@@ -655,7 +655,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             switch (conversionType)
             {
                 case "F":
-                    _userDialogs.Alert($"(F) Message Counters Data: {sensorValues}", "CIMScan RemoteManager");
+                    //_userDialogs.Alert($"(F) Message Counters Data: {sensorValues}", "CIMScan RemoteManager");
 
                     // "F" Message counter data serialization
                     TotalOutgoingMessages = sensorValues.Substring(2, 2).SafeHexToInt();
@@ -667,6 +667,10 @@ namespace CIM.RemoteManager.Core.ViewModels
                     TotalActiveSensors = sensorValues.Substring(14, 2).SafeHexToInt();
                     TotalRecordsInHistoryBuffer = sensorValues.Substring(16, 2).SafeHexToInt();
                     CurrentDateTime = sensorValues.Substring(20, 8).SafeConvert<string>("");
+
+                    _userDialogs.Alert($"(F) Message Counters TotalActiveSensors: {TotalActiveSensors}", "CIMScan RemoteManager");
+                    _userDialogs.Alert($"(F) Message Counters CurrentDateTime: {CurrentDateTime}", "CIMScan RemoteManager");
+
                     break;
                 default:
                     // Split by tab delimiter

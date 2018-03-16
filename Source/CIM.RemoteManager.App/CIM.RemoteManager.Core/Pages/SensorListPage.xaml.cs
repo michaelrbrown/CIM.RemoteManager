@@ -21,7 +21,7 @@ namespace CIM.RemoteManager.Core.Pages
             ToolbarItems.Add(new ToolbarItem("Device Settings", "ic_remote-settings.png", () =>
             {
                 
-            }));
+            }, ToolbarItemOrder.Primary, 0));
         }
         
         private void ListView_OnItemTapped(object sender, ItemTappedEventArgs itemTappedEventArgs)
