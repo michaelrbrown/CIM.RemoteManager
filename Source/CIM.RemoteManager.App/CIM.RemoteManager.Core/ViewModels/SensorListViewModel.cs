@@ -86,7 +86,11 @@ namespace CIM.RemoteManager.Core.ViewModels
         public string UpdateButtonText => UpdatesStarted ? "Updates On" : "Updates Off";
 
         /// <summary>
-        /// Sensor record types (serialized into models later)
+        /// Message counter (F record)
+        /// </summary>
+        public bool StartMessageCounterValueRecord { get; set; } = false;
+        /// <summary>
+        /// Sensor record types (A record)
         /// </summary>
         public bool StartFullSensorValueRecord { get; set; } = false;
         public bool StartAverageSensorValueRecord { get; set; } = false;
@@ -101,6 +105,19 @@ namespace CIM.RemoteManager.Core.ViewModels
             set => SetProperty(ref _isLoading, value);
         }
 
+        /// <summary>
+        ///  "F" = full information
+        ///   total outgoing
+        ///   retries
+        ///   values
+        ///   total incoming
+        ///   errors
+        ///   time since last message
+        ///   active sensors
+        ///   buffered measurements
+        ///   current date/time
+        /// </summary>
+        public readonly StringBuilder MessageCounterValue = new StringBuilder("");
         /// <summary>
         ///  "A" = full information
         ///   index (#)
@@ -205,8 +222,8 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// <summary>
         /// Present unix time
         /// </summary>
-        private string _currentDateTime;
-        public string CurrentDateTime
+        private double _currentDateTime;
+        public double CurrentDateTime
         {
             get => _currentDateTime;
             set => SetProperty(ref _currentDateTime, value);
@@ -215,6 +232,50 @@ namespace CIM.RemoteManager.Core.ViewModels
         #endregion
 
         #region Parsing Routines
+
+        /// <summary>
+        /// Get message counters from remote.
+        /// </summary>
+        /// <param name="characteristicValue"></param>
+        private void GetMessageCounterValues(string characteristicValue)
+        {
+            if (String.IsNullOrEmpty(characteristicValue)) return;
+
+            // Start reading all "message counter values"
+            if (!StartMessageCounterValueRecord && characteristicValue.Contains("{F"))
+            {
+                // If we hit an end char } then record all data up to it
+                if (characteristicValue.Contains("}"))
+                {
+                    MessageCounterValue.Append(characteristicValue);
+                    SerializeStringToSensor(MessageCounterValue.ToString(), "F");
+                    MessageCounterValue.Clear();
+                    StartMessageCounterValueRecord = false;
+                }
+                else
+                {
+                    // Read all characters in buffer while we are within the {}
+                    MessageCounterValue.Append(characteristicValue.Trim(new Char[] { '{' }));
+                    StartMessageCounterValueRecord = true;
+                }
+            }
+            else if (StartMessageCounterValueRecord)
+            {
+                // If we hit an end char } then record all data up to it
+                if (characteristicValue.Contains("}"))
+                {
+                    MessageCounterValue.Append(characteristicValue.GetUntilOrEmpty());
+                    SerializeStringToSensor(MessageCounterValue.ToString(), "F");
+                    MessageCounterValue.Clear();
+                    StartMessageCounterValueRecord = false;
+                }
+                else
+                {
+                    // Read all characters in buffer while we are within the {}
+                    MessageCounterValue.Append(characteristicValue);
+                }
+            }
+        }
 
         /// <summary>
         /// Get Full values for sensor from buffered data
@@ -329,7 +390,13 @@ namespace CIM.RemoteManager.Core.ViewModels
                     LastServerMessageReceived = sensorValues.Substring(12, 2).SafeHexToInt();
                     TotalActiveSensors = sensorValues.Substring(14, 2).SafeHexToInt();
                     TotalRecordsInHistoryBuffer = sensorValues.Substring(16, 2).SafeHexToInt();
-                    CurrentDateTime = sensorValues.Substring(20, 8).SafeConvert<string>("");
+                    CurrentDateTime = sensorValues.Substring(20, 8).SafeHexToDouble();
+
+                    // New instance of station helper
+                    var stationHelper = new StationHelper();
+                    // Validate our current remote Unix date time. Update to current Unix UTC date time
+                    // if year < 2009.
+                    stationHelper.HandleRemoteDateTimeValidation(TxCharacteristic, CurrentDateTime);
                     break;
                 case "A":
                     // "A" Sensor data serialization
@@ -438,6 +505,9 @@ namespace CIM.RemoteManager.Core.ViewModels
         {
             try
             {
+                // Get message counter values from remote to determine if
+                // we have acquired or lost sensors.  Also grabs time stamp.
+                GetMessageCounterValues(CharacteristicValue);
                 // Get full sensor values
                 GetFullSensorValues(CharacteristicValue);
                 // Get average sensor values
@@ -531,8 +601,6 @@ namespace CIM.RemoteManager.Core.ViewModels
                 // Make sure we can write characteristic data to remote
                 if (TxCharacteristic.CanWrite)
                 {
-                    // Send acquire sensors command to remote
-                    await TxCharacteristic.WriteAsync("{A00400000001}".StrToByteArray()).ConfigureAwait(true);
                     // Send a refresh command
                     await TxCharacteristic.WriteAsync("{Y}".StrToByteArray()).ConfigureAwait(true);
                 }
@@ -540,10 +608,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 {
                     _userDialogs.Alert("Cannot write characteristic data to remote!", "CIMScan Remote Manager");
                 }
-
-                // Wait 500 milliseconds
-                await Task.Delay(500).ConfigureAwait(true);
-
+                
                 // Get Characteristics service
                 RxCharacteristic = await _service.GetCharacteristicAsync(RxUuid).ConfigureAwait(true);
             }
@@ -592,13 +657,16 @@ namespace CIM.RemoteManager.Core.ViewModels
                 _userDialogs.Alert(ex.Message, "Error while loading sensor data");
             }
         }
-
+        
         /// <summary>
         /// On Resume
         /// </summary>
         public override void Resume()
         {
             base.Resume();
+
+            _userDialogs.Alert("resume", "Error while loading sensor data");
+
             if (!UpdatesStarted)
             {
                 StartUpdates();
@@ -640,6 +708,8 @@ namespace CIM.RemoteManager.Core.ViewModels
             try
             {
                 UpdatesStarted = true;
+                // Notify property changed
+                RaisePropertyChanged(() => UpdatesStarted);
 
                 // Subscribe to value updated events
                 RxCharacteristic.ValueUpdated -= RxCharacteristicOnValueUpdated;
@@ -668,6 +738,8 @@ namespace CIM.RemoteManager.Core.ViewModels
             try
             {
                 UpdatesStarted = false;
+                // Notify property changed
+                RaisePropertyChanged(() => UpdatesStarted);
 
                 // Stop updates from Bluetooth service
                 await RxCharacteristic.StopUpdatesAsync().ConfigureAwait(true);

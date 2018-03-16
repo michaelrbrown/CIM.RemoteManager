@@ -53,6 +53,7 @@
     <Compile Include="Helpers\DateTimeHelper.cs" />
     <Compile Include="Helpers\SensorTypeConverter.cs" />
     <Compile Include="Helpers\Settings.cs" />
+    <Compile Include="Helpers\StationHelper.cs" />
     <Compile Include="Helpers\StringHelper.cs" />
     <Compile Include="Helpers\TrulyObservableCollection.cs" />
     <Compile Include="Models\BindableBase.cs" />
