@@ -658,15 +658,15 @@ namespace CIM.RemoteManager.Core.ViewModels
                     
 
                     // "F" Message counter data serialization
-                    TotalOutgoingMessages = sensorValues.Substring(2, 2).SafeHexToInt();
-                    TotalOutgoingRetries = sensorValues.Substring(4, 2).SafeHexToInt();
-                    TotalOutgoingValues = sensorValues.Substring(6, 2).SafeHexToInt();
-                    TotalIncomingMessages = sensorValues.Substring(8, 2).SafeHexToInt();
-                    TotalIncomingErrors = sensorValues.Substring(10, 2).SafeHexToInt();
-                    LastServerMessageReceived = sensorValues.Substring(12, 2).SafeHexToInt();
-                    TotalActiveSensors = sensorValues.Substring(14, 2).SafeHexToInt();
-                    TotalRecordsInHistoryBuffer = sensorValues.Substring(16, 2).SafeHexToInt();
-                    CurrentDateTime = sensorValues.Substring(20, 8).SafeConvert<string>("");
+                    TotalOutgoingMessages = sensorValues.Substring(1, 2).SafeHexToInt();
+                    TotalOutgoingRetries = sensorValues.Substring(3, 2).SafeHexToInt();
+                    TotalOutgoingValues = sensorValues.Substring(5, 2).SafeHexToInt();
+                    TotalIncomingMessages = sensorValues.Substring(7, 2).SafeHexToInt();
+                    TotalIncomingErrors = sensorValues.Substring(9, 2).SafeHexToInt();
+                    LastServerMessageReceived = sensorValues.Substring(11, 2).SafeHexToInt();
+                    TotalActiveSensors = sensorValues.Substring(13, 2).SafeHexToInt();
+                    TotalRecordsInHistoryBuffer = sensorValues.Substring(15, 2).SafeHexToInt();
+                    CurrentDateTime = sensorValues.Substring(19, 8).SafeConvert<string>("");
 
                     _userDialogs.Alert($"(F) Message Counters Data: {sensorValues}", "CIMScan RemoteManager");
 
