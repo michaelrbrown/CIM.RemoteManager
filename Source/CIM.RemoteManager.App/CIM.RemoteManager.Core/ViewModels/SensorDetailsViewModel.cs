@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using System.Threading.Tasks;
 using Acr.UserDialogs;
 using CIM.RemoteManager.Core.Helpers;
 using CIM.RemoteManager.Core.Models;
@@ -133,6 +134,11 @@ namespace CIM.RemoteManager.Core.ViewModels
             get => _isLoading;
             set => SetProperty(ref _isLoading, value);
         }
+
+        /// <summary>
+        /// Read try count before stopping characteristic service.  A fail safe.
+        /// </summary>
+        public int RxTryCount { get; set; } = 0;
 
         /// <summary>
         /// Sensor record types (serialized into models later)
@@ -966,9 +972,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                     // Notify property changed
                     RaisePropertyChanged(() => SensorName);
                 }
-
-                //_userDialogs.Alert(SensorIndexSelected.ToString(), "Sensor Index Selected");
-
+                
                 // Notify property changed
                 RaisePropertyChanged(() => SensorIndexSelected);
 
@@ -1002,7 +1006,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             base.Resume();
             if (!UpdatesStarted)
             {
-                StartUpdates();
+                //StartUpdates();
             }
         }
         
@@ -1032,16 +1036,64 @@ namespace CIM.RemoteManager.Core.ViewModels
                     return "Unknown Bluetooth LE state.";
             }
         }
-        
+
         /// <summary>
-        /// Start bluetooth characteristics updating.
+        /// Start Bluetooth characteristics updating
         /// </summary>
         private async void StartUpdates()
         {
             try
             {
+                if (IsLoading)
+                {
+                    // Make sure we are done with our initialization before starting updates
+                    while (IsLoading && !UpdatesStarted && RxTryCount < 100)
+                    {
+                        if (!IsLoading)
+                        {
+                            // Handle updates started
+                            await HandleUpdatesStarted().ConfigureAwait(false);
+
+                            // Reset try count
+                            RxTryCount = 0;
+                        }
+                        else
+                        {
+                            await Task.Delay(1000).ConfigureAwait(true);
+                            // Recursive process until we complete initialization
+                            StartUpdates();
+                        }
+                        // Increment try count
+                        RxTryCount++;
+                    }
+                }
+                else
+                {
+                    // Initialization is done so let's just start
+                    await HandleUpdatesStarted();
+                }
+            }
+            catch (Exception ex)
+            {
+                UpdatesStarted = false;
+                // Notify property changed
+                RaisePropertyChanged(() => UpdatesStarted);
+
+                HockeyApp.MetricsManager.TrackEvent($"(StartUpdates) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
+                _userDialogs.Alert(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Handle updates started by updating interface with bound values from parsed characteristics.
+        /// </summary>
+        /// <returns></returns>
+        private async Task HandleUpdatesStarted()
+        {
+            try
+            {
                 UpdatesStarted = true;
-                
+
                 // Send refresh command to remote
                 string updateValue = string.Empty;
                 if (SensorCommandType == SensorCommand.Plot)
@@ -1067,7 +1119,11 @@ namespace CIM.RemoteManager.Core.ViewModels
             }
             catch (Exception ex)
             {
-                HockeyApp.MetricsManager.TrackEvent($"(StartUpdates) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
+                UpdatesStarted = false;
+                // Notify property changed
+                RaisePropertyChanged(() => UpdatesStarted);
+
+                HockeyApp.MetricsManager.TrackEvent($"(HandleUpdatesStarted) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
                 _userDialogs.Alert(ex.Message);
             }
         }

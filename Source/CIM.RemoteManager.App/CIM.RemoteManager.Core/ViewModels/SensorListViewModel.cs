@@ -96,6 +96,11 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
+        /// Read try count before stopping characteristic service.  A fail safe.
+        /// </summary>
+        public int RxTryCount { get; set; } = 0;
+
+        /// <summary>
         /// Message counter (F record)
         /// </summary>
         public bool StartMessageCounterValueRecord { get; set; } = false;
@@ -575,6 +580,9 @@ namespace CIM.RemoteManager.Core.ViewModels
         {
             try
             {
+                // Loading indicator
+                IsLoading = true;
+
                 _bluetoothLe = bluetoothLe;
                 _userDialogs = userDialogs;
 
@@ -589,6 +597,9 @@ namespace CIM.RemoteManager.Core.ViewModels
             }
             catch (Exception ex)
             {
+                // Loading indicator (make sure it turns off even with exception thrown)
+                IsLoading = false;
+
                 _userDialogs.Alert(ex.Message, "Error while loading sensor data");
                 Mvx.Trace(ex.Message);
             }
@@ -610,9 +621,6 @@ namespace CIM.RemoteManager.Core.ViewModels
 
             try
             {
-                // Loading indicator
-                IsLoading = true;
-
                 // Get our AdaFruit Bluetooth service (UART)
                 _service = await _device.GetServiceAsync(UartUuid).ConfigureAwait(true);
 
@@ -623,7 +631,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 if (TxCharacteristic.CanWrite)
                 {
                     // Send a refresh command
-                    await TxCharacteristic.WriteAsync("{Y}".StrToByteArray()).ConfigureAwait(true);
+                    await TxCharacteristic.WriteAsync("{Y}".StrToByteArray()).ConfigureAwait(false);
                 }
                 else
                 {
@@ -635,13 +643,15 @@ namespace CIM.RemoteManager.Core.ViewModels
             }
             catch (Exception ex)
             {
+                // Loading indicator (make sure it turns off even with exception thrown)
+                IsLoading = false;
+
                 _userDialogs.HideLoading();
                 HockeyApp.MetricsManager.TrackEvent($"(InitRemote) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
                 _userDialogs.Alert(ex.Message);
             }
             finally
             {
-                // Loading indicator (make sure it turns off even with exception thrown)
                 IsLoading = false;
             }
         }
@@ -674,6 +684,9 @@ namespace CIM.RemoteManager.Core.ViewModels
             }
             catch (Exception ex)
             {
+                // Loading indicator (make sure it turns off even with exception thrown)
+                IsLoading = false;
+
                 HockeyApp.MetricsManager.TrackEvent($"(InitFromBundle) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
                 _userDialogs.Alert(ex.Message, "Error while loading sensor data");
             }
@@ -728,6 +741,54 @@ namespace CIM.RemoteManager.Core.ViewModels
         {
             try
             {
+                if (IsLoading)
+                {
+                    // Make sure we are done with our initialization before starting updates
+                    while (IsLoading && !UpdatesStarted && RxTryCount < 100)
+                    {
+                        if (!IsLoading)
+                        {
+                            // Handle updates started
+                            await HandleUpdatesStarted().ConfigureAwait(false);
+
+                            // Reset try count
+                            RxTryCount = 0;
+                        }
+                        else
+                        {
+                            await Task.Delay(1000).ConfigureAwait(true);
+                            // Recursive process until we complete initialization
+                            StartUpdates();
+                        }
+                        // Increment try count
+                        RxTryCount++;
+                    }
+                }
+                else
+                {
+                    // Initialization is done so let's just start
+                    await HandleUpdatesStarted();
+                }
+            }
+            catch (Exception ex)
+            {
+                UpdatesStarted = false;
+                // Notify property changed
+                RaisePropertyChanged(() => UpdatesStarted);
+
+                HockeyApp.MetricsManager.TrackEvent($"(StartUpdates) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
+                _userDialogs.Alert(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Handle updates started by updating interface with bound values from parsed characteristics.
+        /// </summary>
+        /// <returns></returns>
+        private async Task HandleUpdatesStarted()
+        {
+            try
+            {
                 UpdatesStarted = true;
                 // Notify property changed
                 RaisePropertyChanged(() => UpdatesStarted);
@@ -750,7 +811,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 // Notify property changed
                 RaisePropertyChanged(() => UpdatesStarted);
 
-                HockeyApp.MetricsManager.TrackEvent($"(StartUpdates) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
+                HockeyApp.MetricsManager.TrackEvent($"(HandleUpdatesStarted) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
                 _userDialogs.Alert(ex.Message);
             }
         }
