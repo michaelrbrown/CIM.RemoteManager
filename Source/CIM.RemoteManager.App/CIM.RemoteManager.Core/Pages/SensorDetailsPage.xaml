@@ -6,6 +6,7 @@
              BackgroundColor="#FFFFFF">
 
     <pages:BasePage Title="Sensor Plot" BackgroundColor="#FFFFFF" Icon="ic_sensor-plot.png">
+
         <!-- Background -->
         <Image
             Aspect="AspectFill"
@@ -27,7 +28,6 @@
 
         <!-- Margin: left, top, right, bottom -->
         <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Transparent">
-
             <Grid.RowDefinitions>
                 <RowDefinition Height="80"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>

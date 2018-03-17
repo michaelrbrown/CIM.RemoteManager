@@ -948,7 +948,6 @@ namespace CIM.RemoteManager.Core.ViewModels
                 // Loading indicator (make sure it turns off even with exception thrown)
                 IsLoading = false;
             }
-
         }
 
         /// <summary>

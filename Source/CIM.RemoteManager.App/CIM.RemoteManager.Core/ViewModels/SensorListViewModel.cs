@@ -370,6 +370,28 @@ namespace CIM.RemoteManager.Core.ViewModels
             }
         }
 
+        public async void HandleRemoteDateTimeValidation(ICharacteristic txCharacteristic, double remoteUnixDateTime)
+        {
+            _userDialogs.Alert($"(F) Message Counters Data: {remoteUnixDateTime.UnixTimeStampToDateTime()}", "CIMScan RemoteManager");
+            // Validate our station Unix time converted to windows time is less 
+            // than 2009.  If it is we know the station time needs to be set.
+            if (remoteUnixDateTime.UnixTimeStampToDateTime().Year < 2009)
+            {
+                // Get Unix timestamp "now" as UTC
+                Int32 unixTimestampUtc = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+
+                // Format DA-12 station Unix timestamp
+                // T - is to set the station time,
+                // 0 - is the data type
+                // 00 - device index / unused
+                // Next set of digits is Unix time UTC
+                string remoteUnitTimestamp = "{T000" + unixTimestampUtc + "}";
+
+                // Send set Unix UTC time command to remote
+                await txCharacteristic.WriteAsync(remoteUnitTimestamp.StrToByteArray()).ConfigureAwait(true);
+            }
+        }
+
         /// <summary>
         /// Serialize tab based sensor data to strongly typed Sensor model
         /// </summary>
@@ -401,7 +423,8 @@ namespace CIM.RemoteManager.Core.ViewModels
                     var stationHelper = new StationHelper();
                     // Validate our current remote Unix date time. Update to current Unix UTC date time
                     // if year < 2009.
-                    stationHelper.HandleRemoteDateTimeValidation(TxCharacteristic, CurrentDateTime);
+                    //stationHelper.HandleRemoteDateTimeValidation(TxCharacteristic, CurrentDateTime);
+                    HandleRemoteDateTimeValidation(TxCharacteristic, CurrentDateTime);
                     break;
                 case "A":
                     // "A" Sensor data serialization
@@ -698,13 +721,6 @@ namespace CIM.RemoteManager.Core.ViewModels
         public override void Resume()
         {
             base.Resume();
-
-            //_userDialogs.Alert("resume", "loading sensor data");
-
-            if (!UpdatesStarted)
-            {
-                //StartUpdates();
-            }
         }
         
         /// <summary>
@@ -743,9 +759,11 @@ namespace CIM.RemoteManager.Core.ViewModels
             {
                 if (IsLoading)
                 {
+                    _userDialogs.Alert("IsLoading...");
                     // Make sure we are done with our initialization before starting updates
                     while (IsLoading && !UpdatesStarted && RxTryCount < 100)
                     {
+                        _userDialogs.Alert(RxTryCount.ToString());
                         if (!IsLoading)
                         {
                             // Handle updates started
@@ -766,6 +784,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 }
                 else
                 {
+                    _userDialogs.Alert("HandleUpdatesStarted...");
                     // Initialization is done so let's just start
                     await HandleUpdatesStarted();
                 }
