@@ -86,16 +86,6 @@ namespace CIM.RemoteManager.Core.ViewModels
         public string UpdateButtonText => UpdatesStarted ? "Updates On" : "Updates Off";
 
         /// <summary>
-        /// Message counter (F record)
-        /// </summary>
-        public bool StartMessageCounterValueRecord { get; set; } = false;
-        /// <summary>
-        /// Sensor record types (A record)
-        /// </summary>
-        public bool StartFullSensorValueRecord { get; set; } = false;
-        public bool StartAverageSensorValueRecord { get; set; } = false;
-
-        /// <summary>
         /// Is loading indicator for view
         /// </summary>
         bool _isLoading = false;
@@ -106,6 +96,16 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
+        /// Message counter (F record)
+        /// </summary>
+        public bool StartMessageCounterValueRecord { get; set; } = false;
+        /// <summary>
+        /// Sensor record types (A record)
+        /// </summary>
+        public bool StartFullSensorValueRecord { get; set; } = false;
+        public bool StartAverageSensorValueRecord { get; set; } = false;
+
+        // <summary>
         ///  "F" = full information
         ///   total outgoing
         ///   retries
@@ -527,6 +527,28 @@ namespace CIM.RemoteManager.Core.ViewModels
         #region Commands
 
         /// <summary>
+        /// Start sensor updates.
+        /// </summary>
+        public MvxCommand StartUpdatesCommand => new MvxCommand(() =>
+        {
+            if (!UpdatesStarted)
+            {
+                StartUpdates();
+            }
+        });
+
+        /// <summary>
+        /// Stop sensor updates.
+        /// </summary>
+        public MvxCommand StopUpdatesCommand => new MvxCommand(() =>
+        {
+            if (UpdatesStarted)
+            {
+                StopUpdates();
+            }
+        });
+
+        /// <summary>
         /// Toggle sensor updates
         /// </summary>
         public MvxCommand ToggleUpdatesCommand => new MvxCommand((() =>
@@ -664,11 +686,11 @@ namespace CIM.RemoteManager.Core.ViewModels
         {
             base.Resume();
 
-            _userDialogs.Alert("resume", "loading sensor data");
+            //_userDialogs.Alert("resume", "loading sensor data");
 
             if (!UpdatesStarted)
             {
-                StartUpdates();
+                //StartUpdates();
             }
         }
         

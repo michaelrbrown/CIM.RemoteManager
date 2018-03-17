@@ -23,6 +23,26 @@ namespace CIM.RemoteManager.Core.Pages
                 
             }, ToolbarItemOrder.Primary, 0));
         }
+
+        /// <summary>
+        /// Called when [appearing].
+        /// </summary>
+        /// <remarks>
+        /// Start updates in on appearing life cycle.
+        /// </remarks>
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            // Get instance of SensorListViewModel
+            var sensorListViewModel = (SensorListViewModel)this.BindingContext;
+            // Validate
+            if (sensorListViewModel != null)
+            {
+                sensorListViewModel.StopUpdatesCommand.Execute();
+                sensorListViewModel.StartUpdatesCommand.Execute();
+            }
+        }
         
         /// <summary>
         /// Handle toggling of sensor updates

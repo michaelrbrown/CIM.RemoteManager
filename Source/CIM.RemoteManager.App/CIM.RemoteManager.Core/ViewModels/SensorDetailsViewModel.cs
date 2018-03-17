@@ -125,6 +125,16 @@ namespace CIM.RemoteManager.Core.ViewModels
         public string UpdateButtonText => UpdatesStarted ? "Updates On" : "Updates Off";
 
         /// <summary>
+        /// Is loading indicator for view
+        /// </summary>
+        bool _isLoading = false;
+        public bool IsLoading
+        {
+            get => _isLoading;
+            set => SetProperty(ref _isLoading, value);
+        }
+
+        /// <summary>
         /// Sensor record types (serialized into models later)
         /// </summary>
         public bool StartSensorBufferedValueRecord { get; set; } = false;
@@ -884,6 +894,9 @@ namespace CIM.RemoteManager.Core.ViewModels
 
             try
             {
+                // Loading indicator
+                IsLoading = true;
+
                 // Get our Adafruit bluetooth service (UART)
                 _service = await _device.GetServiceAsync(UartUuid).ConfigureAwait(true);
 
@@ -923,6 +936,11 @@ namespace CIM.RemoteManager.Core.ViewModels
                 _userDialogs.HideLoading();
                 HockeyApp.MetricsManager.TrackEvent($"(InitRemote) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
                 _userDialogs.Alert(ex.Message);
+            }
+            finally
+            {
+                // Loading indicator (make sure it turns off even with exception thrown)
+                IsLoading = false;
             }
 
         }
