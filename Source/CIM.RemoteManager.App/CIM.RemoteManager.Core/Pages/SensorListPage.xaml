@@ -54,7 +54,7 @@
 
                     <StackLayout Grid.Row="0" Grid.Column="0" Orientation="Vertical" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Spacing="0">
                         <Label Text="{Binding UpdateButtonText, Mode=TwoWay}" TextColor="{DynamicResource AppLightColor}" HorizontalOptions="Center" VerticalOptions="Center" />
-                        <Switch IsToggled="{Binding UpdatesStarted, Mode=TwoWay}" Toggled="SensorUpdatesSwitchToggled" Margin="5" HorizontalOptions="Center" VerticalOptions="Center" />
+                        <Switch Toggled="SensorUpdatesSwitchToggled" Margin="5" HorizontalOptions="Center" VerticalOptions="Center" />
                     </StackLayout>
 
                     <Image Grid.Row="0" Grid.Column="1" Source="remote512.png" Margin="10" HeightRequest="120" WidthRequest="120" Aspect="AspectFit" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />

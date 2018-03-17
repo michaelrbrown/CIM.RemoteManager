@@ -48,7 +48,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// <summary>
         /// Let our UI know we have updates started / stopped
         /// </summary>
-        public bool UpdatesStarted { get; set; }
+        public bool UpdatesStarted;
 
         /// <summary>
         /// Is Bluetooth LE state on?
@@ -675,6 +675,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             }
             finally
             {
+                _userDialogs.Alert"IsLoading = False;");
                 IsLoading = false;
             }
         }
@@ -757,6 +758,8 @@ namespace CIM.RemoteManager.Core.ViewModels
         {
             try
             {
+                _userDialogs.Alert(IsLoading.ToString());
+
                 if (IsLoading)
                 {
                     _userDialogs.Alert("IsLoading...");
