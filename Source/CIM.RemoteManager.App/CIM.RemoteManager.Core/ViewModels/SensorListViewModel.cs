@@ -758,17 +758,22 @@ namespace CIM.RemoteManager.Core.ViewModels
         {
             try
             {
-                _userDialogs.Alert("IsLoading: {IsLoading.ToString()};");
+                _userDialogs.Alert($"1");
 
                 if (IsLoading)
                 {
 
-                    _userDialogs.Alert($"IsLoading: {IsLoading.ToString()}; Updates started: {UpdatesStarted.ToString()}; RxTryCount: {RxTryCount.ToString()}");
+                    //_userDialogs.Alert($"IsLoading: {IsLoading.ToString()}; Updates started: {UpdatesStarted.ToString()}; RxTryCount: {RxTryCount.ToString()}");
+
+                    _userDialogs.Alert($"2;");
+
 
                     // Make sure we are done with our initialization before starting updates
                     while (IsLoading && !UpdatesStarted && RxTryCount < 100)
                     {
-                        _userDialogs.Alert(RxTryCount.ToString());
+                        //_userDialogs.Alert(RxTryCount.ToString());
+                        _userDialogs.Alert($"3;");
+
                         if (!IsLoading)
                         {
                             // Handle updates started
