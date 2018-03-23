@@ -20,7 +20,6 @@ namespace CIM.RemoteManager.Core.Pages
             // Add device settings toolbar icon and handle selection
             //ToolbarItems.Add(new ToolbarItem("Device Settings", "ic_remote-settings.png", () =>
             //{
-                
             //}, ToolbarItemOrder.Primary, 0));
         }
 
@@ -43,7 +42,7 @@ namespace CIM.RemoteManager.Core.Pages
             //    sensorListViewModel.StartUpdatesCommand.Execute();
             //}
         }
-        
+
         /// <summary>
         /// Handle toggling of sensor updates
         /// </summary>

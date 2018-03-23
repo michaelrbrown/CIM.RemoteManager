@@ -147,7 +147,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         public readonly StringBuilder AverageSensorValue = new StringBuilder("");
 
         #endregion
-        
+
         #region Message Counters
 
         private int _totalOutgoingMessages;
@@ -373,7 +373,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         public async void HandleRemoteDateTimeValidation(ICharacteristic txCharacteristic, double remoteUnixDateTime)
         {
             _userDialogs.Alert($"(F) Message Counters Data: {remoteUnixDateTime.UnixTimeStampToDateTime()}", "CIMScan RemoteManager");
-            // Validate our station Unix time converted to windows time is less 
+            // Validate our station Unix time converted to windows time is less
             // than 2009.  If it is we know the station time needs to be set.
             if (remoteUnixDateTime.UnixTimeStampToDateTime().Year < 2009)
             {
@@ -631,7 +631,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// <summary>
         /// Initialization of Bluetooth service characteristics.
         /// Refresh command sent to remote to start sensor data flow.
-        /// Reading in of A, B, and F sensor records and serializing 
+        /// Reading in of A, B, and F sensor records and serializing
         /// to model for display in UI.
         /// </summary>
         private async void InitRemote()
@@ -660,7 +660,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 {
                     _userDialogs.Alert("Cannot write characteristic data to remote!", "CIMScan Remote Manager");
                 }
-                
+
                 // Get Characteristics service
                 RxCharacteristic = await _service.GetCharacteristicAsync(RxUuid).ConfigureAwait(true);
             }
@@ -675,7 +675,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             }
             finally
             {
-                _userDialogs.Alert"IsLoading = False;");
+                _userDialogs.Alert("IsLoading = False;");
                 IsLoading = false;
             }
         }
@@ -715,7 +715,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 _userDialogs.Alert(ex.Message, "Error while loading sensor data");
             }
         }
-        
+
         /// <summary>
         /// On Resume
         /// </summary>
@@ -723,7 +723,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         {
             base.Resume();
         }
-        
+
         /// <summary>
         /// Setup all the possible Bluetooth LE states
         /// </summary>
@@ -750,7 +750,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                     return "Unknown Bluetooth LE state.";
             }
         }
-        
+
         /// <summary>
         /// Start Bluetooth characteristics updating
         /// </summary>
@@ -758,11 +758,13 @@ namespace CIM.RemoteManager.Core.ViewModels
         {
             try
             {
-                _userDialogs.Alert(IsLoading.ToString());
+                _userDialogs.Alert("IsLoading: {IsLoading.ToString()};");
 
                 if (IsLoading)
                 {
-                    _userDialogs.Alert("IsLoading...");
+
+                    _userDialogs.Alert($"IsLoading: {IsLoading.ToString()}; Updates started: {UpdatesStarted.ToString()}; RxTryCount: {RxTryCount.ToString()}");
+
                     // Make sure we are done with our initialization before starting updates
                     while (IsLoading && !UpdatesStarted && RxTryCount < 100)
                     {
@@ -854,7 +856,7 @@ namespace CIM.RemoteManager.Core.ViewModels
 
                 // Subscribe to value updated events
                 RxCharacteristic.ValueUpdated -= RxCharacteristicOnValueUpdated;
-                
+
                 // Let UI know mode we are in
                 RaisePropertyChanged(() => UpdateButtonText);
             }
@@ -868,7 +870,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 _userDialogs.Alert(ex.Message);
             }
         }
-        
+
         /// <summary>
         /// Sensor selected (navigate to sensor plot page)
         /// </summary>
@@ -889,6 +891,6 @@ namespace CIM.RemoteManager.Core.ViewModels
                 ShowViewModel<SensorDetailsViewModel>(bundle);
             }
         }
-        
+
     }
 }
