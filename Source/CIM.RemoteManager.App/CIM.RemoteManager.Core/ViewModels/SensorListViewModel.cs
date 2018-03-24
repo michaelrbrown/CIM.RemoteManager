@@ -48,7 +48,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// <summary>
         /// Let our UI know we have updates started / stopped
         /// </summary>
-        public bool UpdatesStarted;
+        public bool UpdatesStarted { get; private set; }
 
         /// <summary>
         /// Is Bluetooth LE state on?
@@ -370,9 +370,17 @@ namespace CIM.RemoteManager.Core.ViewModels
             }
         }
 
+        /// <summary>
+        /// Checks if remote date year is before 2009 which means the time has not been set yet.
+        /// Sets the time to unix time if this is true.
+        /// </summary>
+        /// <param name="txCharacteristic">The tx characteristic.</param>
+        /// <param name="remoteUnixDateTime">The remote unix date time.</param>
         public async void HandleRemoteDateTimeValidation(ICharacteristic txCharacteristic, double remoteUnixDateTime)
         {
+
             _userDialogs.Alert($"(F) Message Counters Data: {remoteUnixDateTime.UnixTimeStampToDateTime()}", "CIMScan RemoteManager");
+
             // Validate our station Unix time converted to windows time is less
             // than 2009.  If it is we know the station time needs to be set.
             if (remoteUnixDateTime.UnixTimeStampToDateTime().Year < 2009)
@@ -763,7 +771,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 if (IsLoading)
                 {
 
-                    //_userDialogs.Alert($"IsLoading: {IsLoading.ToString()}; Updates started: {UpdatesStarted.ToString()}; RxTryCount: {RxTryCount.ToString()}");
+                    _userDialogs.Alert($"IsLoading: {IsLoading.ToString()}; Updates started: {UpdatesStarted.ToString()}; RxTryCount: {RxTryCount.ToString()}");
 
                     _userDialogs.Alert($"2;");
 
