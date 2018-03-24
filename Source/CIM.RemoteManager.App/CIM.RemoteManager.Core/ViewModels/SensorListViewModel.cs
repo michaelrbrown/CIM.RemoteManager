@@ -110,7 +110,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         public bool StartFullSensorValueRecord { get; set; } = false;
         public bool StartAverageSensorValueRecord { get; set; } = false;
 
-        // <summary>
+        /// <summary>
         ///  "F" = full information
         ///   total outgoing
         ///   retries
@@ -120,7 +120,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         ///   time since last message
         ///   active sensors
         ///   buffered measurements
-        ///   current date/time
+        ///   current datetime
         /// </summary>
         public readonly StringBuilder MessageCounterValue = new StringBuilder("");
         /// <summary>
@@ -225,10 +225,10 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
-        /// Present unix time
+        /// Present Unix time
         /// </summary>
-        private double _currentDateTime;
-        public double CurrentDateTime
+        private int _currentDateTime;
+        public int CurrentDateTime
         {
             get => _currentDateTime;
             set => SetProperty(ref _currentDateTime, value);
@@ -372,10 +372,10 @@ namespace CIM.RemoteManager.Core.ViewModels
 
         /// <summary>
         /// Checks if remote date year is before 2009 which means the time has not been set yet.
-        /// Sets the time to unix time if this is true.
+        /// Sets the time to Unix time if this is true.
         /// </summary>
-        /// <param name="txCharacteristic">The tx characteristic.</param>
-        /// <param name="remoteUnixDateTime">The remote unix date time.</param>
+        /// <param name="txCharacteristic">The TX characteristic.</param>
+        /// <param name="remoteUnixDateTime">The remote Unix date time.</param>
         public async void HandleRemoteDateTimeValidation(ICharacteristic txCharacteristic, double remoteUnixDateTime)
         {
 
@@ -414,25 +414,27 @@ namespace CIM.RemoteManager.Core.ViewModels
             switch (conversionType)
             {
                 case "F":
-                    _userDialogs.Alert($"(F) Message Counters Data: {sensorValues}", "CIMScan RemoteManager");
+                    //_userDialogs.Alert($"(F) Message Counters Data: {sensorValues}", "CIMScan RemoteManager");
 
                     // "F" Message counter data serialization
-                    TotalOutgoingMessages = sensorValues.Substring(2, 2).SafeHexToInt();
-                    TotalOutgoingRetries = sensorValues.Substring(4, 2).SafeHexToInt();
-                    TotalOutgoingValues = sensorValues.Substring(6, 2).SafeHexToInt();
-                    TotalIncomingMessages = sensorValues.Substring(8, 2).SafeHexToInt();
-                    TotalIncomingErrors = sensorValues.Substring(10, 2).SafeHexToInt();
-                    LastServerMessageReceived = sensorValues.Substring(12, 2).SafeHexToInt();
-                    TotalActiveSensors = sensorValues.Substring(14, 2).SafeHexToInt();
-                    TotalRecordsInHistoryBuffer = sensorValues.Substring(16, 2).SafeHexToInt();
-                    CurrentDateTime = sensorValues.Substring(20, 8).SafeHexToDouble();
+                    TotalOutgoingMessages = sensorValues.Substring(1, 2).SafeHexToInt();
+                    TotalOutgoingRetries = sensorValues.Substring(3, 2).SafeHexToInt();
+                    TotalOutgoingValues = sensorValues.Substring(5, 2).SafeHexToInt();
+                    TotalIncomingMessages = sensorValues.Substring(7, 2).SafeHexToInt();
+                    TotalIncomingErrors = sensorValues.Substring(9, 2).SafeHexToInt();
+                    LastServerMessageReceived = sensorValues.Substring(11, 2).SafeHexToInt();
+                    TotalActiveSensors = sensorValues.Substring(13, 2).SafeHexToInt();
+                    TotalRecordsInHistoryBuffer = sensorValues.Substring(15, 2).SafeHexToInt();
+                    CurrentDateTime = sensorValues.Substring(19, 8).SafeConvert<int>(0);
+
+                    _userDialogs.Alert($"(F) TotalActiveSensors: {TotalActiveSensors}", "CIMScan RemoteManager");
+                    _userDialogs.Alert($"(F) CurrentDateTime: {CurrentDateTime}", "CIMScan RemoteManager");
 
                     // New instance of station helper
-                    //var stationHelper = new StationHelper();
+                    var stationHelper = new StationHelper();
                     // Validate our current remote Unix date time. Update to current Unix UTC date time
                     // if year < 2009.
-                    //stationHelper.HandleRemoteDateTimeValidation(TxCharacteristic, CurrentDateTime);
-                    //HandleRemoteDateTimeValidation(TxCharacteristic, CurrentDateTime);
+                    stationHelper.HandleRemoteDateTimeValidation(TxCharacteristic, CurrentDateTime);
                     break;
                 case "A":
                     // "A" Sensor data serialization
@@ -683,7 +685,6 @@ namespace CIM.RemoteManager.Core.ViewModels
             }
             finally
             {
-                _userDialogs.Alert("IsLoading = False;");
                 IsLoading = false;
             }
         }
@@ -766,21 +767,15 @@ namespace CIM.RemoteManager.Core.ViewModels
         {
             try
             {
-                _userDialogs.Alert($"1");
-
                 if (IsLoading)
                 {
 
-                    _userDialogs.Alert($"IsLoading: {IsLoading.ToString()}; Updates started: {UpdatesStarted.ToString()}; RxTryCount: {RxTryCount.ToString()}");
-
-                    _userDialogs.Alert($"2;");
-
+                    //_userDialogs.Alert($"IsLoading: {IsLoading.ToString()}; Updates started: {UpdatesStarted.ToString()}; RxTryCount: {RxTryCount.ToString()}");
 
                     // Make sure we are done with our initialization before starting updates
                     while (IsLoading && !UpdatesStarted && RxTryCount < 100)
                     {
-                        //_userDialogs.Alert(RxTryCount.ToString());
-                        _userDialogs.Alert($"3;");
+                        _userDialogs.Alert($"Inside loop - RxTryCount: {RxTryCount.ToString()}");
 
                         if (!IsLoading)
                         {
@@ -802,7 +797,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 }
                 else
                 {
-                    _userDialogs.Alert("HandleUpdatesStarted...");
+                    //_userDialogs.Alert("HandleUpdatesStarted...");
                     // Initialization is done so let's just start
                     await HandleUpdatesStarted();
                 }

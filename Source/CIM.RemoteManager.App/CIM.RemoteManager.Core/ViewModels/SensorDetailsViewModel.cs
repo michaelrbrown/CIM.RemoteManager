@@ -472,10 +472,10 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
-        /// Present unix time
+        /// Present Unix time
         /// </summary>
-        private string _currentDateTime;
-        public string CurrentDateTime
+        private int _currentDateTime;
+        public int CurrentDateTime
         {
             get => _currentDateTime;
             set => SetProperty(ref _currentDateTime, value);
@@ -671,7 +671,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             switch (conversionType)
             {
                 case "F":
-                    
+
 
                     // "F" Message counter data serialization
                     TotalOutgoingMessages = sensorValues.Substring(1, 2).SafeHexToInt();
@@ -682,9 +682,9 @@ namespace CIM.RemoteManager.Core.ViewModels
                     LastServerMessageReceived = sensorValues.Substring(11, 2).SafeHexToInt();
                     TotalActiveSensors = sensorValues.Substring(13, 2).SafeHexToInt();
                     TotalRecordsInHistoryBuffer = sensorValues.Substring(15, 2).SafeHexToInt();
-                    CurrentDateTime = sensorValues.Substring(19, 8).SafeConvert<string>("");
+                    CurrentDateTime = sensorValues.Substring(19, 8).SafeConvert<int>(0);
 
-                    _userDialogs.Alert($"(F) Message Counters Data: {sensorValues}", "CIMScan RemoteManager");
+                    //_userDialogs.Alert($"(F) Message Counters Data: {sensorValues}", "CIMScan RemoteManager");
 
                     //_userDialogs.Alert($"(F) Message Counters TotalActiveSensors: {TotalActiveSensors}", "CIMScan RemoteManager");
                     //_userDialogs.Alert($"(F) Message Counters CurrentDateTime: {CurrentDateTime}", "CIMScan RemoteManager");
@@ -712,7 +712,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                     {
                         //_userDialogs.Alert($"(H) Statistics Data: {sensorValues}", "CIMScan RemoteManager");
                         //_userDialogs.Alert($"(H) SensorIndexSelected: {SensorIndexSelected}", "CIMScan RemoteManager");
-                        //_userDialogs.Alert($"(H) Sensor Index: {splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('H') + 1).SafeConvert<int>(0)}", "CIMScan RemoteManager");
+                        _userDialogs.Alert($"(H) Sensor Index: {splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('H') + 1).SafeConvert<int>(0)}", "CIMScan RemoteManager");
 
                         // Only update the values if we have a match
                         if (SensorIndexSelected == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('H') + 1).SafeConvert<int>(0))
@@ -730,7 +730,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                     {
                         //_userDialogs.Alert($"(G) Limits Data: {sensorValues}", "CIMScan RemoteManager");
                         //_userDialogs.Alert($"(G) SensorIndexSelected: {SensorIndexSelected}", "CIMScan RemoteManager");
-                        //_userDialogs.Alert($"(G) Sensor Index: {splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('G') + 1).SafeConvert<int>(0)}", "CIMScan RemoteManager");
+                        _userDialogs.Alert($"(G) Sensor Index: {splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('G') + 1).SafeConvert<int>(0)}", "CIMScan RemoteManager");
 
                         // Only update the values if we have a match
                         if (SensorIndexSelected == splitSensorValues[0]
@@ -870,7 +870,7 @@ namespace CIM.RemoteManager.Core.ViewModels
 
                 // Events
                 _bluetoothLe.StateChanged += OnStateChanged;
-                
+
                 // Register event for device connection lost
                 Adapter.DeviceConnectionLost += OnDeviceConnectionLost;
 
@@ -887,7 +887,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// <summary>
         /// Initialization of bluetooth service characteristics.
         /// Refresh command sent to remote to start sensor data flow.
-        /// Reading in of A, B, and F sensor records and serializing 
+        /// Reading in of A, B, and F sensor records and serializing
         /// to model for display in UI.
         /// </summary>
         private async void InitRemote()
@@ -971,7 +971,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                     // Notify property changed
                     RaisePropertyChanged(() => SensorName);
                 }
-                
+
                 // Notify property changed
                 RaisePropertyChanged(() => SensorIndexSelected);
 
@@ -1008,7 +1008,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 //StartUpdates();
             }
         }
-        
+
         /// <summary>
         /// Setup all the possible Bluetooth LE states.
         /// </summary>
@@ -1151,6 +1151,6 @@ namespace CIM.RemoteManager.Core.ViewModels
                 _userDialogs.Alert(ex.Message);
             }
         }
-        
+
     }
 }
