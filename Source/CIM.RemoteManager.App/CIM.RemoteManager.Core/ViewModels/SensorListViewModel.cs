@@ -420,11 +420,11 @@ namespace CIM.RemoteManager.Core.ViewModels
                     CurrentDateTime = sensorValues.Substring(20, 8).SafeHexToDouble();
 
                     // New instance of station helper
-                    var stationHelper = new StationHelper();
+                    //var stationHelper = new StationHelper();
                     // Validate our current remote Unix date time. Update to current Unix UTC date time
                     // if year < 2009.
                     //stationHelper.HandleRemoteDateTimeValidation(TxCharacteristic, CurrentDateTime);
-                    HandleRemoteDateTimeValidation(TxCharacteristic, CurrentDateTime);
+                    //HandleRemoteDateTimeValidation(TxCharacteristic, CurrentDateTime);
                     break;
                 case "A":
                     // "A" Sensor data serialization
