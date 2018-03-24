@@ -1,206 +1,189 @@
-﻿<mvx:MvxFormsApplication
-    xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:mvx="clr-namespace:MvvmCross.Forms.Core;assembly=MvvmCross.Forms"
-    xmlns:converters="clr-namespace:CIM.RemoteManager.Core.Converters;assembly=CIM.RemoteManager.Core"
-    x:Class="CIM.RemoteManager.Core.BleMvxFormsApp">
+﻿<mvx:MvxFormsApplication x:Class="CIM.RemoteManager.Core.BleMvxFormsApp" xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:converters="clr-namespace:CIM.RemoteManager.Core.Converters;assembly=CIM.RemoteManager.Core" xmlns:mvx="clr-namespace:MvvmCross.Forms.Core;assembly=MvvmCross.Forms">
 
-  <Application.Resources>
-    <ResourceDictionary>
-        <Color x:Key="BodyTextColor">#444444</Color>
-        <Color x:Key="AppBaseColor">#003366</Color>
-        <Color x:Key="AppAccentColor">#0097DF</Color>
-        <Color x:Key="AppSecondaryAccentColor">#96C912</Color>
-        <Color x:Key="AppTertiaryAccentColor">#FFC926</Color>
-        <Color x:Key="AppTextColor">#939393</Color>
-        <Color x:Key="AppLightColor">#FFFFFF</Color>
-        <Color x:Key="AppDarkColor">#969393</Color>
+    <Application.Resources>
+        <ResourceDictionary>
+            <Color x:Key="BodyTextColor">#444444</Color>
+            <Color x:Key="AppBaseColor">#003366</Color>
+            <Color x:Key="AppAccentColor">#0097DF</Color>
+            <Color x:Key="AppSecondaryAccentColor">#96C912</Color>
+            <Color x:Key="AppTertiaryAccentColor">#FFC926</Color>
+            <Color x:Key="AppTextColor">#939393</Color>
+            <Color x:Key="AppLightColor">#FFFFFF</Color>
+            <Color x:Key="AppDarkColor">#969393</Color>
 
-        <Color x:Key="Tag1Color">#FF96C912</Color>
-        <Color x:Key="Tag1ColorSemiTransparent">#3396C912</Color>
-        <Color x:Key="Tag1ColorLight">#FF96C912</Color>
-        <Color x:Key="Tag2Color">#FFFFC926</Color>
-        <Color x:Key="Tag2ColorSemiTransparent">#33FFC926</Color>
-        <Color x:Key="Tag2ColorLight">#FFFFC926</Color>
-        <Color x:Key="Tag3Color">#FF0097DF</Color>
-        <Color x:Key="Tag3ColorSemiTransparent">#330097DF</Color>
-        <Color x:Key="Tag3ColorLight">#FF0097DF</Color>
-        <Color x:Key="IndicatorTextColor">#FF3C3C3C</Color>
-        <Color x:Key="ChartForeground">White</Color>
-        <Color x:Key="ChartForegroundSemiTransparent">#88FFFFFF</Color>
+            <Color x:Key="Tag1Color">#FF96C912</Color>
+            <Color x:Key="Tag1ColorSemiTransparent">#3396C912</Color>
+            <Color x:Key="Tag1ColorLight">#FF96C912</Color>
+            <Color x:Key="Tag2Color">#FFFFC926</Color>
+            <Color x:Key="Tag2ColorSemiTransparent">#33FFC926</Color>
+            <Color x:Key="Tag2ColorLight">#FFFFC926</Color>
+            <Color x:Key="Tag3Color">#FF0097DF</Color>
+            <Color x:Key="Tag3ColorSemiTransparent">#330097DF</Color>
+            <Color x:Key="Tag3ColorLight">#FF0097DF</Color>
+            <Color x:Key="IndicatorTextColor">#FF3C3C3C</Color>
+            <Color x:Key="ChartForeground">White</Color>
+            <Color x:Key="ChartForegroundSemiTransparent">#88FFFFFF</Color>
 
-        <Color x:Key="RemoteNameBackgroundColor">#0097DE</Color>
-        <Color x:Key="CardBackgroundColor">#eceff1</Color>
-        <Color x:Key="FooterBackgroundColor">#B9DEF5</Color>
+            <Color x:Key="RemoteNameBackgroundColor">#0097DE</Color>
+            <Color x:Key="CardBackgroundColor">#eceff1</Color>
+            <Color x:Key="FooterBackgroundColor">#B9DEF5</Color>
 
-        <Color x:Key="NameColor">#01649D</Color>
-        <Color x:Key="SensorTypeColor">#546e7a</Color>
-        <Color x:Key="TimeStampColor">#546e7a</Color>
-        <Color x:Key="MoreIconColor">#B9DEF5</Color>
-        <Color x:Key="ValueColor">#01649D</Color>
-        <Color x:Key="StatusColor">#43a047</Color>
-        <Color x:Key="OutlineColor">#eeeeee</Color>
-        <Color x:Key="SerialNumberColor">#546e7a</Color>
+            <Color x:Key="NameColor">#01649D</Color>
+            <Color x:Key="SensorTypeColor">#546e7a</Color>
+            <Color x:Key="TimeStampColor">#546e7a</Color>
+            <Color x:Key="MoreIconColor">#B9DEF5</Color>
+            <Color x:Key="ValueColor">#01649D</Color>
+            <Color x:Key="StatusColor">#43a047</Color>
+            <Color x:Key="OutlineColor">#eeeeee</Color>
+            <Color x:Key="SerialNumberColor">#546e7a</Color>
 
-        <Color x:Key="EntryBackgroundColor">#7778909c</Color>
-        
-        <Style x:Key="RemoteBackgroundStyle" TargetType="Frame">
-            <Setter Property="WidthRequest" Value="120"/>
-            <Setter Property="HeightRequest" Value="120"/>
-            <Setter Property="CornerRadius" Value="40"/>
-            <Setter Property="Margin" Value="20"/>
-            <Setter Property="Opacity" Value=".95"/>
-            <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
-            <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
-            <Setter Property="BackgroundColor" Value="{DynamicResource AppAccentColor}"/>
-            <Setter Property="OutlineColor" Value="{DynamicResource OutlineColor}"/>
-        </Style>
+            <Color x:Key="EntryBackgroundColor">#7778909c</Color>
 
-        !-- Margin: left, top, right, bottom -->
-        <Style x:Key="CardStyle" TargetType="Grid">
-          <Setter Property="HeightRequest" Value="60"/>
-          <Setter Property="Padding" Value="5,10,0,10"/>
-          <Setter Property="Margin" Value="0"/>
-          <Setter Property="BackgroundColor" Value="{DynamicResource CardBackgroundColor}"/>
-        </Style>
+            <Style x:Key="RemoteBackgroundStyle" TargetType="Frame">
+                <Setter Property="WidthRequest" Value="120" />
+                <Setter Property="HeightRequest" Value="120" />
+                <Setter Property="CornerRadius" Value="40" />
+                <Setter Property="Margin" Value="20" />
+                <Setter Property="Opacity" Value=".95" />
+                <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+                <Setter Property="BackgroundColor" Value="{DynamicResource AppAccentColor}" />
+                <Setter Property="OutlineColor" Value="{DynamicResource OutlineColor}" />
+            </Style>
+            !-- Margin: left, top, right, bottom --&gt;
+            <Style x:Key="CardStyle" TargetType="Grid">
+                <Setter Property="HeightRequest" Value="60" />
+                <Setter Property="Padding" Value="5,10,0,10" />
+                <Setter Property="Margin" Value="0" />
+                <Setter Property="BackgroundColor" Value="{DynamicResource CardBackgroundColor}" />
+            </Style>
 
-        <Style x:Key="Footer" TargetType="Grid">
-          <Setter Property="Padding" Value="10"/>
-          <Setter Property="BackgroundColor" Value="{DynamicResource FooterBackgroundColor}"/>
-        </Style>
+            <Style x:Key="Footer" TargetType="Grid">
+                <Setter Property="Padding" Value="10" />
+                <Setter Property="BackgroundColor" Value="{DynamicResource FooterBackgroundColor}" />
+            </Style>
 
-        <Style x:Key="ShadowStyle" TargetType="BoxView">
-          <Setter Property="HeightRequest" Value=".8"/>
-          <Setter Property="BackgroundColor" Value="#333333"/>
-        </Style>
+            <Style x:Key="ShadowStyle" TargetType="BoxView">
+                <Setter Property="HeightRequest" Value=".8" />
+                <Setter Property="BackgroundColor" Value="#333333" />
+            </Style>
 
-        <Style x:Key="LightShadowStyle" TargetType="BoxView">
-          <Setter Property="HeightRequest" Value=".3"/>
-          <Setter Property="BackgroundColor" Value="#eeeeee"/>
-        </Style>
+            <Style x:Key="LightShadowStyle" TargetType="BoxView">
+                <Setter Property="HeightRequest" Value=".3" />
+                <Setter Property="BackgroundColor" Value="#eeeeee" />
+            </Style>
 
-        <Style x:Key="NameStyle" TargetType="Label">
-          <Setter Property="FontSize" Value="16"/>
-          <Setter Property="TextColor" Value="{DynamicResource NameColor}"/>
-          <Setter Property="FontAttributes" Value="Bold"/>
-        </Style>
+            <Style x:Key="NameStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="TextColor" Value="{DynamicResource NameColor}" />
+                <Setter Property="FontAttributes" Value="Bold" />
+            </Style>
 
-        <Style x:Key="SensorTypeStyle" TargetType="Label">
-          <Setter Property="FontSize" Value="14"/>
-          <Setter Property="TextColor" Value="{DynamicResource SensorTypeColor}"/>
-        </Style>
+            <Style x:Key="SensorTypeStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="TextColor" Value="{DynamicResource SensorTypeColor}" />
+            </Style>
 
-        <Style x:Key="TimeStampStyle" TargetType="Label">
-          <Setter Property="FontSize" Value="14"/>
-          <Setter Property="TextColor" Value="{DynamicResource TimeStampColor}"/>
-        </Style>
+            <Style x:Key="TimeStampStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="TextColor" Value="{DynamicResource TimeStampColor}" />
+            </Style>
 
-        <Style x:Key="MoreStyle" TargetType="Label">
-          <Setter Property="FontSize" Value="10"/>
-          <Setter Property="TextColor" Value="{DynamicResource MoreIconColor}"/>
-          <Setter Property="FontAttributes" Value="Bold"/>
-          <Setter Property="HorizontalTextAlignment" Value="End"/>
-        </Style>
+            <Style x:Key="MoreStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="10" />
+                <Setter Property="TextColor" Value="{DynamicResource MoreIconColor}" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="HorizontalTextAlignment" Value="End" />
+            </Style>
 
-        <Style x:Key="ValueStyle" TargetType="Label">
-          <Setter Property="FontSize" Value="24"/>
-          <Setter Property="TextColor" Value="{DynamicResource ValueColor}"/>
-        </Style>
+            <Style x:Key="ValueStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="24" />
+                <Setter Property="TextColor" Value="{DynamicResource ValueColor}" />
+            </Style>
 
-        <Style x:Key="ValueBoxStyle" TargetType="Grid">
-          <Setter Property="Padding" Value="15"/>
-          <Setter Property="BackgroundColor" Value="{DynamicResource FooterBackgroundColor}"/>
-        </Style>
+            <Style x:Key="ValueUnitTypeStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="TextColor" Value="{DynamicResource ValueColor}" />
+            </Style>
 
-        <Style x:Key="StatusStyle" TargetType="Label">
-          <Setter Property="FontAttributes" Value="None"/>
-          <Setter Property="FontSize" Value="14"/>
-          <Setter Property="VerticalOptions" Value="Center"/>
-        </Style>
+            <Style x:Key="ValueBoxStyle" TargetType="Grid">
+                <Setter Property="Padding" Value="10" />
+                <Setter Property="BackgroundColor" Value="{DynamicResource FooterBackgroundColor}" />
+            </Style>
 
-        <Style x:Key="SerialNumberStyle" TargetType="Label">
-          <Setter Property="TextColor" Value="{DynamicResource SerialNumberColor}"/>
-          <Setter Property="FontSize" Value="14"/>
-          <Setter Property="VerticalOptions" Value="Center"/>
-          <Setter Property="FontAttributes" Value="Italic"/>
-        </Style>
+            <Style x:Key="StatusStyle" TargetType="Label">
+                <Setter Property="FontAttributes" Value="None" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
 
-      <Style x:Key="FormLabelStyle" TargetType="Label">
-            <Setter Property="FontSize" Value="18"/>
-            <Setter Property="TextColor" Value="#444444"/>
-            <Setter Property="FontAttributes" Value="Bold"/>
-            <Setter Property="HorizontalTextAlignment" Value="End"></Setter>
-            <Setter Property="VerticalTextAlignment" Value="Center"></Setter>
-            <!-- Margin: left, top, right, bottom -->
-            <Setter Property="Margin" Value="10,0,2,0"/>
-        </Style>
+            <Style x:Key="SerialNumberStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="{DynamicResource SerialNumberColor}" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="FontAttributes" Value="Italic" />
+            </Style>
 
-        <Style x:Key="FormValueStyle" TargetType="Entry">
-            <Setter Property="FontSize" Value="18"/>
-            <Setter Property="TextColor" Value="#444444"/>
-            <Setter Property="FontAttributes" Value="Bold"/>
-            <Setter Property="HorizontalTextAlignment" Value="Start"></Setter>
-            <Setter Property="VerticalOptions" Value="Center"></Setter>
-            <!-- Margin: left, top, right, bottom -->
-            <Setter Property="Margin" Value="2,0,10,0"/>
-        </Style>
-        
-        <!--  font families  -->
-      <OnPlatform
-          x:Key="RegularFontFamily"
-          x:TypeArguments="x:String"
-          Android="sans-serif"
-          iOS="HelveticaNeue" />
-      <OnPlatform
-          x:Key="LightFontFamily"
-          x:TypeArguments="x:String"
-          Android="sans-serif-light"
-          iOS="HelveticaNeue-Light" />
-      <OnPlatform
-          x:Key="MediumFontFamily"
-          x:TypeArguments="x:String"
-          Android="sans-serif-medium"
-          iOS="HelveticaNeue-Medium" />
-      <OnPlatform
-          x:Key="BoldFontFamily"
-          x:TypeArguments="x:String"
-          Android="sans-serif-medium"
-          iOS="HelveticaNeue-Bold" />
+            <Style x:Key="FormLabelStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="TextColor" Value="#444444" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="HorizontalTextAlignment" Value="End" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+                <!-- Margin: left, top, right, bottom -->
+                <Setter Property="Margin" Value="10,0,2,0" />
+            </Style>
 
-      <!--  styles  -->
-      <Style x:Key="TitleLabel" TargetType="Label">
-        <Setter Property="TextColor" Value="#333333" />
-        <Setter Property="FontSize" Value="20" />
-      </Style>
+            <Style x:Key="FormValueStyle" TargetType="Entry">
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="TextColor" Value="#444444" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="HorizontalTextAlignment" Value="Start" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <!-- Margin: left, top, right, bottom -->
+                <Setter Property="Margin" Value="2,0,10,0" />
+            </Style>
 
-      <Style x:Key="HandleLabel" TargetType="Label">
-        <Setter Property="TextColor" Value="#777777" />
-        <Setter Property="FontSize" Value="12" />
-      </Style>
+            <!-- font families -->
+            <OnPlatform x:Key="RegularFontFamily" x:TypeArguments="x:String" Android="sans-serif" iOS="HelveticaNeue" />
+            <OnPlatform x:Key="LightFontFamily" x:TypeArguments="x:String" Android="sans-serif-light" iOS="HelveticaNeue-Light" />
+            <OnPlatform x:Key="MediumFontFamily" x:TypeArguments="x:String" Android="sans-serif-medium" iOS="HelveticaNeue-Medium" />
+            <OnPlatform x:Key="BoldFontFamily" x:TypeArguments="x:String" Android="sans-serif-medium" iOS="HelveticaNeue-Bold" />
 
-      <Style x:Key="BodyLabel" TargetType="Label">
-        <Setter Property="TextColor" Value="#777777" />
-        <Setter Property="FontSize" Value="11" />
-      </Style>
+            <!-- styles -->
+            <Style x:Key="TitleLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="#333333" />
+                <Setter Property="FontSize" Value="20" />
+            </Style>
 
-      <converters:RssiConverter x:Key="RssiConverter"/>
-      <converters:AlarmStatusConverter x:Key="AlarmStatusConverter"/>
-      <converters:AlarmStatusColorConverter x:Key="AlarmStatusColorConverter"/>
-      <converters:InverseBooleanValueConverter x:Key="InverseBoolean"/>
-      <converters:ListToLabelConverter x:Key="InverseBooleanValueConverter"/>
-      <converters:ListToLabelConverter x:Key="ListToLabelConverter"/>
-      <converters:LoadingOpacityConverter x:Key="LoadingOpacityConverter"/>
-      <converters:IsSelectedBackgroundColorConverter x:Key="IsSelectedBackgroundColorConverter"/>
-      <converters:BooleanToFalseConverter x:Key="BooleanToFalseConverter"/>
-      <converters:UpperCaseConverter x:Key="UpperCaseConverter"/>
-      <converters:FileToImageSourceConverter x:Key="FileToImageSourceConverter"/>
-      <converters:ColorValidationConverter x:Key="ColorValidationConverter"/>
-      <converters:BooleanToFriendlyConverter x:Key="BooleanToFriendlyConverter"/>
-      <converters:HasContentToVisibleConverter x:Key="HasContentToVisibleConverter"/>
-      <converters:GaugeLabelForegroundColorConverter x:Key="GaugeLabelForegroundColorConverter"/>
-      <converters:SelectionChangedEventArgsConverter x:Key="SelectionChangedEventArgsConverter"/>
+            <Style x:Key="HandleLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="#777777" />
+                <Setter Property="FontSize" Value="12" />
+            </Style>
 
-    </ResourceDictionary>
-  </Application.Resources>
-  
+            <Style x:Key="BodyLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="#777777" />
+                <Setter Property="FontSize" Value="11" />
+            </Style>
+
+            <converters:RssiConverter x:Key="RssiConverter" />
+            <converters:AlarmStatusConverter x:Key="AlarmStatusConverter" />
+            <converters:AlarmStatusColorConverter x:Key="AlarmStatusColorConverter" />
+            <converters:InverseBooleanValueConverter x:Key="InverseBoolean" />
+            <converters:ListToLabelConverter x:Key="InverseBooleanValueConverter" />
+            <converters:ListToLabelConverter x:Key="ListToLabelConverter" />
+            <converters:LoadingOpacityConverter x:Key="LoadingOpacityConverter" />
+            <converters:IsSelectedBackgroundColorConverter x:Key="IsSelectedBackgroundColorConverter" />
+            <converters:BooleanToFalseConverter x:Key="BooleanToFalseConverter" />
+            <converters:UpperCaseConverter x:Key="UpperCaseConverter" />
+            <converters:FileToImageSourceConverter x:Key="FileToImageSourceConverter" />
+            <converters:ColorValidationConverter x:Key="ColorValidationConverter" />
+            <converters:BooleanToFriendlyConverter x:Key="BooleanToFriendlyConverter" />
+            <converters:HasContentToVisibleConverter x:Key="HasContentToVisibleConverter" />
+            <converters:GaugeLabelForegroundColorConverter x:Key="GaugeLabelForegroundColorConverter" />
+            <converters:SelectionChangedEventArgsConverter x:Key="SelectionChangedEventArgsConverter" />
+
+        </ResourceDictionary>
+    </Application.Resources>
+
 </mvx:MvxFormsApplication>

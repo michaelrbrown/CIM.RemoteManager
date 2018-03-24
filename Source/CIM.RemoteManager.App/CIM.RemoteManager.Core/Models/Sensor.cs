@@ -1,15 +1,16 @@
 ﻿using System;
 using CIM.RemoteManager.Core.Helpers;
+using Xamarin.Forms;
 
 namespace CIM.RemoteManager.Core.Models
 {
     /// <summary>
-    /// A DA-12 sensor.
+    /// A CIMScan sensor.
     /// </summary>
     public class Sensor : BindableBase
     {
-       
         private int _sensorIndex;
+
         public int SensorIndex
         {
             get => _sensorIndex;
@@ -17,18 +18,57 @@ namespace CIM.RemoteManager.Core.Models
         }
 
         private string _serialNumber;
+
         public string SerialNumber
         {
             get => _serialNumber;
             set => SetProperty(ref _serialNumber, value);
         }
-        
+
+        /// <summary>
+        /// The sensor unit type (°C, %RH).
+        /// </summary>
+        public string SensorUnitType
+        {
+            get
+            {
+                // Validate
+                if (!string.IsNullOrEmpty(_sensorType))
+                {
+                    // Return a sensor unit type
+                    return _sensorType.GetSensorTypeResult().SensorUnitType;
+                }
+                // Default
+                return "";
+            }
+        }
+
+        /// <summary>
+        /// Gets the sensor image based on the sensor type.
+        /// </summary>
+        /// <value>
+        /// The sensor image source from resource directory.
+        /// </value>
+        public ImageSource SensorImage
+        {
+            get
+            {
+                // Validate
+                if (!string.IsNullOrEmpty(_sensorType.GetSensorTypeResult().SensorImage))
+                {
+                    // Return a non-cached image source
+                    return ImageSource.FromFile(_sensorType.GetSensorTypeResult().SensorImage);
+                }
+                // Default image if nothing found
+                return ImageSource.FromFile("defaultSensor.png");
+            }
+        }
+
         private string _name = "N/A";
         public string Name
         {
             get
             {
-                // Try to lookup hex to string
                 if (!string.IsNullOrWhiteSpace(_name))
                 {
                     return _name;
@@ -44,10 +84,9 @@ namespace CIM.RemoteManager.Core.Models
         {
             get
             {
-                // Try to lookup hex to string
                 if (!string.IsNullOrEmpty(_sensorType))
                 {
-                    return _sensorType.LookupNameByValue();
+                    return _sensorType.GetSensorTypeResult().SensorLabel;
                 }
                 // Default
                 return string.Empty;
@@ -90,7 +129,6 @@ namespace CIM.RemoteManager.Core.Models
         {
             get
             {
-                // Try to lookup hex to string
                 if (double.TryParse(_averageValue.ToString(), out double averageValueResult))
                 {
                     return averageValueResult / 10;
@@ -114,7 +152,7 @@ namespace CIM.RemoteManager.Core.Models
             get => _displayConversionCode;
             set => SetProperty(ref _displayConversionCode, value);
         }
-        
+
         private int _decimalLocation;
         public int DecimalLocation
         {

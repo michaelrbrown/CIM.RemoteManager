@@ -1,39 +1,50 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="CIM.RemoteManager.Core.Templates.SensorItemTemplate">
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView x:Class="CIM.RemoteManager.Core.Templates.SensorItemTemplate" xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
     <ContentView.Content>
 
-        <StackLayout Spacing="0" Padding="0" Margin="0" Opacity=".95">
+        <StackLayout Margin="0" Padding="0" Opacity=".95" Spacing="0">
 
             <Grid Style="{DynamicResource CardStyle}">
 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="75" />
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="130" />
                     <ColumnDefinition Width="5" />
                 </Grid.ColumnDefinitions>
 
                 <!-- Margin: left, top, right, bottom -->
-                <Image Grid.Column="0" Source="temperatureSensor.png" Aspect="AspectFit" Scale="1" />
+                <Image Grid.Column="0" Aspect="AspectFit" Scale="1" Source="{Binding SensorImage}" />
 
-                <StackLayout Grid.Column="1" Spacing="0" HeightRequest="100" VerticalOptions="Center">
-                    <Label Text="{Binding Name}" Style="{DynamicResource NameStyle}" VerticalOptions="Center" LineBreakMode="TailTruncation" />
-                    <Label Text="{Binding SensorType}" Style="{DynamicResource SensorTypeStyle}" VerticalOptions="Center" LineBreakMode="TailTruncation" />
-                    <Label Text="{Binding DateTimeStamp, StringFormat='{}{0:hh\\:mm\\:ss tt}'}" Style="{DynamicResource TimeStampStyle}" VerticalOptions="Center" LineBreakMode="TailTruncation" />
+                <StackLayout Grid.Column="1" VerticalOptions="Center" HeightRequest="100" Spacing="0">
+                    <Label VerticalOptions="Center" LineBreakMode="TailTruncation" Style="{DynamicResource NameStyle}" Text="{Binding Name}" />
+                    <Label VerticalOptions="Center" LineBreakMode="TailTruncation" Style="{DynamicResource SensorTypeStyle}" Text="{Binding SensorType}" />
+                    <Label VerticalOptions="Center" LineBreakMode="TailTruncation" Style="{DynamicResource TimeStampStyle}" Text="{Binding DateTimeStamp, StringFormat='{}{0:hh\\:mm\\:ss tt}'}" />
                 </StackLayout>
 
-                <StackLayout Grid.Column="2" Spacing="0">
-                    <Frame Style="{DynamicResource ValueBoxStyle}" Opacity=".7" HeightRequest="30" WidthRequest="100" CornerRadius="20" HasShadow="False" OutlineColor="{DynamicResource OutlineColor}" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
-                        <Label Text="{Binding AverageValue}" Style="{DynamicResource ValueStyle}" LineBreakMode="NoWrap" HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
+                <StackLayout Grid.Column="2" Orientation="Horizontal" Spacing="0">
+                    <Frame VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"
+                           CornerRadius="20" HasShadow="False" HeightRequest="30" Opacity=".7"
+                           OutlineColor="{DynamicResource OutlineColor}"
+                           Style="{DynamicResource ValueBoxStyle}"
+                           WidthRequest="100">
+                        <Label VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"
+                               HorizontalTextAlignment="Center" LineBreakMode="NoWrap"
+                               Style="{DynamicResource ValueStyle}"
+                               Text="{Binding AverageValue}"
+                               VerticalTextAlignment="Center" />
+                        <Label VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"
+                               HorizontalTextAlignment="Start" LineBreakMode="NoWrap"
+                               Style="{DynamicResource ValueUnitTypeStyle}"
+                               Text="{Binding SensorUnitType}"
+                               VerticalTextAlignment="Start" />
                     </Frame>
                 </StackLayout>
 
             </Grid>
 
-            <BoxView Style="{DynamicResource LightShadowStyle}"></BoxView>
+            <BoxView Style="{DynamicResource LightShadowStyle}" />
 
             <Grid Style="{DynamicResource Footer}">
 
@@ -43,12 +54,20 @@
                 </Grid.ColumnDefinitions>
 
                 <StackLayout Grid.Column="0" Spacing="0">
-                    <Label Text="{Binding SensorIndex}" Style="{DynamicResource SerialNumberStyle}" IsVisible="False" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" LineBreakMode="TailTruncation" />
-                    <Label Text="{Binding SerialNumber}" Style="{DynamicResource SerialNumberStyle}" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" LineBreakMode="TailTruncation" />
+                    <Label HorizontalTextAlignment="Start" IsVisible="False" LineBreakMode="TailTruncation"
+                           Style="{DynamicResource SerialNumberStyle}"
+                           Text="{Binding SensorIndex}"
+                           VerticalTextAlignment="Center" />
+                    <Label HorizontalTextAlignment="Start" LineBreakMode="TailTruncation" Style="{DynamicResource SerialNumberStyle}" Text="{Binding SerialNumber}" VerticalTextAlignment="Center" />
                 </StackLayout>
 
                 <StackLayout Grid.Column="1" Spacing="0">
-                    <Label Text="{Binding AlarmStatus, Converter={StaticResource AlarmStatusConverter}}" VerticalOptions="Center" Style="{DynamicResource StatusStyle}" TextColor="{Binding AlarmStatus, Converter={StaticResource AlarmStatusColorConverter}}" HorizontalTextAlignment="End" VerticalTextAlignment="Center" />
+                    <Label VerticalOptions="Center"
+                           HorizontalTextAlignment="End"
+                           Style="{DynamicResource StatusStyle}"
+                           Text="{Binding AlarmStatus, Converter={StaticResource AlarmStatusConverter}}"
+                           TextColor="{Binding AlarmStatus, Converter={StaticResource AlarmStatusColorConverter}}"
+                           VerticalTextAlignment="Center" />
                 </StackLayout>
 
             </Grid>
