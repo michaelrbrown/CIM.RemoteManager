@@ -19,6 +19,7 @@ namespace CIM.RemoteManager.Core.Pages
 
             // Get instance of sensor details viewmodel
             var sensorDetailsViewModel = this.BindingContext as SensorDetailsViewModel;
+
             // Add device settings toolbar icon and handle selection
             ToolbarItems.Add(new ToolbarItem("Refresh Sensor Data", "ic_remote-settings.png", () =>
             {
@@ -44,7 +45,7 @@ namespace CIM.RemoteManager.Core.Pages
 
             //}
 
-           
+
 
         }
 
@@ -56,7 +57,9 @@ namespace CIM.RemoteManager.Core.Pages
         {
             if (this.CurrentPage.Title == "Sensor Statistics")
             {
+                // Get binding context of Sensor Details viewmodel
                 var sensorDetailsViewModel = (SensorDetailsViewModel)this.BindingContext;
+
                 // Validate
                 if (sensorDetailsViewModel != null)
                 {
@@ -68,7 +71,9 @@ namespace CIM.RemoteManager.Core.Pages
             }
             if (this.CurrentPage.Title == "Sensor Limits")
             {
+                // Get binding context of Sensor Details viewmodel
                 var sensorDetailsViewModel = (SensorDetailsViewModel)this.BindingContext;
+
                 // Validate
                 if (sensorDetailsViewModel != null)
                 {
@@ -80,7 +85,9 @@ namespace CIM.RemoteManager.Core.Pages
             }
             else
             {
+                // Get binding context of Sensor Details viewmodel
                 var sensorDetailsViewModel = (SensorDetailsViewModel)this.BindingContext;
+
                 // Validate
                 if (sensorDetailsViewModel != null)
                 {
@@ -115,5 +122,9 @@ namespace CIM.RemoteManager.Core.Pages
             sensorDetailsViewModel.ToggleUpdatesCommand.Execute(null);
         }
 
+        private void SensorOffsetTrimSwitchToggled(object sender, ToggledEventArgs e)
+        {
+
+        }
     }
 }

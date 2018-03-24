@@ -239,4 +239,110 @@
 
     </pages:BasePage>
 
+    <pages:BasePage Title="Sensor Setup" BackgroundColor="#FFFFFF" Icon="ic_sensor-settings.png">
+
+        <!-- Margin: left, top, right, bottom -->
+        <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <!-- Margin: left, top, right, bottom -->
+            <Grid Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+
+                <StackLayout Margin="10" VerticalOptions="Center" HorizontalOptions="Center" HeightRequest="50">
+                    <Frame Margin="0" Padding="0" BackgroundColor="{DynamicResource AppAccentColor}" CornerRadius="15" IsClippedToBounds="True">
+                        <Label Margin="10"
+                               VerticalOptions="Center" HorizontalOptions="Center"
+                               FontSize="18"
+                               Text="{Binding SensorName}"
+                               TextColor="#FFFFFF" />
+                    </Frame>
+                </StackLayout>
+
+            </Grid>
+
+            <!-- Grid layout for Limits form -->
+            <Grid Grid.Row="1" Margin="20,10,20,20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="50" />
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Upper Calibration -->
+                <Label Grid.Row="0" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Upper Calibration: " />
+                <Entry Grid.Row="0" Grid.Column="1" Style="{DynamicResource FormValueStyle}" Text="{Binding AlarmStatusBool}" />
+
+                <!-- Upper Calibration Target -->
+                <Label Grid.Row="0" Grid.Column="2" Style="{DynamicResource FormLabelStyle}" Text="Target: " />
+                <Entry Grid.Row="0" Grid.Column="3" Style="{DynamicResource FormValueStyle}" Text="{Binding AlarmDelay}" />
+
+                <!-- Upper Calibration -->
+                <Label Grid.Row="1" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Lower Calibration: " />
+                <Entry Grid.Row="1" Grid.Column="1" Style="{DynamicResource FormValueStyle}" Text="{Binding AlarmStatusBool}" />
+
+                <!-- Lower Calibration Target -->
+                <Label Grid.Row="1" Grid.Column="2" Style="{DynamicResource FormLabelStyle}" Text="Target: " />
+                <Entry x:Name="LowerCalibrationEntry" Grid.Row="1" Grid.Column="3" Style="{DynamicResource FormValueStyle}" Text="{Binding AlarmDelay}" />
+
+                <!-- Scale -->
+                <Label Grid.Row="2" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Scale: " />
+                <Entry x:Name="ScaleEntry"
+                       Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3"
+                       Style="{DynamicResource FormValueStyle}"
+                       Text="{Binding HighAlarmLimit}" />
+
+                <!-- Offset -->
+                <Label Grid.Row="3" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Offset: " />
+                <Entry x:Name="OffsetEntry" Grid.Row="3" Grid.Column="1" Style="{DynamicResource FormValueStyle}" Text="{Binding HighWarningLimit}" />
+
+                <!-- Offset Trim -->
+                <Label Grid.Row="4" Grid.Column="2" Style="{DynamicResource FormLabelStyle}" Text="Offset Trim: " />
+                <Switch Grid.Row="4" Grid.Column="3"
+                        Margin="5"
+                        VerticalOptions="Center" HorizontalOptions="Center"
+                        Toggled="SensorOffsetTrimSwitchToggled" />
+
+                <!-- Output -->
+                <Label Grid.Row="5" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Output: " />
+                <Entry Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3" Style="{DynamicResource FormValueStyle}" Text="{Binding LowAlarmLimit}" />
+
+                <!-- Input -->
+                <Label Grid.Row="6" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Input: " />
+                <Entry Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="3" Style="{DynamicResource FormValueStyle}" Text="{Binding LowWarningLimit}" />
+
+                <!-- Margin: left, top, right, bottom -->
+                <StackLayout Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2"
+                             VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+                             BackgroundColor="{DynamicResource RemoteNameBackgroundColor}"
+                             HeightRequest="60" Opacity=".6" Orientation="Horizontal" Spacing="0">
+                    <Label Margin="5"
+                           VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"
+                           FontSize="16" LineBreakMode="MiddleTruncation"
+                           Text="{Binding CharacteristicValue, StringFormat=' Incoming Value: {0:N}'}"
+                           TextColor="{DynamicResource AppLightColor}"
+                           VerticalTextAlignment="Center" />
+                </StackLayout>
+
+            </Grid>
+
+        </Grid>
+
+    </pages:BasePage>
+
 </pages:BaseTabbedPage>

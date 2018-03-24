@@ -696,7 +696,7 @@ namespace CIM.RemoteManager.Core.ViewModels
 
                     if (SensorCommandType == SensorCommand.Plot)
                     {
-                        _userDialogs.Alert($"(J) Buffered Data: {sensorValues}", "CIMScan RemoteManager");
+                        //_userDialogs.Alert($"(J) Buffered Data: {sensorValues}", "CIMScan RemoteManager");
 
                         // "J" Sensor plot data serialization
                         var sensorPlot = new SensorPlot
@@ -712,7 +712,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                     {
                         //_userDialogs.Alert($"(H) Statistics Data: {sensorValues}", "CIMScan RemoteManager");
                         //_userDialogs.Alert($"(H) SensorIndexSelected: {SensorIndexSelected}", "CIMScan RemoteManager");
-                        _userDialogs.Alert($"(H) Sensor Index: {splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('H') + 1).SafeConvert<int>(0)}", "CIMScan RemoteManager");
+                        //_userDialogs.Alert($"(H) Sensor Index: {splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('H') + 1).SafeConvert<int>(0)}", "CIMScan RemoteManager");
 
                         // Only update the values if we have a match
                         if (SensorIndexSelected == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('H') + 1).SafeConvert<int>(0))
@@ -730,7 +730,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                     {
                         //_userDialogs.Alert($"(G) Limits Data: {sensorValues}", "CIMScan RemoteManager");
                         //_userDialogs.Alert($"(G) SensorIndexSelected: {SensorIndexSelected}", "CIMScan RemoteManager");
-                        _userDialogs.Alert($"(G) Sensor Index: {splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('G') + 1).SafeConvert<int>(0)}", "CIMScan RemoteManager");
+                        //_userDialogs.Alert($"(G) Sensor Index: {splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('G') + 1).SafeConvert<int>(0)}", "CIMScan RemoteManager");
 
                         // Only update the values if we have a match
                         if (SensorIndexSelected == splitSensorValues[0]
@@ -913,21 +913,21 @@ namespace CIM.RemoteManager.Core.ViewModels
                 if (TxCharacteristic.CanWrite)
                 {
                     // Send a refresh command
-                    await TxCharacteristic.WriteAsync("{Y}".StrToByteArray()).ConfigureAwait(true);
+                    //await TxCharacteristic.WriteAsync("{Y}".StrToByteArray()).ConfigureAwait(true);
 
                     // Now setup plot, statistics, and limits commands
-                    //string updateValue = string.Empty;
-                    //if (SensorCommandType == SensorCommand.Plot)
-                    //{
-                    //    updateValue = "{c" + SensorIndex + "}";
-                    //}
-                    //else if (SensorCommandType == SensorCommand.Statistics || SensorCommandType == SensorCommand.Limits)
-                    //{
-                    //    updateValue = "{Y}";
-                    //}
+                    string updateValue = string.Empty;
+                    if (SensorCommandType == SensorCommand.Plot)
+                    {
+                        updateValue = "{c" + SensorIndex + "}";
+                    }
+                    else if (SensorCommandType == SensorCommand.Statistics || SensorCommandType == SensorCommand.Limits)
+                    {
+                        updateValue = "{Y}";
+                    }
 
-                    // Send a refresh command
-                    //await TxCharacteristic.WriteAsync(updateValue.StrToByteArray()).ConfigureAwait(true);
+                    // Send the command based on command type set above
+                    await TxCharacteristic.WriteAsync(updateValue.StrToByteArray()).ConfigureAwait(true);
                 }
                 else
                 {
@@ -998,7 +998,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
-        /// On Resume
+        /// On Resume.
         /// </summary>
         public override void Resume()
         {
@@ -1037,8 +1037,13 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
-        /// Start Bluetooth characteristics updating
+        /// Start Bluetooth characteristics updating.
         /// </summary>
+        /// <remarks>
+        /// We handle exceptions of trying to write commands to early to the remote
+        /// by a recursive method which ensures our loading (init) process is complete
+        /// before we start trying to handle updates (write commands before initialized).
+        /// </remarks>
         private async void StartUpdates()
         {
             try
@@ -1048,6 +1053,8 @@ namespace CIM.RemoteManager.Core.ViewModels
                     // Make sure we are done with our initialization before starting updates
                     while (IsLoading && !UpdatesStarted && RxTryCount < 100)
                     {
+                        _userDialogs.Alert($"Inside loop - RxTryCount: {RxTryCount.ToString()}");
+
                         if (!IsLoading)
                         {
                             // Handle updates started

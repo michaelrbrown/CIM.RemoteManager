@@ -283,7 +283,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
-        /// Get Full values for sensor from buffered data
+        /// Get Full values for sensor from buffered data.
         /// </summary>
         /// <param name="characteristicValue"></param>
         private void GetFullSensorValues(string characteristicValue)
@@ -327,7 +327,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
-        /// Get Average values for sensor from buffered data
+        /// Get Average values for sensor from buffered data.
         /// </summary>
         /// <param name="characteristicValue"></param>
         private void GetAverageSensorValues(string characteristicValue)
@@ -378,8 +378,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// <param name="remoteUnixDateTime">The remote Unix date time.</param>
         public async void HandleRemoteDateTimeValidation(ICharacteristic txCharacteristic, double remoteUnixDateTime)
         {
-
-            _userDialogs.Alert($"(F) Message Counters Data: {remoteUnixDateTime.UnixTimeStampToDateTime()}", "CIMScan RemoteManager");
+            _userDialogs.Alert($"(F) Message Counters TimeStamp: {remoteUnixDateTime.UnixTimeStampToDateTime()}", "CIMScan RemoteManager");
 
             // Validate our station Unix time converted to windows time is less
             // than 2009.  If it is we know the station time needs to be set.
@@ -401,7 +400,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
-        /// Serialize tab based sensor data to strongly typed Sensor model
+        /// Serialize tab based sensor data to strongly typed Sensor model.
         /// </summary>
         /// <param name="sensorValues"></param>
         /// <param name="conversionType"></param>
@@ -427,8 +426,8 @@ namespace CIM.RemoteManager.Core.ViewModels
                     TotalRecordsInHistoryBuffer = sensorValues.Substring(15, 2).SafeHexToInt();
                     CurrentDateTime = sensorValues.Substring(19, 8).SafeConvert<int>(0);
 
-                    _userDialogs.Alert($"(F) TotalActiveSensors: {TotalActiveSensors}", "CIMScan RemoteManager");
-                    _userDialogs.Alert($"(F) CurrentDateTime: {CurrentDateTime}", "CIMScan RemoteManager");
+                    //_userDialogs.Alert($"(F) TotalActiveSensors: {TotalActiveSensors}", "CIMScan RemoteManager");
+                    //_userDialogs.Alert($"(F) CurrentDateTime: {CurrentDateTime}", "CIMScan RemoteManager");
 
                     // New instance of station helper
                     var stationHelper = new StationHelper();
@@ -511,7 +510,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         #region Event Handlers
 
         /// <summary>
-        /// Event to handle Bluetooth LE state changed
+        /// Event to handle Bluetooth LE state changed.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -522,7 +521,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
-        /// Event to handle Bluetooth connection changes
+        /// Event to handle Bluetooth connection changes.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -535,7 +534,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
-        /// Rx characteristic updated event
+        /// Rx characteristic updated event.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="characteristicUpdatedEventArgs"></param>
@@ -604,7 +603,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         #endregion
 
         /// <summary>
-        /// Sensor view model constructor
+        /// Sensor view model constructor.
         /// </summary>
         /// <param name="bluetoothLe">Bluetooth LE obj</param>
         /// <param name="adapter">Bluetooth LE adapter</param>
@@ -734,7 +733,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
-        /// Setup all the possible Bluetooth LE states
+        /// Setup all the possible Bluetooth LE states.
         /// </summary>
         /// <returns></returns>
         private string GetStateText()
@@ -761,8 +760,13 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
-        /// Start Bluetooth characteristics updating
+        /// Start Bluetooth characteristics updating.
         /// </summary>
+        /// <remarks>
+        /// We handle exceptions of trying to write commands to early to the remote
+        /// by a recursive method which ensures our loading (init) process is complete
+        /// before we start trying to handle updates (write commands before initialized).
+        /// </remarks>
         private async void StartUpdates()
         {
             try
@@ -849,7 +853,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
-        /// Stop Bluetooth characteristics updating
+        /// Stop Bluetooth characteristics updating.
         /// </summary>
         private async void StopUpdates()
         {
@@ -880,7 +884,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
-        /// Sensor selected (navigate to sensor plot page)
+        /// Sensor selected (navigate to sensor plot page).
         /// </summary>
         public void NavigateToSensorDetailsPage(Sensor sensor)
         {
