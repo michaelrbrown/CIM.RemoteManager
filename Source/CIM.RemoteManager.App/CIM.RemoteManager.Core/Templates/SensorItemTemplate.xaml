@@ -29,7 +29,7 @@
                            OutlineColor="{DynamicResource OutlineColor}"
                            Style="{DynamicResource ValueBoxStyle}"
                            WidthRequest="130">
-                        <StackLayout Orientation="Horizontal">
+                        <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
                             <Label VerticalOptions="CenterAndExpand" HorizontalOptions="End"
                                    HorizontalTextAlignment="End" LineBreakMode="NoWrap"
                                    Style="{DynamicResource ValueStyle}"

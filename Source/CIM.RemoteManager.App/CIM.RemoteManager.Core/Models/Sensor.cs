@@ -116,7 +116,7 @@ namespace CIM.RemoteManager.Core.Models
         }
 
         /// <summary>
-        /// Converting Unix to Windows DateTime
+        /// Converting Unix to Windows DateTime.
         /// </summary>
         public DateTime? DateTimeStamp => _timeStamp.UnixTimeStampToDateTime();
 

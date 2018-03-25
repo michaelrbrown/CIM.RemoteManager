@@ -378,7 +378,9 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// <param name="remoteUnixDateTime">The remote Unix date time.</param>
         public async void HandleRemoteDateTimeValidation(ICharacteristic txCharacteristic, double remoteUnixDateTime)
         {
-            _userDialogs.Alert($"(F) Message Counters TimeStamp: {remoteUnixDateTime.UnixTimeStampToDateTime()}", "CIMScan RemoteManager");
+            Device.BeginInvokeOnMainThread(() => {
+                _userDialogs.Alert($"(F) Message Counters TimeStamp: {remoteUnixDateTime.UnixTimeStampToDateTime().Year}", "CIMScan RemoteManager");
+            });
 
             // Validate our station Unix time converted to windows time is less
             // than 2009.  If it is we know the station time needs to be set.

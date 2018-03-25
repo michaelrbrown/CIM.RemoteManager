@@ -324,7 +324,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         #region Sensor Limits
 
         /// <summary>
-        /// Alarm status
+        /// Alarm status.
         /// </summary>
         private int _alarmStatus;
         public int AlarmStatus
@@ -334,7 +334,27 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
-        /// Alarm being processed
+        /// Gets the alarm status for the sensor limits view.
+        /// </summary>
+        /// <value>
+        /// The alarm status boolean value converted from
+        /// integer.
+        /// </value>
+        public bool? AlarmStatusBool
+        {
+            get
+            {
+                if (!String.IsNullOrEmpty(_alarmStatus.ToString()))
+                {
+                    return Convert.ToBoolean(_alarmStatus);
+                }
+                // Default
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Alarm being processed.
         /// </summary>
         private int _alarmBeingProcessed;
         public int AlarmBeingProcessed
@@ -344,7 +364,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
-        /// Alarm delay
+        /// Alarm delay.
         /// </summary>
         private double _alarmDeley;
         public double AlarmDelay
@@ -354,7 +374,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
-        /// Low alarm limit
+        /// Low alarm limit.
         /// </summary>
         private double _lowAlarmLimit;
         public double LowAlarmLimit
@@ -364,7 +384,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
-        /// Low warning limit
+        /// Low warning limit.
         /// </summary>
         private double _lowWarningLimit;
         public double LowWarningLimit
@@ -374,7 +394,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
-        /// High alarm limit
+        /// High alarm limit.
         /// </summary>
         private double _highAlarmLimit;
         public double HighAlarmLimit
@@ -384,7 +404,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
-        /// High warning limit
+        /// High warning limit.
         /// </summary>
         private double _highWarningLimit;
         public double HighWarningLimit
@@ -671,8 +691,6 @@ namespace CIM.RemoteManager.Core.ViewModels
             switch (conversionType)
             {
                 case "F":
-
-
                     // "F" Message counter data serialization
                     TotalOutgoingMessages = sensorValues.Substring(1, 2).SafeHexToInt();
                     TotalOutgoingRetries = sensorValues.Substring(3, 2).SafeHexToInt();
@@ -696,7 +714,7 @@ namespace CIM.RemoteManager.Core.ViewModels
 
                     if (SensorCommandType == SensorCommand.Plot)
                     {
-                        //_userDialogs.Alert($"(J) Buffered Data: {sensorValues}", "CIMScan RemoteManager");
+                        _userDialogs.Alert($"(J) Buffered Data: {sensorValues}", "CIMScan RemoteManager");
 
                         // "J" Sensor plot data serialization
                         var sensorPlot = new SensorPlot
@@ -738,12 +756,12 @@ namespace CIM.RemoteManager.Core.ViewModels
                         {
                             // "G" Sensor data serialization
                             AlarmStatus = splitSensorValues[1].SafeHexToInt();
-                            AlarmBeingProcessed = splitSensorValues[2].SafeHexToInt();
-                            AlarmDelay = splitSensorValues[3].SafeHexToDouble();
-                            LowAlarmLimit = splitSensorValues[4].SafeHexToInt();
-                            LowWarningLimit = splitSensorValues[5].SafeHexToDouble();
-                            HighWarningLimit = splitSensorValues[6].SafeHexToInt();
-                            HighAlarmLimit = splitSensorValues[7].SafeHexToDouble();
+                            //AlarmBeingProcessed = splitSensorValues[2].SafeHexToInt();
+                            AlarmDelay = splitSensorValues[2].SafeHexToDouble();
+                            LowAlarmLimit = splitSensorValues[3].SafeHexToInt();
+                            LowWarningLimit = splitSensorValues[4].SafeHexToDouble();
+                            HighWarningLimit = splitSensorValues[5].SafeHexToInt();
+                            HighAlarmLimit = splitSensorValues[6].SafeHexToDouble();
                         }
                     }
                     break;
