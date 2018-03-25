@@ -121,6 +121,22 @@ namespace CIM.RemoteManager.Core.Models
         public DateTime? DateTimeStamp => _timeStamp.UnixTimeStampToDateTime();
 
         /// <summary>
+        /// Average sensor value plus the value unit type appended.
+        /// </summary>
+        public string AveragePlusUnitValue
+        {
+            get
+            {
+                if (!String.IsNullOrEmpty(AverageValue.ToString()))
+                {
+                    return $"{AverageValue.ToString()} {SensorUnitType}";
+                }
+                // Default
+                return "No Value";
+            }
+        }
+
+        /// <summary>
         /// Average sensor value.
         /// Make sure we divide by 10 to convert to appropriate value.
         /// </summary>

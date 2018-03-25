@@ -28,11 +28,11 @@
                            CornerRadius="20" HasShadow="False" HeightRequest="35" Opacity=".7"
                            OutlineColor="{DynamicResource OutlineColor}"
                            Style="{DynamicResource ValueBoxStyle}"
-                           WidthRequest="100">
+                           WidthRequest="130">
                         <Label VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"
                                HorizontalTextAlignment="End" LineBreakMode="NoWrap"
                                Style="{DynamicResource ValueStyle}"
-                               Text="{Binding AverageValue}"
+                               Text="{Binding AveragePlusUnitValue}"
                                VerticalTextAlignment="Center" />
                         <Label VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"
                                HorizontalTextAlignment="Start" LineBreakMode="NoWrap"
