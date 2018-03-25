@@ -36,7 +36,7 @@
             get => _totalIncomingErrors;
             set => SetProperty(ref _totalIncomingErrors, value);
         }
-        
+
         /// <summary>
         /// Time in minutes
         /// </summary>

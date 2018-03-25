@@ -305,11 +305,11 @@
                 <Entry x:Name="ScaleEntry"
                        Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3"
                        Style="{DynamicResource FormValueStyle}"
-                       Text="{Binding HighAlarmLimit}" />
+                       Text="{Binding Scale}" />
 
                 <!-- Offset -->
                 <Label Grid.Row="3" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Offset: " />
-                <Entry x:Name="OffsetEntry" Grid.Row="3" Grid.Column="1" Style="{DynamicResource FormValueStyle}" Text="{Binding HighWarningLimit}" />
+                <Entry x:Name="OffsetEntry" Grid.Row="3" Grid.Column="1" Style="{DynamicResource FormValueStyle}" Text="{Binding Offset}" />
 
                 <!-- Offset Trim -->
                 <Label Grid.Row="4" Grid.Column="2" Style="{DynamicResource FormLabelStyle}" Text="Offset Trim: " />

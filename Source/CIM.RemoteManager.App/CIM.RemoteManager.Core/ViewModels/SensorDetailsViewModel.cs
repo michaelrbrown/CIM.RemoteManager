@@ -191,6 +191,31 @@ namespace CIM.RemoteManager.Core.ViewModels
 
         #endregion
 
+        #region Sensor
+
+        private double _scale;
+        public double Scale
+        {
+            get => _scale;
+            set => SetProperty(ref _scale, value);
+        }
+
+        private double _offset;
+        public double Offset
+        {
+            get => _offset;
+            set => SetProperty(ref _offset, value);
+        }
+
+        private double _currentValue;
+        public double CurrentValue
+        {
+            get => _currentValue;
+            set => SetProperty(ref _currentValue, value);
+        }
+
+        #endregion
+
         #region Sensor Statistics
 
         /// <summary>
@@ -819,7 +844,7 @@ namespace CIM.RemoteManager.Core.ViewModels
 
                 // Get message counter values from remote to determine if
                 // we have acquired or lost sensors.  Also grabs time stamp.
-                //GetMessageCounterValues(CharacteristicValue);
+                GetMessageCounterValues(CharacteristicValue);
 
                 // Notify property changed
                 RaisePropertyChanged(() => CharacteristicValue);
@@ -943,6 +968,8 @@ namespace CIM.RemoteManager.Core.ViewModels
                     {
                         updateValue = "{Y}";
                     }
+
+                    _userDialogs.Alert($"Write Command: {updateValue}", "CIMScan Remote Manager");
 
                     // Send the command based on command type set above
                     await TxCharacteristic.WriteAsync(updateValue.StrToByteArray()).ConfigureAwait(true);
