@@ -29,11 +29,19 @@
                            OutlineColor="{DynamicResource OutlineColor}"
                            Style="{DynamicResource ValueBoxStyle}"
                            WidthRequest="130">
-                        <Label VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"
-                               HorizontalTextAlignment="Center" LineBreakMode="NoWrap"
-                               Style="{DynamicResource ValueStyle}"
-                               Text="{Binding AveragePlusUnitValue}"
-                               VerticalTextAlignment="Center" />
+                        <StackLayout Orientation="Horizontal">
+                            <Label VerticalOptions="CenterAndExpand" HorizontalOptions="End"
+                                   HorizontalTextAlignment="End" LineBreakMode="NoWrap"
+                                   Style="{DynamicResource ValueStyle}"
+                                   Text="{Binding AveragePlusUnitValue}"
+                                   VerticalTextAlignment="Center" />
+                            <Label Margin="0,-20,0,0"
+                                   VerticalOptions="CenterAndExpand" HorizontalOptions="Start"
+                                   HorizontalTextAlignment="Start" LineBreakMode="NoWrap"
+                                   Style="{DynamicResource ValueUnitTypeStyle}"
+                                   Text="{Binding SensorUnitType}"
+                                   VerticalTextAlignment="Start" />
+                        </StackLayout>
                     </Frame>
                 </StackLayout>
 
