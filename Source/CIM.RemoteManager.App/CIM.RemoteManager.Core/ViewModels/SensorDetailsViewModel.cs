@@ -954,7 +954,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         });
 
         /// <summary>
-        /// Start sensor updates.
+        /// Save sensor calibration offset and scale.
         /// </summary>
         public MvxCommand SaveSensorCalibration => new MvxCommand(SaveSensorCalibrationData);
 
@@ -1017,20 +1017,20 @@ namespace CIM.RemoteManager.Core.ViewModels
                 //// Make sure we can write characteristic data to remote
                 if (TxCharacteristic.CanWrite)
                 {
-                    // Send a refresh command
-                    //await TxCharacteristic.WriteAsync("{Y}".StrToByteArray()).ConfigureAwait(true);
-
-                    // Now setup plot, statistics, and limits commands
+                    // Setup plot command
                     string updateValue = string.Empty;
                     if (SensorCommandType == SensorCommand.Plot)
                     {
-                        updateValue = "{c" + SensorIndex + "}";
+                        updateValue = "{c" + SensorIndexSelected + "}";
                     }
+                    // Send statistics, and limits commands (Y command = refresh all which returns
+                    // limits and statistics data.
                     else if (SensorCommandType == SensorCommand.Statistics || SensorCommandType == SensorCommand.Limits)
                     {
                         updateValue = "{Y}";
                     }
 
+                    // TODO: remove after debugging
                     _userDialogs.Alert($"Write Command: {updateValue}", "CIMScan Remote Manager");
 
                     // Send the command based on command type set above
@@ -1233,7 +1233,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 string updateValue = string.Empty;
                 if (SensorCommandType == SensorCommand.Plot)
                 {
-                    updateValue = "{c" + SensorIndex + "}";
+                    updateValue = "{c" + SensorIndexSelected + "}";
                 }
                 else if (SensorCommandType == SensorCommand.Statistics || SensorCommandType == SensorCommand.Limits)
                 {
