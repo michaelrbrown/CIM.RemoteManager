@@ -79,19 +79,50 @@ namespace CIM.RemoteManager.Core.Models
             set => SetProperty(ref _name, value);
         }
 
-        private string _sensorType;
-        public string SensorType
+        /// <summary>
+        /// The sensor type group (Temperature, Differential Pressure, etc.).
+        /// </summary>
+        public string SensorTypeGroup
         {
             get
             {
+                // Validate
                 if (!string.IsNullOrEmpty(_sensorType))
                 {
-                    return _sensorType.GetSensorTypeResult().SensorLabel;
+                    // Return a sensor unit type
+                    return _sensorType.GetSensorTypeResult().SensorGroup;
                 }
+                // Default
+                return "";
+            }
+        }
+
+        /// <summary>
+        /// The sensor type from the remote.  Used for converting to sensor
+        /// labels, image, and grouping.
+        /// </summary>
+        private string _sensorType;
+        public string SensorType
+        {
+            get => _sensorType;
+            set => SetProperty(ref _sensorType, value);
+        }
+
+        private string _sensorLabel;
+
+        public string SensorLabel
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(_sensorLabel))
+                {
+                    return _sensorLabel.GetSensorTypeResult().SensorLabel;
+                }
+
                 // Default
                 return string.Empty;
             }
-            set => SetProperty(ref _sensorType, value);
+            set => SetProperty(ref _sensorLabel, value);
         }
 
         private double _scale;

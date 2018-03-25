@@ -21,8 +21,8 @@
     <!-- Sensor ListView -->
     <syncfusion:SfListView x:Name="SensorLiistView"
                            Margin="0"
-                           AllowSwiping="True" HeaderSize="145" IsStickyFooter="True" ItemDoubleTapped="SensorListView_OnItemDoubleTapped" ItemSize="116"
-                           ItemSpacing="3"
+                           AllowSwiping="True" HeaderSize="145" IsStickyFooter="True" IsStickyGroupHeader="True" ItemDoubleTapped="SensorListView_OnItemDoubleTapped"
+                           ItemSize="116" ItemSpacing="3"
                            ItemsSource="{Binding SensorCollection}"
                            SelectionBackgroundColor="Transparent">
 
@@ -63,6 +63,23 @@
                 </Grid>
             </DataTemplate>
         </syncfusion:SfListView.HeaderTemplate>
+
+        <!-- Sensor ListView Group Template -->
+        <syncfusion:SfListView.GroupHeaderTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <ViewCell.View>
+                        <StackLayout BackgroundColor="#E4E4E4">
+                            <Label Margin="20,0,0,0"
+                                   VerticalOptions="Center" HorizontalOptions="Start"
+                                   FontAttributes="Bold" FontSize="22"
+                                   Text="{Binding SensorTypeGroup}"
+                                   TextColor="{DynamicResource NameColor}" />
+                        </StackLayout>
+                    </ViewCell.View>
+                </ViewCell>
+            </DataTemplate>
+        </syncfusion:SfListView.GroupHeaderTemplate>
 
         <!-- Sensor ListView Item Template -->
         <syncfusion:SfListView.ItemTemplate>
