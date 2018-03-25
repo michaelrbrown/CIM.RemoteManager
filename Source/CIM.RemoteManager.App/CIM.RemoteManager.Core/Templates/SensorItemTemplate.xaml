@@ -25,12 +25,12 @@
 
                 <StackLayout Grid.Column="2" Orientation="Horizontal" Spacing="0">
                     <Frame VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"
-                           CornerRadius="20" HasShadow="False" HeightRequest="30" Opacity=".7"
+                           CornerRadius="20" HasShadow="False" HeightRequest="35" Opacity=".7"
                            OutlineColor="{DynamicResource OutlineColor}"
                            Style="{DynamicResource ValueBoxStyle}"
                            WidthRequest="100">
                         <Label VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"
-                               HorizontalTextAlignment="Center" LineBreakMode="NoWrap"
+                               HorizontalTextAlignment="End" LineBreakMode="NoWrap"
                                Style="{DynamicResource ValueStyle}"
                                Text="{Binding AverageValue}"
                                VerticalTextAlignment="Center" />
