@@ -73,22 +73,6 @@
             </DataTemplate>
         </syncfusion:SfListView.HeaderTemplate>
 
-        <!-- Sensor ListView Group Template -->
-        <syncfusion:SfListView.GroupHeaderTemplate>
-            <DataTemplate>
-                <ViewCell>
-                    <ViewCell.View>
-                        <StackLayout BackgroundColor="{DynamicResource EntryBackgroundColor}" Opacity=".7">
-                            <Label Margin="20,0,0,0"
-                                   VerticalOptions="Center" HorizontalOptions="Start"
-                                   FontAttributes="Italic" FontSize="20"
-                                   Text="{Binding SensorTypeGroup}"
-                                   TextColor="{DynamicResource AppLightColor}" />
-                        </StackLayout>
-                    </ViewCell.View>
-                </ViewCell>
-            </DataTemplate>
-        </syncfusion:SfListView.GroupHeaderTemplate>
 
         <!-- Sensor ListView Item Template -->
         <syncfusion:SfListView.ItemTemplate>

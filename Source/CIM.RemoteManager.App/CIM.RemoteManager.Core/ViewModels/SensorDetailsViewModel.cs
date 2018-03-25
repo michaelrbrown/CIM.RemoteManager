@@ -1021,7 +1021,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                     string updateValue = string.Empty;
                     if (SensorCommandType == SensorCommand.Plot)
                     {
-                        updateValue = "{c" + SensorIndexSelected + "}";
+                        updateValue = "{c0" + SensorIndexSelected + "}";
                     }
                     // Send statistics, and limits commands (Y command = refresh all which returns
                     // limits and statistics data.
@@ -1031,7 +1031,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                     }
 
                     // TODO: remove after debugging
-                    _userDialogs.Alert($"Write Command: {updateValue}", "CIMScan Remote Manager");
+                    //_userDialogs.Alert($"Write Command: {updateValue}", "CIMScan Remote Manager");
 
                     // Send the command based on command type set above
                     await TxCharacteristic.WriteAsync(updateValue.StrToByteArray()).ConfigureAwait(true);
