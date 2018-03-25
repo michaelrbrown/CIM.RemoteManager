@@ -29,8 +29,9 @@
                            OutlineColor="{DynamicResource OutlineColor}"
                            Style="{DynamicResource ValueBoxStyle}"
                            WidthRequest="130">
-                        <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
-                            <Label VerticalOptions="CenterAndExpand" HorizontalOptions="End"
+                        <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Orientation="Horizontal" Spacing="0">
+                            <Label Margin="0"
+                                   VerticalOptions="CenterAndExpand" HorizontalOptions="End"
                                    HorizontalTextAlignment="End" LineBreakMode="NoWrap"
                                    Style="{DynamicResource ValueStyle}"
                                    Text="{Binding AverageValue}"

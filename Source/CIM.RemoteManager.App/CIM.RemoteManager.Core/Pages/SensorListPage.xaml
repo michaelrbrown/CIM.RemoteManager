@@ -78,12 +78,12 @@
             <DataTemplate>
                 <ViewCell>
                     <ViewCell.View>
-                        <StackLayout BackgroundColor="#E4E4E4">
+                        <StackLayout BackgroundColor="{DynamicResource EntryBackgroundColor}" Opacity=".7">
                             <Label Margin="20,0,0,0"
                                    VerticalOptions="Center" HorizontalOptions="Start"
-                                   FontAttributes="Bold" FontSize="22"
+                                   FontAttributes="Italic" FontSize="20"
                                    Text="{Binding SensorTypeGroup}"
-                                   TextColor="{DynamicResource NameColor}" />
+                                   TextColor="{DynamicResource AppLightColor}" />
                         </StackLayout>
                     </ViewCell.View>
                 </ViewCell>
