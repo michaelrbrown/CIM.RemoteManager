@@ -19,8 +19,8 @@ using Xamarin.Forms;
 namespace CIM.RemoteManager.Core.ViewModels
 {
     /// <summary>
-    /// Device list viewmodel for handling connecting to BlueTooth devices, sorting and listing CimScan devices 
-    /// in a separate list.  Connections and disposing, as well as navigating to sensor list page all contained 
+    /// Device list viewmodel for handling connecting to BlueTooth devices, sorting and listing CimScan devices
+    /// in a separate list.  Connections and disposing, as well as navigating to sensor list page all contained
     /// within the logic of this viewmodel. Inherits from the base viewmodel for shared core functions such as
     /// device bundle identifiers, suspending and resuming connections.
     /// </summary>
@@ -152,7 +152,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         #endregion
-        
+
         #region Commands
 
         /// <summary>
@@ -426,8 +426,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 PreviousName = !string.IsNullOrEmpty(nameString) ? nameString : string.Empty;
             });
         }
-        
-       
+
         /// <summary>
         /// Gets the state text. Setup all the possible Bluetooth LE states.
         /// </summary>
@@ -454,7 +453,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                     return "Unknown Bluetooth LE state.";
             }
         }
-        
+
         /// <summary>
         /// Add or update non-CIMScan devices in list (we want to do this b/c we may not find CIMScan
         /// devices by name (adafruit).
@@ -495,7 +494,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 }
             });
         }
-        
+
         /// <summary>
         /// Cleanups the cancellation token.
         /// </summary>
@@ -531,7 +530,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 _userDialogs.HideLoading();
             }
         }
-        
+
         /// <summary>
         /// Handles the selected device. Handle selected device by providing options to connect, disconnect, and navigate to sensors page.
         /// </summary>
@@ -635,9 +634,9 @@ namespace CIM.RemoteManager.Core.ViewModels
                     PreviousName = device.Device.Name;
                     await Adapter.ConnectToDeviceAsync(device.Device, new ConnectParameters(autoConnect: UseAutoConnect, forceBleTransport: false), tokenSource.Token).ConfigureAwait(true);
                 }
-                
+
                 //_userDialogs.InfoToast($"Connected to {device.Device.Name}.", TimeSpan.FromSeconds(3));
-                
+
                 return true;
 
             }
@@ -653,7 +652,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 device.Update();
             }
         }
-        
+
         /// <summary>
         /// Handles connecting to previous device, which allows faster connection by eliminating searching and prompts.
         /// </summary>
@@ -683,7 +682,7 @@ namespace CIM.RemoteManager.Core.ViewModels
 
                 // Notify end user of successful connection
                 _userDialogs.InfoToast($"Connected to {systemDevice.Name}.", TimeSpan.FromSeconds(3));
-               
+
                 // Try to find our existing device by id
                 var deviceItem = SystemDevices.FirstOrDefault(d => d.Device.Id == systemDevice.Id);
                 if (deviceItem == null)
@@ -762,6 +761,6 @@ namespace CIM.RemoteManager.Core.ViewModels
                 _userDialogs.HideLoading();
             }
         }
-        
+
     }
 }

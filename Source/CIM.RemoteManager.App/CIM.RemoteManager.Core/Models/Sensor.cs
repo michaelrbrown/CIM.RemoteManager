@@ -108,21 +108,23 @@ namespace CIM.RemoteManager.Core.Models
             set => SetProperty(ref _sensorType, value);
         }
 
-        private string _sensorLabel;
-
+        /// <summary>
+        /// Gets the sensor label.
+        /// </summary>
+        /// <value>
+        /// The sensor label converted from sensor type.
+        /// </value>
         public string SensorLabel
         {
             get
             {
-                if (!string.IsNullOrEmpty(_sensorLabel))
+                if (!string.IsNullOrEmpty(_sensorType))
                 {
-                    return _sensorLabel.GetSensorTypeResult().SensorLabel;
+                    return _sensorType.GetSensorTypeResult().SensorLabel;
                 }
-
                 // Default
                 return string.Empty;
             }
-            set => SetProperty(ref _sensorLabel, value);
         }
 
         private double _scale;

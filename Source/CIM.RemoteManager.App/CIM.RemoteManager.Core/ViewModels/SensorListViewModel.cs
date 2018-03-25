@@ -428,8 +428,10 @@ namespace CIM.RemoteManager.Core.ViewModels
                     TotalRecordsInHistoryBuffer = sensorValues.Substring(15, 2).SafeHexToInt();
                     CurrentDateTime = sensorValues.Substring(19, 8).SafeConvert<int>(0);
 
+                    double remoteDateTime = CurrentDateTime;
+
                     //_userDialogs.Alert($"(F) TotalActiveSensors: {TotalActiveSensors}", "CIMScan RemoteManager");
-                    //_userDialogs.Alert($"(F) CurrentDateTime: {CurrentDateTime}", "CIMScan RemoteManager");
+                    _userDialogs.Alert($"(F) CurrentDateTime: {remoteDateTime.UnixTimeStampToDateTime()}", "CIMScan RemoteManager");
 
                     // New instance of station helper
                     var stationHelper = new StationHelper();
@@ -892,13 +894,28 @@ namespace CIM.RemoteManager.Core.ViewModels
         {
             if (sensor != null)
             {
-                // Clear old sensor name
+                // Clear old sensor values
                 if (Application.Current.Properties.ContainsKey("CurrentSensorName"))
                 {
                     Application.Current.Properties.Remove("CurrentSensorName");
                 }
-                // Set sensor name for details page
+                if (Application.Current.Properties.ContainsKey("CurrentSensorType"))
+                {
+                    Application.Current.Properties.Remove("CurrentSensorType");
+                }
+                if (Application.Current.Properties.ContainsKey("CurrentSensorOffset"))
+                {
+                    Application.Current.Properties.Remove("CurrentSensorOffset");
+                }
+                if (Application.Current.Properties.ContainsKey("CurrentSensorScale"))
+                {
+                    Application.Current.Properties.Remove("CurrentSensorScale");
+                }
+                // Set sensor values for details page
                 Application.Current.Properties["CurrentSensorName"] = sensor.Name;
+                Application.Current.Properties["CurrentSensorType"] = sensor.SensorType;
+                Application.Current.Properties["CurrentSensorOffset"] = sensor.Offset;
+                Application.Current.Properties["CurrentSensorScale"] = sensor.Scale;
 
                 // Navigate to sensor plot
                 var bundle = new MvxBundle(new Dictionary<string, string>(Bundle.Data) { { SensorIdKey, sensor.SensorIndex.ToString() } });

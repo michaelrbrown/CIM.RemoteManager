@@ -2,6 +2,7 @@
 using System.Text;
 using System.Threading.Tasks;
 using Acr.UserDialogs;
+using CIM.RemoteManager.Core.Extensions;
 using CIM.RemoteManager.Core.Helpers;
 using CIM.RemoteManager.Core.Models;
 using MvvmCross.Core.ViewModels;
@@ -78,15 +79,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// </summary>
         public int SensorIndex { get; set; }
 
-        /// <summary>
-        /// Sensor name
-        /// </summary>
-        public string SensorName { get; set; }
 
-        /// <summary>
-        /// Sensor serial number (unique id)
-        /// </summary>
-        public string SensorSerialNumber { get; set; }
 
         /// <summary>
         /// Sensor
@@ -193,20 +186,84 @@ namespace CIM.RemoteManager.Core.ViewModels
 
         #region Sensor
 
-        private double _scale;
-        public double Scale
+        /// <summary>
+        /// Sensor name
+        /// </summary>
+        public string SensorName { get; set; }
+
+        /// <summary>
+        /// Sensor serial number (unique id)
+        /// </summary>
+        public string SensorSerialNumber { get; set; }
+
+        /// <summary>
+        /// Sensor type
+        /// </summary>
+        public string SensorType { get; set; }
+
+        /// <summary>
+        /// Sensor Scale
+        /// </summary>
+        private double _upperCalibration;
+        public double UpperCalibration
         {
-            get => _scale;
-            set => SetProperty(ref _scale, value);
+            get => _upperCalibration;
+            set => SetProperty(ref _upperCalibration, value);
         }
 
-        private double _offset;
-        public double Offset
+        /// <summary>
+        /// Sensor Scale
+        /// </summary>
+        private double _upperCalibrationTarget;
+        public double UpperCalibrationTarget
         {
-            get => _offset;
-            set => SetProperty(ref _offset, value);
+            get => _upperCalibrationTarget;
+            set => SetProperty(ref _upperCalibrationTarget, value);
         }
 
+        /// <summary>
+        /// Sensor Scale
+        /// </summary>
+        private double _lowerCalibration;
+        public double LowerCalibration
+        {
+            get => _lowerCalibration;
+            set => SetProperty(ref _lowerCalibration, value);
+        }
+
+        /// <summary>
+        /// Sensor Scale
+        /// </summary>
+        private double _lowerCalibrationTarget;
+        public double LowerCalibrationTarget
+        {
+            get => _lowerCalibrationTarget;
+            set => SetProperty(ref _lowerCalibrationTarget, value);
+        }
+
+        /// <summary>
+        /// Sensor Scale
+        /// </summary>
+        private double _sensorScale;
+        public double SensorScale
+        {
+            get => _sensorScale;
+            set => SetProperty(ref _sensorScale, value);
+        }
+
+        /// <summary>
+        /// Sensor Scale
+        /// </summary>
+        private double _sensorOffset;
+        public double SensorOffset
+        {
+            get => _sensorOffset;
+            set => SetProperty(ref _sensorOffset, value);
+        }
+
+        /// <summary>
+        /// The current value
+        /// </summary>
         private double _currentValue;
         public double CurrentValue
         {
@@ -896,6 +953,11 @@ namespace CIM.RemoteManager.Core.ViewModels
             }
         });
 
+        /// <summary>
+        /// Start sensor updates.
+        /// </summary>
+        public MvxCommand SaveSensorCalibration => new MvxCommand(SaveSensorCalibrationData);
+
         #endregion
 
         /// <summary>
@@ -1008,6 +1070,8 @@ namespace CIM.RemoteManager.Core.ViewModels
 
                 // Get selected sensor index from device
                 SensorIndexSelected = Convert.ToInt32(parameters.Data[SensorIdKey]);
+                // Notify property changed
+                RaisePropertyChanged(() => SensorIndexSelected);
 
                 // Get sensor name from app context
                 if (Application.Current.Properties.ContainsKey("CurrentSensorName"))
@@ -1016,9 +1080,27 @@ namespace CIM.RemoteManager.Core.ViewModels
                     // Notify property changed
                     RaisePropertyChanged(() => SensorName);
                 }
-
-                // Notify property changed
-                RaisePropertyChanged(() => SensorIndexSelected);
+                // Get sensor type from app context
+                if (Application.Current.Properties.ContainsKey("CurrentSensorType"))
+                {
+                    SensorType = Convert.ToString(Application.Current.Properties["CurrentSensorType"]);
+                    // Notify property changed
+                    RaisePropertyChanged(() => SensorType);
+                }
+                // Get sensor offset from app context
+                if (Application.Current.Properties.ContainsKey("CurrentSensorOffset"))
+                {
+                    SensorOffset = Convert.ToDouble(Application.Current.Properties["CurrentSensorOffset"]);
+                    // Notify property changed
+                    RaisePropertyChanged(() => SensorOffset);
+                }
+                // Get sensor scale from app context
+                if (Application.Current.Properties.ContainsKey("CurrentSensorScale"))
+                {
+                    SensorScale = Convert.ToDouble(Application.Current.Properties["CurrentSensorScale"]);
+                    // Notify property changed
+                    RaisePropertyChanged(() => SensorScale);
+                }
 
                 // Get device from bundle
                 _device = GetSensorDeviceBundle(parameters);
@@ -1144,8 +1226,10 @@ namespace CIM.RemoteManager.Core.ViewModels
             try
             {
                 UpdatesStarted = true;
+                // Notify property changed
+                RaisePropertyChanged(() => UpdatesStarted);
 
-                // Send refresh command to remote
+                // Send plot or refresh command to remote
                 string updateValue = string.Empty;
                 if (SensorCommandType == SensorCommand.Plot)
                 {
@@ -1187,6 +1271,8 @@ namespace CIM.RemoteManager.Core.ViewModels
             try
             {
                 UpdatesStarted = false;
+                // Notify property changed
+                RaisePropertyChanged(() => UpdatesStarted);
 
                 // Stop updates from bluetooth service
                 await RxCharacteristic.StopUpdatesAsync().ConfigureAwait(true);
@@ -1200,6 +1286,54 @@ namespace CIM.RemoteManager.Core.ViewModels
             catch (Exception ex)
             {
                 HockeyApp.MetricsManager.TrackEvent($"(StopUpdates) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
+                _userDialogs.Alert(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Saves the sensor calibration data.
+        /// </summary>
+        /// <remarks>
+        ///
+        /// </remarks>
+        private async void SaveSensorCalibrationData()
+        {
+            try
+            {
+                UpdatesStarted = true;
+                // Notify property changed
+                RaisePropertyChanged(() => UpdatesStarted);
+
+                // Setup sensor scale command
+                string sensorScaleUpdateValue = "{C" +  SensorIndexSelected + "\t" + SensorScale + "}";
+
+                _userDialogs.Alert($"sensorScaleUpdateValue: {sensorScaleUpdateValue}");
+
+                // Save scale and offset to remote
+                await TxCharacteristic.WriteAsync(sensorScaleUpdateValue.StrToByteArray()).ConfigureAwait(true);
+
+                // Setup sensor offset command
+                string sensorOffsetUpdateValue = "{D" + SensorIndexSelected + "\t" + SensorOffset + "}";
+
+                _userDialogs.Alert($"sensorOffsetUpdateValue: {sensorScaleUpdateValue}");
+
+                // Save scale and offset to remote
+                await TxCharacteristic.WriteAsync(sensorOffsetUpdateValue.StrToByteArray()).ConfigureAwait(true);
+
+                UpdatesStarted = false;
+                // Notify property changed
+                RaisePropertyChanged(() => UpdatesStarted);
+
+                // Show complete
+                _userDialogs.InfoToast($"Calibration was saved.", TimeSpan.FromSeconds(2));
+            }
+            catch (Exception ex)
+            {
+                UpdatesStarted = false;
+                // Notify property changed
+                RaisePropertyChanged(() => UpdatesStarted);
+
+                HockeyApp.MetricsManager.TrackEvent($"(SaveSensorCalibrationData) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
                 _userDialogs.Alert(ex.Message);
             }
         }

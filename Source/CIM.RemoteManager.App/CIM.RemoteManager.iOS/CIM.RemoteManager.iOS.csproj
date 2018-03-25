@@ -501,6 +501,15 @@
   <ItemGroup>
     <BundleResource Include="Resources\defaultSensor.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\airflowSensor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\particleCountSensor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_save.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

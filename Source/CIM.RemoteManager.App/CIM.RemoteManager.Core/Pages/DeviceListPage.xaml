@@ -1,159 +1,176 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<pages:BaseTabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:pages="clr-namespace:CIM.RemoteManager.Core.Pages;assembly=CIM.RemoteManager.Core"
-             x:Class="CIM.RemoteManager.Core.Pages.DeviceListPage" 
-             Title="Discover Devices"
-             x:Name="DevicePage">
+<pages:BaseTabbedPage x:Class="CIM.RemoteManager.Core.Pages.DeviceListPage"
+                      xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                      xmlns:pages="clr-namespace:CIM.RemoteManager.Core.Pages;assembly=CIM.RemoteManager.Core"
+                      x:Name="DevicePage" Title="Discover Devices">
 
-  <pages:BaseTabbedPage.Resources>
-    <ResourceDictionary>
-      <DataTemplate x:Key="DeviceItemTemplate">
-        <ViewCell>
-          <ViewCell.ContextActions>
-            <MenuItem Command="{Binding Path=BindingContext.DisconnectCommand, Source={x:Reference DevicePage}}"
-                      CommandParameter="{Binding .}" IsDestructive="True"
-                      Text="Disconnect"/>
-          </ViewCell.ContextActions>
+    <pages:BaseTabbedPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="DeviceItemTemplate">
+                <ViewCell>
+                    <ViewCell.ContextActions>
+                        <MenuItem Command="{Binding Path=BindingContext.DisconnectCommand, Source={x:Reference DevicePage}}" CommandParameter="{Binding .}" IsDestructive="True" Text="Disconnect" />
+                    </ViewCell.ContextActions>
 
-          <Grid>
-            
-            <Grid.Triggers>
-              <DataTrigger TargetType="Grid"
-                            Binding="{Binding IsConnected}"
-                            Value="true">
-                <Setter Property="BackgroundColor" Value="#B9DEF5"></Setter>
-              </DataTrigger>
-            </Grid.Triggers>
+                    <Grid>
 
-              <StackLayout Margin="5" Orientation="Vertical" VerticalOptions="CenterAndExpand" BackgroundColor="Transparent">
-                  <Grid>
-                      <Grid.ColumnDefinitions>
-                          <ColumnDefinition Width="5"></ColumnDefinition>
-                          <ColumnDefinition Width="*"></ColumnDefinition>
-                          <ColumnDefinition Width="Auto"></ColumnDefinition>
-                          <ColumnDefinition Width="Auto"></ColumnDefinition>
-                      </Grid.ColumnDefinitions>
-                    
-                      <Frame Grid.Column="0" WidthRequest="5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="#0097DF" HasShadow="False"></Frame>
-            
-                      <StackLayout Grid.Column="1" Orientation="Vertical" VerticalOptions="CenterAndExpand" Margin="5,0,0,0">
-                        <Label Text="{Binding Name}" FontSize="22" TextColor="#2A649B" />
-                        <Label Text="{Binding Id, StringFormat='{0}'}" TextColor="#7B7B7B" FontSize="14"/>
-                      </StackLayout>
-                      
-                      <Image Source="{Binding Rssi, Converter={StaticResource RssiConverter}}"  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Grid.Column="2" HeightRequest="40" Margin="8,12,8,12" />
-                  </Grid>
-              </StackLayout>
-          
-          </Grid>
+                        <Grid.Triggers>
+                            <DataTrigger Binding="{Binding IsConnected}" TargetType="Grid" Value="true">
+                                <Setter Property="BackgroundColor" Value="#B9DEF5" />
+                            </DataTrigger>
+                        </Grid.Triggers>
 
-        </ViewCell>
-      </DataTemplate>
-    </ResourceDictionary>
-  </pages:BaseTabbedPage.Resources>
-  
-  <pages:BaseTabbedPage.Children>
+                        <StackLayout Margin="5" VerticalOptions="CenterAndExpand" BackgroundColor="Transparent" Orientation="Vertical">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="5" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
 
-    <pages:BasePage Title="CIMScan Devices" BackgroundColor="#FFFFFF" Icon="ic_bluetooth-connected.png">
-      <Grid>
-        <Grid.RowDefinitions>
-          <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-        </Grid.RowDefinitions>
+                                <Frame Grid.Column="0"
+                                       VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+                                       BackgroundColor="#0097DF" HasShadow="False" WidthRequest="5" />
 
-        <StackLayout Grid.Row="0" BackgroundColor="#AE2C3B" Padding="10" HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsStateOn, Converter={StaticResource BooleanToFalseConverter}}">
-          <Grid HorizontalOptions="Center">
-            <Grid.ColumnDefinitions>
-              <ColumnDefinition Width="Auto" />
-              <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Image Source="bluetooth-info.png" VerticalOptions="Center" HorizontalOptions="End" />
-            <Label Grid.Column="1" Text="{Binding StateText}" TextColor="#FFFFFF" FontSize="18" VerticalOptions="Center"/>
-          </Grid>
-        </StackLayout>
+                                <StackLayout Grid.Column="1" Margin="5,0,0,0" VerticalOptions="CenterAndExpand" Orientation="Vertical">
+                                    <Label FontSize="22" Text="{Binding Name}" TextColor="#2A649B" />
+                                    <Label FontSize="14" Text="{Binding Id, StringFormat='{0}'}" TextColor="#7B7B7B" />
+                                </StackLayout>
 
-        <!-- Margin: left, top, right, bottom -->
-        <ListView Grid.Row="1" ItemsSource="{Binding SystemDevices}" SelectedItem="{Binding SelectedDevice, Mode=TwoWay}"
-                  IsPullToRefreshEnabled="True"
-                  RefreshCommand="{Binding RefreshCommand}"
-                  IsRefreshing="{Binding IsRefreshing, Mode=OneWay}"
-                  RowHeight="75" Margin="10"
-                  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
-                  BackgroundColor="Transparent"
-                  SeparatorColor="Transparent"
-                  ItemTemplate="{StaticResource DeviceItemTemplate}">
-        </ListView>
+                                <Image Grid.Column="2"
+                                       Margin="8,12,8,12"
+                                       VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"
+                                       HeightRequest="40"
+                                       Source="{Binding Rssi, Converter={StaticResource RssiConverter}}" />
+                            </Grid>
+                        </StackLayout>
 
-        <StackLayout Grid.Row="2" Orientation="Horizontal" HorizontalOptions="Fill">
-              <StackLayout.IsVisible>
-                  <OnPlatform x:TypeArguments="x:Boolean" iOS="false" Android="true" />
-              </StackLayout.IsVisible>
-              <Label Text="Use Android AutoConnect" HorizontalOptions="StartAndExpand" VerticalOptions="Center"/>
-              <Switch IsToggled="{Binding UseAutoConnect}" HorizontalOptions="End"></Switch>
-          </StackLayout>
+                    </Grid>
 
-        <StackLayout Grid.Row="3" Orientation="Horizontal" Margin="0, 0, 0, 10" HorizontalOptions="CenterAndExpand" IsVisible="False">
-            <Button Image="ic_connect-previous.png" Text="{Binding PreviousName, StringFormat='Connect to {0}'}" Command="{Binding ConnectToPreviousCommand}" IsVisible="True" HorizontalOptions="FillAndExpand" WidthRequest="325" BackgroundColor="#F9F9F9" TextColor="#0097DF" />
-        </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+        </ResourceDictionary>
+    </pages:BaseTabbedPage.Resources>
 
-          <StackLayout Grid.Row="4" Orientation="Horizontal" Margin="0, 0, 0, 10" HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsRefreshing}">
-              <Button Image="ic_stop-searching.png" Text="Stop Searching" Command="{Binding StopScanCommand}" HorizontalOptions="CenterAndExpand" WidthRequest="155" BackgroundColor="#F9F9F9" TextColor="#0097DF" />
-          </StackLayout>
-        
-      </Grid>
-    </pages:BasePage>
-    
-    <pages:BasePage Title="Search for All Devices" BackgroundColor="#FFFFFF" Icon="ic_bluetooth-search.png">
-      <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-        </Grid.RowDefinitions>
-        
-        <StackLayout Grid.Row="0" BackgroundColor="#AE2C3B" Padding="10" HorizontalOptions="CenterAndExpand" IsVisible="False">
-            <Grid HorizontalOptions="Center">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Image Source="bluetooth-info.png" VerticalOptions="Center" HorizontalOptions="End" IsVisible="False" />
-                <Label Grid.Column="1" Text="{Binding StateText}" TextColor="#FFFFFF" FontSize="18" VerticalOptions="Center" IsVisible="False" />
+    <pages:BaseTabbedPage.Children>
+
+        <pages:BasePage Title="CIMScan Devices" BackgroundColor="#FFFFFF" Icon="ic_bluetooth-connected.png">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <StackLayout Grid.Row="0" Padding="10" HorizontalOptions="CenterAndExpand" BackgroundColor="#AE2C3B" IsVisible="{Binding IsStateOn, Converter={StaticResource BooleanToFalseConverter}}">
+                    <Grid HorizontalOptions="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Image VerticalOptions="Center" HorizontalOptions="End" Source="bluetooth-info.png" />
+                        <Label Grid.Column="1" VerticalOptions="Center" FontSize="18" Text="{Binding StateText}" TextColor="#FFFFFF" />
+                    </Grid>
+                </StackLayout>
+
+                <!-- Margin: left, top, right, bottom -->
+                <ListView Grid.Row="1"
+                          Margin="10"
+                          VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+                          BackgroundColor="Transparent" IsPullToRefreshEnabled="True"
+                          IsRefreshing="{Binding IsRefreshing, Mode=OneWay}"
+                          ItemTemplate="{StaticResource DeviceItemTemplate}"
+                          ItemsSource="{Binding SystemDevices}"
+                          RefreshCommand="{Binding RefreshCommand}"
+                          RowHeight="75"
+                          SelectedItem="{Binding SelectedDevice, Mode=TwoWay}"
+                          SeparatorColor="Transparent" />
+
+                <StackLayout Grid.Row="2" HorizontalOptions="Fill" Orientation="Horizontal">
+                    <StackLayout.IsVisible>
+                        <OnPlatform x:TypeArguments="x:Boolean" Android="true" iOS="false" />
+                    </StackLayout.IsVisible>
+                    <Label VerticalOptions="Center" HorizontalOptions="StartAndExpand" Text="Use Android AutoConnect" />
+                    <Switch HorizontalOptions="End" IsToggled="{Binding UseAutoConnect}" />
+                </StackLayout>
+
+                <StackLayout Grid.Row="3" Margin="0,0,0,10" HorizontalOptions="CenterAndExpand" IsVisible="False" Orientation="Horizontal">
+                    <Button HorizontalOptions="FillAndExpand"
+                            BackgroundColor="#F9F9F9"
+                            Command="{Binding ConnectToPreviousCommand}"
+                            Image="ic_connect-previous.png" IsVisible="True"
+                            Text="{Binding PreviousName, StringFormat='Connect to {0}'}"
+                            TextColor="#0097DF" WidthRequest="325" />
+                </StackLayout>
+
+                <StackLayout Grid.Row="4" Margin="0,0,0,10" HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsRefreshing}" Orientation="Horizontal">
+                    <Button HorizontalOptions="CenterAndExpand"
+                            BackgroundColor="#F9F9F9"
+                            Command="{Binding StopScanCommand}"
+                            Image="ic_stop-searching.png" Text="Stop Searching" TextColor="#0097DF" WidthRequest="155" />
+                </StackLayout>
+
             </Grid>
-        </StackLayout>
+        </pages:BasePage>
 
-        <!-- Margin: left, top, right, bottom -->
-        <ListView Grid.Row="1" ItemsSource="{Binding Devices}" SelectedItem="{Binding SelectedDevice, Mode=TwoWay}"
-                 IsPullToRefreshEnabled="True"
-                 RefreshCommand="{Binding RefreshCommand}"
-                 IsRefreshing="{Binding IsRefreshing, Mode=OneWay}"
-                 RowHeight="75" Margin="10" 
-                 HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
-                 BackgroundColor="Transparent" 
-                 SeparatorColor="Transparent"
-                 ItemTemplate="{StaticResource DeviceItemTemplate}">
-        </ListView>
+        <pages:BasePage Title="Search for All Devices" BackgroundColor="#FFFFFF" Icon="ic_bluetooth-search.png">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
 
-        <StackLayout Grid.Row="2" Orientation="Horizontal" HorizontalOptions="Fill">
-            <StackLayout.IsVisible>
-              <OnPlatform x:TypeArguments="x:Boolean" iOS="false" Android="true" />
-            </StackLayout.IsVisible>
-            <Label Text="Use Android AutoConnect" HorizontalOptions="StartAndExpand" VerticalOptions="Center"/>
-            <Switch IsToggled="{Binding UseAutoConnect}" HorizontalOptions="End"></Switch>
-        </StackLayout>
-        
-        <StackLayout Grid.Row="3" Orientation="Horizontal" Margin="0, 0, 0, 10" HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsRefreshing}">
-          <Button Image="ic_stop-searching.png" Text="Stop Searching" Command="{Binding StopScanCommand}" HorizontalOptions="CenterAndExpand" WidthRequest="155" BackgroundColor="#F9F9F9" TextColor="#0097DF" />
-        </StackLayout>
-        
-      </Grid>
-    </pages:BasePage>
-    
-  </pages:BaseTabbedPage.Children>
+                <StackLayout Grid.Row="0" Padding="10" HorizontalOptions="CenterAndExpand" BackgroundColor="#AE2C3B" IsVisible="False">
+                    <Grid HorizontalOptions="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Image VerticalOptions="Center" HorizontalOptions="End" IsVisible="False" Source="bluetooth-info.png" />
+                        <Label Grid.Column="1"
+                               VerticalOptions="Center"
+                               FontSize="18" IsVisible="False"
+                               Text="{Binding StateText}"
+                               TextColor="#FFFFFF" />
+                    </Grid>
+                </StackLayout>
+
+                <!-- Margin: left, top, right, bottom -->
+                <ListView Grid.Row="1"
+                          Margin="10"
+                          VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+                          BackgroundColor="Transparent" IsPullToRefreshEnabled="True"
+                          IsRefreshing="{Binding IsRefreshing, Mode=OneWay}"
+                          ItemTemplate="{StaticResource DeviceItemTemplate}"
+                          ItemsSource="{Binding Devices}"
+                          RefreshCommand="{Binding RefreshCommand}"
+                          RowHeight="75"
+                          SelectedItem="{Binding SelectedDevice, Mode=TwoWay}"
+                          SeparatorColor="Transparent" />
+
+                <StackLayout Grid.Row="2" HorizontalOptions="Fill" Orientation="Horizontal">
+                    <StackLayout.IsVisible>
+                        <OnPlatform x:TypeArguments="x:Boolean" Android="true" iOS="false" />
+                    </StackLayout.IsVisible>
+                    <Label VerticalOptions="Center" HorizontalOptions="StartAndExpand" Text="Use Android AutoConnect" />
+                    <Switch HorizontalOptions="End" IsToggled="{Binding UseAutoConnect}" />
+                </StackLayout>
+
+                <StackLayout Grid.Row="3" Margin="0,0,0,10" HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsRefreshing}" Orientation="Horizontal">
+                    <Button HorizontalOptions="CenterAndExpand"
+                            BackgroundColor="#F9F9F9"
+                            Command="{Binding StopScanCommand}"
+                            Image="ic_stop-searching.png" Text="Stop Searching" TextColor="#0097DF" WidthRequest="155" />
+                </StackLayout>
+
+            </Grid>
+        </pages:BasePage>
+
+    </pages:BaseTabbedPage.Children>
 
 </pages:BaseTabbedPage>
