@@ -30,15 +30,10 @@
                            Style="{DynamicResource ValueBoxStyle}"
                            WidthRequest="130">
                         <Label VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"
-                               HorizontalTextAlignment="End" LineBreakMode="NoWrap"
+                               HorizontalTextAlignment="Center" LineBreakMode="NoWrap"
                                Style="{DynamicResource ValueStyle}"
                                Text="{Binding AveragePlusUnitValue}"
                                VerticalTextAlignment="Center" />
-                        <Label VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"
-                               HorizontalTextAlignment="Start" LineBreakMode="NoWrap"
-                               Style="{DynamicResource ValueUnitTypeStyle}"
-                               Text="{Binding SensorUnitType}"
-                               VerticalTextAlignment="Start" />
                     </Frame>
                 </StackLayout>
 
