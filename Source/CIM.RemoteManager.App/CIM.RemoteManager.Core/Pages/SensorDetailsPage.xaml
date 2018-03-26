@@ -54,14 +54,7 @@
                     <chart:NumericalAxis />
                 </chart:RadCartesianChart.VerticalAxis>
                 <chart:RadCartesianChart.Series>
-                    <chart:AreaSeries ItemsSource="{Binding SensorPlotCollection}">
-                        <chart:AreaSeries.ValueBinding>
-                            <chart:PropertyNameDataPointBinding PropertyName="CurrentValue" />
-                        </chart:AreaSeries.ValueBinding>
-                        <chart:AreaSeries.CategoryBinding>
-                            <chart:PropertyNameDataPointBinding PropertyName="TimeStamp" />
-                        </chart:AreaSeries.CategoryBinding>
-                    </chart:AreaSeries>
+                    <chart:AreaSeries ItemsSource="{Binding SensorPlotCollection}" />
                 </chart:RadCartesianChart.Series>
             </chart:RadCartesianChart>
 

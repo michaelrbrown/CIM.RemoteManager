@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Acr.UserDialogs;
@@ -9,6 +10,7 @@ using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
 using Plugin.BLE.Abstractions.Contracts;
 using Plugin.BLE.Abstractions.EventArgs;
+using Syncfusion.SfChart.XForms;
 using Xamarin.Forms;
 
 
@@ -118,8 +120,8 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// <summary>
         /// Sensor collection
         /// </summary>
-        FullyObservableCollection<SensorPlot> _sensorPlotCollection;
-        public FullyObservableCollection<SensorPlot> SensorPlotCollection
+        FullyObservableCollection<ChartDataPoint> _sensorPlotCollection;
+        public FullyObservableCollection<ChartDataPoint> SensorPlotCollection
         {
             get => _sensorPlotCollection;
             set => SetProperty(ref _sensorPlotCollection, value);
@@ -812,8 +814,10 @@ namespace CIM.RemoteManager.Core.ViewModels
                         {
                             //_userDialogs.Alert($"(J) Buffered Data: {sensorValues}", "CIMScan RemoteManager");
 
+                            // New instance of sensor plot
                             var sensorPlot = new SensorPlot();
-                            //int plotIndex = 0;
+                            // Defaults
+                            int plotIndex = 1;
                             bool plotTime = true;
 
                             // Get number of plot points.
@@ -832,7 +836,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                                     sensorPlot.TimeStamp = sensorPlot.UnixTimeStamp.UnixTimeStampToDateTime();
                                     plotTime = false;
 
-                                    _userDialogs.Alert($"(J) sensorPlot.TimeStamp: {sensorPlot.TimeStamp}", "CIMScan RemoteManager");
+                                    //_userDialogs.Alert($"(J) sensorPlot.TimeStamp: {sensorPlot.TimeStamp}", "CIMScan RemoteManager");
                                 }
                                 else
                                 {
@@ -840,37 +844,18 @@ namespace CIM.RemoteManager.Core.ViewModels
                                     sensorPlot.CurrentValue = splitSensorValues[i].SafeHexToInt();
                                     plotTime = true;
 
-                                    _userDialogs.Alert($"(J) sensorPlot.CurrentValue: {sensorPlot.CurrentValue}", "CIMScan RemoteManager");
+                                    //_userDialogs.Alert($"(J) sensorPlot.CurrentValue: {sensorPlot.CurrentValue}", "CIMScan RemoteManager");
                                 }
+
+                                // Every two iterations add values to chart collection
+                                if ((plotIndex % 2) == 0)
+                                {
+                                    // Add plot data to list
+                                    SensorPlotCollection.Add(new ChartDataPoint(sensorPlot.TimeStamp, sensorPlot.CurrentValue));
+                                }
+                                plotIndex++;
                             }
 
-
-
-                            // To Loop through
-                            //foreach (string plotValue in splitSensorValues)
-                            //{
-                            //    // If index of 0 we know it's the number of plot points
-                            //    if (plotIndex == 0)
-                            //    {
-                            //        // Get number of points to show on plot
-                            //        sensorPlot.Points = plotValue.SafeHexToInt();
-                            //    }
-                            //    plotIndex++;
-
-                            //    // Now R
-                            //}
-
-
-
-                            // "J" Sensor plot data serialization
-                            //var sensorPlot = new SensorPlot
-                            //{
-                            //    Points = splitSensorValues[0].SafeHexToInt(),
-                            //    TimeStamp = splitSensorValues[6].SafeHexToInt(),
-                            //    CurrentValue = splitSensorValues[8].SafeHexToDouble()
-                            //};
-                            // Add sensor to list
-                            SensorPlotCollection.Add(sensorPlot);
                         }
                         else if (SensorCommandType == SensorCommand.Statistics)
                         {
