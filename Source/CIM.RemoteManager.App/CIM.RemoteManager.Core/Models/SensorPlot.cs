@@ -15,8 +15,8 @@ namespace CIM.RemoteManager.Core.Models
             set => SetProperty(ref _points, value);
         }
 
-        private double _unixTimeStamp;
-        public double UnixTimeStamp
+        private int _unixTimeStamp;
+        public int UnixTimeStamp
         {
             get => _unixTimeStamp;
             set => SetProperty(ref _unixTimeStamp, value);

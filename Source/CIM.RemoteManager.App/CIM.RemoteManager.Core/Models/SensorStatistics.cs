@@ -40,8 +40,8 @@ namespace CIM.RemoteManager.Core.Models
         /// <summary>
         /// Converting Unix to Windows DateTime
         /// </summary>
-        private double _sinceTimeStamp;
-        public double TimeStamp
+        private int _sinceTimeStamp;
+        public int TimeStamp
         {
             get => _sinceTimeStamp;
             set => SetProperty(ref _sinceTimeStamp, value);
@@ -80,8 +80,8 @@ namespace CIM.RemoteManager.Core.Models
         /// <summary>
         /// Converting Unix to Windows DateTime
         /// </summary>
-        private double _minimumOccuranceTimeStamp;
-        public double MinimumOccuranceTimeStamp
+        private int _minimumOccuranceTimeStamp;
+        public int MinimumOccuranceTimeStamp
         {
             get => _minimumOccuranceTimeStamp;
             set => SetProperty(ref _minimumOccuranceTimeStamp, value);
@@ -115,8 +115,8 @@ namespace CIM.RemoteManager.Core.Models
         /// <summary>
         /// Converting Unix to Windows DateTime
         /// </summary>
-        private double _maximumOccuranceTimeStamp;
-        public double MaximumOccuranceTimeStamp
+        private int _maximumOccuranceTimeStamp;
+        public int MaximumOccuranceTimeStamp
         {
             get => _maximumOccuranceTimeStamp;
             set => SetProperty(ref _maximumOccuranceTimeStamp, value);

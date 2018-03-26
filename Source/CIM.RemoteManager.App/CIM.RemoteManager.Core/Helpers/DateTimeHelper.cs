@@ -4,7 +4,7 @@ namespace CIM.RemoteManager.Core.Helpers
 {
     public static class DateTimeHelper
     {
-        public static DateTime UnixTimeStampToDateTime(this double unixTimeStamp)
+        public static DateTime UnixTimeStampToDateTime(this int unixTimeStamp)
         {
             // Unix timestamp is seconds past epoch
             System.DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);

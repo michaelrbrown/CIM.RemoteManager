@@ -9,16 +9,16 @@ namespace CIM.RemoteManager.Core.Helpers
         /// Handles the remote date time validation.
         /// </summary>
         /// <remarks>
-        /// We validate the DA-12 station time and if it's before 2009 we know 
+        /// We validate the DA-12 station time and if it's before 2009 we know
         /// it's not valid, so we set a new time.
-        /// We take a Unix timestamp as UTC and formats it into a station command to 
-        /// update the time. 
+        /// We take a Unix timestamp as UTC and formats it into a station command to
+        /// update the time.
         /// </remarks>
         /// <param name="txCharacteristic">Bluetooth service characteristic</param>
         /// <param name="remoteUnixDateTime">The remote Unix date time.</param>
-        public async void HandleRemoteDateTimeValidation(ICharacteristic txCharacteristic, double remoteUnixDateTime)
+        public async void HandleRemoteDateTimeValidation(ICharacteristic txCharacteristic, int remoteUnixDateTime)
         {
-            // Validate our station Unix time converted to windows time is less 
+            // Validate our station Unix time converted to windows time is less
             // than 2009.  If it is we know the station time needs to be set.
             if (remoteUnixDateTime.UnixTimeStampToDateTime().Year < 2009)
             {

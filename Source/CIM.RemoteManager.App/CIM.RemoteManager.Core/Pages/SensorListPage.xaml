@@ -80,7 +80,8 @@
                 <ViewCell>
                     <ViewCell.View>
                         <StackLayout BackgroundColor="Transparent" Opacity=".78" Spacing="0">
-                            <Label Margin="0,15,0,0"
+                            <!-- Margin: left, top, right, bottom -->
+                            <Label Margin="0,0,0,10"
                                    VerticalOptions="Center" HorizontalOptions="CenterAndExpand"
                                    FontAttributes="Italic" FontSize="22"
                                    Text="{Binding Key}"

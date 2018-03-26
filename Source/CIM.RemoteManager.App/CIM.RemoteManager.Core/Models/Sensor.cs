@@ -141,8 +141,8 @@ namespace CIM.RemoteManager.Core.Models
             set => SetProperty(ref _offset, value);
         }
 
-        private double _timeStamp;
-        public double TimeStamp
+        private int _timeStamp;
+        public int TimeStamp
         {
             get => _timeStamp;
             set => SetProperty(ref _timeStamp, value);

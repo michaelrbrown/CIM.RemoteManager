@@ -376,7 +376,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// </summary>
         /// <param name="txCharacteristic">The TX characteristic.</param>
         /// <param name="remoteUnixDateTime">The remote Unix date time.</param>
-        public async void HandleRemoteDateTimeValidation(ICharacteristic txCharacteristic, double remoteUnixDateTime)
+        public async void HandleRemoteDateTimeValidation(ICharacteristic txCharacteristic, int remoteUnixDateTime)
         {
             Device.BeginInvokeOnMainThread(() => {
                 _userDialogs.Alert($"(F) Message Counters TimeStamp: {remoteUnixDateTime.UnixTimeStampToDateTime().Year}", "CIMScan RemoteManager");
@@ -431,40 +431,50 @@ namespace CIM.RemoteManager.Core.ViewModels
                         TotalRecordsInHistoryBuffer = sensorValues.Substring(15, 2).SafeHexToInt();
                         CurrentDateTime = sensorValues.Substring(19, 8).SafeConvert<int>(0);
 
+                        _userDialogs.Alert($"(F) here", "CIMScan RemoteManager");
 
-                        double remoteDateTime = CurrentDateTime;
+
+                        _userDialogs.Alert($"(F) here1", "CIMScan RemoteManager");
 
                         //_userDialogs.Alert($"(F) TotalActiveSensors: {TotalActiveSensors}", "CIMScan RemoteManager");
-                        _userDialogs.Alert($"(F) CurrentDateTime Year: {remoteDateTime.UnixTimeStampToDateTime()}", "CIMScan RemoteManager");
+                        _userDialogs.Alert($"(F) CurrentDateTime Year: {CurrentDateTime.UnixTimeStampToDateTime()}", "CIMScan RemoteManager");
+
+                        _userDialogs.Alert($"(F) here2", "CIMScan RemoteManager");
 
                         // Validate our station Unix time converted to windows time is less
                         // than 2009.  If it is we know the station time needs to be set.
-                        if (remoteDateTime.UnixTimeStampToDateTime() < DateTime.UtcNow.AddYears(-10))
+                        if (CurrentDateTime.UnixTimeStampToDateTime() < DateTime.UtcNow.AddYears(-10))
                         {
+
+                            _userDialogs.Alert($"(F) here3", "CIMScan RemoteManager");
+
+
                             // Get Unix timestamp "now" as UTC
                             Int32 unixTimestampUtc = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+
+                            _userDialogs.Alert($"(F) here4", "CIMScan RemoteManager");
 
                             // Format DA-12 station Unix timestamp
                             // T - is to set the station time,
                             // 0 - is the data type
                             // 00 - device index / unused
                             // Next set of digits is Unix time UTC
-                            string remoteUnitTimestamp = "{T000" + unixTimestampUtc + "}";
-
+                            //string remoteUnitTimestamp = "{T000" + unixTimestampUtc + "}";
+                            //
                             //_userDialogs.Alert($"(F) TotalActiveSensors: {TotalActiveSensors}", "CIMScan RemoteManager");
-                            _userDialogs.Alert($"(F) New TimeStamp: {remoteUnitTimestamp}", "CIMScan RemoteManager");
+                            //_userDialogs.Alert($"(F) New TimeStamp: {remoteUnitTimestamp}", "CIMScan RemoteManager");
 
 
                             // Make sure we can write characteristic data to remote
-                            if (TxCharacteristic.CanWrite)
-                            {
-                                // Send set Unix UTC time command to remote
-                                await TxCharacteristic.WriteAsync(remoteUnitTimestamp.StrToByteArray()).ConfigureAwait(true);
-                            }
-                            else
-                            {
-                                _userDialogs.Alert("Cannot write characteristic data to remote (DateTime)!", "CIMScan Remote Manager");
-                            }
+                            //if (TxCharacteristic.CanWrite)
+                            //{
+                            // Send set Unix UTC time command to remote
+                            //await TxCharacteristic.WriteAsync(remoteUnitTimestamp.StrToByteArray()).ConfigureAwait(true);
+                            //}
+                            //else
+                            //{
+                            _userDialogs.Alert("Cannot write characteristic data to remote (DateTime)!", "CIMScan Remote Manager");
+                            //}
                         }
 
                 // New instance of station helper
