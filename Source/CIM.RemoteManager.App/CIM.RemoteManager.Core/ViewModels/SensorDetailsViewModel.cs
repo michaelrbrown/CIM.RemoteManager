@@ -1143,6 +1143,9 @@ namespace CIM.RemoteManager.Core.ViewModels
                 // Notify property changed
                 RaisePropertyChanged(() => SensorIndexSelected);
 
+                // TODO: remove after debugging
+                _userDialogs.Alert($"(InitFromBundle) SensorIndexSelected: {SensorIndexSelected.ToString()}");
+
                 // Get sensor name from app context
                 if (Application.Current.Properties.ContainsKey("CurrentSensorName"))
                 {
@@ -1250,8 +1253,6 @@ namespace CIM.RemoteManager.Core.ViewModels
                     // Make sure we are done with our initialization before starting updates
                     while (IsLoading && !UpdatesStarted && RxTryCount < 100)
                     {
-                        _userDialogs.Alert($"Inside loop - RxTryCount: {RxTryCount.ToString()}");
-
                         if (!IsLoading)
                         {
                             // Handle updates started
@@ -1380,13 +1381,16 @@ namespace CIM.RemoteManager.Core.ViewModels
 
                 _userDialogs.Alert($"sensorScaleUpdateValue: {sensorScaleUpdateValue}");
 
+                _userDialogs.Alert($"sensorScaleUpdateValue byte: {sensorScaleUpdateValue.StrToByteArray().ToString()}");
+
+
                 // Save scale and offset to remote
                 await TxCharacteristic.WriteAsync(sensorScaleUpdateValue.StrToByteArray()).ConfigureAwait(true);
 
                 // Setup sensor offset command
                 string sensorOffsetUpdateValue = "{D" + SensorIndexSelected + "\t" + SensorOffset + "}";
 
-                _userDialogs.Alert($"sensorOffsetUpdateValue: {sensorScaleUpdateValue}");
+                //_userDialogs.Alert($"sensorOffsetUpdateValue: {sensorScaleUpdateValue}");
 
                 // Save scale and offset to remote
                 await TxCharacteristic.WriteAsync(sensorOffsetUpdateValue.StrToByteArray()).ConfigureAwait(true);
