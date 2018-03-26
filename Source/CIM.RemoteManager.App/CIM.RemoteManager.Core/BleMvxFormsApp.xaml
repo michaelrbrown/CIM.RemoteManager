@@ -124,6 +124,17 @@
                 <Setter Property="FontAttributes" Value="Italic" />
             </Style>
 
+            <Style x:Key="FormHeadingStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="24" />
+                <Setter Property="TextColor" Value="#444444" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+                <!-- Margin: left, top, right, bottom -->
+                <Setter Property="Margin" Value="0,8,0,8" />
+            </Style>
+
+
             <Style x:Key="FormLabelStyle" TargetType="Label">
                 <Setter Property="FontSize" Value="18" />
                 <Setter Property="TextColor" Value="#444444" />

@@ -94,6 +94,7 @@
                 <!-- Grid layout for Statistics form -->
                 <Grid Grid.Row="1" Margin="20,10,20,20">
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="80" />
                         <RowDefinition Height="50" />
                         <RowDefinition Height="50" />
                         <RowDefinition Height="50" />
@@ -109,36 +110,43 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
+                    <!-- Heading -->
+                    <StackLayout Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                                 VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+                                 BackgroundColor="#FFFFFF">
+                        <Label HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" Style="{DynamicResource FormHeadingStyle}" Text="Sensor Statistics" />
+                    </StackLayout>
+
                     <!-- Average -->
-                    <Label Grid.Row="0" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Average: " />
-                    <Entry Grid.Row="0" Grid.Column="1" IsEnabled="False" Style="{DynamicResource FormValueStyle}" Text="{Binding AverageValue}" />
+                    <Label Grid.Row="1" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Average: " />
+                    <Entry Grid.Row="1" Grid.Column="1" IsEnabled="False" Style="{DynamicResource FormValueStyle}" Text="{Binding AverageValue}" />
 
                     <!-- Average Since -->
-                    <Label Grid.Row="1" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Since: " />
-                    <Entry Grid.Row="1" Grid.Column="1" IsEnabled="False" Style="{DynamicResource FormValueStyle}" Text="{Binding SinceDateTimeStamp}" />
+                    <Label Grid.Row="2" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Since: " />
+                    <Entry Grid.Row="2" Grid.Column="1" IsEnabled="False" Style="{DynamicResource FormValueStyle}" Text="{Binding SinceDateTimeStamp}" />
 
                     <!-- Minimum -->
-                    <Label Grid.Row="2" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Minimum: " />
-                    <Entry Grid.Row="2" Grid.Column="1" IsEnabled="False" Style="{DynamicResource FormValueStyle}" Text="{Binding MinimumValue}" />
+                    <Label Grid.Row="3" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Minimum: " />
+                    <Entry Grid.Row="3" Grid.Column="1" IsEnabled="False" Style="{DynamicResource FormValueStyle}" Text="{Binding MinimumValue}" />
 
                     <!-- Minimum Occurrence -->
-                    <Label Grid.Row="3" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Occurrence: " />
-                    <Entry Grid.Row="3" Grid.Column="1" IsEnabled="False" Style="{DynamicResource FormValueStyle}" Text="{Binding MinimumOccuranceTimeStamp}" />
+                    <Label Grid.Row="4" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Occurrence: " />
+                    <Entry Grid.Row="4" Grid.Column="1" IsEnabled="False" Style="{DynamicResource FormValueStyle}" Text="{Binding MinimumOccuranceTimeStamp}" />
 
                     <!-- Maximum -->
-                    <Label Grid.Row="4" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Maximum: " />
-                    <Entry Grid.Row="4" Grid.Column="1" IsEnabled="False" Style="{DynamicResource FormValueStyle}" Text="{Binding MaximumValue}" />
+                    <Label Grid.Row="5" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Maximum: " />
+                    <Entry Grid.Row="5" Grid.Column="1" IsEnabled="False" Style="{DynamicResource FormValueStyle}" Text="{Binding MaximumValue}" />
 
                     <!-- Maximum Occurrence -->
-                    <Label Grid.Row="5" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Occurrence: " />
-                    <Entry Grid.Row="5" Grid.Column="1" IsEnabled="False" Style="{DynamicResource FormValueStyle}" Text="{Binding MaximumOccuranceTimeStamp}" />
+                    <Label Grid.Row="6" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Occurrence: " />
+                    <Entry Grid.Row="6" Grid.Column="1" IsEnabled="False" Style="{DynamicResource FormValueStyle}" Text="{Binding MaximumOccuranceTimeStamp}" />
 
                     <!-- Variance -->
-                    <Label Grid.Row="6" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Variance: " />
-                    <Entry Grid.Row="6" Grid.Column="1" IsEnabled="False" Style="{DynamicResource FormValueStyle}" Text="{Binding VarianceValue}" />
+                    <Label Grid.Row="7" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Variance: " />
+                    <Entry Grid.Row="7" Grid.Column="1" IsEnabled="False" Style="{DynamicResource FormValueStyle}" Text="{Binding VarianceValue}" />
 
                     <!-- Margin: left, top, right, bottom -->
-                    <StackLayout Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2"
+                    <StackLayout Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2"
                                  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
                                  BackgroundColor="{DynamicResource RemoteNameBackgroundColor}"
                                  HeightRequest="60" Opacity=".6" Orientation="Horizontal" Spacing="0">
@@ -188,6 +196,7 @@
                 <!-- Grid layout for Limits form -->
                 <Grid Grid.Row="1" Margin="20,0,20,20">
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="80" />
                         <RowDefinition Height="50" />
                         <RowDefinition Height="50" />
                         <RowDefinition Height="50" />
@@ -202,32 +211,39 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
+                    <!-- Heading -->
+                    <StackLayout Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                                 VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+                                 BackgroundColor="#FFFFFF">
+                        <Label HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" Style="{DynamicResource FormHeadingStyle}" Text="Sensor Limits" />
+                    </StackLayout>
+
                     <!-- Alarms Active -->
-                    <Label Grid.Row="0" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Alarms Active: " />
-                    <Entry Grid.Row="0" Grid.Column="1" IsEnabled="False" Style="{DynamicResource FormValueStyle}" Text="{Binding AlarmStatusBool}" />
+                    <Label Grid.Row="1" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Alarms Active: " />
+                    <Entry Grid.Row="1" Grid.Column="1" IsEnabled="False" Style="{DynamicResource FormValueStyle}" Text="{Binding AlarmStatusBool}" />
 
                     <!-- Alarm Delay -->
-                    <Label Grid.Row="1" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Alarm Delay: " />
-                    <Entry Grid.Row="1" Grid.Column="1" IsEnabled="False" Style="{DynamicResource FormValueStyle}" Text="{Binding AlarmDelay}" />
+                    <Label Grid.Row="2" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Alarm Delay: " />
+                    <Entry Grid.Row="2" Grid.Column="1" IsEnabled="False" Style="{DynamicResource FormValueStyle}" Text="{Binding AlarmDelay}" />
 
                     <!-- High Alarm -->
-                    <Label Grid.Row="2" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="High Alarm: " />
-                    <Entry Grid.Row="2" Grid.Column="1" IsEnabled="False" Style="{DynamicResource FormValueStyle}" Text="{Binding HighAlarmLimit}" />
+                    <Label Grid.Row="3" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="High Alarm: " />
+                    <Entry Grid.Row="3" Grid.Column="1" IsEnabled="False" Style="{DynamicResource FormValueStyle}" Text="{Binding HighAlarmLimit}" />
 
                     <!-- High Warning -->
-                    <Label Grid.Row="3" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="High Warning: " />
-                    <Entry Grid.Row="3" Grid.Column="1" IsEnabled="False" Style="{DynamicResource FormValueStyle}" Text="{Binding HighWarningLimit}" />
+                    <Label Grid.Row="4" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="High Warning: " />
+                    <Entry Grid.Row="4" Grid.Column="1" IsEnabled="False" Style="{DynamicResource FormValueStyle}" Text="{Binding HighWarningLimit}" />
 
                     <!-- Low Warning -->
-                    <Label Grid.Row="4" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Low Warning: " />
-                    <Entry Grid.Row="4" Grid.Column="1" IsEnabled="False" Style="{DynamicResource FormValueStyle}" Text="{Binding LowAlarmLimit}" />
+                    <Label Grid.Row="5" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Low Warning: " />
+                    <Entry Grid.Row="5" Grid.Column="1" IsEnabled="False" Style="{DynamicResource FormValueStyle}" Text="{Binding LowAlarmLimit}" />
 
                     <!-- Low Alarm -->
-                    <Label Grid.Row="5" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Low Alarm: " />
-                    <Entry Grid.Row="5" Grid.Column="1" IsEnabled="False" Style="{DynamicResource FormValueStyle}" Text="{Binding LowWarningLimit}" />
+                    <Label Grid.Row="6" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Low Alarm: " />
+                    <Entry Grid.Row="6" Grid.Column="1" IsEnabled="False" Style="{DynamicResource FormValueStyle}" Text="{Binding LowWarningLimit}" />
 
                     <!-- Margin: left, top, right, bottom -->
-                    <StackLayout Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2"
+                    <StackLayout Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2"
                                  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
                                  BackgroundColor="{DynamicResource RemoteNameBackgroundColor}"
                                  HeightRequest="60" Opacity=".6" Orientation="Horizontal" Spacing="0">
@@ -277,7 +293,7 @@
                 <!-- Grid layout for Limits form -->
                 <Grid Grid.Row="1" Margin="20,10,20,20">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="50" />
+                        <RowDefinition Height="80" />
                         <RowDefinition Height="50" />
                         <RowDefinition Height="50" />
                         <RowDefinition Height="50" />
@@ -296,17 +312,16 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
-                    <!-- Upper Calibration -->
-                    <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4"
-                           HorizontalOptions="CenterAndExpand"
-                           HorizontalTextAlignment="Center"
-                           Style="{DynamicResource FormLabelStyle}"
-                           Text="Calibration" />
+                    <!-- Calibration Heading -->
+                    <StackLayout Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4"
+                                 VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+                                 BackgroundColor="#FFFFFF">
+                        <Label HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" Style="{DynamicResource FormHeadingStyle}" Text="Calibration" />
+                    </StackLayout>
 
-                    <Frame BackgroundColor="#FFFFFF">
-                        <Label Grid.Row="1" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Upper: " />
-                        <Entry Grid.Row="1" Grid.Column="1" Style="{DynamicResource FormValueStyle}" Text="{Binding UpperCalibration}" />
-                    </Frame>
+                    <!-- Upper Calibration -->
+                    <Label Grid.Row="1" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Upper: " />
+                    <Entry Grid.Row="1" Grid.Column="1" Style="{DynamicResource FormValueStyle}" Text="{Binding UpperCalibration}" />
 
                     <!-- Upper Calibration Target -->
                     <Label Grid.Row="1" Grid.Column="2" Style="{DynamicResource FormLabelStyle}" Text="Target: " />
@@ -327,12 +342,14 @@
                            Style="{DynamicResource FormValueStyle}"
                            Text="{Binding SensorScale}" />
 
+                    <!-- Offset Heading -->
+                    <StackLayout Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4"
+                                 VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+                                 BackgroundColor="#FFFFFF">
+                        <Label HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" Style="{DynamicResource FormHeadingStyle}" Text="Offset" />
+                    </StackLayout>
+
                     <!-- Offset -->
-                    <Label Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4"
-                           HorizontalOptions="CenterAndExpand"
-                           HorizontalTextAlignment="Center"
-                           Style="{DynamicResource FormLabelStyle}"
-                           Text="Offset" />
                     <Label Grid.Row="5" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Value: " />
                     <Entry x:Name="OffsetEntry" Grid.Row="5" Grid.Column="1" Style="{DynamicResource FormValueStyle}" Text="{Binding SensorOffset}" />
 
