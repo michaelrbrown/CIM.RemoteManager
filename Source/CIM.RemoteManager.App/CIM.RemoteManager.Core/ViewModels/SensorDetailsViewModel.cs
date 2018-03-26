@@ -860,12 +860,13 @@ namespace CIM.RemoteManager.Core.ViewModels
                 {
                     case "C":
                         //Application.Current.MainPage.DisplayAlert("C", splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('A') + 1).SafeConvert<int>(0).ToString(), "Cancel");
+
                         // "C" Sensor data serialization
                         // Update Sensor list by index
-                        if (string.Equals(SensorIndexSelected, splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('C') + 1), StringComparison.OrdinalIgnoreCase))
+                        if (SensorIndexSelected.GetSensorIndexAsInt() == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('C') + 1).SafeConvert<int>(0))
                         {
                             //Application.Current.MainPage.DisplayAlert("Old value: ", sensorListItem.AverageValue.ToString(), "Cancel");
-                            //Application.Current.MainPage.DisplayAlert("New value: ", splitSensorValues[1].SafeHexToDouble().ToString(), "Cancel");
+                            Application.Current.MainPage.DisplayAlert("(C) CurrentValue: ", splitSensorValues[1].SafeHexToDouble().ToString(), "Cancel");
 
                             TimeStamp = splitSensorValues[0].SafeHexToInt();
                             CurrentValue = splitSensorValues[1].SafeHexToDouble();
@@ -1054,7 +1055,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 GetUnfilteredSensorValues(CharacteristicValue);
                 // Get message counter values from remote to determine if
                 // we have acquired or lost sensors.  Also grabs time stamp.
-                GetMessageCounterValues(CharacteristicValue);
+                //GetMessageCounterValues(CharacteristicValue);
 
                 // Notify property changed
                 RaisePropertyChanged(() => CharacteristicValue);
