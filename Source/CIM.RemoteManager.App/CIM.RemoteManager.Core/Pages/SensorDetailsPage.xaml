@@ -36,6 +36,11 @@
                                FontSize="18"
                                Text="{Binding SensorName}"
                                TextColor="#FFFFFF" />
+                        <Label Margin="10"
+                               VerticalOptions="Center" HorizontalOptions="Center"
+                               FontSize="18"
+                               Text="{Binding SensorIndexSelected}"
+                               TextColor="#FFFFFF" />
                     </Frame>
                 </StackLayout>
 

@@ -1144,7 +1144,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 RaisePropertyChanged(() => SensorIndexSelected);
 
                 // TODO: remove after debugging
-                _userDialogs.Alert($"(InitFromBundle) SensorIndexSelected: {SensorIndexSelected.ToString()}");
+                //_userDialogs.Alert($"(InitFromBundle) SensorIndexSelected: {SensorIndexSelected.ToString()}");
 
                 // Get sensor name from app context
                 if (Application.Current.Properties.ContainsKey("CurrentSensorName"))
