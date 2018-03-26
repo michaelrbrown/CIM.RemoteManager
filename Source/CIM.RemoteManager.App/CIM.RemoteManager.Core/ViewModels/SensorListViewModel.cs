@@ -418,9 +418,9 @@ namespace CIM.RemoteManager.Core.ViewModels
             switch (conversionType)
                 {
                     case "F":
-                        //_userDialogs.Alert($"(F) Message Counters Data: {sensorValues}", "CIMScan RemoteManager");
+                        _userDialogs.Alert($"(F) Message Counters Data: {sensorValues}", "CIMScan RemoteManager");
 
-                        _userDialogs.Alert($"(F) before here", "CIMScan RemoteManager");
+                        //_userDialogs.Alert($"(F) before here", "CIMScan RemoteManager");
 
                         // "F" Message counter data serialization
                         TotalOutgoingMessages = sensorValues.Substring(1, 2).SafeHexToInt();
@@ -435,13 +435,10 @@ namespace CIM.RemoteManager.Core.ViewModels
 
                         _userDialogs.Alert($"(F) here current DateTime:{CurrentDateTime.ToString()}", "CIMScan RemoteManager");
 
-                        return;
-
-
                         _userDialogs.Alert($"(F) here1", "CIMScan RemoteManager");
 
                         //_userDialogs.Alert($"(F) TotalActiveSensors: {TotalActiveSensors}", "CIMScan RemoteManager");
-                        _userDialogs.Alert($"(F) CurrentDateTime Year: {CurrentDateTime.UnixTimeStampToDateTime()}", "CIMScan RemoteManager");
+                        _userDialogs.Alert($"(F) CurrentDateTime Year: {CurrentDateTime.UnixTimeStampToDateTime().Year}", "CIMScan RemoteManager");
 
                         _userDialogs.Alert($"(F) here2", "CIMScan RemoteManager");
 
@@ -560,7 +557,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             catch (Exception ex)
             {
                 HockeyApp.MetricsManager.TrackEvent($"(SerializeStringToSensor) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
-                _userDialogs.Alert(ex.Message);
+                //_userDialogs.Alert($"(SerializeStringToSensor) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
             }
         }
 

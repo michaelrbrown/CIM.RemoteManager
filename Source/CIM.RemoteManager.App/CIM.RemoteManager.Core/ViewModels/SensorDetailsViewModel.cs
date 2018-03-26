@@ -1091,7 +1091,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                     }
 
                     // TODO: remove after debugging
-                    //_userDialogs.Alert($"Write Command: {updateValue}", "CIMScan Remote Manager");
+                    _userDialogs.Alert($"Write Command: {updateValue}", "CIMScan Remote Manager");
 
                     // Send the command based on command type set above
                     await TxCharacteristic.WriteAsync(updateValue.StrToByteArray()).ConfigureAwait(true);
