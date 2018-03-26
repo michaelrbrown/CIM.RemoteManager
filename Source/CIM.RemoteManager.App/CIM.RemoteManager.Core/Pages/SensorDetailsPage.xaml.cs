@@ -122,9 +122,29 @@ namespace CIM.RemoteManager.Core.Pages
             sensorDetailsViewModel.ToggleUpdatesCommand.Execute(null);
         }
 
+        /// <summary>
+        /// Offset trim switch toggled.
+        /// </summary>
+        /// <remarks>
+        /// Disables or enables Lower Calibration, Lower Calibration Target, and Scale.
+        /// </remarks>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="ToggledEventArgs"/> instance containing the event data.</param>
         private void SensorOffsetTrimSwitchToggled(object sender, ToggledEventArgs e)
         {
-
+            DisplayAlert("CIMScan", e.Value.ToString(), "Ok");
+            if (e.Value)
+            {
+                LowerCalibrationEntry.IsEnabled = false;
+                LowerCalibrationTargetEntry.IsEnabled = false;
+                ScaleEntry.IsEnabled = false;
+            }
+            else
+            {
+                LowerCalibrationEntry.IsEnabled = true;
+                LowerCalibrationTargetEntry.IsEnabled = true;
+                ScaleEntry.IsEnabled = true;
+            }
         }
     }
 }

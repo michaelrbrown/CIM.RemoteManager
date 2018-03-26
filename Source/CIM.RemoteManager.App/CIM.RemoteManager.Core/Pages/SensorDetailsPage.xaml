@@ -286,7 +286,8 @@
                 </Grid.ColumnDefinitions>
 
                 <!-- Upper Calibration -->
-                <Label Grid.Row="0" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Upper Calibration: " />
+                <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Style="{DynamicResource FormLabelStyle}" Text="Calibration" />
+                <Label Grid.Row="0" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Upper: " />
                 <Entry Grid.Row="0" Grid.Column="1" Style="{DynamicResource FormValueStyle}" Text="{Binding UpperCalibration}" />
 
                 <!-- Upper Calibration Target -->
@@ -295,11 +296,11 @@
 
                 <!-- Lower Calibration -->
                 <Label Grid.Row="1" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Lower Calibration: " />
-                <Entry Grid.Row="1" Grid.Column="1" Style="{DynamicResource FormValueStyle}" Text="{Binding LowerCalibration}" />
+                <Entry x:Name="LowerCalibrationEntry" Grid.Row="1" Grid.Column="1" Style="{DynamicResource FormValueStyle}" Text="{Binding LowerCalibration}" />
 
                 <!-- Lower Calibration Target -->
                 <Label Grid.Row="1" Grid.Column="2" Style="{DynamicResource FormLabelStyle}" Text="Target: " />
-                <Entry x:Name="LowerCalibrationEntry" Grid.Row="1" Grid.Column="3" Style="{DynamicResource FormValueStyle}" Text="{Binding LowerCalibrationTarget}" />
+                <Entry x:Name="LowerCalibrationTargetEntry" Grid.Row="1" Grid.Column="3" Style="{DynamicResource FormValueStyle}" Text="{Binding LowerCalibrationTarget}" />
 
                 <!-- Scale -->
                 <Label Grid.Row="2" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Scale: " />
@@ -309,11 +310,12 @@
                        Text="{Binding SensorScale}" />
 
                 <!-- Offset -->
-                <Label Grid.Row="3" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Offset: " />
+                <Label Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4" Style="{DynamicResource FormLabelStyle}" Text="Offset" />
+                <Label Grid.Row="3" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Value: " />
                 <Entry x:Name="OffsetEntry" Grid.Row="3" Grid.Column="1" Style="{DynamicResource FormValueStyle}" Text="{Binding SensorOffset}" />
 
                 <!-- Offset Trim -->
-                <Label Grid.Row="4" Grid.Column="2" Style="{DynamicResource FormLabelStyle}" Text="Offset Trim: " />
+                <Label Grid.Row="4" Grid.Column="2" Style="{DynamicResource FormLabelStyle}" Text="Trim: " />
                 <Switch Grid.Row="4" Grid.Column="3"
                         Margin="5"
                         VerticalOptions="Center" HorizontalOptions="Center"
@@ -327,7 +329,11 @@
                 <Label Grid.Row="6" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Input: " />
                 <Entry Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="3" Style="{DynamicResource FormValueStyle}" Text="{Binding CurrentValue}" />
 
-                <StackLayout Grid.Row="7" Margin="0,0,0,10" HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsRefreshing}" Orientation="Horizontal">
+                <StackLayout Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="4"
+                             Margin="0,0,0,10"
+                             HorizontalOptions="CenterAndExpand"
+                             IsVisible="{Binding IsRefreshing}"
+                             Orientation="Horizontal">
                     <Button HorizontalOptions="CenterAndExpand"
                             BackgroundColor="#F9F9F9"
                             Command="{Binding SaveSensorCalibration}"
@@ -335,7 +341,7 @@
                 </StackLayout>
 
                 <!-- Margin: left, top, right, bottom -->
-                <StackLayout Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2"
+                <StackLayout Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="4"
                              VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
                              BackgroundColor="{DynamicResource RemoteNameBackgroundColor}"
                              HeightRequest="60" Opacity=".6" Orientation="Horizontal" Spacing="0">

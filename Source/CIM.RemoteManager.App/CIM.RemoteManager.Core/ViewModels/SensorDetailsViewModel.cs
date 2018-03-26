@@ -1021,7 +1021,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                     string updateValue = string.Empty;
                     if (SensorCommandType == SensorCommand.Plot)
                     {
-                        updateValue = "{c0" + SensorIndexSelected + "}";
+                        updateValue = "{c0" + SensorIndexSelected + "00000064}";
                     }
                     // Send statistics, and limits commands (Y command = refresh all which returns
                     // limits and statistics data.
@@ -1233,7 +1233,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 string updateValue = string.Empty;
                 if (SensorCommandType == SensorCommand.Plot)
                 {
-                    updateValue = "{c" + SensorIndexSelected + "}";
+                    updateValue = "{c0" + SensorIndexSelected + "00000064}";
                 }
                 else if (SensorCommandType == SensorCommand.Statistics || SensorCommandType == SensorCommand.Limits)
                 {
