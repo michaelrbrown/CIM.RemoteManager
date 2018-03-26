@@ -794,7 +794,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                     LastServerMessageReceived = sensorValues.Substring(11, 2).SafeHexToInt();
                     TotalActiveSensors = sensorValues.Substring(13, 2).SafeHexToInt();
                     TotalRecordsInHistoryBuffer = sensorValues.Substring(15, 2).SafeHexToInt();
-                    CurrentDateTime = sensorValues.Substring(19, 8).SafeConvert<int>(0);
+                    CurrentDateTime = sensorValues.Substring(19, 8).SafeHexToInt();
 
                     //_userDialogs.Alert($"(F) Message Counters Data: {sensorValues}", "CIMScan RemoteManager");
 
@@ -825,7 +825,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                             if (plotTime)
                             {
                                 // Plot time
-                                sensorPlot.UnixTimeStamp = splitSensorValues[i].SafeConvert<int>(0);
+                                sensorPlot.UnixTimeStamp = splitSensorValues[i].SafeHexToInt();
                                 sensorPlot.TimeStamp = sensorPlot.UnixTimeStamp.UnixTimeStampToDateTime();
                                 plotTime = false;
 

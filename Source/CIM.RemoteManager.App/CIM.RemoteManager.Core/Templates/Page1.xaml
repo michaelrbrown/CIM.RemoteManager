@@ -7,11 +7,12 @@
 
 
 
-        <TableView Intent="Settings">
-            <TableRoot>
-                <TableSection Title="Ring" />
-            </TableRoot>
-        </TableView>
+
+
+        <StackLayout HorizontalOptions="FillAndExpand" BackgroundColor="#FFFFFF" Orientation="Horizontal" WidthRequest="400">
+            <Label Text="Upper: " TextColor="#444444" />
+            <Entry Text="asdfasdf" />
+        </StackLayout>
 
     </ContentPage.Content>
 </ContentPage>
