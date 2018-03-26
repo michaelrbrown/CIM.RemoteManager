@@ -948,7 +948,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                                 if ((plotIndex % 2) == 0)
                                 {
                                     // Add plot data to list
-                                    SensorPlotCollection.Add(new ChartDataPoint(sensorPlot.TimeStamp, sensorPlot.CurrentValue));
+                                    SensorPlotCollection.Add(new ChartDataPoint(sensorPlot.TimeStamp.ToString("HH:mm"), sensorPlot.CurrentValue));
                                 }
                                 plotIndex++;
                             }
@@ -1461,7 +1461,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 RaisePropertyChanged(() => UpdatesStarted);
 
                 // Setup sensor scale command
-                string sensorScaleUpdateValue = "{C" +  SensorIndexSelected + "\t" + SensorScale + "}";
+                string sensorScaleUpdateValue = "{C" +  SensorIndexSelected + "\t" + Convert.ToInt32(SensorScale * 10000) + "}";
 
                 _userDialogs.Alert($"sensorScaleUpdateValue: {sensorScaleUpdateValue}");
 

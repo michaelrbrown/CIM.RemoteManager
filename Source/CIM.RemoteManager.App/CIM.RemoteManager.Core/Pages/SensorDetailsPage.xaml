@@ -47,7 +47,7 @@
             </Grid>
 
             <!-- Chart Control -->
-            <xForms:SfChart Grid.Row="1">
+            <xForms:SfChart Grid.Row="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
                 <xForms:AreaSeries ItemsSource="{Binding SensorPlotCollection}" XBindingPath="Time" YBindingPath="Value" />
             </xForms:SfChart>
 
