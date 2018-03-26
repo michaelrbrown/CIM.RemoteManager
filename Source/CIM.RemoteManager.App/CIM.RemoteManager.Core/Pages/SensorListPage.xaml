@@ -81,7 +81,7 @@
                     <ViewCell.View>
                         <!-- Margin: left, top, right, bottom -->
                         <Label Margin="0,0,0,0"
-                               VerticalOptions="Center" HorizontalOptions="CenterAndExpand"
+                               VerticalOptions="Center" HorizontalOptions="StartAndExpand"
                                FontAttributes="Italic" FontSize="22"
                                Text="{Binding Key}"
                                TextColor="{DynamicResource AppLightColor}"
