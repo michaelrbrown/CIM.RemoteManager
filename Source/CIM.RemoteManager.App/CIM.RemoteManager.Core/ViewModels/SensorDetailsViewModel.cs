@@ -782,131 +782,139 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// <param name="conversionType"></param>
         private void SerializeStringToSensor(string sensorValues, string conversionType = "")
         {
-            switch (conversionType)
+            try
             {
-                case "F":
-                    // "F" Message counter data serialization
-                    TotalOutgoingMessages = sensorValues.Substring(1, 2).SafeHexToInt();
-                    TotalOutgoingRetries = sensorValues.Substring(3, 2).SafeHexToInt();
-                    TotalOutgoingValues = sensorValues.Substring(5, 2).SafeHexToInt();
-                    TotalIncomingMessages = sensorValues.Substring(7, 2).SafeHexToInt();
-                    TotalIncomingErrors = sensorValues.Substring(9, 2).SafeHexToInt();
-                    LastServerMessageReceived = sensorValues.Substring(11, 2).SafeHexToInt();
-                    TotalActiveSensors = sensorValues.Substring(13, 2).SafeHexToInt();
-                    TotalRecordsInHistoryBuffer = sensorValues.Substring(15, 2).SafeHexToInt();
-                    CurrentDateTime = sensorValues.Substring(19, 8).SafeHexToInt();
+                switch (conversionType)
+                {
+                    case "F":
+                        // "F" Message counter data serialization
+                        TotalOutgoingMessages = sensorValues.Substring(1, 2).SafeHexToInt();
+                        TotalOutgoingRetries = sensorValues.Substring(3, 2).SafeHexToInt();
+                        TotalOutgoingValues = sensorValues.Substring(5, 2).SafeHexToInt();
+                        TotalIncomingMessages = sensorValues.Substring(7, 2).SafeHexToInt();
+                        TotalIncomingErrors = sensorValues.Substring(9, 2).SafeHexToInt();
+                        LastServerMessageReceived = sensorValues.Substring(11, 2).SafeHexToInt();
+                        TotalActiveSensors = sensorValues.Substring(13, 2).SafeHexToInt();
+                        TotalRecordsInHistoryBuffer = sensorValues.Substring(15, 2).SafeHexToInt();
+                        CurrentDateTime = sensorValues.Substring(19, 8).SafeHexToInt();
 
-                    //_userDialogs.Alert($"(F) Message Counters Data: {sensorValues}", "CIMScan RemoteManager");
+                        //_userDialogs.Alert($"(F) Message Counters Data: {sensorValues}", "CIMScan RemoteManager");
 
-                    //_userDialogs.Alert($"(F) Message Counters TotalActiveSensors: {TotalActiveSensors}", "CIMScan RemoteManager");
-                    //_userDialogs.Alert($"(F) Message Counters CurrentDateTime: {CurrentDateTime}", "CIMScan RemoteManager");
+                        //_userDialogs.Alert($"(F) Message Counters TotalActiveSensors: {TotalActiveSensors}", "CIMScan RemoteManager");
+                        //_userDialogs.Alert($"(F) Message Counters CurrentDateTime: {CurrentDateTime}", "CIMScan RemoteManager");
 
-                    break;
-                default:
-                    // Split by tab delimiter
-                    string[] splitSensorValues = sensorValues.Split('\t');
+                        break;
+                    default:
+                        // Split by tab delimiter
+                        string[] splitSensorValues = sensorValues.Split('\t');
 
-                    if (SensorCommandType == SensorCommand.Plot)
-                    {
-                        //_userDialogs.Alert($"(J) Buffered Data: {sensorValues}", "CIMScan RemoteManager");
-
-                        var sensorPlot = new SensorPlot();
-                        //int plotIndex = 0;
-                        bool plotTime = true;
-
-                        // Get number of plot points
-                        int numberOfPlotPoints = splitSensorValues[0].SafeHexToInt() - 1;
-
-                        _userDialogs.Alert($"(J) sensorPlot.numberOfPlotPoints: {numberOfPlotPoints.ToString()}", "CIMScan RemoteManager");
-
-                        // Iterate through plot values and set plot datetime and current value
-                        for (int i = 1; i <= numberOfPlotPoints; i++)
+                        if (SensorCommandType == SensorCommand.Plot)
                         {
-                            if (plotTime)
+                            //_userDialogs.Alert($"(J) Buffered Data: {sensorValues}", "CIMScan RemoteManager");
+
+                            var sensorPlot = new SensorPlot();
+                            //int plotIndex = 0;
+                            bool plotTime = true;
+
+                            // Get number of plot points
+                            int numberOfPlotPoints = splitSensorValues[0].SafeHexToInt() - 1;
+
+                            _userDialogs.Alert($"(J) sensorPlot.numberOfPlotPoints: {numberOfPlotPoints.ToString()}", "CIMScan RemoteManager");
+
+                            // Iterate through plot values and set plot datetime and current value
+                            for (int i = 1; i <= numberOfPlotPoints; i++)
                             {
-                                // Plot time
-                                sensorPlot.UnixTimeStamp = splitSensorValues[i].SafeHexToInt();
-                                sensorPlot.TimeStamp = sensorPlot.UnixTimeStamp.UnixTimeStampToDateTime();
-                                plotTime = false;
+                                if (plotTime)
+                                {
+                                    // Plot time
+                                    sensorPlot.UnixTimeStamp = splitSensorValues[i].SafeHexToInt();
+                                    sensorPlot.TimeStamp = sensorPlot.UnixTimeStamp.UnixTimeStampToDateTime();
+                                    plotTime = false;
 
-                                _userDialogs.Alert($"(J) sensorPlot.TimeStamp: {sensorPlot.TimeStamp}", "CIMScan RemoteManager");
+                                    _userDialogs.Alert($"(J) sensorPlot.TimeStamp: {sensorPlot.TimeStamp}", "CIMScan RemoteManager");
+                                }
+                                else
+                                {
+                                    // Plot value
+                                    sensorPlot.CurrentValue = splitSensorValues[i].SafeHexToInt();
+                                    plotTime = true;
+
+                                    _userDialogs.Alert($"(J) sensorPlot.CurrentValue: {sensorPlot.CurrentValue}", "CIMScan RemoteManager");
+                                }
                             }
-                            else
+
+
+
+                            // To Loop through
+                            //foreach (string plotValue in splitSensorValues)
+                            //{
+                            //    // If index of 0 we know it's the number of plot points
+                            //    if (plotIndex == 0)
+                            //    {
+                            //        // Get number of points to show on plot
+                            //        sensorPlot.Points = plotValue.SafeHexToInt();
+                            //    }
+                            //    plotIndex++;
+
+                            //    // Now R
+                            //}
+
+
+
+                            // "J" Sensor plot data serialization
+                            //var sensorPlot = new SensorPlot
+                            //{
+                            //    Points = splitSensorValues[0].SafeHexToInt(),
+                            //    TimeStamp = splitSensorValues[6].SafeHexToInt(),
+                            //    CurrentValue = splitSensorValues[8].SafeHexToDouble()
+                            //};
+                            // Add sensor to list
+                            SensorPlotCollection.Add(sensorPlot);
+                        }
+                        else if (SensorCommandType == SensorCommand.Statistics)
+                        {
+                            //_userDialogs.Alert($"(H) Statistics Data: {sensorValues}", "CIMScan RemoteManager");
+                            //_userDialogs.Alert($"(H) SensorIndexSelected: {SensorIndexSelected}", "CIMScan RemoteManager");
+                            //_userDialogs.Alert($"(H) Sensor Index: {splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('H') + 1).SafeConvert<int>(0)}", "CIMScan RemoteManager");
+
+                            // Only update the values if we have a match
+                            if (SensorIndexSelected.GetSensorIndexAsInt() == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('H') + 1).SafeConvert<int>(0))
                             {
-                                // Plot value
-                                sensorPlot.CurrentValue = splitSensorValues[i].SafeHexToInt();
-                                plotTime = true;
-
-                                _userDialogs.Alert($"(J) sensorPlot.CurrentValue: {sensorPlot.CurrentValue}", "CIMScan RemoteManager");
+                                // "H" Sensor data serialization
+                                MaximumValue = splitSensorValues[1].SafeHexToDouble();
+                                MaximumOccuranceTimeStamp = splitSensorValues[2].SafeHexToInt();
+                                MinimumValue = splitSensorValues[3].SafeHexToDouble();
+                                MinimumOccuranceTimeStamp = splitSensorValues[4].SafeHexToInt();
+                                AverageValue = splitSensorValues[5].SafeHexToDouble();
+                                TimeStamp = splitSensorValues[6].SafeHexToInt();
                             }
                         }
-
-
-
-                        // To Loop through
-                        //foreach (string plotValue in splitSensorValues)
-                        //{
-                        //    // If index of 0 we know it's the number of plot points
-                        //    if (plotIndex == 0)
-                        //    {
-                        //        // Get number of points to show on plot
-                        //        sensorPlot.Points = plotValue.SafeHexToInt();
-                        //    }
-                        //    plotIndex++;
-
-                        //    // Now R
-                        //}
-
-
-
-                        // "J" Sensor plot data serialization
-                        //var sensorPlot = new SensorPlot
-                        //{
-                        //    Points = splitSensorValues[0].SafeHexToInt(),
-                        //    TimeStamp = splitSensorValues[6].SafeHexToInt(),
-                        //    CurrentValue = splitSensorValues[8].SafeHexToDouble()
-                        //};
-                        // Add sensor to list
-                        SensorPlotCollection.Add(sensorPlot);
-                    }
-                    else if (SensorCommandType == SensorCommand.Statistics)
-                    {
-                        //_userDialogs.Alert($"(H) Statistics Data: {sensorValues}", "CIMScan RemoteManager");
-                        //_userDialogs.Alert($"(H) SensorIndexSelected: {SensorIndexSelected}", "CIMScan RemoteManager");
-                        //_userDialogs.Alert($"(H) Sensor Index: {splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('H') + 1).SafeConvert<int>(0)}", "CIMScan RemoteManager");
-
-                        // Only update the values if we have a match
-                        if (SensorIndexSelected.GetSensorIndexAsInt() == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('H') + 1).SafeConvert<int>(0))
+                        else if (SensorCommandType == SensorCommand.Limits)
                         {
-                            // "H" Sensor data serialization
-                            MaximumValue = splitSensorValues[1].SafeHexToDouble();
-                            MaximumOccuranceTimeStamp = splitSensorValues[2].SafeHexToInt();
-                            MinimumValue = splitSensorValues[3].SafeHexToDouble();
-                            MinimumOccuranceTimeStamp = splitSensorValues[4].SafeHexToInt();
-                            AverageValue = splitSensorValues[5].SafeHexToDouble();
-                            TimeStamp = splitSensorValues[6].SafeHexToInt();
-                        }
-                    }
-                    else if (SensorCommandType == SensorCommand.Limits)
-                    {
-                        //_userDialogs.Alert($"(G) Limits Data: {sensorValues}", "CIMScan RemoteManager");
-                        //_userDialogs.Alert($"(G) SensorIndexSelected: {SensorIndexSelected}", "CIMScan RemoteManager");
-                        //_userDialogs.Alert($"(G) Sensor Index: {splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('G') + 1).SafeConvert<int>(0)}", "CIMScan RemoteManager");
+                            //_userDialogs.Alert($"(G) Limits Data: {sensorValues}", "CIMScan RemoteManager");
+                            //_userDialogs.Alert($"(G) SensorIndexSelected: {SensorIndexSelected}", "CIMScan RemoteManager");
+                            //_userDialogs.Alert($"(G) Sensor Index: {splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('G') + 1).SafeConvert<int>(0)}", "CIMScan RemoteManager");
 
-                        // Only update the values if we have a match
-                        if (SensorIndexSelected.GetSensorIndexAsInt() == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('G') + 1).SafeConvert<int>(0))
-                        {
-                            // "G" Sensor data serialization
-                            AlarmStatus = splitSensorValues[1].SafeHexToInt();
-                            //AlarmBeingProcessed = splitSensorValues[2].SafeHexToInt();
-                            AlarmDelay = splitSensorValues[2].SafeHexToDouble();
-                            LowAlarmLimit = splitSensorValues[3].SafeHexToInt();
-                            LowWarningLimit = splitSensorValues[4].SafeHexToDouble();
-                            HighWarningLimit = splitSensorValues[5].SafeHexToInt();
-                            HighAlarmLimit = splitSensorValues[6].SafeHexToDouble();
+                            // Only update the values if we have a match
+                            if (SensorIndexSelected.GetSensorIndexAsInt() == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('G') + 1).SafeConvert<int>(0))
+                            {
+                                // "G" Sensor data serialization
+                                AlarmStatus = splitSensorValues[1].SafeHexToInt();
+                                //AlarmBeingProcessed = splitSensorValues[2].SafeHexToInt();
+                                AlarmDelay = splitSensorValues[2].SafeHexToDouble();
+                                LowAlarmLimit = splitSensorValues[3].SafeHexToInt();
+                                LowWarningLimit = splitSensorValues[4].SafeHexToDouble();
+                                HighWarningLimit = splitSensorValues[5].SafeHexToInt();
+                                HighAlarmLimit = splitSensorValues[6].SafeHexToDouble();
+                            }
                         }
-                    }
-                    break;
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                HockeyApp.MetricsManager.TrackEvent($"(SerializeStringToSensor) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
+                //_userDialogs.Alert($"(SerializeStringToSensor) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
             }
 
         }
@@ -1108,7 +1116,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             {
                 _userDialogs.HideLoading();
                 HockeyApp.MetricsManager.TrackEvent($"(InitRemote) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
-                _userDialogs.Alert(ex.Message);
+                _userDialogs.Alert($"(InitRemote) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
             }
             finally
             {
@@ -1180,7 +1188,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             catch (Exception ex)
             {
                 HockeyApp.MetricsManager.TrackEvent($"(InitFromBundle) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
-                _userDialogs.Alert(ex.Message, "Error while loading sensor data");
+                _userDialogs.Alert($"(InitFromBundle) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
             }
         }
 
@@ -1273,7 +1281,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 RaisePropertyChanged(() => UpdatesStarted);
 
                 HockeyApp.MetricsManager.TrackEvent($"(StartUpdates) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
-                _userDialogs.Alert(ex.Message);
+                _userDialogs.Alert($"(StartUpdates) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
             }
         }
 
@@ -1319,7 +1327,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 RaisePropertyChanged(() => UpdatesStarted);
 
                 HockeyApp.MetricsManager.TrackEvent($"(HandleUpdatesStarted) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
-                _userDialogs.Alert(ex.Message);
+                _userDialogs.Alert($"(HandleUpdatesStarted) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
             }
         }
 
@@ -1346,7 +1354,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             catch (Exception ex)
             {
                 HockeyApp.MetricsManager.TrackEvent($"(StopUpdates) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
-                _userDialogs.Alert(ex.Message);
+                _userDialogs.Alert($"(StopUpdates) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
             }
         }
 
@@ -1394,7 +1402,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 RaisePropertyChanged(() => UpdatesStarted);
 
                 HockeyApp.MetricsManager.TrackEvent($"(SaveSensorCalibrationData) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
-                _userDialogs.Alert(ex.Message);
+                _userDialogs.Alert($"(SaveSensorCalibrationData) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
             }
         }
 

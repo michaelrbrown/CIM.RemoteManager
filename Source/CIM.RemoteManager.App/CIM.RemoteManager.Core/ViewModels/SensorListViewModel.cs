@@ -435,25 +435,17 @@ namespace CIM.RemoteManager.Core.ViewModels
 
                         _userDialogs.Alert($"(F) here current DateTime:{CurrentDateTime.ToString()}", "CIMScan RemoteManager");
 
-                        _userDialogs.Alert($"(F) here1", "CIMScan RemoteManager");
-
                         //_userDialogs.Alert($"(F) TotalActiveSensors: {TotalActiveSensors}", "CIMScan RemoteManager");
                         _userDialogs.Alert($"(F) CurrentDateTime Year: {CurrentDateTime.UnixTimeStampToDateTime().Year}", "CIMScan RemoteManager");
-
-                        _userDialogs.Alert($"(F) here2", "CIMScan RemoteManager");
 
                         // Validate our station Unix time converted to windows time is less
                         // than 2009.  If it is we know the station time needs to be set.
                         if (CurrentDateTime.UnixTimeStampToDateTime().Year < 2009)
                         {
-
-                            _userDialogs.Alert($"(F) here3", "CIMScan RemoteManager");
-
-
                             // Get Unix timestamp "now" as UTC
                             Int32 unixTimestampUtc = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
 
-                            _userDialogs.Alert($"(F) here4", "CIMScan RemoteManager");
+                            _userDialogs.Alert($"(F) unixTimestampUtc: {unixTimestampUtc}", "CIMScan RemoteManager");
 
                             // Format DA-12 station Unix timestamp
                             // T - is to set the station time,
@@ -688,7 +680,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 // Loading indicator (make sure it turns off even with exception thrown)
                 IsLoading = false;
 
-                _userDialogs.Alert(ex.Message, "Error while loading sensor data");
+                _userDialogs.Alert(ex.Message, "Error while loading sensor data!");
                 Mvx.Trace(ex.Message);
             }
         }
@@ -736,7 +728,7 @@ namespace CIM.RemoteManager.Core.ViewModels
 
                 _userDialogs.HideLoading();
                 HockeyApp.MetricsManager.TrackEvent($"(InitRemote) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
-                _userDialogs.Alert(ex.Message);
+                _userDialogs.Alert($"(InitRemote) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
             }
             finally
             {
@@ -867,7 +859,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 RaisePropertyChanged(() => UpdatesStarted);
 
                 HockeyApp.MetricsManager.TrackEvent($"(StartUpdates) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
-                _userDialogs.Alert(ex.Message);
+                _userDialogs.Alert($"(StartUpdates) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
             }
         }
 
@@ -902,7 +894,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 RaisePropertyChanged(() => UpdatesStarted);
 
                 HockeyApp.MetricsManager.TrackEvent($"(HandleUpdatesStarted) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
-                _userDialogs.Alert(ex.Message);
+                _userDialogs.Alert($"(HandleUpdatesStarted) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
             }
         }
 
@@ -933,7 +925,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 RaisePropertyChanged(() => UpdatesStarted);
 
                 HockeyApp.MetricsManager.TrackEvent($"(StopUpdates) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
-                _userDialogs.Alert(ex.Message);
+                _userDialogs.Alert($"(StopUpdates) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
             }
         }
 
@@ -942,34 +934,42 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// </summary>
         public void NavigateToSensorDetailsPage(Sensor sensor)
         {
-            if (sensor != null)
+            try
             {
-                // Clear old sensor values
-                if (Application.Current.Properties.ContainsKey("CurrentSensorName"))
+                if (sensor != null)
                 {
-                    Application.Current.Properties.Remove("CurrentSensorName");
-                }
-                if (Application.Current.Properties.ContainsKey("CurrentSensorType"))
-                {
-                    Application.Current.Properties.Remove("CurrentSensorType");
-                }
-                if (Application.Current.Properties.ContainsKey("CurrentSensorOffset"))
-                {
-                    Application.Current.Properties.Remove("CurrentSensorOffset");
-                }
-                if (Application.Current.Properties.ContainsKey("CurrentSensorScale"))
-                {
-                    Application.Current.Properties.Remove("CurrentSensorScale");
-                }
-                // Set sensor values for details page
-                Application.Current.Properties["CurrentSensorName"] = sensor.Name;
-                Application.Current.Properties["CurrentSensorType"] = sensor.SensorType;
-                Application.Current.Properties["CurrentSensorOffset"] = sensor.Offset;
-                Application.Current.Properties["CurrentSensorScale"] = sensor.Scale;
+                    // Clear old sensor values
+                    if (Application.Current.Properties.ContainsKey("CurrentSensorName"))
+                    {
+                        Application.Current.Properties.Remove("CurrentSensorName");
+                    }
+                    if (Application.Current.Properties.ContainsKey("CurrentSensorType"))
+                    {
+                        Application.Current.Properties.Remove("CurrentSensorType");
+                    }
+                    if (Application.Current.Properties.ContainsKey("CurrentSensorOffset"))
+                    {
+                        Application.Current.Properties.Remove("CurrentSensorOffset");
+                    }
+                    if (Application.Current.Properties.ContainsKey("CurrentSensorScale"))
+                    {
+                        Application.Current.Properties.Remove("CurrentSensorScale");
+                    }
+                    // Set sensor values for details page
+                    Application.Current.Properties["CurrentSensorName"] = sensor.Name;
+                    Application.Current.Properties["CurrentSensorType"] = sensor.SensorType;
+                    Application.Current.Properties["CurrentSensorOffset"] = sensor.Offset;
+                    Application.Current.Properties["CurrentSensorScale"] = sensor.Scale;
 
-                // Navigate to sensor plot
-                var bundle = new MvxBundle(new Dictionary<string, string>(Bundle.Data) { { SensorIdKey, sensor.SensorIndex.ToString() } });
-                ShowViewModel<SensorDetailsViewModel>(bundle);
+                    // Navigate to sensor plot
+                    var bundle = new MvxBundle(new Dictionary<string, string>(Bundle.Data) { { SensorIdKey, sensor.SensorIndex.ToString() } });
+                    ShowViewModel<SensorDetailsViewModel>(bundle);
+                }
+            }
+            catch (Exception ex)
+            {
+                HockeyApp.MetricsManager.TrackEvent($"(NavigateToSensorDetailsPage) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
+                _userDialogs.Alert($"(NavigateToSensorDetailsPage) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
             }
         }
 

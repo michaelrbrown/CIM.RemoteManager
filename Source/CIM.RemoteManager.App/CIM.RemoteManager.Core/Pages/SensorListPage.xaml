@@ -82,9 +82,10 @@
                         <!-- Margin: left, top, right, bottom -->
                         <Label Margin="0,0,0,0"
                                VerticalOptions="Center" HorizontalOptions="CenterAndExpand"
-                               FontAttributes="Italic" FontSize="22" LineBreakMode="NoWrap"
+                               FontAttributes="Italic" FontSize="22"
                                Text="{Binding Key}"
-                               TextColor="{DynamicResource AppLightColor}" />
+                               TextColor="{DynamicResource AppLightColor}"
+                               WidthRequest="225" />
                     </ViewCell.View>
                 </ViewCell>
             </DataTemplate>
