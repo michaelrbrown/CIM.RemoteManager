@@ -54,7 +54,7 @@
                             <chart:PropertyNameDataPointBinding PropertyName="CurrentValue" />
                         </chart:AreaSeries.ValueBinding>
                         <chart:AreaSeries.CategoryBinding>
-                            <chart:PropertyNameDataPointBinding PropertyName="DateTimeStamp" />
+                            <chart:PropertyNameDataPointBinding PropertyName="TimeStamp" />
                         </chart:AreaSeries.CategoryBinding>
                     </chart:AreaSeries>
                 </chart:RadCartesianChart.Series>

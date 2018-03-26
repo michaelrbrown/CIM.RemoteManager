@@ -8,16 +8,22 @@ namespace CIM.RemoteManager.Core.Models
     /// </summary>
     public class SensorPlot : BindableBase
     {
-       
         private int _points;
         public int Points
         {
             get => _points;
             set => SetProperty(ref _points, value);
         }
-        
-        private double _timeStamp;
-        public double TimeStamp
+
+        private double _unixTimeStamp;
+        public double UnixTimeStamp
+        {
+            get => _unixTimeStamp;
+            set => SetProperty(ref _unixTimeStamp, value);
+        }
+
+        private DateTime _timeStamp;
+        public DateTime TimeStamp
         {
             get => _timeStamp;
             set => SetProperty(ref _timeStamp, value);
@@ -26,7 +32,7 @@ namespace CIM.RemoteManager.Core.Models
         /// <summary>
         /// Converting Unix to Windows DateTime
         /// </summary>
-        public DateTime? DateTimeStamp => _timeStamp.UnixTimeStampToDateTime();
+        public DateTime? DateTimeStamp => _unixTimeStamp.UnixTimeStampToDateTime();
 
         private double _currentValue;
         public double CurrentValue
