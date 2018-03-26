@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ServiceModel.Dispatcher;
+using CIM.RemoteManager.Core.Helpers;
 using CIM.RemoteManager.Core.Models;
 using CIM.RemoteManager.Core.ViewModels;
 using MvvmCross.Core.ViewModels;
@@ -145,5 +147,68 @@ namespace CIM.RemoteManager.Core.Pages
                 ScaleEntry.IsEnabled = true;
             }
         }
+
+        /// <summary>
+        /// The scale and offset entry calibration fields.
+        /// </summary>
+        private string _upperCalibrationEntryValue = "";
+        private string _upperCalibrationTargetEntryValue = "";
+        private string _lowerCalibrationEntryValue = "";
+        private string _lowerCalibrationTargetEntryalue = "";
+
+        private void UpperCalibrationEntry_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            _upperCalibrationEntryValue = e.NewTextValue;
+        }
+
+        private void UpperCalibrationTargetEntry_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            _upperCalibrationTargetEntryValue = e.NewTextValue;
+        }
+
+        private void LowerCalibrationEntry_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            _lowerCalibrationEntryValue = e.NewTextValue;
+        }
+
+        private void LowerCalibrationTargetEntry_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            _lowerCalibrationTargetEntryalue = e.NewTextValue;
+        }
+
+        /// <summary>
+        /// Calculates the scale and offset.
+        /// </summary>
+        private void CalculateScaleAndOffset()
+        {
+            try
+            {
+                // Get entry values for calculation
+                double upperCalibrationEntryValue = _upperCalibrationEntryValue.SafeConvert<double>(0);
+                double upperCalibrationTargetEntryValue = _upperCalibrationTargetEntryValue.SafeConvert<double>(0);
+                double lowerCalibrationEntryValue = _lowerCalibrationEntryValue.SafeConvert<double>(0);
+                double lowerCalibrationTargetEntryalue = _lowerCalibrationTargetEntryalue.SafeConvert<double>(0);
+
+                // Calculate x and y
+                double y = upperCalibrationTargetEntryValue - lowerCalibrationTargetEntryalue;
+                double x = upperCalibrationEntryValue - lowerCalibrationEntryValue;
+
+                // Calculate scale
+                double scale = y / x;
+                // Calculate offset
+                double offset = upperCalibrationTargetEntryValue - (scale * upperCalibrationEntryValue);
+
+                // Show value in scale entry
+                ScaleEntry.Text = scale.ToString();
+
+                // Show value in offset entry
+                OffsetEntry.Text = offset.ToString();
+            }
+            catch
+            {
+                // ignored
+            }
+        }
+
     }
 }
