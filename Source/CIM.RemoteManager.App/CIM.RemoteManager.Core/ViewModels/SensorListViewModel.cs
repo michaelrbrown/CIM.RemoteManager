@@ -452,15 +452,15 @@ namespace CIM.RemoteManager.Core.ViewModels
 
 
                         // Make sure we can write characteristic data to remote
-                        if (TxCharacteristic.CanWrite)
-                        {
+                        //if (TxCharacteristic.CanWrite)
+                        //{
                             // Send set Unix UTC time command to remote
-                            await TxCharacteristic.WriteAsync(remoteUnitTimestamp.StrToByteArray()).ConfigureAwait(true);
-                        }
-                        else
-                        {
+                            //await TxCharacteristic.WriteAsync(remoteUnitTimestamp.StrToByteArray()).ConfigureAwait(true);
+                        //}
+                        //else
+                        //{
                             _userDialogs.Alert("Cannot write characteristic data to remote (DateTime)!", "CIMScan Remote Manager");
-                        }
+                        //}
                     }
 
                     // New instance of station helper
