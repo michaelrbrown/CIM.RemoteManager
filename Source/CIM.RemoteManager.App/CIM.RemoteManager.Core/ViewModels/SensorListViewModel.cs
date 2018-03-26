@@ -420,6 +420,8 @@ namespace CIM.RemoteManager.Core.ViewModels
                     case "F":
                         //_userDialogs.Alert($"(F) Message Counters Data: {sensorValues}", "CIMScan RemoteManager");
 
+                        _userDialogs.Alert($"(F) before here", "CIMScan RemoteManager");
+
                         // "F" Message counter data serialization
                         TotalOutgoingMessages = sensorValues.Substring(1, 2).SafeHexToInt();
                         TotalOutgoingRetries = sensorValues.Substring(3, 2).SafeHexToInt();

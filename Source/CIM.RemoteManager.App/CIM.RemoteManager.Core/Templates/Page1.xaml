@@ -6,12 +6,12 @@
 
 
 
-        <StackLayout Orientation="Horizontal" WidthRequest="130">
-            <Label VerticalOptions="CenterAndExpand" HorizontalOptions="End" LineBreakMode="NoWrap" Text="asdfasdf" VerticalTextAlignment="Center" />
-            <Label Margin="0,-20,0,0"
-                   VerticalOptions="CenterAndExpand" HorizontalOptions="Start"
-                   HorizontalTextAlignment="Start" LineBreakMode="NoWrap" Text="C" VerticalTextAlignment="Start" />
-        </StackLayout>
+
+        <TableView Intent="Settings">
+            <TableRoot>
+                <TableSection Title="Ring" />
+            </TableRoot>
+        </TableView>
 
     </ContentPage.Content>
 </ContentPage>
