@@ -132,7 +132,6 @@ namespace CIM.RemoteManager.Core.Pages
         /// <param name="e">The <see cref="ToggledEventArgs"/> instance containing the event data.</param>
         private void SensorOffsetTrimSwitchToggled(object sender, ToggledEventArgs e)
         {
-            DisplayAlert("CIMScan", e.Value.ToString(), "Ok");
             if (e.Value)
             {
                 LowerCalibrationEntry.IsEnabled = false;
