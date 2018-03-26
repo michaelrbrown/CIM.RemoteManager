@@ -808,14 +808,14 @@ namespace CIM.RemoteManager.Core.ViewModels
 
                     if (SensorCommandType == SensorCommand.Plot)
                     {
-                        _userDialogs.Alert($"(J) Buffered Data: {sensorValues}", "CIMScan RemoteManager");
+                        //_userDialogs.Alert($"(J) Buffered Data: {sensorValues}", "CIMScan RemoteManager");
 
                         var sensorPlot = new SensorPlot();
                         //int plotIndex = 0;
                         bool plotTime = true;
 
                         // Get number of plot points
-                        int numberOfPlotPoints = splitSensorValues[0].SafeHexToInt();
+                        int numberOfPlotPoints = splitSensorValues[0].SafeHexToInt() - 1;
 
                         _userDialogs.Alert($"(J) sensorPlot.numberOfPlotPoints: {numberOfPlotPoints.ToString()}", "CIMScan RemoteManager");
 
