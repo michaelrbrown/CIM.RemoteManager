@@ -79,9 +79,9 @@
             <DataTemplate>
                 <ViewCell>
                     <ViewCell.View>
-                        <StackLayout BackgroundColor="Transparent" Opacity=".78">
-                            <Label Margin="20,0,0,0"
-                                   VerticalOptions="Center" HorizontalOptions="Start"
+                        <StackLayout BackgroundColor="Transparent" Opacity=".78" Spacing="0">
+                            <Label Margin="20,10,0,0"
+                                   VerticalOptions="Center" HorizontalOptions="CenterAndExpand"
                                    FontAttributes="Italic" FontSize="22"
                                    Text="{Binding Key}"
                                    TextColor="{DynamicResource AppLightColor}" />
