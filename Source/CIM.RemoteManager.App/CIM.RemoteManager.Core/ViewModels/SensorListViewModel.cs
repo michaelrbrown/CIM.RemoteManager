@@ -431,11 +431,11 @@ namespace CIM.RemoteManager.Core.ViewModels
                     double remoteDateTime = CurrentDateTime;
 
                     //_userDialogs.Alert($"(F) TotalActiveSensors: {TotalActiveSensors}", "CIMScan RemoteManager");
-                    _userDialogs.Alert($"(F) CurrentDateTime Year: {remoteDateTime.UnixTimeStampToDateTime().Year}", "CIMScan RemoteManager");
+                    _userDialogs.Alert($"(F) CurrentDateTime Year: {remoteDateTime.UnixTimeStampToDateTime()}", "CIMScan RemoteManager");
 
                     // Validate our station Unix time converted to windows time is less
                     // than 2009.  If it is we know the station time needs to be set.
-                    if (remoteDateTime.UnixTimeStampToDateTime().Year < 2009)
+                    if (remoteDateTime.UnixTimeStampToDateTime() < DateTime.UtcNow.AddYears(-10))
                     {
                         // Get Unix timestamp "now" as UTC
                         Int32 unixTimestampUtc = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
@@ -452,15 +452,15 @@ namespace CIM.RemoteManager.Core.ViewModels
 
 
                         // Make sure we can write characteristic data to remote
-                        //if (TxCharacteristic.CanWrite)
-                        //{
+                        if (TxCharacteristic.CanWrite)
+                        {
                             // Send set Unix UTC time command to remote
-                            //await TxCharacteristic.WriteAsync(remoteUnitTimestamp.StrToByteArray()).ConfigureAwait(true);
-                        //}
-                        //else
-                        //{
+                            await TxCharacteristic.WriteAsync(remoteUnitTimestamp.StrToByteArray()).ConfigureAwait(true);
+                        }
+                        else
+                        {
                             _userDialogs.Alert("Cannot write characteristic data to remote (DateTime)!", "CIMScan Remote Manager");
-                        //}
+                        }
                     }
 
                     // New instance of station helper
