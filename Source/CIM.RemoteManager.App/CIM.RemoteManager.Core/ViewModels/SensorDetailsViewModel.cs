@@ -1034,7 +1034,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 Adapter.DeviceConnectionLost += OnDeviceConnectionLost;
 
                 // Sensor data
-                _sensorPlotCollection = new FullyObservableCollection<SensorPlot>();
+                _sensorPlotCollection = new FullyObservableCollection<ChartDataPoint>();
             }
             catch (Exception ex)
             {

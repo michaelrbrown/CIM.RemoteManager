@@ -317,26 +317,26 @@
 
                     <!-- Upper Calibration -->
                     <Label Grid.Row="1" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Upper: " />
-                    <Entry Grid.Row="1" Grid.Column="1" Style="{DynamicResource FormValueStyle}" Text="{Binding UpperCalibration}" />
+                    <Entry Grid.Row="1" Grid.Column="1" Style="{DynamicResource FormValueStyle}" Text="{Binding UpperCalibration, Mode=TwoWay}" />
 
                     <!-- Upper Calibration Target -->
                     <Label Grid.Row="1" Grid.Column="2" Style="{DynamicResource FormLabelStyle}" Text="Target: " />
-                    <Entry Grid.Row="1" Grid.Column="3" Style="{DynamicResource FormValueStyle}" Text="{Binding UpperCalibrationTarget}" />
+                    <Entry Grid.Row="1" Grid.Column="3" Style="{DynamicResource FormValueStyle}" Text="{Binding UpperCalibrationTarget, Mode=TwoWay}" />
 
                     <!-- Lower Calibration -->
                     <Label Grid.Row="2" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Lower: " />
-                    <Entry x:Name="LowerCalibrationEntry" Grid.Row="2" Grid.Column="1" Style="{DynamicResource FormValueStyle}" Text="{Binding LowerCalibration}" />
+                    <Entry x:Name="LowerCalibrationEntry" Grid.Row="2" Grid.Column="1" Style="{DynamicResource FormValueStyle}" Text="{Binding LowerCalibration, Mode=TwoWay}" />
 
                     <!-- Lower Calibration Target -->
                     <Label Grid.Row="2" Grid.Column="2" Style="{DynamicResource FormLabelStyle}" Text="Target: " />
-                    <Entry x:Name="LowerCalibrationTargetEntry" Grid.Row="2" Grid.Column="3" Style="{DynamicResource FormValueStyle}" Text="{Binding LowerCalibrationTarget}" />
+                    <Entry x:Name="LowerCalibrationTargetEntry" Grid.Row="2" Grid.Column="3" Style="{DynamicResource FormValueStyle}" Text="{Binding LowerCalibrationTarget, Mode=TwoWay}" />
 
                     <!-- Scale -->
                     <Label Grid.Row="3" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Scale: " />
                     <Entry x:Name="ScaleEntry"
                            Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3"
                            Style="{DynamicResource FormValueStyle}"
-                           Text="{Binding SensorScale}" />
+                           Text="{Binding SensorScale, Mode=TwoWay}" />
 
                     <!-- Offset Heading -->
                     <StackLayout Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4"
@@ -347,7 +347,7 @@
 
                     <!-- Offset -->
                     <Label Grid.Row="5" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Value: " />
-                    <Entry x:Name="OffsetEntry" Grid.Row="5" Grid.Column="1" Style="{DynamicResource FormValueStyle}" Text="{Binding SensorOffset}" />
+                    <Entry x:Name="OffsetEntry" Grid.Row="5" Grid.Column="1" Style="{DynamicResource FormValueStyle}" Text="{Binding SensorOffset, Mode=TwoWay}" />
 
                     <!-- Offset Trim -->
                     <Label Grid.Row="5" Grid.Column="2" Style="{DynamicResource FormLabelStyle}" Text="Trim: " />
@@ -358,11 +358,11 @@
 
                     <!-- Output -->
                     <Label Grid.Row="6" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Output: " />
-                    <Entry Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="3" Style="{DynamicResource FormValueStyle}" Text="{Binding LowAlarmLimit}" />
+                    <Entry Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="3" Style="{DynamicResource FormValueStyle}" Text="{Binding SensorOutput, Mode=TwoWay}" />
 
                     <!-- Input -->
                     <Label Grid.Row="7" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Input: " />
-                    <Entry Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="3" Style="{DynamicResource FormValueStyle}" Text="{Binding CurrentValue}" />
+                    <Entry Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="3" Style="{DynamicResource FormValueStyle}" Text="{Binding SensorInput, Mode=TwoWay}" />
 
                     <!-- Save Button -->
                     <StackLayout Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="4"
