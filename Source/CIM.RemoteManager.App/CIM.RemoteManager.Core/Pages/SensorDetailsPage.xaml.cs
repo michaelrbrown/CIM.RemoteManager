@@ -159,21 +159,32 @@ namespace CIM.RemoteManager.Core.Pages
         private void UpperCalibrationEntry_OnTextChanged(object sender, TextChangedEventArgs e)
         {
             _upperCalibrationEntryValue = e.NewTextValue;
+
+            DisplayAlert("CIMScan", $"value: {_upperCalibrationEntryValue}", "Ok");
+
+            // Perform calculation
+            CalculateScaleAndOffset();
         }
 
         private void UpperCalibrationTargetEntry_OnTextChanged(object sender, TextChangedEventArgs e)
         {
             _upperCalibrationTargetEntryValue = e.NewTextValue;
+            // Perform calculation
+            CalculateScaleAndOffset();
         }
 
         private void LowerCalibrationEntry_OnTextChanged(object sender, TextChangedEventArgs e)
         {
             _lowerCalibrationEntryValue = e.NewTextValue;
+            // Perform calculation
+            CalculateScaleAndOffset();
         }
 
         private void LowerCalibrationTargetEntry_OnTextChanged(object sender, TextChangedEventArgs e)
         {
             _lowerCalibrationTargetEntryalue = e.NewTextValue;
+            // Perform calculation
+            CalculateScaleAndOffset();
         }
 
         /// <summary>

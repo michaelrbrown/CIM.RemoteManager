@@ -196,11 +196,11 @@
     <Reference Include="Syncfusion.SfBusyIndicator.XForms.Android, Version=15.4451.0.20, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Syncfusion.Xamarin.SfBusyIndicator.15.4.0.20\lib\MonoAndroid10\Syncfusion.SfBusyIndicator.XForms.Android.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.SfChart.XForms, Version=16.1451.0.24, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Syncfusion.Xamarin.SfChart.16.1.0.24\lib\MonoAndroid10\Syncfusion.SfChart.XForms.dll</HintPath>
+    <Reference Include="Syncfusion.SfChart.XForms, Version=16.1451.0.26, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Syncfusion.Xamarin.SfChart.16.1.0.26\lib\MonoAndroid10\Syncfusion.SfChart.XForms.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.SfChart.XForms.Android, Version=16.1451.0.24, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Syncfusion.Xamarin.SfChart.16.1.0.24\lib\MonoAndroid10\Syncfusion.SfChart.XForms.Android.dll</HintPath>
+    <Reference Include="Syncfusion.SfChart.XForms.Android, Version=16.1451.0.26, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Syncfusion.Xamarin.SfChart.16.1.0.26\lib\MonoAndroid10\Syncfusion.SfChart.XForms.Android.dll</HintPath>
     </Reference>
     <Reference Include="Syncfusion.SfListView.XForms, Version=15.4451.0.20, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Syncfusion.Xamarin.SfListView.15.4.0.20\lib\MonoAndroid10\Syncfusion.SfListView.XForms.dll</HintPath>

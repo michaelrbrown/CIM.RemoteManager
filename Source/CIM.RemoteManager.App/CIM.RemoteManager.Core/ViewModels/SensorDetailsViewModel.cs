@@ -104,7 +104,8 @@ namespace CIM.RemoteManager.Core.ViewModels
         {
             Plot,
             Statistics,
-            Limits
+            Limits,
+            Calibration
         };
 
         /// <summary>
@@ -148,6 +149,13 @@ namespace CIM.RemoteManager.Core.ViewModels
         public int RxTryCount { get; set; } = 0;
 
         /// <summary>
+        /// Gets or sets a value indicating whether [start unfiltered sensor value record].
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [start unfiltered sensor value record]; otherwise, <c>false</c>.
+        /// </value>
+        public bool StartUnfilteredSensorValueRecord { get; set; } = false;
+        /// <summary>
         /// Sensor record types (serialized into models later)
         /// </summary>
         public bool StartSensorBufferedValueRecord { get; set; } = false;
@@ -164,6 +172,11 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// </summary>
         public bool StartMessageCounterValueRecord { get; set; } = false;
 
+        /// <summary>
+        ///  "C" = unfiltered (current) value
+        ///   # | time | current value
+        /// </summary>
+        public readonly StringBuilder UnfilteredSensorValue = new StringBuilder("");
         /// <summary>
         ///  "J" = buffered sensor data
         ///   number of points
@@ -285,6 +298,16 @@ namespace CIM.RemoteManager.Core.ViewModels
             set => SetProperty(ref _currentValue, value);
         }
 
+        /// <summary>
+        /// Sensor timestamp
+        /// </summary>
+        private int _timeStamp;
+        public int TimeStamp
+        {
+            get => _timeStamp;
+            set => SetProperty(ref _timeStamp, value);
+        }
+
         #endregion
 
         #region Sensor Statistics
@@ -313,7 +336,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// Converting Unix to Windows DateTime
         /// </summary>
         private int _sinceTimeStamp;
-        public int TimeStamp
+        public int SinceTimeStamp
         {
             get => _sinceTimeStamp;
             set => SetProperty(ref _sinceTimeStamp, value);
@@ -602,6 +625,50 @@ namespace CIM.RemoteManager.Core.ViewModels
         #region Parsing Routines
 
         /// <summary>
+        /// Get unfiltered (current) values for sensor from buffered data
+        /// </summary>
+        /// <param name="characteristicValue"></param>
+        private void GetUnfilteredSensorValues(string characteristicValue)
+        {
+            if (String.IsNullOrEmpty(characteristicValue)) return;
+
+            // Start reading all "unfiltered (current) sensor values"
+            if (!StartUnfilteredSensorValueRecord && characteristicValue.Contains("{F"))
+            {
+                // If we hit an end char } then record all data up to it
+                if (characteristicValue.Contains("}"))
+                {
+                    UnfilteredSensorValue.Append(characteristicValue);
+                    SerializeStringToSensor(UnfilteredSensorValue.ToString(), "C");
+                    UnfilteredSensorValue.Clear();
+                    StartUnfilteredSensorValueRecord = false;
+                }
+                else
+                {
+                    // Read all characters in buffer while we are within the {}
+                    UnfilteredSensorValue.Append(characteristicValue.Trim(new Char[] { '{' }));
+                    StartUnfilteredSensorValueRecord = true;
+                }
+            }
+            else if (StartUnfilteredSensorValueRecord)
+            {
+                // If we hit an end char } then record all data up to it
+                if (characteristicValue.Contains("}"))
+                {
+                    UnfilteredSensorValue.Append(characteristicValue.GetUntilOrEmpty());
+                    SerializeStringToSensor(UnfilteredSensorValue.ToString(), "C");
+                    UnfilteredSensorValue.Clear();
+                    StartUnfilteredSensorValueRecord = false;
+                }
+                else
+                {
+                    // Read all characters in buffer while we are within the {}
+                    UnfilteredSensorValue.Append(characteristicValue);
+                }
+            }
+        }
+
+        /// <summary>
         /// Get message counters from remote.
         /// </summary>
         /// <param name="characteristicValue"></param>
@@ -786,8 +853,24 @@ namespace CIM.RemoteManager.Core.ViewModels
         {
             try
             {
+                // Split by tab delimiter
+                string[] splitSensorValues = sensorValues.Split('\t');
+
                 switch (conversionType)
                 {
+                    case "C":
+                        //Application.Current.MainPage.DisplayAlert("C", splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('A') + 1).SafeConvert<int>(0).ToString(), "Cancel");
+                        // "C" Sensor data serialization
+                        // Update Sensor list by index
+                        if (string.Equals(SensorIndexSelected, splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('C') + 1), StringComparison.OrdinalIgnoreCase))
+                        {
+                            //Application.Current.MainPage.DisplayAlert("Old value: ", sensorListItem.AverageValue.ToString(), "Cancel");
+                            //Application.Current.MainPage.DisplayAlert("New value: ", splitSensorValues[1].SafeHexToDouble().ToString(), "Cancel");
+
+                            TimeStamp = splitSensorValues[0].SafeHexToInt();
+                            CurrentValue = splitSensorValues[1].SafeHexToDouble();
+                        }
+                        break;
                     case "F":
                         // "F" Message counter data serialization
                         TotalOutgoingMessages = sensorValues.Substring(1, 2).SafeHexToInt();
@@ -807,12 +890,26 @@ namespace CIM.RemoteManager.Core.ViewModels
 
                         break;
                     default:
-                        // Split by tab delimiter
-                        string[] splitSensorValues = sensorValues.Split('\t');
-
                         if (SensorCommandType == SensorCommand.Plot)
                         {
                             //_userDialogs.Alert($"(J) Buffered Data: {sensorValues}", "CIMScan RemoteManager");
+
+
+                            SensorPlotCollection.Add(new ChartDataPoint("Jan", 42));
+                            SensorPlotCollection.Add(new ChartDataPoint("Feb", 44));
+                            SensorPlotCollection.Add(new ChartDataPoint("Mar", 53));
+                            SensorPlotCollection.Add(new ChartDataPoint("Apr", 64));
+                            SensorPlotCollection.Add(new ChartDataPoint("May", 75));
+                            SensorPlotCollection.Add(new ChartDataPoint("Jun", 83));
+                            SensorPlotCollection.Add(new ChartDataPoint("Jul", 87));
+                            SensorPlotCollection.Add(new ChartDataPoint("Aug", 84));
+                            SensorPlotCollection.Add(new ChartDataPoint("Sep", 78));
+                            SensorPlotCollection.Add(new ChartDataPoint("Oct", 67));
+                            SensorPlotCollection.Add(new ChartDataPoint("Nov", 55));
+                            SensorPlotCollection.Add(new ChartDataPoint("Dec", 45));
+
+
+                            return;
 
                             // New instance of sensor plot
                             var sensorPlot = new SensorPlot();
@@ -872,7 +969,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                                 MinimumValue = splitSensorValues[3].SafeHexToDouble();
                                 MinimumOccuranceTimeStamp = splitSensorValues[4].SafeHexToInt();
                                 AverageValue = splitSensorValues[5].SafeHexToDouble();
-                                TimeStamp = splitSensorValues[6].SafeHexToInt();
+                                SinceTimeStamp = splitSensorValues[6].SafeHexToInt();
                             }
                         }
                         else if (SensorCommandType == SensorCommand.Limits)
@@ -900,7 +997,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             catch (Exception ex)
             {
                 HockeyApp.MetricsManager.TrackEvent($"(SerializeStringToSensor) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
-                //_userDialogs.Alert($"(SerializeStringToSensor) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
+                _userDialogs.Alert($"(SerializeStringToSensor) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
             }
 
         }
@@ -953,6 +1050,8 @@ namespace CIM.RemoteManager.Core.ViewModels
                     GetSensorLimitsValues(CharacteristicValue);
                 }
 
+                // Get unfiltered (current) sensor values
+                GetUnfilteredSensorValues(CharacteristicValue);
                 // Get message counter values from remote to determine if
                 // we have acquired or lost sensors.  Also grabs time stamp.
                 GetMessageCounterValues(CharacteristicValue);

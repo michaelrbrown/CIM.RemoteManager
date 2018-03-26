@@ -192,8 +192,8 @@
     <Reference Include="Syncfusion.SfBusyIndicator.XForms, Version=15.4451.0.20, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Syncfusion.Xamarin.SfBusyIndicator.15.4.0.20\lib\portable-win+net45+wp80+win81+wpa81\Syncfusion.SfBusyIndicator.XForms.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.SfChart.XForms, Version=16.1451.0.24, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Syncfusion.Xamarin.SfChart.16.1.0.24\lib\portable-win+net45+wp80+win81+wpa81\Syncfusion.SfChart.XForms.dll</HintPath>
+    <Reference Include="Syncfusion.SfChart.XForms, Version=16.1451.0.26, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Syncfusion.Xamarin.SfChart.16.1.0.26\lib\portable-win+net45+wp80+win81+wpa81\Syncfusion.SfChart.XForms.dll</HintPath>
     </Reference>
     <Reference Include="Syncfusion.SfListView.XForms, Version=15.4451.0.20, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Syncfusion.Xamarin.SfListView.15.4.0.20\lib\portable-win+net45+wp80+win81+wpa81\Syncfusion.SfListView.XForms.dll</HintPath>

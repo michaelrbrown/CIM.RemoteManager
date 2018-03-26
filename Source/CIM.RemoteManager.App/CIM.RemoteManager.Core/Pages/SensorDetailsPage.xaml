@@ -1,6 +1,6 @@
 ﻿<pages:BaseTabbedPage x:Class="CIM.RemoteManager.Core.Pages.SensorDetailsPage"
                       xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                      xmlns:chart="clr-namespace:Telerik.XamarinForms.Chart;assembly=Telerik.XamarinForms.Chart" xmlns:pages="clr-namespace:CIM.RemoteManager.Core.Pages;assembly=CIM.RemoteManager.Core"
+                      xmlns:pages="clr-namespace:CIM.RemoteManager.Core.Pages;assembly=CIM.RemoteManager.Core" xmlns:xForms="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms"
                       BackgroundColor="#EEEEEE">
 
     <pages:BasePage Title="Sensor Plot" Padding="0" BackgroundColor="#EEEEEE" Icon="ic_sensor-plot.png">
@@ -46,17 +46,10 @@
 
             </Grid>
 
-            <chart:RadCartesianChart Grid.Row="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="#FFFFFF">
-                <chart:RadCartesianChart.HorizontalAxis>
-                    <chart:CategoricalAxis />
-                </chart:RadCartesianChart.HorizontalAxis>
-                <chart:RadCartesianChart.VerticalAxis>
-                    <chart:NumericalAxis />
-                </chart:RadCartesianChart.VerticalAxis>
-                <chart:RadCartesianChart.Series>
-                    <chart:AreaSeries ItemsSource="{Binding SensorPlotCollection}" />
-                </chart:RadCartesianChart.Series>
-            </chart:RadCartesianChart>
+            <!-- Chart Control -->
+            <xForms:SfChart Grid.Row="1">
+                <xForms:AreaSeries ItemsSource="{Binding SensorPlotCollection}" XBindingPath="Time" YBindingPath="Value" />
+            </xForms:SfChart>
 
         </Grid>
 
@@ -370,7 +363,7 @@
 
                     <!-- Input -->
                     <Label Grid.Row="7" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Input: " />
-                    <Entry Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="3" Style="{DynamicResource FormValueStyle}" Text="{Binding SensorInput, Mode=TwoWay}" />
+                    <Entry Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="3" Style="{DynamicResource FormValueStyle}" Text="{Binding CurrentValue, Mode=TwoWay}" />
 
                     <!-- Save Button -->
                     <StackLayout Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="4"
