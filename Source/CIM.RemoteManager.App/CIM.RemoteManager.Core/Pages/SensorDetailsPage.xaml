@@ -317,19 +317,27 @@
 
                     <!-- Upper Calibration -->
                     <Label Grid.Row="1" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Upper: " />
-                    <Entry Grid.Row="1" Grid.Column="1" Style="{DynamicResource FormValueStyle}" Text="{Binding UpperCalibration, Mode=TwoWay}" />
+                    <Entry Grid.Row="1" Grid.Column="1" Style="{DynamicResource FormValueStyle}" Text="{Binding UpperCalibration, Mode=TwoWay}" TextChanged="UpperCalibrationEntry_OnTextChanged" />
 
                     <!-- Upper Calibration Target -->
                     <Label Grid.Row="1" Grid.Column="2" Style="{DynamicResource FormLabelStyle}" Text="Target: " />
-                    <Entry Grid.Row="1" Grid.Column="3" Style="{DynamicResource FormValueStyle}" Text="{Binding UpperCalibrationTarget, Mode=TwoWay}" />
+                    <Entry Grid.Row="1" Grid.Column="3" Style="{DynamicResource FormValueStyle}" Text="{Binding UpperCalibrationTarget, Mode=TwoWay}" TextChanged="UpperCalibrationTargetEntry_OnTextChanged" />
 
                     <!-- Lower Calibration -->
                     <Label Grid.Row="2" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Lower: " />
-                    <Entry x:Name="LowerCalibrationEntry" Grid.Row="2" Grid.Column="1" Style="{DynamicResource FormValueStyle}" Text="{Binding LowerCalibration, Mode=TwoWay}" />
+                    <Entry x:Name="LowerCalibrationEntry"
+                           Grid.Row="2" Grid.Column="1"
+                           Style="{DynamicResource FormValueStyle}"
+                           Text="{Binding LowerCalibration, Mode=TwoWay}"
+                           TextChanged="LowerCalibrationEntry_OnTextChanged" />
 
                     <!-- Lower Calibration Target -->
                     <Label Grid.Row="2" Grid.Column="2" Style="{DynamicResource FormLabelStyle}" Text="Target: " />
-                    <Entry x:Name="LowerCalibrationTargetEntry" Grid.Row="2" Grid.Column="3" Style="{DynamicResource FormValueStyle}" Text="{Binding LowerCalibrationTarget, Mode=TwoWay}" />
+                    <Entry x:Name="LowerCalibrationTargetEntry"
+                           Grid.Row="2" Grid.Column="3"
+                           Style="{DynamicResource FormValueStyle}"
+                           Text="{Binding LowerCalibrationTarget, Mode=TwoWay}"
+                           TextChanged="LowerCalibrationTargetEntry_OnTextChanged" />
 
                     <!-- Scale -->
                     <Label Grid.Row="3" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Scale: " />
