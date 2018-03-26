@@ -436,7 +436,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                         _userDialogs.Alert($"(F) here current DateTime:{CurrentDateTime.ToString()}", "CIMScan RemoteManager");
 
                         //_userDialogs.Alert($"(F) TotalActiveSensors: {TotalActiveSensors}", "CIMScan RemoteManager");
-                        _userDialogs.Alert($"(F) CurrentDateTime Year: {CurrentDateTime.UnixTimeStampToDateTime().Year}", "CIMScan RemoteManager");
+                        _userDialogs.Alert($"(F) CurrentDateTime Year: {CurrentDateTime.UnixTimeStampToDateTime().Year.ToString()}", "CIMScan RemoteManager");
 
                         // Validate our station Unix time converted to windows time is less
                         // than 2009.  If it is we know the station time needs to be set.

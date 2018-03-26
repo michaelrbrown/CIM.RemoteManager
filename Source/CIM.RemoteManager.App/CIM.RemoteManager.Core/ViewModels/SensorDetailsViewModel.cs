@@ -816,8 +816,9 @@ namespace CIM.RemoteManager.Core.ViewModels
                             //int plotIndex = 0;
                             bool plotTime = true;
 
-                            // Get number of plot points
-                            int numberOfPlotPoints = splitSensorValues[0].SafeHexToInt() - 1;
+                            // Get number of plot points.
+                            // Multiply times two since we have to collect time and value.
+                            int numberOfPlotPoints = splitSensorValues[0].SafeHexToInt() * 2;
 
                             _userDialogs.Alert($"(J) sensorPlot.numberOfPlotPoints: {numberOfPlotPoints.ToString()}", "CIMScan RemoteManager");
 
@@ -1089,7 +1090,8 @@ namespace CIM.RemoteManager.Core.ViewModels
                     string updateValue = string.Empty;
                     if (SensorCommandType == SensorCommand.Plot)
                     {
-                        updateValue = "{c" + SensorIndexSelected + "00000064}";
+                        // Plot 10 points
+                        updateValue = "{c0" + SensorIndexSelected + "0000000A}";
                     }
                     // Send statistics, and limits commands (Y command = refresh all which returns
                     // limits and statistics data.
@@ -1301,7 +1303,8 @@ namespace CIM.RemoteManager.Core.ViewModels
                 string updateValue = string.Empty;
                 if (SensorCommandType == SensorCommand.Plot)
                 {
-                    updateValue = "{c" + SensorIndexSelected + "00000064}";
+                    // Plot 10 points
+                    updateValue = "{c0" + SensorIndexSelected + "0000000A}";
                 }
                 else if (SensorCommandType == SensorCommand.Statistics || SensorCommandType == SensorCommand.Limits)
                 {
