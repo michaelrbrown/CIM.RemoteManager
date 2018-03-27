@@ -920,7 +920,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                             int plotIndex = 1;
                             bool plotTime = true;
 
-                            await Application.Current.MainPage.DisplayAlert("(J) 1st val: ", splitSensorValues[0].ToString(), "Cancel");
+                            //await Application.Current.MainPage.DisplayAlert("(J) 1st val: ", splitSensorValues[0].ToString(), "Cancel").ConfigureAwait(true);
 
                             // Get number of plot points.
                             // Multiply times two since we have to collect time and value.
@@ -928,7 +928,9 @@ namespace CIM.RemoteManager.Core.ViewModels
 
                             //_userDialogs.Alert($"(J) sensorPlot.numberOfPlotPoints: {numberOfPlotPoints.ToString()}", "CIMScan RemoteManager");
 
-                            _userDialogs.InfoToast($"(J) sensorPlot.numberOfPlotPoints: {numberOfPlotPoints.ToString()}", TimeSpan.FromSeconds(5));
+                            await Application.Current.MainPage.DisplayAlert("(J) numberOfPlotPoints: ", numberOfPlotPoints.ToString(), "Cancel").ConfigureAwait(true);
+
+                            //_userDialogs.InfoToast($"(J) sensorPlot.numberOfPlotPoints: {numberOfPlotPoints.ToString()}", TimeSpan.FromSeconds(5));
 
 
                             // Iterate through plot values and set plot datetime and current value
@@ -955,6 +957,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                                 // Every two iterations add values to chart collection
                                 if ((plotIndex % 2) == 0)
                                 {
+                                    await Application.Current.MainPage.DisplayAlert("(J) add data point: ", sensorPlot.TimeStamp.ToString("HH:mm") + "-" + sensorPlot.CurrentValue.ToString(), "Cancel").ConfigureAwait(true);
                                     // Add plot data to list
                                     SensorPlotCollection.Add(new ChartDataPoint(sensorPlot.TimeStamp.ToString("HH:mm"), sensorPlot.CurrentValue));
                                 }
@@ -962,7 +965,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                             }
 
 
-                            await Task.Delay(2000);
+                            await Task.Delay(2000).ConfigureAwait(true);
                             // Send a refresh command after we load plot data to refresh other page data
                             await TxCharacteristic.WriteAsync("{Y}".StrToByteArray()).ConfigureAwait(true);
 
@@ -1206,7 +1209,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                     //_userDialogs.Alert($"Write Command: {updateValue}", "CIMScan Remote Manager");
 
 
-                    await Application.Current.MainPage.DisplayAlert("J Byte Array to Str: ", updateValue.StrToByteArray().ToString(), "Cancel");
+                    //await Application.Current.MainPage.DisplayAlert("J Byte Array to Str: ", updateValue.StrToByteArray().ToString(), "Cancel");
 
 
                     // Send the command based on command type set above
