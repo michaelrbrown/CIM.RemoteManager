@@ -934,13 +934,13 @@ namespace CIM.RemoteManager.Core.ViewModels
                             }
 
                             // Wait a couple seconds before we fire off another request for plot data
-                            await Task.Delay(2000).ConfigureAwait(true);
+                            await Task.Delay(5000).ConfigureAwait(true);
                             // Plot 10 points
                             string updateValue = "{c0" + SensorIndexSelected + "0000000A}";
                             // Send the command based on command type set above
                             await TxCharacteristic.WriteAsync(updateValue.StrToByteArray()).ConfigureAwait(true);
                             // Show refreshing of chart via toast
-                            _userDialogs.InfoToast("Refreshing chart...", TimeSpan.FromSeconds(5));
+                            _userDialogs.InfoToast("Refreshing chart...", TimeSpan.FromSeconds(1));
 
                         }
                         else if (SensorCommandType == SensorCommand.Statistics)
@@ -1165,11 +1165,11 @@ namespace CIM.RemoteManager.Core.ViewModels
                 if (TxCharacteristic.CanWrite)
                 {
                     // Setup plot command
-                    string updateValue = string.Empty;
+                    //string updateValue = string.Empty;
                     //if (SensorCommandType == SensorCommand.Plot)
                     //{
                         // Plot 10 points
-                        updateValue = "{c0" + SensorIndexSelected + "0000000A}";
+                        //updateValue = "{c0" + SensorIndexSelected + "0000000A}";
                     //}
                     // Send statistics, and limits commands (Y command = refresh all which returns
                     // limits and statistics data.
@@ -1186,7 +1186,7 @@ namespace CIM.RemoteManager.Core.ViewModels
 
 
                     // Send the command based on command type set above
-                    await TxCharacteristic.WriteAsync(updateValue.StrToByteArray()).ConfigureAwait(true);
+                    //await TxCharacteristic.WriteAsync(updateValue.StrToByteArray()).ConfigureAwait(true);
                 }
                 else
                 {

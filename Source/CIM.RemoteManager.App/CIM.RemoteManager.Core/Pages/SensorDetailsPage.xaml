@@ -78,9 +78,7 @@
                         </xForms:NumericalAxis.Title>
                     </xForms:NumericalAxis>
                 </xForms:SfChart.SecondaryAxis>
-                <xForms:SfChart.Series>
-                    <xForms:AreaSeries ItemsSource="{Binding SensorPlotCollection}" />
-                </xForms:SfChart.Series>
+                <xForms:FastLineSeries ItemsSource="{Binding SensorPlotCollection}" XBindingPath="Value" YBindingPath="Time" />
             </xForms:SfChart>
 
             <!-- Margin: left, top, right, bottom -->
