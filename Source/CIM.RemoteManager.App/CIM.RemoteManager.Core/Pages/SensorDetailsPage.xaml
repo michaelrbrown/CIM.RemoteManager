@@ -1,6 +1,6 @@
 ﻿<pages:BaseTabbedPage x:Class="CIM.RemoteManager.Core.Pages.SensorDetailsPage"
                       xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                      xmlns:chart="clr-namespace:Telerik.XamarinForms.Chart;assembly=Telerik.XamarinForms.Chart" xmlns:pages="clr-namespace:CIM.RemoteManager.Core.Pages;assembly=CIM.RemoteManager.Core" xmlns:xForms="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms"
+                      xmlns:pages="clr-namespace:CIM.RemoteManager.Core.Pages;assembly=CIM.RemoteManager.Core" xmlns:xForms="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms"
                       BackgroundColor="#EEEEEE">
 
     <pages:BaseTabbedPage.Resources>
@@ -15,7 +15,7 @@
         </ResourceDictionary>
     </pages:BaseTabbedPage.Resources>
 
-    <pages:BasePage Title="Sensor Plot" Padding="0" BackgroundColor="#EEEEEE" Icon="ic_sensor-plot.png">
+    <pages:BasePage Title="Sensor Plot" Padding="0" BackgroundColor="#FFFFFF" Icon="ic_sensor-plot.png">
 
         <!-- Background -->
         <Image Aspect="AspectFill" RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height}" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width}" Source="bgapplication.jpg" />
@@ -34,7 +34,7 @@
         <!-- Margin: left, top, right, bottom -->
         <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent">
             <Grid.RowDefinitions>
-                <RowDefinition Height="80" />
+                <RowDefinition Height="60" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="50" />
             </Grid.RowDefinitions>
@@ -100,7 +100,7 @@
 
     </pages:BasePage>
 
-    <pages:BasePage Title="Sensor Statistics" Padding="0" BackgroundColor="#EEEEEE" Icon="ic_sensor-statistics.png">
+    <pages:BasePage Title="Sensor Statistics" Padding="0" BackgroundColor="#FFFFFF" Icon="ic_sensor-statistics.png">
 
         <ScrollView>
 
@@ -108,7 +108,7 @@
             <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent">
 
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="80" />
+                    <RowDefinition Height="60" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
@@ -128,7 +128,7 @@
                 </Grid>
 
                 <!-- Grid layout for Statistics form -->
-                <Grid Grid.Row="1" Margin="20,10,20,20">
+                <Grid Grid.Row="1" Margin="0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="50" />
@@ -202,7 +202,7 @@
 
     </pages:BasePage>
 
-    <pages:BasePage Title="Sensor Limits" Padding="0" BackgroundColor="#EEEEEE" Icon="ic_sensor-limits.png">
+    <pages:BasePage Title="Sensor Limits" Padding="0" BackgroundColor="#FFFFFF" Icon="ic_sensor-limits.png">
 
         <ScrollView>
 
@@ -210,7 +210,7 @@
             <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent">
 
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="80" />
+                    <RowDefinition Height="60" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
@@ -230,7 +230,7 @@
                 </Grid>
 
                 <!-- Grid layout for Limits form -->
-                <Grid Grid.Row="1" Margin="20,0,20,20">
+                <Grid Grid.Row="1" Margin="0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="50" />
@@ -299,7 +299,7 @@
 
     </pages:BasePage>
 
-    <pages:BasePage Title="Sensor Setup" Padding="0" BackgroundColor="#EEEEEE" Icon="ic_sensor-settings.png">
+    <pages:BasePage Title="Sensor Setup" Padding="0" BackgroundColor="#FFFFFF" Icon="ic_sensor-settings.png">
 
         <ScrollView>
 
@@ -307,7 +307,7 @@
             <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent">
 
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="80" />
+                    <RowDefinition Height="60" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
@@ -326,8 +326,8 @@
 
                 </Grid>
 
-                <!-- Grid layout for Limits form -->
-                <Grid Grid.Row="1" Margin="20,10,20,20">
+                <!-- Grid layout for Settings form -->
+                <Grid Grid.Row="1" Margin="0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="50" />
                         <RowDefinition Height="50" />

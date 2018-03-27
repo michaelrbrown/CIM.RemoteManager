@@ -920,14 +920,14 @@ namespace CIM.RemoteManager.Core.ViewModels
                             int plotIndex = 1;
                             bool plotTime = true;
 
-                            //await Application.Current.MainPage.DisplayAlert("(J) 1st val: ", splitSensorValues[0].ToString(), "Cancel").ConfigureAwait(true);
+                            await Application.Current.MainPage.DisplayAlert("(J) 1st val: ", splitSensorValues[0].ToString(), "Cancel").ConfigureAwait(true);
 
 
-                            await Application.Current.MainPage.DisplayAlert("(J) 1st val: ", splitSensorValues[0].Substring(4, (splitSensorValues[0].Length - 1)).ToString(), "Cancel").ConfigureAwait(true);
+                            await Application.Current.MainPage.DisplayAlert("(J) 1st val parsed: ", splitSensorValues[0].Substring(1, (splitSensorValues[0].Length - 1)).ToString(), "Cancel").ConfigureAwait(true);
 
                             // Get number of plot points.
                             // Multiply times two since we have to collect time and value.
-                            int numberOfPlotPoints = splitSensorValues[0].Substring(4, (splitSensorValues[0].Length - 1)).SafeHexToInt() * 2;
+                            int numberOfPlotPoints = splitSensorValues[0].Substring(1, (splitSensorValues[0].Length - 1)).SafeHexToInt() * 2;
 
                             //_userDialogs.Alert($"(J) sensorPlot.numberOfPlotPoints: {numberOfPlotPoints.ToString()}", "CIMScan RemoteManager");
 
