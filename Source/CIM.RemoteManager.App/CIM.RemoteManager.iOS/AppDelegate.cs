@@ -5,6 +5,7 @@ using MvvmCross.iOS.Platform;
 using MvvmCross.Platform;
 using Syncfusion.ListView.XForms.iOS;
 using Syncfusion.SfBusyIndicator.XForms.iOS;
+using Syncfusion.SfChart.XForms.iOS.Renderers;
 using UIKit;
 
 namespace CIM.RemoteManager.iOS
@@ -32,6 +33,7 @@ namespace CIM.RemoteManager.iOS
             manager.Authenticator.AuthenticateInstallation(); // This line is obsolete in crash only builds
 
             // Init Syncfusion controls
+            new SfChartRenderer();
             new SfBusyIndicatorRenderer();
             SfListViewRenderer.Init();
 

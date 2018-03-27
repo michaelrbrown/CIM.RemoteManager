@@ -7,6 +7,7 @@ using MvvmCross.Core.Views;
 using MvvmCross.Forms.Droid.Presenters;
 using MvvmCross.Platform;
 using Syncfusion.SfBusyIndicator.XForms.Droid;
+using Syncfusion.SfChart.XForms.Droid;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
@@ -35,7 +36,9 @@ namespace CIM.RemoteManager.Android
             Mvx.Resolve<IMvxAppStart>().Start();
 
             // Init Syncfusion controls
+            new SfChartRenderer();
             new SfBusyIndicatorRenderer();
+
 
             CheckForUpdates();
         }
