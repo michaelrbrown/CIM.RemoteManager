@@ -121,8 +121,8 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// <summary>
         /// Sensor collection
         /// </summary>
-        FullyObservableCollection<ChartDataPoint> _sensorPlotCollection;
-        public FullyObservableCollection<ChartDataPoint> SensorPlotCollection
+        FullyObservableCollection<SensorPlot> _sensorPlotCollection;
+        public FullyObservableCollection<SensorPlot> SensorPlotCollection
         {
             get => _sensorPlotCollection;
             set => SetProperty(ref _sensorPlotCollection, value);
@@ -895,25 +895,29 @@ namespace CIM.RemoteManager.Core.ViewModels
                         {
                             //_userDialogs.Alert($"(J) Buffered Data: {sensorValues}", "CIMScan RemoteManager");
 
+                            // New instance of sensor plot
+                            var sensorPlot = new SensorPlot
+                            {
+                                TimeStamp = DateTime.Now.ToString("HH:mm"),
+                                CurrentValue = 54
+                            };
 
-                            SensorPlotCollection.Add(new ChartDataPoint("Jan", 42));
-                            SensorPlotCollection.Add(new ChartDataPoint("Feb", 44));
-                            SensorPlotCollection.Add(new ChartDataPoint("Mar", 53));
-                            SensorPlotCollection.Add(new ChartDataPoint("Apr", 64));
-                            SensorPlotCollection.Add(new ChartDataPoint("May", 75));
-                            SensorPlotCollection.Add(new ChartDataPoint("Jun", 83));
-                            SensorPlotCollection.Add(new ChartDataPoint("Jul", 87));
-                            SensorPlotCollection.Add(new ChartDataPoint("Aug", 84));
-                            SensorPlotCollection.Add(new ChartDataPoint("Sep", 78));
-                            SensorPlotCollection.Add(new ChartDataPoint("Oct", 67));
-                            SensorPlotCollection.Add(new ChartDataPoint("Nov", 55));
-                            SensorPlotCollection.Add(new ChartDataPoint("Dec", 45));
-
+                            SensorPlotCollection.Add(sensorPlot);
+                            SensorPlotCollection.Add(sensorPlot);
+                            SensorPlotCollection.Add(sensorPlot);
+                            SensorPlotCollection.Add(sensorPlot);
+                            SensorPlotCollection.Add(sensorPlot);
+                            SensorPlotCollection.Add(sensorPlot);
+                            SensorPlotCollection.Add(sensorPlot);
+                            SensorPlotCollection.Add(sensorPlot);
+                            SensorPlotCollection.Add(sensorPlot);
+                            SensorPlotCollection.Add(sensorPlot);
+                            SensorPlotCollection.Add(sensorPlot);
+                            SensorPlotCollection.Add(sensorPlot);
 
                             return;
 
-                            // New instance of sensor plot
-                            var sensorPlot = new SensorPlot();
+                            
                             // Defaults
                             int plotIndex = 1;
                             bool plotTime = true;
@@ -931,7 +935,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                                 {
                                     // Plot time
                                     sensorPlot.UnixTimeStamp = splitSensorValues[i].SafeHexToInt();
-                                    sensorPlot.TimeStamp = sensorPlot.UnixTimeStamp.UnixTimeStampToDateTime();
+                                    //sensorPlot.TimeStamp = sensorPlot.UnixTimeStamp.UnixTimeStampToDateTime();
                                     plotTime = false;
 
                                     //_userDialogs.Alert($"(J) sensorPlot.TimeStamp: {sensorPlot.TimeStamp}", "CIMScan RemoteManager");
@@ -949,7 +953,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                                 if ((plotIndex % 2) == 0)
                                 {
                                     // Add plot data to list
-                                    SensorPlotCollection.Add(new ChartDataPoint(sensorPlot.TimeStamp.ToString("HH:mm"), sensorPlot.CurrentValue));
+                                    //SensorPlotCollection.Add(new ChartDataPoint(sensorPlot.TimeStamp.ToString("HH:mm"), sensorPlot.CurrentValue));
                                 }
                                 plotIndex++;
                             }
@@ -1139,7 +1143,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 Adapter.DeviceConnectionLost += OnDeviceConnectionLost;
 
                 // Sensor data
-                _sensorPlotCollection = new FullyObservableCollection<ChartDataPoint>();
+                _sensorPlotCollection = new FullyObservableCollection<SensorPlot>();
             }
             catch (Exception ex)
             {
