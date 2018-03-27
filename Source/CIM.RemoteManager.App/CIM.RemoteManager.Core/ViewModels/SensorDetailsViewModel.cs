@@ -851,11 +851,11 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// <param name="conversionType"></param>
         private void SerializeStringToSensor(string sensorValues, string conversionType = "")
         {
+            // Split by tab delimiter
+            string[] splitSensorValues = sensorValues.Split('\t');
+
             try
             {
-                // Split by tab delimiter
-                string[] splitSensorValues = sensorValues.Split('\t');
-
                 switch (conversionType)
                 {
                     case "C":
@@ -964,6 +964,8 @@ namespace CIM.RemoteManager.Core.ViewModels
                             // Only update the values if we have a match
                             if (SensorIndexSelected.GetSensorIndexAsInt() == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('H') + 1).SafeConvert<int>(0))
                             {
+                                _userDialogs.Alert($"(H) Sensor Index: {splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('H') + 1).SafeConvert<int>(0)}", "CIMScan RemoteManager");
+
                                 // "H" Sensor data serialization
                                 MaximumValue = splitSensorValues[1].SafeHexToDouble();
                                 MaximumOccuranceTimeStamp = splitSensorValues[2].SafeHexToInt();
@@ -982,6 +984,8 @@ namespace CIM.RemoteManager.Core.ViewModels
                             // Only update the values if we have a match
                             if (SensorIndexSelected.GetSensorIndexAsInt() == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('G') + 1).SafeConvert<int>(0))
                             {
+                                _userDialogs.Alert($"(G) Sensor Index: {splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('G') + 1).SafeConvert<int>(0)}", "CIMScan RemoteManager");
+
                                 // "G" Sensor data serialization
                                 AlarmStatus = splitSensorValues[1].SafeHexToInt();
                                 //AlarmBeingProcessed = splitSensorValues[2].SafeHexToInt();
@@ -998,7 +1002,8 @@ namespace CIM.RemoteManager.Core.ViewModels
             catch (Exception ex)
             {
                 HockeyApp.MetricsManager.TrackEvent($"(SerializeStringToSensor) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
-                _userDialogs.Alert($"(SerializeStringToSensor) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
+                Application.Current.MainPage.DisplayAlert("CIMScan", splitSensorValues.ToString(), "Cancel");
+                //_userDialogs.Alert($"(SerializeStringToSensor) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
             }
 
         }

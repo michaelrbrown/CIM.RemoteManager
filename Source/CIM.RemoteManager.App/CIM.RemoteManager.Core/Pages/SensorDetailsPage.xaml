@@ -24,6 +24,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="80" />
                 <RowDefinition Height="*" />
+                <RowDefinition Height="50" />
             </Grid.RowDefinitions>
 
             <!-- Margin: left, top, right, bottom -->
@@ -84,6 +85,19 @@
                 </xForms:SfChart.Series>
 
             </xForms:SfChart>
+
+            <!-- Margin: left, top, right, bottom -->
+            <StackLayout Grid.Row="2"
+                         VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+                         BackgroundColor="{DynamicResource RemoteNameBackgroundColor}"
+                         HeightRequest="60" Opacity=".6" Orientation="Horizontal" Spacing="0">
+                <Label Margin="5"
+                       VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"
+                       FontSize="16" LineBreakMode="MiddleTruncation"
+                       Text="{Binding CharacteristicValue, StringFormat=' Incoming Value: {0:N}'}"
+                       TextColor="{DynamicResource AppLightColor}"
+                       VerticalTextAlignment="Center" />
+            </StackLayout>
 
         </Grid>
 
