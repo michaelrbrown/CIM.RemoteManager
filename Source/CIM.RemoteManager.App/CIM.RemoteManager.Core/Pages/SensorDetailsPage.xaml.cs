@@ -161,9 +161,6 @@ namespace CIM.RemoteManager.Core.Pages
         private void UpperCalibrationEntry_OnTextChanged(object sender, TextChangedEventArgs e)
         {
             _upperCalibrationEntryValue = e.NewTextValue;
-
-            DisplayAlert("CIMScan", $"value: {_upperCalibrationEntryValue}", "Ok");
-
             // Perform calculation
             CalculateScaleAndOffset();
         }
