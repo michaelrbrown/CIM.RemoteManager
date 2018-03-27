@@ -960,7 +960,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                                 // Every two iterations add values to chart collection
                                 if ((plotIndex % 2) == 0)
                                 {
-                                    await Application.Current.MainPage.DisplayAlert("(J) add data point: ", sensorPlot.TimeStamp.ToString("HH:mm") + "-" + sensorPlot.CurrentValue.ToString(), "Cancel").ConfigureAwait(true);
+                                    //await Application.Current.MainPage.DisplayAlert("(J) add data point: ", sensorPlot.TimeStamp.ToString("HH:mm") + "-" + sensorPlot.CurrentValue.ToString(), "Cancel").ConfigureAwait(true);
                                     // Add plot data to list
                                     SensorPlotCollection.Add(new ChartDataPoint(sensorPlot.TimeStamp.ToString("HH:mm"), sensorPlot.CurrentValue));
                                 }
