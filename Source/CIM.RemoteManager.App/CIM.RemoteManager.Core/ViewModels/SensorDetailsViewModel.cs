@@ -1006,7 +1006,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             catch (Exception ex)
             {
                 HockeyApp.MetricsManager.TrackEvent($"(SerializeStringToSensor) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
-                Application.Current.MainPage.DisplayAlert("CIMScan", splitSensorValues.ToString(), "Cancel");
+                Application.Current.MainPage.DisplayAlert("CIMScan", $"(Error :: Message: {ex.Message}; sensorValues: {sensorValues}", "Cancel");
                 //_userDialogs.Alert($"(SerializeStringToSensor) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
             }
 

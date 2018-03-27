@@ -48,7 +48,7 @@
             </Grid>
 
             <!-- Chart Control -->
-            <xForms:SfChart Grid.Row="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <xForms:SfChart Grid.Row="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" MinimumHeightRequest="300" MinimumWidthRequest="200">
 
                 <xForms:SfChart.PrimaryAxis>
 
@@ -80,7 +80,7 @@
 
                 <xForms:SfChart.Series>
 
-                    <xForms:ColumnSeries ItemsSource="{Binding SensorPlotCollection}" XBindingPath="Time" YBindingPath="Value" />
+                    <xForms:ColumnSeries ItemsSource="{Binding SensorPlotCollection}" />
 
                 </xForms:SfChart.Series>
 
