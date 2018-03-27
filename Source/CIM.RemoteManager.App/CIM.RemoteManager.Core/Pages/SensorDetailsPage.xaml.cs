@@ -22,6 +22,8 @@ namespace CIM.RemoteManager.Core.Pages
             // Get instance of sensor details viewmodel
             var sensorDetailsViewModel = this.BindingContext as SensorDetailsViewModel;
 
+            //SensorPlotChart.BindingContext = sensorDetailsViewModel;
+
             // Add device settings toolbar icon and handle selection
             ToolbarItems.Add(new ToolbarItem("Refresh Sensor Data", "ic_remote-settings.png", () =>
             {

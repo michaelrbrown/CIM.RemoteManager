@@ -895,6 +895,8 @@ namespace CIM.RemoteManager.Core.ViewModels
                         {
                             //_userDialogs.Alert($"(J) Buffered Data: {sensorValues}", "CIMScan RemoteManager");
 
+                            // New instance of sensor plot
+                            var sensorPlot = new SensorPlot();
 
                             SensorPlotCollection.Add(new ChartDataPoint("Jan", 42));
                             SensorPlotCollection.Add(new ChartDataPoint("Feb", 44));
@@ -909,11 +911,9 @@ namespace CIM.RemoteManager.Core.ViewModels
                             SensorPlotCollection.Add(new ChartDataPoint("Nov", 55));
                             SensorPlotCollection.Add(new ChartDataPoint("Dec", 45));
 
-
                             return;
 
-                            // New instance of sensor plot
-                            var sensorPlot = new SensorPlot();
+
                             // Defaults
                             int plotIndex = 1;
                             bool plotTime = true;
@@ -949,7 +949,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                                 if ((plotIndex % 2) == 0)
                                 {
                                     // Add plot data to list
-                                    SensorPlotCollection.Add(new ChartDataPoint(sensorPlot.TimeStamp.ToString("HH:mm"), sensorPlot.CurrentValue));
+                                    //SensorPlotCollection.Add(new ChartDataPoint(sensorPlot.TimeStamp.ToString("HH:mm"), sensorPlot.CurrentValue));
                                 }
                                 plotIndex++;
                             }
@@ -1002,7 +1002,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             catch (Exception ex)
             {
                 HockeyApp.MetricsManager.TrackEvent($"(SerializeStringToSensor) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
-                Application.Current.MainPage.DisplayAlert("CIMScan", $"(Error :: Message: {ex.Message}; sensorValues: {sensorValues}", "Cancel");
+                Application.Current.MainPage.DisplayAlert("CIMScan", splitSensorValues.ToString(), "Cancel");
                 //_userDialogs.Alert($"(SerializeStringToSensor) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
             }
 
