@@ -3,6 +3,18 @@
                       xmlns:chart="clr-namespace:Telerik.XamarinForms.Chart;assembly=Telerik.XamarinForms.Chart" xmlns:pages="clr-namespace:CIM.RemoteManager.Core.Pages;assembly=CIM.RemoteManager.Core" xmlns:xForms="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms"
                       BackgroundColor="#EEEEEE">
 
+    <pages:BaseTabbedPage.Resources>
+        <ResourceDictionary>
+            <xForms:ChartColorCollection x:Key="Colors">
+                <Color>#0097DF</Color>
+                <Color>#546e7a</Color>
+                <Color>#FFFFC926</Color>
+                <Color>#43a047</Color>
+                <Color>#88FFFFFF</Color>
+            </xForms:ChartColorCollection>
+        </ResourceDictionary>
+    </pages:BaseTabbedPage.Resources>
+
     <pages:BasePage Title="Sensor Plot" Padding="0" BackgroundColor="#EEEEEE" Icon="ic_sensor-plot.png">
 
         <!-- Background -->
@@ -49,6 +61,9 @@
 
             <!-- Chart Control -->
             <xForms:SfChart Grid.Row="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                <xForms:SfChart.ColorModel>
+                    <xForms:ChartColorModel CustomBrushes="{StaticResource Colors}" Palette="Custom" />
+                </xForms:SfChart.ColorModel>
                 <xForms:SfChart.PrimaryAxis>
                     <xForms:CategoryAxis>
                         <xForms:CategoryAxis.Title>
@@ -64,7 +79,7 @@
                     </xForms:NumericalAxis>
                 </xForms:SfChart.SecondaryAxis>
                 <xForms:SfChart.Series>
-                    <xForms:ColumnSeries ItemsSource="{Binding SensorPlotCollection}" />
+                    <xForms:AreaSeries ItemsSource="{Binding SensorPlotCollection}" />
                 </xForms:SfChart.Series>
             </xForms:SfChart>
 

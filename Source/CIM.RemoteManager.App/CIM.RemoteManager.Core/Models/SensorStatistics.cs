@@ -1,6 +1,5 @@
 ﻿using System;
 using CIM.RemoteManager.Core.Helpers;
-using Telerik.XamarinForms.Common.DataAnnotations;
 
 namespace CIM.RemoteManager.Core.Models
 {
