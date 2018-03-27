@@ -898,20 +898,20 @@ namespace CIM.RemoteManager.Core.ViewModels
                             // New instance of sensor plot
                             var sensorPlot = new SensorPlot();
 
-                            SensorPlotCollection.Add(new ChartDataPoint("Jan", 42));
-                            SensorPlotCollection.Add(new ChartDataPoint("Feb", 44));
-                            SensorPlotCollection.Add(new ChartDataPoint("Mar", 53));
-                            SensorPlotCollection.Add(new ChartDataPoint("Apr", 64));
-                            SensorPlotCollection.Add(new ChartDataPoint("May", 75));
-                            SensorPlotCollection.Add(new ChartDataPoint("Jun", 83));
-                            SensorPlotCollection.Add(new ChartDataPoint("Jul", 87));
-                            SensorPlotCollection.Add(new ChartDataPoint("Aug", 84));
-                            SensorPlotCollection.Add(new ChartDataPoint("Sep", 78));
-                            SensorPlotCollection.Add(new ChartDataPoint("Oct", 67));
-                            SensorPlotCollection.Add(new ChartDataPoint("Nov", 55));
-                            SensorPlotCollection.Add(new ChartDataPoint("Dec", 45));
+                            //SensorPlotCollection.Add(new ChartDataPoint("Jan", 42));
+                            //SensorPlotCollection.Add(new ChartDataPoint("Feb", 44));
+                            //SensorPlotCollection.Add(new ChartDataPoint("Mar", 53));
+                            //SensorPlotCollection.Add(new ChartDataPoint("Apr", 64));
+                            //SensorPlotCollection.Add(new ChartDataPoint("May", 75));
+                            //SensorPlotCollection.Add(new ChartDataPoint("Jun", 83));
+                            //SensorPlotCollection.Add(new ChartDataPoint("Jul", 87));
+                            //SensorPlotCollection.Add(new ChartDataPoint("Aug", 84));
+                            //SensorPlotCollection.Add(new ChartDataPoint("Sep", 78));
+                            //SensorPlotCollection.Add(new ChartDataPoint("Oct", 67));
+                            //SensorPlotCollection.Add(new ChartDataPoint("Nov", 55));
+                            //SensorPlotCollection.Add(new ChartDataPoint("Dec", 45));
 
-                            return;
+                            //return;
 
 
                             // Defaults
