@@ -25,7 +25,7 @@
             <Color x:Key="ButtonTextColor">#222222</Color>
             <Color x:Key="ChartForeground">White</Color>
             <Color x:Key="ChartForegroundSemiTransparent">#88FFFFFF</Color>
-
+            <Color x:Key="HeaderBackgroundColor">#B9DEF5</Color>
             <Color x:Key="RemoteNameBackgroundColor">#0097DE</Color>
             <Color x:Key="CardBackgroundColor">#eceff1</Color>
             <Color x:Key="FooterBackgroundColor">#B9DEF5</Color>

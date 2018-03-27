@@ -96,6 +96,23 @@ namespace CIM.RemoteManager.Core.ViewModels
         public int SensorIndex { get; set; }
 
         /// <summary>
+        /// Sensor name plus index
+        /// </summary>
+        public string SensorNameAndIndex
+        {
+            get
+            {
+                // Try to lookup hex to string
+                if (!String.IsNullOrEmpty(_sensorIndexSelected))
+                {
+                    return $"{SensorName} ({SensorIndexSelected})";
+                }
+                // Default
+                return SensorName;
+            }
+        }
+
+        /// <summary>
         /// Sensor
         /// </summary>
         public Sensor Sensor { get; set; }
@@ -858,6 +875,93 @@ namespace CIM.RemoteManager.Core.ViewModels
             {
                 switch (conversionType)
                 {
+                    case "J":
+                        //_userDialogs.Alert($"(J) Buffered Data: {sensorValues}", "CIMScan RemoteManager");
+
+                        // New instance of sensor plot
+                        var sensorPlot = new SensorPlot();
+                        // Defaults
+                        int plotIndex = 1;
+                        bool plotTime = true;
+
+                        // Get number of plot points.
+                        // Multiply times two since we have to collect time and value.
+                        int numberOfPlotPoints = splitSensorValues[0].Substring(1, (splitSensorValues[0].Length - 1)).SafeHexToInt() * 2;
+
+                        // Iterate through plot values and set plot datetime and current value
+                        for (int i = 1; i <= numberOfPlotPoints; i++)
+                        {
+                            if (plotTime)
+                            {
+                                // Plot time
+                                sensorPlot.UnixTimeStamp = splitSensorValues[i].SafeHexToInt();
+                                sensorPlot.TimeStamp = sensorPlot.UnixTimeStamp.UnixTimeStampToDateTime();
+                                plotTime = false;
+                            }
+                            else
+                            {
+                                // Plot value
+                                sensorPlot.CurrentValue = splitSensorValues[i].SafeHexToInt();
+                                plotTime = true;
+                            }
+
+                            // Every two iterations add values to chart collection
+                            if ((plotIndex % 2) == 0)
+                            {
+                                // Add plot data to list
+                                SensorPlotCollection.Add(new ChartDataPoint(sensorPlot.TimeStamp.ToString("HH:mm"), sensorPlot.CurrentValue));
+                            }
+                            plotIndex++;
+                        }
+
+                        // Wait a couple seconds before we fire off another request for plot data
+                        await Task.Delay(5000).ConfigureAwait(true);
+                        // Plot 10 points
+                        string updateValue = "{c0" + SensorIndexSelected + "0000000A}";
+                        // Send the command based on command type set above
+                        await TxCharacteristic.WriteAsync(updateValue.StrToByteArray()).ConfigureAwait(true);
+                        // Show refreshing of chart via toast
+                        _userDialogs.InfoToast("Refreshing chart...", TimeSpan.FromSeconds(1));
+                        break;
+                    case "H":
+                        //_userDialogs.Alert($"(H) Statistics Data: {sensorValues}", "CIMScan RemoteManager");
+                        //_userDialogs.Alert($"(H) SensorIndexSelected: {SensorIndexSelected}", "CIMScan RemoteManager");
+                        //_userDialogs.Alert($"(H) Sensor Index: {splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('H') + 1).SafeConvert<int>(0)}", "CIMScan RemoteManager");
+
+                        // Only update the values if we have a match
+                        if (SensorIndexSelected.GetSensorIndexAsInt() == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('H') + 1).SafeConvert<int>(0))
+                        {
+                            _userDialogs.Alert($"(H) Sensor Index: {splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('H') + 1).SafeConvert<int>(0)}", "CIMScan RemoteManager");
+
+                            // "H" Sensor data serialization
+                            MaximumValue = splitSensorValues[1].SafeHexToDouble();
+                            MaximumOccuranceTimeStamp = splitSensorValues[2].SafeHexToInt();
+                            MinimumValue = splitSensorValues[3].SafeHexToDouble();
+                            MinimumOccuranceTimeStamp = splitSensorValues[4].SafeHexToInt();
+                            AverageValue = splitSensorValues[5].SafeHexToDouble();
+                            SinceTimeStamp = splitSensorValues[6].SafeHexToInt();
+                        }
+                        break;
+                    case "G":
+                        //_userDialogs.Alert($"(G) Limits Data: {sensorValues}", "CIMScan RemoteManager");
+                        //_userDialogs.Alert($"(G) SensorIndexSelected: {SensorIndexSelected}", "CIMScan RemoteManager");
+                        //_userDialogs.Alert($"(G) Sensor Index: {splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('G') + 1).SafeConvert<int>(0)}", "CIMScan RemoteManager");
+
+                        // Only update the values if we have a match
+                        if (SensorIndexSelected.GetSensorIndexAsInt() == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('G') + 1).SafeConvert<int>(0))
+                        {
+                            _userDialogs.Alert($"(G) Sensor Index: {splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('G') + 1).SafeConvert<int>(0)}", "CIMScan RemoteManager");
+
+                            // "G" Sensor data serialization
+                            AlarmStatus = splitSensorValues[1].SafeHexToInt();
+                            //AlarmBeingProcessed = splitSensorValues[2].SafeHexToInt();
+                            AlarmDelay = splitSensorValues[2].SafeHexToDouble();
+                            LowAlarmLimit = splitSensorValues[3].SafeHexToInt();
+                            LowWarningLimit = splitSensorValues[4].SafeHexToDouble();
+                            HighWarningLimit = splitSensorValues[5].SafeHexToInt();
+                            HighAlarmLimit = splitSensorValues[6].SafeHexToDouble();
+                        }
+                        break;
                     case "C":
                         //Application.Current.MainPage.DisplayAlert("C", splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('A') + 1).SafeConvert<int>(0).ToString(), "Cancel");
 
@@ -895,94 +999,15 @@ namespace CIM.RemoteManager.Core.ViewModels
                     default:
                         if (SensorCommandType == SensorCommand.Plot)
                         {
-                            //_userDialogs.Alert($"(J) Buffered Data: {sensorValues}", "CIMScan RemoteManager");
-
-                            // New instance of sensor plot
-                            var sensorPlot = new SensorPlot();
-                            // Defaults
-                            int plotIndex = 1;
-                            bool plotTime = true;
-
-                            // Get number of plot points.
-                            // Multiply times two since we have to collect time and value.
-                            int numberOfPlotPoints = splitSensorValues[0].Substring(1, (splitSensorValues[0].Length - 1)).SafeHexToInt() * 2;
-
-                            // Iterate through plot values and set plot datetime and current value
-                            for (int i = 1; i <= numberOfPlotPoints; i++)
-                            {
-                                if (plotTime)
-                                {
-                                    // Plot time
-                                    sensorPlot.UnixTimeStamp = splitSensorValues[i].SafeHexToInt();
-                                    sensorPlot.TimeStamp = sensorPlot.UnixTimeStamp.UnixTimeStampToDateTime();
-                                    plotTime = false;
-                                }
-                                else
-                                {
-                                    // Plot value
-                                    sensorPlot.CurrentValue = splitSensorValues[i].SafeHexToInt();
-                                    plotTime = true;
-                                }
-
-                                // Every two iterations add values to chart collection
-                                if ((plotIndex % 2) == 0)
-                                {
-                                    // Add plot data to list
-                                    SensorPlotCollection.Add(new ChartDataPoint(sensorPlot.TimeStamp.ToString("HH:mm"), sensorPlot.CurrentValue));
-                                }
-                                plotIndex++;
-                            }
-
-                            // Wait a couple seconds before we fire off another request for plot data
-                            await Task.Delay(5000).ConfigureAwait(true);
-                            // Plot 10 points
-                            string updateValue = "{c0" + SensorIndexSelected + "0000000A}";
-                            // Send the command based on command type set above
-                            await TxCharacteristic.WriteAsync(updateValue.StrToByteArray()).ConfigureAwait(true);
-                            // Show refreshing of chart via toast
-                            _userDialogs.InfoToast("Refreshing chart...", TimeSpan.FromSeconds(1));
 
                         }
                         else if (SensorCommandType == SensorCommand.Statistics)
                         {
-                            //_userDialogs.Alert($"(H) Statistics Data: {sensorValues}", "CIMScan RemoteManager");
-                            //_userDialogs.Alert($"(H) SensorIndexSelected: {SensorIndexSelected}", "CIMScan RemoteManager");
-                            //_userDialogs.Alert($"(H) Sensor Index: {splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('H') + 1).SafeConvert<int>(0)}", "CIMScan RemoteManager");
 
-                            // Only update the values if we have a match
-                            if (SensorIndexSelected.GetSensorIndexAsInt() == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('H') + 1).SafeConvert<int>(0))
-                            {
-                                _userDialogs.Alert($"(H) Sensor Index: {splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('H') + 1).SafeConvert<int>(0)}", "CIMScan RemoteManager");
-
-                                // "H" Sensor data serialization
-                                MaximumValue = splitSensorValues[1].SafeHexToDouble();
-                                MaximumOccuranceTimeStamp = splitSensorValues[2].SafeHexToInt();
-                                MinimumValue = splitSensorValues[3].SafeHexToDouble();
-                                MinimumOccuranceTimeStamp = splitSensorValues[4].SafeHexToInt();
-                                AverageValue = splitSensorValues[5].SafeHexToDouble();
-                                SinceTimeStamp = splitSensorValues[6].SafeHexToInt();
-                            }
                         }
                         else if (SensorCommandType == SensorCommand.Limits)
                         {
-                            //_userDialogs.Alert($"(G) Limits Data: {sensorValues}", "CIMScan RemoteManager");
-                            //_userDialogs.Alert($"(G) SensorIndexSelected: {SensorIndexSelected}", "CIMScan RemoteManager");
-                            //_userDialogs.Alert($"(G) Sensor Index: {splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('G') + 1).SafeConvert<int>(0)}", "CIMScan RemoteManager");
 
-                            // Only update the values if we have a match
-                            if (SensorIndexSelected.GetSensorIndexAsInt() == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('G') + 1).SafeConvert<int>(0))
-                            {
-                                _userDialogs.Alert($"(G) Sensor Index: {splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('G') + 1).SafeConvert<int>(0)}", "CIMScan RemoteManager");
-
-                                // "G" Sensor data serialization
-                                AlarmStatus = splitSensorValues[1].SafeHexToInt();
-                                //AlarmBeingProcessed = splitSensorValues[2].SafeHexToInt();
-                                AlarmDelay = splitSensorValues[2].SafeHexToDouble();
-                                LowAlarmLimit = splitSensorValues[3].SafeHexToInt();
-                                LowWarningLimit = splitSensorValues[4].SafeHexToDouble();
-                                HighWarningLimit = splitSensorValues[5].SafeHexToInt();
-                                HighAlarmLimit = splitSensorValues[6].SafeHexToDouble();
-                            }
                         }
                         break;
                 }
@@ -1034,15 +1059,15 @@ namespace CIM.RemoteManager.Core.ViewModels
             try
             {
                 // Get data based on tab selected
-                if (SensorCommandType == SensorCommand.Plot)
-                {
+                //if (SensorCommandType == SensorCommand.Plot)
+                //{
                     await GetSensorPlotValuesAsync(CharacteristicValue);
-                }
-                else if (SensorCommandType == SensorCommand.Statistics || SensorCommandType == SensorCommand.Limits)
-                {
+                //}
+                //else if (SensorCommandType == SensorCommand.Statistics || SensorCommandType == SensorCommand.Limits)
+                //{
                     await GetSensorStatisticsValuesAsync(CharacteristicValue);
                     await GetSensorLimitsValuesAsync(CharacteristicValue);
-                }
+                //}
 
                 // Get unfiltered (current) sensor values
                 await GetUnfilteredSensorValuesAsync(CharacteristicValue);

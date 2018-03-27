@@ -41,22 +41,16 @@
 
             <!-- Margin: left, top, right, bottom -->
             <Grid Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-
-                <StackLayout Margin="10" VerticalOptions="Center" HorizontalOptions="Center" HeightRequest="50">
-                    <Frame Margin="0" Padding="0" BackgroundColor="{DynamicResource AppAccentColor}" CornerRadius="15" IsClippedToBounds="True">
-                        <Label Margin="10"
-                               VerticalOptions="Center" HorizontalOptions="Center"
-                               FontSize="18"
-                               Text="{Binding SensorName}"
-                               TextColor="#FFFFFF" />
-                        <Label Margin="10"
-                               VerticalOptions="Center" HorizontalOptions="Center"
-                               FontSize="18"
-                               Text="{Binding SensorIndexSelected}"
-                               TextColor="#FFFFFF" />
-                    </Frame>
+                <StackLayout Margin="0"
+                             VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+                             BackgroundColor="{DynamicResource HeaderBackgroundColor}"
+                             HeightRequest="50" Orientation="Horizontal">
+                    <Label Margin="10"
+                           VerticalOptions="Center" HorizontalOptions="Center"
+                           FontSize="18"
+                           Text="{Binding SensorNameAndIndex}"
+                           TextColor="#FFFFFF" />
                 </StackLayout>
-
             </Grid>
 
             <!-- Chart Control -->
@@ -112,17 +106,16 @@
 
                 <!-- Margin: left, top, right, bottom -->
                 <Grid Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-
-                    <StackLayout Margin="10" VerticalOptions="Center" HorizontalOptions="Center" HeightRequest="50">
-                        <Frame Margin="0" Padding="0" BackgroundColor="{DynamicResource AppAccentColor}" CornerRadius="15" IsClippedToBounds="True">
-                            <Label Margin="10"
-                                   VerticalOptions="Center" HorizontalOptions="Center"
-                                   FontSize="18"
-                                   Text="{Binding SensorName}"
-                                   TextColor="#FFFFFF" />
-                        </Frame>
+                    <StackLayout Margin="0"
+                                 VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+                                 BackgroundColor="{DynamicResource HeaderBackgroundColor}"
+                                 HeightRequest="50" Orientation="Horizontal">
+                        <Label Margin="10"
+                               VerticalOptions="Center" HorizontalOptions="Center"
+                               FontSize="18"
+                               Text="{Binding SensorNameAndIndex}"
+                               TextColor="#FFFFFF" />
                     </StackLayout>
-
                 </Grid>
 
                 <!-- Grid layout for Statistics form -->
@@ -214,17 +207,16 @@
 
                 <!-- Margin: left, top, right, bottom -->
                 <Grid Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-
-                    <StackLayout Margin="10" VerticalOptions="Center" HorizontalOptions="Center" HeightRequest="50">
-                        <Frame Margin="0" Padding="0" BackgroundColor="{DynamicResource AppAccentColor}" CornerRadius="15" IsClippedToBounds="True">
-                            <Label Margin="10"
-                                   VerticalOptions="Center" HorizontalOptions="Center"
-                                   FontSize="18"
-                                   Text="{Binding SensorName}"
-                                   TextColor="#FFFFFF" />
-                        </Frame>
+                    <StackLayout Margin="0"
+                                 VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+                                 BackgroundColor="{DynamicResource HeaderBackgroundColor}"
+                                 HeightRequest="50" Orientation="Horizontal">
+                        <Label Margin="10"
+                               VerticalOptions="Center" HorizontalOptions="Center"
+                               FontSize="18"
+                               Text="{Binding SensorNameAndIndex}"
+                               TextColor="#FFFFFF" />
                     </StackLayout>
-
                 </Grid>
 
                 <!-- Grid layout for Limits form -->
@@ -311,17 +303,16 @@
 
                 <!-- Margin: left, top, right, bottom -->
                 <Grid Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-
-                    <StackLayout Margin="10" VerticalOptions="Center" HorizontalOptions="Center" HeightRequest="50">
-                        <Frame Margin="0" Padding="0" BackgroundColor="{DynamicResource AppAccentColor}" CornerRadius="15" IsClippedToBounds="True">
-                            <Label Margin="10"
-                                   VerticalOptions="Center" HorizontalOptions="Center"
-                                   FontSize="18"
-                                   Text="{Binding SensorName}"
-                                   TextColor="#FFFFFF" />
-                        </Frame>
+                    <StackLayout Margin="0"
+                                 VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+                                 BackgroundColor="{DynamicResource HeaderBackgroundColor}"
+                                 HeightRequest="50" Orientation="Horizontal">
+                        <Label Margin="10"
+                               VerticalOptions="Center" HorizontalOptions="Center"
+                               FontSize="18"
+                               Text="{Binding SensorNameAndIndex}"
+                               TextColor="#FFFFFF" />
                     </StackLayout>
-
                 </Grid>
 
                 <!-- Grid layout for Settings form -->
