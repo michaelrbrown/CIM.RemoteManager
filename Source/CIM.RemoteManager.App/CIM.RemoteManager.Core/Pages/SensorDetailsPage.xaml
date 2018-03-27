@@ -417,9 +417,11 @@
                                  IsVisible="{Binding IsRefreshing}"
                                  Orientation="Horizontal">
                         <Button HorizontalOptions="CenterAndExpand"
-                                BackgroundColor="#F9F9F9"
+                                BackgroundColor="{DynamicResource ButtonBackgroundColor}"
                                 Command="{Binding SaveSensorCalibration}"
-                                Image="ic_save.png" Text="Save Calibration" TextColor="#0097DF" WidthRequest="155" />
+                                Image="ic_save.png" Text="Save Calibration"
+                                TextColor="{DynamicResource ButtonTextColor}"
+                                WidthRequest="155" />
                     </StackLayout>
 
                     <!-- Margin: left, top, right, bottom -->

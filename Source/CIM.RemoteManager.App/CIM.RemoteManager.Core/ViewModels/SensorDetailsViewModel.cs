@@ -899,42 +899,13 @@ namespace CIM.RemoteManager.Core.ViewModels
 
                             // New instance of sensor plot
                             var sensorPlot = new SensorPlot();
-
-                            //SensorPlotCollection.Add(new ChartDataPoint("Jan", 42));
-                            //SensorPlotCollection.Add(new ChartDataPoint("Feb", 44));
-                            //SensorPlotCollection.Add(new ChartDataPoint("Mar", 53));
-                            //SensorPlotCollection.Add(new ChartDataPoint("Apr", 64));
-                            //SensorPlotCollection.Add(new ChartDataPoint("May", 75));
-                            //SensorPlotCollection.Add(new ChartDataPoint("Jun", 83));
-                            //SensorPlotCollection.Add(new ChartDataPoint("Jul", 87));
-                            //SensorPlotCollection.Add(new ChartDataPoint("Aug", 84));
-                            //SensorPlotCollection.Add(new ChartDataPoint("Sep", 78));
-                            //SensorPlotCollection.Add(new ChartDataPoint("Oct", 67));
-                            //SensorPlotCollection.Add(new ChartDataPoint("Nov", 55));
-                            //SensorPlotCollection.Add(new ChartDataPoint("Dec", 45));
-
-                            //return;
-
-
                             // Defaults
                             int plotIndex = 1;
                             bool plotTime = true;
 
-                            //await Application.Current.MainPage.DisplayAlert("(J) 1st val: ", splitSensorValues[0].ToString(), "Cancel").ConfigureAwait(true);
-
-
-                            //await Application.Current.MainPage.DisplayAlert("(J) 1st val parsed: ", splitSensorValues[0].Substring(1, (splitSensorValues[0].Length - 1)).ToString(), "Cancel").ConfigureAwait(true);
-
                             // Get number of plot points.
                             // Multiply times two since we have to collect time and value.
                             int numberOfPlotPoints = splitSensorValues[0].Substring(1, (splitSensorValues[0].Length - 1)).SafeHexToInt() * 2;
-
-                            //_userDialogs.Alert($"(J) sensorPlot.numberOfPlotPoints: {numberOfPlotPoints.ToString()}", "CIMScan RemoteManager");
-
-                            await Application.Current.MainPage.DisplayAlert("(J) numberOfPlotPoints: ", numberOfPlotPoints.ToString(), "Cancel").ConfigureAwait(true);
-
-                            //_userDialogs.InfoToast($"(J) sensorPlot.numberOfPlotPoints: {numberOfPlotPoints.ToString()}", TimeSpan.FromSeconds(5));
-
 
                             // Iterate through plot values and set plot datetime and current value
                             for (int i = 1; i <= numberOfPlotPoints; i++)
@@ -945,32 +916,31 @@ namespace CIM.RemoteManager.Core.ViewModels
                                     sensorPlot.UnixTimeStamp = splitSensorValues[i].SafeHexToInt();
                                     sensorPlot.TimeStamp = sensorPlot.UnixTimeStamp.UnixTimeStampToDateTime();
                                     plotTime = false;
-
-                                    //_userDialogs.Alert($"(J) sensorPlot.TimeStamp: {sensorPlot.TimeStamp}", "CIMScan RemoteManager");
                                 }
                                 else
                                 {
                                     // Plot value
                                     sensorPlot.CurrentValue = splitSensorValues[i].SafeHexToInt();
                                     plotTime = true;
-
-                                    //_userDialogs.Alert($"(J) sensorPlot.CurrentValue: {sensorPlot.CurrentValue}", "CIMScan RemoteManager");
                                 }
 
                                 // Every two iterations add values to chart collection
                                 if ((plotIndex % 2) == 0)
                                 {
-                                    //await Application.Current.MainPage.DisplayAlert("(J) add data point: ", sensorPlot.TimeStamp.ToString("HH:mm") + "-" + sensorPlot.CurrentValue.ToString(), "Cancel").ConfigureAwait(true);
                                     // Add plot data to list
                                     SensorPlotCollection.Add(new ChartDataPoint(sensorPlot.TimeStamp.ToString("HH:mm"), sensorPlot.CurrentValue));
                                 }
                                 plotIndex++;
                             }
 
-
+                            // Wait a couple seconds before we fire off another request for plot data
                             await Task.Delay(2000).ConfigureAwait(true);
-                            // Send a refresh command after we load plot data to refresh other page data
-                            await TxCharacteristic.WriteAsync("{Y}".StrToByteArray()).ConfigureAwait(true);
+                            // Plot 10 points
+                            string updateValue = "{c0" + SensorIndexSelected + "0000000A}";
+                            // Send the command based on command type set above
+                            await TxCharacteristic.WriteAsync(updateValue.StrToByteArray()).ConfigureAwait(true);
+                            // Show refreshing of chart via toast
+                            _userDialogs.InfoToast("Refreshing chart...", TimeSpan.FromSeconds(5));
 
                         }
                         else if (SensorCommandType == SensorCommand.Statistics)
@@ -1471,6 +1441,32 @@ namespace CIM.RemoteManager.Core.ViewModels
             {
                 HockeyApp.MetricsManager.TrackEvent($"(StopUpdates) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
                 _userDialogs.Alert($"(StopUpdates) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
+            }
+        }
+
+        /// <summary>
+        /// Refreshes plot data recursively.
+        /// </summary>
+        private async void RefreshPlotData()
+        {
+            try
+            {
+                // Make sure we are done with our initialization before starting updates
+                while (!IsLoading && UpdatesStarted)
+                {
+                    await Task.Delay(5000).ConfigureAwait(true);
+                    // Recursive process until we complete initialization
+                    StartUpdates();
+                }
+            }
+            catch (Exception ex)
+            {
+                UpdatesStarted = false;
+                // Notify property changed
+                RaisePropertyChanged(() => UpdatesStarted);
+
+                HockeyApp.MetricsManager.TrackEvent($"(StartUpdates) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
+                _userDialogs.Alert($"(StartUpdates) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
             }
         }
 
