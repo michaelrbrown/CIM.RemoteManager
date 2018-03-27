@@ -924,7 +924,8 @@ namespace CIM.RemoteManager.Core.ViewModels
                             SensorPlotCollection.Add(sensorPlot);
                             SensorPlotCollection.Add(sensorPlot);
                             SensorPlotCollection.Add(sensorPlot);
-
+                            // Notify property changed to update UI
+                            RaisePropertyChanged(() => SensorPlotCollection);
                             return;
 
                             
