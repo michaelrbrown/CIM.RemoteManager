@@ -896,19 +896,29 @@ namespace CIM.RemoteManager.Core.ViewModels
                             //_userDialogs.Alert($"(J) Buffered Data: {sensorValues}", "CIMScan RemoteManager");
 
                             // New instance of sensor plot
-                            var sensorPlot = new SensorPlot
-                            {
-                                TimeStamp = DateTime.Now.ToString("HH:mm"),
-                                CurrentValue = 54
-                            };
+                            var sensorPlot = new SensorPlot();
+                            sensorPlot.TimeStamp = DateTime.Now;
+                            sensorPlot.CurrentValue = 34;
 
                             SensorPlotCollection.Add(sensorPlot);
                             SensorPlotCollection.Add(sensorPlot);
+                            sensorPlot.TimeStamp = DateTime.Now.AddHours(1);
+                            sensorPlot.CurrentValue = 44;
                             SensorPlotCollection.Add(sensorPlot);
+                            sensorPlot.TimeStamp = DateTime.Now.AddHours(2);
+                            sensorPlot.CurrentValue = 54;
                             SensorPlotCollection.Add(sensorPlot);
+                            sensorPlot.TimeStamp = DateTime.Now.AddHours(3);
+                            sensorPlot.CurrentValue =64;
                             SensorPlotCollection.Add(sensorPlot);
+                            sensorPlot.TimeStamp = DateTime.Now.AddHours(4);
+                            sensorPlot.CurrentValue = 74;
                             SensorPlotCollection.Add(sensorPlot);
+                            sensorPlot.TimeStamp = DateTime.Now.AddHours(5);
+                            sensorPlot.CurrentValue = 84;
                             SensorPlotCollection.Add(sensorPlot);
+                            sensorPlot.TimeStamp = DateTime.Now.AddHours(6);
+                            sensorPlot.CurrentValue = 94;
                             SensorPlotCollection.Add(sensorPlot);
                             SensorPlotCollection.Add(sensorPlot);
                             SensorPlotCollection.Add(sensorPlot);
@@ -935,7 +945,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                                 {
                                     // Plot time
                                     sensorPlot.UnixTimeStamp = splitSensorValues[i].SafeHexToInt();
-                                    //sensorPlot.TimeStamp = sensorPlot.UnixTimeStamp.UnixTimeStampToDateTime();
+                                    sensorPlot.TimeStamp = sensorPlot.UnixTimeStamp.UnixTimeStampToDateTime();
                                     plotTime = false;
 
                                     //_userDialogs.Alert($"(J) sensorPlot.TimeStamp: {sensorPlot.TimeStamp}", "CIMScan RemoteManager");
@@ -1006,7 +1016,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             catch (Exception ex)
             {
                 HockeyApp.MetricsManager.TrackEvent($"(SerializeStringToSensor) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
-                Application.Current.MainPage.DisplayAlert("CIMScan", $"(Error :: Message: {ex.Message}; sensorValues: {sensorValues}", "Cancel");
+                Application.Current.MainPage.DisplayAlert("CIMScan", splitSensorValues.ToString(), "Cancel");
                 //_userDialogs.Alert($"(SerializeStringToSensor) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
             }
 

@@ -1,6 +1,7 @@
 ﻿<pages:BaseTabbedPage x:Class="CIM.RemoteManager.Core.Pages.SensorDetailsPage"
                       xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                       xmlns:pages="clr-namespace:CIM.RemoteManager.Core.Pages;assembly=CIM.RemoteManager.Core" xmlns:xForms="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms"
+                      xmlns:chart="clr-namespace:Telerik.XamarinForms.Chart;assembly=Telerik.XamarinForms.Chart"
                       BackgroundColor="#EEEEEE">
 
     <pages:BasePage Title="Sensor Plot" Padding="0" BackgroundColor="#EEEEEE" Icon="ic_sensor-plot.png">
@@ -48,43 +49,24 @@
             </Grid>
 
             <!-- Chart Control -->
-            <xForms:SfChart Grid.Row="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" MinimumHeightRequest="300" MinimumWidthRequest="200">
-
-                <xForms:SfChart.PrimaryAxis>
-
-                    <xForms:CategoryAxis>
-
-                        <xForms:CategoryAxis.Title>
-
-                            <xForms:ChartAxisTitle Text="Time" />
-
-                        </xForms:CategoryAxis.Title>
-
-                    </xForms:CategoryAxis>
-
-                </xForms:SfChart.PrimaryAxis>
-
-                <xForms:SfChart.SecondaryAxis>
-
-                    <xForms:NumericalAxis>
-
-                        <xForms:NumericalAxis.Title>
-
-                            <xForms:ChartAxisTitle Text="Value" />
-
-                        </xForms:NumericalAxis.Title>
-
-                    </xForms:NumericalAxis>
-
-                </xForms:SfChart.SecondaryAxis>
-
-                <xForms:SfChart.Series>
-
-                    <xForms:ColumnSeries ItemsSource="{Binding SensorPlotCollection}" />
-
-                </xForms:SfChart.Series>
-
-            </xForms:SfChart>
+            <chart:RadCartesianChart Grid.Row="1" SelectionPaletteName="LightSelected">
+                <chart:RadCartesianChart.HorizontalAxis>
+                    <chart:DateTimeContinuousAxis LabelFormat="HH" GapLength="0.5" PlotMode="BetweenTicks" MajorStepUnit="Hour" MajorStep="2" />
+                </chart:RadCartesianChart.HorizontalAxis>
+                <chart:RadCartesianChart.VerticalAxis>
+                    <chart:NumericalAxis/>
+                </chart:RadCartesianChart.VerticalAxis>
+                <chart:RadCartesianChart.Series>
+                    <chart:BarSeries ItemsSource="{Binding SensorPlotCollection}">
+                        <chart:BarSeries.ValueBinding>
+                            <chart:PropertyNameDataPointBinding PropertyName="CurrentValue"/>
+                        </chart:BarSeries.ValueBinding>
+                        <chart:BarSeries.CategoryBinding>
+                            <chart:PropertyNameDataPointBinding PropertyName="Timestamp"/>
+                        </chart:BarSeries.CategoryBinding>
+                    </chart:BarSeries>
+                </chart:RadCartesianChart.Series>
+            </chart:RadCartesianChart>
 
             <!-- Margin: left, top, right, bottom -->
             <StackLayout Grid.Row="2"
