@@ -31,6 +31,11 @@
             </Grid>
         </StackLayout>
 
+        <pages:BasePage.ToolbarItems>
+            <ToolbarItem Name="ToolbarItemRefreshSensorData"
+                         Command="RefreshSensorDataCommand" Icon="ic_refresh-sensordata.png" Order="Primary" Priority="0" Text="" />
+        </pages:BasePage.ToolbarItems>
+
         <!-- Margin: left, top, right, bottom -->
         <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent">
             <Grid.RowDefinitions>
@@ -89,16 +94,16 @@
                     </xForms:CategoryAxis>
                 </xForms:SfChart.PrimaryAxis>
                 <xForms:SfChart.SecondaryAxis>
-                    <xForms:NumericalAxis PlotOffset="100">
+                    <xForms:NumericalAxis AutoScrollingMode="Start" PlotOffset="100">
                         <xForms:NumericalAxis.Title>
                             <xForms:ChartAxisTitle Text="{Binding ChartValueTitle}" />
                         </xForms:NumericalAxis.Title>
                     </xForms:NumericalAxis>
                 </xForms:SfChart.SecondaryAxis>
                 <xForms:SfChart.Series>
-                    <xForms:FastLineSeries AnimationDuration="3"
+                    <xForms:FastLineSeries AnimationDuration="5"
                                            DataMarker="{Binding CurrentValue}"
-                                           EnableAnimation="True"
+                                           EnableAnimation="True" EnableTooltip="True"
                                            ItemsSource="{Binding SensorPlotCollection}"
                                            Opacity=".8" ShowTrackballInfo="True" />
                 </xForms:SfChart.Series>

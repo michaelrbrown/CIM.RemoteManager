@@ -979,7 +979,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                             ProcessingPlotData = false;
 
                             // Refresh plot data after we wrap up this plot charting
-                            await RefreshPlotData();
+                            //await RefreshPlotData();
                         break;
                     case "H":
                         //_userDialogs.Alert($"(H) Statistics Data: {sensorValues}", "CIMScan RemoteManager");
@@ -1106,7 +1106,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         private async Task RefreshPlotData()
         {
             // Wait a couple seconds before we fire off another request for plot data
-            await Task.Delay(5000).ConfigureAwait(true);
+            //await Task.Delay(5000).ConfigureAwait(true);
             if (!ProcessingPlotData)
             {
                 // Plot 10 points
@@ -1116,10 +1116,10 @@ namespace CIM.RemoteManager.Core.ViewModels
                 await TxCharacteristic.WriteAsync(updateValue.StrToByteArray()).ConfigureAwait(true);
 
                 // Show refreshing of chart via toast
-                _userDialogs.InfoToast("Refreshing chart...", TimeSpan.FromSeconds(1));
+                _userDialogs.InfoToast("Refreshing chart (100 points)...", TimeSpan.FromSeconds(1));
             }
             // Wait a couple seconds before we fire off another request for plot data
-            await Task.Delay(5000).ConfigureAwait(true);
+            //await Task.Delay(1000).ConfigureAwait(true);
             //await RefreshPlotData();
         }
 
@@ -1215,17 +1215,18 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// <summary>
         /// Refresh sensor data.
         /// </summary>
-        public MvxCommand RefreshSensorDataCommand => new MvxCommand(() =>
+        public MvxCommand RefreshSensorDataCommand => new MvxCommand(async () =>
         {
-            if (!UpdatesStarted)
-            {
-                StartUpdates();
-            }
-            else
-            {
-                StopUpdates();
-                StartUpdates();
-            }
+            await RefreshPlotData();
+            //if (!UpdatesStarted)
+            //{
+            //    StartUpdates();
+            //}
+            //else
+            //{
+            //    StopUpdates();
+            //    StartUpdates();
+            //}
         });
 
         /// <summary>
