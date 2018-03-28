@@ -49,7 +49,7 @@
                            VerticalOptions="Center" HorizontalOptions="Center"
                            FontSize="18"
                            Text="{Binding SensorNameAndIndex}"
-                           TextColor="#FFFFFF" />
+                           TextColor="{DynamicResource HeaderTextColor}" />
                 </StackLayout>
             </Grid>
 
@@ -58,21 +58,15 @@
                 <xForms:SfChart.ColorModel>
                     <xForms:ChartColorModel CustomBrushes="{StaticResource Colors}" Palette="Custom" />
                 </xForms:SfChart.ColorModel>
+
                 <xForms:SfChart.PrimaryAxis>
-                    <xForms:CategoryAxis>
-                        <xForms:CategoryAxis.Title>
-                            <xForms:ChartAxisTitle Text="Time" />
-                        </xForms:CategoryAxis.Title>
-                    </xForms:CategoryAxis>
+                    <xForms:DateTimeAxis x:Name="XAxis" Title="Time"
+                                         AutoScrollingMode="Start" Interval="4" IntervalType="Seconds" PlotOffset="10" ShowTrackBallInfo="True" />
                 </xForms:SfChart.PrimaryAxis>
                 <xForms:SfChart.SecondaryAxis>
-                    <xForms:NumericalAxis>
-                        <xForms:NumericalAxis.Title>
-                            <xForms:ChartAxisTitle Text="Value" />
-                        </xForms:NumericalAxis.Title>
-                    </xForms:NumericalAxis>
+                    <xForms:NumericalAxis Title="Value" PlotOffset="10" />
                 </xForms:SfChart.SecondaryAxis>
-                <xForms:FastLineSeries ItemsSource="{Binding SensorPlotCollection}" XBindingPath="Value" YBindingPath="Time" />
+                <xForms:FastLineSeries AnimationDuration="1" EnableAnimation="True" ItemsSource="{Binding SensorPlotCollection}" XBindingPath="CurrentValue" YBindingPath="TimeStamp" />
             </xForms:SfChart>
 
             <!-- Margin: left, top, right, bottom -->
@@ -114,7 +108,7 @@
                                VerticalOptions="Center" HorizontalOptions="Center"
                                FontSize="18"
                                Text="{Binding SensorNameAndIndex}"
-                               TextColor="#FFFFFF" />
+                               TextColor="{DynamicResource HeaderTextColor}" />
                     </StackLayout>
                 </Grid>
 
@@ -215,7 +209,7 @@
                                VerticalOptions="Center" HorizontalOptions="Center"
                                FontSize="18"
                                Text="{Binding SensorNameAndIndex}"
-                               TextColor="#FFFFFF" />
+                               TextColor="{DynamicResource HeaderTextColor}" />
                     </StackLayout>
                 </Grid>
 
@@ -311,7 +305,7 @@
                                VerticalOptions="Center" HorizontalOptions="Center"
                                FontSize="18"
                                Text="{Binding SensorNameAndIndex}"
-                               TextColor="#FFFFFF" />
+                               TextColor="{DynamicResource HeaderTextColor}" />
                     </StackLayout>
                 </Grid>
 

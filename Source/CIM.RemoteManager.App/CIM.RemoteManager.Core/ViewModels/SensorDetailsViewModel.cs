@@ -1015,6 +1015,8 @@ namespace CIM.RemoteManager.Core.ViewModels
             catch (Exception ex)
             {
                 HockeyApp.MetricsManager.TrackEvent($"(SerializeStringToSensor) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
+                // Show refreshing of chart via toast
+                _userDialogs.InfoToast($"(SerializeStringToSensor) Message: {ex.Message};", TimeSpan.FromSeconds(4));
                 //await Application.Current.MainPage.DisplayAlert("CIMScan", splitSensorValues.ToString(), "Cancel");
                 //_userDialogs.Alert($"(SerializeStringToSensor) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
             }
@@ -1062,21 +1064,28 @@ namespace CIM.RemoteManager.Core.ViewModels
                 //if (SensorCommandType == SensorCommand.Plot)
                 //{
                     await GetSensorPlotValuesAsync(CharacteristicValue);
+                // Notify property changed
+                RaisePropertyChanged(() => CharacteristicValue);
                 //}
                 //else if (SensorCommandType == SensorCommand.Statistics || SensorCommandType == SensorCommand.Limits)
                 //{
-                    await GetSensorStatisticsValuesAsync(CharacteristicValue);
-                    await GetSensorLimitsValuesAsync(CharacteristicValue);
+                await GetSensorStatisticsValuesAsync(CharacteristicValue);
+                // Notify property changed
+                RaisePropertyChanged(() => CharacteristicValue);
+                await GetSensorLimitsValuesAsync(CharacteristicValue);
+                // Notify property changed
+                RaisePropertyChanged(() => CharacteristicValue);
                 //}
 
                 // Get unfiltered (current) sensor values
                 await GetUnfilteredSensorValuesAsync(CharacteristicValue);
+                // Notify property changed
+                RaisePropertyChanged(() => CharacteristicValue);
                 // Get message counter values from remote to determine if
                 // we have acquired or lost sensors.  Also grabs time stamp.
                 //GetMessageCounterValues(CharacteristicValue);
-
                 // Notify property changed
-                RaisePropertyChanged(() => CharacteristicValue);
+                //RaisePropertyChanged(() => CharacteristicValue);
             }
             catch (Exception ex)
             {
