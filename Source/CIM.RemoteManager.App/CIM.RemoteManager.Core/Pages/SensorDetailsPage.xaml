@@ -6,14 +6,19 @@
     <pages:BaseTabbedPage.Resources>
         <ResourceDictionary>
             <xForms:ChartColorCollection x:Key="Colors">
-                <Color>#0097DF</Color>
                 <Color>#546e7a</Color>
+                <Color>#0097DF</Color>
                 <Color>#FFFFC926</Color>
                 <Color>#43a047</Color>
                 <Color>#88FFFFFF</Color>
             </xForms:ChartColorCollection>
         </ResourceDictionary>
     </pages:BaseTabbedPage.Resources>
+
+    <pages:BaseTabbedPage.ToolbarItems>
+        <ToolbarItem Name="ToolbarItemRefreshSensorData"
+                     Command="RefreshSensorDataCommand" Icon="ic_refresh-sensordata.png" Order="Primary" Priority="0" Text="" />
+    </pages:BaseTabbedPage.ToolbarItems>
 
     <pages:BasePage Title="Sensor Plot" Padding="0" BackgroundColor="#FFFFFF" Icon="ic_sensor-plot.png">
 
@@ -96,7 +101,11 @@
                     </xForms:NumericalAxis>
                 </xForms:SfChart.SecondaryAxis>
                 <xForms:SfChart.Series>
-                    <xForms:FastLineSeries ItemsSource="{Binding SensorPlotCollection}" />
+                    <xForms:FastLineSeries AnimationDuration="3"
+                                           DataMarker="{Binding CurrentValue}"
+                                           EnableAnimation="True"
+                                           ItemsSource="{Binding SensorPlotCollection}"
+                                           Opacity=".8" ShowTrackballInfo="True" />
                 </xForms:SfChart.Series>
             </xForms:SfChart>
 

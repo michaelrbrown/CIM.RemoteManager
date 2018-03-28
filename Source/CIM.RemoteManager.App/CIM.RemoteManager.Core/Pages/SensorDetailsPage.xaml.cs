@@ -19,38 +19,16 @@ namespace CIM.RemoteManager.Core.Pages
             // Set binding context to viewmodel
             BindingContext = this;
 
-            // Get instance of sensor details viewmodel
-            var sensorDetailsViewModel = this.BindingContext as SensorDetailsViewModel;
-
-            //SensorPlotChart.BindingContext = sensorDetailsViewModel;
-
-            // Add device settings toolbar icon and handle selection
-            ToolbarItems.Add(new ToolbarItem("Refresh Sensor Data", "ic_refresh-sensordata.png", () =>
-            {
-                // Validate
-                if (sensorDetailsViewModel != null)
-                {
-                    // Refresh sensor data
-                    sensorDetailsViewModel.StopUpdatesCommand.Execute();
-                    sensorDetailsViewModel.StartUpdatesCommand.Execute();
-                }
-            }, ToolbarItemOrder.Primary, 0));
-
             // Set current paged changed event to handle sensor update types
             this.CurrentPageChanged += CurrentPageHasChanged;
 
-            //var sensorDetailsViewModel = this.BindingContext as SensorDetailsViewModel;
-            //// Validate
-            //if (sensorDetailsViewModel != null)
-            //{
-            //    sensorDetailsViewModel.SensorCommandType = SensorDetailsViewModel.SensorCommand.Plot;
-            //    sensorDetailsViewModel.StopUpdatesCommand.Execute();
-            //    sensorDetailsViewModel.StartUpdatesCommand.Execute();
-
-            //}
-
-
-
+            // Send plot command and start logging data
+            if (this.BindingContext is SensorDetailsViewModel sensorDetailsViewModel)
+            {
+                sensorDetailsViewModel.SensorCommandType = SensorDetailsViewModel.SensorCommand.Plot;
+                sensorDetailsViewModel.StopUpdatesCommand.Execute();
+                sensorDetailsViewModel.StartUpdatesCommand.Execute();
+            }
         }
 
         /// <summary>
@@ -69,8 +47,6 @@ namespace CIM.RemoteManager.Core.Pages
                 {
                     // Set sensor command type to pull Statistics Characteristics
                     sensorDetailsViewModel.SensorCommandType = SensorDetailsViewModel.SensorCommand.Statistics;
-                    //sensorDetailsViewModel.StopUpdatesCommand.Execute();
-                    //sensorDetailsViewModel.StartUpdatesCommand.Execute();
                 }
             }
             if (this.CurrentPage.Title == "Sensor Limits")
@@ -83,8 +59,6 @@ namespace CIM.RemoteManager.Core.Pages
                 {
                     // Set sensor command type to pull Statistics Characteristics
                     sensorDetailsViewModel.SensorCommandType = SensorDetailsViewModel.SensorCommand.Limits;
-                    //sensorDetailsViewModel.StopUpdatesCommand.Execute();
-                    //sensorDetailsViewModel.StartUpdatesCommand.Execute();
                 }
             }
             else
@@ -111,19 +85,6 @@ namespace CIM.RemoteManager.Core.Pages
         private void CurrentPageHasChanged(object sender, EventArgs e)
         {
             this.Title = this.CurrentPage.Title;
-        }
-
-        /// <summary>
-        /// Handle toggling of sensor updates
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void SensorUpdatesSwitchToggled(object sender, ToggledEventArgs e)
-        {
-            // Get instance of SensorPlotViewModel
-            var sensorDetailsViewModel = (SensorDetailsViewModel)this.BindingContext;
-            // Toggle sensor updates
-            sensorDetailsViewModel.ToggleUpdatesCommand.Execute(null);
         }
 
         /// <summary>

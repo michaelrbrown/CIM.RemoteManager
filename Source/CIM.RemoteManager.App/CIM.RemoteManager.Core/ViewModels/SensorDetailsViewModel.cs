@@ -1206,6 +1206,22 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
+        /// Refresh sensor data.
+        /// </summary>
+        public MvxCommand RefreshSensorDataCommand => new MvxCommand(() =>
+        {
+            if (!UpdatesStarted)
+            {
+                StartUpdates();
+            }
+            else
+            {
+                StopUpdates();
+                StartUpdates();
+            }
+        });
+
+        /// <summary>
         /// Start sensor updates.
         /// </summary>
         public MvxCommand StartUpdatesCommand => new MvxCommand(() =>
