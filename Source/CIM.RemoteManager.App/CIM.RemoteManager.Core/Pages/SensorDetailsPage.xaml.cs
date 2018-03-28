@@ -25,7 +25,7 @@ namespace CIM.RemoteManager.Core.Pages
             //SensorPlotChart.BindingContext = sensorDetailsViewModel;
 
             // Add device settings toolbar icon and handle selection
-            ToolbarItems.Add(new ToolbarItem("Refresh Sensor Data", "ic_remote-settings.png", () =>
+            ToolbarItems.Add(new ToolbarItem("Refresh Sensor Data", "ic_refresh-sensordata.png", () =>
             {
                 // Validate
                 if (sensorDetailsViewModel != null)
