@@ -18,6 +18,17 @@ namespace CIM.RemoteManager.Core.Pages
 
             // Set current paged changed event to handle sensor update types
             this.CurrentPageChanged += CurrentPageHasChanged;
+        }
+
+        /// <summary>
+        /// When overridden, allows application developers to customize behavior immediately prior to the <see cref="T:Xamarin.Forms.Page" /> becoming visible.
+        /// </summary>
+        /// <remarks>
+        /// Handles our view logic for on appearing life cycle events such as creating today event, moving to current service date, and initializing control defaults.
+        /// </remarks>
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
 
             // Send plot command and start logging data
             if (this.BindingContext is SensorDetailsViewModel sensorDetailsViewModel)

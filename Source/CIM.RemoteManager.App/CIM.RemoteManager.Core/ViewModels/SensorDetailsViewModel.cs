@@ -1619,14 +1619,11 @@ namespace CIM.RemoteManager.Core.ViewModels
                 SensorCommandType = sensorCommandType;
                 // Notify property changed
                 RaisePropertyChanged(() => SensorCommandType);
-
-                // Show complete
-                _userDialogs.InfoToast($"SensorCommandType Set: {SensorCommandType}", TimeSpan.FromSeconds(2));
             }
             catch (Exception ex)
             {
                 HockeyApp.MetricsManager.TrackEvent($"(SaveSensorCalibrationData) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
-                _userDialogs.Alert($"(SaveSensorCalibrationData) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
+                //_userDialogs.Alert($"(SaveSensorCalibrationData) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
             }
         }
 
