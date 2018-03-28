@@ -765,7 +765,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 if (characteristicValue.Contains("}"))
                 {
                     BufferedSensorValue.Append(characteristicValue);
-                    await SerializeStringToSensorAsync(BufferedSensorValue.ToString());
+                    await SerializeStringToSensorAsync(BufferedSensorValue.ToString(), string.Empty);
                     BufferedSensorValue.Clear();
                     StartSensorBufferedValueRecord = false;
                 }
@@ -782,7 +782,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 if (characteristicValue.Contains("}"))
                 {
                     BufferedSensorValue.Append(characteristicValue.GetUntilOrEmpty());
-                    await SerializeStringToSensorAsync(BufferedSensorValue.ToString());
+                    await SerializeStringToSensorAsync(BufferedSensorValue.ToString(), string.Empty);
                     BufferedSensorValue.Clear();
                     StartSensorBufferedValueRecord = false;
                 }
@@ -809,7 +809,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 if (characteristicValue.Contains("}"))
                 {
                     StatisticsSensorValue.Append(characteristicValue);
-                    await SerializeStringToSensorAsync(StatisticsSensorValue.ToString());
+                    await SerializeStringToSensorAsync(StatisticsSensorValue.ToString(), string.Empty);
                     StatisticsSensorValue.Clear();
                     StartSensorStatisticsValueRecord = false;
                 }
@@ -826,7 +826,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 if (characteristicValue.Contains("}"))
                 {
                     StatisticsSensorValue.Append(characteristicValue.GetUntilOrEmpty());
-                    await SerializeStringToSensorAsync(StatisticsSensorValue.ToString());
+                    await SerializeStringToSensorAsync(StatisticsSensorValue.ToString(), string.Empty);
                     StatisticsSensorValue.Clear();
                     StartSensorStatisticsValueRecord = false;
                 }
@@ -853,7 +853,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 if (characteristicValue.Contains("}"))
                 {
                     StatisticsSensorValue.Append(characteristicValue);
-                    await SerializeStringToSensorAsync(StatisticsSensorValue.ToString());
+                    await SerializeStringToSensorAsync(StatisticsSensorValue.ToString(), string.Empty);
                     StatisticsSensorValue.Clear();
                     StartSensorLimitValueRecord = false;
                 }
@@ -870,7 +870,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 if (characteristicValue.Contains("}"))
                 {
                     StatisticsSensorValue.Append(characteristicValue.GetUntilOrEmpty());
-                    await SerializeStringToSensorAsync(StatisticsSensorValue.ToString());
+                    await SerializeStringToSensorAsync(StatisticsSensorValue.ToString(), string.Empty);
                     StatisticsSensorValue.Clear();
                     StartSensorLimitValueRecord = false;
                 }
@@ -894,7 +894,11 @@ namespace CIM.RemoteManager.Core.ViewModels
 
             try
             {
-                await Application.Current.MainPage.DisplayAlert("CIMScan", $"conversionType: {conversionType}", "Cancel");
+                if (string.Equals(conversionType, "F"))
+                {
+                    await Application.Current.MainPage.DisplayAlert("CIMScan", $"conversionType: {conversionType}", "Cancel");
+
+                }
 
                 switch (conversionType)
                 {
