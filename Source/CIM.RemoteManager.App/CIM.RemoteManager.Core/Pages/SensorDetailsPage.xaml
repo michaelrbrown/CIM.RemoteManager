@@ -39,15 +39,15 @@
                 <RowDefinition Height="50" />
             </Grid.RowDefinitions>
 
-            <!-- Margin: left, top, right, bottom -->
+            <!-- Sensor Name and Serial Number -->
             <Grid Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
                 <StackLayout Margin="0"
                              VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
                              BackgroundColor="{DynamicResource HeaderBackgroundColor}"
                              HeightRequest="50" Orientation="Horizontal">
                     <Label Margin="10"
-                           VerticalOptions="Center" HorizontalOptions="Center"
-                           FontSize="18"
+                           VerticalOptions="Center" HorizontalOptions="CenterAndExpand"
+                           FontSize="18" HorizontalTextAlignment="Center"
                            Text="{Binding SensorNameAndIndex}"
                            TextColor="{DynamicResource HeaderTextColor}" />
                 </StackLayout>
@@ -98,15 +98,15 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
-                <!-- Margin: left, top, right, bottom -->
+                <!-- Sensor Name and Serial Number -->
                 <Grid Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
                     <StackLayout Margin="0"
                                  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
                                  BackgroundColor="{DynamicResource HeaderBackgroundColor}"
                                  HeightRequest="50" Orientation="Horizontal">
                         <Label Margin="10"
-                               VerticalOptions="Center" HorizontalOptions="Center"
-                               FontSize="18"
+                               VerticalOptions="Center" HorizontalOptions="CenterAndExpand"
+                               FontSize="18" HorizontalTextAlignment="Center"
                                Text="{Binding SensorNameAndIndex}"
                                TextColor="{DynamicResource HeaderTextColor}" />
                     </StackLayout>
@@ -199,15 +199,15 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
-                <!-- Margin: left, top, right, bottom -->
+                <!-- Sensor Name and Serial Number -->
                 <Grid Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
                     <StackLayout Margin="0"
                                  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
                                  BackgroundColor="{DynamicResource HeaderBackgroundColor}"
                                  HeightRequest="50" Orientation="Horizontal">
                         <Label Margin="10"
-                               VerticalOptions="Center" HorizontalOptions="Center"
-                               FontSize="18"
+                               VerticalOptions="Center" HorizontalOptions="CenterAndExpand"
+                               FontSize="18" HorizontalTextAlignment="Center"
                                Text="{Binding SensorNameAndIndex}"
                                TextColor="{DynamicResource HeaderTextColor}" />
                     </StackLayout>
@@ -295,15 +295,15 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
-                <!-- Margin: left, top, right, bottom -->
+                <!-- Sensor Name and Serial Number -->
                 <Grid Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
                     <StackLayout Margin="0"
                                  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
                                  BackgroundColor="{DynamicResource HeaderBackgroundColor}"
                                  HeightRequest="50" Orientation="Horizontal">
                         <Label Margin="10"
-                               VerticalOptions="Center" HorizontalOptions="Center"
-                               FontSize="18"
+                               VerticalOptions="Center" HorizontalOptions="CenterAndExpand"
+                               FontSize="18" HorizontalTextAlignment="Center"
                                Text="{Binding SensorNameAndIndex}"
                                TextColor="{DynamicResource HeaderTextColor}" />
                     </StackLayout>
