@@ -50,16 +50,16 @@
                            VerticalOptions="Center" HorizontalOptions="End"
                            Aspect="AspectFit" HeightRequest="40"
                            Source="{Binding SensorImage}" />
-                    <StackLayout Margin="0"
+                    <StackLayout Margin="0,10,5,10"
                                  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
                                  BackgroundColor="{DynamicResource HeaderBackgroundColor}"
                                  HeightRequest="50" Orientation="Vertical">
-                        <Label Margin="5,0,0,5"
+                        <Label Margin="5,0,0,0"
                                VerticalOptions="Center" HorizontalOptions="Start"
                                FontSize="18" HorizontalTextAlignment="Center"
                                Text="{Binding SensorNameAndIndex}"
                                TextColor="{DynamicResource HeaderTextColor}" />
-                        <Label Margin="5,0,0,5"
+                        <Label Margin="5,5,0,0"
                                VerticalOptions="Center" HorizontalOptions="Start"
                                FontSize="12" HorizontalTextAlignment="Center"
                                Text="{Binding SensorSerialNumber}"
@@ -69,22 +69,27 @@
             </Grid>
 
             <!-- Chart Control -->
-            <xForms:SfChart Grid.Row="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent">
+            <xForms:SfChart Grid.Row="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
                 <xForms:SfChart.ColorModel>
                     <xForms:ChartColorModel CustomBrushes="{StaticResource Colors}" Palette="Custom" />
                 </xForms:SfChart.ColorModel>
-
                 <xForms:SfChart.PrimaryAxis>
-                    <xForms:DateTimeAxis x:Name="XAxis" Title="Time" PlotOffset="10">
-                        <xForms:DateTimeAxis.LabelStyle>
-                            <xForms:ChartAxisLabelStyle LabelFormat="hh:mm:ss" />
-                        </xForms:DateTimeAxis.LabelStyle>
-                    </xForms:DateTimeAxis>
+                    <xForms:CategoryAxis>
+                        <xForms:CategoryAxis.Title>
+                            <xForms:ChartAxisTitle Text="Time" />
+                        </xForms:CategoryAxis.Title>
+                    </xForms:CategoryAxis>
                 </xForms:SfChart.PrimaryAxis>
                 <xForms:SfChart.SecondaryAxis>
-                    <xForms:NumericalAxis Title="Value" PlotOffset="10" />
+                    <xForms:NumericalAxis>
+                        <xForms:NumericalAxis.Title>
+                            <xForms:ChartAxisTitle Text="Value" />
+                        </xForms:NumericalAxis.Title>
+                    </xForms:NumericalAxis>
                 </xForms:SfChart.SecondaryAxis>
-                <xForms:FastLineSeries AnimationDuration="1" EnableAnimation="True" ItemsSource="{Binding SensorPlotCollection}" XBindingPath="CurrentValue" YBindingPath="TimeStamp" />
+                <xForms:SfChart.Series>
+                    <xForms:AreaSeries ItemsSource="{Binding SensorPlotCollection}" />
+                </xForms:SfChart.Series>
             </xForms:SfChart>
 
             <!-- Margin: left, top, right, bottom -->
