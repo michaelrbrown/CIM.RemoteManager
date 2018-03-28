@@ -7,6 +7,7 @@ using Acr.UserDialogs;
 using CIM.RemoteManager.Core.Extensions;
 using CIM.RemoteManager.Core.Helpers;
 using CIM.RemoteManager.Core.Models;
+using CIM.RemoteManager.Core.Pages;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
 using Plugin.BLE.Abstractions.Contracts;
@@ -974,6 +975,9 @@ namespace CIM.RemoteManager.Core.ViewModels
 
                             // Release processing
                             ProcessingPlotData = false;
+
+                            // Let the plot know to resume series notifications
+                            MessagingCenter.Send<SensorDetailsViewModel>(this, "Resume");
 
                             // Refresh plot data after we wrap up this plot charting
                             //await RefreshPlotData();

@@ -172,10 +172,16 @@ namespace CIM.RemoteManager.Core.Pages
         /// <remarks>
         /// Calls commands in viewmodel to load more plot data.
         /// </remarks>
-        /// <param name="sender">The source of the event.</param>
+        /// <param name="s">The source of the event.</param>
         /// <param name="e">The <see cref="ValueChangedEventArgs"/> instance containing the event data.</param>
-        private void SegControl_OnValueChanged(object sender, ValueChangedEventArgs e)
+        private void SegControl_OnValueChanged(object s, ValueChangedEventArgs e)
         {
+            SensorPlotChart.SuspendSeriesNotification();
+            MessagingCenter.Subscribe<SensorDetailsPage>(this, "Resume", (sender) => {
+                SensorPlotChart.ResumeSeriesNotification();
+                Application.Current.MainPage.DisplayAlert("CIMScan", "Resumed from Messaging Center", "Cancel");
+            });
+
             // Get binding context of Sensor Details viewmodel
             var sensorDetailsViewModel = (SensorDetailsViewModel)this.BindingContext;
             switch (e.NewValue)
