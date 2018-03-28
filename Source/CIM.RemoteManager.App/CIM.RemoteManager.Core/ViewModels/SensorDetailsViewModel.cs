@@ -977,7 +977,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                             ProcessingPlotData = false;
 
                             // Refresh plot data after we wrap up this plot charting
-                            RefreshPlotData();
+                            await RefreshPlotData();
                         break;
                     case "H":
                         //_userDialogs.Alert($"(H) Statistics Data: {sensorValues}", "CIMScan RemoteManager");
@@ -1101,7 +1101,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// Refreshes the plot data.
         /// </summary>
         /// <returns>Task</returns>
-        private void RefreshPlotData()
+        private async Task RefreshPlotData()
         {
             if (!ProcessingPlotData)
             {
@@ -1109,13 +1109,13 @@ namespace CIM.RemoteManager.Core.ViewModels
                 string updateValue = "{c0" + SensorIndexSelected + "0000000A}";
 
                 // Send the command based on command type set above
-                TxCharacteristic.WriteAsync(updateValue.StrToByteArray()).ConfigureAwait(true);
+                await TxCharacteristic.WriteAsync(updateValue.StrToByteArray()).ConfigureAwait(true);
 
                 // Show refreshing of chart via toast
                 _userDialogs.InfoToast("Refreshing chart...", TimeSpan.FromSeconds(1));
             }
             // Wait a couple seconds before we fire off another request for plot data
-            Task.Delay(5000);
+            await Task.Delay(5000).ConfigureAwait(true);
             //await RefreshPlotData();
         }
 
@@ -1323,33 +1323,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 TxCharacteristic = await _service.GetCharacteristicAsync(TxUuid).ConfigureAwait(true);
 
                 //// Make sure we can write characteristic data to remote
-                if (TxCharacteristic.CanWrite)
-                {
-                    // Setup plot command
-                    //string updateValue = string.Empty;
-                    //if (SensorCommandType == SensorCommand.Plot)
-                    //{
-                        // Plot 10 points
-                        //updateValue = "{c0" + SensorIndexSelected + "0000000A}";
-                    //}
-                    // Send statistics, and limits commands (Y command = refresh all which returns
-                    // limits and statistics data.
-                    //else if (SensorCommandType == SensorCommand.Statistics || SensorCommandType == SensorCommand.Limits)
-                    //{
-                    //updateValue = "{Y}";
-                    //}
-
-                    // TODO: remove after debugging
-                    //_userDialogs.Alert($"Write Command: {updateValue}", "CIMScan Remote Manager");
-
-
-                    //await Application.Current.MainPage.DisplayAlert("J Byte Array to Str: ", updateValue.StrToByteArray().ToString(), "Cancel");
-
-
-                    // Send the command based on command type set above
-                    //await TxCharacteristic.WriteAsync(updateValue.StrToByteArray()).ConfigureAwait(true);
-                }
-                else
+                if (!TxCharacteristic.CanWrite)
                 {
                     _userDialogs.Alert("Cannot write characteristic data to remote!", "CIMScan Remote Manager");
                 }
@@ -1555,11 +1529,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 if (SensorCommandType == SensorCommand.Plot)
                 {
                     // Plot 10 points
-                    updateValue = "{c0" + SensorIndexSelected + "0000000A}";
-                }
-                else if (SensorCommandType == SensorCommand.Statistics || SensorCommandType == SensorCommand.Limits)
-                {
-                    //updateValue = "{Y}";
+                    updateValue = "{c0" + SensorIndexSelected + "00000064}";
                 }
 
                 // Send a refresh command
@@ -1626,7 +1596,6 @@ namespace CIM.RemoteManager.Core.ViewModels
             catch (Exception ex)
             {
                 HockeyApp.MetricsManager.TrackEvent($"(SaveSensorCalibrationData) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
-                //_userDialogs.Alert($"(SaveSensorCalibrationData) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
             }
         }
 
@@ -1647,18 +1616,15 @@ namespace CIM.RemoteManager.Core.ViewModels
                 // Setup sensor scale command
                 string sensorScaleUpdateValue = "{C" +  SensorIndexSelected + "\t" + Convert.ToInt32(SensorScale * 10000) + "}";
 
-                _userDialogs.Alert($"sensorScaleUpdateValue: {sensorScaleUpdateValue}");
-
-                _userDialogs.Alert($"sensorScaleUpdateValue byte: {sensorScaleUpdateValue.StrToByteArray().ToString()}");
-
+                _userDialogs.Alert($"sensorScaleUpdateValue: {Convert.ToInt32(SensorScale * 10000)}");
 
                 // Save scale and offset to remote
                 await TxCharacteristic.WriteAsync(sensorScaleUpdateValue.StrToByteArray()).ConfigureAwait(true);
 
                 // Setup sensor offset command
-                string sensorOffsetUpdateValue = "{D" + SensorIndexSelected + "\t" + SensorOffset + "}";
+                string sensorOffsetUpdateValue = "{D" + SensorIndexSelected + "\t" + Convert.ToInt32(SensorOffset * 10000) + "}";
 
-                //_userDialogs.Alert($"sensorOffsetUpdateValue: {sensorScaleUpdateValue}");
+                _userDialogs.Alert($"sensorOffsetUpdateValue: {Convert.ToInt32(SensorOffset * 10000)}");
 
                 // Save scale and offset to remote
                 await TxCharacteristic.WriteAsync(sensorOffsetUpdateValue.StrToByteArray()).ConfigureAwait(true);
@@ -1670,6 +1636,15 @@ namespace CIM.RemoteManager.Core.ViewModels
                 // Show complete
                 _userDialogs.InfoToast($"Calibration was saved.", TimeSpan.FromSeconds(2));
             }
+            catch (DivideByZeroException divideByZeroException)
+            {
+                UpdatesStarted = false;
+                // Notify property changed
+                RaisePropertyChanged(() => UpdatesStarted);
+
+                HockeyApp.MetricsManager.TrackEvent($"(SaveSensorCalibrationData) Message: {divideByZeroException.Message}; StackTrace: {divideByZeroException.StackTrace}");
+                _userDialogs.Alert($"You cannot divide by zero. Division by zero error!");
+            }
             catch (Exception ex)
             {
                 UpdatesStarted = false;
@@ -1677,7 +1652,6 @@ namespace CIM.RemoteManager.Core.ViewModels
                 RaisePropertyChanged(() => UpdatesStarted);
 
                 HockeyApp.MetricsManager.TrackEvent($"(SaveSensorCalibrationData) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
-                _userDialogs.Alert($"(SaveSensorCalibrationData) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
             }
         }
 

@@ -1,8 +1,8 @@
-﻿<pages:BasePage x:Class="CIM.RemoteManager.Core.Pages.SensorListPage"
+﻿<pages:BasePage Title="Sensors"
+                x:Class="CIM.RemoteManager.Core.Pages.SensorListPage"
                 xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                 xmlns:dataSource="clr-namespace:Syncfusion.DataSource;assembly=Syncfusion.DataSource.Portable" xmlns:pages="clr-namespace:CIM.RemoteManager.Core.Pages;assembly=CIM.RemoteManager.Core" xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
                 xmlns:templates="clr-namespace:CIM.RemoteManager.Core.Templates;assembly=CIM.RemoteManager.Core"
-                Title="Sensors"
                 BackgroundColor="#003366">
 
     <!-- Background -->
