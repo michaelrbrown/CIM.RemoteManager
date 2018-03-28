@@ -966,7 +966,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                                     int sensorPlotCollectionCount = SensorPlotCollection.Count;
                                     if (sensorPlotCollectionCount > 10)
                                     {
-                                        SensorPlotCollection.RemoveAt(0);
+                                        SensorPlotCollection.RemoveAt(sensorPlotCollectionCount);
                                     }
 
                                     // Add plot data to list

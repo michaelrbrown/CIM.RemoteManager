@@ -58,8 +58,8 @@
                            Source="{Binding SensorImage}" />
                     <Label Margin="5,0,5,0"
                            VerticalOptions="Center" HorizontalOptions="Start"
-                           FontSize="30" HorizontalTextAlignment="Center"
-                           Text="{Binding SensorSerialNumber}"
+                           FontSize="34" HorizontalTextAlignment="Center"
+                           Text="{Binding SensorIndexSelected}"
                            TextColor="{DynamicResource HeaderTextColor}" />
                     <StackLayout Margin="0,10,5,10"
                                  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
