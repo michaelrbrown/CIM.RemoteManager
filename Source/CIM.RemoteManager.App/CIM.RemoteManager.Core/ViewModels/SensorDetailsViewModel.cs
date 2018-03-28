@@ -933,6 +933,8 @@ namespace CIM.RemoteManager.Core.ViewModels
                             // Defaults
                             int plotIndex = 1;
                             bool plotTime = true;
+                            // Clear Plot collection
+                            SensorPlotCollection.Clear();
 
                             // Get number of plot points.
                             // Multiply times two since we have to collect time and value.
@@ -1103,10 +1105,12 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// <returns>Task</returns>
         private async Task RefreshPlotData()
         {
+            // Wait a couple seconds before we fire off another request for plot data
+            await Task.Delay(5000).ConfigureAwait(true);
             if (!ProcessingPlotData)
             {
                 // Plot 10 points
-                string updateValue = "{c0" + SensorIndexSelected + "0000000A}";
+                string updateValue = "{c0" + SensorIndexSelected + "00000064}";
 
                 // Send the command based on command type set above
                 await TxCharacteristic.WriteAsync(updateValue.StrToByteArray()).ConfigureAwait(true);
