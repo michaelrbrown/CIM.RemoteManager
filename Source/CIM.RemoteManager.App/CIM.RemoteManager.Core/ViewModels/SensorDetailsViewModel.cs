@@ -958,14 +958,6 @@ namespace CIM.RemoteManager.Core.ViewModels
                                 // Every two iterations add values to chart collection
                                 if ((plotIndex % 2) == 0)
                                 {
-                                    // Keep the data scrolling by removing old data while new
-                                    // data is coming in.
-                                    int sensorPlotCollectionCount = SensorPlotCollection.Count;
-                                    if (sensorPlotCollectionCount > 10)
-                                    {
-                                        //SensorPlotCollection.RemoveAt(sensorPlotCollectionCount);
-                                    }
-
                                     // Add plot data to list
                                     SensorPlotCollection.Add(new ChartDataPoint(sensorPlot.TimeStamp.ToString("MM/dd hh:mm tt"), sensorPlot.CurrentValue));
                                 }
@@ -977,7 +969,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                             ProcessingPlotData = false;
 
                             // Let the plot know to resume series notifications
-                            MessagingCenter.Send<SensorDetailsViewModel>(this, "Resume");
+                            //MessagingCenter.Send<SensorDetailsViewModel>(this, "Resume");
 
                             // Refresh plot data after we wrap up this plot charting
                             //await RefreshPlotData();
@@ -1281,7 +1273,11 @@ namespace CIM.RemoteManager.Core.ViewModels
         {
             if (!ProcessingPlotData)
             {
+                // Clear Plot collection
+                SensorPlotCollection.Clear();
+                // Start processing flag
                 ProcessingPlotData = true;
+
                 // Plot 50 points
                 string updateValue = "{c0" + SensorIndexSelected + "00000032}";
 
@@ -1302,7 +1298,11 @@ namespace CIM.RemoteManager.Core.ViewModels
         {
             if (!ProcessingPlotData)
             {
+                // Clear Plot collection
+                SensorPlotCollection.Clear();
+                // Start processing flag
                 ProcessingPlotData = true;
+
                 // Plot 100 points
                 string updateValue = "{c0" + SensorIndexSelected + "00000064}";
 
@@ -1323,7 +1323,11 @@ namespace CIM.RemoteManager.Core.ViewModels
         {
             if (!ProcessingPlotData)
             {
+                // Clear Plot collection
+                SensorPlotCollection.Clear();
+                // Start processing flag
                 ProcessingPlotData = true;
+
                 // Plot 200 points
                 string updateValue = "{c0" + SensorIndexSelected + "000000C8}";
 
@@ -1344,7 +1348,11 @@ namespace CIM.RemoteManager.Core.ViewModels
         {
             if (!ProcessingPlotData)
             {
+                // Clear Plot collection
+                SensorPlotCollection.Clear();
+                // Start processing flag
                 ProcessingPlotData = true;
+
                 // Plot 500 points
                 string updateValue = "{c0" + SensorIndexSelected + "000001F4}";
 

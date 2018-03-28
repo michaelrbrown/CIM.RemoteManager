@@ -176,11 +176,11 @@ namespace CIM.RemoteManager.Core.Pages
         /// <param name="e">The <see cref="ValueChangedEventArgs"/> instance containing the event data.</param>
         private void SegControl_OnValueChanged(object s, ValueChangedEventArgs e)
         {
-            SensorPlotChart.SuspendSeriesNotification();
-            MessagingCenter.Subscribe<SensorDetailsPage>(this, "Resume", (sender) => {
-                SensorPlotChart.ResumeSeriesNotification();
-                Application.Current.MainPage.DisplayAlert("CIMScan", "Resumed from Messaging Center", "Cancel");
-            });
+            //SensorPlotChart.SuspendSeriesNotification();
+            //MessagingCenter.Subscribe<SensorDetailsPage>(this, "Resume", (sender) => {
+            //    SensorPlotChart.ResumeSeriesNotification();
+            //    Application.Current.MainPage.DisplayAlert("CIMScan", "Resumed from Messaging Center", "Cancel");
+            //});
 
             // Get binding context of Sensor Details viewmodel
             var sensorDetailsViewModel = (SensorDetailsViewModel)this.BindingContext;

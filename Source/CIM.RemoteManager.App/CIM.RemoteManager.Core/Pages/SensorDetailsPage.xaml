@@ -45,19 +45,19 @@
             <Grid Grid.Row="0"
                   Margin="0"
                   VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
-                  BackgroundColor="{DynamicResource HeaderBackgroundColor}"
+                  BackgroundColor="{StaticResource HeaderBackgroundColor}"
                   HeightRequest="50">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="80" />
+                    <ColumnDefinition Width="60" />
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="80" />
+                    <ColumnDefinition Width="100" />
                 </Grid.ColumnDefinitions>
 
                 <!-- Margin: left, top, right, bottom -->
                 <StackLayout Grid.Column="0"
                              Margin="0"
                              VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
-                             BackgroundColor="{DynamicResource HeaderBackgroundColor}"
+                             BackgroundColor="{StaticResource HeaderBackgroundColor}"
                              HeightRequest="50" Spacing="0">
                     <!-- Sensor Image -->
                     <Image Margin="10,5,0,5"
@@ -69,57 +69,57 @@
                 <StackLayout Grid.Column="1"
                              Margin="0,10,5,10"
                              VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
-                             BackgroundColor="{DynamicResource HeaderBackgroundColor}"
+                             BackgroundColor="{StaticResource HeaderBackgroundColor}"
                              HeightRequest="50" Orientation="Vertical" Spacing="0">
                     <!-- Sensor Name -->
                     <Label Margin="5,0,0,0"
                            VerticalOptions="Center" HorizontalOptions="Start"
                            FontSize="18" HorizontalTextAlignment="Center"
                            Text="{Binding SensorName}"
-                           TextColor="{DynamicResource HeaderTextColor}" />
+                           TextColor="{StaticResource HeaderTextColor}" />
                     <!-- Serial Number -->
                     <Label Margin="5,0,0,0"
                            VerticalOptions="Center" HorizontalOptions="Start"
                            FontSize="12" HorizontalTextAlignment="Center"
                            Text="{Binding SensorSerialNumber}"
-                           TextColor="{DynamicResource HeaderSubTextColor}" />
+                           TextColor="{StaticResource HeaderSubTextColor}" />
                 </StackLayout>
 
                 <StackLayout Grid.Column="2"
                              Margin="0"
                              VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
-                             BackgroundColor="{DynamicResource ButtonBackgroundColor}"
+                             BackgroundColor="{StaticResource ButtonBackgroundColor}"
                              Orientation="Vertical" Spacing="0">
                     <!-- Sensor Index -->
                     <Label Margin="5,5,10,5"
-                           VerticalOptions="Start" HorizontalOptions="Center"
+                           VerticalOptions="Center" HorizontalOptions="Center"
                            FontSize="12" HorizontalTextAlignment="Center" LineBreakMode="NoWrap" Text="Sensor Index"
-                           TextColor="{DynamicResource HeaderTextColor}" />
+                           TextColor="{StaticResource HeaderTextColor}" />
                     <!-- Sensor Index -->
                     <Label Margin="5,5,10,5"
-                           VerticalOptions="End" HorizontalOptions="Center"
+                           VerticalOptions="Center" HorizontalOptions="Center"
                            FontSize="32" HorizontalTextAlignment="Center" LineBreakMode="NoWrap"
                            Text="{Binding SensorIndexSelected}"
-                           TextColor="{DynamicResource HeaderSubTextColor}" />
+                           TextColor="{StaticResource HeaderSubTextColor}" />
                 </StackLayout>
             </Grid>
 
             <!-- Segmented Control -->
             <StackLayout Grid.Row="1"
                          VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
-                         BackgroundColor="{DynamicResource AppLightColor}"
-                         HeightRequest="50" Orientation="Horizontal" Spacing="0">
+                         BackgroundColor="{StaticResource AppLightColor}"
+                         HeightRequest="60" Orientation="Horizontal" Spacing="0">
 
                 <abstractions:SegmentedControl x:Name="SegControl"
-                                               VerticalOptions="Center" HorizontalOptions="CenterAndExpand"
+                                               VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"
                                                SelectedSegment="0"
-                                               TintColor="{DynamicResource EntryBackgroundColor}"
+                                               TintColor="{StaticResource EntryBackgroundColor}"
                                                ValueChanged="SegControl_OnValueChanged">
                     <abstractions:SegmentedControl.Children>
-                        <abstractions:SegmentedControlOption HorizontalOptions="Center" Text="50" WidthRequest="75" />
-                        <abstractions:SegmentedControlOption HorizontalOptions="Center" Text="100" WidthRequest="75" />
-                        <abstractions:SegmentedControlOption HorizontalOptions="Center" Text="200" WidthRequest="75" />
-                        <abstractions:SegmentedControlOption HorizontalOptions="Center" Text="500" WidthRequest="75" />
+                        <abstractions:SegmentedControlOption HorizontalOptions="Center" HeightRequest="60" Text="50" WidthRequest="125" />
+                        <abstractions:SegmentedControlOption HorizontalOptions="Center" HeightRequest="60" Text="100" WidthRequest="125" />
+                        <abstractions:SegmentedControlOption HorizontalOptions="Center" HeightRequest="60" Text="200" WidthRequest="125" />
+                        <abstractions:SegmentedControlOption HorizontalOptions="Center" HeightRequest="60" Text="500" WidthRequest="125" />
                     </abstractions:SegmentedControl.Children>
                 </abstractions:SegmentedControl>
 
@@ -140,16 +140,16 @@
                     <xForms:ChartColorModel CustomBrushes="{StaticResource Colors}" Palette="Custom" />
                 </xForms:SfChart.ColorModel>
                 <xForms:SfChart.PrimaryAxis>
-                    <xForms:CategoryAxis LabelRotationAngle="35" ShowTrackballInfo="True">
+                    <xForms:CategoryAxis LabelPlacement="OnTicks" LabelRotationAngle="90" ShowTrackballInfo="True" TickPosition="Outside">
                         <xForms:CategoryAxis.Title>
-                            <xForms:ChartAxisTitle Text="Time" />
+                            <xForms:ChartAxisTitle Margin="0" FontSize="12" />
                         </xForms:CategoryAxis.Title>
                     </xForms:CategoryAxis>
                 </xForms:SfChart.PrimaryAxis>
                 <xForms:SfChart.SecondaryAxis>
-                    <xForms:NumericalAxis PlotOffset="40">
+                    <xForms:NumericalAxis EdgeLabelsVisibilityMode="AlwaysVisible" PlotOffset="40" ShowTrackballInfo="True" TickPosition="Outside">
                         <xForms:NumericalAxis.Title>
-                            <xForms:ChartAxisTitle Text="{Binding ChartValueTitle}" />
+                            <xForms:ChartAxisTitle FontSize="12" Text="{Binding ChartValueTitle}" />
                         </xForms:NumericalAxis.Title>
                     </xForms:NumericalAxis>
                 </xForms:SfChart.SecondaryAxis>
@@ -158,7 +158,7 @@
                                            DataMarker="{Binding CurrentValue}"
                                            EnableAnimation="True" EnableTooltip="True"
                                            ItemsSource="{Binding SensorPlotCollection}"
-                                           ListenPropertyChange="True" Opacity=".8" ShowTrackballInfo="True" />
+                                           ListenPropertyChange="True" Opacity="1" ShowTrackballInfo="True" />
                 </xForms:SfChart.Series>
             </xForms:SfChart>
 
