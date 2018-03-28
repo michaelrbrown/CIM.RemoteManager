@@ -36,7 +36,7 @@
         <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent">
             <Grid.RowDefinitions>
                 <RowDefinition Height="60" />
-                <RowDefinition Height="80" />
+                <RowDefinition Height="60" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="50" />
             </Grid.RowDefinitions>
@@ -82,7 +82,7 @@
             <StackLayout Grid.Row="1"
                          VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
                          BackgroundColor="{DynamicResource AppLightColor}"
-                         HeightRequest="60" Opacity=".6" Orientation="Horizontal" Spacing="0">
+                         HeightRequest="50" Orientation="Horizontal" Spacing="0">
 
                 <abstractions:SegmentedControl x:Name="SegControl"
                                                VerticalOptions="Center" HorizontalOptions="CenterAndExpand"
@@ -109,7 +109,7 @@
                                      TextColor="{DynamicResource ChartForegroundSemiTransparent}"
                                      ViewBoxHeight="150" ViewBoxWidth="150" />
             <!-- Chart Control -->
-            <xForms:SfChart Grid.Row="2" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <xForms:SfChart x:Name="SensorPlotChart" Grid.Row="2" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
                 <xForms:SfChart.ColorModel>
                     <xForms:ChartColorModel CustomBrushes="{StaticResource Colors}" Palette="Custom" />
                 </xForms:SfChart.ColorModel>
@@ -132,7 +132,7 @@
                                            DataMarker="{Binding CurrentValue}"
                                            EnableAnimation="True" EnableTooltip="True"
                                            ItemsSource="{Binding SensorPlotCollection}"
-                                           Opacity=".8" ShowTrackballInfo="True" />
+                                           ListenPropertyChange="True" Opacity=".8" ShowTrackballInfo="True" />
                 </xForms:SfChart.Series>
             </xForms:SfChart>
 

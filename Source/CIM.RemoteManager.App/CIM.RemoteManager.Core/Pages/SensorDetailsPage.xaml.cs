@@ -166,10 +166,16 @@ namespace CIM.RemoteManager.Core.Pages
             }
         }
 
+        /// <summary>
+        /// Handles the OnValueChanged event of the SegControl control.
+        /// </summary>
+        /// <remarks>
+        /// Calls commands in viewmodel to load more plot data.
+        /// </remarks>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="ValueChangedEventArgs"/> instance containing the event data.</param>
         private void SegControl_OnValueChanged(object sender, ValueChangedEventArgs e)
         {
-            Application.Current.MainPage.DisplayAlert("CIMScan", e.NewValue.ToString(), "Cancel");
-
             // Get binding context of Sensor Details viewmodel
             var sensorDetailsViewModel = (SensorDetailsViewModel)this.BindingContext;
             switch (e.NewValue)
