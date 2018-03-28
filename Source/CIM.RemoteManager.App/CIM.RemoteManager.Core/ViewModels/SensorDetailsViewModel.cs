@@ -887,7 +887,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// </summary>
         /// <param name="sensorValues"></param>
         /// <param name="conversionType"></param>
-        private async Task SerializeStringToSensorAsync(string sensorValues, string conversionType = "")
+        private async Task SerializeStringToSensorAsync(string sensorValues, string conversionType)
         {
             // Split by tab delimiter
             string[] splitSensorValues = sensorValues.Split('\t');
