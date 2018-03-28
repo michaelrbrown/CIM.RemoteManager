@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Acr.UserDialogs;
@@ -113,6 +114,23 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
+        /// Sensor serial number plus index
+        /// </summary>
+        public string SensorSerialNumberAndIndex
+        {
+            get
+            {
+                // Try to lookup hex to string
+                if (!String.IsNullOrEmpty(_sensorIndexSelected))
+                {
+                    return $"{SensorSerialNumber} ({SensorIndexSelected})";
+                }
+                // Default
+                return SensorSerialNumber;
+            }
+        }
+
+        /// <summary>
         /// Gets the sensor image based on the sensor type.
         /// </summary>
         /// <value>
@@ -134,27 +152,27 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
-        /// Sensor
+        /// Chart value title
         /// </summary>
-        public Sensor Sensor { get; set; }
-
-        public enum SensorCommand
+        public string ChartValueTitle
         {
-            Plot,
-            Statistics,
-            Limits,
-            Calibration
-        };
+            get
+            {
+                // Validate
+                if (!string.IsNullOrEmpty(SensorType.GetSensorTypeResult().SensorUnitType))
+                {
+                    // Return a combined sensor group plus unit type (ex. Temperature °C)
+                    return $"{SensorType.GetSensorTypeResult().SensorGroup} {SensorType.GetSensorTypeResult().SensorUnitType}";
+                }
+                // Default
+                return SensorType.GetSensorTypeResult().SensorGroup;
+            }
+        }
 
         /// <summary>
         /// Sensor
         /// </summary>
-        private SensorCommand _sensorCommand;
-        public SensorCommand SensorCommandType
-        {
-            get => _sensorCommand;
-            set => SetProperty(ref _sensorCommand, value);
-        }
+        public Sensor Sensor { get; set; }
 
         /// <summary>
         /// Sensor collection
@@ -912,8 +930,6 @@ namespace CIM.RemoteManager.Core.ViewModels
                             // Start processing
                             ProcessingPlotData = true;
 
-                            //_userDialogs.Alert($"(J) Buffered Data: {sensorValues}", "CIMScan RemoteManager");
-
                             // New instance of sensor plot
                             var sensorPlot = new SensorPlot();
                             // Defaults
@@ -922,9 +938,8 @@ namespace CIM.RemoteManager.Core.ViewModels
 
                             // Get number of plot points.
                             // Multiply times two since we have to collect time and value.
-                            int numberOfPlotPoints = splitSensorValues[0].Substring(1, (splitSensorValues[0].Length - 1)).SafeHexToInt() * 2;
-
-                            //await Application.Current.MainPage.DisplayAlert("CIMScan", $"Number of Plot Points: {numberOfPlotPoints}", "Cancel");
+                            int numberOfPlotPoints =
+                                splitSensorValues[0].Substring(1, (splitSensorValues[0].Length - 1)).SafeHexToInt() * 2;
 
                             // Iterate through plot values and set plot datetime and current value
                             for (int i = 1; i <= numberOfPlotPoints; i++)
@@ -946,9 +961,19 @@ namespace CIM.RemoteManager.Core.ViewModels
                                 // Every two iterations add values to chart collection
                                 if ((plotIndex % 2) == 0)
                                 {
+                                    // Keep the data scrolling by removing old data while new
+                                    // data is coming in.
+                                    int sensorPlotCollectionCount = SensorPlotCollection.Count;
+                                    if (sensorPlotCollectionCount > 10)
+                                    {
+                                        SensorPlotCollection.RemoveAt(0);
+                                    }
+
                                     // Add plot data to list
-                                    SensorPlotCollection.Add(new ChartDataPoint(sensorPlot.TimeStamp.ToString("HH:mm"), sensorPlot.CurrentValue));
+                                    SensorPlotCollection.Add(new ChartDataPoint(sensorPlot.TimeStamp.ToString("HH:mm"),
+                                        sensorPlot.CurrentValue));
                                 }
+
                                 plotIndex++;
                             }
 
@@ -963,6 +988,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                             // Release processing
                             ProcessingPlotData = false;
                         }
+
                         break;
                     case "H":
                         //_userDialogs.Alert($"(H) Statistics Data: {sensorValues}", "CIMScan RemoteManager");
@@ -970,9 +996,12 @@ namespace CIM.RemoteManager.Core.ViewModels
                         //_userDialogs.Alert($"(H) Sensor Index: {splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('H') + 1).SafeConvert<int>(0)}", "CIMScan RemoteManager");
 
                         // Only update the values if we have a match
-                        if (SensorIndexSelected.GetSensorIndexAsInt() == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('H') + 1).SafeConvert<int>(0))
+                        if (SensorIndexSelected.GetSensorIndexAsInt() == splitSensorValues[0]
+                                .Substring(splitSensorValues[0].LastIndexOf('H') + 1).SafeConvert<int>(0))
                         {
-                            _userDialogs.Alert($"(H) Sensor Index: {splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('H') + 1).SafeConvert<int>(0)}", "CIMScan RemoteManager");
+                            _userDialogs.Alert(
+                                $"(H) Sensor Index: {splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('H') + 1).SafeConvert<int>(0)}",
+                                "CIMScan RemoteManager");
 
                             // "H" Sensor data serialization
                             MaximumValue = splitSensorValues[1].SafeHexToDouble();
@@ -985,6 +1014,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                             // Show refreshing of chart via toast
                             _userDialogs.InfoToast("Refreshing Statistics...", TimeSpan.FromSeconds(1));
                         }
+
                         break;
                     case "G":
                         //_userDialogs.Alert($"(G) Limits Data: {sensorValues}", "CIMScan RemoteManager");
@@ -992,9 +1022,12 @@ namespace CIM.RemoteManager.Core.ViewModels
                         //_userDialogs.Alert($"(G) Sensor Index: {splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('G') + 1).SafeConvert<int>(0)}", "CIMScan RemoteManager");
 
                         // Only update the values if we have a match
-                        if (SensorIndexSelected.GetSensorIndexAsInt() == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('G') + 1).SafeConvert<int>(0))
+                        if (SensorIndexSelected.GetSensorIndexAsInt() == splitSensorValues[0]
+                                .Substring(splitSensorValues[0].LastIndexOf('G') + 1).SafeConvert<int>(0))
                         {
-                            _userDialogs.Alert($"(G) Sensor Index: {splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('G') + 1).SafeConvert<int>(0)}", "CIMScan RemoteManager");
+                            _userDialogs.Alert(
+                                $"(G) Sensor Index: {splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('G') + 1).SafeConvert<int>(0)}",
+                                "CIMScan RemoteManager");
 
                             // "G" Sensor data serialization
                             AlarmStatus = splitSensorValues[1].SafeHexToInt();
@@ -1007,13 +1040,15 @@ namespace CIM.RemoteManager.Core.ViewModels
                             // Show refreshing of chart via toast
                             _userDialogs.InfoToast("Refreshing Limits...", TimeSpan.FromSeconds(1));
                         }
+
                         break;
                     case "C":
                         //Application.Current.MainPage.DisplayAlert("C", splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('A') + 1).SafeConvert<int>(0).ToString(), "Cancel");
 
                         // "C" Sensor data serialization
                         // Update Sensor list by index
-                        if (SensorIndexSelected.GetSensorIndexAsInt() == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('C') + 1).SafeConvert<int>(0))
+                        if (SensorIndexSelected.GetSensorIndexAsInt() == splitSensorValues[0]
+                                .Substring(splitSensorValues[0].LastIndexOf('C') + 1).SafeConvert<int>(0))
                         {
                             //Application.Current.MainPage.DisplayAlert("Old value: ", sensorListItem.AverageValue.ToString(), "Cancel");
                             //await Application.Current.MainPage.DisplayAlert("(C) CurrentValue: ", splitSensorValues[1].SafeHexToDouble().ToString(), "Cancel");
@@ -1025,6 +1060,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                             // Show refreshing of chart via toast
                             _userDialogs.InfoToast("Refreshing Settings...", TimeSpan.FromSeconds(1));
                         }
+
                         break;
                     case "F":
                         // "F" Message counter data serialization
@@ -1057,16 +1093,25 @@ namespace CIM.RemoteManager.Core.ViewModels
                         {
 
                         }
+
                         break;
                 }
             }
             catch (Exception ex)
             {
-                HockeyApp.MetricsManager.TrackEvent($"(SerializeStringToSensor) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
+                // Release processing
+                ProcessingPlotData = false;
+                HockeyApp.MetricsManager.TrackEvent(
+                    $"(SerializeStringToSensor) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
                 // Show refreshing of chart via toast
                 //_userDialogs.InfoToast($"(SerializeStringToSensor) Message: {ex.Message};", TimeSpan.FromSeconds(4));
                 //await Application.Current.MainPage.DisplayAlert("CIMScan", splitSensorValues.ToString(), "Cancel");
                 //_userDialogs.Alert($"(SerializeStringToSensor) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
+            }
+            finally
+            {
+                // Release processing
+                ProcessingPlotData = false;
             }
 
         }
@@ -1138,6 +1183,27 @@ namespace CIM.RemoteManager.Core.ViewModels
         #endregion
 
         #region Commands
+
+        /// <summary>
+        /// Command types.
+        /// </summary>
+        public enum SensorCommand
+        {
+            Plot,
+            Statistics,
+            Limits,
+            Calibration
+        };
+
+        /// <summary>
+        /// Sensor command.
+        /// </summary>
+        private SensorCommand _sensorCommand;
+        public SensorCommand SensorCommandType
+        {
+            get => _sensorCommand;
+            set => SetProperty(ref _sensorCommand, value);
+        }
 
         /// <summary>
         /// Start sensor updates.
