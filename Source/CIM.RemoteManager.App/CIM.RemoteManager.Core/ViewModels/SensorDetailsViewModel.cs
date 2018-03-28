@@ -977,7 +977,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                             ProcessingPlotData = false;
 
                             // Refresh plot data after we wrap up this plot charting
-                            await RefreshPlotData();
+                            RefreshPlotData();
                         break;
                     case "H":
                         //_userDialogs.Alert($"(H) Statistics Data: {sensorValues}", "CIMScan RemoteManager");
@@ -1101,7 +1101,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// Refreshes the plot data.
         /// </summary>
         /// <returns>Task</returns>
-        private async Task RefreshPlotData()
+        private void RefreshPlotData()
         {
             if (!ProcessingPlotData)
             {
@@ -1109,13 +1109,13 @@ namespace CIM.RemoteManager.Core.ViewModels
                 string updateValue = "{c0" + SensorIndexSelected + "0000000A}";
 
                 // Send the command based on command type set above
-                await TxCharacteristic.WriteAsync(updateValue.StrToByteArray()).ConfigureAwait(true);
+                TxCharacteristic.WriteAsync(updateValue.StrToByteArray()).ConfigureAwait(true);
 
                 // Show refreshing of chart via toast
                 _userDialogs.InfoToast("Refreshing chart...", TimeSpan.FromSeconds(1));
             }
             // Wait a couple seconds before we fire off another request for plot data
-            await Task.Delay(5000).ConfigureAwait(true);
+            Task.Delay(5000);
             //await RefreshPlotData();
         }
 

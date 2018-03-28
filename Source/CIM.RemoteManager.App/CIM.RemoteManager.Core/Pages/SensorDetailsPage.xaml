@@ -51,9 +51,9 @@
                            VerticalOptions="Center" HorizontalOptions="End"
                            Aspect="AspectFit" HeightRequest="40"
                            Source="{Binding SensorImage}" />
-                    <Label Margin="5,0,5,0"
+                    <Label Margin="5,0,0,0"
                            VerticalOptions="Center" HorizontalOptions="Start"
-                           FontSize="34" HorizontalTextAlignment="Center"
+                           FontSize="36" HorizontalTextAlignment="Center"
                            Text="{Binding SensorIndexSelected}"
                            TextColor="{DynamicResource HeaderTextColor}" />
                     <StackLayout Margin="0,10,5,10"
@@ -89,7 +89,7 @@
                     </xForms:CategoryAxis>
                 </xForms:SfChart.PrimaryAxis>
                 <xForms:SfChart.SecondaryAxis>
-                    <xForms:NumericalAxis PlotOffset="50">
+                    <xForms:NumericalAxis PlotOffset="100">
                         <xForms:NumericalAxis.Title>
                             <xForms:ChartAxisTitle Text="{Binding ChartValueTitle}" />
                         </xForms:NumericalAxis.Title>
@@ -145,7 +145,7 @@
                                VerticalOptions="Center" HorizontalOptions="End"
                                Aspect="AspectFit" HeightRequest="40"
                                Source="{Binding SensorImage}" />
-                        <Label Margin="5,0,5,0"
+                        <Label Margin="5,0,0,0"
                                VerticalOptions="Center" HorizontalOptions="Start"
                                FontSize="34" HorizontalTextAlignment="Center"
                                Text="{Binding SensorIndexSelected}"
@@ -269,7 +269,7 @@
                                VerticalOptions="Center" HorizontalOptions="End"
                                Aspect="AspectFit" HeightRequest="40"
                                Source="{Binding SensorImage}" />
-                        <Label Margin="5,0,5,0"
+                        <Label Margin="5,0,0,0"
                                VerticalOptions="Center" HorizontalOptions="Start"
                                FontSize="34" HorizontalTextAlignment="Center"
                                Text="{Binding SensorIndexSelected}"
@@ -388,7 +388,7 @@
                                VerticalOptions="Center" HorizontalOptions="End"
                                Aspect="AspectFit" HeightRequest="40"
                                Source="{Binding SensorImage}" />
-                        <Label Margin="5,0,5,0"
+                        <Label Margin="5,0,0,0"
                                VerticalOptions="Center" HorizontalOptions="Start"
                                FontSize="34" HorizontalTextAlignment="Center"
                                Text="{Binding SensorIndexSelected}"
