@@ -1610,28 +1610,23 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
-        /// Refreshes plot data recursively.
+        /// Sets the sensor command type.
         /// </summary>
-        private async void RefreshPlotData()
+        public void SetSensorCommandType(SensorCommand sensorCommandType)
         {
             try
             {
-                // Make sure we are done with our initialization before starting updates
-                while (!IsLoading && UpdatesStarted)
-                {
-                    await Task.Delay(5000).ConfigureAwait(true);
-                    // Recursive process until we complete initialization
-                    StartUpdates();
-                }
+                SensorCommandType = sensorCommandType;
+                // Notify property changed
+                RaisePropertyChanged(() => SensorCommandType);
+
+                // Show complete
+                _userDialogs.InfoToast($"SensorCommandType Set: {SensorCommandType}", TimeSpan.FromSeconds(2));
             }
             catch (Exception ex)
             {
-                UpdatesStarted = false;
-                // Notify property changed
-                RaisePropertyChanged(() => UpdatesStarted);
-
-                HockeyApp.MetricsManager.TrackEvent($"(StartUpdates) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
-                _userDialogs.Alert($"(StartUpdates) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
+                HockeyApp.MetricsManager.TrackEvent($"(SaveSensorCalibrationData) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
+                _userDialogs.Alert($"(SaveSensorCalibrationData) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
             }
         }
 

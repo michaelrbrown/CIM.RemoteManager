@@ -1,9 +1,6 @@
 ﻿using System;
-using System.ServiceModel.Dispatcher;
 using CIM.RemoteManager.Core.Helpers;
-using CIM.RemoteManager.Core.Models;
 using CIM.RemoteManager.Core.ViewModels;
-using MvvmCross.Core.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -37,43 +34,19 @@ namespace CIM.RemoteManager.Core.Pages
         /// </summary>
         protected override void OnCurrentPageChanged()
         {
+            // Get binding context of Sensor Details viewmodel
+            var sensorDetailsViewModel = (SensorDetailsViewModel)this.BindingContext;
             if (this.CurrentPage.Title == "Sensor Statistics")
             {
-                // Get binding context of Sensor Details viewmodel
-                var sensorDetailsViewModel = (SensorDetailsViewModel)this.BindingContext;
-
-                // Validate
-                if (sensorDetailsViewModel != null)
-                {
-                    // Set sensor command type to pull Statistics Characteristics
-                    sensorDetailsViewModel.SensorCommandType = SensorDetailsViewModel.SensorCommand.Statistics;
-                }
+                sensorDetailsViewModel?.SetSensorCommandType(SensorDetailsViewModel.SensorCommand.Statistics);
             }
-            if (this.CurrentPage.Title == "Sensor Limits")
+            else if (this.CurrentPage.Title == "Sensor Limits")
             {
-                // Get binding context of Sensor Details viewmodel
-                var sensorDetailsViewModel = (SensorDetailsViewModel)this.BindingContext;
-
-                // Validate
-                if (sensorDetailsViewModel != null)
-                {
-                    // Set sensor command type to pull Statistics Characteristics
-                    sensorDetailsViewModel.SensorCommandType = SensorDetailsViewModel.SensorCommand.Limits;
-                }
+                sensorDetailsViewModel?.SetSensorCommandType(SensorDetailsViewModel.SensorCommand.Limits);
             }
             else
             {
-                // Get binding context of Sensor Details viewmodel
-                var sensorDetailsViewModel = (SensorDetailsViewModel)this.BindingContext;
-
-                // Validate
-                if (sensorDetailsViewModel != null)
-                {
-                    sensorDetailsViewModel.SensorCommandType = SensorDetailsViewModel.SensorCommand.Plot;
-                    sensorDetailsViewModel.StopUpdatesCommand.Execute();
-                    sensorDetailsViewModel.StartUpdatesCommand.Execute();
-
-                }
+                sensorDetailsViewModel?.SetSensorCommandType(SensorDetailsViewModel.SensorCommand.Plot);
             }
         }
 
