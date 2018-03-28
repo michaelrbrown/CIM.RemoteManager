@@ -130,14 +130,30 @@ namespace CIM.RemoteManager.Core.Models
         private double _scale;
         public double Scale
         {
-            get => _scale;
+            get
+            {
+                if (double.TryParse(_scale.ToString(), out double scaleValueResult))
+                {
+                    return scaleValueResult / 10000;
+                }
+                // Default
+                return 0;
+            }
             set => SetProperty(ref _scale, value);
         }
 
         private double _offset;
         public double Offset
         {
-            get => _offset;
+            get
+            {
+                if (double.TryParse(_offset.ToString(), out double offsetValueResult))
+                {
+                    return offsetValueResult / 10000;
+                }
+                // Default
+                return 0;
+            }
             set => SetProperty(ref _offset, value);
         }
 

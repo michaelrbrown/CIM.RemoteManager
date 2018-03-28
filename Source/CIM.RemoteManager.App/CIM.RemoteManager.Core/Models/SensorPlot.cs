@@ -37,7 +37,15 @@ namespace CIM.RemoteManager.Core.Models
         private double _currentValue;
         public double CurrentValue
         {
-            get => _currentValue;
+            get
+            {
+                if (double.TryParse(_currentValue.ToString(), out double currentValueResult))
+                {
+                    return currentValueResult / 10;
+                }
+                // Default
+                return 0;
+            }
             set => SetProperty(ref _currentValue, value);
         }
     }

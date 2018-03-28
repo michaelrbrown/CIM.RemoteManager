@@ -89,7 +89,7 @@
                     </xForms:CategoryAxis>
                 </xForms:SfChart.PrimaryAxis>
                 <xForms:SfChart.SecondaryAxis>
-                    <xForms:NumericalAxis>
+                    <xForms:NumericalAxis PlotOffset="50">
                         <xForms:NumericalAxis.Title>
                             <xForms:ChartAxisTitle Text="{Binding ChartValueTitle}" />
                         </xForms:NumericalAxis.Title>

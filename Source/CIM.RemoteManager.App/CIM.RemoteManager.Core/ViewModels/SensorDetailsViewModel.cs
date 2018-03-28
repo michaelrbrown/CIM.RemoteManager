@@ -925,8 +925,6 @@ namespace CIM.RemoteManager.Core.ViewModels
                 switch (conversionType)
                 {
                     case "J":
-                        if (!ProcessingPlotData)
-                        {
                             // Start processing
                             ProcessingPlotData = true;
 
@@ -938,8 +936,7 @@ namespace CIM.RemoteManager.Core.ViewModels
 
                             // Get number of plot points.
                             // Multiply times two since we have to collect time and value.
-                            int numberOfPlotPoints =
-                                splitSensorValues[0].Substring(1, (splitSensorValues[0].Length - 1)).SafeHexToInt() * 2;
+                            int numberOfPlotPoints = splitSensorValues[0].Substring(1, (splitSensorValues[0].Length - 1)).SafeHexToInt() * 2;
 
                             // Iterate through plot values and set plot datetime and current value
                             for (int i = 1; i <= numberOfPlotPoints; i++)
@@ -966,29 +963,21 @@ namespace CIM.RemoteManager.Core.ViewModels
                                     int sensorPlotCollectionCount = SensorPlotCollection.Count;
                                     if (sensorPlotCollectionCount > 10)
                                     {
-                                        SensorPlotCollection.RemoveAt(sensorPlotCollectionCount);
+                                        //SensorPlotCollection.RemoveAt(sensorPlotCollectionCount);
                                     }
 
                                     // Add plot data to list
-                                    SensorPlotCollection.Add(new ChartDataPoint(sensorPlot.TimeStamp.ToString("HH:mm"),
-                                        sensorPlot.CurrentValue));
+                                    SensorPlotCollection.Add(new ChartDataPoint(sensorPlot.TimeStamp.ToString("HH:mm"), sensorPlot.CurrentValue));
                                 }
 
                                 plotIndex++;
                             }
 
-                            // Wait a couple seconds before we fire off another request for plot data
-                            await Task.Delay(5000).ConfigureAwait(true);
-                            // Plot 10 points
-                            string updateValue = "{c0" + SensorIndexSelected + "0000000A}";
-                            // Send the command based on command type set above
-                            await TxCharacteristic.WriteAsync(updateValue.StrToByteArray()).ConfigureAwait(true);
-                            // Show refreshing of chart via toast
-                            _userDialogs.InfoToast("Refreshing chart...", TimeSpan.FromSeconds(1));
                             // Release processing
                             ProcessingPlotData = false;
-                        }
 
+                            // Refresh plot data after we wrap up this plot charting
+                            await RefreshPlotData();
                         break;
                     case "H":
                         //_userDialogs.Alert($"(H) Statistics Data: {sensorValues}", "CIMScan RemoteManager");
@@ -996,12 +985,9 @@ namespace CIM.RemoteManager.Core.ViewModels
                         //_userDialogs.Alert($"(H) Sensor Index: {splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('H') + 1).SafeConvert<int>(0)}", "CIMScan RemoteManager");
 
                         // Only update the values if we have a match
-                        if (SensorIndexSelected.GetSensorIndexAsInt() == splitSensorValues[0]
-                                .Substring(splitSensorValues[0].LastIndexOf('H') + 1).SafeConvert<int>(0))
+                        if (SensorIndexSelected.GetSensorIndexAsInt() == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('H') + 1).SafeConvert<int>(0))
                         {
-                            _userDialogs.Alert(
-                                $"(H) Sensor Index: {splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('H') + 1).SafeConvert<int>(0)}",
-                                "CIMScan RemoteManager");
+                            //_userDialogs.Alert($"(H) Sensor Index: {splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('H') + 1).SafeConvert<int>(0)}", "CIMScan RemoteManager");
 
                             // "H" Sensor data serialization
                             MaximumValue = splitSensorValues[1].SafeHexToDouble();
@@ -1022,12 +1008,9 @@ namespace CIM.RemoteManager.Core.ViewModels
                         //_userDialogs.Alert($"(G) Sensor Index: {splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('G') + 1).SafeConvert<int>(0)}", "CIMScan RemoteManager");
 
                         // Only update the values if we have a match
-                        if (SensorIndexSelected.GetSensorIndexAsInt() == splitSensorValues[0]
-                                .Substring(splitSensorValues[0].LastIndexOf('G') + 1).SafeConvert<int>(0))
+                        if (SensorIndexSelected.GetSensorIndexAsInt() == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('G') + 1).SafeConvert<int>(0))
                         {
-                            _userDialogs.Alert(
-                                $"(G) Sensor Index: {splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('G') + 1).SafeConvert<int>(0)}",
-                                "CIMScan RemoteManager");
+                            //_userDialogs.Alert($"(G) Sensor Index: {splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('G') + 1).SafeConvert<int>(0)}", "CIMScan RemoteManager");
 
                             // "G" Sensor data serialization
                             AlarmStatus = splitSensorValues[1].SafeHexToInt();
@@ -1047,8 +1030,7 @@ namespace CIM.RemoteManager.Core.ViewModels
 
                         // "C" Sensor data serialization
                         // Update Sensor list by index
-                        if (SensorIndexSelected.GetSensorIndexAsInt() == splitSensorValues[0]
-                                .Substring(splitSensorValues[0].LastIndexOf('C') + 1).SafeConvert<int>(0))
+                        if (SensorIndexSelected.GetSensorIndexAsInt() == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('C') + 1).SafeConvert<int>(0))
                         {
                             //Application.Current.MainPage.DisplayAlert("Old value: ", sensorListItem.AverageValue.ToString(), "Cancel");
                             //await Application.Current.MainPage.DisplayAlert("(C) CurrentValue: ", splitSensorValues[1].SafeHexToDouble().ToString(), "Cancel");
@@ -1101,8 +1083,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             {
                 // Release processing
                 ProcessingPlotData = false;
-                HockeyApp.MetricsManager.TrackEvent(
-                    $"(SerializeStringToSensor) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
+                HockeyApp.MetricsManager.TrackEvent($"(SerializeStringToSensor) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
                 // Show refreshing of chart via toast
                 //_userDialogs.InfoToast($"(SerializeStringToSensor) Message: {ex.Message};", TimeSpan.FromSeconds(4));
                 //await Application.Current.MainPage.DisplayAlert("CIMScan", splitSensorValues.ToString(), "Cancel");
@@ -1114,6 +1095,28 @@ namespace CIM.RemoteManager.Core.ViewModels
                 ProcessingPlotData = false;
             }
 
+        }
+
+        /// <summary>
+        /// Refreshes the plot data.
+        /// </summary>
+        /// <returns>Task</returns>
+        private async Task RefreshPlotData()
+        {
+            if (!ProcessingPlotData)
+            {
+                // Plot 10 points
+                string updateValue = "{c0" + SensorIndexSelected + "0000000A}";
+
+                // Send the command based on command type set above
+                await TxCharacteristic.WriteAsync(updateValue.StrToByteArray()).ConfigureAwait(true);
+
+                // Show refreshing of chart via toast
+                _userDialogs.InfoToast("Refreshing chart...", TimeSpan.FromSeconds(1));
+            }
+            // Wait a couple seconds before we fire off another request for plot data
+            await Task.Delay(5000).ConfigureAwait(true);
+            //await RefreshPlotData();
         }
 
         #endregion

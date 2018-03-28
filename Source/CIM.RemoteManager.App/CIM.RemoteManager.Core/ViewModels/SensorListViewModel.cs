@@ -490,8 +490,8 @@ namespace CIM.RemoteManager.Core.ViewModels
                             sensorListItemA.SerialNumber = splitSensorValues[1];
                             sensorListItemA.Name = splitSensorValues[2];
                             sensorListItemA.SensorType = splitSensorValues[3];
-                            sensorListItemA.Scale = splitSensorValues[4].SafeConvert<double>(0);
-                            sensorListItemA.Offset = splitSensorValues[5].SafeConvert<double>(0);
+                            sensorListItemA.Scale = splitSensorValues[4].SafeHexToDouble();
+                            sensorListItemA.Offset = splitSensorValues[5].SafeHexToDouble();
                             sensorListItemA.TimeStamp = splitSensorValues[6].SafeHexToInt();
                             sensorListItemA.AverageValue = splitSensorValues[7].SafeHexToDouble();
                             sensorListItemA.CurrentValue = splitSensorValues[8].SafeHexToDouble();
@@ -513,8 +513,8 @@ namespace CIM.RemoteManager.Core.ViewModels
                                 SerialNumber = splitSensorValues[1],
                                 Name = splitSensorValues[2],
                                 SensorType = splitSensorValues[3],
-                                Scale = splitSensorValues[4].SafeConvert<double>(0),
-                                Offset = splitSensorValues[5].SafeConvert<double>(0),
+                                Scale = splitSensorValues[4].SafeHexToDouble(),
+                                Offset = splitSensorValues[5].SafeHexToDouble(),
                                 TimeStamp = splitSensorValues[6].SafeHexToInt(),
                                 AverageValue = splitSensorValues[7].SafeHexToDouble(),
                                 CurrentValue = splitSensorValues[8].SafeHexToDouble(),
