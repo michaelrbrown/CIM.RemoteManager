@@ -2,6 +2,7 @@
 
     <Application.Resources>
         <ResourceDictionary>
+            <!-- App Colors -->
             <Color x:Key="BodyTextColor">#444444</Color>
             <Color x:Key="AppBaseColor">#003366</Color>
             <Color x:Key="AppAccentColor">#0097DF</Color>
@@ -11,6 +12,7 @@
             <Color x:Key="AppLightColor">#FFFFFF</Color>
             <Color x:Key="AppDarkColor">#969393</Color>
 
+            <!-- Misc Colors -->
             <Color x:Key="Tag1Color">#FF96C912</Color>
             <Color x:Key="Tag1ColorSemiTransparent">#3396C912</Color>
             <Color x:Key="Tag1ColorLight">#FF96C912</Color>
@@ -21,17 +23,20 @@
             <Color x:Key="Tag3ColorSemiTransparent">#330097DF</Color>
             <Color x:Key="Tag3ColorLight">#FF0097DF</Color>
             <Color x:Key="IndicatorTextColor">#FF3C3C3C</Color>
-            <Color x:Key="ButtonBackgroundColor">#88FFFFFF</Color>
-            <Color x:Key="ButtonTextColor">#222222</Color>
+
+            <!-- Chart Colors -->
             <Color x:Key="ChartForeground">White</Color>
             <Color x:Key="ChartForegroundSemiTransparent">#88FFFFFF</Color>
+
+            <!-- Page Colors -->
             <Color x:Key="HeaderBackgroundColor">#B9DEF5</Color>
             <Color x:Key="HeaderTextColor">#01649D</Color>
             <Color x:Key="HeaderSubTextColor">#546e7a</Color>
+
+            <!-- Sensor Colors -->
             <Color x:Key="RemoteNameBackgroundColor">#0097DE</Color>
             <Color x:Key="CardBackgroundColor">#eceff1</Color>
             <Color x:Key="FooterBackgroundColor">#B9DEF5</Color>
-
             <Color x:Key="NameColor">#01649D</Color>
             <Color x:Key="SensorTypeColor">#546e7a</Color>
             <Color x:Key="TimeStampColor">#546e7a</Color>
@@ -41,8 +46,15 @@
             <Color x:Key="OutlineColor">#eeeeee</Color>
             <Color x:Key="SerialNumberColor">#546e7a</Color>
 
+            <!-- Form Colors -->
+            <Color x:Key="HeadingTextColor">#7778909c</Color>
+            <Color x:Key="LabelTextColor">#7778909c</Color>
+            <Color x:Key="EntryTextColor">#7778909c</Color>
             <Color x:Key="EntryBackgroundColor">#7778909c</Color>
+            <Color x:Key="ButtonBackgroundColor">#88FFFFFF</Color>
+            <Color x:Key="ButtonTextColor">#222222</Color>
 
+            <!-- Sensor List Styles -->
             <Style x:Key="RemoteBackgroundStyle" TargetType="Frame">
                 <Setter Property="WidthRequest" Value="120" />
                 <Setter Property="HeightRequest" Value="120" />
@@ -54,7 +66,7 @@
                 <Setter Property="BackgroundColor" Value="{DynamicResource AppAccentColor}" />
                 <Setter Property="OutlineColor" Value="{DynamicResource OutlineColor}" />
             </Style>
-            !-- Margin: left, top, right, bottom --&gt;
+
             <Style x:Key="CardStyle" TargetType="Grid">
                 <Setter Property="HeightRequest" Value="60" />
                 <Setter Property="Padding" Value="5,10,0,10" />
@@ -128,30 +140,28 @@
                 <Setter Property="FontAttributes" Value="Italic" />
             </Style>
 
+            <!-- Form Styles -->
             <Style x:Key="FormHeadingStyle" TargetType="Label">
                 <Setter Property="FontSize" Value="24" />
-                <Setter Property="TextColor" Value="#444444" />
+                <Setter Property="TextColor" Value="{StaticResource HeadingTextColor}" />
                 <Setter Property="FontAttributes" Value="Bold" />
                 <Setter Property="HorizontalTextAlignment" Value="Center" />
                 <Setter Property="VerticalTextAlignment" Value="Center" />
                 <!-- Margin: left, top, right, bottom -->
                 <Setter Property="Margin" Value="0,8,0,8" />
             </Style>
-
-
             <Style x:Key="FormLabelStyle" TargetType="Label">
                 <Setter Property="FontSize" Value="18" />
-                <Setter Property="TextColor" Value="#444444" />
+                <Setter Property="TextColor" Value="{StaticResource LabelTextColor}" />
                 <Setter Property="FontAttributes" Value="Bold" />
                 <Setter Property="HorizontalTextAlignment" Value="End" />
                 <Setter Property="VerticalTextAlignment" Value="Center" />
                 <!-- Margin: left, top, right, bottom -->
                 <Setter Property="Margin" Value="10,0,2,0" />
             </Style>
-
             <Style x:Key="FormValueStyle" TargetType="Entry">
                 <Setter Property="FontSize" Value="18" />
-                <Setter Property="TextColor" Value="#444444" />
+                <Setter Property="TextColor" Value="{StaticResource EntryTextColor}" />
                 <Setter Property="FontAttributes" Value="Bold" />
                 <Setter Property="HorizontalTextAlignment" Value="Start" />
                 <Setter Property="VerticalOptions" Value="Center" />
@@ -167,17 +177,18 @@
 
             <!-- styles -->
             <Style x:Key="TitleLabel" TargetType="Label">
-                <Setter Property="TextColor" Value="#333333" />
+                <Setter Property="TextColor" Value="{StaticResource HeadingTextColor}" />
                 <Setter Property="FontSize" Value="20" />
             </Style>
 
             <Style x:Key="HandleLabel" TargetType="Label">
-                <Setter Property="TextColor" Value="#777777" />
+                <Setter Property="TextColor" Value="{StaticResource LabelTextColor}" />
                 <Setter Property="FontSize" Value="12" />
             </Style>
 
             <Style x:Key="BodyLabel" TargetType="Label">
-                <Setter Property="TextColor" Value="#777777" />
+                EntryTextColor
+                <Setter Property="TextColor" Value="{StaticResource HeadingTextColor}" />
                 <Setter Property="FontSize" Value="11" />
             </Style>
 
