@@ -3,6 +3,7 @@ using CIM.RemoteManager.Core.Helpers;
 using CIM.RemoteManager.Core.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using ValueChangedEventArgs = SegmentedControl.FormsPlugin.Abstractions.ValueChangedEventArgs;
 
 namespace CIM.RemoteManager.Core.Pages
 {
@@ -165,5 +166,27 @@ namespace CIM.RemoteManager.Core.Pages
             }
         }
 
+        private void SegControl_OnValueChanged(object sender, ValueChangedEventArgs e)
+        {
+            Application.Current.MainPage.DisplayAlert("CIMScan", e.NewValue.ToString(), "Cancel");
+
+            // Get binding context of Sensor Details viewmodel
+            var sensorDetailsViewModel = (SensorDetailsViewModel)this.BindingContext;
+            switch (e.NewValue)
+            {
+                case 0:
+                    sensorDetailsViewModel.LoadMorePlotData1.Execute();
+                    break;
+                case 1:
+                    sensorDetailsViewModel.LoadMorePlotData2.Execute();
+                    break;
+                case 2:
+                    sensorDetailsViewModel.LoadMorePlotData3.Execute();
+                    break;
+                case 3:
+                    sensorDetailsViewModel.LoadMorePlotData4.Execute();
+                    break;
+            }
+        }
     }
 }

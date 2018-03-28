@@ -3,6 +3,7 @@ using HockeyApp.iOS;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.iOS.Platform;
 using MvvmCross.Platform;
+using SegmentedControl.FormsPlugin.iOS;
 using Syncfusion.ListView.XForms.iOS;
 using Syncfusion.SfBusyIndicator.XForms.iOS;
 using Syncfusion.SfChart.XForms.iOS.Renderers;
@@ -32,10 +33,11 @@ namespace CIM.RemoteManager.iOS
             manager.StartManager();
             manager.Authenticator.AuthenticateInstallation(); // This line is obsolete in crash only builds
 
-            // Init Syncfusion controls
+            // Init SyncFusion controls
             new SfChartRenderer();
             new SfBusyIndicatorRenderer();
             SfListViewRenderer.Init();
+            SegmentedControlRenderer.Init();
 
             // Make UIWindow they key window
             _window.MakeKeyAndVisible();

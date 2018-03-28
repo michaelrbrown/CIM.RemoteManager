@@ -1268,6 +1268,90 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// </summary>
         public MvxCommand SaveSensorCalibration => new MvxCommand(SaveSensorCalibrationData);
 
+        /// <summary>
+        /// Load more plot data
+        /// </summary>
+        public MvxCommand LoadMorePlotData1 => new MvxCommand(LoadMorePlotData1Async);
+
+        private async void LoadMorePlotData1Async()
+        {
+            if (!ProcessingPlotData)
+            {
+                ProcessingPlotData = true;
+                // Plot 50 points
+                string updateValue = "{c0" + SensorIndexSelected + "00000032}";
+
+                // Send the command based on command type set above
+                await TxCharacteristic.WriteAsync(updateValue.StrToByteArray()).ConfigureAwait(true);
+
+                // Show refreshing of chart via toast
+                _userDialogs.InfoToast("Refreshing chart (50 points)...", TimeSpan.FromSeconds(1));
+            }
+        }
+
+        /// <summary>
+        /// Load more plot data
+        /// </summary>
+        public MvxCommand LoadMorePlotData2 => new MvxCommand(LoadMorePlotData2Async);
+
+        private async void LoadMorePlotData2Async()
+        {
+            if (!ProcessingPlotData)
+            {
+                ProcessingPlotData = true;
+                // Plot 100 points
+                string updateValue = "{c0" + SensorIndexSelected + "00000064}";
+
+                // Send the command based on command type set above
+                await TxCharacteristic.WriteAsync(updateValue.StrToByteArray()).ConfigureAwait(true);
+
+                // Show refreshing of chart via toast
+                _userDialogs.InfoToast("Refreshing chart (100 points)...", TimeSpan.FromSeconds(1));
+            }
+        }
+
+        /// <summary>
+        /// Load more plot data
+        /// </summary>
+        public MvxCommand LoadMorePlotData3 => new MvxCommand(LoadMorePlotData3Async);
+
+        private async void LoadMorePlotData3Async()
+        {
+            if (!ProcessingPlotData)
+            {
+                ProcessingPlotData = true;
+                // Plot 200 points
+                string updateValue = "{c0" + SensorIndexSelected + "000000C8}";
+
+                // Send the command based on command type set above
+                await TxCharacteristic.WriteAsync(updateValue.StrToByteArray()).ConfigureAwait(true);
+
+                // Show refreshing of chart via toast
+                _userDialogs.InfoToast("Refreshing chart (200 points)...", TimeSpan.FromSeconds(1));
+            }
+        }
+
+        /// <summary>
+        /// Load more plot data
+        /// </summary>
+        public MvxCommand LoadMorePlotData4 => new MvxCommand(LoadMorePlotData4Async);
+
+        private async void LoadMorePlotData4Async()
+        {
+            if (!ProcessingPlotData)
+            {
+                ProcessingPlotData = true;
+                // Plot 500 points
+                string updateValue = "{c0" + SensorIndexSelected + "000001F4}";
+
+                // Send the command based on command type set above
+                await TxCharacteristic.WriteAsync(updateValue.StrToByteArray()).ConfigureAwait(true);
+
+                // Show refreshing of chart via toast
+                _userDialogs.InfoToast("Refreshing chart (500 points)...", TimeSpan.FromSeconds(1));
+            }
+        }
+
         #endregion
 
         /// <summary>

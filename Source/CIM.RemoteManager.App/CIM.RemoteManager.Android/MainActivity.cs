@@ -35,10 +35,11 @@ namespace CIM.RemoteManager.Android
 
             Mvx.Resolve<IMvxAppStart>().Start();
 
-            // Init Syncfusion controls
+            // Init SyncFusion controls
             new SfChartRenderer();
             new SfBusyIndicatorRenderer();
-
+            //SfListViewRenderer.Init();
+            //SegmentedControlRenderer.Init();
 
             CheckForUpdates();
         }
