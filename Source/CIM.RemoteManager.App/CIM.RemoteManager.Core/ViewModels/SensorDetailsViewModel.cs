@@ -182,6 +182,16 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
+        /// Processing plot indicator
+        /// </summary>
+        bool _processingPlotData = false;
+        public bool ProcessingPlotData
+        {
+            get => _processingPlotData;
+            set => SetProperty(ref _processingPlotData, value);
+        }
+
+        /// <summary>
         /// Read try count before stopping characteristic service.  A fail safe.
         /// </summary>
         public int RxTryCount { get; set; } = 0;
@@ -897,54 +907,62 @@ namespace CIM.RemoteManager.Core.ViewModels
                 switch (conversionType)
                 {
                     case "J":
-                        //_userDialogs.Alert($"(J) Buffered Data: {sensorValues}", "CIMScan RemoteManager");
-
-                        // New instance of sensor plot
-                        var sensorPlot = new SensorPlot();
-                        // Defaults
-                        int plotIndex = 1;
-                        bool plotTime = true;
-
-                        // Get number of plot points.
-                        // Multiply times two since we have to collect time and value.
-                        int numberOfPlotPoints = splitSensorValues[0].Substring(1, (splitSensorValues[0].Length - 1)).SafeHexToInt() * 2;
-
-                        //await Application.Current.MainPage.DisplayAlert("CIMScan", $"Number of Plot Points: {numberOfPlotPoints}", "Cancel");
-
-                        // Iterate through plot values and set plot datetime and current value
-                        for (int i = 1; i <= numberOfPlotPoints; i++)
+                        if (!ProcessingPlotData)
                         {
-                            if (plotTime)
+                            // Start processing
+                            ProcessingPlotData = true;
+
+                            //_userDialogs.Alert($"(J) Buffered Data: {sensorValues}", "CIMScan RemoteManager");
+
+                            // New instance of sensor plot
+                            var sensorPlot = new SensorPlot();
+                            // Defaults
+                            int plotIndex = 1;
+                            bool plotTime = true;
+
+                            // Get number of plot points.
+                            // Multiply times two since we have to collect time and value.
+                            int numberOfPlotPoints = splitSensorValues[0].Substring(1, (splitSensorValues[0].Length - 1)).SafeHexToInt() * 2;
+
+                            //await Application.Current.MainPage.DisplayAlert("CIMScan", $"Number of Plot Points: {numberOfPlotPoints}", "Cancel");
+
+                            // Iterate through plot values and set plot datetime and current value
+                            for (int i = 1; i <= numberOfPlotPoints; i++)
                             {
-                                // Plot time
-                                sensorPlot.UnixTimeStamp = splitSensorValues[i].SafeHexToInt();
-                                sensorPlot.TimeStamp = sensorPlot.UnixTimeStamp.UnixTimeStampToDateTime();
-                                plotTime = false;
-                            }
-                            else
-                            {
-                                // Plot value
-                                sensorPlot.CurrentValue = splitSensorValues[i].SafeHexToInt();
-                                plotTime = true;
+                                if (plotTime)
+                                {
+                                    // Plot time
+                                    sensorPlot.UnixTimeStamp = splitSensorValues[i].SafeHexToInt();
+                                    sensorPlot.TimeStamp = sensorPlot.UnixTimeStamp.UnixTimeStampToDateTime();
+                                    plotTime = false;
+                                }
+                                else
+                                {
+                                    // Plot value
+                                    sensorPlot.CurrentValue = splitSensorValues[i].SafeHexToInt();
+                                    plotTime = true;
+                                }
+
+                                // Every two iterations add values to chart collection
+                                if ((plotIndex % 2) == 0)
+                                {
+                                    // Add plot data to list
+                                    SensorPlotCollection.Add(new ChartDataPoint(sensorPlot.TimeStamp, sensorPlot.CurrentValue));
+                                }
+                                plotIndex++;
                             }
 
-                            // Every two iterations add values to chart collection
-                            if ((plotIndex % 2) == 0)
-                            {
-                                // Add plot data to list
-                                SensorPlotCollection.Add(new ChartDataPoint(sensorPlot.TimeStamp.ToString("HH:mm"), sensorPlot.CurrentValue));
-                            }
-                            plotIndex++;
+                            // Wait a couple seconds before we fire off another request for plot data
+                            await Task.Delay(5000).ConfigureAwait(true);
+                            // Plot 10 points
+                            string updateValue = "{c0" + SensorIndexSelected + "0000000A}";
+                            // Send the command based on command type set above
+                            await TxCharacteristic.WriteAsync(updateValue.StrToByteArray()).ConfigureAwait(true);
+                            // Show refreshing of chart via toast
+                            _userDialogs.InfoToast("Refreshing chart...", TimeSpan.FromSeconds(1));
+                            // Release processing
+                            ProcessingPlotData = false;
                         }
-
-                        // Wait a couple seconds before we fire off another request for plot data
-                        await Task.Delay(5000).ConfigureAwait(true);
-                        // Plot 10 points
-                        string updateValue = "{c0" + SensorIndexSelected + "0000000A}";
-                        // Send the command based on command type set above
-                        await TxCharacteristic.WriteAsync(updateValue.StrToByteArray()).ConfigureAwait(true);
-                        // Show refreshing of chart via toast
-                        _userDialogs.InfoToast("Refreshing chart...", TimeSpan.FromSeconds(1));
                         break;
                     case "H":
                         //_userDialogs.Alert($"(H) Statistics Data: {sensorValues}", "CIMScan RemoteManager");
