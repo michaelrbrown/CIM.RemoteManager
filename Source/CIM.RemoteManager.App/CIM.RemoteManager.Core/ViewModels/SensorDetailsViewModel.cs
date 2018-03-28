@@ -894,6 +894,8 @@ namespace CIM.RemoteManager.Core.ViewModels
 
             try
             {
+                await Application.Current.MainPage.DisplayAlert("CIMScan", $"conversionType: {conversionType}", "Cancel");
+
                 switch (conversionType)
                 {
                     case "J":

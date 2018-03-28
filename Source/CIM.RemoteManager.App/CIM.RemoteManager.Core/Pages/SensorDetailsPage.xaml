@@ -46,7 +46,7 @@
                              BackgroundColor="{DynamicResource HeaderBackgroundColor}"
                              HeightRequest="50" Orientation="Horizontal">
                     <!-- Margin: left, top, right, bottom -->
-                    <Image Aspect="AspectFit" Scale="1" Source="{Binding SensorImage}" />
+                    <Image VerticalOptions="Center" HorizontalOptions="Center" Aspect="AspectFit" HeightRequest="50" Source="{Binding SensorImage}" />
                     <Label Margin="10"
                            VerticalOptions="Center" HorizontalOptions="CenterAndExpand"
                            FontSize="18" HorizontalTextAlignment="Center"
