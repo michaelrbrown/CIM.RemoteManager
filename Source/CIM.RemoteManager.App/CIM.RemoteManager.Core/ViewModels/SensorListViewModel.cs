@@ -945,6 +945,10 @@ namespace CIM.RemoteManager.Core.ViewModels
                     {
                         Application.Current.Properties.Remove("CurrentSensorName");
                     }
+                    if (Application.Current.Properties.ContainsKey("CurrentSensorSerialNumber"))
+                    {
+                        Application.Current.Properties.Remove("CurrentSensorSerialNumber");
+                    }
                     if (Application.Current.Properties.ContainsKey("CurrentSensorType"))
                     {
                         Application.Current.Properties.Remove("CurrentSensorType");
@@ -959,6 +963,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                     }
                     // Set sensor values for details page
                     Application.Current.Properties["CurrentSensorName"] = sensor.Name;
+                    Application.Current.Properties["CurrentSensorSerialNumber"] = sensor.SerialNumber;
                     Application.Current.Properties["CurrentSensorType"] = sensor.SensorType;
                     Application.Current.Properties["CurrentSensorOffset"] = sensor.Offset;
                     Application.Current.Properties["CurrentSensorScale"] = sensor.Scale;

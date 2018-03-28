@@ -894,12 +894,6 @@ namespace CIM.RemoteManager.Core.ViewModels
 
             try
             {
-                if (string.Equals(conversionType, "F"))
-                {
-                    await Application.Current.MainPage.DisplayAlert("CIMScan", $"conversionType: {conversionType}", "Cancel");
-
-                }
-
                 switch (conversionType)
                 {
                     case "J":
@@ -915,7 +909,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                         // Multiply times two since we have to collect time and value.
                         int numberOfPlotPoints = splitSensorValues[0].Substring(1, (splitSensorValues[0].Length - 1)).SafeHexToInt() * 2;
 
-                        await Application.Current.MainPage.DisplayAlert("CIMScan", $"Number of Plot Points: {numberOfPlotPoints}", "Cancel");
+                        //await Application.Current.MainPage.DisplayAlert("CIMScan", $"Number of Plot Points: {numberOfPlotPoints}", "Cancel");
 
                         // Iterate through plot values and set plot datetime and current value
                         for (int i = 1; i <= numberOfPlotPoints; i++)
@@ -1291,6 +1285,13 @@ namespace CIM.RemoteManager.Core.ViewModels
                     SensorName = Convert.ToString(Application.Current.Properties["CurrentSensorName"]);
                     // Notify property changed
                     RaisePropertyChanged(() => SensorName);
+                }
+                // Get sensor serial number from app context
+                if (Application.Current.Properties.ContainsKey("CurrentSensorSerialNumber"))
+                {
+                    SensorSerialNumber = Convert.ToString(Application.Current.Properties["CurrentSensorSerialNumber"]);
+                    // Notify property changed
+                    RaisePropertyChanged(() => SensorSerialNumber);
                 }
                 // Get sensor type from app context
                 if (Application.Current.Properties.ContainsKey("CurrentSensorType"))

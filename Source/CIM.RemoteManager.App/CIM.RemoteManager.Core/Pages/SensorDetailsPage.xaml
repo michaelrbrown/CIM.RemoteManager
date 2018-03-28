@@ -46,12 +46,25 @@
                              BackgroundColor="{DynamicResource HeaderBackgroundColor}"
                              HeightRequest="50" Orientation="Horizontal">
                     <!-- Margin: left, top, right, bottom -->
-                    <Image VerticalOptions="Center" HorizontalOptions="End" Aspect="AspectFill" HeightRequest="50" Source="{Binding SensorImage}" />
-                    <Label Margin="10"
-                           VerticalOptions="Center" HorizontalOptions="Start"
-                           FontSize="18" HorizontalTextAlignment="Center"
-                           Text="{Binding SensorNameAndIndex}"
-                           TextColor="{DynamicResource HeaderTextColor}" />
+                    <Image Margin="10,0,0,5"
+                           VerticalOptions="Center" HorizontalOptions="End"
+                           Aspect="AspectFit" HeightRequest="40"
+                           Source="{Binding SensorImage}" />
+                    <StackLayout Margin="0"
+                                 VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+                                 BackgroundColor="{DynamicResource HeaderBackgroundColor}"
+                                 HeightRequest="50" Orientation="Vertical">
+                        <Label Margin="5,0,0,5"
+                               VerticalOptions="Center" HorizontalOptions="Start"
+                               FontSize="18" HorizontalTextAlignment="Center"
+                               Text="{Binding SensorNameAndIndex}"
+                               TextColor="{DynamicResource HeaderTextColor}" />
+                        <Label Margin="5,0,0,5"
+                               VerticalOptions="Center" HorizontalOptions="Start"
+                               FontSize="12" HorizontalTextAlignment="Center"
+                               Text="{Binding SensorSerialNumber}"
+                               TextColor="{DynamicResource HeaderTextColor}" />
+                    </StackLayout>
                 </StackLayout>
             </Grid>
 
@@ -62,12 +75,16 @@
                 </xForms:SfChart.ColorModel>
 
                 <xForms:SfChart.PrimaryAxis>
-                    <xForms:DateTimeAxis x:Name="XAxis" Title="Time" PlotOffset="10" />
+                    <xForms:DateTimeAxis x:Name="XAxis" Title="Time" PlotOffset="10">
+                        <xForms:DateTimeAxis.LabelStyle>
+                            <xForms:ChartAxisLabelStyle LabelFormat="hh:mm:ss" />
+                        </xForms:DateTimeAxis.LabelStyle>
+                    </xForms:DateTimeAxis>
                 </xForms:SfChart.PrimaryAxis>
                 <xForms:SfChart.SecondaryAxis>
                     <xForms:NumericalAxis Title="Value" PlotOffset="10" />
                 </xForms:SfChart.SecondaryAxis>
-                <xForms:FastLineSeries AnimationDuration="1" EnableAnimation="True" ItemsSource="{Binding SensorPlotCollection}" XBindingPath="TimeStamp" YBindingPath="CurrentValue" />
+                <xForms:FastLineSeries AnimationDuration="1" EnableAnimation="True" ItemsSource="{Binding SensorPlotCollection}" XBindingPath="CurrentValue" YBindingPath="TimeStamp" />
             </xForms:SfChart>
 
             <!-- Margin: left, top, right, bottom -->
