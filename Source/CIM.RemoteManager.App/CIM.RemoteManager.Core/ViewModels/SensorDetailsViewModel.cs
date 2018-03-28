@@ -947,7 +947,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                                 if ((plotIndex % 2) == 0)
                                 {
                                     // Add plot data to list
-                                    SensorPlotCollection.Add(new ChartDataPoint(sensorPlot.TimeStamp, sensorPlot.CurrentValue));
+                                    SensorPlotCollection.Add(new ChartDataPoint(sensorPlot.TimeStamp.ToString("HH:mm"), sensorPlot.CurrentValue));
                                 }
                                 plotIndex++;
                             }
@@ -981,6 +981,9 @@ namespace CIM.RemoteManager.Core.ViewModels
                             MinimumOccuranceTimeStamp = splitSensorValues[4].SafeHexToInt();
                             AverageValue = splitSensorValues[5].SafeHexToDouble();
                             SinceTimeStamp = splitSensorValues[6].SafeHexToInt();
+
+                            // Show refreshing of chart via toast
+                            _userDialogs.InfoToast("Refreshing Statistics...", TimeSpan.FromSeconds(1));
                         }
                         break;
                     case "G":
@@ -1001,6 +1004,8 @@ namespace CIM.RemoteManager.Core.ViewModels
                             LowWarningLimit = splitSensorValues[4].SafeHexToDouble();
                             HighWarningLimit = splitSensorValues[5].SafeHexToInt();
                             HighAlarmLimit = splitSensorValues[6].SafeHexToDouble();
+                            // Show refreshing of chart via toast
+                            _userDialogs.InfoToast("Refreshing Limits...", TimeSpan.FromSeconds(1));
                         }
                         break;
                     case "C":
@@ -1013,10 +1018,12 @@ namespace CIM.RemoteManager.Core.ViewModels
                             //Application.Current.MainPage.DisplayAlert("Old value: ", sensorListItem.AverageValue.ToString(), "Cancel");
                             //await Application.Current.MainPage.DisplayAlert("(C) CurrentValue: ", splitSensorValues[1].SafeHexToDouble().ToString(), "Cancel");
 
-                            _userDialogs.InfoToast($"(C) CurrentValue: {splitSensorValues[1].SafeHexToDouble().ToString()}", TimeSpan.FromSeconds(5));
+                            //_userDialogs.InfoToast($"(C) CurrentValue: {splitSensorValues[1].SafeHexToDouble().ToString()}", TimeSpan.FromSeconds(5));
 
                             TimeStamp = splitSensorValues[0].SafeHexToInt();
                             CurrentValue = splitSensorValues[1].SafeHexToDouble();
+                            // Show refreshing of chart via toast
+                            _userDialogs.InfoToast("Refreshing Settings...", TimeSpan.FromSeconds(1));
                         }
                         break;
                     case "F":
