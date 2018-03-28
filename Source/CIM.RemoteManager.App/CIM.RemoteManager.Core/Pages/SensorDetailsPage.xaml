@@ -54,19 +54,18 @@
             </Grid>
 
             <!-- Chart Control -->
-            <xForms:SfChart Grid.Row="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <xForms:SfChart Grid.Row="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent">
                 <xForms:SfChart.ColorModel>
                     <xForms:ChartColorModel CustomBrushes="{StaticResource Colors}" Palette="Custom" />
                 </xForms:SfChart.ColorModel>
 
                 <xForms:SfChart.PrimaryAxis>
-                    <xForms:DateTimeAxis x:Name="XAxis" Title="Time"
-                                         AutoScrollingMode="Start" Interval="4" IntervalType="Seconds" PlotOffset="10" />
+                    <xForms:DateTimeAxis x:Name="XAxis" Title="Time" PlotOffset="10" />
                 </xForms:SfChart.PrimaryAxis>
                 <xForms:SfChart.SecondaryAxis>
                     <xForms:NumericalAxis Title="Value" PlotOffset="10" />
                 </xForms:SfChart.SecondaryAxis>
-                <xForms:FastLineSeries AnimationDuration="1" EnableAnimation="True" ItemsSource="{Binding SensorPlotCollection}" XBindingPath="CurrentValue" YBindingPath="TimeStamp" />
+                <xForms:FastLineSeries AnimationDuration="1" EnableAnimation="True" ItemsSource="{Binding SensorPlotCollection}" XBindingPath="TimeStamp" YBindingPath="CurrentValue" />
             </xForms:SfChart>
 
             <!-- Margin: left, top, right, bottom -->
