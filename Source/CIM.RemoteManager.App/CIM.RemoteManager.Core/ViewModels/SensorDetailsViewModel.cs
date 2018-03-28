@@ -202,7 +202,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// <summary>
         /// Processing plot indicator
         /// </summary>
-        bool _processingPlotData = false;
+        bool _processingPlotData = true;
         public bool ProcessingPlotData
         {
             get => _processingPlotData;
@@ -925,9 +925,6 @@ namespace CIM.RemoteManager.Core.ViewModels
                 switch (conversionType)
                 {
                     case "J":
-                            // Start processing
-                            ProcessingPlotData = true;
-
                             // New instance of sensor plot
                             var sensorPlot = new SensorPlot();
                             // Defaults

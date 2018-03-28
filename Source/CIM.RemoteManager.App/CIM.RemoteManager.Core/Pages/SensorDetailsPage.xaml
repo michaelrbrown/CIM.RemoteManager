@@ -1,6 +1,6 @@
 ﻿<pages:BaseTabbedPage x:Class="CIM.RemoteManager.Core.Pages.SensorDetailsPage"
                       xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                      xmlns:pages="clr-namespace:CIM.RemoteManager.Core.Pages;assembly=CIM.RemoteManager.Core" xmlns:xForms="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms"
+                      xmlns:pages="clr-namespace:CIM.RemoteManager.Core.Pages;assembly=CIM.RemoteManager.Core" xmlns:xForms="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms" xmlns:xForms1="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
                       BackgroundColor="#EEEEEE">
 
     <pages:BaseTabbedPage.Resources>
@@ -33,7 +33,7 @@
 
         <pages:BasePage.ToolbarItems>
             <ToolbarItem Name="ToolbarItemRefreshSensorData"
-                         Command="RefreshSensorDataCommand" Icon="ic_refresh-sensordata.png" Order="Primary" Priority="0" Text="" />
+                         Command="RefreshSensorDataCommand" Icon="ic_refresh-sensordata.png" Order="Secondary" Priority="1" Text="Refresh" />
         </pages:BasePage.ToolbarItems>
 
         <!-- Margin: left, top, right, bottom -->
@@ -81,27 +81,33 @@
                 </StackLayout>
             </Grid>
 
+            <xForms1:SfBusyIndicator x:Name="ChartBusyindicator" Title="Loading Plot Data..."
+                                     Grid.Row="1"
+                                     AnimationType="ECG" BackgroundColor="Transparent"
+                                     IsBusy="{Binding ProcessingPlotData}"
+                                     IsVisible="{Binding ProcessingPlotData}"
+                                     TextColor="{DynamicResource NameColor}" />
             <!-- Chart Control -->
             <xForms:SfChart Grid.Row="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
                 <xForms:SfChart.ColorModel>
                     <xForms:ChartColorModel CustomBrushes="{StaticResource Colors}" Palette="Custom" />
                 </xForms:SfChart.ColorModel>
                 <xForms:SfChart.PrimaryAxis>
-                    <xForms:CategoryAxis>
+                    <xForms:CategoryAxis LabelRotationAngle="45" ShowTrackballInfo="True">
                         <xForms:CategoryAxis.Title>
                             <xForms:ChartAxisTitle Text="Time" />
                         </xForms:CategoryAxis.Title>
                     </xForms:CategoryAxis>
                 </xForms:SfChart.PrimaryAxis>
                 <xForms:SfChart.SecondaryAxis>
-                    <xForms:NumericalAxis AutoScrollingMode="Start" PlotOffset="100">
+                    <xForms:NumericalAxis AutoScrollingMode="End" EdgeLabelsDrawingMode="Shift" PlotOffset="100">
                         <xForms:NumericalAxis.Title>
                             <xForms:ChartAxisTitle Text="{Binding ChartValueTitle}" />
                         </xForms:NumericalAxis.Title>
                     </xForms:NumericalAxis>
                 </xForms:SfChart.SecondaryAxis>
                 <xForms:SfChart.Series>
-                    <xForms:FastLineSeries AnimationDuration="5"
+                    <xForms:FastLineSeries AnimationDuration="10"
                                            DataMarker="{Binding CurrentValue}"
                                            EnableAnimation="True" EnableTooltip="True"
                                            ItemsSource="{Binding SensorPlotCollection}"
