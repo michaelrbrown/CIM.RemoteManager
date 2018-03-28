@@ -99,26 +99,29 @@
 
             </StackLayout>
 
+            <!-- Chart Loading Indicator -->
             <xForms1:SfBusyIndicator x:Name="ChartBusyindicator" Title="Loading Plot Data..."
                                      Grid.Row="2"
                                      AnimationType="ECG" BackgroundColor="Transparent"
                                      IsBusy="{Binding ProcessingPlotData}"
                                      IsVisible="{Binding ProcessingPlotData}"
-                                     TextColor="{DynamicResource NameColor}" />
+                                     Opacity=".7"
+                                     TextColor="{DynamicResource ChartForegroundSemiTransparent}"
+                                     ViewBoxHeight="150" ViewBoxWidth="150" />
             <!-- Chart Control -->
             <xForms:SfChart Grid.Row="2" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
                 <xForms:SfChart.ColorModel>
                     <xForms:ChartColorModel CustomBrushes="{StaticResource Colors}" Palette="Custom" />
                 </xForms:SfChart.ColorModel>
                 <xForms:SfChart.PrimaryAxis>
-                    <xForms:CategoryAxis LabelRotationAngle="45" ShowTrackballInfo="True">
+                    <xForms:CategoryAxis LabelRotationAngle="35" ShowTrackballInfo="True">
                         <xForms:CategoryAxis.Title>
                             <xForms:ChartAxisTitle Text="Time" />
                         </xForms:CategoryAxis.Title>
                     </xForms:CategoryAxis>
                 </xForms:SfChart.PrimaryAxis>
                 <xForms:SfChart.SecondaryAxis>
-                    <xForms:NumericalAxis AutoScrollingMode="End" EdgeLabelsDrawingMode="Shift" PlotOffset="100">
+                    <xForms:NumericalAxis PlotOffset="40">
                         <xForms:NumericalAxis.Title>
                             <xForms:ChartAxisTitle Text="{Binding ChartValueTitle}" />
                         </xForms:NumericalAxis.Title>
