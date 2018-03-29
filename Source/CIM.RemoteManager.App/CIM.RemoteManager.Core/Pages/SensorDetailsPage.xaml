@@ -50,7 +50,6 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="60" />
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="100" />
                 </Grid.ColumnDefinitions>
 
                 <!-- Margin: left, top, right, bottom -->
@@ -158,19 +157,6 @@
                                            ListenPropertyChange="True" Opacity="1" ShowTrackballInfo="True" />
                 </xForms:SfChart.Series>
             </xForms:SfChart>
-
-            <!-- Debugging -->
-            <StackLayout Grid.Row="3"
-                         VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
-                         BackgroundColor="{DynamicResource RemoteNameBackgroundColor}"
-                         HeightRequest="60" IsVisible="False" Opacity=".6" Orientation="Horizontal" Spacing="0">
-                <Label Margin="5"
-                       VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"
-                       FontSize="16" LineBreakMode="MiddleTruncation"
-                       Text="{Binding CharacteristicValue, StringFormat=' Incoming Value: {0:N}'}"
-                       TextColor="{DynamicResource AppLightColor}"
-                       VerticalTextAlignment="Center" />
-            </StackLayout>
 
         </Grid>
 
