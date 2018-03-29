@@ -31,7 +31,7 @@
     <AndroidTlsProvider>
     </AndroidTlsProvider>
     <AndroidKeyStore>true</AndroidKeyStore>
-    <AndroidSigningKeyStore>D:\GitHub\Repos\DotComCoders\CIM.RemoteManager\Source\CIM.RemoteManager.App\CIM.RemoteManager.Android\dcc_keystore.keystore</AndroidSigningKeyStore>
+    <AndroidSigningKeyStore>C:\Repos\GitHub\DCC\CIM.RemoteManager\Source\CIM.RemoteManager.App\CIM.RemoteManager.Android\dcc_keystore.keystore</AndroidSigningKeyStore>
     <AndroidSigningStorePass>mb1991</AndroidSigningStorePass>
     <AndroidSigningKeyAlias>dcc_keystore</AndroidSigningKeyAlias>
     <AndroidSigningKeyPass>mb1991</AndroidSigningKeyPass>
@@ -44,10 +44,10 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
-    <AndroidLinkMode>None</AndroidLinkMode>
+    <AndroidUseSharedRuntime>true</AndroidUseSharedRuntime>
+    <AndroidLinkMode>SdkOnly</AndroidLinkMode>
     <AndroidLinkSkip />
-    <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
+    <EmbedAssembliesIntoApk>false</EmbedAssembliesIntoApk>
     <AndroidSupportedAbis />
     <AndroidStoreUncompressedFileExtensions />
     <MandroidI18n />

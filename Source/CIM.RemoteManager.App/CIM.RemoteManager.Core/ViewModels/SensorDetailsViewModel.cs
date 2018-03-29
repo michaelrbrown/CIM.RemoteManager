@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Acr.UserDialogs;
 using CIM.RemoteManager.Core.Extensions;
 using CIM.RemoteManager.Core.Helpers;
 using CIM.RemoteManager.Core.Models;
-using CIM.RemoteManager.Core.Pages;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
 using Plugin.BLE.Abstractions.Contracts;
@@ -1084,12 +1081,6 @@ namespace CIM.RemoteManager.Core.ViewModels
                 //await Application.Current.MainPage.DisplayAlert("CIMScan", splitSensorValues.ToString(), "Cancel");
                 //_userDialogs.Alert($"(SerializeStringToSensor) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
             }
-            finally
-            {
-                // Release processing
-                ProcessingPlotData = false;
-            }
-
         }
 
         /// <summary>
@@ -1098,8 +1089,6 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// <returns>Task</returns>
         private async Task RefreshPlotData()
         {
-            // Wait a couple seconds before we fire off another request for plot data
-            //await Task.Delay(5000).ConfigureAwait(true);
             if (!ProcessingPlotData)
             {
                 // Plot 10 points
@@ -1111,9 +1100,6 @@ namespace CIM.RemoteManager.Core.ViewModels
                 // Show refreshing of chart via toast
                 _userDialogs.InfoToast("Refreshing chart (100 points)...", TimeSpan.FromSeconds(1));
             }
-            // Wait a couple seconds before we fire off another request for plot data
-            //await Task.Delay(1000).ConfigureAwait(true);
-            //await RefreshPlotData();
         }
 
         #endregion
