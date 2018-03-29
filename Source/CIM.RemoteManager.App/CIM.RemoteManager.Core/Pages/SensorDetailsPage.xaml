@@ -505,7 +505,7 @@
                         <RowDefinition Height="50" />
                         <RowDefinition Height="50" />
                         <RowDefinition Height="50" />
-                        <RowDefinition Height="50" />
+                        <RowDefinition Height="70" />
                     </Grid.RowDefinitions>
 
                     <Grid.ColumnDefinitions>
@@ -583,7 +583,7 @@
 
                     <!-- Save Button -->
                     <StackLayout Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="4"
-                                 Margin="0,10,0,20"
+                                 Margin="0,10,0,10"
                                  HorizontalOptions="CenterAndExpand"
                                  IsVisible="{Binding IsRefreshing}"
                                  Orientation="Horizontal">

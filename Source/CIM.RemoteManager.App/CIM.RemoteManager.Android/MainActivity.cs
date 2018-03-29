@@ -8,6 +8,7 @@ using MvvmCross.Forms.Droid.Presenters;
 using MvvmCross.Platform;
 using Syncfusion.SfBusyIndicator.XForms.Droid;
 using Syncfusion.SfChart.XForms.Droid;
+using Syncfusion.XForms.iOS.PopupLayout;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
@@ -40,6 +41,7 @@ namespace CIM.RemoteManager.Android
             new SfBusyIndicatorRenderer();
             //SfListViewRenderer.Init();
             //SegmentedControlRenderer.Init();
+            SfPopupLayoutRenderer.Init();
 
             CheckForUpdates();
         }
