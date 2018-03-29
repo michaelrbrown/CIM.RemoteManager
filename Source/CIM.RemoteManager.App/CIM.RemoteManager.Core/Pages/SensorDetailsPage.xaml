@@ -32,7 +32,7 @@
             </Grid>
         </StackLayout>
 
-        <!-- Margin: left, top, right, bottom -->
+        <!-- Content Wrapper -->
         <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent">
             <Grid.RowDefinitions>
                 <RowDefinition Height="60" />
