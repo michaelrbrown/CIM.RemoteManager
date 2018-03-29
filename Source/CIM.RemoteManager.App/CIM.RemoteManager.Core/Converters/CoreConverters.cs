@@ -11,9 +11,9 @@ namespace CIM.RemoteManager.Core.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (double.TryParse(value.ToString(), out double averageValueResult))
+            if (int.TryParse(value.ToString(), out int averageValueResult))
             {
-                if (Math.Abs(averageValueResult) < 0)
+                if (averageValueResult == 0)
                 {
                     return "";
                 }

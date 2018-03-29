@@ -959,7 +959,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                                 if ((plotIndex % 2) == 0)
                                 {
                                     // Add plot data to list
-                                    SensorPlotCollection.Add(new ChartDataPoint(sensorPlot.TimeStamp.ToString("MM/dd hh:mm tt"), sensorPlot.CurrentValue));
+                                    SensorPlotCollection.Add(new ChartDataPoint(sensorPlot.TimeStamp.ToString("MM/dd hh:mm tt").Replace(" ", "\n"), sensorPlot.CurrentValue));
                                 }
 
                                 plotIndex++;
