@@ -10,7 +10,6 @@ namespace CIM.RemoteManager.Core.Models
     public class Sensor : BindableBase
     {
         private int _sensorIndex;
-
         public int SensorIndex
         {
             get => _sensorIndex;
@@ -18,11 +17,28 @@ namespace CIM.RemoteManager.Core.Models
         }
 
         private string _serialNumber;
-
         public string SerialNumber
         {
             get => _serialNumber;
             set => SetProperty(ref _serialNumber, value);
+        }
+
+        /// <summary>
+        /// The sensor index plus serial number.
+        /// </summary>
+        public string SensorIndexPlusSerialNumber
+        {
+            get
+            {
+                // Validate
+                if (!string.IsNullOrEmpty(_sensorIndex.ToString()))
+                {
+                    // Return combined sensor index plus serial number
+                    return $"{_sensorIndex} - {_serialNumber}";
+                }
+                // Default
+                return _serialNumber;
+            }
         }
 
         /// <summary>

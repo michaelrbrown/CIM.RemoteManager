@@ -57,12 +57,8 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <StackLayout Grid.Column="0" Spacing="0">
-                    <Label HorizontalTextAlignment="Start" IsVisible="False" LineBreakMode="TailTruncation"
-                           Style="{DynamicResource SerialNumberStyle}"
-                           Text="{Binding SensorIndex}"
-                           VerticalTextAlignment="Center" />
-                    <Label HorizontalTextAlignment="Start" LineBreakMode="TailTruncation" Style="{DynamicResource SerialNumberStyle}" Text="{Binding SerialNumber}" VerticalTextAlignment="Center" />
+                <StackLayout Grid.Column="0" Orientation="Horizontal" Spacing="0">
+                    <Label HorizontalTextAlignment="Start" LineBreakMode="TailTruncation" Style="{DynamicResource SerialNumberStyle}" Text="{Binding SensorIndexPlusSerialNumber}" VerticalTextAlignment="Center" />
                 </StackLayout>
 
                 <StackLayout Grid.Column="1" Spacing="0">

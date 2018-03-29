@@ -233,9 +233,6 @@
     <Reference Include="Syncfusion.SfPopupLayout.XForms.Android, Version=16.1451.0.32, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Syncfusion.Xamarin.SfPopupLayout.16.1.0.32\lib\MonoAndroid10\Syncfusion.SfPopupLayout.XForms.Android.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.SfPopupLayout.XForms.iOS">
-      <HintPath>..\..\packages\Syncfusion.Xamarin.SfPopupLayout.16.1.0.32\lib\Xamarin.iOS10\Syncfusion.SfPopupLayout.XForms.iOS.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
