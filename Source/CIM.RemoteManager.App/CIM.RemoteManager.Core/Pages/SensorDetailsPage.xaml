@@ -628,7 +628,7 @@
                                 BackgroundColor="{DynamicResource ButtonBackgroundColor}"
                                 BorderRadius="5"
                                 Command="{Binding SaveSensorCalibration}"
-                                MinimumWidthRequest="150" Text="Save Calibration"
+                                HeightRequest="50" MinimumWidthRequest="150" Text="Save Calibration"
                                 TextColor="{DynamicResource ButtonTextColor}"
                                 WidthRequest="155" />
                     </StackLayout>
