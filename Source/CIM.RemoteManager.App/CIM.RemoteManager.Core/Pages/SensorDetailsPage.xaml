@@ -36,7 +36,7 @@
         <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="Transparent">
             <Grid.RowDefinitions>
                 <RowDefinition Height="60" />
-                <RowDefinition Height="60" />
+                <RowDefinition Height="50" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
@@ -103,7 +103,7 @@
             <!-- Segmented Control -->
             <StackLayout Grid.Row="1"
                          VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
-                         HeightRequest="60" Orientation="Horizontal" Spacing="0">
+                         HeightRequest="50" Orientation="Horizontal" Spacing="0">
 
                 <abstractions:SegmentedControl x:Name="SegControl"
                                                VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"
@@ -124,12 +124,12 @@
             <!-- Chart Loading Indicator -->
             <xForms1:SfBusyIndicator x:Name="ChartBusyindicator" Title="Loading Plot Data..."
                                      Grid.Row="2"
-                                     AnimationType="ECG" BackgroundColor="Transparent" HeightRequest="150"
+                                     AnimationType="ECG" BackgroundColor="Transparent" HeightRequest="250"
                                      IsBusy="{Binding ProcessingPlotData}"
                                      IsVisible="{Binding ProcessingPlotData}"
-                                     Opacity=".5"
+                                     Opacity=".3"
                                      TextColor="{DynamicResource ChartForeground}"
-                                     ViewBoxHeight="150" ViewBoxWidth="150" WidthRequest="150" />
+                                     ViewBoxHeight="250" ViewBoxWidth="250" WidthRequest="250" />
             <!-- Chart Control -->
             <xForms:SfChart x:Name="SensorPlotChart" Grid.Row="2" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
                 <xForms:SfChart.ColorModel>
@@ -145,7 +145,7 @@
                 <xForms:SfChart.SecondaryAxis>
                     <xForms:NumericalAxis EdgeLabelsVisibilityMode="AlwaysVisible" PlotOffset="40" ShowTrackballInfo="True" TickPosition="Outside">
                         <xForms:NumericalAxis.Title>
-                            <xForms:ChartAxisTitle FontSize="12" Text="{Binding ChartValueTitle}" TextColor="{StaticResource LabelTextColor}" />
+                            <xForms:ChartAxisTitle FontSize="14" Text="{Binding ChartValueTitle}" TextColor="{StaticResource ChartForeground}" />
                         </xForms:NumericalAxis.Title>
                     </xForms:NumericalAxis>
                 </xForms:SfChart.SecondaryAxis>
@@ -238,31 +238,31 @@
                     </StackLayout>
 
                     <!-- Average -->
-                    <Label Grid.Row="1" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Average: " />
+                    <Label Grid.Row="1" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Average " />
                     <Entry Grid.Row="1" Grid.Column="1" IsEnabled="False" Style="{DynamicResource FormValueStyle}" Text="{Binding AverageValue}" />
 
                     <!-- Average Since -->
-                    <Label Grid.Row="2" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Since: " />
+                    <Label Grid.Row="2" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Since " />
                     <Entry Grid.Row="2" Grid.Column="1" IsEnabled="False" Style="{DynamicResource FormValueStyle}" Text="{Binding SinceDateTimeStamp}" />
 
                     <!-- Minimum -->
-                    <Label Grid.Row="3" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Minimum: " />
+                    <Label Grid.Row="3" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Minimum " />
                     <Entry Grid.Row="3" Grid.Column="1" IsEnabled="False" Style="{DynamicResource FormValueStyle}" Text="{Binding MinimumValue}" />
 
                     <!-- Minimum Occurrence -->
-                    <Label Grid.Row="4" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Occurrence: " />
+                    <Label Grid.Row="4" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Occurrence " />
                     <Entry Grid.Row="4" Grid.Column="1" IsEnabled="False" Style="{DynamicResource FormValueStyle}" Text="{Binding MinimumOccuranceTimeStamp}" />
 
                     <!-- Maximum -->
-                    <Label Grid.Row="5" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Maximum: " />
+                    <Label Grid.Row="5" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Maximum " />
                     <Entry Grid.Row="5" Grid.Column="1" IsEnabled="False" Style="{DynamicResource FormValueStyle}" Text="{Binding MaximumValue}" />
 
                     <!-- Maximum Occurrence -->
-                    <Label Grid.Row="6" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Occurrence: " />
+                    <Label Grid.Row="6" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Occurrence " />
                     <Entry Grid.Row="6" Grid.Column="1" IsEnabled="False" Style="{DynamicResource FormValueStyle}" Text="{Binding MaximumOccuranceTimeStamp}" />
 
                     <!-- Variance -->
-                    <Label Grid.Row="7" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Variance: " />
+                    <Label Grid.Row="7" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Variance " />
                     <Entry Grid.Row="7" Grid.Column="1" IsEnabled="False" Style="{DynamicResource FormValueStyle}" Text="{Binding VarianceValue}" />
 
                 </Grid>
@@ -348,27 +348,27 @@
                     </StackLayout>
 
                     <!-- Alarms Active -->
-                    <Label Grid.Row="1" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Alarms Active: " />
+                    <Label Grid.Row="1" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Alarms Active " />
                     <Entry Grid.Row="1" Grid.Column="1" IsEnabled="False" Style="{DynamicResource FormValueStyle}" Text="{Binding AlarmStatusBool}" />
 
                     <!-- Alarm Delay -->
-                    <Label Grid.Row="2" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Alarm Delay: " />
+                    <Label Grid.Row="2" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Alarm Delay " />
                     <Entry Grid.Row="2" Grid.Column="1" IsEnabled="False" Style="{DynamicResource FormValueStyle}" Text="{Binding AlarmDelay}" />
 
                     <!-- High Alarm -->
-                    <Label Grid.Row="3" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="High Alarm: " />
+                    <Label Grid.Row="3" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="High Alarm " />
                     <Entry Grid.Row="3" Grid.Column="1" IsEnabled="False" Style="{DynamicResource FormValueStyle}" Text="{Binding HighAlarmLimit}" />
 
                     <!-- High Warning -->
-                    <Label Grid.Row="4" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="High Warning: " />
+                    <Label Grid.Row="4" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="High Warning " />
                     <Entry Grid.Row="4" Grid.Column="1" IsEnabled="False" Style="{DynamicResource FormValueStyle}" Text="{Binding HighWarningLimit}" />
 
                     <!-- Low Warning -->
-                    <Label Grid.Row="5" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Low Warning: " />
+                    <Label Grid.Row="5" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Low Warning " />
                     <Entry Grid.Row="5" Grid.Column="1" IsEnabled="False" Style="{DynamicResource FormValueStyle}" Text="{Binding LowAlarmLimit}" />
 
                     <!-- Low Alarm -->
-                    <Label Grid.Row="6" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Low Alarm: " />
+                    <Label Grid.Row="6" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Low Alarm " />
                     <Entry Grid.Row="6" Grid.Column="1" IsEnabled="False" Style="{DynamicResource FormValueStyle}" Text="{Binding LowWarningLimit}" />
 
                 </Grid>
@@ -458,15 +458,15 @@
                     </StackLayout>
 
                     <!-- Upper Calibration -->
-                    <Label Grid.Row="1" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Upper: " />
+                    <Label Grid.Row="1" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Upper " />
                     <Entry Grid.Row="1" Grid.Column="1" Style="{DynamicResource FormValueStyle}" Text="{Binding UpperCalibration, Mode=TwoWay}" TextChanged="UpperCalibrationEntry_OnTextChanged" />
 
                     <!-- Upper Calibration Target -->
-                    <Label Grid.Row="1" Grid.Column="2" Style="{DynamicResource FormLabelStyle}" Text="Target: " />
+                    <Label Grid.Row="1" Grid.Column="2" Style="{DynamicResource FormLabelStyle}" Text="Target " />
                     <Entry Grid.Row="1" Grid.Column="3" Style="{DynamicResource FormValueStyle}" Text="{Binding UpperCalibrationTarget, Mode=TwoWay}" TextChanged="UpperCalibrationTargetEntry_OnTextChanged" />
 
                     <!-- Lower Calibration -->
-                    <Label Grid.Row="2" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Lower: " />
+                    <Label Grid.Row="2" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Lower " />
                     <Entry x:Name="LowerCalibrationEntry"
                            Grid.Row="2" Grid.Column="1"
                            Style="{DynamicResource FormValueStyle}"
@@ -474,7 +474,7 @@
                            TextChanged="LowerCalibrationEntry_OnTextChanged" />
 
                     <!-- Lower Calibration Target -->
-                    <Label Grid.Row="2" Grid.Column="2" Style="{DynamicResource FormLabelStyle}" Text="Target: " />
+                    <Label Grid.Row="2" Grid.Column="2" Style="{DynamicResource FormLabelStyle}" Text="Target " />
                     <Entry x:Name="LowerCalibrationTargetEntry"
                            Grid.Row="2" Grid.Column="3"
                            Style="{DynamicResource FormValueStyle}"
@@ -482,7 +482,7 @@
                            TextChanged="LowerCalibrationTargetEntry_OnTextChanged" />
 
                     <!-- Scale -->
-                    <Label Grid.Row="3" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Scale: " />
+                    <Label Grid.Row="3" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Scale " />
                     <Entry x:Name="ScaleEntry"
                            Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3"
                            Style="{DynamicResource FormValueStyle}"
@@ -497,27 +497,27 @@
                     </StackLayout>
 
                     <!-- Offset -->
-                    <Label Grid.Row="5" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Value: " />
+                    <Label Grid.Row="5" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Value " />
                     <Entry x:Name="OffsetEntry" Grid.Row="5" Grid.Column="1" Style="{DynamicResource FormValueStyle}" Text="{Binding SensorOffset, Mode=TwoWay}" />
 
                     <!-- Offset Trim -->
-                    <Label Grid.Row="5" Grid.Column="2" Style="{DynamicResource FormLabelStyle}" Text="Trim: " />
+                    <Label Grid.Row="5" Grid.Column="2" Style="{DynamicResource FormLabelStyle}" Text="Trim? " />
                     <Switch Grid.Row="5" Grid.Column="3"
                             Margin="5"
                             VerticalOptions="Center" HorizontalOptions="Center"
                             Toggled="SensorOffsetTrimSwitchToggled" />
 
                     <!-- Output -->
-                    <Label Grid.Row="6" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Output: " />
+                    <Label Grid.Row="6" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Output " />
                     <Entry Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="3" Style="{DynamicResource FormValueStyle}" Text="{Binding SensorOutput, Mode=TwoWay}" />
 
                     <!-- Input -->
-                    <Label Grid.Row="7" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Input: " />
+                    <Label Grid.Row="7" Grid.Column="0" Style="{DynamicResource FormLabelStyle}" Text="Input " />
                     <Entry Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="3" Style="{DynamicResource FormValueStyle}" Text="{Binding CurrentValue, Mode=TwoWay}" />
 
                     <!-- Save Button -->
                     <StackLayout Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="4"
-                                 Margin="0,10,0,10"
+                                 Margin="0,10,0,20"
                                  HorizontalOptions="CenterAndExpand"
                                  IsVisible="{Binding IsRefreshing}"
                                  Orientation="Horizontal">

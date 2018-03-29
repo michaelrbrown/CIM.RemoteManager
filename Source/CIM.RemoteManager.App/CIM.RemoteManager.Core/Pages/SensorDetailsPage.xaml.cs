@@ -104,6 +104,11 @@ namespace CIM.RemoteManager.Core.Pages
         private string _lowerCalibrationEntryValue = "";
         private string _lowerCalibrationTargetEntryalue = "";
 
+        /// <summary>
+        /// Handles the OnTextChanged event of the UpperCalibrationEntry control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="TextChangedEventArgs"/> instance containing the event data.</param>
         private void UpperCalibrationEntry_OnTextChanged(object sender, TextChangedEventArgs e)
         {
             _upperCalibrationEntryValue = e.NewTextValue;
@@ -111,6 +116,11 @@ namespace CIM.RemoteManager.Core.Pages
             CalculateScaleAndOffset();
         }
 
+        /// <summary>
+        /// Handles the OnTextChanged event of the UpperCalibrationTargetEntry control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="TextChangedEventArgs"/> instance containing the event data.</param>
         private void UpperCalibrationTargetEntry_OnTextChanged(object sender, TextChangedEventArgs e)
         {
             _upperCalibrationTargetEntryValue = e.NewTextValue;
@@ -118,6 +128,11 @@ namespace CIM.RemoteManager.Core.Pages
             CalculateScaleAndOffset();
         }
 
+        /// <summary>
+        /// Handles the OnTextChanged event of the LowerCalibrationEntry control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="TextChangedEventArgs"/> instance containing the event data.</param>
         private void LowerCalibrationEntry_OnTextChanged(object sender, TextChangedEventArgs e)
         {
             _lowerCalibrationEntryValue = e.NewTextValue;
@@ -125,6 +140,11 @@ namespace CIM.RemoteManager.Core.Pages
             CalculateScaleAndOffset();
         }
 
+        /// <summary>
+        /// Handles the OnTextChanged event of the LowerCalibrationTargetEntry control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="TextChangedEventArgs"/> instance containing the event data.</param>
         private void LowerCalibrationTargetEntry_OnTextChanged(object sender, TextChangedEventArgs e)
         {
             _lowerCalibrationTargetEntryalue = e.NewTextValue;
@@ -162,7 +182,7 @@ namespace CIM.RemoteManager.Core.Pages
             }
             catch
             {
-                // ignored
+                // ignored (soak up division by zero error, etc)
             }
         }
 
