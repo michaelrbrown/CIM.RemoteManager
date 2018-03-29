@@ -4,8 +4,8 @@
         <ResourceDictionary>
             <!-- App Colors -->
             <Color x:Key="BodyTextColor">#444444</Color>
-            <Color x:Key="AppBaseColor">#003366</Color>
-            <Color x:Key="AppAccentColor">#0097DF</Color>
+            <Color x:Key="AppBaseColor">#50841D</Color>
+            <Color x:Key="AppAccentColor">#61AF33</Color>
             <Color x:Key="AppSecondaryAccentColor">#96C912</Color>
             <Color x:Key="AppTertiaryAccentColor">#FFC926</Color>
             <Color x:Key="AppTextColor">#939393</Color>
@@ -29,27 +29,27 @@
             <Color x:Key="ChartForegroundSemiTransparent">#88FFFFFF</Color>
 
             <!-- Page Colors -->
-            <Color x:Key="HeaderBackgroundColor">#B9DEF5</Color>
-            <Color x:Key="HeaderTextColor">#01649D</Color>
+            <Color x:Key="HeaderBackgroundColor">#90C262</Color>
+            <Color x:Key="HeaderTextColor">#50841D</Color>
             <Color x:Key="HeaderSubTextColor">#546e7a</Color>
 
             <!-- Sensor Colors -->
-            <Color x:Key="RemoteNameBackgroundColor">#0097DE</Color>
+            <Color x:Key="RemoteNameBackgroundColor">#61AF33</Color>
             <Color x:Key="CardBackgroundColor">#eceff1</Color>
             <Color x:Key="FooterBackgroundColor">#B9DEF5</Color>
-            <Color x:Key="NameColor">#01649D</Color>
+            <Color x:Key="NameColor">#50841D</Color>
             <Color x:Key="SensorTypeColor">#546e7a</Color>
             <Color x:Key="TimeStampColor">#546e7a</Color>
             <Color x:Key="MoreIconColor">#B9DEF5</Color>
-            <Color x:Key="ValueColor">#01649D</Color>
+            <Color x:Key="ValueColor">#50841D</Color>
             <Color x:Key="StatusColor">#43a047</Color>
             <Color x:Key="OutlineColor">#eeeeee</Color>
             <Color x:Key="SerialNumberColor">#546e7a</Color>
 
             <!-- Form Colors -->
-            <Color x:Key="HeadingTextColor">#7778909c</Color>
-            <Color x:Key="LabelTextColor">#7778909c</Color>
-            <Color x:Key="EntryTextColor">#7778909c</Color>
+            <Color x:Key="HeadingTextColor">#42525B</Color>
+            <Color x:Key="LabelTextColor">#42525B</Color>
+            <Color x:Key="EntryTextColor">#42525B</Color>
             <Color x:Key="EntryBackgroundColor">#7778909c</Color>
             <Color x:Key="ButtonBackgroundColor">#88FFFFFF</Color>
             <Color x:Key="ButtonTextColor">#222222</Color>
@@ -191,7 +191,7 @@
                 <Setter Property="FontSize" Value="11" />
             </Style>
 
-            <converters:AlarmStatusConverter x:Key="SensorValueValidationConverter" />
+            <converters:SensorValueValidationConverter x:Key="SensorValueValidationConverter" />
             <converters:RssiConverter x:Key="RssiConverter" />
             <converters:AlarmStatusConverter x:Key="AlarmStatusConverter" />
             <converters:AlarmStatusColorConverter x:Key="AlarmStatusColorConverter" />

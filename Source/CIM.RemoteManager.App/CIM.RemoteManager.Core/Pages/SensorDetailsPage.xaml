@@ -7,7 +7,7 @@
     <pages:BaseTabbedPage.Resources>
         <ResourceDictionary>
             <xForms:ChartColorCollection x:Key="Colors">
-                <Color>#FFFFC926</Color>
+                <Color>#61AF33</Color>
                 <Color>#0097DF</Color>
                 <Color>#FFFFC926</Color>
                 <Color>#43a047</Color>
@@ -97,7 +97,7 @@
                     <!-- Sensor Index -->
                     <Label Margin="5,0,10,5"
                            VerticalOptions="Center" HorizontalOptions="Center"
-                           FontSize="32" HorizontalTextAlignment="Center" LineBreakMode="NoWrap"
+                           FontSize="28" HorizontalTextAlignment="Center" LineBreakMode="NoWrap"
                            Text="{Binding SensorIndexSelected}"
                            TextColor="{StaticResource HeaderSubTextColor}" />
                 </StackLayout>
@@ -139,7 +139,7 @@
                     <xForms:ChartColorModel CustomBrushes="{StaticResource Colors}" Palette="Custom" />
                 </xForms:SfChart.ColorModel>
                 <xForms:SfChart.PrimaryAxis>
-                    <xForms:CategoryAxis LabelPlacement="OnTicks" LabelRotationAngle="90" ShowTrackballInfo="True" TickPosition="Outside">
+                    <xForms:CategoryAxis LabelPlacement="OnTicks" LabelRotationAngle="50" ShowTrackballInfo="True" TickPosition="Outside">
                         <xForms:CategoryAxis.Title>
                             <xForms:ChartAxisTitle Margin="0" FontSize="12" />
                         </xForms:CategoryAxis.Title>
