@@ -2,7 +2,7 @@
                       xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                       xmlns:abstractions="clr-namespace:SegmentedControl.FormsPlugin.Abstractions;assembly=SegmentedControl.FormsPlugin.Abstractions" xmlns:pages="clr-namespace:CIM.RemoteManager.Core.Pages;assembly=CIM.RemoteManager.Core"
                       xmlns:xForms="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms" xmlns:xForms1="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
-                      BackgroundColor="#EEEEEE">
+                      BackgroundColor="#FFFFFF">
 
     <pages:BaseTabbedPage.Resources>
         <ResourceDictionary>
@@ -57,7 +57,7 @@
                 <StackLayout Grid.Column="0"
                              Margin="0"
                              VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
-                             BackgroundColor="{StaticResource HeaderBackgroundColor}"
+                             BackgroundColor="{StaticResource CardBackgroundColor}"
                              HeightRequest="50" Spacing="0">
                     <!-- Sensor Image -->
                     <Image Margin="10,5,0,5"
@@ -69,14 +69,14 @@
                 <StackLayout Grid.Column="1"
                              Margin="0,10,5,10"
                              VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
-                             BackgroundColor="{StaticResource HeaderBackgroundColor}"
+                             BackgroundColor="{StaticResource CardBackgroundColor}"
                              HeightRequest="50" Orientation="Vertical" Spacing="0">
                     <!-- Sensor Name -->
                     <Label Margin="5,0,0,0"
                            VerticalOptions="Center" HorizontalOptions="Start"
                            FontSize="18" HorizontalTextAlignment="Center"
                            Text="{Binding SensorName}"
-                           TextColor="{StaticResource HeaderSubTextColor}" />
+                           TextColor="{StaticResource HeaderTextColor}" />
                     <!-- Serial Number -->
                     <Label Margin="5,0,0,0"
                            VerticalOptions="Center" HorizontalOptions="Start"
@@ -88,12 +88,12 @@
                 <StackLayout Grid.Column="2"
                              Margin="0"
                              VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
-                             BackgroundColor="#EEEEEE" Orientation="Vertical" Spacing="0">
+                             BackgroundColor="#FFFFFF" Orientation="Vertical" Spacing="0">
                     <!-- Sensor Index -->
                     <Label Margin="5,5,10,0"
                            VerticalOptions="Center" HorizontalOptions="Center"
                            FontSize="12" HorizontalTextAlignment="Center" LineBreakMode="NoWrap" Text="Sensor Index"
-                           TextColor="{StaticResource HeaderTextColor}" />
+                           TextColor="{StaticResource HeaderSubTextColor}" />
                     <!-- Sensor Index -->
                     <Label Margin="5,0,10,5"
                            VerticalOptions="Center" HorizontalOptions="Center"
@@ -111,9 +111,9 @@
 
                 <abstractions:SegmentedControl x:Name="SegControl"
                                                VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"
-                                               SelectedSegment="0"
-                                               TintColor="{StaticResource EntryBackgroundColor}"
-                                               ValueChanged="SegControl_OnValueChanged" WidthRequest="350">
+                                               SelectedSegment="0" SelectedTextColor="#FFFFFF"
+                                               TintColor="{StaticResource HeaderTextColor}"
+                                               ValueChanged="SegControl_OnValueChanged" WidthRequest="325">
                     <abstractions:SegmentedControl.Children>
                         <abstractions:SegmentedControlOption HorizontalOptions="Center" HeightRequest="60" Text="50" />
                         <abstractions:SegmentedControlOption HorizontalOptions="Center" HeightRequest="60" Text="100" />
@@ -248,6 +248,7 @@
 
                     <!-- Heading -->
                     <StackLayout Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                                 Margin="10"
                                  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
                                  BackgroundColor="#FFFFFF">
                         <Label HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" Style="{DynamicResource FormHeadingStyle}" Text="Sensor Statistics" />
@@ -371,6 +372,7 @@
 
                     <!-- Heading -->
                     <StackLayout Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                                 Margin="10"
                                  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
                                  BackgroundColor="#FFFFFF">
                         <Label HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" Style="{DynamicResource FormHeadingStyle}" Text="Sensor Limits" />
@@ -493,7 +495,10 @@
                     </Grid.ColumnDefinitions>
 
                     <!-- Calibration Heading -->
-                    <StackLayout Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" HorizontalOptions="FillAndExpand" BackgroundColor="#FFFFFF">
+                    <StackLayout Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4"
+                                 Margin="10,10,10,0"
+                                 HorizontalOptions="FillAndExpand"
+                                 BackgroundColor="#FFFFFF">
                         <Label HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" Style="{DynamicResource FormHeadingStyle}" Text="Calibration" />
                     </StackLayout>
 
@@ -530,6 +535,7 @@
 
                     <!-- Offset Heading -->
                     <StackLayout Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4"
+                                 Margin="10,10,10,0"
                                  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
                                  BackgroundColor="#FFFFFF">
                         <Label HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" Style="{DynamicResource FormHeadingStyle}" Text="Offset" />
@@ -562,6 +568,7 @@
                                  Orientation="Horizontal">
                         <Button HorizontalOptions="CenterAndExpand"
                                 BackgroundColor="{DynamicResource ButtonBackgroundColor}"
+                                BorderRadius="5"
                                 Command="{Binding SaveSensorCalibration}"
                                 Image="ic_save.png" Text="Save Calibration"
                                 TextColor="{DynamicResource ButtonTextColor}"

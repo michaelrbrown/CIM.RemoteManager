@@ -47,12 +47,12 @@
             <Color x:Key="SerialNumberColor">#546e7a</Color>
 
             <!-- Form Colors -->
-            <Color x:Key="HeadingTextColor">#7778909c</Color>
-            <Color x:Key="LabelTextColor">#7778909c</Color>
-            <Color x:Key="EntryTextColor">#7778909c</Color>
+            <Color x:Key="HeadingTextColor">#3B4951</Color>
+            <Color x:Key="LabelTextColor">#42525B</Color>
+            <Color x:Key="EntryTextColor">#42525B</Color>
             <Color x:Key="EntryBackgroundColor">#7778909c</Color>
-            <Color x:Key="ButtonBackgroundColor">#88FFFFFF</Color>
-            <Color x:Key="ButtonTextColor">#222222</Color>
+            <Color x:Key="ButtonBackgroundColor">#0097DF</Color>
+            <Color x:Key="ButtonTextColor">#FFFFFF</Color>
 
             <!-- Sensor List Styles -->
             <Style x:Key="RemoteBackgroundStyle" TargetType="Frame">
