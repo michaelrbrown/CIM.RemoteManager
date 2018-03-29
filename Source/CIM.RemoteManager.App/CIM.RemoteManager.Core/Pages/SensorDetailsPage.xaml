@@ -7,8 +7,8 @@
     <pages:BaseTabbedPage.Resources>
         <ResourceDictionary>
             <xForms:ChartColorCollection x:Key="Colors">
-                <Color>#61AF33</Color>
                 <Color>#0097DF</Color>
+                <Color>#546e7a</Color>
                 <Color>#FFFFC926</Color>
                 <Color>#43a047</Color>
                 <Color>#88FFFFFF</Color>
@@ -76,7 +76,7 @@
                            VerticalOptions="Center" HorizontalOptions="Start"
                            FontSize="18" HorizontalTextAlignment="Center"
                            Text="{Binding SensorName}"
-                           TextColor="{StaticResource HeaderTextColor}" />
+                           TextColor="{StaticResource HeaderSubTextColor}" />
                     <!-- Serial Number -->
                     <Label Margin="5,0,0,0"
                            VerticalOptions="Center" HorizontalOptions="Start"
@@ -88,7 +88,7 @@
                 <StackLayout Grid.Column="2"
                              Margin="0"
                              VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
-                             Orientation="Vertical" Spacing="0">
+                             BackgroundColor="#EEEEEE" Orientation="Vertical" Spacing="0">
                     <!-- Sensor Index -->
                     <Label Margin="5,5,10,0"
                            VerticalOptions="Center" HorizontalOptions="Center"
@@ -113,12 +113,12 @@
                                                VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"
                                                SelectedSegment="0"
                                                TintColor="{StaticResource EntryBackgroundColor}"
-                                               ValueChanged="SegControl_OnValueChanged">
+                                               ValueChanged="SegControl_OnValueChanged" WidthRequest="350">
                     <abstractions:SegmentedControl.Children>
-                        <abstractions:SegmentedControlOption HorizontalOptions="Center" HeightRequest="60" Text="50" WidthRequest="125" />
-                        <abstractions:SegmentedControlOption HorizontalOptions="Center" HeightRequest="60" Text="100" WidthRequest="125" />
-                        <abstractions:SegmentedControlOption HorizontalOptions="Center" HeightRequest="60" Text="200" WidthRequest="125" />
-                        <abstractions:SegmentedControlOption HorizontalOptions="Center" HeightRequest="60" Text="500" WidthRequest="125" />
+                        <abstractions:SegmentedControlOption HorizontalOptions="Center" HeightRequest="60" Text="50" />
+                        <abstractions:SegmentedControlOption HorizontalOptions="Center" HeightRequest="60" Text="100" />
+                        <abstractions:SegmentedControlOption HorizontalOptions="Center" HeightRequest="60" Text="200" />
+                        <abstractions:SegmentedControlOption HorizontalOptions="Center" HeightRequest="60" Text="500" />
                     </abstractions:SegmentedControl.Children>
                 </abstractions:SegmentedControl>
 
@@ -130,8 +130,8 @@
                                      AnimationType="ECG" BackgroundColor="Transparent" HeightRequest="150"
                                      IsBusy="{Binding ProcessingPlotData}"
                                      IsVisible="{Binding ProcessingPlotData}"
-                                     Opacity=".7"
-                                     TextColor="{DynamicResource Tag2Color}"
+                                     Opacity=".5"
+                                     TextColor="{DynamicResource Tag3Color}"
                                      ViewBoxHeight="150" ViewBoxWidth="150" WidthRequest="150" />
             <!-- Chart Control -->
             <xForms:SfChart x:Name="SensorPlotChart" Grid.Row="2" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
@@ -161,11 +161,11 @@
                 </xForms:SfChart.Series>
             </xForms:SfChart>
 
-            <!-- Margin: left, top, right, bottom -->
+            <!-- Debugging -->
             <StackLayout Grid.Row="3"
                          VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
-                         BackgroundColor="{DynamicResource ButtonBackgroundColor}"
-                         HeightRequest="60" Opacity=".6" Orientation="Horizontal" Spacing="0">
+                         BackgroundColor="{DynamicResource RemoteNameBackgroundColor}"
+                         HeightRequest="60" IsVisible="False" Opacity=".6" Orientation="Horizontal" Spacing="0">
                 <Label Margin="5"
                        VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"
                        FontSize="16" LineBreakMode="MiddleTruncation"
@@ -285,7 +285,7 @@
                     <StackLayout Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2"
                                  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
                                  BackgroundColor="{DynamicResource RemoteNameBackgroundColor}"
-                                 HeightRequest="60" Opacity=".6" Orientation="Horizontal" Spacing="0">
+                                 HeightRequest="60" IsVisible="False" Opacity=".6" Orientation="Horizontal" Spacing="0">
                         <Label Margin="5"
                                VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"
                                FontSize="16" LineBreakMode="MiddleTruncation"
@@ -404,7 +404,7 @@
                     <StackLayout Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2"
                                  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
                                  BackgroundColor="{DynamicResource RemoteNameBackgroundColor}"
-                                 HeightRequest="60" Opacity=".6" Orientation="Horizontal" Spacing="0">
+                                 HeightRequest="60" IsVisible="False" Opacity=".6" Orientation="Horizontal" Spacing="0">
                         <Label Margin="5"
                                VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"
                                FontSize="16" LineBreakMode="MiddleTruncation"
@@ -572,7 +572,7 @@
                     <StackLayout Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="4"
                                  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
                                  BackgroundColor="{DynamicResource RemoteNameBackgroundColor}"
-                                 HeightRequest="60" Opacity=".6" Orientation="Horizontal" Spacing="0">
+                                 HeightRequest="60" IsVisible="False" Opacity=".6" Orientation="Horizontal" Spacing="0">
                         <Label Margin="5"
                                VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"
                                FontSize="16" LineBreakMode="MiddleTruncation"
