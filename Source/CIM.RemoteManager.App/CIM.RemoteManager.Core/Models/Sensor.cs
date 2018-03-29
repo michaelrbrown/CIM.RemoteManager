@@ -196,7 +196,15 @@ namespace CIM.RemoteManager.Core.Models
             {
                 if (double.TryParse(_averageValue.ToString(), out double averageValueResult))
                 {
-                    return averageValueResult / 10;
+                    double finalResult = averageValueResult / 10;
+                    if (Math.Abs(finalResult - 32768) < 0)
+                    {
+                        return 0;
+                    }
+                    else
+                    {
+                        return finalResult;
+                    }
                 }
                 // Default
                 return 0;

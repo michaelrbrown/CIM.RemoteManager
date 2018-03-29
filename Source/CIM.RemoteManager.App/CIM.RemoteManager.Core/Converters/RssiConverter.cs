@@ -16,7 +16,8 @@ namespace CIM.RemoteManager.Core.Converters
             {
                 rssiVal = value.ToString();
             }
-                
+
+            // Show RSSI image by signal strength
             bool successParse = int.TryParse(rssiVal, out int rssiValue);
             if (successParse)
             {
@@ -39,7 +40,6 @@ namespace CIM.RemoteManager.Core.Converters
                 {
                     return "rssi_2.png";
                 }
-                
             }
 
             return "rssi_1.png";

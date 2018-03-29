@@ -7,23 +7,25 @@ using ImageSource = Xamarin.Forms.ImageSource;
 
 namespace CIM.RemoteManager.Core.Converters
 {
-    //public class SuggestionItemSelectedEventArgsConverter : IValueConverter
-    //{
-    //    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-    //    {
-    //        if (!(value is Telerik.XamarinForms.Input.AutoComplete.SuggestionItemSelectedEventArgs eventArgs))
+    public class SensorValueValidationConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (double.TryParse(value.ToString(), out double averageValueResult))
+            {
+                if (Math.Abs(averageValueResult) < 0)
+                {
+                    return "";
+                }
+            }
+            return value;
+        }
 
-    //            throw new ArgumentException("Expected SuggestionItemSelectedEventArgs as value", nameof(value));
-
-    //        return eventArgs;
-
-    //    }
-
-    //    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-    //    {
-    //        throw new NotImplementedException();
-    //    }
-    //}
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
 
     public class SelectionChangedEventArgsConverter : IValueConverter
     {
@@ -35,19 +37,6 @@ namespace CIM.RemoteManager.Core.Converters
 
             return eventArgs;
 
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
-    
-    public class GaugeLabelForegroundColorConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return Color.White;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -94,7 +83,7 @@ namespace CIM.RemoteManager.Core.Converters
             throw new NotImplementedException();
         }
     }
-    
+
     public class FileToImageSourceConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -146,7 +135,7 @@ namespace CIM.RemoteManager.Core.Converters
             throw new NotImplementedException();
         }
     }
-    
+
     public class ListToLabelConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

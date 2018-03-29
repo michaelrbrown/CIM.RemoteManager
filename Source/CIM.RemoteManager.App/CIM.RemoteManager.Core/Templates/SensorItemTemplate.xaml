@@ -34,7 +34,7 @@
                                    VerticalOptions="CenterAndExpand" HorizontalOptions="End"
                                    HorizontalTextAlignment="End" LineBreakMode="NoWrap"
                                    Style="{DynamicResource ValueStyle}"
-                                   Text="{Binding AverageValue}"
+                                   Text="{Binding AverageValue, Converter={StaticResource SensorValueValidationConverter}}"
                                    VerticalTextAlignment="Center" />
                             <Label Margin="0,-20,0,0"
                                    VerticalOptions="CenterAndExpand" HorizontalOptions="Start"

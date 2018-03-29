@@ -191,6 +191,7 @@
                 <Setter Property="FontSize" Value="11" />
             </Style>
 
+            <converters:AlarmStatusConverter x:Key="SensorValueValidationConverter" />
             <converters:RssiConverter x:Key="RssiConverter" />
             <converters:AlarmStatusConverter x:Key="AlarmStatusConverter" />
             <converters:AlarmStatusColorConverter x:Key="AlarmStatusColorConverter" />
@@ -205,7 +206,6 @@
             <converters:ColorValidationConverter x:Key="ColorValidationConverter" />
             <converters:BooleanToFriendlyConverter x:Key="BooleanToFriendlyConverter" />
             <converters:HasContentToVisibleConverter x:Key="HasContentToVisibleConverter" />
-            <converters:GaugeLabelForegroundColorConverter x:Key="GaugeLabelForegroundColorConverter" />
             <converters:SelectionChangedEventArgsConverter x:Key="SelectionChangedEventArgsConverter" />
 
         </ResourceDictionary>
