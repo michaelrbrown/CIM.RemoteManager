@@ -47,9 +47,9 @@
             <Color x:Key="SerialNumberColor">#546e7a</Color>
 
             <!-- Form Colors -->
-            <Color x:Key="HeadingTextColor">#3B4951</Color>
-            <Color x:Key="LabelTextColor">#42525B</Color>
-            <Color x:Key="EntryTextColor">#42525B</Color>
+            <Color x:Key="HeadingTextColor">#262E33</Color>
+            <Color x:Key="LabelTextColor">#262E33</Color>
+            <Color x:Key="EntryTextColor">#262E33</Color>
             <Color x:Key="EntryBackgroundColor">#7778909c</Color>
             <Color x:Key="ButtonBackgroundColor">#0097DF</Color>
             <Color x:Key="ButtonTextColor">#FFFFFF</Color>
@@ -153,7 +153,7 @@
             <Style x:Key="FormLabelStyle" TargetType="Label">
                 <Setter Property="FontSize" Value="16" />
                 <Setter Property="TextColor" Value="{StaticResource LabelTextColor}" />
-                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="FontAttributes" Value="None" />
                 <Setter Property="HorizontalTextAlignment" Value="End" />
                 <Setter Property="VerticalTextAlignment" Value="Center" />
                 <!-- Margin: left, top, right, bottom -->
@@ -162,7 +162,7 @@
             <Style x:Key="FormValueStyle" TargetType="Entry">
                 <Setter Property="FontSize" Value="16" />
                 <Setter Property="TextColor" Value="{StaticResource EntryTextColor}" />
-                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="FontAttributes" Value="None" />
                 <Setter Property="HorizontalTextAlignment" Value="Start" />
                 <Setter Property="VerticalOptions" Value="Center" />
                 <!-- Margin: left, top, right, bottom -->
