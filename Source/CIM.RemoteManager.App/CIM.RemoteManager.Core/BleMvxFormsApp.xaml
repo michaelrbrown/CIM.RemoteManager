@@ -25,13 +25,15 @@
             <Color x:Key="IndicatorTextColor">#FF3C3C3C</Color>
 
             <!-- Chart Colors -->
-            <Color x:Key="ChartForeground">White</Color>
+            <Color x:Key="ChartForeground">#01649D</Color>
             <Color x:Key="ChartForegroundSemiTransparent">#88FFFFFF</Color>
 
             <!-- Page Colors -->
-            <Color x:Key="HeaderBackgroundColor">#B9DEF5</Color>
-            <Color x:Key="HeaderTextColor">#01649D</Color>
-            <Color x:Key="HeaderSubTextColor">#546e7a</Color>
+            <Color x:Key="HeaderBackgroundColor">#01649D</Color>
+            <Color x:Key="HeaderTextColor">#FFFFFF</Color>
+            <Color x:Key="HeaderSubTextColor">#FFFFFF</Color>
+            <Color x:Key="SegmentedControlTintColor">#01649D</Color>
+            <Color x:Key="SegmentedControlTextColor">#FFFFFF</Color>
 
             <!-- Sensor Colors -->
             <Color x:Key="RemoteNameBackgroundColor">#0097DE</Color>
