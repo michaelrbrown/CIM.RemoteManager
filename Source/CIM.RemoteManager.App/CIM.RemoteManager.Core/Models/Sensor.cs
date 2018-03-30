@@ -34,7 +34,7 @@ namespace CIM.RemoteManager.Core.Models
                 if (!string.IsNullOrEmpty(_sensorIndex.ToString()))
                 {
                     // Return combined sensor index plus serial number
-                    return $"{_sensorIndex} - {_serialNumber}";
+                    return $"({_sensorIndex}) {_serialNumber}";
                 }
                 // Default
                 return _serialNumber;

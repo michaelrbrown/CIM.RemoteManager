@@ -559,41 +559,122 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// <summary>
         /// Low alarm limit.
         /// </summary>
-        private double _lowAlarmLimit;
-        public double LowAlarmLimit
+        private double? _lowAlarmLimit;
+        public double? LowAlarmLimit
         {
-            get => _lowAlarmLimit;
-            set => SetProperty(ref _lowAlarmLimit, value);
+            get
+            {
+                if (double.TryParse(_lowAlarmLimit.ToString(), out double lowAlarmLimitResult))
+                {
+                    if (Math.Abs(lowAlarmLimitResult - 32768) < 0)
+                    {
+                        return null;
+                    }
+                    // Default
+                    return lowAlarmLimitResult;
+                }
+
+                return lowAlarmLimitResult;
+            }
+            set
+            {
+                if (!bool.Equals(this._lowAlarmLimit, value))
+                {
+                    this._lowAlarmLimit = value;
+                    RaisePropertyChanged(() => LowAlarmLimit);
+                }
+            }
         }
 
         /// <summary>
         /// Low warning limit.
         /// </summary>
-        private double _lowWarningLimit;
-        public double LowWarningLimit
+        private double? _lowWarningLimit;
+        public double? LowWarningLimit
         {
-            get => _lowWarningLimit;
-            set => SetProperty(ref _lowWarningLimit, value);
+            get
+            {
+                if (double.TryParse(_lowWarningLimit.ToString(), out double lowWarningLimitResult))
+                {
+                    if (Math.Abs(lowWarningLimitResult - 32768) < 0)
+                    {
+                        return null;
+                    }
+                    // Default
+                    return lowWarningLimitResult;
+                }
+                // Default
+                return lowWarningLimitResult;
+            }
+            set
+            {
+                if (!bool.Equals(this._lowWarningLimit, value))
+                {
+                    this._lowWarningLimit = value;
+                    RaisePropertyChanged(() => LowWarningLimit);
+                }
+            }
         }
 
         /// <summary>
         /// High alarm limit.
         /// </summary>
-        private double _highAlarmLimit;
-        public double HighAlarmLimit
+
+        private double? _highAlarmLimit;
+        public double? HighAlarmLimit
         {
-            get => _highAlarmLimit;
-            set => SetProperty(ref _highAlarmLimit, value);
+            get
+            {
+                if (double.TryParse(_highAlarmLimit.ToString(), out double highAlarmLimitResult))
+                {
+                    if (Math.Abs(highAlarmLimitResult - 32768) < 0)
+                    {
+                        return null;
+                    }
+                    // Default
+                    return highAlarmLimitResult;
+                }
+                // Default
+                return highAlarmLimitResult;
+            }
+            set
+            {
+                if (!bool.Equals(this._highAlarmLimit, value))
+                {
+                    this._highAlarmLimit = value;
+                    RaisePropertyChanged(() => HighAlarmLimit);
+                }
+            }
         }
 
         /// <summary>
         /// High warning limit.
         /// </summary>
-        private double _highWarningLimit;
-        public double HighWarningLimit
+        private double? _highWarningLimit;
+        public double? HighWarningLimit
         {
-            get => _highWarningLimit;
-            set => SetProperty(ref _highWarningLimit, value);
+            get
+            {
+                if (double.TryParse(_highWarningLimit.ToString(), out double highWarningLimitResult))
+                {
+                    if (Math.Abs(highWarningLimitResult - 32768) < 0)
+                    {
+                        return null;
+                    }
+                    // Default
+                    return highWarningLimitResult;
+                }
+
+                return highWarningLimitResult;
+            }
+            set
+            {
+                if (!bool.Equals(this._highWarningLimit, value))
+                {
+                    this._highWarningLimit = value;
+                    RaisePropertyChanged(() => HighWarningLimit);
+                }
+            }
         }
 
         #endregion

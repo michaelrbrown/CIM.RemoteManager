@@ -55,7 +55,7 @@
                 <!-- Margin: left, top, right, bottom -->
                 <StackLayout Grid.Column="0" Margin="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Spacing="0">
                     <!-- Sensor Image -->
-                    <Image Margin="10,5,0,5"
+                    <Image Margin="10,15,0,5"
                            VerticalOptions="Center" HorizontalOptions="Center"
                            Aspect="AspectFit" HeightRequest="40"
                            Source="{Binding SensorImage}" />
@@ -183,12 +183,9 @@
                     </Grid.ColumnDefinitions>
 
                     <!-- Margin: left, top, right, bottom -->
-                    <StackLayout Grid.Column="0"
-                                 Margin="0"
-                                 VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
-                                 HeightRequest="50" Spacing="0">
+                    <StackLayout Grid.Column="0" Margin="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Spacing="0">
                         <!-- Sensor Image -->
-                        <Image Margin="10,5,0,5"
+                        <Image Margin="10,15,0,5"
                                VerticalOptions="Center" HorizontalOptions="Center"
                                Aspect="AspectFit" HeightRequest="40"
                                Source="{Binding SensorImage}" />
@@ -316,14 +313,11 @@
                     </Grid.ColumnDefinitions>
 
                     <!-- Margin: left, top, right, bottom -->
-                    <StackLayout Grid.Column="0"
-                                 Margin="0"
-                                 VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
-                                 HeightRequest="50" Spacing="0">
+                    <StackLayout Grid.Column="0" Margin="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Spacing="0">
                         <!-- Sensor Image -->
-                        <Image Margin="10,5,0,5"
+                        <Image Margin="10,15,0,5"
                                VerticalOptions="Center" HorizontalOptions="Center"
-                               Aspect="AspectFit" HeightRequest="50"
+                               Aspect="AspectFit" HeightRequest="40"
                                Source="{Binding SensorImage}" />
                     </StackLayout>
 
@@ -444,14 +438,11 @@
                     </Grid.ColumnDefinitions>
 
                     <!-- Margin: left, top, right, bottom -->
-                    <StackLayout Grid.Column="0"
-                                 Margin="0"
-                                 VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
-                                 HeightRequest="50" Spacing="0">
+                    <StackLayout Grid.Column="0" Margin="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Spacing="0">
                         <!-- Sensor Image -->
-                        <Image Margin="10,5,0,5"
+                        <Image Margin="10,15,0,5"
                                VerticalOptions="Center" HorizontalOptions="Center"
-                               Aspect="AspectFit" HeightRequest="50"
+                               Aspect="AspectFit" HeightRequest="40"
                                Source="{Binding SensorImage}" />
                     </StackLayout>
 
