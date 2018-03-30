@@ -55,7 +55,7 @@
                 <!-- Margin: left, top, right, bottom -->
                 <StackLayout Grid.Column="0" Margin="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Spacing="0">
                     <!-- Sensor Image -->
-                    <Image Margin="10,15,0,5"
+                    <Image Margin="10,10,0,5"
                            VerticalOptions="Center" HorizontalOptions="Center"
                            Aspect="AspectFit" HeightRequest="40"
                            Source="{Binding SensorImage}" />
@@ -185,7 +185,7 @@
                     <!-- Margin: left, top, right, bottom -->
                     <StackLayout Grid.Column="0" Margin="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Spacing="0">
                         <!-- Sensor Image -->
-                        <Image Margin="10,15,0,5"
+                        <Image Margin="10,10,0,5"
                                VerticalOptions="Center" HorizontalOptions="Center"
                                Aspect="AspectFit" HeightRequest="40"
                                Source="{Binding SensorImage}" />
@@ -315,7 +315,7 @@
                     <!-- Margin: left, top, right, bottom -->
                     <StackLayout Grid.Column="0" Margin="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Spacing="0">
                         <!-- Sensor Image -->
-                        <Image Margin="10,15,0,5"
+                        <Image Margin="10,10,0,5"
                                VerticalOptions="Center" HorizontalOptions="Center"
                                Aspect="AspectFit" HeightRequest="40"
                                Source="{Binding SensorImage}" />
@@ -440,7 +440,7 @@
                     <!-- Margin: left, top, right, bottom -->
                     <StackLayout Grid.Column="0" Margin="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Spacing="0">
                         <!-- Sensor Image -->
-                        <Image Margin="10,15,0,5"
+                        <Image Margin="10,10,0,5"
                                VerticalOptions="Center" HorizontalOptions="Center"
                                Aspect="AspectFit" HeightRequest="40"
                                Source="{Binding SensorImage}" />
