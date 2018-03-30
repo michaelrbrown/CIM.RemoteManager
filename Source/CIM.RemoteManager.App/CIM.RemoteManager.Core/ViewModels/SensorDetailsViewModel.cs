@@ -566,7 +566,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             {
                 if (double.TryParse(_lowAlarmLimit.ToString(), out double lowAlarmLimitResult))
                 {
-                    if (Math.Abs(lowAlarmLimitResult - 32768) < 0)
+                    if (Convert.ToInt32(lowAlarmLimitResult) == 0)
                     {
                         return null;
                     }
@@ -596,7 +596,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             {
                 if (double.TryParse(_lowWarningLimit.ToString(), out double lowWarningLimitResult))
                 {
-                    if (Math.Abs(lowWarningLimitResult - 32768) < 0)
+                    if (Convert.ToInt32(lowWarningLimitResult) == 0)
                     {
                         return null;
                     }
@@ -627,7 +627,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             {
                 if (double.TryParse(_highAlarmLimit.ToString(), out double highAlarmLimitResult))
                 {
-                    if (Math.Abs(highAlarmLimitResult - 32768) < 0)
+                    if (Convert.ToInt32(highAlarmLimitResult) == 0)
                     {
                         return null;
                     }
@@ -657,7 +657,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             {
                 if (double.TryParse(_highWarningLimit.ToString(), out double highWarningLimitResult))
                 {
-                    if (Math.Abs(highWarningLimitResult - 32768) < 0)
+                    if (Convert.ToInt32(highWarningLimitResult) == 0)
                     {
                         return null;
                     }
