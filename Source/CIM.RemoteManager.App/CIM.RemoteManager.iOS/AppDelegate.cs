@@ -45,7 +45,7 @@ namespace CIM.RemoteManager.iOS
             _window.MakeKeyAndVisible();
 
             // Setup color scheme
-            UIColor accentColor = UIColor.FromRGB(0, 151, 223);
+            UIColor accentColor = UIColor.FromRGB(1, 100, 157);
             // UISlider
             UISlider.Appearance.TintColor = accentColor;
             UISlider.Appearance.ThumbTintColor = accentColor;

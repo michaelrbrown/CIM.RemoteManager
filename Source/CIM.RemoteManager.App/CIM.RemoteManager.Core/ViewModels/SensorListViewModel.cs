@@ -826,9 +826,6 @@ namespace CIM.RemoteManager.Core.ViewModels
             {
                 if (IsLoading)
                 {
-
-                    //_userDialogs.Alert($"IsLoading: {IsLoading.ToString()}; Updates started: {UpdatesStarted.ToString()}; RxTryCount: {RxTryCount.ToString()}");
-
                     // Make sure we are done with our initialization before starting updates
                     while (IsLoading && !UpdatesStarted && RxTryCount < 100)
                     {
@@ -852,7 +849,6 @@ namespace CIM.RemoteManager.Core.ViewModels
                 }
                 else
                 {
-                    //_userDialogs.Alert("HandleUpdatesStarted...");
                     // Initialization is done so let's just start
                     await HandleUpdatesStarted();
                 }
