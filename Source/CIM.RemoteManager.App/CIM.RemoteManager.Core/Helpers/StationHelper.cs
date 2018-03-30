@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Plugin.BLE.Abstractions.Contracts;
 
 namespace CIM.RemoteManager.Core.Helpers
@@ -16,7 +17,7 @@ namespace CIM.RemoteManager.Core.Helpers
         /// </remarks>
         /// <param name="txCharacteristic">Bluetooth service characteristic</param>
         /// <param name="remoteUnixDateTime">The remote Unix date time.</param>
-        public async void HandleRemoteDateTimeValidation(ICharacteristic txCharacteristic, int remoteUnixDateTime)
+        public async Task HandleRemoteDateTimeValidation(ICharacteristic txCharacteristic, int remoteUnixDateTime)
         {
             // Validate our station Unix time converted to windows time is less
             // than 2009.  If it is we know the station time needs to be set.

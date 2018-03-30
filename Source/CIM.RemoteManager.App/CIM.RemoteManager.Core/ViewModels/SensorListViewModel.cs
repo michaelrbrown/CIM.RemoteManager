@@ -371,37 +371,6 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
-        /// Checks if remote date year is before 2009 which means the time has not been set yet.
-        /// Sets the time to Unix time if this is true.
-        /// </summary>
-        /// <param name="txCharacteristic">The TX characteristic.</param>
-        /// <param name="remoteUnixDateTime">The remote Unix date time.</param>
-        public async void HandleRemoteDateTimeValidation(ICharacteristic txCharacteristic, int remoteUnixDateTime)
-        {
-            Device.BeginInvokeOnMainThread(() => {
-                _userDialogs.Alert($"(F) Message Counters TimeStamp: {remoteUnixDateTime.UnixTimeStampToDateTime().Year}", "CIMScan RemoteManager");
-            });
-
-            // Validate our station Unix time converted to windows time is less
-            // than 2009.  If it is we know the station time needs to be set.
-            if (remoteUnixDateTime.UnixTimeStampToDateTime().Year < 2009)
-            {
-                // Get Unix timestamp "now" as UTC
-                Int32 unixTimestampUtc = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
-
-                // Format DA-12 station Unix timestamp
-                // T - is to set the station time,
-                // 0 - is the data type
-                // 00 - device index / unused
-                // Next set of digits is Unix time UTC
-                string remoteUnitTimestamp = "{T000" + unixTimestampUtc + "}";
-
-                // Send set Unix UTC time command to remote
-                await txCharacteristic.WriteAsync(remoteUnitTimestamp.StrToByteArray()).ConfigureAwait(true);
-            }
-        }
-
-        /// <summary>
         /// Serialize tab based sensor data to strongly typed Sensor model.
         /// </summary>
         /// <param name="sensorValues"></param>
@@ -418,10 +387,6 @@ namespace CIM.RemoteManager.Core.ViewModels
             switch (conversionType)
                 {
                     case "F":
-                        //_userDialogs.Alert($"(F) Message Counters Data: {sensorValues}", "CIMScan RemoteManager");
-
-                        //_userDialogs.Alert($"(F) before here", "CIMScan RemoteManager");
-
                         // "F" Message counter data serialization
                         TotalOutgoingMessages = sensorValues.Substring(1, 2).SafeHexToInt();
                         TotalOutgoingRetries = sensorValues.Substring(3, 2).SafeHexToInt();
@@ -433,63 +398,21 @@ namespace CIM.RemoteManager.Core.ViewModels
                         TotalRecordsInHistoryBuffer = sensorValues.Substring(15, 2).SafeHexToInt();
                         CurrentDateTime = sensorValues.Substring(19, 8).SafeHexToInt();
 
-
-
-                        //_userDialogs.Alert($"(F) here current DateTime:{CurrentDateTime.ToString()}", "CIMScan RemoteManager");
-
-                        //_userDialogs.Alert($"(F) TotalActiveSensors: {TotalActiveSensors}", "CIMScan RemoteManager");
-                        _userDialogs.Alert($"(F) CurrentDateTime Year: {CurrentDateTime.UnixTimeStampToDateTime().Year.ToString()}", "CIMScan RemoteManager");
-
-
-                        return;
-
-                        // Validate our station Unix time converted to windows time is less
-                        // than 2009.  If it is we know the station time needs to be set.
-                        if (CurrentDateTime.UnixTimeStampToDateTime().Year < 2009)
+                        // Be certain we have a parsable integer
+                        if (int.TryParse(CurrentDateTime.ToString(), out int currentDateTimeResult))
                         {
-                            // Get Unix timestamp "now" as UTC
-                            Int32 unixTimestampUtc = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
-
-                            _userDialogs.Alert($"(F) unixTimestampUtc: {unixTimestampUtc}", "CIMScan RemoteManager");
-
-                            // Format DA-12 station Unix timestamp
-                            // T - is to set the station time,
-                            // 0 - is the data type
-                            // 00 - device index / unused
-                            // Next set of digits is Unix time UTC
-                            string remoteUnitTimestamp = "{T000" + unixTimestampUtc + "}";
-                            //
-                            //_userDialogs.Alert($"(F) TotalActiveSensors: {TotalActiveSensors}", "CIMScan RemoteManager");
-                            _userDialogs.Alert($"(F) New TimeStamp: {remoteUnitTimestamp}", "CIMScan RemoteManager");
-
-
-                            // Make sure we can write characteristic data to remote
-                            if (TxCharacteristic.CanWrite)
-                            {
-                            // Send set Unix UTC time command to remote
-                                await TxCharacteristic.WriteAsync(remoteUnitTimestamp.StrToByteArray()).ConfigureAwait(true);
-                            }
-                            else
-                            {
-                                _userDialogs.Alert("Cannot write characteristic data to remote (DateTime)!", "CIMScan Remote Manager");
-                            }
+                            // New instance of station helper
+                            var stationHelper = new StationHelper();
+                            // Validate our current remote Unix date time. Update to current Unix UTC date time
+                            // if year < 2009.
+                            await stationHelper.HandleRemoteDateTimeValidation(TxCharacteristic, currentDateTimeResult);
                         }
-
-                // New instance of station helper
-                //var stationHelper = new StationHelper();
-                // Validate our current remote Unix date time. Update to current Unix UTC date time
-                // if year < 2009.
-                //stationHelper.HandleRemoteDateTimeValidation(TxCharacteristic, CurrentDateTime);
-                break;
+                        break;
                     case "A":
                         // "A" Sensor data serialization
                         var sensorListItemA = SensorCollection.FirstOrDefault(s => s.SensorIndex == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('A') + 1).SafeConvert<int>(0));
                         if (sensorListItemA != null)
                         {
-                            //_userDialogs.Alert($"(A) Sensor Index: { splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('A') + 1).SafeConvert<int>(0)}", "CIMScan RemoteManager");
-
-                            // Update sensor items in list
-                            //sensorListItemA.SensorIndex = splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('A') + 1).SafeConvert<int>(0);
                             sensorListItemA.SerialNumber = splitSensorValues[1];
                             sensorListItemA.Name = splitSensorValues[2];
                             sensorListItemA.SensorType = splitSensorValues[3];
@@ -500,15 +423,12 @@ namespace CIM.RemoteManager.Core.ViewModels
                             sensorListItemA.CurrentValue = splitSensorValues[8].SafeHexToDouble();
                             sensorListItemA.DecimalLocation = splitSensorValues[9].SafeConvert<int>(0);
                             sensorListItemA.StatisticsTotalCalcSettings = splitSensorValues[10];
+
                             // Notify property changed to update UI
                             RaisePropertyChanged(() => SensorCollection);
                         }
                         else
                         {
-                            //_userDialogs.Alert($"(A) (NEW REC) Sensor Index: {splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('A') + 1).SafeConvert<int>(0)}", "CIMScan RemoteManager");
-                            //_userDialogs.Alert($"(A) Serial Number: {splitSensorValues[1]}", "CIMScan RemoteManager");
-                            //_userDialogs.Alert($"(A) Average Value: {splitSensorValues[7].SafeHexToDouble().ToString()}", "CIMScan RemoteManager");
-
                             // Create new sensor record for list
                             var sensor = new Sensor
                             {
@@ -524,6 +444,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                                 DecimalLocation = splitSensorValues[9].SafeConvert<int>(0),
                                 StatisticsTotalCalcSettings = splitSensorValues[10]
                             };
+
                             // Add sensor to list
                             SensorCollection.Add(sensor);
                         }
@@ -534,15 +455,11 @@ namespace CIM.RemoteManager.Core.ViewModels
                         var sensorListItemB = SensorCollection.FirstOrDefault(s => s.SensorIndex == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('B') + 1).SafeConvert<int>(0));
                         if (sensorListItemB != null)
                         {
-                            //_userDialogs.Alert($"(B) Sensor Index: {splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('B') + 1).SafeConvert<int>(0).ToString()}", "CIMScan RemoteManager");
-                            //_userDialogs.Alert($"(B) Sensor Index: {splitSensorValues[0]}", "CIMScan RemoteManager");
-                            //_userDialogs.Alert($"(B) Average Value: {splitSensorValues[2].SafeHexToDouble().ToString()}", "CIMScan RemoteManager");
-
-                            //sensorListItemB.SensorIndex = splitSensorValues[0].SafeHexToInt();
                             sensorListItemB.TimeStamp = splitSensorValues[1].SafeHexToInt();
                             sensorListItemB.AverageValue = splitSensorValues[2].SafeHexToDouble();
                             sensorListItemB.AlarmStatus = splitSensorValues[3].SafeHexToInt();
                         }
+
                         // Notify property changed to update UI
                         RaisePropertyChanged(() => SensorCollection);
                         break;
@@ -554,7 +471,6 @@ namespace CIM.RemoteManager.Core.ViewModels
             catch (Exception ex)
             {
                 HockeyApp.MetricsManager.TrackEvent($"(SerializeStringToSensor) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
-                //_userDialogs.Alert($"(SerializeStringToSensor) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
             }
         }
 

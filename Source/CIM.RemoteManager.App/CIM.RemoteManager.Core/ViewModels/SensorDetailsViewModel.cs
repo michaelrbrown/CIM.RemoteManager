@@ -1006,9 +1006,11 @@ namespace CIM.RemoteManager.Core.ViewModels
                     case "J":
                             // New instance of sensor plot
                             var sensorPlot = new SensorPlot();
+
                             // Defaults
                             int plotIndex = 1;
                             bool plotTime = true;
+
                             // Clear Plot collection
                             SensorPlotCollection.Clear();
 
@@ -1045,23 +1047,11 @@ namespace CIM.RemoteManager.Core.ViewModels
 
                             // Release processing
                             ProcessingPlotData = false;
-
-                            // Let the plot know to resume series notifications
-                            //MessagingCenter.Send<SensorDetailsViewModel>(this, "Resume");
-
-                            // Refresh plot data after we wrap up this plot charting
-                            //await RefreshPlotData();
                         break;
                     case "H":
-                        //_userDialogs.Alert($"(H) Statistics Data: {sensorValues}", "CIMScan RemoteManager");
-                        //_userDialogs.Alert($"(H) SensorIndexSelected: {SensorIndexSelected}", "CIMScan RemoteManager");
-                        //_userDialogs.Alert($"(H) Sensor Index: {splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('H') + 1).SafeConvert<int>(0)}", "CIMScan RemoteManager");
-
                         // Only update the values if we have a match
                         if (SensorIndexSelected.GetSensorIndexAsInt() == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('H') + 1).SafeConvert<int>(0))
                         {
-                            //_userDialogs.Alert($"(H) Sensor Index: {splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('H') + 1).SafeConvert<int>(0)}", "CIMScan RemoteManager");
-
                             // "H" Sensor data serialization
                             MaximumValue = splitSensorValues[1].SafeHexToDouble();
                             MaximumOccuranceTimeStamp = splitSensorValues[2].SafeHexToInt();
@@ -1073,49 +1063,34 @@ namespace CIM.RemoteManager.Core.ViewModels
                             // Show refreshing of chart via toast
                             _userDialogs.InfoToast("Refreshing Statistics...", TimeSpan.FromSeconds(1));
                         }
-
                         break;
                     case "G":
-                        //_userDialogs.Alert($"(G) Limits Data: {sensorValues}", "CIMScan RemoteManager");
-                        //_userDialogs.Alert($"(G) SensorIndexSelected: {SensorIndexSelected}", "CIMScan RemoteManager");
-                        //_userDialogs.Alert($"(G) Sensor Index: {splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('G') + 1).SafeConvert<int>(0)}", "CIMScan RemoteManager");
-
                         // Only update the values if we have a match
                         if (SensorIndexSelected.GetSensorIndexAsInt() == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('G') + 1).SafeConvert<int>(0))
                         {
-                            //_userDialogs.Alert($"(G) Sensor Index: {splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('G') + 1).SafeConvert<int>(0)}", "CIMScan RemoteManager");
-
                             // "G" Sensor data serialization
                             AlarmStatus = splitSensorValues[1].SafeHexToInt();
-                            //AlarmBeingProcessed = splitSensorValues[2].SafeHexToInt();
                             AlarmDelay = splitSensorValues[2].SafeHexToDouble();
                             LowAlarmLimit = splitSensorValues[3].SafeHexToInt();
                             LowWarningLimit = splitSensorValues[4].SafeHexToDouble();
                             HighWarningLimit = splitSensorValues[5].SafeHexToInt();
                             HighAlarmLimit = splitSensorValues[6].SafeHexToDouble();
+
                             // Show refreshing of chart via toast
                             _userDialogs.InfoToast("Refreshing Limits...", TimeSpan.FromSeconds(1));
                         }
-
                         break;
                     case "C":
-                        //Application.Current.MainPage.DisplayAlert("C", splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('A') + 1).SafeConvert<int>(0).ToString(), "Cancel");
-
                         // "C" Sensor data serialization
                         // Update Sensor list by index
                         if (SensorIndexSelected.GetSensorIndexAsInt() == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('C') + 1).SafeConvert<int>(0))
                         {
-                            //Application.Current.MainPage.DisplayAlert("Old value: ", sensorListItem.AverageValue.ToString(), "Cancel");
-                            //await Application.Current.MainPage.DisplayAlert("(C) CurrentValue: ", splitSensorValues[1].SafeHexToDouble().ToString(), "Cancel");
-
-                            //_userDialogs.InfoToast($"(C) CurrentValue: {splitSensorValues[1].SafeHexToDouble().ToString()}", TimeSpan.FromSeconds(5));
-
                             TimeStamp = splitSensorValues[0].SafeHexToInt();
                             CurrentValue = splitSensorValues[1].SafeHexToDouble();
+
                             // Show refreshing of chart via toast
                             _userDialogs.InfoToast("Refreshing Settings...", TimeSpan.FromSeconds(1));
                         }
-
                         break;
                     case "F":
                         // "F" Message counter data serialization
@@ -1129,13 +1104,18 @@ namespace CIM.RemoteManager.Core.ViewModels
                         TotalRecordsInHistoryBuffer = sensorValues.Substring(15, 2).SafeHexToInt();
                         CurrentDateTime = sensorValues.Substring(19, 8).SafeHexToInt();
 
-                        //_userDialogs.Alert($"(F) Message Counters Data: {sensorValues}", "CIMScan RemoteManager");
-
-                        //_userDialogs.Alert($"(F) Message Counters TotalActiveSensors: {TotalActiveSensors}", "CIMScan RemoteManager");
-                        //_userDialogs.Alert($"(F) Message Counters CurrentDateTime: {CurrentDateTime}", "CIMScan RemoteManager");
-
+                        // Be certain we have a parsable integer
+                        if (int.TryParse(CurrentDateTime.ToString(), out int currentDateTimeResult))
+                        {
+                            // New instance of station helper
+                            var stationHelper = new StationHelper();
+                            // Validate our current remote Unix date time. Update to current Unix UTC date time
+                            // if year < 2009.
+                            await stationHelper.HandleRemoteDateTimeValidation(TxCharacteristic, currentDateTimeResult);
+                        }
                         break;
                     default:
+                        // Handle any defaults...
                         if (SensorCommandType == SensorCommand.Plot)
                         {
 
@@ -1148,7 +1128,6 @@ namespace CIM.RemoteManager.Core.ViewModels
                         {
 
                         }
-
                         break;
                 }
             }
@@ -1159,8 +1138,6 @@ namespace CIM.RemoteManager.Core.ViewModels
                 HockeyApp.MetricsManager.TrackEvent($"(SerializeStringToSensor) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
                 // Show refreshing of chart via toast
                 //_userDialogs.InfoToast($"(SerializeStringToSensor) Message: {ex.Message};", TimeSpan.FromSeconds(4));
-                //await Application.Current.MainPage.DisplayAlert("CIMScan", splitSensorValues.ToString(), "Cancel");
-                //_userDialogs.Alert($"(SerializeStringToSensor) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
             }
         }
 
