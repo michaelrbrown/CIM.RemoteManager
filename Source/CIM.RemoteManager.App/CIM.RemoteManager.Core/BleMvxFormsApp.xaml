@@ -36,7 +36,7 @@
             <Color x:Key="SegmentedControlTextColor">#FFFFFF</Color>
 
             <!-- Sensor Colors -->
-            <Color x:Key="RemoteNameBackgroundColor">#0097DE</Color>
+            <Color x:Key="RemoteNameBackgroundColor">#62B034</Color>
             <Color x:Key="CardBackgroundColor">#eceff1</Color>
             <Color x:Key="FooterBackgroundColor">#B9DEF5</Color>
             <Color x:Key="NameColor">#01649D</Color>
@@ -44,7 +44,7 @@
             <Color x:Key="TimeStampColor">#546e7a</Color>
             <Color x:Key="MoreIconColor">#B9DEF5</Color>
             <Color x:Key="ValueColor">#01649D</Color>
-            <Color x:Key="StatusColor">#43a047</Color>
+            <Color x:Key="StatusColor">#62B034</Color>
             <Color x:Key="OutlineColor">#eeeeee</Color>
             <Color x:Key="SerialNumberColor">#546e7a</Color>
 
@@ -53,7 +53,7 @@
             <Color x:Key="LabelTextColor">#262E33</Color>
             <Color x:Key="EntryTextColor">#262E33</Color>
             <Color x:Key="EntryBackgroundColor">#7778909c</Color>
-            <Color x:Key="ButtonBackgroundColor">#0097DF</Color>
+            <Color x:Key="ButtonBackgroundColor">#01649D</Color>
             <Color x:Key="ButtonTextColor">#FFFFFF</Color>
 
             <!-- Sensor List Styles -->
