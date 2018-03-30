@@ -1278,15 +1278,6 @@ namespace CIM.RemoteManager.Core.ViewModels
         public MvxCommand RefreshSensorDataCommand => new MvxCommand(async () =>
         {
             await RefreshPlotData();
-            //if (!UpdatesStarted)
-            //{
-            //    StartUpdates();
-            //}
-            //else
-            //{
-            //    StopUpdates();
-            //    StartUpdates();
-            //}
         });
 
         /// <summary>
@@ -1329,7 +1320,22 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// <summary>
         /// Save sensor calibration offset and scale.
         /// </summary>
-        public MvxCommand SaveSensorCalibration => new MvxCommand(SaveSensorCalibrationData);
+        public MvxCommand SaveSensorCalibration => new MvxCommand(async () =>
+        {
+
+            // User dialog prompting for save/cancel
+            var result = await UserDialogs.Instance.ConfirmAsync(new ConfirmConfig
+            {
+                Title = "Confirm Sensor Calibration",
+                Message = "Are you sure you wish to save?",
+                OkText = "OK",
+                CancelText = "Cancel"
+            }).ConfigureAwait(true);
+
+            // Process save if user said OK
+            if (result) SaveSensorCalibrationData();
+        });
+
 
         /// <summary>
         /// Load more plot data
