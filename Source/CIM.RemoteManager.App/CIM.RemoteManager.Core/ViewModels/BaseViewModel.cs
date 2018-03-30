@@ -101,7 +101,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             var characteristicId = parameters.Data[CharacteristicIdKey];
             return await service.GetCharacteristicAsync(Guid.Parse(characteristicId));
         }
-        
+
         protected async Task<IDescriptor> GetDescriptorFromBundleAsync(IMvxBundle parameters)
         {
             var characteristic = await GetCharacteristicFromBundleAsync(parameters);
