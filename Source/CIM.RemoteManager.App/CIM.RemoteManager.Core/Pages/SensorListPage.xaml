@@ -95,10 +95,9 @@
             <DataTemplate>
                 <ViewCell>
                     <ViewCell.View>
-                        <Frame Margin="5" Padding="10"
+                        <Frame Margin="0" Padding="15"
                                VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
-                               BackgroundColor="{StaticResource AppBaseColor}"
-                               CornerRadius="10" HasShadow="False">
+                               BackgroundColor="Transparent" CornerRadius="10" HasShadow="False">
                             <!-- Margin: left, top, right, bottom -->
                             <Label Margin="0,0,0,0"
                                    VerticalOptions="Center" HorizontalOptions="CenterAndExpand"

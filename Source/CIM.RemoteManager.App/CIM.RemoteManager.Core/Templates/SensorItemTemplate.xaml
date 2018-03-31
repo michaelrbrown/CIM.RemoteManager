@@ -53,23 +53,24 @@
             <Grid BackgroundColor="{Binding AlarmStatus, Converter={StaticResource AlarmStatusColorConverter}}" Style="{DynamicResource Footer}">
 
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="80" />
+                    <ColumnDefinition Width="60" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <Frame Margin="5" Padding="5"
+                <Frame Grid.Column="0"
+                       Margin="5" Padding="5"
                        VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
                        BackgroundColor="{StaticResource SensorIndexFrameColor}"
-                       CornerRadius="50" HasShadow="False" WidthRequest="80">
+                       CornerRadius="20" HasShadow="False" HeightRequest="60" WidthRequest="60">
                     <Label HorizontalTextAlignment="Start" LineBreakMode="NoWrap" Style="{DynamicResource SensorIndexStyle}" Text="{Binding SensorIndex}" />
                 </Frame>
 
-                <StackLayout Grid.Column="0" Orientation="Horizontal" Spacing="0">
+                <StackLayout Grid.Column="1" Orientation="Horizontal" Spacing="0">
                     <Label HorizontalTextAlignment="Start" LineBreakMode="TailTruncation" Style="{DynamicResource SerialNumberStyle}" Text="{Binding SensorSerialNumber}" VerticalTextAlignment="Center" />
                 </StackLayout>
 
-                <StackLayout Grid.Column="1" Spacing="0">
+                <StackLayout Grid.Column="2" Spacing="0">
                     <Label VerticalOptions="Center"
                            HorizontalTextAlignment="End"
                            Style="{DynamicResource StatusStyle}"
