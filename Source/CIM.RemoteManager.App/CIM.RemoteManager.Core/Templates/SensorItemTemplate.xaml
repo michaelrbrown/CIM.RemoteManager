@@ -8,11 +8,12 @@
             <Grid BackgroundColor="{Binding AlarmStatus, Converter={StaticResource AlarmStatusColorConverter}}">
 
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="50" />
+                    <ColumnDefinition Width="20" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
                 <Label Grid.Column="0"
+                       Margin="0"
                        VerticalOptions="Center"
                        HorizontalTextAlignment="Center" Rotation="90"
                        Style="{DynamicResource StatusStyle}"
@@ -75,7 +76,7 @@
                         </Grid.ColumnDefinitions>
 
                         <StackLayout Grid.Column="0" Spacing="0">
-                            <Label HorizontalTextAlignment="Start" LineBreakMode="TailTruncation" Style="{DynamicResource SerialNumberStyle}" Text="{Binding SensorSerialNumber}" VerticalTextAlignment="Center" />
+                            <Label HorizontalTextAlignment="Start" LineBreakMode="TailTruncation" Style="{DynamicResource SerialNumberStyle}" Text="{Binding SerialNumber}" />
                         </StackLayout>
 
                         <StackLayout Grid.Column="1" Spacing="0">
