@@ -70,22 +70,16 @@
                     <Grid Style="{DynamicResource Footer}">
 
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="60" />
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
 
-                        <Frame Grid.Column="0"
-                               BackgroundColor="{StaticResource SensorIndexFrameColor}"
-                               CornerRadius="15" HasShadow="False" HeightRequest="40" WidthRequest="60" />
-
-                        <StackLayout Grid.Column="1" Spacing="0">
+                        <StackLayout Grid.Column="0" Spacing="0">
                             <Label HorizontalTextAlignment="Start" LineBreakMode="TailTruncation" Style="{DynamicResource SerialNumberStyle}" Text="{Binding SensorSerialNumber}" VerticalTextAlignment="Center" />
                         </StackLayout>
 
-                        <StackLayout Grid.Column="2" Spacing="0">
+                        <StackLayout Grid.Column="1" Spacing="0">
                             <Label HorizontalTextAlignment="Start" LineBreakMode="NoWrap" Style="{DynamicResource SensorIndexStyle}" Text="{Binding SensorIndex}" />
-
                         </StackLayout>
 
                     </Grid>

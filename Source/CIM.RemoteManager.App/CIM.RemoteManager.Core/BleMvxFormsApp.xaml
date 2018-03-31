@@ -91,8 +91,8 @@
             </Style>
 
             <Style x:Key="LightShadowStyle" TargetType="BoxView">
-                <Setter Property="HeightRequest" Value=".3" />
-                <Setter Property="BackgroundColor" Value="#eeeeee" />
+                <Setter Property="HeightRequest" Value=".7" />
+                <Setter Property="BackgroundColor" Value="#969393" />
             </Style>
 
             <Style x:Key="NameStyle" TargetType="Label">
@@ -140,7 +140,7 @@
             </Style>
 
             <Style x:Key="SerialNumberStyle" TargetType="Label">
-                <Setter Property="TextColor" Value="{StaticResource SerialNumberColor}" />
+                <Setter Property="TextColor" Value="{StaticResource ValueColor}" />
                 <Setter Property="FontSize" Value="14" />
                 <Setter Property="VerticalOptions" Value="Center" />
                 <Setter Property="FontAttributes" Value="Italic" />
@@ -149,6 +149,7 @@
             <Style x:Key="SensorIndexStyle" TargetType="Label">
                 <Setter Property="TextColor" Value="{StaticResource SensorIndexTextColor}" />
                 <Setter Property="FontSize" Value="14" />
+                <Setter Property="FontAttributes" Value="Bold" />
                 <Setter Property="HorizontalTextAlignment" Value="Center" />
                 <Setter Property="VerticalTextAlignment" Value="Center" />
                 <Setter Property="HorizontalOptions" Value="Center" />

@@ -14,18 +14,18 @@ namespace CIM.RemoteManager.Core.Converters
                 switch (alarmValue)
                 {
                     case 0:
-                        return "Status: normal";
+                        return "normal";
                     case 1:
-                        return "Status: warning";
+                        return "warning";
                     case 2:
-                        return "Status: alarm";
+                        return "alarm";
                     case 3:
-                        return "Status: error";
+                        return "error";
                 }
 
             }
             // Default
-            return "Status: normal";
+            return "normal";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

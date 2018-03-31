@@ -34,13 +34,13 @@ namespace CIM.RemoteManager.Core.Pages
             base.OnAppearing();
 
             // Get instance of SensorListViewModel
-            //var sensorListViewModel = (SensorListViewModel)this.BindingContext;
-            //// Validate
-            //if (sensorListViewModel != null)
-            //{
-            //    sensorListViewModel.StopUpdatesCommand.Execute();
-            //    sensorListViewModel.StartUpdatesCommand.Execute();
-            //}
+            var sensorListViewModel = (SensorListViewModel)this.BindingContext;
+            // Validate
+            if (sensorListViewModel != null)
+            {
+                sensorListViewModel.StopUpdatesCommand.Execute();
+                sensorListViewModel.StartUpdatesCommand.Execute();
+            }
         }
 
         /// <summary>
