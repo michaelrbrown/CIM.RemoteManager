@@ -5,7 +5,7 @@
 
         <StackLayout Margin="0" Padding="0" Opacity=".95" Spacing="0">
 
-            <Grid BackgroundColor="{Binding AlarmStatus, Converter={StaticResource AlarmStatusColorConverter}}">
+            <Grid BackgroundColor="{Binding AlarmStatus, Converter={StaticResource AlarmStatusColorConverter}}" ColumnSpacing="0">
 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="20" />
@@ -19,9 +19,9 @@
                        Style="{DynamicResource StatusStyle}"
                        Text="{Binding AlarmStatus, Converter={StaticResource AlarmStatusConverter}}"
                        TextColor="{StaticResource SerialNumberColor}"
-                       VerticalTextAlignment="Center" />
+                       VerticalTextAlignment="Center" WidthRequest="100" />
 
-                <StackLayout Grid.Column="1" Margin="0" Padding="0" Opacity=".95" Spacing="0">
+                <StackLayout Grid.Column="1" Margin="0" Padding="0" Opacity="1" Spacing="0">
 
                     <Grid Style="{DynamicResource CardStyle}">
 
