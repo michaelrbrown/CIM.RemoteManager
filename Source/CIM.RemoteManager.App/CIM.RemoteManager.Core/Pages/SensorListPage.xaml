@@ -57,9 +57,9 @@
         <syncfusion:SfListView.HeaderTemplate>
             <DataTemplate>
                 <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
-                             BackgroundColor="{DynamicResource RemoteNameBackgroundColor}"
+                             BackgroundColor="{StaticResource RemoteNameBackgroundColor}"
                              HeightRequest="40" Orientation="Horizontal" Spacing="0">
-                    <Label VerticalOptions="Center" HorizontalOptions="CenterAndExpand" FontSize="20" Text="{Binding DeviceName}" TextColor="{DynamicResource AppLightColor}" />
+                    <Label VerticalOptions="Center" HorizontalOptions="CenterAndExpand" FontSize="20" Text="{Binding DeviceName}" TextColor="{StaticResource HeaderTextColor}" />
                 </StackLayout>
             </DataTemplate>
         </syncfusion:SfListView.HeaderTemplate>
@@ -77,7 +77,7 @@
                                    VerticalOptions="Center" HorizontalOptions="CenterAndExpand"
                                    FontAttributes="Italic" FontSize="18" HorizontalTextAlignment="Center"
                                    Text="{Binding Key}"
-                                   TextColor="{DynamicResource GroupTextColor}"
+                                   TextColor="{StaticResource GroupTextColor}"
                                    VerticalTextAlignment="Center" WidthRequest="225" />
                         </Frame>
                     </ViewCell.View>
@@ -97,7 +97,7 @@
 
         <syncfusion:SfListView.RightSwipeTemplate>
             <DataTemplate x:Name="RightSwipeTemplate">
-                <Grid VerticalOptions="Fill" HorizontalOptions="Fill" BackgroundColor="{DynamicResource RemoteNameBackgroundColor}">
+                <Grid VerticalOptions="Fill" HorizontalOptions="Fill" BackgroundColor="{StaticResource RemoteNameBackgroundColor}">
                     <Grid VerticalOptions="Center" HorizontalOptions="Center">
                         <Image Grid.Row="0" Grid.Column="0"
                                BackgroundColor="Transparent" HeightRequest="48" Source="ic_sensor-settings.png" WidthRequest="48" />
@@ -111,13 +111,13 @@
             <DataTemplate>
                 <!-- Margin: left, top, right, bottom -->
                 <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
-                             BackgroundColor="{DynamicResource RemoteNameBackgroundColor}"
+                             BackgroundColor="{StaticResource RemoteNameBackgroundColor}"
                              HeightRequest="60" Opacity=".6" Orientation="Horizontal" Spacing="0">
                     <Label Margin="5"
                            VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"
                            FontSize="16" LineBreakMode="MiddleTruncation"
                            Text="{Binding CharacteristicValue, StringFormat=' Incoming Value: {0:N}'}"
-                           TextColor="{DynamicResource AppLightColor}"
+                           TextColor="{StaticResource AppLightColor}"
                            VerticalTextAlignment="Center" />
                 </StackLayout>
             </DataTemplate>

@@ -40,7 +40,7 @@
             <Color x:Key="RemoteNameBackgroundColor">#01649D</Color>
             <Color x:Key="CardBackgroundColor">#01649D</Color>
             <Color x:Key="FooterBackgroundColor">#B9DEF5</Color>
-            <Color x:Key="GroupTextColor">#FFFFFF</Color>
+            <Color x:Key="GroupTextColor">#01649D</Color>
             <Color x:Key="NameColor">#FFFFFF</Color>
             <Color x:Key="SensorTypeColor">#FFFFFF</Color>
             <Color x:Key="TimeStampColor">#FFFFFF</Color>

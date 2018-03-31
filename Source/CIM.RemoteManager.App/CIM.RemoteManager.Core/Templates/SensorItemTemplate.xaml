@@ -7,21 +7,7 @@
 
             <Grid BackgroundColor="{Binding AlarmStatus, Converter={StaticResource AlarmStatusColorConverter}}" ColumnSpacing="0">
 
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="20" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-
-                <Label Grid.Column="0"
-                       Margin="0"
-                       VerticalOptions="Center"
-                       HorizontalTextAlignment="Center" Rotation="90"
-                       Style="{DynamicResource StatusStyle}"
-                       Text="{Binding AlarmStatus, Converter={StaticResource AlarmStatusConverter}}"
-                       TextColor="{StaticResource SerialNumberColor}"
-                       VerticalTextAlignment="Center" WidthRequest="100" />
-
-                <StackLayout Grid.Column="1" Margin="0" Padding="0" Opacity="1" Spacing="0">
+                <StackLayout Margin="0" Padding="0" Opacity="1" Spacing="0">
 
                     <Grid Style="{DynamicResource CardStyle}">
 
@@ -44,7 +30,7 @@
                         <StackLayout Grid.Column="2" Orientation="Horizontal" Spacing="0">
                             <Frame VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"
                                    CornerRadius="20" HasShadow="False" HeightRequest="35" Opacity="1"
-                                   OutlineColor="{DynamicResource OutlineColor}"
+                                   OutlineColor="{Binding AlarmStatus, Converter={StaticResource AlarmStatusColorConverter}}"
                                    Style="{DynamicResource ValueBoxStyle}"
                                    WidthRequest="130">
                                 <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Orientation="Horizontal" Spacing="0">
