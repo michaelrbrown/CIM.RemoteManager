@@ -44,13 +44,13 @@ namespace CIM.RemoteManager.Core.Converters
                 switch (alarmValue)
                 {
                     case 0:
-                        return Color.ForestGreen;
+                        return Color.FromHex("#4A840B");
                     case 1:
-                        return Color.Yellow;
+                        return Color.FromHex("#CDAC00");
                     case 2:
-                        return Color.Red;
+                        return Color.FromHex("#9A1C1F");
                     case 3:
-                        return Color.Blue;
+                        return Color.FromHex("#2758A7");
                 }
 
             }

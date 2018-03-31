@@ -41,14 +41,11 @@
             <syncfusion:GridLayout>
                 <syncfusion:GridLayout.SpanCount>
                     <OnPlatform x:TypeArguments="x:Int32">
-                        <OnPlatform.WinPhone>
-                            <OnIdiom x:TypeArguments="x:Int32" Desktop="4" Phone="2" Tablet="4" />
-                        </OnPlatform.WinPhone>
                         <OnPlatform.Android>
-                            <OnIdiom x:TypeArguments="x:Int32" Phone="2" Tablet="4" />
+                            <OnIdiom x:TypeArguments="x:Int32" Phone="1" Tablet="2" />
                         </OnPlatform.Android>
                         <OnPlatform.iOS>
-                            <OnIdiom x:TypeArguments="x:Int32" Phone="2" Tablet="4" />
+                            <OnIdiom x:TypeArguments="x:Int32" Phone="1" Tablet="2" />
                         </OnPlatform.iOS>
                     </OnPlatform>
                 </syncfusion:GridLayout.SpanCount>
@@ -98,9 +95,10 @@
             <DataTemplate>
                 <ViewCell>
                     <ViewCell.View>
-                        <Frame Margin="10" Padding="5"
+                        <Frame Margin="5" Padding="10"
                                VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
-                               BackgroundColor="#262E33" CornerRadius="20">
+                               BackgroundColor="{StaticResource AppBaseColor}"
+                               CornerRadius="10" HasShadow="False">
                             <!-- Margin: left, top, right, bottom -->
                             <Label Margin="0,0,0,0"
                                    VerticalOptions="Center" HorizontalOptions="CenterAndExpand"
