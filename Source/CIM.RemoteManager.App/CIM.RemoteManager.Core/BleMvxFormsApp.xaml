@@ -37,16 +37,16 @@
 
             <!-- Sensor Colors -->
             <Color x:Key="RemoteNameBackgroundColor">#62B034</Color>
-            <Color x:Key="CardBackgroundColor">#eceff1</Color>
+            <Color x:Key="CardBackgroundColor">#01649D</Color>
             <Color x:Key="FooterBackgroundColor">#B9DEF5</Color>
-            <Color x:Key="NameColor">#01649D</Color>
-            <Color x:Key="SensorTypeColor">#546e7a</Color>
-            <Color x:Key="TimeStampColor">#546e7a</Color>
+            <Color x:Key="NameColor">#FFFFFF</Color>
+            <Color x:Key="SensorTypeColor">#FFFFFF</Color>
+            <Color x:Key="TimeStampColor">#FFFFFF</Color>
             <Color x:Key="MoreIconColor">#B9DEF5</Color>
             <Color x:Key="ValueColor">#01649D</Color>
             <Color x:Key="StatusColor">#62B034</Color>
             <Color x:Key="OutlineColor">#eeeeee</Color>
-            <Color x:Key="SerialNumberColor">#546e7a</Color>
+            <Color x:Key="SerialNumberColor">#01649D</Color>
 
             <!-- Form Colors -->
             <Color x:Key="HeadingTextColor">#262E33</Color>
