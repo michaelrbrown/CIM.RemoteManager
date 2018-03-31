@@ -40,15 +40,17 @@
             <Color x:Key="RemoteNameBackgroundColor">#01649D</Color>
             <Color x:Key="CardBackgroundColor">#01649D</Color>
             <Color x:Key="FooterBackgroundColor">#B9DEF5</Color>
-            <Color x:Key="GroupTextColor">#01649D</Color>
+            <Color x:Key="GroupTextColor">#FFFFFF</Color>
             <Color x:Key="NameColor">#FFFFFF</Color>
             <Color x:Key="SensorTypeColor">#FFFFFF</Color>
             <Color x:Key="TimeStampColor">#FFFFFF</Color>
             <Color x:Key="MoreIconColor">#B9DEF5</Color>
             <Color x:Key="ValueColor">#01649D</Color>
             <Color x:Key="StatusColor">#62B034</Color>
-            <Color x:Key="OutlineColor">#eeeeee</Color>
-            <Color x:Key="SerialNumberColor">#01649D</Color>
+            <Color x:Key="OutlineColor">#EEEEEE</Color>
+            <Color x:Key="SensorIndexFrameColor">#01649D</Color>
+            <Color x:Key="SensorIndexTextColor">#FFFFFF</Color>
+            <Color x:Key="SerialNumberColor">#FFFFFF</Color>
 
             <!-- Form Colors -->
             <Color x:Key="HeadingTextColor">#262E33</Color>
@@ -140,6 +142,16 @@
             <Style x:Key="SerialNumberStyle" TargetType="Label">
                 <Setter Property="TextColor" Value="{DynamicResource SerialNumberColor}" />
                 <Setter Property="FontSize" Value="14" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="FontAttributes" Value="Italic" />
+            </Style>
+
+            <Style x:Key="SensorIndexStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="{DynamicResource SensorIndexTextColor}" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+                <Setter Property="HorizontalOptions" Value="Center" />
                 <Setter Property="VerticalOptions" Value="Center" />
                 <Setter Property="FontAttributes" Value="Italic" />
             </Style>

@@ -50,15 +50,23 @@
 
             <BoxView Style="{DynamicResource LightShadowStyle}" />
 
-            <Grid Style="{DynamicResource Footer}">
+            <Grid BackgroundColor="{Binding AlarmStatus, Converter={StaticResource AlarmStatusColorConverter}}" Style="{DynamicResource Footer}">
 
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
+                <Frame Margin="5" Padding="5"
+                       VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+                       BackgroundColor="{StaticResource SensorIndexFrameColor}"
+                       CornerRadius="40" WidthRequest="80">
+                    <Label HorizontalTextAlignment="Start" LineBreakMode="NoWrap" Style="{DynamicResource SensorIndexStyle}" Text="{Binding SensorIndex}" />
+                </Frame>
+
                 <StackLayout Grid.Column="0" Orientation="Horizontal" Spacing="0">
-                    <Label HorizontalTextAlignment="Start" LineBreakMode="TailTruncation" Style="{DynamicResource SerialNumberStyle}" Text="{Binding SensorIndexPlusSerialNumber}" VerticalTextAlignment="Center" />
+                    <Label HorizontalTextAlignment="Start" LineBreakMode="TailTruncation" Style="{DynamicResource SerialNumberStyle}" Text="{Binding SensorSerialNumber}" VerticalTextAlignment="Center" />
                 </StackLayout>
 
                 <StackLayout Grid.Column="1" Spacing="0">
@@ -66,7 +74,7 @@
                            HorizontalTextAlignment="End"
                            Style="{DynamicResource StatusStyle}"
                            Text="{Binding AlarmStatus, Converter={StaticResource AlarmStatusConverter}}"
-                           TextColor="{Binding AlarmStatus, Converter={StaticResource AlarmStatusColorConverter}}"
+                           TextColor="{StaticResource SerialNumberColor}"
                            VerticalTextAlignment="Center" />
                 </StackLayout>
 

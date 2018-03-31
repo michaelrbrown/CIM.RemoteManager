@@ -36,6 +36,25 @@
             </dataSource:DataSource>
         </syncfusion:SfListView.DataSource>
 
+        <!-- Layout Manager (provides columns on higher resolution devices) -->
+        <syncfusion:SfListView.LayoutManager>
+            <syncfusion:GridLayout>
+                <syncfusion:GridLayout.SpanCount>
+                    <OnPlatform x:TypeArguments="x:Int32">
+                        <OnPlatform.WinPhone>
+                            <OnIdiom x:TypeArguments="x:Int32" Desktop="4" Phone="2" Tablet="4" />
+                        </OnPlatform.WinPhone>
+                        <OnPlatform.Android>
+                            <OnIdiom x:TypeArguments="x:Int32" Phone="2" Tablet="4" />
+                        </OnPlatform.Android>
+                        <OnPlatform.iOS>
+                            <OnIdiom x:TypeArguments="x:Int32" Phone="2" Tablet="4" />
+                        </OnPlatform.iOS>
+                    </OnPlatform>
+                </syncfusion:GridLayout.SpanCount>
+            </syncfusion:GridLayout>
+        </syncfusion:SfListView.LayoutManager>
+
         <!-- Sensor ListView Header Template -->
         <syncfusion:SfListView.HeaderTemplate>
             <DataTemplate>
@@ -79,13 +98,17 @@
             <DataTemplate>
                 <ViewCell>
                     <ViewCell.View>
-                        <!-- Margin: left, top, right, bottom -->
-                        <Label Margin="0,0,0,0"
-                               VerticalOptions="Center" HorizontalOptions="StartAndExpand"
-                               FontAttributes="Italic" FontSize="18"
-                               Text="{Binding Key}"
-                               TextColor="{DynamicResource GroupTextColor}"
-                               WidthRequest="225" />
+                        <Frame Margin="10" Padding="5"
+                               VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+                               BackgroundColor="#262E33" CornerRadius="20">
+                            <!-- Margin: left, top, right, bottom -->
+                            <Label Margin="0,0,0,0"
+                                   VerticalOptions="Center" HorizontalOptions="CenterAndExpand"
+                                   FontAttributes="Italic" FontSize="18" HorizontalTextAlignment="Center"
+                                   Text="{Binding Key}"
+                                   TextColor="{DynamicResource GroupTextColor}"
+                                   VerticalTextAlignment="Center" WidthRequest="225" />
+                        </Frame>
                     </ViewCell.View>
                 </ViewCell>
             </DataTemplate>
