@@ -60,9 +60,8 @@
 
                 <Frame Grid.Column="0"
                        Margin="5" Padding="5"
-                       VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
                        BackgroundColor="{StaticResource SensorIndexFrameColor}"
-                       CornerRadius="20" HasShadow="False" HeightRequest="60" WidthRequest="60">
+                       CornerRadius="15" HasShadow="False" WidthRequest="60">
                     <Label HorizontalTextAlignment="Start" LineBreakMode="NoWrap" Style="{DynamicResource SensorIndexStyle}" Text="{Binding SensorIndex}" />
                 </Frame>
 

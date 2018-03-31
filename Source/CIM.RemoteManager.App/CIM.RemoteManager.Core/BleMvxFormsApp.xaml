@@ -69,20 +69,20 @@
                 <Setter Property="Opacity" Value=".95" />
                 <Setter Property="VerticalOptions" Value="CenterAndExpand" />
                 <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
-                <Setter Property="BackgroundColor" Value="{DynamicResource AppAccentColor}" />
-                <Setter Property="OutlineColor" Value="{DynamicResource OutlineColor}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource AppAccentColor}" />
+                <Setter Property="OutlineColor" Value="{StaticResource OutlineColor}" />
             </Style>
 
             <Style x:Key="CardStyle" TargetType="Grid">
                 <Setter Property="HeightRequest" Value="60" />
                 <Setter Property="Padding" Value="5,10,0,10" />
                 <Setter Property="Margin" Value="0" />
-                <Setter Property="BackgroundColor" Value="{DynamicResource CardBackgroundColor}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource CardBackgroundColor}" />
             </Style>
 
             <Style x:Key="Footer" TargetType="Grid">
                 <Setter Property="Padding" Value="10" />
-                <Setter Property="BackgroundColor" Value="{DynamicResource FooterBackgroundColor}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource FooterBackgroundColor}" />
             </Style>
 
             <Style x:Key="ShadowStyle" TargetType="BoxView">
@@ -97,40 +97,40 @@
 
             <Style x:Key="NameStyle" TargetType="Label">
                 <Setter Property="FontSize" Value="16" />
-                <Setter Property="TextColor" Value="{DynamicResource NameColor}" />
+                <Setter Property="TextColor" Value="{StaticResource NameColor}" />
                 <Setter Property="FontAttributes" Value="Bold" />
             </Style>
 
             <Style x:Key="SensorTypeStyle" TargetType="Label">
                 <Setter Property="FontSize" Value="14" />
-                <Setter Property="TextColor" Value="{DynamicResource SensorTypeColor}" />
+                <Setter Property="TextColor" Value="{StaticResource SensorTypeColor}" />
             </Style>
 
             <Style x:Key="TimeStampStyle" TargetType="Label">
                 <Setter Property="FontSize" Value="14" />
-                <Setter Property="TextColor" Value="{DynamicResource TimeStampColor}" />
+                <Setter Property="TextColor" Value="{StaticResource TimeStampColor}" />
             </Style>
 
             <Style x:Key="MoreStyle" TargetType="Label">
                 <Setter Property="FontSize" Value="10" />
-                <Setter Property="TextColor" Value="{DynamicResource MoreIconColor}" />
+                <Setter Property="TextColor" Value="{StaticResource MoreIconColor}" />
                 <Setter Property="FontAttributes" Value="Bold" />
                 <Setter Property="HorizontalTextAlignment" Value="End" />
             </Style>
 
             <Style x:Key="ValueStyle" TargetType="Label">
                 <Setter Property="FontSize" Value="24" />
-                <Setter Property="TextColor" Value="{DynamicResource ValueColor}" />
+                <Setter Property="TextColor" Value="{StaticResource ValueColor}" />
             </Style>
 
             <Style x:Key="ValueUnitTypeStyle" TargetType="Label">
                 <Setter Property="FontSize" Value="16" />
-                <Setter Property="TextColor" Value="{DynamicResource ValueColor}" />
+                <Setter Property="TextColor" Value="{StaticResource ValueColor}" />
             </Style>
 
             <Style x:Key="ValueBoxStyle" TargetType="Grid">
                 <Setter Property="Padding" Value="10" />
-                <Setter Property="BackgroundColor" Value="{DynamicResource FooterBackgroundColor}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource FooterBackgroundColor}" />
             </Style>
 
             <Style x:Key="StatusStyle" TargetType="Label">
@@ -140,20 +140,19 @@
             </Style>
 
             <Style x:Key="SerialNumberStyle" TargetType="Label">
-                <Setter Property="TextColor" Value="{DynamicResource SerialNumberColor}" />
+                <Setter Property="TextColor" Value="{StaticResource SerialNumberColor}" />
                 <Setter Property="FontSize" Value="14" />
                 <Setter Property="VerticalOptions" Value="Center" />
                 <Setter Property="FontAttributes" Value="Italic" />
             </Style>
 
             <Style x:Key="SensorIndexStyle" TargetType="Label">
-                <Setter Property="TextColor" Value="{DynamicResource SensorIndexTextColor}" />
+                <Setter Property="TextColor" Value="{StaticResource SensorIndexTextColor}" />
                 <Setter Property="FontSize" Value="14" />
                 <Setter Property="HorizontalTextAlignment" Value="Center" />
                 <Setter Property="VerticalTextAlignment" Value="Center" />
                 <Setter Property="HorizontalOptions" Value="Center" />
                 <Setter Property="VerticalOptions" Value="Center" />
-                <Setter Property="FontAttributes" Value="Italic" />
             </Style>
 
             <!-- Form Styles -->
