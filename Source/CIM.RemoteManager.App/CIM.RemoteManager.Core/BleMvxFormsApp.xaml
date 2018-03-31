@@ -36,9 +36,11 @@
             <Color x:Key="SegmentedControlTextColor">#FFFFFF</Color>
 
             <!-- Sensor Colors -->
-            <Color x:Key="RemoteNameBackgroundColor">#62B034</Color>
+            <Color x:Key="BluetoothStatusTextColor">#01649D</Color>
+            <Color x:Key="RemoteNameBackgroundColor">#01649D</Color>
             <Color x:Key="CardBackgroundColor">#01649D</Color>
             <Color x:Key="FooterBackgroundColor">#B9DEF5</Color>
+            <Color x:Key="GroupTextColor">#01649D</Color>
             <Color x:Key="NameColor">#FFFFFF</Color>
             <Color x:Key="SensorTypeColor">#FFFFFF</Color>
             <Color x:Key="TimeStampColor">#FFFFFF</Color>
