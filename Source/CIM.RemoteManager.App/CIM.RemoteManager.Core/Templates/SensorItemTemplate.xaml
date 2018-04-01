@@ -3,19 +3,21 @@
 
     <ContentView.Content>
 
-        <StackLayout Margin="5" VerticalOptions="CenterAndExpand" BackgroundColor="Transparent" Orientation="Vertical">
+        <!-- Sensor Outer Wrapper -->
+        <StackLayout Margin="5,0,0,0" VerticalOptions="CenterAndExpand" BackgroundColor="Transparent" Orientation="Vertical">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="5" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
+                <!-- Sensor Alarm Color Indicator -->
                 <Frame Grid.Column="0"
                        VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
                        BackgroundColor="{Binding AlarmStatus, Converter={StaticResource AlarmStatusColorConverter}}"
                        HasShadow="False" WidthRequest="5" />
 
-
+                <!-- Sensor Inner Wrapper -->
                 <StackLayout Grid.Column="1" Margin="0" Padding="0" Opacity="1" Spacing="0">
 
                     <Grid Style="{DynamicResource CardStyle}">
@@ -27,25 +29,29 @@
                             <ColumnDefinition Width="5" />
                         </Grid.ColumnDefinitions>
 
-                        <!-- Margin: left, top, right, bottom -->
+                        <!-- Sensor Image -->
                         <Image Grid.Column="0" Aspect="AspectFit" Scale="1" Source="{Binding SensorImage}" />
 
+                        <!-- Sensor Name, Type, and TimeStamp -->
                         <StackLayout Grid.Column="1" VerticalOptions="Center" HeightRequest="100" Spacing="0">
                             <Label VerticalOptions="Center" LineBreakMode="TailTruncation" Style="{DynamicResource NameStyle}" Text="{Binding Name}" />
                             <Label VerticalOptions="Center" LineBreakMode="TailTruncation" Style="{DynamicResource SensorTypeStyle}" Text="{Binding SensorLabel}" />
                             <Label VerticalOptions="Center" LineBreakMode="TailTruncation" Style="{DynamicResource TimeStampStyle}" Text="{Binding DateTimeStamp, StringFormat='{}{0:hh\\:mm\\:ss tt}'}" />
                         </StackLayout>
 
+                        <!-- Sensor Value and Unit Type -->
                         <StackLayout Grid.Column="2" Orientation="Horizontal" Spacing="0">
 
                             <Frame Style="{DynamicResource ValueInnerBoxStyle}">
                                 <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Orientation="Horizontal" Spacing="0">
+                                    <!-- Sensor Unit Type -->
                                     <Label Margin="0"
                                            VerticalOptions="CenterAndExpand" HorizontalOptions="End"
                                            HorizontalTextAlignment="End" LineBreakMode="NoWrap"
                                            Style="{DynamicResource ValueStyle}"
                                            Text="{Binding AverageValue, Converter={StaticResource SensorValueValidationConverter}}"
                                            VerticalTextAlignment="Center" />
+                                    <!-- Sensor Unit Type -->
                                     <Label Margin="0,-20,0,0"
                                            VerticalOptions="CenterAndExpand" HorizontalOptions="Start"
                                            HorizontalTextAlignment="Start" LineBreakMode="NoWrap"
@@ -60,6 +66,7 @@
 
                     <BoxView Style="{DynamicResource LightShadowStyle}" />
 
+                    <!-- Sensor Footer Wrapper -->
                     <Grid Style="{DynamicResource Footer}">
 
                         <Grid.ColumnDefinitions>
@@ -67,10 +74,12 @@
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
 
+                        <!-- Sensor Serial Number -->
                         <StackLayout Grid.Column="0" Spacing="0">
                             <Label HorizontalTextAlignment="Start" LineBreakMode="TailTruncation" Style="{DynamicResource SerialNumberStyle}" Text="{Binding SerialNumber}" />
                         </StackLayout>
 
+                        <!-- Sensor Index -->
                         <StackLayout Grid.Column="1" Spacing="0">
                             <Label HorizontalTextAlignment="Start" LineBreakMode="NoWrap" Style="{DynamicResource SensorIndexStyle}" Text="{Binding SensorIndex}" />
                         </StackLayout>

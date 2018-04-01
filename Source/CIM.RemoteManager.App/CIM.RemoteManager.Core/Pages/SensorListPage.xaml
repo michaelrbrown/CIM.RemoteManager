@@ -23,8 +23,8 @@
     <!-- Sensor ListView -->
     <syncfusion:SfListView x:Name="SensorLiistView"
                            Margin="0"
-                           AllowSwiping="False" HeaderSize="40" IsStickyFooter="True" IsStickyGroupHeader="False" ItemDoubleTapped="SensorListView_OnItemDoubleTapped"
-                           ItemSize="116" ItemSpacing="0"
+                           AllowSwiping="False" HeaderSize="40" IsStickyFooter="True" IsStickyGroupHeader="True" ItemDoubleTapped="SensorListView_OnItemDoubleTapped"
+                           ItemSize="116" ItemSpacing="2"
                            ItemsSource="{Binding SensorCollection}"
                            SelectionBackgroundColor="Transparent">
 
@@ -69,14 +69,14 @@
             <DataTemplate>
                 <ViewCell>
                     <ViewCell.View>
-                        <StackLayout Margin="0" Padding="15" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+                        <Grid Margin="0" Padding="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
                             <!-- Margin: left, top, right, bottom -->
                             <Label Margin="0,5,0,5"
                                    VerticalOptions="Center" HorizontalOptions="CenterAndExpand"
                                    FontAttributes="Italic" FontSize="20" HorizontalTextAlignment="Center"
                                    Text="{Binding Key}"
                                    TextColor="#01649D" VerticalTextAlignment="Center" WidthRequest="225" />
-                        </StackLayout>
+                        </Grid>
                     </ViewCell.View>
                 </ViewCell>
             </DataTemplate>
@@ -109,7 +109,7 @@
                 <!-- Margin: left, top, right, bottom -->
                 <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
                              BackgroundColor="{StaticResource RemoteNameBackgroundColor}"
-                             HeightRequest="60" Opacity=".6" Orientation="Horizontal" Spacing="0">
+                             HeightRequest="60" Orientation="Horizontal" Spacing="0">
                     <Label Margin="5"
                            VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"
                            FontSize="16" LineBreakMode="MiddleTruncation"
