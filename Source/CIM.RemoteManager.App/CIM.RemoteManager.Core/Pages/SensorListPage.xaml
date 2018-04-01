@@ -78,7 +78,7 @@
                                    VerticalOptions="Center" HorizontalOptions="CenterAndExpand"
                                    FontAttributes="Italic" FontSize="20" HorizontalTextAlignment="Center"
                                    Text="{Binding Key}"
-                                   TextColor="#FFFFFF" VerticalTextAlignment="Center" WidthRequest="225" />
+                                   TextColor="#01649D" VerticalTextAlignment="Center" WidthRequest="225" />
                         </StackLayout>
                     </ViewCell.View>
                 </ViewCell>
