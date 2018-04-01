@@ -69,7 +69,9 @@
             <DataTemplate>
                 <ViewCell>
                     <ViewCell.View>
-                        <StackLayout Margin="0" Padding="15" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                        <StackLayout Margin="0" Padding="15" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+                            <!-- Margin: left, top, right, bottom -->
+                            <Image Aspect="AspectFit" Scale="1" Source="{Binding SensorImage}" />
                             <!-- Margin: left, top, right, bottom -->
                             <Label Margin="0,5,0,5"
                                    VerticalOptions="Center" HorizontalOptions="CenterAndExpand"
