@@ -6,6 +6,7 @@
                 Padding="0"
                 BackgroundColor="#FFFFFF">
 
+    <!-- BTLE Status -->
     <StackLayout Padding="10" HorizontalOptions="CenterAndExpand" BackgroundColor="#AE2C3B" IsVisible="{Binding IsStateOn, Converter={StaticResource BooleanToFalseConverter}}">
         <Grid HorizontalOptions="Center">
             <Grid.ColumnDefinitions>
@@ -78,11 +79,11 @@
                         <Grid Margin="0" Padding="0"
                               VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
                               ColumnSpacing="0" RowSpacing="0">
-                            <!-- Margin: left, top, right, bottom -->
+                            <!-- Sensor Group Name -->
                             <Label Margin="0,5,0,5"
                                    VerticalOptions="Center" HorizontalOptions="CenterAndExpand"
                                    FontAttributes="Italic" FontSize="20" HorizontalTextAlignment="Center"
-                                   Text="{Binding Key}"
+                                   Text="{Binding Key, Converter={StaticResource UpperCaseConverter}}"
                                    TextColor="#01649D" VerticalTextAlignment="Center" WidthRequest="225" />
                         </Grid>
                     </ViewCell.View>
@@ -100,9 +101,10 @@
             </DataTemplate>
         </syncfusion:SfListView.ItemTemplate>
 
+        <!-- Right Swipe Template -->
         <syncfusion:SfListView.RightSwipeTemplate>
             <DataTemplate x:Name="RightSwipeTemplate">
-                <Grid VerticalOptions="Fill" HorizontalOptions="Fill" BackgroundColor="{StaticResource RemoteNameBackgroundColor}">
+                <Grid VerticalOptions="Fill" HorizontalOptions="Fill" BackgroundColor="{StaticResource CardBackgroundColor}">
                     <Grid VerticalOptions="Center" HorizontalOptions="Center">
                         <Image Grid.Row="0" Grid.Column="0"
                                BackgroundColor="Transparent" HeightRequest="48" Source="ic_sensor-settings.png" WidthRequest="48" />
@@ -118,6 +120,7 @@
                 <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
                              BackgroundColor="{StaticResource RemoteNameBackgroundColor}"
                              HeightRequest="60" Orientation="Horizontal" Spacing="0">
+                    <!-- Sensor BTLE Characteristic Incoming Values -->
                     <Label Margin="5"
                            VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"
                            FontSize="16" LineBreakMode="MiddleTruncation"
