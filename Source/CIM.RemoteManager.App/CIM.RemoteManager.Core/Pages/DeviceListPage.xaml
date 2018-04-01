@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<pages:BaseTabbedPage x:Class="CIM.RemoteManager.Core.Pages.DeviceListPage"
+<pages:BaseTabbedPage x:Name="DevicePage" Title="Discover Devices"
+                      x:Class="CIM.RemoteManager.Core.Pages.DeviceListPage"
                       xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                      xmlns:pages="clr-namespace:CIM.RemoteManager.Core.Pages;assembly=CIM.RemoteManager.Core"
-                      x:Name="DevicePage" Title="Discover Devices">
+                      xmlns:pages="clr-namespace:CIM.RemoteManager.Core.Pages;assembly=CIM.RemoteManager.Core">
 
     <pages:BaseTabbedPage.Resources>
         <ResourceDictionary>

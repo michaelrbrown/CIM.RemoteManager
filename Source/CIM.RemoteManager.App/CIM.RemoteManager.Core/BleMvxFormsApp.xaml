@@ -41,7 +41,7 @@
             <Color x:Key="RemoteNameBackgroundColor">#01649D</Color>
             <Color x:Key="GroupBackgroundColor">#FFFFFF</Color>
             <Color x:Key="CardBackgroundColor">#FFFFFF</Color>
-            <Color x:Key="FooterBackgroundColor">#B9DEF5</Color>
+            <Color x:Key="FooterBackgroundColor">#D8EDF9</Color>
             <Color x:Key="GroupTextColor">#01649D</Color>
             <Color x:Key="NameColor">#01649D</Color>
             <Color x:Key="SensorTypeColor">#7B7B7B</Color>
@@ -116,13 +116,6 @@
             <Style x:Key="TimeStampStyle" TargetType="Label">
                 <Setter Property="FontSize" Value="14" />
                 <Setter Property="TextColor" Value="{StaticResource TimeStampColor}" />
-            </Style>
-
-            <Style x:Key="MoreStyle" TargetType="Label">
-                <Setter Property="FontSize" Value="10" />
-                <Setter Property="TextColor" Value="{StaticResource MoreIconColor}" />
-                <Setter Property="FontAttributes" Value="Bold" />
-                <Setter Property="HorizontalTextAlignment" Value="End" />
             </Style>
 
             <Style x:Key="ValueStyle" TargetType="Label">
