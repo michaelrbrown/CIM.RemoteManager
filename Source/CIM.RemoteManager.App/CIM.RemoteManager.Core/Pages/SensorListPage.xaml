@@ -73,10 +73,6 @@
                                      VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
                                      BackgroundColor="{StaticResource GroupBackgroundColor}"
                                      Orientation="Horizontal">
-
-
-                            <!-- Margin: left, top, right, bottom -->
-                            <Image Aspect="AspectFit" Scale="1" Source="{Binding SensorImage}" />
                             <!-- Margin: left, top, right, bottom -->
                             <Label Margin="0,5,0,5"
                                    VerticalOptions="Center" HorizontalOptions="CenterAndExpand"

@@ -38,7 +38,7 @@
             <!-- Sensor Colors -->
             <Color x:Key="BluetoothStatusTextColor">#01649D</Color>
             <Color x:Key="RemoteNameBackgroundColor">#01649D</Color>
-            <Color x:Key="GroupBackgroundColor">#01649D</Color>
+            <Color x:Key="GroupBackgroundColor">#FFFFFF</Color>
             <Color x:Key="CardBackgroundColor">#FFFFFF</Color>
             <Color x:Key="FooterBackgroundColor">#FFFFFF</Color>
             <Color x:Key="GroupTextColor">#01649D</Color>
