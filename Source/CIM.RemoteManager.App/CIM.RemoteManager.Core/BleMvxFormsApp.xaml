@@ -29,6 +29,7 @@
             <Color x:Key="ChartForegroundSemiTransparent">#88FFFFFF</Color>
 
             <!-- Page Colors -->
+            <Color x:Key="BusyIndicatorColor">#01649D</Color>
             <Color x:Key="HeaderBackgroundColor">#01649D</Color>
             <Color x:Key="HeaderTextColor">#FFFFFF</Color>
             <Color x:Key="HeaderSubTextColor">#FFFFFF</Color>

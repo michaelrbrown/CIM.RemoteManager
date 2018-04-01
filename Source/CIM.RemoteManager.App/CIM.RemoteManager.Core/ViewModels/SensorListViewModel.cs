@@ -96,6 +96,16 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
+        /// Processing sensor data
+        /// </summary>
+        bool _processingSensorData = true;
+        public bool ProcessingSensorData
+        {
+            get => _processingSensorData;
+            set => SetProperty(ref _processingSensorData, value);
+        }
+
+        /// <summary>
         /// Read try count before stopping characteristic service.  A fail safe.
         /// </summary>
         public int RxTryCount { get; set; } = 0;
@@ -407,6 +417,9 @@ namespace CIM.RemoteManager.Core.ViewModels
                             // if year < 2009.
                             await stationHelper.HandleRemoteDateTimeValidation(TxCharacteristic, currentDateTimeResult);
                         }
+
+                        // Processing sensor data done
+                        ProcessingSensorData = false;
                         break;
                     case "A":
                         // "A" Sensor data serialization
@@ -448,6 +461,9 @@ namespace CIM.RemoteManager.Core.ViewModels
                             // Add sensor to list
                             SensorCollection.Add(sensor);
                         }
+
+                        // Processing sensor data done
+                        ProcessingSensorData = false;
                         break;
                     case "B":
                         // "B" Sensor data serialization
