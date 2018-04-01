@@ -69,10 +69,7 @@
             <DataTemplate>
                 <ViewCell>
                     <ViewCell.View>
-                        <StackLayout Margin="0" Padding="15"
-                                     VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
-                                     BackgroundColor="{StaticResource GroupBackgroundColor}"
-                                     Orientation="Horizontal">
+                        <StackLayout Margin="0" Padding="15" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Orientation="Horizontal">
                             <!-- Margin: left, top, right, bottom -->
                             <Label Margin="0,5,0,5"
                                    VerticalOptions="Center" HorizontalOptions="CenterAndExpand"
