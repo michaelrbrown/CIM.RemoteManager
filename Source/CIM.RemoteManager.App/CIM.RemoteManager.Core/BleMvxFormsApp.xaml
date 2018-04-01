@@ -133,7 +133,7 @@
                 <Setter Property="TextColor" Value="{StaticResource ValueColor}" />
             </Style>
 
-            <Style x:Key="ValueOuterBoxStyle" TargetType="Grid">
+            <Style x:Key="ValueOuterBoxStyle" TargetType="Frame">
                 <Setter Property="VerticalOptions" Value="CenterAndExpand" />
                 <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
                 <Setter Property="CornerRadius" Value="20" />
@@ -142,7 +142,7 @@
                 <Setter Property="HeightRequest" Value="37" />
                 <Setter Property="Padding" Value="2" />
             </Style>
-            <Style x:Key="ValueInnerBoxStyle" TargetType="Grid">
+            <Style x:Key="ValueInnerBoxStyle" TargetType="Frame">
                 <Setter Property="VerticalOptions" Value="CenterAndExpand" />
                 <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
                 <Setter Property="CornerRadius" Value="20" />
