@@ -7,7 +7,7 @@
         <StackLayout Margin="5,0,0,0" VerticalOptions="CenterAndExpand" BackgroundColor="Transparent" Orientation="Vertical">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="5" />
+                    <ColumnDefinition Width="10" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
