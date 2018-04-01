@@ -92,7 +92,12 @@
 
             <Style x:Key="LightShadowStyle" TargetType="BoxView">
                 <Setter Property="HeightRequest" Value=".7" />
-                <Setter Property="BackgroundColor" Value="#969393" />
+                <Setter Property="BackgroundColor" Value="#B9DEF5" />
+            </Style>
+
+            <Style x:Key="DarkShadowStyle" TargetType="BoxView">
+                <Setter Property="HeightRequest" Value=".7" />
+                <Setter Property="BackgroundColor" Value="#888888" />
             </Style>
 
             <Style x:Key="NameStyle" TargetType="Label">
@@ -128,7 +133,22 @@
                 <Setter Property="TextColor" Value="{StaticResource ValueColor}" />
             </Style>
 
-            <Style x:Key="ValueBoxStyle" TargetType="Grid">
+            <Style x:Key="ValueOuterBoxStyle" TargetType="Grid">
+                <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+                <Setter Property="CornerRadius" Value="20" />
+                <Setter Property="HasShadow" Value="False" />
+                <Setter Property="WidthRequest" Value="132" />
+                <Setter Property="HeightRequest" Value="37" />
+                <Setter Property="Padding" Value="2" />
+            </Style>
+            <Style x:Key="ValueInnerBoxStyle" TargetType="Grid">
+                <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+                <Setter Property="CornerRadius" Value="20" />
+                <Setter Property="HasShadow" Value="False" />
+                <Setter Property="WidthRequest" Value="130" />
+                <Setter Property="HeightRequest" Value="35" />
                 <Setter Property="Padding" Value="10" />
                 <Setter Property="BackgroundColor" Value="{StaticResource FooterBackgroundColor}" />
             </Style>

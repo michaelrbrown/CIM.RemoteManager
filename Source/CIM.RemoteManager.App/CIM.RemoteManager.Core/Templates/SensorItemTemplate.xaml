@@ -28,25 +28,23 @@
                         </StackLayout>
 
                         <StackLayout Grid.Column="2" Orientation="Horizontal" Spacing="0">
-                            <Frame VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"
-                                   CornerRadius="20" HasShadow="False" HeightRequest="35" Opacity="1"
-                                   OutlineColor="{Binding AlarmStatus, Converter={StaticResource AlarmStatusColorConverter}}"
-                                   Style="{DynamicResource ValueBoxStyle}"
-                                   WidthRequest="130">
-                                <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Orientation="Horizontal" Spacing="0">
-                                    <Label Margin="0"
-                                           VerticalOptions="CenterAndExpand" HorizontalOptions="End"
-                                           HorizontalTextAlignment="End" LineBreakMode="NoWrap"
-                                           Style="{DynamicResource ValueStyle}"
-                                           Text="{Binding AverageValue, Converter={StaticResource SensorValueValidationConverter}}"
-                                           VerticalTextAlignment="Center" />
-                                    <Label Margin="0,-20,0,0"
-                                           VerticalOptions="CenterAndExpand" HorizontalOptions="Start"
-                                           HorizontalTextAlignment="Start" LineBreakMode="NoWrap"
-                                           Style="{DynamicResource ValueUnitTypeStyle}"
-                                           Text="{Binding SensorUnitType}"
-                                           VerticalTextAlignment="Start" />
-                                </StackLayout>
+                            <Frame BackgroundColor="{Binding AlarmStatus, Converter={StaticResource AlarmStatusColorConverter}}" OutlineColor="{Binding AlarmStatus, Converter={StaticResource AlarmStatusColorConverter}}" Style="{StaticResource ValueOuterBoxStyle}">
+                                <Frame OutlineColor="{Binding AlarmStatus, Converter={StaticResource AlarmStatusColorConverter}}" Style="{DynamicResource ValueInnerBoxStyle}">
+                                    <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Orientation="Horizontal" Spacing="0">
+                                        <Label Margin="0"
+                                               VerticalOptions="CenterAndExpand" HorizontalOptions="End"
+                                               HorizontalTextAlignment="End" LineBreakMode="NoWrap"
+                                               Style="{DynamicResource ValueStyle}"
+                                               Text="{Binding AverageValue, Converter={StaticResource SensorValueValidationConverter}}"
+                                               VerticalTextAlignment="Center" />
+                                        <Label Margin="0,-20,0,0"
+                                               VerticalOptions="CenterAndExpand" HorizontalOptions="Start"
+                                               HorizontalTextAlignment="Start" LineBreakMode="NoWrap"
+                                               Style="{DynamicResource ValueUnitTypeStyle}"
+                                               Text="{Binding SensorUnitType}"
+                                               VerticalTextAlignment="Start" />
+                                    </StackLayout>
+                                </Frame>
                             </Frame>
                         </StackLayout>
 
@@ -70,6 +68,8 @@
                         </StackLayout>
 
                     </Grid>
+
+                    <BoxView Style="{DynamicResource DarkShadowStyle}" />
 
                 </StackLayout>
 

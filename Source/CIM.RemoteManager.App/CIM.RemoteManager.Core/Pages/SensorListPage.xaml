@@ -23,7 +23,7 @@
     <!-- Sensor ListView -->
     <syncfusion:SfListView x:Name="SensorLiistView"
                            Margin="0"
-                           AllowSwiping="True" HeaderSize="40" IsStickyFooter="True" IsStickyGroupHeader="False" ItemDoubleTapped="SensorListView_OnItemDoubleTapped"
+                           AllowSwiping="False" HeaderSize="40" IsStickyFooter="True" IsStickyGroupHeader="False" ItemDoubleTapped="SensorListView_OnItemDoubleTapped"
                            ItemSize="116" ItemSpacing="0"
                            ItemsSource="{Binding SensorCollection}"
                            SelectionBackgroundColor="Transparent">
@@ -69,16 +69,14 @@
             <DataTemplate>
                 <ViewCell>
                     <ViewCell.View>
-                        <Frame Margin="0" Padding="15"
-                               VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
-                               BackgroundColor="Transparent" CornerRadius="10" HasShadow="False">
+                        <StackLayout Margin="0" Padding="15" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
                             <!-- Margin: left, top, right, bottom -->
                             <Label Margin="0,5,0,5"
                                    VerticalOptions="Center" HorizontalOptions="CenterAndExpand"
                                    FontAttributes="Italic" FontSize="20" HorizontalTextAlignment="Center"
                                    Text="{Binding Key}"
                                    TextColor="#01649D" VerticalTextAlignment="Center" WidthRequest="225" />
-                        </Frame>
+                        </StackLayout>
                     </ViewCell.View>
                 </ViewCell>
             </DataTemplate>
