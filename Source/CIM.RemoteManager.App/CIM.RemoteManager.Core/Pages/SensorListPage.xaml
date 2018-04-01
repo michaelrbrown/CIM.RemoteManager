@@ -69,7 +69,12 @@
             <DataTemplate>
                 <ViewCell>
                     <ViewCell.View>
-                        <StackLayout Margin="0" Padding="15" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+                        <StackLayout Margin="0" Padding="15"
+                                     VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+                                     BackgroundColor="{StaticResource GroupBackgroundColor}"
+                                     Orientation="Horizontal">
+
+
                             <!-- Margin: left, top, right, bottom -->
                             <Image Aspect="AspectFit" Scale="1" Source="{Binding SensorImage}" />
                             <!-- Margin: left, top, right, bottom -->
@@ -77,7 +82,7 @@
                                    VerticalOptions="Center" HorizontalOptions="CenterAndExpand"
                                    FontAttributes="Italic" FontSize="20" HorizontalTextAlignment="Center"
                                    Text="{Binding Key}"
-                                   TextColor="#01649D" VerticalTextAlignment="Center" WidthRequest="225" />
+                                   TextColor="#FFFFFF" VerticalTextAlignment="Center" WidthRequest="225" />
                         </StackLayout>
                     </ViewCell.View>
                 </ViewCell>
