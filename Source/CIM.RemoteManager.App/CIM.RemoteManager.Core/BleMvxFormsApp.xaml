@@ -42,7 +42,7 @@
             <Color x:Key="GroupBackgroundColor">#FFFFFF</Color>
             <Color x:Key="CardBackgroundColor">#FFFFFF</Color>
             <Color x:Key="FooterBackgroundColor">#D8EDF9</Color>
-            <Color x:Key="GroupTextColor">#01649D</Color>
+            <Color x:Key="GroupTextColor">#262E33</Color>
             <Color x:Key="NameColor">#01649D</Color>
             <Color x:Key="SensorTypeColor">#7B7B7B</Color>
             <Color x:Key="TimeStampColor">#7B7B7B</Color>

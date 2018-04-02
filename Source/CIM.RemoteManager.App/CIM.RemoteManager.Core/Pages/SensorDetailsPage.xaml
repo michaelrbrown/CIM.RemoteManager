@@ -260,7 +260,7 @@
                                  Margin="10"
                                  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
                                  BackgroundColor="#FFFFFF">
-                        <Label HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" Style="{DynamicResource FormHeadingStyle}" Text="Sensor Statistics" />
+                        <Label HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" Style="{DynamicResource FormHeadingStyle}" Text="SENSOR STATISTICS" />
                     </StackLayout>
 
                     <!-- Average -->
@@ -401,7 +401,7 @@
                                  Margin="10"
                                  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
                                  BackgroundColor="#FFFFFF">
-                        <Label HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" Style="{DynamicResource FormHeadingStyle}" Text="Sensor Limits" />
+                        <Label HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" Style="{DynamicResource FormHeadingStyle}" Text="SENSOR LIMITS" />
                     </StackLayout>
 
                     <!-- Alarms Active -->
@@ -542,7 +542,7 @@
                                  Margin="10,10,10,0"
                                  HorizontalOptions="FillAndExpand"
                                  BackgroundColor="#FFFFFF">
-                        <Label HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" Style="{DynamicResource FormHeadingStyle}" Text="Calibration" />
+                        <Label HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" Style="{DynamicResource FormHeadingStyle}" Text="CALIBRATION" />
                     </StackLayout>
 
                     <!-- Upper Calibration -->
@@ -581,7 +581,7 @@
                                  Margin="10,10,10,0"
                                  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
                                  BackgroundColor="#FFFFFF">
-                        <Label HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" Style="{DynamicResource FormHeadingStyle}" Text="Offset" />
+                        <Label HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center" Style="{DynamicResource FormHeadingStyle}" Text="OFFSET" />
                     </StackLayout>
 
                     <!-- Offset -->
