@@ -13,15 +13,6 @@
             <Color x:Key="AppDarkColor">#969393</Color>
 
             <!-- Misc Colors -->
-            <Color x:Key="Tag1Color">#FF96C912</Color>
-            <Color x:Key="Tag1ColorSemiTransparent">#3396C912</Color>
-            <Color x:Key="Tag1ColorLight">#FF96C912</Color>
-            <Color x:Key="Tag2Color">#FFFFC926</Color>
-            <Color x:Key="Tag2ColorSemiTransparent">#33FFC926</Color>
-            <Color x:Key="Tag2ColorLight">#FFFFC926</Color>
-            <Color x:Key="Tag3Color">#FF0097DF</Color>
-            <Color x:Key="Tag3ColorSemiTransparent">#330097DF</Color>
-            <Color x:Key="Tag3ColorLight">#FF0097DF</Color>
             <Color x:Key="IndicatorTextColor">#FF3C3C3C</Color>
 
             <!-- Chart Colors -->
@@ -43,16 +34,14 @@
             <Color x:Key="CardBackgroundColor">#FFFFFF</Color>
             <Color x:Key="FooterBackgroundColor">#D8EDF9</Color>
             <Color x:Key="GroupTextColor">#262E33</Color>
-            <Color x:Key="NameColor">#01649D</Color>
-            <Color x:Key="SensorTypeColor">#7B7B7B</Color>
-            <Color x:Key="TimeStampColor">#7B7B7B</Color>
-            <Color x:Key="MoreIconColor">#B9DEF5</Color>
-            <Color x:Key="ValueColor">#01649D</Color>
-            <Color x:Key="StatusColor">#62B034</Color>
+            <Color x:Key="NameTextColor">#01649D</Color>
+            <Color x:Key="SensorTypeTextColor">#7B7B7B</Color>
+            <Color x:Key="TimeStampTextColor">#7B7B7B</Color>
+            <Color x:Key="ValueTextColor">#01649D</Color>
             <Color x:Key="OutlineColor">#EEEEEE</Color>
             <Color x:Key="SensorIndexFrameColor">#01649D</Color>
-            <Color x:Key="SensorIndexTextColor">#FFFFFF</Color>
-            <Color x:Key="SerialNumberColor">#FFFFFF</Color>
+            <Color x:Key="SensorIndexTextColor">#7B7B7B</Color>
+            <Color x:Key="SerialNumberTextColor">#7B7B7B</Color>
 
             <!-- Form Colors -->
             <Color x:Key="HeadingTextColor">#262E33</Color>
@@ -103,28 +92,28 @@
 
             <Style x:Key="NameStyle" TargetType="Label">
                 <Setter Property="FontSize" Value="16" />
-                <Setter Property="TextColor" Value="{StaticResource NameColor}" />
+                <Setter Property="TextColor" Value="{StaticResource NameTextColor}" />
                 <Setter Property="FontAttributes" Value="Bold" />
             </Style>
 
             <Style x:Key="SensorTypeStyle" TargetType="Label">
                 <Setter Property="FontSize" Value="14" />
-                <Setter Property="TextColor" Value="{StaticResource SensorTypeColor}" />
+                <Setter Property="TextColor" Value="{StaticResource SensorTypeTextColor}" />
             </Style>
 
             <Style x:Key="TimeStampStyle" TargetType="Label">
                 <Setter Property="FontSize" Value="14" />
-                <Setter Property="TextColor" Value="{StaticResource TimeStampColor}" />
+                <Setter Property="TextColor" Value="{StaticResource TimeStampTextColor}" />
             </Style>
 
             <Style x:Key="ValueStyle" TargetType="Label">
                 <Setter Property="FontSize" Value="24" />
-                <Setter Property="TextColor" Value="{StaticResource ValueColor}" />
+                <Setter Property="TextColor" Value="{StaticResource ValueTextColor}" />
             </Style>
 
             <Style x:Key="ValueUnitTypeStyle" TargetType="Label">
                 <Setter Property="FontSize" Value="16" />
-                <Setter Property="TextColor" Value="{StaticResource ValueColor}" />
+                <Setter Property="TextColor" Value="{StaticResource ValueTextColor}" />
             </Style>
 
             <Style x:Key="ValueOuterBoxStyle" TargetType="Frame">
@@ -154,14 +143,14 @@
             </Style>
 
             <Style x:Key="SerialNumberStyle" TargetType="Label">
-                <Setter Property="TextColor" Value="{StaticResource ValueColor}" />
+                <Setter Property="TextColor" Value="{StaticResource SerialNumberTextColor}" />
                 <Setter Property="FontSize" Value="14" />
                 <Setter Property="VerticalOptions" Value="Center" />
-                <Setter Property="FontAttributes" Value="Italic" />
+                <Setter Property="FontAttributes" Value="None" />
             </Style>
 
             <Style x:Key="SensorIndexStyle" TargetType="Label">
-                <Setter Property="TextColor" Value="{StaticResource ValueColor}" />
+                <Setter Property="TextColor" Value="{StaticResource SensorIndexTextColor}" />
                 <Setter Property="FontSize" Value="14" />
                 <Setter Property="FontAttributes" Value="Bold" />
                 <Setter Property="Margin" Value="5,0,5,0" />
@@ -205,22 +194,6 @@
             <OnPlatform x:Key="LightFontFamily" x:TypeArguments="x:String" Android="sans-serif-light" iOS="HelveticaNeue-Light" />
             <OnPlatform x:Key="MediumFontFamily" x:TypeArguments="x:String" Android="sans-serif-medium" iOS="HelveticaNeue-Medium" />
             <OnPlatform x:Key="BoldFontFamily" x:TypeArguments="x:String" Android="sans-serif-medium" iOS="HelveticaNeue-Bold" />
-
-            <!-- styles -->
-            <Style x:Key="TitleLabel" TargetType="Label">
-                <Setter Property="TextColor" Value="{StaticResource HeadingTextColor}" />
-                <Setter Property="FontSize" Value="20" />
-            </Style>
-
-            <Style x:Key="HandleLabel" TargetType="Label">
-                <Setter Property="TextColor" Value="{StaticResource LabelTextColor}" />
-                <Setter Property="FontSize" Value="12" />
-            </Style>
-
-            <Style x:Key="BodyLabel" TargetType="Label">
-                <Setter Property="TextColor" Value="{StaticResource HeadingTextColor}" />
-                <Setter Property="FontSize" Value="11" />
-            </Style>
 
             <converters:SensorValueValidationConverter x:Key="SensorValueValidationConverter" />
             <converters:RssiConverter x:Key="RssiConverter" />
