@@ -96,6 +96,24 @@ namespace CIM.RemoteManager.Core.Models
         }
 
         /// <summary>
+        /// The sensor name plus index.
+        /// </summary>
+        public string SensorNamePlusIndex
+        {
+            get
+            {
+                // Validate
+                if (!string.IsNullOrEmpty(_sensorIndex.ToString()))
+                {
+                    // Return combined sensor name plus serial number
+                    return $"({_sensorIndex}) {_name}";
+                }
+                // Default
+                return _name;
+            }
+        }
+
+        /// <summary>
         /// The sensor type group (Temperature, Differential Pressure, etc.).
         /// </summary>
         public string SensorTypeGroup

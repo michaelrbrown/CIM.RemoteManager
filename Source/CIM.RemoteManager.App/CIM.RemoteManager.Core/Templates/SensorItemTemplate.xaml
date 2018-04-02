@@ -23,7 +23,7 @@
                     <Grid Style="{DynamicResource CardStyle}">
 
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="75" />
+                            <ColumnDefinition Width="65" />
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="130" />
                             <ColumnDefinition Width="5" />
@@ -33,8 +33,9 @@
                         <Image Grid.Column="0" Aspect="AspectFit" Scale="1" Source="{Binding SensorImage}" />
 
                         <!-- Sensor Name, Type, and TimeStamp -->
-                        <StackLayout Grid.Column="1" VerticalOptions="Center" HeightRequest="100" Spacing="0">
-                            <Label VerticalOptions="Center" LineBreakMode="TailTruncation" Style="{DynamicResource NameStyle}" Text="{Binding Name}" />
+                        <StackLayout Grid.Column="1" VerticalOptions="Center" Spacing="0">
+                            <Label VerticalOptions="Center" LineBreakMode="TailTruncation" Style="{DynamicResource NameStyle}" Text="{Binding SensorNamePlusIndex}" />
+                            <Label VerticalOptions="Center" LineBreakMode="TailTruncation" Style="{DynamicResource SerialNumberStyle}" Text="{Binding SerialNumber}" />
                             <Label VerticalOptions="Center" LineBreakMode="TailTruncation" Style="{DynamicResource SensorTypeStyle}" Text="{Binding SensorLabel}" />
                             <Label VerticalOptions="Center" LineBreakMode="TailTruncation" Style="{DynamicResource TimeStampStyle}" Text="{Binding DateTimeStamp, StringFormat='{}{0:hh\\:mm\\:ss tt}'}" />
                         </StackLayout>
@@ -64,26 +65,7 @@
 
                     </Grid>
 
-                    <!-- Sensor Footer Wrapper -->
-                    <Grid Style="{DynamicResource Footer}">
-
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-
-                        <!-- Sensor Serial Number -->
-                        <StackLayout Grid.Column="0" Spacing="0">
-                            <Label HorizontalTextAlignment="Start" LineBreakMode="TailTruncation" Style="{DynamicResource SerialNumberStyle}" Text="{Binding SerialNumber}" />
-                        </StackLayout>
-
-                        <!-- Sensor Index -->
-                        <StackLayout Grid.Column="1" Spacing="0">
-                            <Label HorizontalTextAlignment="Start" LineBreakMode="NoWrap" Style="{DynamicResource SensorIndexStyle}" Text="{Binding SensorIndex}" />
-                        </StackLayout>
-
-                    </Grid>
-
+                    <!-- Row Separator -->
                     <BoxView Style="{DynamicResource DarkShadowStyle}" />
 
                 </StackLayout>
