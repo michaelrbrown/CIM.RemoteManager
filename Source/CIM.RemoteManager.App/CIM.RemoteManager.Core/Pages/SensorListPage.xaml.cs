@@ -18,9 +18,9 @@ namespace CIM.RemoteManager.Core.Pages
             BindingContext = this;
 
             // Add device settings toolbar icon and handle selection
-            //ToolbarItems.Add(new ToolbarItem("Device Settings", "ic_remote-settings.png", () =>
-            //{
-            //}, ToolbarItemOrder.Primary, 0));
+            ToolbarItems.Add(new ToolbarItem("Device Settings", "ic_remote-settings.png", () =>
+            {
+            }, ToolbarItemOrder.Primary, 0));
         }
 
         /// <summary>
