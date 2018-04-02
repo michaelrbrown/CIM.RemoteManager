@@ -4,11 +4,42 @@ namespace CIM.RemoteManager.Core.Models
 {
     public class SensorTypeResult
     {
+        /// <summary>
+        /// Gets or sets the sensor group.
+        /// </summary>
+        /// <value>
+        /// The sensor group.
+        /// </value>
         public string SensorGroup { get; set; }
+        /// <summary>
+        /// Gets or sets the sensor image.
+        /// </summary>
+        /// <value>
+        /// The sensor image.
+        /// </value>
         public string SensorImage { get; set; }
+        /// <summary>
+        /// Gets or sets the sensor label.
+        /// </summary>
+        /// <value>
+        /// The sensor label.
+        /// </value>
         public string SensorLabel { get; set; }
+        /// <summary>
+        /// Gets or sets the type of the sensor unit.
+        /// </summary>
+        /// <value>
+        /// The type of the sensor unit.
+        /// </value>
         public string SensorUnitType { get; set; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SensorTypeResult"/> class.
+        /// </summary>
+        /// <param name="sensorGroup">The sensor group.</param>
+        /// <param name="sensorImage">The sensor image.</param>
+        /// <param name="sensorLabel">The sensor label.</param>
+        /// <param name="sensorUnitType">Type of the sensor unit.</param>
         public SensorTypeResult(string sensorGroup, string sensorImage, string sensorLabel, string sensorUnitType)
         {
             SensorGroup = sensorGroup;
@@ -18,6 +49,11 @@ namespace CIM.RemoteManager.Core.Models
         }
     }
 
+    /// <summary>
+    /// Returns a strongly typed SensorTypeResult model containing key sensor information matched
+    /// by a sensor type value. This is responsible for grouping sensors, setting the sensor image,
+    /// setting the sensor label (type of sensor), and the sensor unit type.
+    /// </summary>
     public static class SensorType
     {
         public static SensorTypeResult GetSensorTypeResult(this string value)

@@ -9,6 +9,16 @@ namespace CIM.RemoteManager.Core.Converters
 {
     public class SensorValueValidationConverter : IValueConverter
     {
+        /// <summary>
+        /// Implement this method to convert <paramref name="value" /> to <paramref name="targetType" /> by using <paramref name="parameter" /> and <paramref name="culture" />.
+        /// </summary>
+        /// <param name="value">The value to convert.</param>
+        /// <param name="targetType">The type to which to convert the value.</param>
+        /// <param name="parameter">A parameter to use during the conversion.</param>
+        /// <param name="culture">The culture to use during the conversion.</param>
+        /// <returns>
+        /// Checks a sensor value of zero.  If zero, we just show a blank string to end user in app.
+        /// </returns>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (int.TryParse(value.ToString(), out int averageValueResult))

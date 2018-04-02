@@ -7,7 +7,7 @@ namespace CIM.RemoteManager.Core.Helpers
         /// <summary>
         /// Converts Unix datetime to Windows local time.
         /// </summary>
-        /// <param name="unixTimeStamp">The unix time stamp.</param>
+        /// <param name="unixTimeStamp">The Unix time stamp.</param>
         /// <returns>Windows local time.</returns>
         public static DateTime UnixTimeStampToDateTime(this int unixTimeStamp)
         {

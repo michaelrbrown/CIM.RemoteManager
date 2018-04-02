@@ -37,5 +37,6 @@ namespace CIM.RemoteManager.Core.Helpers
                 await txCharacteristic.WriteAsync(remoteUnitTimestamp.StrToByteArray()).ConfigureAwait(true);
             }
         }
+
     }
 }

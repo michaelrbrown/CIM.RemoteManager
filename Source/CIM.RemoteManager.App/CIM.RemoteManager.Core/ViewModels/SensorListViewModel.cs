@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Acr.UserDialogs;
+using CIM.RemoteManager.Core.Extensions;
 using CIM.RemoteManager.Core.Helpers;
 using CIM.RemoteManager.Core.Models;
 using MvvmCross.Core.ViewModels;
@@ -416,6 +417,8 @@ namespace CIM.RemoteManager.Core.ViewModels
                             // Validate our current remote Unix date time. Update to current Unix UTC date time
                             // if year < 2009.
                             await stationHelper.HandleRemoteDateTimeValidation(TxCharacteristic, currentDateTimeResult);
+                            // Show updating station datetime message
+                            _userDialogs.InfoToast("Updating Station DateTime...", TimeSpan.FromSeconds(2));
                         }
 
                         // Processing sensor data done

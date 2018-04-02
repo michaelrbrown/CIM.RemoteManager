@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 
-namespace CIM.RemoteManager.Core.Helpers
+namespace CIM.RemoteManager.Core.Models
 {
     public class FullyObservableCollection<T> : ObservableCollection<T> where T : INotifyPropertyChanged
     {

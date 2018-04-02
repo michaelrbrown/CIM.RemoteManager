@@ -81,9 +81,9 @@ namespace CIM.RemoteManager.Core.Models
         }
 
         /// <summary>
-        /// The sensor name plus index.
+        /// The sensor index plus the name.
         /// </summary>
-        public string SensorNamePlusIndex
+        public string SensorIndexPlusName
         {
             get
             {
@@ -91,10 +91,10 @@ namespace CIM.RemoteManager.Core.Models
                 if (!string.IsNullOrEmpty(_sensorIndex.ToString()))
                 {
                     // Return combined sensor name plus serial number
-                    return $"({_sensorIndex}) {_name}";
+                    return $"({_sensorIndex}) {Name}";
                 }
                 // Default
-                return _name;
+                return Name;
             }
         }
 

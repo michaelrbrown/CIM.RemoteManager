@@ -68,7 +68,7 @@ namespace CIM.RemoteManager.Core.Models
             get => _lowAlarmLimit;
             set => SetProperty(ref _lowAlarmLimit, value);
         }
-        
+
         /// <summary>
         /// Low warning limit
         /// </summary>

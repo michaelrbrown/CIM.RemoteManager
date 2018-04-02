@@ -40,23 +40,18 @@
       <DependentUpon>BleMvxFormsApp.xaml</DependentUpon>
     </Compile>
     <Compile Include="Common\CoreConstants.cs" />
-    <Compile Include="Controls\EnhancedListView.cs" />
-    <Compile Include="Controls\RepeaterView.cs" />
     <Compile Include="Converters\AlarmConverter.cs" />
     <Compile Include="Converters\CoreConverters.cs" />
     <Compile Include="Converters\InverseBooleanValueConverter.cs" />
     <Compile Include="Converters\RssiConverter.cs" />
     <Compile Include="Extensions\GuidExtension.cs" />
     <Compile Include="Extensions\IUserDialogsExtensions.cs" />
-    <Compile Include="Helpers\AsciiStringConverter.cs" />
-    <Compile Include="Helpers\ByteHelper.cs" />
     <Compile Include="Helpers\DateTimeHelper.cs" />
     <Compile Include="Helpers\NumberHelper.cs" />
-    <Compile Include="Helpers\SensorTypeConverter.cs" />
-    <Compile Include="Helpers\Settings.cs" />
+    <Compile Include="Helpers\SettingsHelper.cs" />
     <Compile Include="Helpers\StationHelper.cs" />
     <Compile Include="Helpers\StringHelper.cs" />
-    <Compile Include="Helpers\TrulyObservableCollection.cs" />
+    <Compile Include="Models\TrulyObservableCollection.cs" />
     <Compile Include="Models\BindableBase.cs" />
     <Compile Include="Models\Device.cs" />
     <Compile Include="Models\MessageCounters.cs" />
