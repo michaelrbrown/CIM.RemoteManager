@@ -80,21 +80,6 @@ namespace CIM.RemoteManager.Core.Models
             }
         }
 
-        private string _name = "N/A";
-        public string Name
-        {
-            get
-            {
-                if (!string.IsNullOrWhiteSpace(_name))
-                {
-                    return _name;
-                }
-                // Default
-                return "CIMScan Sensor";
-            }
-            set => SetProperty(ref _name, value);
-        }
-
         /// <summary>
         /// The sensor name plus index.
         /// </summary>
@@ -111,6 +96,21 @@ namespace CIM.RemoteManager.Core.Models
                 // Default
                 return _name;
             }
+        }
+
+        private string _name = "N/A";
+        public string Name
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(_name))
+                {
+                    return _name;
+                }
+                // Default
+                return "CIMScan Sensor";
+            }
+            set => SetProperty(ref _name, value);
         }
 
         /// <summary>
@@ -212,7 +212,7 @@ namespace CIM.RemoteManager.Core.Models
             {
                 if (!String.IsNullOrEmpty(AverageValue.ToString()))
                 {
-                    return $"{AverageValue.ToString()} {SensorUnitType}";
+                    return $"{AverageValue} {SensorUnitType}";
                 }
                 // Default
                 return "No Value";
@@ -231,14 +231,8 @@ namespace CIM.RemoteManager.Core.Models
                 if (double.TryParse(_averageValue.ToString(), out double averageValueResult))
                 {
                     double finalResult = averageValueResult / 10;
-                    if (Math.Abs(finalResult - 32768) < 0)
-                    {
-                        return 0;
-                    }
-                    else
-                    {
-                        return finalResult;
-                    }
+                    // Return result
+                    return finalResult.ValidateNumber();
                 }
                 // Default
                 return 0;

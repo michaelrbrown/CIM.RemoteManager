@@ -51,6 +51,7 @@
     <Compile Include="Helpers\AsciiStringConverter.cs" />
     <Compile Include="Helpers\ByteHelper.cs" />
     <Compile Include="Helpers\DateTimeHelper.cs" />
+    <Compile Include="Helpers\NumberHelper.cs" />
     <Compile Include="Helpers\SensorTypeConverter.cs" />
     <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Helpers\StationHelper.cs" />

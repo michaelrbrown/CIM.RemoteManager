@@ -358,7 +358,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         private double _currentValue;
         public double CurrentValue
         {
-            get => _currentValue;
+            get => _currentValue.ValidateNumber();
             set => SetProperty(ref _currentValue, value);
         }
 
@@ -385,10 +385,11 @@ namespace CIM.RemoteManager.Core.ViewModels
         {
             get
             {
-                // Try to lookup hex to string
                 if (double.TryParse(_averageValue.ToString(), out double averageValueResult))
                 {
-                    return averageValueResult / 10;
+                    double finalResult = averageValueResult / 10;
+                    // Return result
+                    return finalResult.ValidateNumber();
                 }
                 // Default
                 return 0;
@@ -424,13 +425,17 @@ namespace CIM.RemoteManager.Core.ViewModels
                 // Try to lookup hex to string
                 if (double.TryParse(_minimumValue.ToString(), out double minimumValueResult))
                 {
-                    return minimumValueResult / 10;
+                    double finalResult = minimumValueResult / 10;
+                    // Return result
+                    return finalResult.ValidateNumber();
                 }
                 // Default
                 return 0;
             }
             set => SetProperty(ref _minimumValue, value);
         }
+
+
 
         /// <summary>
         /// Converting Unix to Windows DateTime
@@ -459,7 +464,9 @@ namespace CIM.RemoteManager.Core.ViewModels
                 // Try to lookup hex to string
                 if (double.TryParse(_maximumValue.ToString(), out double maximumValueResult))
                 {
-                    return maximumValueResult / 10;
+                    double finalResult = maximumValueResult / 10;
+                    // Return result
+                    return finalResult.ValidateNumber();
                 }
                 // Default
                 return 0;
@@ -549,11 +556,11 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// <summary>
         /// Alarm delay.
         /// </summary>
-        private double _alarmDeley;
+        private double _alarmDelay;
         public double AlarmDelay
         {
-            get => _alarmDeley;
-            set => SetProperty(ref _alarmDeley, value);
+            get => _alarmDelay.ValidateNumber();
+            set => SetProperty(ref _alarmDelay, value);
         }
 
         /// <summary>
@@ -566,15 +573,11 @@ namespace CIM.RemoteManager.Core.ViewModels
             {
                 if (double.TryParse(_lowAlarmLimit.ToString(), out double lowAlarmLimitResult))
                 {
-                    if (Convert.ToInt32(lowAlarmLimitResult) == 0)
-                    {
-                        return null;
-                    }
-                    // Default
-                    return lowAlarmLimitResult;
+                    // Validate number
+                    return lowAlarmLimitResult.ValidateNumber();
                 }
-
-                return lowAlarmLimitResult;
+                // Default
+                return 0;
             }
             set
             {
@@ -596,15 +599,11 @@ namespace CIM.RemoteManager.Core.ViewModels
             {
                 if (double.TryParse(_lowWarningLimit.ToString(), out double lowWarningLimitResult))
                 {
-                    if (Convert.ToInt32(lowWarningLimitResult) == 0)
-                    {
-                        return null;
-                    }
-                    // Default
-                    return lowWarningLimitResult;
+                    // Validate number
+                    return lowWarningLimitResult.ValidateNumber();
                 }
                 // Default
-                return lowWarningLimitResult;
+                return 0;
             }
             set
             {
@@ -627,15 +626,11 @@ namespace CIM.RemoteManager.Core.ViewModels
             {
                 if (double.TryParse(_highAlarmLimit.ToString(), out double highAlarmLimitResult))
                 {
-                    if (Convert.ToInt32(highAlarmLimitResult) == 0)
-                    {
-                        return null;
-                    }
-                    // Default
-                    return highAlarmLimitResult;
+                    // Validate number
+                    return highAlarmLimitResult.ValidateNumber();
                 }
                 // Default
-                return highAlarmLimitResult;
+                return 0;
             }
             set
             {
@@ -657,15 +652,11 @@ namespace CIM.RemoteManager.Core.ViewModels
             {
                 if (double.TryParse(_highWarningLimit.ToString(), out double highWarningLimitResult))
                 {
-                    if (Convert.ToInt32(highWarningLimitResult) == 0)
-                    {
-                        return null;
-                    }
-                    // Default
-                    return highWarningLimitResult;
+                    // Validate number
+                    return highWarningLimitResult.ValidateNumber();
                 }
-
-                return highWarningLimitResult;
+                // Default
+                return 0;
             }
             set
             {

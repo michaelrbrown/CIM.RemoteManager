@@ -33,7 +33,7 @@
                         <Image Grid.Column="0" Aspect="AspectFit" Scale="1" Source="{Binding SensorImage}" />
 
                         <!-- Sensor Name, Type, and TimeStamp -->
-                        <StackLayout Grid.Column="1" VerticalOptions="Center" Spacing="0">
+                        <StackLayout Grid.Column="1" VerticalOptions="Center" HeightRequest="100" Spacing="0">
                             <Label VerticalOptions="Center" LineBreakMode="TailTruncation" Style="{DynamicResource NameStyle}" Text="{Binding SensorNamePlusIndex}" />
                             <Label VerticalOptions="Center" LineBreakMode="TailTruncation" Style="{DynamicResource SerialNumberStyle}" Text="{Binding SerialNumber}" />
                             <Label VerticalOptions="Center" LineBreakMode="TailTruncation" Style="{DynamicResource SensorTypeStyle}" Text="{Binding SensorLabel}" />
