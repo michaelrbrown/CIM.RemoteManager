@@ -84,7 +84,8 @@
                                    VerticalOptions="Center" HorizontalOptions="CenterAndExpand"
                                    FontAttributes="Italic" FontSize="20" HorizontalTextAlignment="Center"
                                    Text="{Binding Key, Converter={StaticResource UpperCaseConverter}}"
-                                   TextColor="#01649D" VerticalTextAlignment="Center" WidthRequest="225" />
+                                   TextColor="{StaticResource GroupTextColor}"
+                                   VerticalTextAlignment="Center" WidthRequest="225" />
                         </Grid>
                     </ViewCell.View>
                 </ViewCell>
