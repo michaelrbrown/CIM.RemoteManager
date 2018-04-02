@@ -53,7 +53,6 @@
     <Compile Include="Helpers\StringHelper.cs" />
     <Compile Include="Models\TrulyObservableCollection.cs" />
     <Compile Include="Models\BindableBase.cs" />
-    <Compile Include="Models\Device.cs" />
     <Compile Include="Models\MessageCounters.cs" />
     <Compile Include="Models\SensorMessage.cs" />
     <Compile Include="Models\SensorPlot.cs" />

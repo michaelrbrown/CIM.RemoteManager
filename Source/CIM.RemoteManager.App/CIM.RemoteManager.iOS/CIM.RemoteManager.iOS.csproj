@@ -460,7 +460,7 @@
     <BundleResource Include="Resources\remote512.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_sensor-settings2.png" />
+    <BundleResource Include="Resources\ic_remote-settings.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\bg_app.jpg" />
