@@ -82,7 +82,7 @@
                             <!-- Sensor Group Name -->
                             <Label Margin="0,5,0,5"
                                    VerticalOptions="Center" HorizontalOptions="CenterAndExpand"
-                                   FontAttributes="Italic" FontSize="20" HorizontalTextAlignment="Center"
+                                   FontSize="20" HorizontalTextAlignment="Center"
                                    Text="{Binding Key, Converter={StaticResource UpperCaseConverter}}"
                                    TextColor="{StaticResource GroupTextColor}"
                                    VerticalTextAlignment="Center" WidthRequest="225" />
