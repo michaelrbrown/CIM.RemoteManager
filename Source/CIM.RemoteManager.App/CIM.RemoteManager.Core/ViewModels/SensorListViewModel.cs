@@ -412,13 +412,18 @@ namespace CIM.RemoteManager.Core.ViewModels
                         // Be certain we have a parsable integer
                         if (int.TryParse(CurrentDateTime.ToString(), out int currentDateTimeResult))
                         {
+
+                            // Show updating station datetime message
+                            _userDialogs.InfoToast($"Remote DateTime: {currentDateTimeResult.UnixTimeStampToDateTime()}", TimeSpan.FromSeconds(2));
+
+
                             // New instance of station helper
                             var stationHelper = new StationHelper();
                             // Validate our current remote Unix date time. Update to current Unix UTC date time
                             // if year < 2009.
                             await stationHelper.HandleRemoteDateTimeValidation(TxCharacteristic, currentDateTimeResult);
                             // Show updating station datetime message
-                            _userDialogs.InfoToast("Updating Station DateTime...", TimeSpan.FromSeconds(2));
+                            //_userDialogs.InfoToast("Updating Station DateTime...", TimeSpan.FromSeconds(2));
                         }
 
                         // Processing sensor data done
