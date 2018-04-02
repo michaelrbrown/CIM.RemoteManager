@@ -64,8 +64,6 @@
 
                     </Grid>
 
-                    <BoxView Style="{DynamicResource LightShadowStyle}" />
-
                     <!-- Sensor Footer Wrapper -->
                     <Grid Style="{DynamicResource Footer}">
 

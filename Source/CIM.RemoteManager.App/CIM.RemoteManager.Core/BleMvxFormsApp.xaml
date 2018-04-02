@@ -84,7 +84,6 @@
 
             <Style x:Key="Footer" TargetType="Grid">
                 <Setter Property="Padding" Value="5" />
-                <Setter Property="BackgroundColor" Value="{StaticResource FooterBackgroundColor}" />
             </Style>
 
             <Style x:Key="ShadowStyle" TargetType="BoxView">
