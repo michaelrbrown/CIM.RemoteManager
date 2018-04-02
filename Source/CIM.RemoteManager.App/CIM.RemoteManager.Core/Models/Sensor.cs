@@ -90,11 +90,11 @@ namespace CIM.RemoteManager.Core.Models
                 // Validate
                 if (!string.IsNullOrEmpty(_sensorIndex.ToString()))
                 {
-                    // Return combined sensor name plus serial number
-                    return $"({_sensorIndex}) {Name}";
+                    // Return combined sensor index plus name
+                    return $"({_sensorIndex}) {_name}";
                 }
                 // Default
-                return Name;
+                return _name;
             }
         }
 
