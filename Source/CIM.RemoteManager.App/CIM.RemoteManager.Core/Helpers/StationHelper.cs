@@ -17,7 +17,7 @@ namespace CIM.RemoteManager.Core.Helpers
         /// </remarks>
         /// <param name="txCharacteristic">Bluetooth service characteristic</param>
         /// <param name="remoteUnixDateTime">The remote Unix date time.</param>
-        public async Task HandleRemoteDateTimeValidation(ICharacteristic txCharacteristic, int remoteUnixDateTime)
+        public async Task<bool> HandleRemoteDateTimeValidation(ICharacteristic txCharacteristic, int remoteUnixDateTime)
         {
             // Validate our station Unix time converted to windows time is less
             // than 2009.  If it is we know the station time needs to be set.
@@ -35,7 +35,13 @@ namespace CIM.RemoteManager.Core.Helpers
 
                 // Send set Unix UTC time command to remote
                 await txCharacteristic.WriteAsync(remoteUnitTimestamp.StrToByteArray()).ConfigureAwait(true);
+
+                // Let caller know we set station time
+                return true;
             }
+
+            // We didn't set station time
+            return false;
         }
 
     }
