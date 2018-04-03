@@ -441,11 +441,6 @@ namespace CIM.RemoteManager.Core.ViewModels
                             sensorListItemA.DecimalLocation = splitSensorValues[9].SafeConvert<int>(0);
                             sensorListItemA.StatisticsTotalCalcSettings = splitSensorValues[10];
 
-
-                            // Show updating station datetime message
-                            _userDialogs.InfoToast($"1Sensor Name: {sensorListItemA.Name}", TimeSpan.FromSeconds(1));
-
-
                             // Notify property changed to update UI
                             RaisePropertyChanged(() => SensorCollection);
                         }
@@ -467,9 +462,9 @@ namespace CIM.RemoteManager.Core.ViewModels
                                 StatisticsTotalCalcSettings = splitSensorValues[10]
                             };
 
-                            // Show updating station datetime message
-                            _userDialogs.InfoToast($"2Sensor Name: {sensor.Name}", TimeSpan.FromSeconds(1));
 
+                            // Show updating station datetime message
+                            _userDialogs.InfoToast($"Sensor Val: {splitSensorValues[7].SafeHexToDouble()}", TimeSpan.FromSeconds(1));
 
                             // Add sensor to list
                             SensorCollection.Add(sensor);

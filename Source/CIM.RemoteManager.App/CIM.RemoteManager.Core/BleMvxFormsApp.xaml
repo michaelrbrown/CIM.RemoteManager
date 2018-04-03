@@ -160,6 +160,7 @@
                 <Setter Property="HeightRequest" Value="35" />
                 <Setter Property="Padding" Value="10" />
                 <Setter Property="BackgroundColor" Value="{StaticResource FooterBackgroundColor}" />
+                <Setter Property="OutlineColor" Value="#888888" />
             </Style>
 
             <Style x:Key="StatusStyle" TargetType="Label">

@@ -36,7 +36,7 @@
                         <StackLayout Grid.Column="1" VerticalOptions="Center" Spacing="0">
                             <Label VerticalOptions="Center" LineBreakMode="TailTruncation" Style="{DynamicResource NameStyle}" Text="{Binding Name}" />
                             <Label VerticalOptions="Center" LineBreakMode="TailTruncation" Style="{DynamicResource SensorTypeStyle}" Text="{Binding SensorLabel}" />
-                            <Label VerticalOptions="Center" LineBreakMode="NoWrap" Style="{DynamicResource SensorIndexStyle}" Text="{Binding SensorIndex, StringFormat='Sensor Index: {0:N}'}" />
+                            <Label VerticalOptions="Center" LineBreakMode="NoWrap" Style="{DynamicResource SensorIndexStyle}" Text="{Binding SensorIndex, StringFormat='Sensor Index: {0}'}" />
                         </StackLayout>
 
                         <!-- Sensor Value and Unit Type -->
@@ -82,7 +82,7 @@
 
                         <!-- Sensor Serial Number -->
                         <StackLayout Grid.Column="1" Spacing="0">
-                            <Label HorizontalTextAlignment="Start" LineBreakMode="TailTruncation" Style="{DynamicResource SerialNumberStyle}" Text="{Binding SerialNumber}" />
+                            <Label HorizontalTextAlignment="End" LineBreakMode="TailTruncation" Style="{DynamicResource SerialNumberStyle}" Text="{Binding SerialNumber}" />
                         </StackLayout>
                     </Grid>
 
