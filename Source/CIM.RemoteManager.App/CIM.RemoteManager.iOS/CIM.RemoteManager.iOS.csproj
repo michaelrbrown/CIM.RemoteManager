@@ -504,6 +504,12 @@
   <ItemGroup>
     <BundleResource Include="Resources\ic_debug.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_cimscan-devices.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_other-devices.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
