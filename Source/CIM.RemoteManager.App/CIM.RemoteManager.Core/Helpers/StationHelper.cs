@@ -48,5 +48,31 @@ namespace CIM.RemoteManager.Core.Helpers
             return false;
         }
 
+        /// <summary>
+        /// Gets the alarm status.
+        /// </summary>
+        /// <param name="statusFlag">The status flag.</param>
+        /// <returns>Alarm status <code>string</code>.</returns>
+        public string GetAlarmStatus(int statusFlag)
+        {
+            bool successParse = int.TryParse(statusFlag.ToString(), out int alarmValue);
+            if (successParse)
+            {
+                switch (alarmValue)
+                {
+                    case 0:
+                        return "normal";
+                    case 1:
+                        return "warning";
+                    case 2:
+                        return "alarm";
+                    case 3:
+                        return "error";
+                }
+
+            }
+            // Default
+            return "normal";
+        }
     }
 }

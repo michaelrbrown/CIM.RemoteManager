@@ -53,6 +53,7 @@ namespace CIM.RemoteManager.iOS
             UISwitch.Appearance.TintColor = accentColor;
             UISwitch.Appearance.OnTintColor = accentColor;
             // UITabBar
+            UITabBar.Appearance.BackgroundImage = new UIImage();
             UITabBar.Appearance.BarTintColor = accentColor;
             UITabBar.Appearance.BackgroundColor = accentColor;
             UITabBar.Appearance.TintColor = UIColor.FromRGB(220, 225, 227);
@@ -60,7 +61,7 @@ namespace CIM.RemoteManager.iOS
             // UINavigationBar
             UINavigationBar.Appearance.BarTintColor = accentColor;
             UINavigationBar.Appearance.TintColor = UIColor.White;
-            UINavigationBar.Appearance.SetTitleTextAttributes(new UITextAttributes { TextColor = UIColor.White });
+            UINavigationBar.Appearance.SetTitleTextAttributes(new UITextAttributes { TextColor = UIColor.White, TextShadowColor = UIColor.White});
             // UIToolbar
             UIToolbar.Appearance.BackgroundColor = accentColor;
             UIToolbar.Appearance.TintColor = UIColor.White;

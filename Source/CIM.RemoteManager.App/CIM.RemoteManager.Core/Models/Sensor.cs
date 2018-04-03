@@ -81,17 +81,21 @@ namespace CIM.RemoteManager.Core.Models
         }
 
         /// <summary>
-        /// The sensor index plus the name.
+        /// The sensor index plus the alarm status.
         /// </summary>
-        public string SensorIndexPlusName
+        public string SensorIndexPlusStatus
         {
             get
             {
                 // Validate
                 if (!string.IsNullOrEmpty(_sensorIndex.ToString()))
                 {
-                    // Return combined sensor index plus name
-                    return $"({_sensorIndex}) {Name}";
+                    // Instance of station helper
+                    var stationHelper = new StationHelper();
+                    // Get alarm status from alarm flag (int)
+                    string alarmStatus = stationHelper.GetAlarmStatus(AlarmStatus);
+                    // Return combined sensor index plus alarm status
+                    return $"Index: {_sensorIndex}) Status: {alarmStatus}";
                 }
                 // Default
                 return _name;
