@@ -124,7 +124,7 @@
                             Command="{Binding StopScanCommand}"
                             Image="ic_stop-searching.png" Text="Stop Searching"
                             TextColor="{StaticResource ButtonTextColor}"
-                            WidthRequest="155" />
+                            WidthRequest="175" />
                 </StackLayout>
 
             </Grid>
@@ -184,7 +184,7 @@
                             Command="{Binding StopScanCommand}"
                             Image="ic_stop-searching.png" Text="Stop Searching"
                             TextColor="{StaticResource ButtonTextColor}"
-                            WidthRequest="155" />
+                            WidthRequest="175" />
                 </StackLayout>
 
             </Grid>
