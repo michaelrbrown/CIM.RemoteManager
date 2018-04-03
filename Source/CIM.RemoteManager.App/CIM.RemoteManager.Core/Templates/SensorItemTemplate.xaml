@@ -72,7 +72,7 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="10" />
+                            <ColumnDefinition Width="5" />
                         </Grid.ColumnDefinitions>
 
                         <!-- Sensor Index -->
