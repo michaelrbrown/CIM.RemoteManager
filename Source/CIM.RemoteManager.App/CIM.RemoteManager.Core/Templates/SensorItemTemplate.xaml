@@ -4,8 +4,9 @@
     <ContentView.Content>
 
         <!-- Sensor Outer Wrapper -->
-        <StackLayout Margin="5,0,0,0" VerticalOptions="CenterAndExpand" BackgroundColor="Transparent" Orientation="Vertical">
-            <Grid>
+        <!-- Margin: left, top, right, bottom -->
+        <StackLayout Margin="0,0,0,0" VerticalOptions="CenterAndExpand" BackgroundColor="Transparent" Orientation="Vertical">
+            <Grid ColumnSpacing="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="10" />
                     <ColumnDefinition Width="*" />
@@ -13,6 +14,7 @@
 
                 <!-- Sensor Alarm Color Indicator -->
                 <Frame Grid.Column="0"
+                       Margin="0" Padding="0"
                        VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
                        BackgroundColor="{Binding AlarmStatus, Converter={StaticResource AlarmStatusColorConverter}}"
                        CornerRadius="0" HasShadow="False" WidthRequest="10" />

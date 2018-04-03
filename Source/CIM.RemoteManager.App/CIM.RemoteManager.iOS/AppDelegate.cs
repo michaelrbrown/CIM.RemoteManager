@@ -55,7 +55,7 @@ namespace CIM.RemoteManager.iOS
             // UITabBar
             UITabBar.Appearance.BarTintColor = accentColor;
             UITabBar.Appearance.BackgroundColor = accentColor;
-            UITabBar.Appearance.TintColor = UIColor.FromRGB(90, 171, 230);
+            UITabBar.Appearance.TintColor = UIColor.FromRGB(220, 225, 227);
             UITabBar.Appearance.SelectedImageTintColor = UIColor.White;
             // UINavigationBar
             UINavigationBar.Appearance.BarTintColor = accentColor;
