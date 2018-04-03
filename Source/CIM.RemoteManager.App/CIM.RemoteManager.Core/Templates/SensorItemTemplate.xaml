@@ -28,7 +28,6 @@
                             <ColumnDefinition Width="65" />
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="130" />
-                            <ColumnDefinition Width="3" />
                         </Grid.ColumnDefinitions>
 
                         <!-- Sensor Image -->
@@ -44,7 +43,7 @@
                         <!-- Sensor Value and Unit Type -->
                         <StackLayout Grid.Column="2" Orientation="Horizontal" Spacing="0">
 
-                            <Frame Style="{StaticResource ValueInnerBoxStyle}">
+                            <Frame BackgroundColor="{Binding AlarmStatus, Converter={StaticResource AlarmStatusColorConverter}}" Style="{StaticResource ValueInnerBoxStyle}">
                                 <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Orientation="Horizontal" Spacing="0">
                                     <!-- Sensor Unit Type -->
                                     <Label Margin="0"
@@ -66,7 +65,7 @@
 
                     </Grid>
 
-                    <BoxView Style="{StaticResource LightShadowStyle}" />
+                    <BoxView BackgroundColor="{Binding AlarmStatus, Converter={StaticResource AlarmStatusColorConverter}}" Style="{StaticResource LightShadowStyle}" />
 
                     <!-- Sensor Footer Wrapper -->
                     <Grid Style="{StaticResource Footer}">
@@ -87,8 +86,6 @@
                             <Label HorizontalTextAlignment="End" LineBreakMode="TailTruncation" Style="{StaticResource SerialNumberStyle}" Text="{Binding SerialNumber}" />
                         </StackLayout>
                     </Grid>
-
-                    <BoxView BackgroundColor="{Binding AlarmStatus, Converter={StaticResource AlarmStatusColorConverter}}" Style="{StaticResource DarkShadowStyle}" />
 
                 </StackLayout>
 
