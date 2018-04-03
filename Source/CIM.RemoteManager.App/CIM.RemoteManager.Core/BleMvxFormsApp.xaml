@@ -41,16 +41,16 @@
             <Color x:Key="RemoteNameBackgroundColor">#01649D</Color>
             <Color x:Key="GroupBackgroundColor">#FFFFFF</Color>
             <Color x:Key="CardBackgroundColor">#FFFFFF</Color>
-            <Color x:Key="FooterBackgroundColor">Transparent</Color>
+            <Color x:Key="FooterBackgroundColor">#D8EDF9</Color>
             <Color x:Key="GroupTextColor">#262E33</Color>
             <Color x:Key="NameTextColor">#01649D</Color>
             <Color x:Key="SensorTypeTextColor">#7B7B7B</Color>
-            <Color x:Key="TimeStampTextColor">#FFFFFF</Color>
+            <Color x:Key="TimeStampTextColor">#3580C6</Color>
             <Color x:Key="ValueTextColor">#01649D</Color>
             <Color x:Key="OutlineColor">#EEEEEE</Color>
             <Color x:Key="SensorIndexFrameColor">#01649D</Color>
             <Color x:Key="SensorIndexTextColor">#7B7B7B</Color>
-            <Color x:Key="SerialNumberTextColor">#FFFFFF</Color>
+            <Color x:Key="SerialNumberTextColor">#3580C6</Color>
 
             <!-- Form Colors -->
             <Color x:Key="HeadingTextColor">#262E33</Color>

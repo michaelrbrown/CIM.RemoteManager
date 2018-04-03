@@ -38,7 +38,7 @@
                         <StackLayout Grid.Column="1" VerticalOptions="Center" Spacing="0">
                             <Label VerticalOptions="Center" LineBreakMode="TailTruncation" Style="{StaticResource NameStyle}" Text="{Binding Name}" />
                             <Label VerticalOptions="Center" LineBreakMode="TailTruncation" Style="{StaticResource SensorTypeStyle}" Text="{Binding SensorLabel}" />
-                            <Label VerticalOptions="Center" LineBreakMode="NoWrap" Style="{StaticResource SensorIndexStyle}" Text="{Binding SensorIndex, StringFormat='Sensor Index: {0}'}" />
+                            <Label VerticalOptions="Center" LineBreakMode="NoWrap" Style="{StaticResource SensorIndexStyle}" Text="{Binding SensorIndexPlusStatus}" />
                         </StackLayout>
 
                         <!-- Sensor Value and Unit Type -->
@@ -69,7 +69,7 @@
                     <BoxView Style="{StaticResource LightShadowStyle}" />
 
                     <!-- Sensor Footer Wrapper -->
-                    <Grid BackgroundColor="{Binding AlarmStatus, Converter={StaticResource AlarmStatusColorConverter}}" Style="{StaticResource Footer}">
+                    <Grid Style="{StaticResource Footer}">
 
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
