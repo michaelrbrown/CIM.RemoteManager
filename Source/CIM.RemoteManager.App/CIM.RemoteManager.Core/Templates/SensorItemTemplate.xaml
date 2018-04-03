@@ -35,7 +35,6 @@
                         <!-- Sensor Name, Type, and TimeStamp -->
                         <StackLayout Grid.Column="1" VerticalOptions="Center" Spacing="0">
                             <Label VerticalOptions="Center" LineBreakMode="TailTruncation" Style="{DynamicResource NameStyle}" Text="{Binding Name}" />
-                            <Label HorizontalTextAlignment="Start" LineBreakMode="TailTruncation" Style="{DynamicResource SerialNumberStyle}" Text="{Binding SerialNumber}" />
                             <Label VerticalOptions="Center" LineBreakMode="TailTruncation" Style="{DynamicResource SensorTypeStyle}" Text="{Binding SensorLabel}" />
                             <Label VerticalOptions="Center" LineBreakMode="TailTruncation" Style="{DynamicResource TimeStampStyle}" Text="{Binding DateTimeStamp, StringFormat='{}{0:hh\\:mm\\:ss tt}'}" />
                         </StackLayout>
