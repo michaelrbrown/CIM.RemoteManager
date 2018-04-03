@@ -15,10 +15,10 @@
                 <Frame Grid.Column="0"
                        VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
                        BackgroundColor="{Binding AlarmStatus, Converter={StaticResource AlarmStatusColorConverter}}"
-                       CornerRadius="3" HasShadow="False" WidthRequest="10" />
+                       CornerRadius="0" HasShadow="False" WidthRequest="10" />
 
                 <!-- Sensor Inner Wrapper -->
-                <StackLayout Grid.Column="1" Margin="0" Padding="0" Opacity="1" Spacing="0">
+                <StackLayout Grid.Column="1" Margin="0" Padding="0" Spacing="0">
 
                     <Grid Style="{DynamicResource CardStyle}">
 
@@ -26,7 +26,7 @@
                             <ColumnDefinition Width="65" />
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="130" />
-                            <ColumnDefinition Width="5" />
+                            <ColumnDefinition Width="3" />
                         </Grid.ColumnDefinitions>
 
                         <!-- Sensor Image -->
