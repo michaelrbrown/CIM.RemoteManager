@@ -65,6 +65,8 @@
 
                     </Grid>
 
+                    <BoxView Style="{DynamicResource LightShadowStyle}" />
+
                     <!-- Sensor Footer Wrapper -->
                     <Grid Style="{DynamicResource Footer}">
 
@@ -73,16 +75,15 @@
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
 
-                        <!-- Sensor Serial Number -->
-                        <StackLayout Grid.Column="0" Spacing="0">
-                            <Label HorizontalTextAlignment="Start" LineBreakMode="TailTruncation" Style="{DynamicResource SerialNumberStyle}" Text="{Binding SerialNumber}" />
-                        </StackLayout>
-
                         <!-- Sensor Index -->
-                        <StackLayout Grid.Column="1" Spacing="0">
+                        <StackLayout Grid.Column="0" Spacing="0">
                             <Label HorizontalTextAlignment="Start" LineBreakMode="NoWrap" Style="{DynamicResource SensorIndexStyle}" Text="{Binding SensorIndex}" />
                         </StackLayout>
 
+                        <!-- Sensor Serial Number -->
+                        <StackLayout Grid.Column="1" Spacing="0">
+                            <Label HorizontalTextAlignment="Start" LineBreakMode="TailTruncation" Style="{DynamicResource SerialNumberStyle}" Text="{Binding SerialNumber}" />
+                        </StackLayout>
                     </Grid>
 
                     <BoxView Style="{DynamicResource DarkShadowStyle}" />

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using CIM.RemoteManager.Core.Common;
 using Plugin.BLE.Abstractions.Contracts;
 
 namespace CIM.RemoteManager.Core.Helpers
@@ -21,7 +22,7 @@ namespace CIM.RemoteManager.Core.Helpers
         {
             // Validate our station Unix time converted to windows time is less
             // than 2009.  If it is we know the station time needs to be set.
-            if (remoteUnixDateTime.UnixTimeStampToDateTime().Year < 2009)
+            if (remoteUnixDateTime.UnixTimeStampToDateTime().Year < CoreConstants.StationSettingLowestDateTimeYear)
             {
                 // Get Unix timestamp "now" as UTC
                 Int32 unixTimestampUtc = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
@@ -35,6 +36,9 @@ namespace CIM.RemoteManager.Core.Helpers
 
                 // Send set Unix UTC time command to remote
                 await txCharacteristic.WriteAsync(remoteUnitTimestamp.StrToByteArray()).ConfigureAwait(true);
+
+                // Wait a couple seconds for remote to process
+                await Task.Delay(2000).ConfigureAwait(true);
 
                 // Let caller know we set station time
                 return true;

@@ -412,14 +412,11 @@ namespace CIM.RemoteManager.Core.ViewModels
                         // Be certain we have a parsable integer
                         if (int.TryParse(CurrentDateTime.ToString(), out int currentDateTimeResult))
                         {
-                            // Show updating station datetime message
-                            _userDialogs.InfoToast($"Remote DateTime: {currentDateTimeResult.UnixTimeStampToDateTime().Year}", TimeSpan.FromSeconds(1));
-
                             // New instance of station helper
                             var stationHelper = new StationHelper();
                             // Validate our current remote Unix date time. Update to current Unix UTC date time
                             // if year < 2009.
-                            bool wasStationTimeSet = await stationHelper.HandleRemoteDateTimeValidation(TxCharacteristic, currentDateTimeResult);
+                            bool wasStationTimeSet = await stationHelper.HandleRemoteDateTimeValidation(TxCharacteristic, currentDateTimeResult).ConfigureAwait(true);
 
                             // Show updating station datetime message
                             if (wasStationTimeSet) _userDialogs.InfoToast("Updating Station DateTime...", TimeSpan.FromSeconds(2));
@@ -444,6 +441,11 @@ namespace CIM.RemoteManager.Core.ViewModels
                             sensorListItemA.DecimalLocation = splitSensorValues[9].SafeConvert<int>(0);
                             sensorListItemA.StatisticsTotalCalcSettings = splitSensorValues[10];
 
+
+                            // Show updating station datetime message
+                            _userDialogs.InfoToast($"1Sensor Name: {sensorListItemA.Name}", TimeSpan.FromSeconds(1));
+
+
                             // Notify property changed to update UI
                             RaisePropertyChanged(() => SensorCollection);
                         }
@@ -464,6 +466,10 @@ namespace CIM.RemoteManager.Core.ViewModels
                                 DecimalLocation = splitSensorValues[9].SafeConvert<int>(0),
                                 StatisticsTotalCalcSettings = splitSensorValues[10]
                             };
+
+                            // Show updating station datetime message
+                            _userDialogs.InfoToast($"2Sensor Name: {sensor.Name}", TimeSpan.FromSeconds(1));
+
 
                             // Add sensor to list
                             SensorCollection.Add(sensor);

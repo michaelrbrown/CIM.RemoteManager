@@ -79,6 +79,7 @@
 
             <Style x:Key="Footer" TargetType="Grid">
                 <Setter Property="Padding" Value="5" />
+                <Setter Property="BackgroundColor" Value="{StaticResource FooterBackgroundColor}" />
             </Style>
 
             <Style x:Key="ShadowStyle" TargetType="BoxView">
@@ -168,10 +169,6 @@
                 <Setter Property="FontSize" Value="14" />
                 <Setter Property="FontAttributes" Value="Bold" />
                 <Setter Property="Margin" Value="5,0,5,0" />
-                <Setter Property="HorizontalTextAlignment" Value="Center" />
-                <Setter Property="VerticalTextAlignment" Value="Center" />
-                <Setter Property="HorizontalOptions" Value="Center" />
-                <Setter Property="VerticalOptions" Value="Center" />
             </Style>
 
             <!-- Form Styles -->

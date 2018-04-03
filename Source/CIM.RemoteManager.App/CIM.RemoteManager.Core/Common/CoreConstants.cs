@@ -1,4 +1,7 @@
-﻿namespace CIM.RemoteManager.Core.Common
+﻿using System;
+using System.Drawing;
+
+namespace CIM.RemoteManager.Core.Common
 {
     /// <summary>
     /// Core constants for solution.
@@ -7,6 +10,8 @@
     {
         public static string LocalizationNamespace = "CIM.RemoteManager.Core";
         public static string RootFolderForResources = "Localization";
+
+        public static Int16 StationSettingLowestDateTimeYear = 2009;
 
         public static string HockeyAppAndroidDebug = "";
         public static string HockeyAppAndroidProd = "";
@@ -19,6 +24,5 @@
     /// </summary>
     public static class UiConstants
     {
-
     }
 }

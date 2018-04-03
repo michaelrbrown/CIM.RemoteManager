@@ -1102,7 +1102,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                             var stationHelper = new StationHelper();
                             // Validate our current remote Unix date time. Update to current Unix UTC date time
                             // if year < 2009.
-                            bool wasStationTimeSet = await stationHelper.HandleRemoteDateTimeValidation(TxCharacteristic, currentDateTimeResult);
+                            bool wasStationTimeSet = await stationHelper.HandleRemoteDateTimeValidation(TxCharacteristic, currentDateTimeResult).ConfigureAwait(true);
 
                             // Show updating station datetime message
                             if (wasStationTimeSet) _userDialogs.InfoToast("Updating Station DateTime...", TimeSpan.FromSeconds(2));
