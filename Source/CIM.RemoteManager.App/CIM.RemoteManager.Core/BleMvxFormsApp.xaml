@@ -99,33 +99,47 @@
 
             <Style x:Key="NameStyle" TargetType="Label">
                 <Setter Property="FontFamily" Value="{StaticResource RegularFontFamily}" />
-                <Setter Property="FontSize" Value="16" />
                 <Setter Property="TextColor" Value="{StaticResource NameTextColor}" />
+                <Setter Property="FontSize" Value="16" />
                 <Setter Property="FontAttributes" Value="Bold" />
             </Style>
 
             <Style x:Key="SensorTypeStyle" TargetType="Label">
                 <Setter Property="FontFamily" Value="{StaticResource RegularFontFamily}" />
-                <Setter Property="FontSize" Value="14" />
                 <Setter Property="TextColor" Value="{StaticResource SensorTypeTextColor}" />
+                <Setter Property="FontSize" Value="14" />
             </Style>
 
             <Style x:Key="TimeStampStyle" TargetType="Label">
                 <Setter Property="FontFamily" Value="{StaticResource RegularFontFamily}" />
-                <Setter Property="FontSize" Value="14" />
                 <Setter Property="TextColor" Value="{StaticResource TimeStampTextColor}" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+
+            <Style x:Key="SerialNumberStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource RegularFontFamily}" />
+                <Setter Property="TextColor" Value="{StaticResource SerialNumberTextColor}" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+
+            <Style x:Key="SensorIndexStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource RegularFontFamily}" />
+                <Setter Property="TextColor" Value="{StaticResource SensorIndexTextColor}" />
+                <Setter Property="FontSize" Value="14" />
             </Style>
 
             <Style x:Key="ValueStyle" TargetType="Label">
                 <Setter Property="FontFamily" Value="{StaticResource RegularFontFamily}" />
-                <Setter Property="FontSize" Value="24" />
                 <Setter Property="TextColor" Value="{StaticResource ValueTextColor}" />
+                <Setter Property="FontSize" Value="24" />
             </Style>
 
             <Style x:Key="ValueUnitTypeStyle" TargetType="Label">
                 <Setter Property="FontFamily" Value="{StaticResource RegularFontFamily}" />
-                <Setter Property="FontSize" Value="16" />
                 <Setter Property="TextColor" Value="{StaticResource ValueTextColor}" />
+                <Setter Property="FontSize" Value="16" />
             </Style>
 
             <Style x:Key="ValueOuterBoxStyle" TargetType="Frame">
@@ -153,22 +167,6 @@
                 <Setter Property="FontAttributes" Value="None" />
                 <Setter Property="FontSize" Value="14" />
                 <Setter Property="VerticalOptions" Value="Center" />
-            </Style>
-
-            <Style x:Key="SerialNumberStyle" TargetType="Label">
-                <Setter Property="FontFamily" Value="{StaticResource RegularFontFamily}" />
-                <Setter Property="TextColor" Value="{StaticResource SerialNumberTextColor}" />
-                <Setter Property="FontSize" Value="14" />
-                <Setter Property="VerticalOptions" Value="Center" />
-                <Setter Property="FontAttributes" Value="None" />
-            </Style>
-
-            <Style x:Key="SensorIndexStyle" TargetType="Label">
-                <Setter Property="FontFamily" Value="{StaticResource RegularFontFamily}" />
-                <Setter Property="TextColor" Value="{StaticResource SensorIndexTextColor}" />
-                <Setter Property="FontSize" Value="14" />
-                <Setter Property="FontAttributes" Value="Bold" />
-                <Setter Property="Margin" Value="5,0,5,0" />
             </Style>
 
             <!-- Form Styles -->

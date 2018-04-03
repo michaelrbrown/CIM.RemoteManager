@@ -36,7 +36,7 @@
                         <StackLayout Grid.Column="1" VerticalOptions="Center" Spacing="0">
                             <Label VerticalOptions="Center" LineBreakMode="TailTruncation" Style="{DynamicResource NameStyle}" Text="{Binding Name}" />
                             <Label VerticalOptions="Center" LineBreakMode="TailTruncation" Style="{DynamicResource SensorTypeStyle}" Text="{Binding SensorLabel}" />
-                            <Label VerticalOptions="Center" LineBreakMode="TailTruncation" Style="{DynamicResource TimeStampStyle}" Text="{Binding DateTimeStamp, StringFormat='{}{0:hh\\:mm\\:ss tt}'}" />
+                            <Label VerticalOptions="Center" LineBreakMode="NoWrap" Style="{DynamicResource SensorIndexStyle}" Text="{Binding SensorIndex, StringFormat='Sensor Index: {0:N}'}" />
                         </StackLayout>
 
                         <!-- Sensor Value and Unit Type -->
@@ -70,13 +70,14 @@
                     <Grid Style="{DynamicResource Footer}">
 
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="10" />
                         </Grid.ColumnDefinitions>
 
                         <!-- Sensor Index -->
                         <StackLayout Grid.Column="0" Spacing="0">
-                            <Label HorizontalTextAlignment="Start" LineBreakMode="NoWrap" Style="{DynamicResource SensorIndexStyle}" Text="{Binding SensorIndex}" />
+                            <Label HorizontalTextAlignment="Start" LineBreakMode="NoWrap" Style="{DynamicResource TimeStampStyle}" Text="{Binding DateTimeStamp, StringFormat='{}{0:hh\\:mm\\:ss tt}'}" />
                         </StackLayout>
 
                         <!-- Sensor Serial Number -->

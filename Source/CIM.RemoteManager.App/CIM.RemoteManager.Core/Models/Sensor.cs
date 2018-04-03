@@ -91,7 +91,7 @@ namespace CIM.RemoteManager.Core.Models
                 if (!string.IsNullOrEmpty(_sensorIndex.ToString()))
                 {
                     // Return combined sensor index plus name
-                    return $"({_sensorIndex}) {_name}";
+                    return $"({_sensorIndex}) {Name}";
                 }
                 // Default
                 return _name;
@@ -103,7 +103,7 @@ namespace CIM.RemoteManager.Core.Models
         {
             get
             {
-                if (!string.IsNullOrEmpty(_name))
+                if (!string.IsNullOrWhiteSpace(_name))
                 {
                     return _name;
                 }
@@ -210,7 +210,7 @@ namespace CIM.RemoteManager.Core.Models
         {
             get
             {
-                if (!String.IsNullOrEmpty(AverageValue.ToString()))
+                if (!String.IsNullOrWhiteSpace(AverageValue.ToString()))
                 {
                     return $"{AverageValue} {SensorUnitType}";
                 }

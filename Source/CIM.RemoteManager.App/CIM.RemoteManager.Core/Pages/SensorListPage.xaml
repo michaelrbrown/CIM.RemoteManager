@@ -21,10 +21,10 @@
     <!-- Chart Loading Indicator -->
     <xForms:SfBusyIndicator x:Name="ChartBusyindicator" Title="Loading Sensor Data..."
                             AnimationType="HorizontalPulsingBox" BackgroundColor="Transparent" HeightRequest="250"
-                            IsBusy="{Binding ProcessingPlotData}"
-                            IsVisible="{Binding ProcessingPlotData}"
-                            Opacity=".3"
-                            TextColor="{DynamicResource BusyIndicatorColor}"
+                            IsBusy="{Binding ProcessingSensorData}"
+                            IsVisible="{Binding ProcessingSensorData}"
+                            Opacity=".8"
+                            TextColor="{StaticResource BusyIndicatorColor}"
                             ViewBoxHeight="250" ViewBoxWidth="250" WidthRequest="250" />
 
     <!-- Sensor ListView -->
