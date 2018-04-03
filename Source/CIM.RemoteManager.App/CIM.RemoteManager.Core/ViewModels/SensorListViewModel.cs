@@ -462,7 +462,6 @@ namespace CIM.RemoteManager.Core.ViewModels
                                 StatisticsTotalCalcSettings = splitSensorValues[10]
                             };
 
-
                             // Show updating station datetime message
                             _userDialogs.InfoToast($"Sensor Val: {splitSensorValues[7].SafeHexToDouble()}", TimeSpan.FromSeconds(1));
 

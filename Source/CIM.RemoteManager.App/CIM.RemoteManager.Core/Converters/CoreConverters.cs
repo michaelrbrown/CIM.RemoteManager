@@ -21,13 +21,13 @@ namespace CIM.RemoteManager.Core.Converters
         /// </returns>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            //if (int.TryParse(value.ToString(), out int averageValueResult))
-            //{
-            //    if (averageValueResult == 0)
-            //    {
-            //        return "";
-            //    }
-            //}
+            if (int.TryParse(value.ToString(), out int averageValueResult))
+            {
+                if (averageValueResult == 0)
+                {
+                    return "";
+                }
+            }
             return value;
         }
 

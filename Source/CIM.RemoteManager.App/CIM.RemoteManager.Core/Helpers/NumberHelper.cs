@@ -9,17 +9,14 @@ namespace CIM.RemoteManager.Core.Helpers
         /// </summary>
         /// <param name="number">The number.</param>
         /// <returns>Validated result</returns>
-        public static int ValidateNumber(this double number)
+        public static double ValidateNumber(this double number)
         {
-            if (int.TryParse(number.ToString(), out int result))
+            if (Math.Abs(number - 32768) < 0.001)
             {
-                if (result == 32768)
-                {
-                    return 0;
-                }
+                return 0;
             }
             // Return result
-            return result;
+            return number;
         }
 
         /// <summary>
