@@ -45,7 +45,8 @@ namespace CIM.RemoteManager.iOS
             _window.MakeKeyAndVisible();
 
             // Setup color scheme
-            UIColor accentColor = UIColor.FromRGB(220, 225, 227);
+            UIColor accentColor = UIColor.FromRGB(1, 100, 157);
+            UIColor secondaryAccentColor = UIColor.FromRGB(220, 225, 227);
             // UISlider
             UISlider.Appearance.TintColor = accentColor;
             UISlider.Appearance.ThumbTintColor = accentColor;
@@ -53,15 +54,14 @@ namespace CIM.RemoteManager.iOS
             UISwitch.Appearance.TintColor = accentColor;
             UISwitch.Appearance.OnTintColor = accentColor;
             // UITabBar
-            UITabBar.Appearance.BackgroundImage = new UIImage();
             UITabBar.Appearance.BarTintColor = accentColor;
-            UITabBar.Appearance.BackgroundColor = accentColor;
-            UITabBar.Appearance.TintColor = UIColor.FromRGB(1, 100, 157);
-            UITabBar.Appearance.SelectedImageTintColor = UIColor.White;
+            UITabBar.Appearance.BackgroundColor = secondaryAccentColor;
+            UITabBar.Appearance.TintColor = UIColor.FromRGB(1, 100, 157); ;
+            UITabBar.Appearance.SelectedImageTintColor = UIColor.FromRGB(1, 100, 157); ;
             // UINavigationBar
             UINavigationBar.Appearance.BarTintColor = accentColor;
             UINavigationBar.Appearance.TintColor = UIColor.White;
-            UINavigationBar.Appearance.SetTitleTextAttributes(new UITextAttributes { TextColor = UIColor.White});
+            UINavigationBar.Appearance.SetTitleTextAttributes(new UITextAttributes { TextColor = UIColor.White });
             // UIToolbar
             UIToolbar.Appearance.BackgroundColor = accentColor;
             UIToolbar.Appearance.TintColor = UIColor.White;
