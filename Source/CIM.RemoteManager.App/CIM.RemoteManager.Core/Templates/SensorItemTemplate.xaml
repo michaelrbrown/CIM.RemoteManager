@@ -76,12 +76,12 @@
                         </Grid.ColumnDefinitions>
 
                         <!-- Sensor Index -->
-                        <StackLayout Grid.Column="0" Spacing="0">
+                        <StackLayout Grid.Column="0" HorizontalOptions="FillAndExpand" Spacing="0">
                             <Label HorizontalTextAlignment="Start" LineBreakMode="NoWrap" Style="{DynamicResource TimeStampStyle}" Text="{Binding DateTimeStamp, StringFormat='{}{0:hh\\:mm\\:ss tt}'}" />
                         </StackLayout>
 
                         <!-- Sensor Serial Number -->
-                        <StackLayout Grid.Column="1" Spacing="0">
+                        <StackLayout Grid.Column="1" HorizontalOptions="FillAndExpand" Spacing="0">
                             <Label HorizontalTextAlignment="End" LineBreakMode="TailTruncation" Style="{DynamicResource SerialNumberStyle}" Text="{Binding SerialNumber}" />
                         </StackLayout>
                     </Grid>
