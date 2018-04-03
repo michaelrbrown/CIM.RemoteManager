@@ -7,14 +7,14 @@
                 BackgroundColor="#FFFFFF">
 
     <!-- BTLE Status -->
-    <StackLayout Padding="10" HorizontalOptions="CenterAndExpand" BackgroundColor="#AE2C3B" IsVisible="{Binding IsStateOn, Converter={StaticResource BooleanToFalseConverter}}">
+    <StackLayout Padding="10" HorizontalOptions="CenterAndExpand" BackgroundColor="{StaticResource BTLEStatusBackgroundColor}" IsVisible="{Binding IsStateOn, Converter={StaticResource BooleanToFalseConverter}}">
         <Grid HorizontalOptions="Center">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Image VerticalOptions="Center" HorizontalOptions="End" Source="bluetooth-info.png" />
-            <Label Grid.Column="1" VerticalOptions="Center" FontSize="18" Text="{Binding StateText}" TextColor="#FFFFFF" />
+            <Label Grid.Column="1" VerticalOptions="Center" FontSize="18" Text="{Binding StateText}" TextColor="{StaticResource BTLEStatusTextColor}" />
         </Grid>
     </StackLayout>
 

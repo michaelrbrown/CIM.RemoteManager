@@ -34,6 +34,9 @@
             <Color x:Key="SegmentedControlTextColor">#FFFFFF</Color>
 
             <!-- Sensor Colors -->
+            <Color x:Key="DeviceFrameTextColor">#0097DF</Color>
+            <Color x:Key="DeviceNameTextColor">#01649D</Color>
+            <Color x:Key="DeviceIdTextColor">#7B7B7B</Color>
             <Color x:Key="BluetoothStatusTextColor">#01649D</Color>
             <Color x:Key="RemoteNameBackgroundColor">#01649D</Color>
             <Color x:Key="GroupBackgroundColor">#FFFFFF</Color>
@@ -56,6 +59,8 @@
             <Color x:Key="EntryBackgroundColor">#7778909c</Color>
             <Color x:Key="ButtonBackgroundColor">#01649D</Color>
             <Color x:Key="ButtonTextColor">#FFFFFF</Color>
+            <Color x:Key="BTLEStatusBackgroundColor">#AE2C3B</Color>
+            <Color x:Key="BTLEStatusTextColor">#FFFFFF</Color>
 
             <!-- Sensor List Styles -->
             <Style x:Key="RemoteBackgroundStyle" TargetType="Frame">
@@ -168,6 +173,12 @@
                 <Setter Property="FontAttributes" Value="None" />
                 <Setter Property="FontSize" Value="14" />
                 <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+
+            <Style x:Key="BTLEStatusStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource RegularFontFamily}" />
+                <Setter Property="BackgroundColor" Value="#AE2C3B" />
+                <Setter Property="TextColor" Value="#FFFFFF" />
             </Style>
 
             <!-- Form Styles -->

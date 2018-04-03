@@ -52,7 +52,7 @@
         <image name="humiditySensor.png" width="512" height="512"/>
         <image name="ic_bluetooth-connected.png" width="21" height="24"/>
         <image name="ic_bluetooth-search.png" width="24" height="24"/>
-        <image name="ic_connect-previous.png" width="24" height="24"/>
+        <image name="ic_connect-previous.png" width="32" height="32"/>
         <image name="ic_debug.png" width="32" height="32"/>
         <image name="ic_refresh-sensordata.png" width="512" height="512"/>
         <image name="ic_remote-settings.png" width="33" height="32"/>
@@ -61,7 +61,7 @@
         <image name="ic_sensor-plot.png" width="32" height="32"/>
         <image name="ic_sensor-settings.png" width="32" height="32"/>
         <image name="ic_sensor-statistics.png" width="32" height="32"/>
-        <image name="ic_stop-searching.png" width="24" height="24"/>
+        <image name="ic_stop-searching.png" width="32" height="32"/>
         <image name="Icon-Small-40.png" width="40" height="40"/>
         <image name="Icon-Small.png" width="29" height="29"/>
         <image name="ovenTempSensor.png" width="512" height="512"/>

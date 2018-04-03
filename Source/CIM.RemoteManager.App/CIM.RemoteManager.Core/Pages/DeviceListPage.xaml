@@ -35,12 +35,13 @@
                                 <!-- Blue Indicator of Active Connection -->
                                 <Frame Grid.Column="0"
                                        VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
-                                       BackgroundColor="#0097DF" HasShadow="False" WidthRequest="5" />
+                                       BackgroundColor="{StaticResource DeviceFrameTextColor}"
+                                       CornerRadius="0" HasShadow="False" WidthRequest="5" />
 
                                 <!-- Device Name and GUID -->
                                 <StackLayout Grid.Column="1" Margin="5,0,0,0" VerticalOptions="CenterAndExpand" Orientation="Vertical">
-                                    <Label FontSize="22" Text="{Binding Name}" TextColor="#2A649B" />
-                                    <Label FontSize="14" Text="{Binding Id, StringFormat='{0}'}" TextColor="#7B7B7B" />
+                                    <Label FontSize="22" Text="{Binding Name}" TextColor="{StaticResource DeviceNameTextColor}" />
+                                    <Label FontSize="14" Text="{Binding Id, StringFormat='{0}'}" TextColor="{StaticResource DeviceIdTextColor}" />
                                 </StackLayout>
 
                                 <!-- RSSI Indicator -->
@@ -72,14 +73,14 @@
                 </Grid.RowDefinitions>
 
                 <!-- BTLE Status -->
-                <StackLayout Grid.Row="0" Padding="10" HorizontalOptions="CenterAndExpand" BackgroundColor="#AE2C3B" IsVisible="{Binding IsStateOn, Converter={StaticResource BooleanToFalseConverter}}">
+                <StackLayout Grid.Row="0" Padding="10" HorizontalOptions="CenterAndExpand" BackgroundColor="{StaticResource BTLEStatusBackgroundColor}" IsVisible="{Binding IsStateOn, Converter={StaticResource BooleanToFalseConverter}}">
                     <Grid HorizontalOptions="Center">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <Image VerticalOptions="Center" HorizontalOptions="End" Source="bluetooth-info.png" />
-                        <Label Grid.Column="1" VerticalOptions="Center" FontSize="18" Text="{Binding StateText}" TextColor="#FFFFFF" />
+                        <Label Grid.Column="1" VerticalOptions="Center" FontSize="18" Text="{Binding StateText}" TextColor="{StaticResource BTLEStatusTextColor}" />
                     </Grid>
                 </StackLayout>
 
@@ -108,19 +109,22 @@
                 <!-- Connect to Previous Button -->
                 <StackLayout Grid.Row="3" Margin="0,0,0,10" HorizontalOptions="CenterAndExpand" IsVisible="False" Orientation="Horizontal">
                     <Button HorizontalOptions="FillAndExpand"
-                            BackgroundColor="#F9F9F9"
+                            BackgroundColor="{StaticResource ButtonBackgroundColor}"
                             Command="{Binding ConnectToPreviousCommand}"
                             Image="ic_connect-previous.png" IsVisible="True"
                             Text="{Binding PreviousName, StringFormat='Connect to {0}'}"
-                            TextColor="#0097DF" WidthRequest="325" />
+                            TextColor="{StaticResource ButtonTextColor}"
+                            WidthRequest="325" />
                 </StackLayout>
 
                 <!-- Stop Searching Button -->
                 <StackLayout Grid.Row="4" Margin="0,0,0,10" HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsRefreshing}" Orientation="Horizontal">
                     <Button HorizontalOptions="CenterAndExpand"
-                            BackgroundColor="#F9F9F9"
+                            BackgroundColor="{StaticResource ButtonBackgroundColor}"
                             Command="{Binding StopScanCommand}"
-                            Image="ic_stop-searching.png" Text="Stop Searching" TextColor="#0097DF" WidthRequest="155" />
+                            Image="ic_stop-searching.png" Text="Stop Searching"
+                            TextColor="{StaticResource ButtonTextColor}"
+                            WidthRequest="155" />
                 </StackLayout>
 
             </Grid>
@@ -136,7 +140,7 @@
                 </Grid.RowDefinitions>
 
                 <!-- BTLE Status -->
-                <StackLayout Grid.Row="0" Padding="10" HorizontalOptions="CenterAndExpand" BackgroundColor="#AE2C3B" IsVisible="False">
+                <StackLayout Grid.Row="0" Padding="10" HorizontalOptions="CenterAndExpand" BackgroundColor="{StaticResource BTLEStatusBackgroundColor}" IsVisible="False">
                     <Grid HorizontalOptions="Center">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
@@ -147,7 +151,7 @@
                                VerticalOptions="Center"
                                FontSize="18" IsVisible="False"
                                Text="{Binding StateText}"
-                               TextColor="#FFFFFF" />
+                               TextColor="{StaticResource BTLEStatusTextColor}" />
                     </Grid>
                 </StackLayout>
 
@@ -176,9 +180,11 @@
                 <!-- Stop Searching Button -->
                 <StackLayout Grid.Row="3" Margin="0,0,0,10" HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsRefreshing}" Orientation="Horizontal">
                     <Button HorizontalOptions="CenterAndExpand"
-                            BackgroundColor="#F9F9F9"
+                            BackgroundColor="{StaticResource ButtonBackgroundColor}"
                             Command="{Binding StopScanCommand}"
-                            Image="ic_stop-searching.png" Text="Stop Searching" TextColor="#0097DF" WidthRequest="155" />
+                            Image="ic_stop-searching.png" Text="Stop Searching"
+                            TextColor="{StaticResource ButtonTextColor}"
+                            WidthRequest="155" />
                 </StackLayout>
 
             </Grid>
