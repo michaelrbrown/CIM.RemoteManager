@@ -22,17 +22,16 @@
     <xForms:SfBusyIndicator x:Name="ChartBusyindicator" Title="Loading Sensor Data..."
                             AnimationType="HorizontalPulsingBox" BackgroundColor="Transparent" HeightRequest="250"
                             IsBusy="{Binding ProcessingSensorData}"
-                            IsVisible="{Binding ProcessingSensorData}"
-                            Opacity=".8"
+                            IsVisible="True" Opacity=".8"
                             TextColor="{StaticResource BusyIndicatorColor}"
                             ViewBoxHeight="250" ViewBoxWidth="250" WidthRequest="250" />
 
     <!-- Sensor ListView -->
     <syncfusion:SfListView x:Name="SensorLiistView"
                            Margin="0" Padding="0"
-                           AllowSwiping="False" HeaderSize="40" IsStickyFooter="True" IsStickyGroupHeader="True"
-                           IsVisible="{Binding ProcessingSensorData, Converter={StaticResource InverseBooleanValueConverter}}"
-                           ItemDoubleTapped="SensorListView_OnItemDoubleTapped" ItemSize="116" ItemSpacing="0"
+                           AllowSwiping="False" HeaderSize="40"
+                           IsBusy="{Binding ProcessingSensorData}"
+                           IsStickyFooter="True" IsStickyGroupHeader="True" ItemDoubleTapped="SensorListView_OnItemDoubleTapped" ItemSize="116" ItemSpacing="0"
                            ItemsSource="{Binding SensorCollection}"
                            SelectionBackgroundColor="Transparent">
 
