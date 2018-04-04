@@ -14,7 +14,7 @@
 
                 <!-- Sensor Alarm Color Indicator -->
                 <Frame Grid.Column="0"
-                       Margin="5,0,0,0" Padding="0"
+                       Margin="0" Padding="0"
                        VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
                        BackgroundColor="{Binding AlarmStatus, Converter={StaticResource AlarmStatusColorConverter}}"
                        CornerRadius="0" HasShadow="False" WidthRequest="15" />
@@ -27,7 +27,7 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="65" />
                             <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="150" />
+                            <ColumnDefinition Width="160" />
                         </Grid.ColumnDefinitions>
 
                         <!-- Sensor Image -->
@@ -65,7 +65,7 @@
 
                     </Grid>
 
-                    <BoxView BackgroundColor="{Binding AlarmStatus, Converter={StaticResource AlarmStatusColorConverter}}" Style="{StaticResource LightShadowStyle}" />
+                    <BoxView Style="{StaticResource LightShadowStyle}" />
 
                     <!-- Sensor Footer Wrapper -->
                     <Grid Style="{StaticResource Footer}">
