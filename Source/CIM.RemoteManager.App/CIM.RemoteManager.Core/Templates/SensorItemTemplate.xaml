@@ -7,6 +7,8 @@
         <!-- Margin: left, top, right, bottom -->
         <StackLayout Margin="0,0,0,0" VerticalOptions="CenterAndExpand" BackgroundColor="Transparent" Orientation="Vertical">
             <Grid ColumnSpacing="0">
+
+                <!-- Sensor Alarm Indicator, Sensor Body -->
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="15" />
                     <ColumnDefinition Width="*" />
@@ -24,6 +26,7 @@
 
                     <Grid Style="{StaticResource CardStyle}">
 
+                        <!-- Sensor Image, Name/Type/Index/Status, Average Value/Unit -->
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="65" />
                             <ColumnDefinition Width="*" />
@@ -40,12 +43,12 @@
                             <Label VerticalOptions="Center" LineBreakMode="NoWrap" Style="{StaticResource SensorIndexStyle}" Text="{Binding SensorIndexPlusStatus}" />
                         </StackLayout>
 
-                        <!-- Sensor Value and Unit Type -->
+                        <!-- Sensor Average Value and Unit Type -->
                         <StackLayout Grid.Column="2" Orientation="Horizontal" Spacing="0">
 
                             <Frame Style="{StaticResource ValueInnerBoxStyle}">
                                 <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Orientation="Horizontal" Spacing="0">
-                                    <!-- Sensor Unit Type -->
+                                    <!-- Sensor Average Value -->
                                     <Label Margin="0"
                                            VerticalOptions="CenterAndExpand" HorizontalOptions="End"
                                            HorizontalTextAlignment="End" LineBreakMode="NoWrap"
@@ -65,6 +68,7 @@
 
                     </Grid>
 
+                    <!-- Border Line -->
                     <BoxView Style="{StaticResource LightShadowStyle}" />
 
                     <!-- Sensor Footer Wrapper -->
@@ -76,7 +80,7 @@
                             <ColumnDefinition Width="5" />
                         </Grid.ColumnDefinitions>
 
-                        <!-- Sensor Index -->
+                        <!-- Sensor DateTime -->
                         <StackLayout Grid.Column="0" HorizontalOptions="FillAndExpand" Spacing="0">
                             <Label HorizontalTextAlignment="Start" LineBreakMode="NoWrap" Style="{StaticResource TimeStampStyle}" Text="{Binding DateTimeStamp, StringFormat='{}{0:hh\\:mm\\:ss tt}'}" />
                         </StackLayout>
