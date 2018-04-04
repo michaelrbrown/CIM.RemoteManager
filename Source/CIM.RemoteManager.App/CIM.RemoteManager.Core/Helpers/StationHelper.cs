@@ -31,14 +31,14 @@ namespace CIM.RemoteManager.Core.Helpers
                 // T - is to set the station time,
                 // 0 - is the data type
                 // 00 - device index / unused
-                // Next set of digits is Unix time UTC
-                string remoteUnitTimestamp = "{T000" + unixTimestampUtc + "}";
+                // Next set of digits is Unix time UTC (converted to HEX)
+                string remoteUnitTimestamp = "{T000" + unixTimestampUtc.ToString("X") + "}";
 
                 // Send set Unix UTC time command to remote
                 await txCharacteristic.WriteAsync(remoteUnitTimestamp.StrToByteArray()).ConfigureAwait(true);
 
                 // Wait a couple seconds for remote to process
-                await Task.Delay(2000).ConfigureAwait(true);
+                await Task.Delay(3000).ConfigureAwait(true);
 
                 // Let caller know we set station time
                 return true;

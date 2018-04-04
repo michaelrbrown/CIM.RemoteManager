@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Acr.UserDialogs;
-using CIM.RemoteManager.Core.Common;
 using CIM.RemoteManager.Core.Extensions;
 using CIM.RemoteManager.Core.Helpers;
 using CIM.RemoteManager.Core.Models;
@@ -414,46 +413,22 @@ namespace CIM.RemoteManager.Core.ViewModels
                         if (int.TryParse(CurrentDateTime.ToString(), out int currentDateTimeResult))
                         {
                             // New instance of station helper
-                            //var stationHelper = new StationHelper();
+                            var stationHelper = new StationHelper();
                             // Validate our current remote Unix date time. Update to current Unix UTC date time
                             // if year < 2009.
-                            //bool wasStationTimeSet = await stationHelper.HandleRemoteDateTimeValidation(TxCharacteristic, currentDateTimeResult).ConfigureAwait(true);
-
-                            // Validate our station Unix time converted to windows time is less
-                            // than 2009.  If it is we know the station time needs to be set.
-                            if (currentDateTimeResult.UnixTimeStampToDateTime().Year < CoreConstants.StationSettingLowestDateTimeYear)
-                            {
-                                // Get Unix timestamp "now" as UTC
-                                Int32 unixTimestampUtc = (Int32)(DateTime.UtcNow.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
-
-                                // Format DA-12 station Unix timestamp
-                                // T - is to set the station time,
-                                // 0 - is the data type
-                                // 00 - device index / unused
-                                // Next set of digits is Unix time UTC
-                                string remoteUnitTimestamp = "{T000" + unixTimestampUtc + "}";
-
-                                // Send set Unix UTC time command to remote
-                                await TxCharacteristic.WriteAsync(remoteUnitTimestamp.StrToByteArray()).ConfigureAwait(true);
-
-                                // Wait a couple seconds for remote to process
-                                await Task.Delay(4000).ConfigureAwait(true);
-
-                                _userDialogs.InfoToast("Updating Station DateTime...", TimeSpan.FromSeconds(2));
-
-                                // Send refresh command to remote after
-                                await TxCharacteristic.WriteAsync("{Y}".StrToByteArray()).ConfigureAwait(true);
-                            }
-
+                            bool wasStationTimeSet = await stationHelper.HandleRemoteDateTimeValidation(TxCharacteristic, currentDateTimeResult).ConfigureAwait(true);
 
                             // Show updating station datetime message
-                            //if (wasStationTimeSet)
-                            //{
-                            //    _userDialogs.InfoToast("Updating Station DateTime...", TimeSpan.FromSeconds(2));
-
-                            //    // Reset to false
-                            //    wasStationTimeSet = false;
-                            //}
+                            if (wasStationTimeSet)
+                            {
+                                _userDialogs.InfoToast("Updating Station DateTime...", TimeSpan.FromSeconds(2));
+                                // Send refresh command to remote after
+                                await TxCharacteristic.WriteAsync("{Y}".StrToByteArray()).ConfigureAwait(true);
+                                // Wait a couple seconds for remote to process
+                                await Task.Delay(2000).ConfigureAwait(true);
+                                // Show refreshing message
+                                _userDialogs.InfoToast("Refreshing Station Settings...", TimeSpan.FromSeconds(2));
+                            }
                         }
 
                         // Processing sensor data done

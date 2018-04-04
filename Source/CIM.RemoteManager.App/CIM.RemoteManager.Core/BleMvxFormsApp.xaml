@@ -47,7 +47,7 @@
             <Color x:Key="SensorTypeTextColor">#7B7B7B</Color>
             <Color x:Key="TimeStampTextColor">#3580C6</Color>
             <Color x:Key="ValueTextColor">#01649D</Color>
-            <Color x:Key="OutlineColor">#EEEEEE</Color>
+            <Color x:Key="OutlineColor">#90C9EF</Color>
             <Color x:Key="SensorIndexFrameColor">#01649D</Color>
             <Color x:Key="SensorIndexTextColor">#7B7B7B</Color>
             <Color x:Key="SerialNumberTextColor">#3580C6</Color>
@@ -165,7 +165,7 @@
                 <Setter Property="Padding" Value="10" />
                 <Setter Property="Margin" Value="5" />
                 <Setter Property="BackgroundColor" Value="{StaticResource FooterBackgroundColor}" />
-                <Setter Property="OutlineColor" Value="#90C9EF" />
+                <Setter Property="OutlineColor" Value="{StaticResource OutlineColor}" />
             </Style>
 
             <Style x:Key="StatusStyle" TargetType="Label">
