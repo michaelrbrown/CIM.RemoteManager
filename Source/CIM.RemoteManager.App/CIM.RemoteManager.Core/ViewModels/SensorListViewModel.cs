@@ -420,6 +420,9 @@ namespace CIM.RemoteManager.Core.ViewModels
 
                             // Show updating station datetime message
                             if (wasStationTimeSet) _userDialogs.InfoToast("Updating Station DateTime...", TimeSpan.FromSeconds(2));
+
+                            // Send refresh command to remote
+                            await TxCharacteristic.WriteAsync("{Y}".StrToByteArray()).ConfigureAwait(true);
                         }
 
                         // Processing sensor data done
