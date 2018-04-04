@@ -4,6 +4,10 @@ using Xamarin.Forms;
 
 namespace CIM.RemoteManager.Core.Converters
 {
+    /// <summary>
+    /// Class AlarmStatusConverter.
+    /// </summary>
+    /// <seealso cref="Xamarin.Forms.IValueConverter" />
     public class AlarmStatusConverter : IValueConverter
     {
         /// <summary>
@@ -38,6 +42,14 @@ namespace CIM.RemoteManager.Core.Converters
             return "normal";
         }
 
+        /// <summary>
+        /// Implement this method to convert <paramref name="value" /> back from <paramref name="targetType" /> by using <paramref name="parameter" /> and <paramref name="culture" />.
+        /// </summary>
+        /// <param name="value">The value to convert.</param>
+        /// <param name="targetType">The type to which to convert the value.</param>
+        /// <param name="parameter">A parameter to use during the conversion.</param>
+        /// <param name="culture">The culture to use during the conversion.</param>
+        /// <exception cref="NotImplementedException"></exception>
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
@@ -57,21 +69,28 @@ namespace CIM.RemoteManager.Core.Converters
             {
                 switch (alarmValue)
                 {
-                    case 0:
+                    case 0: // Normal (green)
                         return Color.FromHex("#03BB03");
-                    case 1:
+                    case 1: // Warning (yellow)
                         return Color.FromHex("#CDAC00");
-                    case 2:
+                    case 2: // Alarm (red)
                         return Color.FromHex("#9A1C1F");
-                    case 3:
+                    case 3: // Error (blue)
                         return Color.FromHex("#2758A7");
                 }
 
             }
-            // Default
-            return Color.ForestGreen;
+            // Default - Normal (green)
+            return Color.FromHex("#03BB03");
         }
 
+        /// <summary>
+        /// Implement this method to convert <paramref name="value" /> back from <paramref name="targetType" /> by using <paramref name="parameter" /> and <paramref name="culture" />.
+        /// </summary>
+        /// <param name="value">The value to convert.</param>
+        /// <param name="targetType">The type to which to convert the value.</param>
+        /// <param name="parameter">A parameter to use during the conversion.</param>
+        /// <param name="culture">The culture to use during the conversion.</param>
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             return null;

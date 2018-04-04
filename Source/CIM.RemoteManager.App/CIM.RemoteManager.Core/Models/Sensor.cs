@@ -95,7 +95,7 @@ namespace CIM.RemoteManager.Core.Models
                     // Get alarm status from alarm flag (int)
                     string alarmStatus = stationHelper.GetAlarmStatus(AlarmStatus);
                     // Return combined sensor index plus alarm status
-                    return $"Index: {_sensorIndex}) Status: {alarmStatus}";
+                    return $"Index: {_sensorIndex} Status: {alarmStatus}";
                 }
                 // Default
                 return _name;
