@@ -5,6 +5,11 @@ using Xamarin.Forms;
 
 namespace CIM.RemoteManager.Core.Converters
 {
+    /// <summary>
+    /// Class InverseBooleanValueConverter.
+    /// </summary>
+    /// <seealso cref="bool" />
+    /// <seealso cref="Xamarin.Forms.IValueConverter" />
     public class InverseBooleanValueConverter : MvxValueConverter<bool, bool>, IValueConverter
     {
         /// <summary>
