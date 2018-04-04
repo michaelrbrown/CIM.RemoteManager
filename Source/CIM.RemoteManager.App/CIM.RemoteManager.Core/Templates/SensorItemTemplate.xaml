@@ -43,7 +43,7 @@
                         <!-- Sensor Value and Unit Type -->
                         <StackLayout Grid.Column="2" Orientation="Horizontal" Spacing="0">
 
-                            <Frame BackgroundColor="{Binding AlarmStatus, Converter={StaticResource AlarmStatusColorConverter}}" Style="{StaticResource ValueInnerBoxStyle}">
+                            <Frame OutlineColor="{Binding AlarmStatus, Converter={StaticResource AlarmStatusColorConverter}}" Style="{StaticResource ValueInnerBoxStyle}">
                                 <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Orientation="Horizontal" Spacing="0">
                                     <!-- Sensor Unit Type -->
                                     <Label Margin="0"
