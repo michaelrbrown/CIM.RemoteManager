@@ -160,8 +160,6 @@
                 <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
                 <Setter Property="CornerRadius" Value="10" />
                 <Setter Property="HasShadow" Value="False" />
-                <Setter Property="WidthRequest" Value="130" />
-                <Setter Property="HeightRequest" Value="35" />
                 <Setter Property="Padding" Value="10" />
                 <Setter Property="Margin" Value="5" />
                 <Setter Property="BackgroundColor" Value="{StaticResource FooterBackgroundColor}" />

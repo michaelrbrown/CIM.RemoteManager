@@ -27,7 +27,7 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="65" />
                             <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="130" />
+                            <ColumnDefinition Width="150" />
                         </Grid.ColumnDefinitions>
 
                         <!-- Sensor Image -->
