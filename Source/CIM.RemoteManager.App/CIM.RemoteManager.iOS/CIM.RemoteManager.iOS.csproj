@@ -418,9 +418,6 @@
     <BundleResource Include="Resources\ic_StopSearching.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\bluetooth-info.png" />
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="Resources\temperatureSensor.png" />
   </ItemGroup>
   <ItemGroup>

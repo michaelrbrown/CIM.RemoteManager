@@ -400,9 +400,6 @@
     <AndroidResource Include="Resources\drawable\baromicPressureSensor.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\bluetooth-info.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable\c02Sensor.png" />
   </ItemGroup>
   <ItemGroup>

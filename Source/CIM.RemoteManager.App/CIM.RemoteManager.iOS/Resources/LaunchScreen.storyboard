@@ -39,7 +39,6 @@
         <image name="Icon-Small-50.png" width="50" height="50"/>
         <image name="airflowSensor.png" width="512" height="512"/>
         <image name="baromicPressureSensor.png" width="512" height="512"/>
-        <image name="bluetooth-info.png" width="24" height="24"/>
         <image name="c02Sensor.png" width="512" height="512"/>
         <image name="DA12.png" width="241" height="199"/>
         <image name="defaultSensor.png" width="512" height="512"/>
