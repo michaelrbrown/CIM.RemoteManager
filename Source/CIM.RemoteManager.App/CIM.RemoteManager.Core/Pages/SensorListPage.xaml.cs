@@ -36,14 +36,14 @@ namespace CIM.RemoteManager.Core.Pages
         {
             base.OnAppearing();
 
-            // Get instance of SensorListViewModel
-            var sensorListViewModel = (SensorListViewModel)this.BindingContext;
-            // Validate
-            if (sensorListViewModel != null)
-            {
-                sensorListViewModel.StopUpdatesCommand.Execute();
-                sensorListViewModel.StartUpdatesCommand.Execute();
-            }
+            //// Get instance of SensorListViewModel
+            //var sensorListViewModel = (SensorListViewModel)this.BindingContext;
+            //// Validate
+            //if (sensorListViewModel != null)
+            //{
+            //    sensorListViewModel.StopUpdatesCommand.Execute();
+            //    sensorListViewModel.StartUpdatesCommand.Execute();
+            //}
         }
 
         /// <summary>
@@ -71,13 +71,13 @@ namespace CIM.RemoteManager.Core.Pages
         private void PullToRefresh_OnRefreshing(object sender, EventArgs e)
         {
             // Get instance of SensorListViewModel
-            var sensorListViewModel = (SensorListViewModel)this.BindingContext;
-            // Validate
-            if (sensorListViewModel != null)
-            {
-                sensorListViewModel.StopUpdatesCommand.Execute();
-                sensorListViewModel.StartUpdatesCommand.Execute();
-            }
+            //var sensorListViewModel = (SensorListViewModel)this.BindingContext;
+            //// Validate
+            //if (sensorListViewModel != null)
+            //{
+            //    sensorListViewModel.StopUpdatesCommand.Execute();
+            //    sensorListViewModel.StartUpdatesCommand.Execute();
+            //}
         }
     }
 }
