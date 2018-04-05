@@ -430,9 +430,6 @@
     <AndroidResource Include="Resources\drawable\particleCountSensor.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\remote512.2.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable\remote512.png" />
   </ItemGroup>
   <ItemGroup>

@@ -442,9 +442,6 @@
     <BundleResource Include="Resources\DA12.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\remote512.2.png" />
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="Resources\rssi_5.png" />
   </ItemGroup>
   <ItemGroup>

@@ -51,7 +51,6 @@
         <image name="Icon-Small.png" width="29" height="29"/>
         <image name="ovenTempSensor.png" width="512" height="512"/>
         <image name="particleCountSensor.png" width="512" height="512"/>
-        <image name="remote512.2.png" width="512" height="512"/>
         <image name="remote512.png" width="955" height="552"/>
         <image name="rssi_1.png" width="40" height="40"/>
         <image name="rssi_2.png" width="40" height="40"/>
