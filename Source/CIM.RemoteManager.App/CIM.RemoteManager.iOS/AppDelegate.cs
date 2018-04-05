@@ -7,6 +7,7 @@ using SegmentedControl.FormsPlugin.iOS;
 using Syncfusion.ListView.XForms.iOS;
 using Syncfusion.SfBusyIndicator.XForms.iOS;
 using Syncfusion.SfChart.XForms.iOS.Renderers;
+using Syncfusion.SfPullToRefresh.XForms;
 using Syncfusion.XForms.iOS.PopupLayout;
 using UIKit;
 
@@ -37,6 +38,7 @@ namespace CIM.RemoteManager.iOS
             // Init SyncFusion controls
             new SfChartRenderer();
             new SfBusyIndicatorRenderer();
+            new SfPullToRefresh();
             SfListViewRenderer.Init();
             SegmentedControlRenderer.Init();
             SfPopupLayoutRenderer.Init();
