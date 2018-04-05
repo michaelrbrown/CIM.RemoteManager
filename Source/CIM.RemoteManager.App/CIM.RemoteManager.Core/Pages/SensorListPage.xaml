@@ -23,7 +23,7 @@
                              IsRefreshing="False"
                              ProgressBackgroundColor="{StaticResource BusyIndicatorColor}"
                              ProgressStrokeColor="{StaticResource OutlineColor}"
-                             ProgressStrokeWidth="2" RefreshContentHeight="50" RefreshContentWidth="50" Refreshing="PullToRefresh_OnRefreshing"
+                             ProgressStrokeWidth="2" RefreshContentHeight="50" RefreshContentWidth="50"
                              TransitionMode="SlideOnTop">
         <xForms1:SfPullToRefresh.PullableContent>
 
