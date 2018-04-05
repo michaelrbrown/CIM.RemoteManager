@@ -39,8 +39,6 @@
         <image name="Icon-Small-50.png" width="50" height="50"/>
         <image name="airflowSensor.png" width="512" height="512"/>
         <image name="baromicPressureSensor.png" width="512" height="512"/>
-        <image name="bg_app.jpg" width="1080" height="1920"/>
-        <image name="bgapplication.png" width="425" height="1134"/>
         <image name="bluetooth-info.png" width="24" height="24"/>
         <image name="c02Sensor.png" width="512" height="512"/>
         <image name="DA12.png" width="241" height="199"/>
@@ -48,18 +46,8 @@
         <image name="differentialPressureSensor.png" width="512" height="512"/>
         <image name="fridgeTemperatureSensor.png" width="512" height="512"/>
         <image name="humiditySensor.png" width="512" height="512"/>
-        <image name="ic_bluetooth-connected.png" width="21" height="24"/>
-        <image name="ic_bluetooth-search.png" width="24" height="24"/>
-        <image name="ic_connect-previous.png" width="32" height="32"/>
         <image name="ic_debug.png" width="32" height="32"/>
-        <image name="ic_refresh-sensordata.png" width="512" height="512"/>
-        <image name="ic_remote-settings.png" width="33" height="32"/>
         <image name="ic_save.png" width="24" height="22"/>
-        <image name="ic_sensor-limits.png" width="32" height="32"/>
-        <image name="ic_sensor-plot.png" width="32" height="32"/>
-        <image name="ic_sensor-settings.png" width="32" height="32"/>
-        <image name="ic_sensor-statistics.png" width="32" height="32"/>
-        <image name="ic_stop-searching.png" width="32" height="32"/>
         <image name="Icon-Small-40.png" width="40" height="40"/>
         <image name="Icon-Small.png" width="29" height="29"/>
         <image name="ovenTempSensor.png" width="512" height="512"/>
@@ -73,8 +61,18 @@
         <image name="rssi_5.png" width="40" height="40"/>
         <image name="stop.png" width="20" height="20"/>
         <image name="temperatureSensor.png" width="512" height="512"/>
-        <image name="ic_cimscan-devices.png" width="33" height="32"/>
-        <image name="ic_other-devices.png" width="32" height="32"/>
         <image name="oxygenSensor.png" width="512" height="512"/>
+        <image name="ic_BluetoothConnected.png" width="21" height="24"/>
+        <image name="ic_BluetoothSearch.png" width="24" height="24"/>
+        <image name="ic_CimscanDevices.png" width="33" height="32"/>
+        <image name="ic_ConnectPrevious.png" width="32" height="32"/>
+        <image name="ic_OtherDevices.png" width="32" height="32"/>
+        <image name="ic_RemoteSettings.png" width="33" height="32"/>
+        <image name="ic_SensorLimits.png" width="32" height="32"/>
+        <image name="ic_SensorPlot.png" width="32" height="32"/>
+        <image name="ic_SensorSettings.png" width="32" height="32"/>
+        <image name="ic_SensorStatistics.png" width="32" height="32"/>
+        <image name="ic_StopSearching.png" width="32" height="32"/>
+        <image name="ic_RefreshSensorData.png" width="512" height="512"/>
     </resources>
 </document>
