@@ -127,7 +127,7 @@ namespace CIM.RemoteManager.Core.Models
                     return new SensorTypeResult("CO2", "c02Sensor.png", "CT21 CO2", "%");
 
                 case "8410":
-                    return new SensorTypeResult("O2", "02Sensor.png", "CT29 O2", "%");
+                    return new SensorTypeResult("O2", "oxygenSensor.png", "CT29 O2", "%");
 
                 case "8500":
                     return new SensorTypeResult("Differential Pressure", "differentialPressureSensor.png", "10.1\" CT22 Diff. Pres.", "Pa");

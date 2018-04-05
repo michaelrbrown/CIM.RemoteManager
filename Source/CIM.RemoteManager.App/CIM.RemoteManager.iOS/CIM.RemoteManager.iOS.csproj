@@ -469,15 +469,6 @@
     <BundleResource Include="Resources\ic_remote-settings.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\bg_app.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\app_bg_sensor.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\bgapplication.png" />
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="Resources\ic_sensor-statistics.png" />
   </ItemGroup>
   <ItemGroup>
@@ -493,7 +484,7 @@
     <BundleResource Include="Resources\ic_refresh-sensordata.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\02Sensor.png" />
+    <BundleResource Include="Resources\oxygenSensor.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\defaultSensor.png" />
