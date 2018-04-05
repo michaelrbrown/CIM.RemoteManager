@@ -19,19 +19,11 @@
         </Grid>
     </StackLayout>
 
-    <!-- Chart Loading Indicator -->
-    <xForms:SfBusyIndicator x:Name="ChartBusyindicator" Title="Loading Sensor Data..."
-                            AnimationType="HorizontalPulsingBox" BackgroundColor="Transparent" HeightRequest="250"
-                            IsBusy="{Binding ProcessingSensorData}"
-                            IsVisible="True" Opacity=".8"
-                            TextColor="{StaticResource BusyIndicatorColor}"
-                            ViewBoxHeight="250" ViewBoxWidth="250" WidthRequest="250" />
-
     <xForms1:SfPullToRefresh x:Name="PullToRefresh"
                              IsRefreshing="False"
                              ProgressBackgroundColor="{StaticResource BusyIndicatorColor}"
-                             ProgressStrokeColor="{StaticResource OutlineColor}" ProgressStrokeWidth="2" Refreshing="PullToRefresh_OnRefreshing"
-                             RefreshContentHeight="50" RefreshContentWidth="50"
+                             ProgressStrokeColor="{StaticResource OutlineColor}"
+                             ProgressStrokeWidth="2" RefreshContentHeight="50" RefreshContentWidth="50" Refreshing="PullToRefresh_OnRefreshing"
                              TransitionMode="SlideOnTop">
         <xForms1:SfPullToRefresh.PullableContent>
 
