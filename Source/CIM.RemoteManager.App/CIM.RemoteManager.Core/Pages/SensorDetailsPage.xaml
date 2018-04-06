@@ -12,7 +12,7 @@
         </ResourceDictionary>
     </pages:BaseTabbedPage.Resources>
 
-    <pages:BasePage Title="Sensor Plot" Padding="0" BackgroundColor="#FFFFFF" Icon="ic_SensorPlot.png">
+    <pages:BasePage Title="Sensor Plot" Padding="0" BackgroundColor="#FFFFFF" Icon="ic_sensor-plot.png">
 
         <!-- BTLE Status -->
         <StackLayout Padding="10" HorizontalOptions="CenterAndExpand" BackgroundColor="{StaticResource BTLEStatusBackgroundColor}" IsVisible="{Binding IsStateOn, Converter={StaticResource BooleanToFalseConverter}}">
@@ -153,7 +153,7 @@
 
     </pages:BasePage>
 
-    <pages:BasePage Title="Sensor Statistics" Padding="0" BackgroundColor="#FFFFFF" Icon="ic_SensorStatistics.png">
+    <pages:BasePage Title="Sensor Statistics" Padding="0" BackgroundColor="#FFFFFF" Icon="ic_sensor-statistics.png">
 
         <!-- BTLE Status -->
         <StackLayout Padding="10" HorizontalOptions="CenterAndExpand" BackgroundColor="{StaticResource BTLEStatusBackgroundColor}" IsVisible="{Binding IsStateOn, Converter={StaticResource BooleanToFalseConverter}}">
@@ -295,7 +295,7 @@
 
     </pages:BasePage>
 
-    <pages:BasePage Title="Sensor Limits" Padding="0" BackgroundColor="#FFFFFF" Icon="ic_SensorLimits.png">
+    <pages:BasePage Title="Sensor Limits" Padding="0" BackgroundColor="#FFFFFF" Icon="ic_sensor-limits.png">
 
         <!-- BTLE Status -->
         <StackLayout Padding="10" HorizontalOptions="CenterAndExpand" BackgroundColor="{StaticResource BTLEStatusBackgroundColor}" IsVisible="{Binding IsStateOn, Converter={StaticResource BooleanToFalseConverter}}">
@@ -432,7 +432,7 @@
 
     </pages:BasePage>
 
-    <pages:BasePage Title="Sensor Setup" Padding="0" BackgroundColor="#FFFFFF" Icon="ic_SensorSettings.png">
+    <pages:BasePage Title="Sensor Setup" Padding="0" BackgroundColor="#FFFFFF" Icon="ic_sensor-settings.png">
 
         <!-- BTLE Status -->
         <StackLayout Padding="10" HorizontalOptions="CenterAndExpand" BackgroundColor="{StaticResource BTLEStatusBackgroundColor}" IsVisible="{Binding IsStateOn, Converter={StaticResource BooleanToFalseConverter}}">

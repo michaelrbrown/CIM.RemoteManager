@@ -2,6 +2,8 @@ using Acr.UserDialogs;
 using Android.App;
 using Android.Content.PM;
 using Android.OS;
+using HockeyApp.Android;
+using HockeyApp.Android.Metrics;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.Forms.Droid.Presenters;
@@ -24,8 +26,6 @@ namespace CIM.RemoteManager.Android
             base.OnCreate(bundle);
 
             UserDialogs.Init(this);
-            // FFImageloading init
-            //CachedImageRenderer.Init(enableFastRenderer: true);
             Forms.Init(this, bundle);
             var formsApp = new CIM.RemoteManager.Core.BleMvxFormsApp();
             LoadApplication(formsApp);
@@ -35,33 +35,32 @@ namespace CIM.RemoteManager.Android
 
             Mvx.Resolve<IMvxAppStart>().Start();
 
+            // HockeyApp
+            CheckForUpdates();
+
             // Init SyncFusion controls
             new SfChartRenderer();
             new SfBusyIndicatorRenderer();
-            //SfListViewRenderer.Init();
-            //SegmentedControlRenderer.Init();
-            //SfPopupLayoutRenderer.Init();
 
-            CheckForUpdates();
         }
 
         protected override void OnResume()
         {
             base.OnResume();
-            //CrashManager.Register(this, "7941bf481049476ca868b71fb4deadaa");
+            CrashManager.Register(this, "7941bf481049476ca868b71fb4deadaa");
             // in your main activity OnCreate-method add:
-            //MetricsManager.Register(Application, "7941bf481049476ca868b71fb4deadaa");
+            MetricsManager.Register(Application, "7941bf481049476ca868b71fb4deadaa");
         }
 
         private void CheckForUpdates()
         {
             // Remove this for store builds!
-            //UpdateManager.Register(this, "7941bf481049476ca868b71fb4deadaa");
+            UpdateManager.Register(this, "7941bf481049476ca868b71fb4deadaa");
         }
 
         private void UnregisterManagers()
         {
-            //UpdateManager.Unregister();
+            UpdateManager.Unregister();
         }
 
         protected override void OnPause()

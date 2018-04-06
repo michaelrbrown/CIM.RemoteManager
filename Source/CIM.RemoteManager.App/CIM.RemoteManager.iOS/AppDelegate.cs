@@ -7,9 +7,6 @@ using SegmentedControl.FormsPlugin.iOS;
 using Syncfusion.ListView.XForms.iOS;
 using Syncfusion.SfBusyIndicator.XForms.iOS;
 using Syncfusion.SfChart.XForms.iOS.Renderers;
-using Syncfusion.SfPullToRefresh.XForms;
-using Syncfusion.SfPullToRefresh.XForms.iOS;
-using Syncfusion.XForms.iOS.PopupLayout;
 using UIKit;
 
 namespace CIM.RemoteManager.iOS
@@ -19,12 +16,6 @@ namespace CIM.RemoteManager.iOS
     {
         UIWindow _window;
 
-        /// <summary>
-        /// Application launching.
-        /// </summary>
-        /// <param name="app">The application.</param>
-        /// <param name="options">The options.</param>
-        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             _window = new UIWindow(UIScreen.MainScreen.Bounds);
@@ -47,7 +38,6 @@ namespace CIM.RemoteManager.iOS
             new SfBusyIndicatorRenderer();
             SfListViewRenderer.Init();
             SegmentedControlRenderer.Init();
-            SfPopupLayoutRenderer.Init();
 
             // Make UIWindow they key window
             _window.MakeKeyAndVisible();

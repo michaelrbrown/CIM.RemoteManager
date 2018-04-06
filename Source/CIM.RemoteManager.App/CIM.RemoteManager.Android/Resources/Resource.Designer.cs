@@ -2423,50 +2423,6 @@ namespace CIM.RemoteManager.Android
 			global::Syncfusion.SfChart.XForms.Droid.Resource.Styleable.CardView_contentPaddingLeft = global::CIM.RemoteManager.Android.Resource.Styleable.CardView_contentPaddingLeft;
 			global::Syncfusion.SfChart.XForms.Droid.Resource.Styleable.CardView_contentPaddingRight = global::CIM.RemoteManager.Android.Resource.Styleable.CardView_contentPaddingRight;
 			global::Syncfusion.SfChart.XForms.Droid.Resource.Styleable.CardView_contentPaddingTop = global::CIM.RemoteManager.Android.Resource.Styleable.CardView_contentPaddingTop;
-			global::Syncfusion.XForms.Android.PopupLayout.Resource.Attribute.cardBackgroundColor = global::CIM.RemoteManager.Android.Resource.Attribute.cardBackgroundColor;
-			global::Syncfusion.XForms.Android.PopupLayout.Resource.Attribute.cardCornerRadius = global::CIM.RemoteManager.Android.Resource.Attribute.cardCornerRadius;
-			global::Syncfusion.XForms.Android.PopupLayout.Resource.Attribute.cardElevation = global::CIM.RemoteManager.Android.Resource.Attribute.cardElevation;
-			global::Syncfusion.XForms.Android.PopupLayout.Resource.Attribute.cardMaxElevation = global::CIM.RemoteManager.Android.Resource.Attribute.cardMaxElevation;
-			global::Syncfusion.XForms.Android.PopupLayout.Resource.Attribute.cardPreventCornerOverlap = global::CIM.RemoteManager.Android.Resource.Attribute.cardPreventCornerOverlap;
-			global::Syncfusion.XForms.Android.PopupLayout.Resource.Attribute.cardUseCompatPadding = global::CIM.RemoteManager.Android.Resource.Attribute.cardUseCompatPadding;
-			global::Syncfusion.XForms.Android.PopupLayout.Resource.Attribute.contentPadding = global::CIM.RemoteManager.Android.Resource.Attribute.contentPadding;
-			global::Syncfusion.XForms.Android.PopupLayout.Resource.Attribute.contentPaddingBottom = global::CIM.RemoteManager.Android.Resource.Attribute.contentPaddingBottom;
-			global::Syncfusion.XForms.Android.PopupLayout.Resource.Attribute.contentPaddingLeft = global::CIM.RemoteManager.Android.Resource.Attribute.contentPaddingLeft;
-			global::Syncfusion.XForms.Android.PopupLayout.Resource.Attribute.contentPaddingRight = global::CIM.RemoteManager.Android.Resource.Attribute.contentPaddingRight;
-			global::Syncfusion.XForms.Android.PopupLayout.Resource.Attribute.contentPaddingTop = global::CIM.RemoteManager.Android.Resource.Attribute.contentPaddingTop;
-			global::Syncfusion.XForms.Android.PopupLayout.Resource.Color.cardview_dark_background = global::CIM.RemoteManager.Android.Resource.Color.cardview_dark_background;
-			global::Syncfusion.XForms.Android.PopupLayout.Resource.Color.cardview_light_background = global::CIM.RemoteManager.Android.Resource.Color.cardview_light_background;
-			global::Syncfusion.XForms.Android.PopupLayout.Resource.Color.cardview_shadow_end_color = global::CIM.RemoteManager.Android.Resource.Color.cardview_shadow_end_color;
-			global::Syncfusion.XForms.Android.PopupLayout.Resource.Color.cardview_shadow_start_color = global::CIM.RemoteManager.Android.Resource.Color.cardview_shadow_start_color;
-			global::Syncfusion.XForms.Android.PopupLayout.Resource.Dimension.cardview_compat_inset_shadow = global::CIM.RemoteManager.Android.Resource.Dimension.cardview_compat_inset_shadow;
-			global::Syncfusion.XForms.Android.PopupLayout.Resource.Dimension.cardview_default_elevation = global::CIM.RemoteManager.Android.Resource.Dimension.cardview_default_elevation;
-			global::Syncfusion.XForms.Android.PopupLayout.Resource.Dimension.cardview_default_radius = global::CIM.RemoteManager.Android.Resource.Dimension.cardview_default_radius;
-			global::Syncfusion.XForms.Android.PopupLayout.Resource.Drawable.popup_forms_android_close_icon = global::CIM.RemoteManager.Android.Resource.Drawable.popup_forms_android_close_icon;
-			global::Syncfusion.XForms.Android.PopupLayout.Resource.Drawable.popup_forms_android_shadow = global::CIM.RemoteManager.Android.Resource.Drawable.popup_forms_android_shadow;
-			global::Syncfusion.XForms.Android.PopupLayout.Resource.Id.BorderView = global::CIM.RemoteManager.Android.Resource.Id.BorderView;
-			global::Syncfusion.XForms.Android.PopupLayout.Resource.String.library_name = global::CIM.RemoteManager.Android.Resource.String.library_name;
-			global::Syncfusion.XForms.Android.PopupLayout.Resource.Style.Base_CardView = global::CIM.RemoteManager.Android.Resource.Style.Base_CardView;
-			global::Syncfusion.XForms.Android.PopupLayout.Resource.Style.CardView = global::CIM.RemoteManager.Android.Resource.Style.CardView;
-			global::Syncfusion.XForms.Android.PopupLayout.Resource.Style.CardView_Dark = global::CIM.RemoteManager.Android.Resource.Style.CardView_Dark;
-			global::Syncfusion.XForms.Android.PopupLayout.Resource.Style.CardView_Light = global::CIM.RemoteManager.Android.Resource.Style.CardView_Light;
-			global::Syncfusion.XForms.Android.PopupLayout.Resource.Styleable.CardView = global::CIM.RemoteManager.Android.Resource.Styleable.CardView;
-			global::Syncfusion.XForms.Android.PopupLayout.Resource.Styleable.CardView_android_minHeight = global::CIM.RemoteManager.Android.Resource.Styleable.CardView_android_minHeight;
-			global::Syncfusion.XForms.Android.PopupLayout.Resource.Styleable.CardView_android_minWidth = global::CIM.RemoteManager.Android.Resource.Styleable.CardView_android_minWidth;
-			global::Syncfusion.XForms.Android.PopupLayout.Resource.Styleable.CardView_cardBackgroundColor = global::CIM.RemoteManager.Android.Resource.Styleable.CardView_cardBackgroundColor;
-			global::Syncfusion.XForms.Android.PopupLayout.Resource.Styleable.CardView_cardCornerRadius = global::CIM.RemoteManager.Android.Resource.Styleable.CardView_cardCornerRadius;
-			global::Syncfusion.XForms.Android.PopupLayout.Resource.Styleable.CardView_cardElevation = global::CIM.RemoteManager.Android.Resource.Styleable.CardView_cardElevation;
-			global::Syncfusion.XForms.Android.PopupLayout.Resource.Styleable.CardView_cardMaxElevation = global::CIM.RemoteManager.Android.Resource.Styleable.CardView_cardMaxElevation;
-			global::Syncfusion.XForms.Android.PopupLayout.Resource.Styleable.CardView_cardPreventCornerOverlap = global::CIM.RemoteManager.Android.Resource.Styleable.CardView_cardPreventCornerOverlap;
-			global::Syncfusion.XForms.Android.PopupLayout.Resource.Styleable.CardView_cardUseCompatPadding = global::CIM.RemoteManager.Android.Resource.Styleable.CardView_cardUseCompatPadding;
-			global::Syncfusion.XForms.Android.PopupLayout.Resource.Styleable.CardView_contentPadding = global::CIM.RemoteManager.Android.Resource.Styleable.CardView_contentPadding;
-			global::Syncfusion.XForms.Android.PopupLayout.Resource.Styleable.CardView_contentPaddingBottom = global::CIM.RemoteManager.Android.Resource.Styleable.CardView_contentPaddingBottom;
-			global::Syncfusion.XForms.Android.PopupLayout.Resource.Styleable.CardView_contentPaddingLeft = global::CIM.RemoteManager.Android.Resource.Styleable.CardView_contentPaddingLeft;
-			global::Syncfusion.XForms.Android.PopupLayout.Resource.Styleable.CardView_contentPaddingRight = global::CIM.RemoteManager.Android.Resource.Styleable.CardView_contentPaddingRight;
-			global::Syncfusion.XForms.Android.PopupLayout.Resource.Styleable.CardView_contentPaddingTop = global::CIM.RemoteManager.Android.Resource.Styleable.CardView_contentPaddingTop;
-			global::Syncfusion.SfPullToRefresh.XForms.Android.Resource.Drawable.shadow_effect = global::CIM.RemoteManager.Android.Resource.Drawable.shadow_effect;
-			global::Syncfusion.SfPullToRefresh.XForms.Android.Resource.Id.ShadowEffectShape = global::CIM.RemoteManager.Android.Resource.Id.ShadowEffectShape;
-			global::Syncfusion.SfPullToRefresh.XForms.Android.Resource.String.ApplicationName = global::CIM.RemoteManager.Android.Resource.String.ApplicationName;
-			global::Syncfusion.SfPullToRefresh.XForms.Android.Resource.String.Hello = global::CIM.RemoteManager.Android.Resource.String.Hello;
 			global::Xamarin.Forms.Platform.Android.Resource.Attribute.actionBarSize = global::CIM.RemoteManager.Android.Resource.Attribute.actionBarSize;
 		}
 		
@@ -4756,26 +4712,26 @@ namespace CIM.RemoteManager.Android
 			// aapt resource value: 0x7f020054
 			public const int avd_hide_password = 2130837588;
 			
-			// aapt resource value: 0x7f020139
-			public const int avd_hide_password_1 = 2130837817;
+			// aapt resource value: 0x7f020136
+			public const int avd_hide_password_1 = 2130837814;
 			
-			// aapt resource value: 0x7f02013a
-			public const int avd_hide_password_2 = 2130837818;
+			// aapt resource value: 0x7f020137
+			public const int avd_hide_password_2 = 2130837815;
 			
-			// aapt resource value: 0x7f02013b
-			public const int avd_hide_password_3 = 2130837819;
+			// aapt resource value: 0x7f020138
+			public const int avd_hide_password_3 = 2130837816;
 			
 			// aapt resource value: 0x7f020055
 			public const int avd_show_password = 2130837589;
 			
-			// aapt resource value: 0x7f02013c
-			public const int avd_show_password_1 = 2130837820;
+			// aapt resource value: 0x7f020139
+			public const int avd_show_password_1 = 2130837817;
 			
-			// aapt resource value: 0x7f02013d
-			public const int avd_show_password_2 = 2130837821;
+			// aapt resource value: 0x7f02013a
+			public const int avd_show_password_2 = 2130837818;
 			
-			// aapt resource value: 0x7f02013e
-			public const int avd_show_password_3 = 2130837822;
+			// aapt resource value: 0x7f02013b
+			public const int avd_show_password_3 = 2130837819;
 			
 			// aapt resource value: 0x7f020056
 			public const int baromicPressureSensor = 2130837590;
@@ -5389,11 +5345,11 @@ namespace CIM.RemoteManager.Android
 			// aapt resource value: 0x7f020121
 			public const int notification_icon_background = 2130837793;
 			
-			// aapt resource value: 0x7f020137
-			public const int notification_template_icon_bg = 2130837815;
+			// aapt resource value: 0x7f020134
+			public const int notification_template_icon_bg = 2130837812;
 			
-			// aapt resource value: 0x7f020138
-			public const int notification_template_icon_low_bg = 2130837816;
+			// aapt resource value: 0x7f020135
+			public const int notification_template_icon_low_bg = 2130837813;
 			
 			// aapt resource value: 0x7f020122
 			public const int notification_tile_bg = 2130837794;
@@ -5411,52 +5367,43 @@ namespace CIM.RemoteManager.Android
 			public const int particleCountSensor = 2130837798;
 			
 			// aapt resource value: 0x7f020127
-			public const int popup_forms_android_close_icon = 2130837799;
+			public const int remote512 = 2130837799;
 			
 			// aapt resource value: 0x7f020128
-			public const int popup_forms_android_shadow = 2130837800;
+			public const int roundedbg = 2130837800;
 			
 			// aapt resource value: 0x7f020129
-			public const int remote512 = 2130837801;
+			public const int roundedbgdark = 2130837801;
 			
 			// aapt resource value: 0x7f02012a
-			public const int roundedbg = 2130837802;
+			public const int rssi_1 = 2130837802;
 			
 			// aapt resource value: 0x7f02012b
-			public const int roundedbgdark = 2130837803;
+			public const int rssi_2 = 2130837803;
 			
 			// aapt resource value: 0x7f02012c
-			public const int rssi_1 = 2130837804;
+			public const int rssi_3 = 2130837804;
 			
 			// aapt resource value: 0x7f02012d
-			public const int rssi_2 = 2130837805;
+			public const int rssi_4 = 2130837805;
 			
 			// aapt resource value: 0x7f02012e
-			public const int rssi_3 = 2130837806;
+			public const int rssi_5 = 2130837806;
 			
 			// aapt resource value: 0x7f02012f
-			public const int rssi_4 = 2130837807;
+			public const int segmented_control_background = 2130837807;
 			
 			// aapt resource value: 0x7f020130
-			public const int rssi_5 = 2130837808;
+			public const int segmented_control_first_background = 2130837808;
 			
 			// aapt resource value: 0x7f020131
-			public const int segmented_control_background = 2130837809;
+			public const int segmented_control_last_background = 2130837809;
 			
 			// aapt resource value: 0x7f020132
-			public const int segmented_control_first_background = 2130837810;
+			public const int stop = 2130837810;
 			
 			// aapt resource value: 0x7f020133
-			public const int segmented_control_last_background = 2130837811;
-			
-			// aapt resource value: 0x7f020134
-			public const int shadow_effect = 2130837812;
-			
-			// aapt resource value: 0x7f020135
-			public const int stop = 2130837813;
-			
-			// aapt resource value: 0x7f020136
-			public const int temperatureSensor = 2130837814;
+			public const int temperatureSensor = 2130837811;
 			
 			static Drawable()
 			{
@@ -5471,9 +5418,6 @@ namespace CIM.RemoteManager.Android
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f0900f0
-			public const int BorderView = 2131296496;
-			
 			// aapt resource value: 0x7f09000f
 			public const int MvvmCrossTagId = 2131296271;
 			
@@ -5482,9 +5426,6 @@ namespace CIM.RemoteManager.Android
 			
 			// aapt resource value: 0x7f0900e6
 			public const int SegControl = 2131296486;
-			
-			// aapt resource value: 0x7f0900f2
-			public const int ShadowEffectShape = 2131296498;
 			
 			// aapt resource value: 0x7f0900d2
 			public const int action0 = 2131296466;
@@ -6026,8 +5967,8 @@ namespace CIM.RemoteManager.Android
 			// aapt resource value: 0x7f090079
 			public const int seriesLayout = 2131296377;
 			
-			// aapt resource value: 0x7f0900f1
-			public const int shape_id = 2131296497;
+			// aapt resource value: 0x7f0900f0
+			public const int shape_id = 2131296496;
 			
 			// aapt resource value: 0x7f09005e
 			public const int shortcut = 2131296350;

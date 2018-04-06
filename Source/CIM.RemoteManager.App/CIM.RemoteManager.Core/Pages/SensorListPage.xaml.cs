@@ -1,22 +1,15 @@
-﻿using System;
-using CIM.RemoteManager.Core.Models;
+﻿using CIM.RemoteManager.Core.Models;
 using CIM.RemoteManager.Core.ViewModels;
 using Syncfusion.ListView.XForms;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using ItemTappedEventArgs = Syncfusion.ListView.XForms.ItemTappedEventArgs;
 
 namespace CIM.RemoteManager.Core.Pages
 {
-    /// <summary>
-    /// Class SensorListPage.
-    /// </summary>
-    /// <seealso cref="CIM.RemoteManager.Core.Pages.BasePage" />
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SensorListPage
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SensorListPage"/> class.
-        /// </summary>
         public SensorListPage()
         {
             InitializeComponent();
@@ -25,7 +18,7 @@ namespace CIM.RemoteManager.Core.Pages
             BindingContext = this;
 
             // Add device settings toolbar icon and handle selection
-            ToolbarItems.Add(new ToolbarItem("Device Settings", "ic_RemoteSettings.png", () =>
+            ToolbarItems.Add(new ToolbarItem("Device Settings", "ic_remote-settings.png", () =>
             {
             }, ToolbarItemOrder.Primary, 0));
         }
@@ -40,14 +33,27 @@ namespace CIM.RemoteManager.Core.Pages
         {
             base.OnAppearing();
 
-            //// Get instance of SensorListViewModel
-            //var sensorListViewModel = (SensorListViewModel)this.BindingContext;
-            //// Validate
-            //if (sensorListViewModel != null)
-            //{
-            //    sensorListViewModel.StopUpdatesCommand.Execute();
-            //    sensorListViewModel.StartUpdatesCommand.Execute();
-            //}
+            // Get instance of SensorListViewModel
+            var sensorListViewModel = (SensorListViewModel)this.BindingContext;
+            // Validate
+            if (sensorListViewModel != null)
+            {
+                sensorListViewModel.StopUpdatesCommand.Execute();
+                sensorListViewModel.StartUpdatesCommand.Execute();
+            }
+        }
+
+        /// <summary>
+        /// Handle toggling of sensor updates
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SensorUpdatesSwitchToggled(object sender, ToggledEventArgs e)
+        {
+            // Get instance of SensorListViewModel
+            var sensorListViewModel = (SensorListViewModel)this.BindingContext;
+            // Toggle sensor updates
+            sensorListViewModel.ToggleUpdatesCommand.Execute(null);
         }
 
         /// <summary>
@@ -66,5 +72,6 @@ namespace CIM.RemoteManager.Core.Pages
                 sensorListViewModel.NavigateToSensorDetailsPage(sensorItem);
             }
         }
+
     }
 }

@@ -188,8 +188,8 @@
     <Reference Include="Splat, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Splat.2.0.0\lib\MonoAndroid403\Splat.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.Core.XForms, Version=16.1451.0.32, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Syncfusion.Xamarin.Core.16.1.0.32\lib\MonoAndroid10\Syncfusion.Core.XForms.dll</HintPath>
+    <Reference Include="Syncfusion.Core.XForms, Version=15.4451.0.20, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Syncfusion.Xamarin.Core.15.4.0.20\lib\MonoAndroid10\Syncfusion.Core.XForms.dll</HintPath>
     </Reference>
     <Reference Include="Syncfusion.DataSource.Portable, Version=15.4451.0.20, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Syncfusion.Xamarin.DataSource.15.4.0.20\lib\MonoAndroid10\Syncfusion.DataSource.Portable.dll</HintPath>
@@ -226,18 +226,6 @@
     </Reference>
     <Reference Include="Syncfusion.SfNumericTextBox.XForms.Android, Version=15.4451.0.20, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Syncfusion.Xamarin.SfNumericTextBox.15.4.0.20\lib\MonoAndroid10\Syncfusion.SfNumericTextBox.XForms.Android.dll</HintPath>
-    </Reference>
-    <Reference Include="Syncfusion.SfPopupLayout.XForms, Version=16.1451.0.32, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Syncfusion.Xamarin.SfPopupLayout.16.1.0.32\lib\MonoAndroid10\Syncfusion.SfPopupLayout.XForms.dll</HintPath>
-    </Reference>
-    <Reference Include="Syncfusion.SfPopupLayout.XForms.Android, Version=16.1451.0.32, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Syncfusion.Xamarin.SfPopupLayout.16.1.0.32\lib\MonoAndroid10\Syncfusion.SfPopupLayout.XForms.Android.dll</HintPath>
-    </Reference>
-    <Reference Include="Syncfusion.SfPullToRefresh.XForms, Version=16.1451.0.32, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Syncfusion.Xamarin.SfPullToRefresh.16.1.0.32\lib\MonoAndroid10\Syncfusion.SfPullToRefresh.XForms.dll</HintPath>
-    </Reference>
-    <Reference Include="Syncfusion.SfPullToRefresh.XForms.Android, Version=16.1451.0.32, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Syncfusion.Xamarin.SfPullToRefresh.16.1.0.32\lib\MonoAndroid10\Syncfusion.SfPullToRefresh.XForms.Android.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -388,9 +376,6 @@
     <AndroidResource Include="Resources\values\style.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\oxygenSensor.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable\temperatureSensor.png" />
   </ItemGroup>
   <ItemGroup>
@@ -418,13 +403,49 @@
     <AndroidResource Include="Resources\drawable\humiditySensor.png" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ic_BluetoothConnected.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ic_BluetoothSearch.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ic_CimscanDevices.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ic_ConnectPrevious.png" />
+  </ItemGroup>
+  <ItemGroup>
     <AndroidResource Include="Resources\drawable\ic_debug.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ic_OtherDevices.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ic_RefreshSensorData.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ic_RemoteSettings.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\ic_save.png" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ic_SensorLimits.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ic_SensorPlot.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ic_SensorSettings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ic_StopSearching.png" />
+  </ItemGroup>
+  <ItemGroup>
     <AndroidResource Include="Resources\drawable\ovenTempSensor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\oxygenSensor.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\particleCountSensor.png" />
@@ -449,39 +470,6 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\stop.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\ic_BluetoothConnected.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\ic_BluetoothSearch.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\ic_CimscanDevices.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\ic_ConnectPrevious.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\ic_OtherDevices.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\ic_RefreshSensorData.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\ic_RemoteSettings.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\ic_SensorLimits.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\ic_SensorPlot.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\ic_SensorSettings.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\ic_StopSearching.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

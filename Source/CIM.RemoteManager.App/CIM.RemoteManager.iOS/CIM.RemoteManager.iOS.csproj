@@ -56,10 +56,10 @@
     <CodesignKey>iPhone Developer</CodesignKey>
     <MtouchDebug>true</MtouchDebug>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
-    <CodesignProvision>CIM : Development Mobile Profile</CodesignProvision>
+    <CodesignProvision>
+    </CodesignProvision>
     <BuildIpa>true</BuildIpa>
     <IOSDebugOverWiFi>true</IOSDebugOverWiFi>
-    <MtouchLink>None</MtouchLink>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>none</DebugType>
@@ -71,8 +71,7 @@
     <ConsolePause>false</ConsolePause>
     <CodesignKey>iPhone Developer</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
-    <CodesignProvision>CIM : Development Mobile Profile</CodesignProvision>
-    <MtouchLink>None</MtouchLink>
+    <BuildIpa>true</BuildIpa>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Ad-Hoc|iPhone' ">
     <DebugType>none</DebugType>
@@ -244,8 +243,8 @@
     <Reference Include="Splat, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Splat.2.0.0\lib\Xamarin.iOS10\Splat.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.Core.XForms, Version=16.1451.0.32, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Syncfusion.Xamarin.Core.16.1.0.32\lib\Xamarin.iOS10\Syncfusion.Core.XForms.dll</HintPath>
+    <Reference Include="Syncfusion.Core.XForms, Version=15.4451.0.20, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Syncfusion.Xamarin.Core.15.4.0.20\lib\Xamarin.iOS10\Syncfusion.Core.XForms.dll</HintPath>
     </Reference>
     <Reference Include="Syncfusion.DataSource.Portable, Version=15.4451.0.20, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Syncfusion.Xamarin.DataSource.15.4.0.20\lib\Xamarin.iOS10\Syncfusion.DataSource.Portable.dll</HintPath>
@@ -282,18 +281,6 @@
     </Reference>
     <Reference Include="Syncfusion.SfNumericTextBox.XForms.iOS, Version=15.4451.0.20, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Syncfusion.Xamarin.SfNumericTextBox.15.4.0.20\lib\Xamarin.iOS10\Syncfusion.SfNumericTextBox.XForms.iOS.dll</HintPath>
-    </Reference>
-    <Reference Include="Syncfusion.SfPopupLayout.XForms, Version=16.1451.0.32, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Syncfusion.Xamarin.SfPopupLayout.16.1.0.32\lib\Xamarin.iOS10\Syncfusion.SfPopupLayout.XForms.dll</HintPath>
-    </Reference>
-    <Reference Include="Syncfusion.SfPopupLayout.XForms.iOS, Version=16.1451.0.32, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Syncfusion.Xamarin.SfPopupLayout.16.1.0.32\lib\Xamarin.iOS10\Syncfusion.SfPopupLayout.XForms.iOS.dll</HintPath>
-    </Reference>
-    <Reference Include="Syncfusion.SfPullToRefresh.XForms, Version=16.1451.0.32, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Syncfusion.Xamarin.SfPullToRefresh.16.1.0.32\lib\Xamarin.iOS10\Syncfusion.SfPullToRefresh.XForms.dll</HintPath>
-    </Reference>
-    <Reference Include="Syncfusion.SfPullToRefresh.XForms.iOS, Version=16.1451.0.32, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Syncfusion.Xamarin.SfPullToRefresh.16.1.0.32\lib\Xamarin.iOS10\Syncfusion.SfPullToRefresh.XForms.iOS.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
@@ -405,19 +392,22 @@
     <BundleResource Include="Icon-Small-50%402x.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_BluetoothConnected.png" />
+    <BundleResource Include="Resources\ic_bluetooth-connected.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_BluetoothSearch.png" />
+    <BundleResource Include="Resources\ic_bluetooth-search.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\stop.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_ConnectPrevious.png" />
+    <BundleResource Include="Resources\ic_connect-previous.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_StopSearching.png" />
+    <BundleResource Include="Resources\ic_stop-searching.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\bluetooth-info.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\temperatureSensor.png" />
@@ -444,6 +434,9 @@
     <BundleResource Include="Resources\DA12.png" />
   </ItemGroup>
   <ItemGroup>
+    <BundleResource Include="Resources\remote512.2.png" />
+  </ItemGroup>
+  <ItemGroup>
     <BundleResource Include="Resources\rssi_5.png" />
   </ItemGroup>
   <ItemGroup>
@@ -462,25 +455,34 @@
     <BundleResource Include="Resources\remote512.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_RemoteSettings.png" />
+    <BundleResource Include="Resources\ic_remote-settings.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_SensorStatistics.png" />
+    <BundleResource Include="Resources\bg_app.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_SensorPlot.png" />
+    <BundleResource Include="Resources\app_bg_sensor.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_SensorSettings.png" />
+    <BundleResource Include="Resources\bgapplication.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_SensorLimits.png" />
+    <BundleResource Include="Resources\ic_sensor-statistics.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_RefreshSensorData.png" />
+    <BundleResource Include="Resources\ic_sensor-plot.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\oxygenSensor.png" />
+    <BundleResource Include="Resources\ic_sensor-settings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_sensor-limits.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_refresh-sensordata.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\02Sensor.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\defaultSensor.png" />
@@ -498,10 +500,10 @@
     <BundleResource Include="Resources\ic_debug.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_CimscanDevices.png" />
+    <BundleResource Include="Resources\ic_cimscan-devices.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_OtherDevices.png" />
+    <BundleResource Include="Resources\ic_other-devices.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

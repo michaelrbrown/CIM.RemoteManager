@@ -1139,6 +1139,8 @@ namespace CIM.RemoteManager.Core.ViewModels
                 // Release processing
                 ProcessingPlotData = false;
                 HockeyApp.MetricsManager.TrackEvent($"(SerializeStringToSensor) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
+                // Show refreshing of chart via toast
+                //_userDialogs.InfoToast($"(SerializeStringToSensor) Message: {ex.Message};", TimeSpan.FromSeconds(4));
             }
         }
 
@@ -1508,6 +1510,9 @@ namespace CIM.RemoteManager.Core.ViewModels
                 SensorIndexSelected = parameters.Data[SensorIdKey];
                 // Notify property changed
                 RaisePropertyChanged(() => SensorIndexSelected);
+
+                // TODO: remove after debugging
+                //_userDialogs.Alert($"(InitFromBundle) SensorIndexSelected: {SensorIndexSelected.ToString()}");
 
                 // Get sensor name from app context
                 if (Application.Current.Properties.ContainsKey("CurrentSensorName"))

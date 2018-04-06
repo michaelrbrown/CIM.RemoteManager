@@ -62,7 +62,7 @@
 
     <pages:BaseTabbedPage.Children>
 
-        <pages:BasePage Title="CIMScan Devices" BackgroundColor="#FFFFFF" Icon="ic_CimscanDevices.png">
+        <pages:BasePage Title="CIMScan Devices" BackgroundColor="#FFFFFF" Icon="ic_cimscan-devices.png">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -111,7 +111,7 @@
                     <Button HorizontalOptions="FillAndExpand"
                             BackgroundColor="{StaticResource ButtonBackgroundColor}"
                             Command="{Binding ConnectToPreviousCommand}"
-                            Image="ic_ConnectPrevious..png" IsVisible="True"
+                            Image="ic_connect-previous.png" IsVisible="True"
                             Text="{Binding PreviousName, StringFormat='Connect to {0}'}"
                             TextColor="{StaticResource ButtonTextColor}"
                             WidthRequest="325" />
@@ -122,7 +122,7 @@
                     <Button HorizontalOptions="CenterAndExpand"
                             BackgroundColor="{StaticResource ButtonBackgroundColor}"
                             Command="{Binding StopScanCommand}"
-                            Image="ic_StopSearching.png" Text="Stop Searching"
+                            Image="ic_stop-searching.png" Text="Stop Searching"
                             TextColor="{StaticResource ButtonTextColor}"
                             WidthRequest="175" />
                 </StackLayout>
@@ -130,7 +130,7 @@
             </Grid>
         </pages:BasePage>
 
-        <pages:BasePage Title="Search for All Devices" BackgroundColor="#FFFFFF" Icon="ic_OtherDevices.png">
+        <pages:BasePage Title="Search for All Devices" BackgroundColor="#FFFFFF" Icon="ic_other-devices.png">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -182,7 +182,7 @@
                     <Button HorizontalOptions="CenterAndExpand"
                             BackgroundColor="{StaticResource ButtonBackgroundColor}"
                             Command="{Binding StopScanCommand}"
-                            Image="ic_StopSearching.png" Text="Stop Searching"
+                            Image="ic_stop-searching.png" Text="Stop Searching"
                             TextColor="{StaticResource ButtonTextColor}"
                             WidthRequest="175" />
                 </StackLayout>
