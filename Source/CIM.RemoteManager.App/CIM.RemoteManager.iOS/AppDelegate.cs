@@ -48,7 +48,6 @@ namespace CIM.RemoteManager.iOS
             SfListViewRenderer.Init();
             SegmentedControlRenderer.Init();
             SfPopupLayoutRenderer.Init();
-            SfPullToRefreshRenderer.Init();
 
             // Make UIWindow they key window
             _window.MakeKeyAndVisible();

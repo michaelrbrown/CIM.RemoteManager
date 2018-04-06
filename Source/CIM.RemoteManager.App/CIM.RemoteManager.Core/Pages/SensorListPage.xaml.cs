@@ -2,6 +2,7 @@
 using CIM.RemoteManager.Core.Models;
 using CIM.RemoteManager.Core.ViewModels;
 using Syncfusion.ListView.XForms;
+using Syncfusion.SfBusyIndicator.XForms;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -24,6 +25,15 @@ namespace CIM.RemoteManager.Core.Pages
             ToolbarItems.Add(new ToolbarItem("Device Settings", "ic_RemoteSettings.png", () =>
             {
             }, ToolbarItemOrder.Primary, 0));
+
+            SfBusyIndicator busyIndicator = new SfBusyIndicator
+            {
+                AnimationType = AnimationTypes.HorizontalPulsingBox,
+                ViewBoxWidth = 150,
+                ViewBoxHeight = 150,
+                TextColor = Color.FromHex("#01649D")
+            };
+            this.Content = busyIndicator;
         }
 
         /// <summary>
