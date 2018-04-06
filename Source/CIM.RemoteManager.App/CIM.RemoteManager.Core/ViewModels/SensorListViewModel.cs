@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Acr.UserDialogs;
+using CIM.RemoteManager.Core.Extensions;
 using CIM.RemoteManager.Core.Helpers;
 using CIM.RemoteManager.Core.Models;
 using MvvmCross.Core.ViewModels;
@@ -93,6 +94,16 @@ namespace CIM.RemoteManager.Core.ViewModels
         {
             get => _isLoading;
             set => SetProperty(ref _isLoading, value);
+        }
+
+        /// <summary>
+        /// Processing sensor data
+        /// </summary>
+        bool _processingSensorData = true;
+        public bool ProcessingSensorData
+        {
+            get => _processingSensorData;
+            set => SetProperty(ref _processingSensorData, value);
         }
 
         /// <summary>
@@ -380,11 +391,11 @@ namespace CIM.RemoteManager.Core.ViewModels
             try
             {
 
-                // Split by tab delimiter
-                string[] splitSensorValues = sensorValues.Split('\t');
+            // Split by tab delimiter
+            string[] splitSensorValues = sensorValues.Split('\t');
 
-                // What type of record are we parsing / serializing?
-                switch (conversionType)
+            // What type of record are we parsing / serializing?
+            switch (conversionType)
                 {
                     case "F":
                         // "F" Message counter data serialization
@@ -405,8 +416,23 @@ namespace CIM.RemoteManager.Core.ViewModels
                             var stationHelper = new StationHelper();
                             // Validate our current remote Unix date time. Update to current Unix UTC date time
                             // if year < 2009.
-                            await stationHelper.HandleRemoteDateTimeValidation(TxCharacteristic, currentDateTimeResult);
+                            bool wasStationTimeSet = await stationHelper.HandleRemoteDateTimeValidation(TxCharacteristic, currentDateTimeResult).ConfigureAwait(true);
+
+                            // Show updating station datetime message
+                            if (wasStationTimeSet)
+                            {
+                                _userDialogs.InfoToast("Updating Station DateTime...", TimeSpan.FromSeconds(2));
+                                // Send refresh command to remote after
+                                await TxCharacteristic.WriteAsync("{Y}".StrToByteArray()).ConfigureAwait(true);
+                                // Wait a couple seconds for remote to process
+                                await Task.Delay(2000).ConfigureAwait(true);
+                                // Show refreshing message
+                                _userDialogs.InfoToast("Refreshing Station Settings...", TimeSpan.FromSeconds(2));
+                            }
                         }
+
+                        // Processing sensor data done
+                        ProcessingSensorData = false;
                         break;
                     case "A":
                         // "A" Sensor data serialization
@@ -448,6 +474,9 @@ namespace CIM.RemoteManager.Core.ViewModels
                             // Add sensor to list
                             SensorCollection.Add(sensor);
                         }
+
+                        // Processing sensor data done
+                        ProcessingSensorData = false;
                         break;
                     case "B":
                         // "B" Sensor data serialization

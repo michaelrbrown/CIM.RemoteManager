@@ -2,21 +2,30 @@
                 x:Class="CIM.RemoteManager.Core.Pages.SensorListPage"
                 xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                 xmlns:dataSource="clr-namespace:Syncfusion.DataSource;assembly=Syncfusion.DataSource.Portable" xmlns:pages="clr-namespace:CIM.RemoteManager.Core.Pages;assembly=CIM.RemoteManager.Core" xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
-                xmlns:templates="clr-namespace:CIM.RemoteManager.Core.Templates;assembly=CIM.RemoteManager.Core"
+                xmlns:templates="clr-namespace:CIM.RemoteManager.Core.Templates;assembly=CIM.RemoteManager.Core" xmlns:xForms="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
                 Padding="0"
                 BackgroundColor="#FFFFFF">
 
     <!-- BTLE Status -->
-    <StackLayout Padding="10" HorizontalOptions="CenterAndExpand" BackgroundColor="{StaticResource BTLEStatusBackgroundColor}" IsVisible="{Binding IsStateOn, Converter={StaticResource BooleanToFalseConverter}}">
+    <StackLayout Padding="10" HorizontalOptions="CenterAndExpand" BackgroundColor="#AE2C3B" IsVisible="{Binding IsStateOn, Converter={StaticResource BooleanToFalseConverter}}">
         <Grid HorizontalOptions="Center">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Image VerticalOptions="Center" HorizontalOptions="End" Source="bluetooth-info.png" />
-            <Label Grid.Column="1" VerticalOptions="Center" FontSize="18" Text="{Binding StateText}" TextColor="{StaticResource BTLEStatusTextColor}" />
+            <Label Grid.Column="1" VerticalOptions="Center" FontSize="18" Text="{Binding StateText}" TextColor="#FFFFFF" />
         </Grid>
     </StackLayout>
+
+    <!-- Chart Loading Indicator -->
+    <xForms:SfBusyIndicator x:Name="ChartBusyindicator" Title="Loading Sensor Data..."
+                            AnimationType="HorizontalPulsingBox" BackgroundColor="Transparent" HeightRequest="250"
+                            IsBusy="{Binding ProcessingPlotData}"
+                            IsVisible="{Binding ProcessingPlotData}"
+                            Opacity=".3"
+                            TextColor="{DynamicResource BusyIndicatorColor}"
+                            ViewBoxHeight="250" ViewBoxWidth="250" WidthRequest="250" />
 
     <!-- Sensor ListView -->
     <syncfusion:SfListView x:Name="SensorLiistView"
@@ -73,10 +82,9 @@
                             <!-- Sensor Group Name -->
                             <Label Margin="0,5,0,5"
                                    VerticalOptions="Center" HorizontalOptions="CenterAndExpand"
-                                   FontSize="20" HorizontalTextAlignment="Center"
+                                   FontAttributes="Italic" FontSize="20" HorizontalTextAlignment="Center"
                                    Text="{Binding Key, Converter={StaticResource UpperCaseConverter}}"
-                                   TextColor="{StaticResource GroupTextColor}"
-                                   VerticalTextAlignment="Center" WidthRequest="225" />
+                                   TextColor="#01649D" VerticalTextAlignment="Center" WidthRequest="225" />
                         </Grid>
                     </ViewCell.View>
                 </ViewCell>
@@ -99,7 +107,7 @@
                 <Grid VerticalOptions="Fill" HorizontalOptions="Fill" BackgroundColor="{StaticResource CardBackgroundColor}">
                     <Grid VerticalOptions="Center" HorizontalOptions="Center">
                         <Image Grid.Row="0" Grid.Column="0"
-                               BackgroundColor="Transparent" HeightRequest="48" Source="ic_SensorSettings.png" WidthRequest="48" />
+                               BackgroundColor="Transparent" HeightRequest="48" Source="ic_sensor-settings.png" WidthRequest="48" />
                     </Grid>
                 </Grid>
             </DataTemplate>
