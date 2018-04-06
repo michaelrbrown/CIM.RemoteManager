@@ -2,20 +2,31 @@
 using CIM.RemoteManager.Core.ViewModels;
 using Syncfusion.ListView.XForms;
 using Xamarin.Forms;
+using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 using Xamarin.Forms.Xaml;
 using ItemTappedEventArgs = Syncfusion.ListView.XForms.ItemTappedEventArgs;
 
 namespace CIM.RemoteManager.Core.Pages
 {
+    /// <summary>
+    /// Class SensorListPage.
+    /// </summary>
+    /// <seealso cref="CIM.RemoteManager.Core.Pages.BasePage" />
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SensorListPage
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SensorListPage"/> class.
+        /// </summary>
         public SensorListPage()
         {
             InitializeComponent();
 
             // Set binding context to viewmodel
             BindingContext = this;
+
+            // Add extra padding for iPhoneX
+            On<Xamarin.Forms.PlatformConfiguration.iOS>().SetUseSafeArea(true);
 
             // Add device settings toolbar icon and handle selection
             ToolbarItems.Add(new ToolbarItem("Device Settings", "ic_remote-settings.png", () =>

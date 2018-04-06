@@ -13,8 +13,16 @@ using MvvmCross.Forms.Droid.Presenters;
 
 namespace CIM.RemoteManager.Android
 {
+    /// <summary>
+    /// Class Setup.
+    /// </summary>
+    /// <seealso cref="MvvmCross.Droid.Platform.MvxAndroidSetup" />
     public class Setup : MvxAndroidSetup
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Setup"/> class.
+        /// </summary>
+        /// <param name="applicationContext">The application context.</param>
         public Setup(Context applicationContext) : base(applicationContext)
         {
         }
@@ -29,6 +37,10 @@ namespace CIM.RemoteManager.Android
             return new DebugTrace();
         }
 
+        /// <summary>
+        /// Creates the view presenter.
+        /// </summary>
+        /// <returns>IMvxAndroidViewPresenter.</returns>
         protected override IMvxAndroidViewPresenter CreateViewPresenter()
         {
             var presenter = new MvxFormsDroidPagePresenter();
@@ -39,7 +51,7 @@ namespace CIM.RemoteManager.Android
         protected override void InitializeIoC()
         {
             base.InitializeIoC();
-
+            // Inject dependencies
             Mvx.RegisterSingleton(() => UserDialogs.Instance);
             Mvx.RegisterSingleton(() => CrossSettings.Current);
             Mvx.RegisterSingleton(() => CrossPermissions.Current);

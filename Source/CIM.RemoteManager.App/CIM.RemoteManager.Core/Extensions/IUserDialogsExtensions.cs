@@ -4,6 +4,9 @@ using Acr.UserDialogs;
 
 namespace CIM.RemoteManager.Core.Extensions
 {
+    /// <summary>
+    /// Class IUserDialogsExtensions.
+    /// </summary>
     public static class IUserDialogsExtensions
     {
         /// <summary>

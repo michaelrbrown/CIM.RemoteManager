@@ -108,7 +108,7 @@
                 <Grid VerticalOptions="Fill" HorizontalOptions="Fill" BackgroundColor="{StaticResource CardBackgroundColor}">
                     <Grid VerticalOptions="Center" HorizontalOptions="Center">
                         <Image Grid.Row="0" Grid.Column="0"
-                               BackgroundColor="Transparent" HeightRequest="48" Source="ic_sensor-settings.png" WidthRequest="48" />
+                               BackgroundColor="Transparent" HeightRequest="48" Source="ic_sensorsettings.png" WidthRequest="48" />
                     </Grid>
                 </Grid>
             </DataTemplate>

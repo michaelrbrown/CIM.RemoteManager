@@ -15,9 +15,17 @@ using Xamarin.Forms.Platform.Android;
 
 namespace CIM.RemoteManager.Android
 {
+    /// <summary>
+    /// Class MainActivity.
+    /// </summary>
+    /// <seealso cref="Xamarin.Forms.Platform.Android.FormsAppCompatActivity" />
     [Activity(ScreenOrientation = ScreenOrientation.Portrait)]
     public class MainActivity : FormsAppCompatActivity
     {
+        /// <summary>
+        /// Called when [create].
+        /// </summary>
+        /// <param name="bundle">The bundle.</param>
         protected override void OnCreate(Bundle bundle)
         {
             ToolbarResource = Resource.Layout.toolbar;
@@ -41,9 +49,11 @@ namespace CIM.RemoteManager.Android
             // Init SyncFusion controls
             new SfChartRenderer();
             new SfBusyIndicatorRenderer();
-
         }
 
+        /// <summary>
+        /// Called when [resume].
+        /// </summary>
         protected override void OnResume()
         {
             base.OnResume();
@@ -63,12 +73,18 @@ namespace CIM.RemoteManager.Android
             UpdateManager.Unregister();
         }
 
+        /// <summary>
+        /// Called when [pause].
+        /// </summary>
         protected override void OnPause()
         {
             base.OnPause();
             UnregisterManagers();
         }
 
+        /// <summary>
+        /// Called when [destroy].
+        /// </summary>
         protected override void OnDestroy()
         {
             base.OnDestroy();

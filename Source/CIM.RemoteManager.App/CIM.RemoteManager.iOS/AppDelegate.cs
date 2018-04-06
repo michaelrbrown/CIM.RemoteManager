@@ -11,11 +11,21 @@ using UIKit;
 
 namespace CIM.RemoteManager.iOS
 {
+    /// <summary>
+    /// Class AppDelegate.
+    /// </summary>
+    /// <seealso cref="MvvmCross.iOS.Platform.MvxApplicationDelegate" />
     [Register("AppDelegate")]
     public partial class AppDelegate : MvxApplicationDelegate
     {
         UIWindow _window;
 
+        /// <summary>
+        /// App Launching.
+        /// </summary>
+        /// <param name="app">The application.</param>
+        /// <param name="options">The options.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             _window = new UIWindow(UIScreen.MainScreen.Bounds);
