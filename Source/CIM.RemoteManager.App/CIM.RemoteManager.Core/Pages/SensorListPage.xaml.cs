@@ -2,7 +2,6 @@
 using CIM.RemoteManager.Core.Models;
 using CIM.RemoteManager.Core.ViewModels;
 using Syncfusion.ListView.XForms;
-using Syncfusion.SfBusyIndicator.XForms;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -25,15 +24,6 @@ namespace CIM.RemoteManager.Core.Pages
             ToolbarItems.Add(new ToolbarItem("Device Settings", "ic_RemoteSettings.png", () =>
             {
             }, ToolbarItemOrder.Primary, 0));
-
-            SfBusyIndicator busyIndicator = new SfBusyIndicator
-            {
-                AnimationType = AnimationTypes.HorizontalPulsingBox,
-                ViewBoxWidth = 150,
-                ViewBoxHeight = 150,
-                TextColor = Color.FromHex("#01649D")
-            };
-            this.Content = busyIndicator;
         }
 
         /// <summary>
@@ -71,23 +61,6 @@ namespace CIM.RemoteManager.Core.Pages
                 // Navigate to sensor details view model (for plot, statistics, limits, and sensor settings)
                 sensorListViewModel.NavigateToSensorDetailsPage(sensorItem);
             }
-        }
-
-        /// <summary>
-        /// Handles the OnRefreshing event of the PullToRefresh control.
-        /// </summary>
-        /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
-        private void PullToRefresh_OnRefreshing(object sender, EventArgs e)
-        {
-            // Get instance of SensorListViewModel
-            //var sensorListViewModel = (SensorListViewModel)this.BindingContext;
-            //// Validate
-            //if (sensorListViewModel != null)
-            //{
-            //    sensorListViewModel.StopUpdatesCommand.Execute();
-            //    sensorListViewModel.StartUpdatesCommand.Execute();
-            //}
         }
     }
 }
