@@ -22,7 +22,7 @@ namespace CIM.RemoteManager.Core.Pages
             InitializeComponent();
 
             // Set binding context to viewmodel
-            //BindingContext = this;
+            BindingContext = this;
 
             // Add device settings toolbar icon and handle selection
             ToolbarItems.Add(new ToolbarItem("Device Settings", "ic_RemoteSettings.png", () =>
