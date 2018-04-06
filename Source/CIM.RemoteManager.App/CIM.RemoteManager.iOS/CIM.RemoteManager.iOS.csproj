@@ -392,22 +392,7 @@
     <BundleResource Include="Icon-Small-50%402x.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_bluetooth-connected.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_bluetooth-search.png" />
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="Resources\stop.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_connect-previous.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_stop-searching.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\bluetooth-info.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\temperatureSensor.png" />
@@ -455,9 +440,6 @@
     <BundleResource Include="Resources\remote512.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_remote-settings.png" />
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="Resources\bg_app.jpg" />
   </ItemGroup>
   <ItemGroup>
@@ -465,24 +447,6 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\bgapplication.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_sensor-statistics.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_sensor-plot.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_sensor-settings.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_sensor-limits.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_refresh-sensordata.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\02Sensor.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\defaultSensor.png" />
@@ -500,10 +464,46 @@
     <BundleResource Include="Resources\ic_debug.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_cimscan-devices.png" />
+    <BundleResource Include="Resources\ic_BluetoothConnected.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_other-devices.png" />
+    <BundleResource Include="Resources\ic_BluetoothSearch.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_CimscanDevices.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_ConnectPrevious.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_OtherDevices.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_RefreshSensorData.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_RemoteSettings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_SensorLimits.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_SensorPlot.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_SensorSettings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_SensorStatistics.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\ic_StopSearching.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\oxygenSensor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\bluetoothinfo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

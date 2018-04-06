@@ -62,7 +62,7 @@
 
     <pages:BaseTabbedPage.Children>
 
-        <pages:BasePage Title="CIMScan Devices" BackgroundColor="#FFFFFF" Icon="ic_cimscan-devices.png">
+        <pages:BasePage Title="CIMScan Devices" BackgroundColor="#FFFFFF" Icon="ic_cimscandevices.png">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -79,7 +79,7 @@
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <Image VerticalOptions="Center" HorizontalOptions="End" Source="bluetooth-info.png" />
+                        <Image VerticalOptions="Center" HorizontalOptions="End" Source="bluetoothinfo.png" />
                         <Label Grid.Column="1" VerticalOptions="Center" FontSize="18" Text="{Binding StateText}" TextColor="{StaticResource BTLEStatusTextColor}" />
                     </Grid>
                 </StackLayout>
@@ -111,7 +111,7 @@
                     <Button HorizontalOptions="FillAndExpand"
                             BackgroundColor="{StaticResource ButtonBackgroundColor}"
                             Command="{Binding ConnectToPreviousCommand}"
-                            Image="ic_connect-previous.png" IsVisible="True"
+                            Image="ic_connectprevious.png" IsVisible="True"
                             Text="{Binding PreviousName, StringFormat='Connect to {0}'}"
                             TextColor="{StaticResource ButtonTextColor}"
                             WidthRequest="325" />
@@ -122,15 +122,15 @@
                     <Button HorizontalOptions="CenterAndExpand"
                             BackgroundColor="{StaticResource ButtonBackgroundColor}"
                             Command="{Binding StopScanCommand}"
-                            Image="ic_stop-searching.png" Text="Stop Searching"
+                            Text="Stop Searching"
                             TextColor="{StaticResource ButtonTextColor}"
-                            WidthRequest="175" />
+                            WidthRequest="155" />
                 </StackLayout>
 
             </Grid>
         </pages:BasePage>
 
-        <pages:BasePage Title="Search for All Devices" BackgroundColor="#FFFFFF" Icon="ic_other-devices.png">
+        <pages:BasePage Title="Search for All Devices" BackgroundColor="#FFFFFF" Icon="ic_otherdevices.png">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -146,7 +146,7 @@
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <Image VerticalOptions="Center" HorizontalOptions="End" IsVisible="False" Source="bluetooth-info.png" />
+                        <Image VerticalOptions="Center" HorizontalOptions="End" IsVisible="False" Source="bluetoothinfo.png" />
                         <Label Grid.Column="1"
                                VerticalOptions="Center"
                                FontSize="18" IsVisible="False"
@@ -182,9 +182,9 @@
                     <Button HorizontalOptions="CenterAndExpand"
                             BackgroundColor="{StaticResource ButtonBackgroundColor}"
                             Command="{Binding StopScanCommand}"
-                            Image="ic_stop-searching.png" Text="Stop Searching"
+                            Text="Stop Searching"
                             TextColor="{StaticResource ButtonTextColor}"
-                            WidthRequest="175" />
+                            WidthRequest="155" />
                 </StackLayout>
 
             </Grid>

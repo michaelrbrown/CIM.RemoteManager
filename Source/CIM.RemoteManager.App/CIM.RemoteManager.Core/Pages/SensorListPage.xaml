@@ -13,7 +13,7 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Image VerticalOptions="Center" HorizontalOptions="End" Source="bluetooth-info.png" />
+            <Image VerticalOptions="Center" HorizontalOptions="End" Source="bluetoothinfo.png" />
             <Label Grid.Column="1" VerticalOptions="Center" FontSize="18" Text="{Binding StateText}" TextColor="{StaticResource BTLEStatusTextColor}" />
         </Grid>
     </StackLayout>
@@ -122,7 +122,7 @@
                              BackgroundColor="{StaticResource RemoteNameBackgroundColor}"
                              HeightRequest="60" Orientation="Horizontal" Spacing="0">
                     <!-- Sensor BTLE Characteristic Incoming Values -->
-                    <Label Margin="5"
+                    <Label Margin="5,5,5,10"
                            VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand"
                            FontSize="16" LineBreakMode="MiddleTruncation"
                            Text="{Binding CharacteristicValue, StringFormat=' Incoming Value: {0:N}'}"
