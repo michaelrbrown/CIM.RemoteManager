@@ -21,9 +21,8 @@
     <!-- Sensor ListView -->
     <syncfusion:SfListView x:Name="SensorLiistView"
                            Margin="0" Padding="0"
-                           AllowSwiping="False" HeaderSize="40"
-                           IsBusy="{Binding ProcessingSensorData}"
-                           IsStickyFooter="True" IsStickyGroupHeader="True" ItemDoubleTapped="SensorListView_OnItemDoubleTapped" ItemSize="116" ItemSpacing="0"
+                           AllowSwiping="False" HeaderSize="40" IsStickyFooter="True" IsStickyGroupHeader="True" ItemDoubleTapped="SensorListView_OnItemDoubleTapped"
+                           ItemSize="116" ItemSpacing="0"
                            ItemsSource="{Binding SensorCollection}"
                            SelectionBackgroundColor="Transparent">
 
