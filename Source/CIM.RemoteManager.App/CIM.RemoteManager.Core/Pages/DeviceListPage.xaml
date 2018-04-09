@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<pages:BaseTabbedPage x:Name="DevicePage" Title="Discover Devices"
-                      x:Class="CIM.RemoteManager.Core.Pages.DeviceListPage"
-                      xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                      xmlns:pages="clr-namespace:CIM.RemoteManager.Core.Pages;assembly=CIM.RemoteManager.Core">
+<pages:BaseTabbedPage
+    x:Class="CIM.RemoteManager.Core.Pages.DeviceListPage"
+    xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:pages="clr-namespace:CIM.RemoteManager.Core.Pages;assembly=CIM.RemoteManager.Core"
+    x:Name="DevicePage" Title="Discover Devices">
 
     <pages:BaseTabbedPage.Resources>
         <ResourceDictionary>
@@ -10,20 +11,28 @@
                 <ViewCell>
                     <!-- Disconnect Swipe Left Action -->
                     <ViewCell.ContextActions>
-                        <MenuItem Command="{Binding Path=BindingContext.DisconnectCommand, Source={x:Reference DevicePage}}" CommandParameter="{Binding .}" IsDestructive="True" Text="Disconnect" />
+                        <MenuItem
+                            Command="{Binding Path=BindingContext.DisconnectCommand, Source={x:Reference DevicePage}}"
+                            CommandParameter="{Binding .}"
+                            IsDestructive="True" Text="Disconnect" />
                     </ViewCell.ContextActions>
 
                     <Grid>
 
                         <!-- IsConnected Trigger (highlights background) -->
                         <Grid.Triggers>
-                            <DataTrigger Binding="{Binding IsConnected}" TargetType="Grid" Value="true">
+                            <DataTrigger
+                                Binding="{Binding IsConnected}"
+                                TargetType="Grid"
+                                Value="true">
                                 <Setter Property="BackgroundColor" Value="#B9DEF5" />
                             </DataTrigger>
                         </Grid.Triggers>
 
                         <!-- ListView Device Template Wrapper -->
-                        <StackLayout Margin="5" VerticalOptions="CenterAndExpand" BackgroundColor="Transparent" Orientation="Vertical">
+                        <StackLayout
+                            Margin="5"
+                            BackgroundColor="Transparent" Orientation="Vertical" VerticalOptions="CenterAndExpand">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="5" />
@@ -33,23 +42,33 @@
                                 </Grid.ColumnDefinitions>
 
                                 <!-- Blue Indicator of Active Connection -->
-                                <Frame Grid.Column="0"
-                                       VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
-                                       BackgroundColor="{StaticResource DeviceFrameTextColor}"
-                                       CornerRadius="0" HasShadow="False" WidthRequest="5" />
+                                <Frame
+                                    Grid.Column="0"
+                                    BackgroundColor="{StaticResource DeviceFrameTextColor}"
+                                    CornerRadius="0" HasShadow="False" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" WidthRequest="5" />
 
                                 <!-- Device Name and GUID -->
-                                <StackLayout Grid.Column="1" Margin="5,0,0,0" VerticalOptions="CenterAndExpand" Orientation="Vertical">
-                                    <Label FontSize="22" Text="{Binding Name}" TextColor="{StaticResource DeviceNameTextColor}" />
-                                    <Label FontSize="14" Text="{Binding Id, StringFormat='{0}'}" TextColor="{StaticResource DeviceIdTextColor}" />
+                                <StackLayout
+                                    Grid.Column="1"
+                                    Margin="5,0,0,0"
+                                    Orientation="Vertical" VerticalOptions="CenterAndExpand">
+                                    <Label
+                                        FontSize="22"
+                                        Text="{Binding Name}"
+                                        TextColor="{StaticResource DeviceNameTextColor}" />
+                                    <Label
+                                        FontSize="14"
+                                        Text="{Binding Id, StringFormat='{0}'}"
+                                        TextColor="{StaticResource DeviceIdTextColor}" />
                                 </StackLayout>
 
                                 <!-- RSSI Indicator -->
-                                <Image Grid.Column="2"
-                                       Margin="8,12,8,12"
-                                       VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"
-                                       HeightRequest="40"
-                                       Source="{Binding Rssi, Converter={StaticResource RssiConverter}}" />
+                                <Image
+                                    Grid.Column="2"
+                                    Margin="8,12,8,12"
+                                    HeightRequest="40" HorizontalOptions="CenterAndExpand"
+                                    Source="{Binding Rssi, Converter={StaticResource RssiConverter}}"
+                                    VerticalOptions="CenterAndExpand" />
                             </Grid>
                         </StackLayout>
 
@@ -62,7 +81,9 @@
 
     <pages:BaseTabbedPage.Children>
 
-        <pages:BasePage Title="CIMScan Devices" BackgroundColor="#FFFFFF" Icon="ic_CimscanDevices.png">
+        <pages:BasePage
+            Title="CIMScan Devices"
+            BackgroundColor="#FFFFFF" Icon="ic_CimscanDevices.png">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -73,64 +94,89 @@
                 </Grid.RowDefinitions>
 
                 <!-- BTLE Status -->
-                <StackLayout Grid.Row="0" Padding="10" HorizontalOptions="CenterAndExpand" BackgroundColor="{StaticResource BTLEStatusBackgroundColor}" IsVisible="{Binding IsStateOn, Converter={StaticResource BooleanToFalseConverter}}">
+                <StackLayout
+                    Grid.Row="0"
+                    Padding="10"
+                    BackgroundColor="{StaticResource BTLEStatusBackgroundColor}"
+                    HorizontalOptions="CenterAndExpand"
+                    IsVisible="{Binding IsStateOn, Converter={StaticResource BooleanToFalseConverter}}">
                     <Grid HorizontalOptions="Center">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <Image VerticalOptions="Center" HorizontalOptions="End" Source="bluetoothinfo.png" />
-                        <Label Grid.Column="1" VerticalOptions="Center" FontSize="18" Text="{Binding StateText}" TextColor="{StaticResource BTLEStatusTextColor}" />
+                        <Image
+                            HorizontalOptions="End" Source="bluetoothinfo.png" VerticalOptions="Center" />
+                        <Label
+                            Grid.Column="1"
+                            FontSize="18"
+                            Text="{Binding StateText}"
+                            TextColor="{StaticResource BTLEStatusTextColor}"
+                            VerticalOptions="Center" />
                     </Grid>
                 </StackLayout>
 
                 <!-- CIMScan Devices ListView -->
-                <ListView Grid.Row="1"
-                          Margin="10"
-                          VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
-                          BackgroundColor="Transparent" IsPullToRefreshEnabled="True"
-                          IsRefreshing="{Binding IsRefreshing, Mode=OneWay}"
-                          ItemTemplate="{StaticResource DeviceItemTemplate}"
-                          ItemsSource="{Binding SystemDevices}"
-                          RefreshCommand="{Binding RefreshCommand}"
-                          RowHeight="75"
-                          SelectedItem="{Binding SelectedDevice, Mode=TwoWay}"
-                          SeparatorColor="Transparent" />
+                <ListView
+                    Grid.Row="1"
+                    Margin="10"
+                    BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" IsPullToRefreshEnabled="True"
+                    IsRefreshing="{Binding IsRefreshing, Mode=OneWay}"
+                    ItemTemplate="{StaticResource DeviceItemTemplate}"
+                    ItemsSource="{Binding SystemDevices}"
+                    RefreshCommand="{Binding RefreshCommand}"
+                    RowHeight="75"
+                    SelectedItem="{Binding SelectedDevice, Mode=TwoWay}"
+                    SeparatorColor="Transparent" VerticalOptions="FillAndExpand" />
 
                 <!-- Android AutoConnect -->
-                <StackLayout Grid.Row="2" HorizontalOptions="Fill" Orientation="Horizontal">
+                <StackLayout
+                    Grid.Row="2"
+                    HorizontalOptions="Fill" Orientation="Horizontal">
                     <StackLayout.IsVisible>
-                        <OnPlatform x:TypeArguments="x:Boolean" Android="true" iOS="false" />
+                        <OnPlatform
+                            x:TypeArguments="x:Boolean" Android="true" iOS="false" />
                     </StackLayout.IsVisible>
-                    <Label VerticalOptions="Center" HorizontalOptions="StartAndExpand" Text="Use Android AutoConnect" />
+                    <Label
+                        HorizontalOptions="StartAndExpand" Text="Use Android AutoConnect" VerticalOptions="Center" />
                     <Switch HorizontalOptions="End" IsToggled="{Binding UseAutoConnect}" />
                 </StackLayout>
 
                 <!-- Connect to Previous Button -->
-                <StackLayout Grid.Row="3" Margin="0,0,0,10" HorizontalOptions="CenterAndExpand" IsVisible="False" Orientation="Horizontal">
-                    <Button HorizontalOptions="FillAndExpand"
-                            BackgroundColor="{StaticResource ButtonBackgroundColor}"
-                            Command="{Binding ConnectToPreviousCommand}"
-                            Image="ic_connectprevious.png" IsVisible="True"
-                            Text="{Binding PreviousName, StringFormat='Connect to {0}'}"
-                            TextColor="{StaticResource ButtonTextColor}"
-                            WidthRequest="325" />
+                <StackLayout
+                    Grid.Row="3"
+                    Margin="0,0,0,10"
+                    HorizontalOptions="CenterAndExpand" IsVisible="False" Orientation="Horizontal">
+                    <Button
+                        BackgroundColor="{StaticResource ButtonBackgroundColor}"
+                        Command="{Binding ConnectToPreviousCommand}"
+                        HorizontalOptions="FillAndExpand" Image="ic_connectprevious.png" IsVisible="True"
+                        Text="{Binding PreviousName, StringFormat='Connect to {0}'}"
+                        TextColor="{StaticResource ButtonTextColor}"
+                        WidthRequest="325" />
                 </StackLayout>
 
                 <!-- Stop Searching Button -->
-                <StackLayout Grid.Row="4" Margin="0,0,0,10" HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsRefreshing}" Orientation="Horizontal">
-                    <Button HorizontalOptions="CenterAndExpand"
-                            BackgroundColor="{StaticResource ButtonBackgroundColor}"
-                            Command="{Binding StopScanCommand}"
-                            Text="Stop Searching"
-                            TextColor="{StaticResource ButtonTextColor}"
-                            WidthRequest="155" />
+                <StackLayout
+                    Grid.Row="4"
+                    Margin="0,0,0,10"
+                    HorizontalOptions="CenterAndExpand"
+                    IsVisible="{Binding IsRefreshing}"
+                    Orientation="Horizontal">
+                    <Button
+                        BackgroundColor="{StaticResource ButtonBackgroundColor}"
+                        Command="{Binding StopScanCommand}"
+                        HorizontalOptions="CenterAndExpand" Text="Stop Searching"
+                        TextColor="{StaticResource ButtonTextColor}"
+                        WidthRequest="155" />
                 </StackLayout>
 
             </Grid>
         </pages:BasePage>
 
-        <pages:BasePage Title="Search for All Devices" BackgroundColor="#FFFFFF" Icon="ic_OtherDevices.png">
+        <pages:BasePage
+            Title="All Other Devices"
+            BackgroundColor="#FFFFFF" Icon="ic_OtherDevices.png">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -140,51 +186,66 @@
                 </Grid.RowDefinitions>
 
                 <!-- BTLE Status -->
-                <StackLayout Grid.Row="0" Padding="10" HorizontalOptions="CenterAndExpand" BackgroundColor="{StaticResource BTLEStatusBackgroundColor}" IsVisible="False">
+                <StackLayout
+                    Grid.Row="0"
+                    Padding="10"
+                    BackgroundColor="{StaticResource BTLEStatusBackgroundColor}"
+                    HorizontalOptions="CenterAndExpand" IsVisible="False">
                     <Grid HorizontalOptions="Center">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <Image VerticalOptions="Center" HorizontalOptions="End" IsVisible="False" Source="bluetoothinfo.png" />
-                        <Label Grid.Column="1"
-                               VerticalOptions="Center"
-                               FontSize="18" IsVisible="False"
-                               Text="{Binding StateText}"
-                               TextColor="{StaticResource BTLEStatusTextColor}" />
+                        <Image
+                            HorizontalOptions="End" IsVisible="False" Source="bluetoothinfo.png" VerticalOptions="Center" />
+                        <Label
+                            Grid.Column="1"
+                            FontSize="18" IsVisible="False"
+                            Text="{Binding StateText}"
+                            TextColor="{StaticResource BTLEStatusTextColor}"
+                            VerticalOptions="Center" />
                     </Grid>
                 </StackLayout>
 
                 <!-- All Devices ListView -->
-                <ListView Grid.Row="1"
-                          Margin="10"
-                          VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
-                          BackgroundColor="Transparent" IsPullToRefreshEnabled="True"
-                          IsRefreshing="{Binding IsRefreshing, Mode=OneWay}"
-                          ItemTemplate="{StaticResource DeviceItemTemplate}"
-                          ItemsSource="{Binding Devices}"
-                          RefreshCommand="{Binding RefreshCommand}"
-                          RowHeight="75"
-                          SelectedItem="{Binding SelectedDevice, Mode=TwoWay}"
-                          SeparatorColor="Transparent" />
+                <ListView
+                    Grid.Row="1"
+                    Margin="10"
+                    BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" IsPullToRefreshEnabled="True"
+                    IsRefreshing="{Binding IsRefreshing, Mode=OneWay}"
+                    ItemTemplate="{StaticResource DeviceItemTemplate}"
+                    ItemsSource="{Binding Devices}"
+                    RefreshCommand="{Binding RefreshCommand}"
+                    RowHeight="75"
+                    SelectedItem="{Binding SelectedDevice, Mode=TwoWay}"
+                    SeparatorColor="Transparent" VerticalOptions="FillAndExpand" />
 
                 <!-- Android AutoConnect -->
-                <StackLayout Grid.Row="2" HorizontalOptions="Fill" Orientation="Horizontal">
+                <StackLayout
+                    Grid.Row="2"
+                    HorizontalOptions="Fill" Orientation="Horizontal">
                     <StackLayout.IsVisible>
-                        <OnPlatform x:TypeArguments="x:Boolean" Android="true" iOS="false" />
+                        <OnPlatform
+                            x:TypeArguments="x:Boolean" Android="true" iOS="false" />
                     </StackLayout.IsVisible>
-                    <Label VerticalOptions="Center" HorizontalOptions="StartAndExpand" Text="Use Android AutoConnect" />
+                    <Label
+                        HorizontalOptions="StartAndExpand" Text="Use Android AutoConnect" VerticalOptions="Center" />
                     <Switch HorizontalOptions="End" IsToggled="{Binding UseAutoConnect}" />
                 </StackLayout>
 
                 <!-- Stop Searching Button -->
-                <StackLayout Grid.Row="3" Margin="0,0,0,10" HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsRefreshing}" Orientation="Horizontal">
-                    <Button HorizontalOptions="CenterAndExpand"
-                            BackgroundColor="{StaticResource ButtonBackgroundColor}"
-                            Command="{Binding StopScanCommand}"
-                            Text="Stop Searching"
-                            TextColor="{StaticResource ButtonTextColor}"
-                            WidthRequest="155" />
+                <StackLayout
+                    Grid.Row="3"
+                    Margin="0,0,0,10"
+                    HorizontalOptions="CenterAndExpand"
+                    IsVisible="{Binding IsRefreshing}"
+                    Orientation="Horizontal">
+                    <Button
+                        BackgroundColor="{StaticResource ButtonBackgroundColor}"
+                        Command="{Binding StopScanCommand}"
+                        HorizontalOptions="CenterAndExpand" Text="Stop Searching"
+                        TextColor="{StaticResource ButtonTextColor}"
+                        WidthRequest="155" />
                 </StackLayout>
 
             </Grid>
