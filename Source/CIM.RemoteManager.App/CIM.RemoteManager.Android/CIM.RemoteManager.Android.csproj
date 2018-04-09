@@ -30,7 +30,7 @@
     </NuGetPackageImportStamp>
     <AndroidTlsProvider>
     </AndroidTlsProvider>
-    <AndroidKeyStore>false</AndroidKeyStore>
+    <AndroidKeyStore>true</AndroidKeyStore>
     <AndroidSigningKeyStore>C:\Repos\GitHub\DCC\CIM.RemoteManager\Source\CIM.RemoteManager.App\CIM.RemoteManager.Android\dcc_keystore.keystore</AndroidSigningKeyStore>
     <AndroidSigningStorePass>mb1991</AndroidSigningStorePass>
     <AndroidSigningKeyAlias>dcc_keystore</AndroidSigningKeyAlias>
@@ -397,7 +397,7 @@
     <AndroidResource Include="Resources\drawable\da12.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\defaultSensor.png" />
+    <AndroidResource Include="Resources\drawable\defaultsensor.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\differentialpressuresensor.png" />

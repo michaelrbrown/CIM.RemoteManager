@@ -640,10 +640,11 @@ namespace CIM.RemoteManager.Core.ViewModels
                 return true;
 
             }
-            catch (Exception ex)
+            catch
             {
-                _userDialogs.Alert(ex.Message, "Connection error");
-                Mvx.Trace(ex.Message);
+                //_userDialogs.ErrorToast("Connection Error", $"Cannot connect to device, ensure it's not in use.", TimeSpan.FromSeconds(5));
+                _userDialogs.Alert($"Cannot connect to device, ensure it's not in use.", "Connection error");
+                //Mvx.Trace(ex.Message);
                 return false;
             }
             finally

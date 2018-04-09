@@ -76,7 +76,7 @@ namespace CIM.RemoteManager.Core.Models
                     return ImageSource.FromFile(_sensorType.GetSensorTypeResult().SensorImage);
                 }
                 // Default image if nothing found
-                return ImageSource.FromFile("defaultSensor.png");
+                return ImageSource.FromFile("defaultsensor.png");
             }
         }
 
@@ -95,7 +95,7 @@ namespace CIM.RemoteManager.Core.Models
                     // Get alarm status from alarm flag (int)
                     string alarmStatus = stationHelper.GetAlarmStatus(AlarmStatus);
                     // Return combined sensor index plus alarm status
-                    return $"Index: {_sensorIndex} Status: {alarmStatus}";
+                    return $"Index: {_sensorIndex} - {alarmStatus}";
                 }
                 // Default
                 return _name;
