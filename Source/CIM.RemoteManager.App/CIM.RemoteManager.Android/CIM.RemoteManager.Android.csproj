@@ -30,7 +30,7 @@
     </NuGetPackageImportStamp>
     <AndroidTlsProvider>
     </AndroidTlsProvider>
-    <AndroidKeyStore>true</AndroidKeyStore>
+    <AndroidKeyStore>false</AndroidKeyStore>
     <AndroidSigningKeyStore>C:\Users\micha\AppData\Local\Xamarin\Mono for Android\Keystore\DCC_Keystore\DCC_Keystore.keystore</AndroidSigningKeyStore>
     <AndroidSigningStorePass>mb1991</AndroidSigningStorePass>
     <AndroidSigningKeyAlias>dcc_keystore</AndroidSigningKeyAlias>

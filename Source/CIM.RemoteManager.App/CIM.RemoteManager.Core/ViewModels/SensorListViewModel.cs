@@ -413,7 +413,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                         TotalRecordsInHistoryBuffer = sensorValues.Substring(15, 2).SafeHexToInt();
                         CurrentDateTime = sensorValues.Substring(19, 8).SafeHexToInt();
 
-                        // Be certain we have a parsable integer
+                        // Be certain we have an integer that can be parsed
                         if (int.TryParse(CurrentDateTime.ToString(), out int currentDateTimeResult))
                         {
                             // New instance of station helper
