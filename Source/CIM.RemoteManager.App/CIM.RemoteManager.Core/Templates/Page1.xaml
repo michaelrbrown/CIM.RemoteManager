@@ -8,8 +8,8 @@
 
 
 
-        <StackLayout Margin="0,40,0,0" HorizontalOptions="FillAndExpand" BackgroundColor="#EEEEEE" Orientation="Vertical">
-            <StackLayout HorizontalOptions="FillAndExpand" BackgroundColor="#EEEEEE" Orientation="Horizontal">
+        <StackLayout Margin="0,40,0,0" BackgroundColor="#EEEEEE" HorizontalOptions="FillAndExpand" Orientation="Vertical">
+            <StackLayout BackgroundColor="#EEEEEE" HorizontalOptions="FillAndExpand" Orientation="Horizontal">
                 <Label Text="Upper: " TextColor="#444444" />
                 <Entry BackgroundColor="White" Text="asdfasdasdfasfasasdff" />
             </StackLayout>

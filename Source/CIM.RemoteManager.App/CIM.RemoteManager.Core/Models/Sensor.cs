@@ -10,10 +10,6 @@ namespace CIM.RemoteManager.Core.Models
     public class Sensor : BindableBase
     {
         private int _sensorIndex;
-        /// <summary>
-        /// Gets or sets the index of the sensor.
-        /// </summary>
-        /// <value>The index of the sensor.</value>
         public int SensorIndex
         {
             get => _sensorIndex;
@@ -21,10 +17,6 @@ namespace CIM.RemoteManager.Core.Models
         }
 
         private string _serialNumber;
-        /// <summary>
-        /// Gets or sets the serial number.
-        /// </summary>
-        /// <value>The serial number.</value>
         public string SerialNumber
         {
             get => _serialNumber;
@@ -111,10 +103,6 @@ namespace CIM.RemoteManager.Core.Models
         }
 
         private string _name = "N/A";
-        /// <summary>
-        /// Gets or sets the name.
-        /// </summary>
-        /// <value>The name.</value>
         public string Name
         {
             get
@@ -178,10 +166,6 @@ namespace CIM.RemoteManager.Core.Models
         }
 
         private double _scale;
-        /// <summary>
-        /// Gets or sets the scale.
-        /// </summary>
-        /// <value>The scale.</value>
         public double Scale
         {
             get
@@ -197,10 +181,6 @@ namespace CIM.RemoteManager.Core.Models
         }
 
         private double _offset;
-        /// <summary>
-        /// Gets or sets the offset.
-        /// </summary>
-        /// <value>The offset.</value>
         public double Offset
         {
             get
@@ -216,10 +196,6 @@ namespace CIM.RemoteManager.Core.Models
         }
 
         private int _timeStamp;
-        /// <summary>
-        /// Gets or sets the time stamp.
-        /// </summary>
-        /// <value>The time stamp.</value>
         public int TimeStamp
         {
             get => _timeStamp;
@@ -269,10 +245,6 @@ namespace CIM.RemoteManager.Core.Models
         }
 
         private double _currentValue;
-        /// <summary>
-        /// Gets or sets the current value.
-        /// </summary>
-        /// <value>The current value.</value>
         public double CurrentValue
         {
             get => _currentValue;
@@ -280,10 +252,6 @@ namespace CIM.RemoteManager.Core.Models
         }
 
         private int _displayConversionCode;
-        /// <summary>
-        /// Gets or sets the display conversion code.
-        /// </summary>
-        /// <value>The display conversion code.</value>
         public int DisplayConversionCode
         {
             get => _displayConversionCode;
@@ -291,10 +259,6 @@ namespace CIM.RemoteManager.Core.Models
         }
 
         private int _decimalLocation;
-        /// <summary>
-        /// Gets or sets the decimal location.
-        /// </summary>
-        /// <value>The decimal location.</value>
         public int DecimalLocation
         {
             get => _decimalLocation;
@@ -302,10 +266,6 @@ namespace CIM.RemoteManager.Core.Models
         }
 
         private string _statisticsTotalCalcSettings;
-        /// <summary>
-        /// Gets or sets the statistics total calculate settings.
-        /// </summary>
-        /// <value>The statistics total calculate settings.</value>
         public string StatisticsTotalCalcSettings
         {
             get => _statisticsTotalCalcSettings;
@@ -313,10 +273,6 @@ namespace CIM.RemoteManager.Core.Models
         }
 
         private int _alarmStatus;
-        /// <summary>
-        /// Gets or sets the alarm status.
-        /// </summary>
-        /// <value>The alarm status.</value>
         public int AlarmStatus
         {
             get => _alarmStatus;

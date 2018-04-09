@@ -2,9 +2,6 @@
 
 namespace CIM.RemoteManager.Core.Extensions
 {
-    /// <summary>
-    /// Class GuidExtension.
-    /// </summary>
     public static class GuidExtension
     {
         /// <summary>
@@ -25,7 +22,7 @@ namespace CIM.RemoteManager.Core.Extensions
         }
 
         /// <summary>
-        /// Extract the Bluetooth "Assigned Number" from a Uuid
+        /// Extract the Bluetooth "Assigned Number" from a Uuid 
         /// </summary>
         /// <returns>4 digit hex value, eg 0x2A37 (which is heart rate measurement)</returns>
         /// <param name="uuid">a Guid of the form {00002A37-0000-1000-8000-00805f9b34fb}</param>
@@ -40,11 +37,6 @@ namespace CIM.RemoteManager.Core.Extensions
             return "0x" + id;
         }
 
-        /// <summary>
-        /// To the hexadecimal string.
-        /// </summary>
-        /// <param name="bytes">The bytes.</param>
-        /// <returns>System.String.</returns>
         public static string ToHexString(this byte[] bytes)
         {
             return bytes != null ? BitConverter.ToString(bytes) : string.Empty;

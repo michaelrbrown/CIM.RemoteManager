@@ -18,7 +18,7 @@ namespace CIM.RemoteManager.Core.Pages
             BindingContext = this;
 
             // Add device settings toolbar icon and handle selection
-            ToolbarItems.Add(new ToolbarItem("Device Settings", "ic_remote-settings.png", () =>
+            ToolbarItems.Add(new ToolbarItem("Device Settings", "ic_remotesettings.png", () =>
             {
             }, ToolbarItemOrder.Primary, 0));
         }
@@ -41,19 +41,6 @@ namespace CIM.RemoteManager.Core.Pages
                 sensorListViewModel.StopUpdatesCommand.Execute();
                 sensorListViewModel.StartUpdatesCommand.Execute();
             }
-        }
-
-        /// <summary>
-        /// Handle toggling of sensor updates
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void SensorUpdatesSwitchToggled(object sender, ToggledEventArgs e)
-        {
-            // Get instance of SensorListViewModel
-            var sensorListViewModel = (SensorListViewModel)this.BindingContext;
-            // Toggle sensor updates
-            sensorListViewModel.ToggleUpdatesCommand.Execute(null);
         }
 
         /// <summary>

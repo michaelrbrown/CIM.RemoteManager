@@ -5,10 +5,11 @@ using Android.Views;
 using Android.Widget;
 using MvvmCross.Binding.BindingContext;
 
+//Default
 namespace CIM.RemoteManager.Android
 {
     // This class is never actually executed, but when Xamarin linking is enabled it does how to ensure types and properties
-    // are preserved in the deployed app.
+    // are preserved in the deployed app
     public class LinkerPleaseInclude
     {
         public void Include(Button button)
@@ -20,6 +21,7 @@ namespace CIM.RemoteManager.Android
         {
             checkBox.CheckedChange += (sender, args) => checkBox.Checked = !checkBox.Checked;
         }
+        
         public void Include(Switch @switch)
         {
             @switch.CheckedChange += (sender, args) => @switch.Checked = !@switch.Checked;
@@ -35,7 +37,7 @@ namespace CIM.RemoteManager.Android
             text.TextChanged += (sender, args) => text.Text = "" + text.Text;
             text.Hint = "" + text.Hint;
         }
-
+        
         public void Include(CheckedTextView text)
         {
             text.TextChanged += (sender, args) => text.Text = "" + text.Text;
@@ -66,11 +68,11 @@ namespace CIM.RemoteManager.Android
         {
             command.CanExecuteChanged += (s, e) => { if (command.CanExecute(null)) command.Execute(null); };
         }
-
+        
         public void Include(MvvmCross.Platform.IoC.MvxPropertyInjector injector)
         {
             injector = new MvvmCross.Platform.IoC.MvxPropertyInjector ();
-        }
+        } 
 
         public void Include(System.ComponentModel.INotifyPropertyChanged changed)
         {
@@ -78,7 +80,7 @@ namespace CIM.RemoteManager.Android
                 var test = e.PropertyName;
             };
         }
-
+        
         public void Include(MvxTaskBasedBindingContext context)
         {
             context.Dispose();

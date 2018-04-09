@@ -5,9 +5,6 @@ using Plugin.BLE.Abstractions.Contracts;
 
 namespace CIM.RemoteManager.Core.Helpers
 {
-    /// <summary>
-    /// Class StationHelper.
-    /// </summary>
     public class StationHelper
     {
         /// <summary>

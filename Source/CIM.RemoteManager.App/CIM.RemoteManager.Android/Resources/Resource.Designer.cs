@@ -2423,6 +2423,46 @@ namespace CIM.RemoteManager.Android
 			global::Syncfusion.SfChart.XForms.Droid.Resource.Styleable.CardView_contentPaddingLeft = global::CIM.RemoteManager.Android.Resource.Styleable.CardView_contentPaddingLeft;
 			global::Syncfusion.SfChart.XForms.Droid.Resource.Styleable.CardView_contentPaddingRight = global::CIM.RemoteManager.Android.Resource.Styleable.CardView_contentPaddingRight;
 			global::Syncfusion.SfChart.XForms.Droid.Resource.Styleable.CardView_contentPaddingTop = global::CIM.RemoteManager.Android.Resource.Styleable.CardView_contentPaddingTop;
+			global::Syncfusion.XForms.Android.PopupLayout.Resource.Attribute.cardBackgroundColor = global::CIM.RemoteManager.Android.Resource.Attribute.cardBackgroundColor;
+			global::Syncfusion.XForms.Android.PopupLayout.Resource.Attribute.cardCornerRadius = global::CIM.RemoteManager.Android.Resource.Attribute.cardCornerRadius;
+			global::Syncfusion.XForms.Android.PopupLayout.Resource.Attribute.cardElevation = global::CIM.RemoteManager.Android.Resource.Attribute.cardElevation;
+			global::Syncfusion.XForms.Android.PopupLayout.Resource.Attribute.cardMaxElevation = global::CIM.RemoteManager.Android.Resource.Attribute.cardMaxElevation;
+			global::Syncfusion.XForms.Android.PopupLayout.Resource.Attribute.cardPreventCornerOverlap = global::CIM.RemoteManager.Android.Resource.Attribute.cardPreventCornerOverlap;
+			global::Syncfusion.XForms.Android.PopupLayout.Resource.Attribute.cardUseCompatPadding = global::CIM.RemoteManager.Android.Resource.Attribute.cardUseCompatPadding;
+			global::Syncfusion.XForms.Android.PopupLayout.Resource.Attribute.contentPadding = global::CIM.RemoteManager.Android.Resource.Attribute.contentPadding;
+			global::Syncfusion.XForms.Android.PopupLayout.Resource.Attribute.contentPaddingBottom = global::CIM.RemoteManager.Android.Resource.Attribute.contentPaddingBottom;
+			global::Syncfusion.XForms.Android.PopupLayout.Resource.Attribute.contentPaddingLeft = global::CIM.RemoteManager.Android.Resource.Attribute.contentPaddingLeft;
+			global::Syncfusion.XForms.Android.PopupLayout.Resource.Attribute.contentPaddingRight = global::CIM.RemoteManager.Android.Resource.Attribute.contentPaddingRight;
+			global::Syncfusion.XForms.Android.PopupLayout.Resource.Attribute.contentPaddingTop = global::CIM.RemoteManager.Android.Resource.Attribute.contentPaddingTop;
+			global::Syncfusion.XForms.Android.PopupLayout.Resource.Color.cardview_dark_background = global::CIM.RemoteManager.Android.Resource.Color.cardview_dark_background;
+			global::Syncfusion.XForms.Android.PopupLayout.Resource.Color.cardview_light_background = global::CIM.RemoteManager.Android.Resource.Color.cardview_light_background;
+			global::Syncfusion.XForms.Android.PopupLayout.Resource.Color.cardview_shadow_end_color = global::CIM.RemoteManager.Android.Resource.Color.cardview_shadow_end_color;
+			global::Syncfusion.XForms.Android.PopupLayout.Resource.Color.cardview_shadow_start_color = global::CIM.RemoteManager.Android.Resource.Color.cardview_shadow_start_color;
+			global::Syncfusion.XForms.Android.PopupLayout.Resource.Dimension.cardview_compat_inset_shadow = global::CIM.RemoteManager.Android.Resource.Dimension.cardview_compat_inset_shadow;
+			global::Syncfusion.XForms.Android.PopupLayout.Resource.Dimension.cardview_default_elevation = global::CIM.RemoteManager.Android.Resource.Dimension.cardview_default_elevation;
+			global::Syncfusion.XForms.Android.PopupLayout.Resource.Dimension.cardview_default_radius = global::CIM.RemoteManager.Android.Resource.Dimension.cardview_default_radius;
+			global::Syncfusion.XForms.Android.PopupLayout.Resource.Drawable.popup_forms_android_close_icon = global::CIM.RemoteManager.Android.Resource.Drawable.popup_forms_android_close_icon;
+			global::Syncfusion.XForms.Android.PopupLayout.Resource.Drawable.popup_forms_android_shadow = global::CIM.RemoteManager.Android.Resource.Drawable.popup_forms_android_shadow;
+			global::Syncfusion.XForms.Android.PopupLayout.Resource.Id.BorderView = global::CIM.RemoteManager.Android.Resource.Id.BorderView;
+			global::Syncfusion.XForms.Android.PopupLayout.Resource.String.library_name = global::CIM.RemoteManager.Android.Resource.String.library_name;
+			global::Syncfusion.XForms.Android.PopupLayout.Resource.Style.Base_CardView = global::CIM.RemoteManager.Android.Resource.Style.Base_CardView;
+			global::Syncfusion.XForms.Android.PopupLayout.Resource.Style.CardView = global::CIM.RemoteManager.Android.Resource.Style.CardView;
+			global::Syncfusion.XForms.Android.PopupLayout.Resource.Style.CardView_Dark = global::CIM.RemoteManager.Android.Resource.Style.CardView_Dark;
+			global::Syncfusion.XForms.Android.PopupLayout.Resource.Style.CardView_Light = global::CIM.RemoteManager.Android.Resource.Style.CardView_Light;
+			global::Syncfusion.XForms.Android.PopupLayout.Resource.Styleable.CardView = global::CIM.RemoteManager.Android.Resource.Styleable.CardView;
+			global::Syncfusion.XForms.Android.PopupLayout.Resource.Styleable.CardView_android_minHeight = global::CIM.RemoteManager.Android.Resource.Styleable.CardView_android_minHeight;
+			global::Syncfusion.XForms.Android.PopupLayout.Resource.Styleable.CardView_android_minWidth = global::CIM.RemoteManager.Android.Resource.Styleable.CardView_android_minWidth;
+			global::Syncfusion.XForms.Android.PopupLayout.Resource.Styleable.CardView_cardBackgroundColor = global::CIM.RemoteManager.Android.Resource.Styleable.CardView_cardBackgroundColor;
+			global::Syncfusion.XForms.Android.PopupLayout.Resource.Styleable.CardView_cardCornerRadius = global::CIM.RemoteManager.Android.Resource.Styleable.CardView_cardCornerRadius;
+			global::Syncfusion.XForms.Android.PopupLayout.Resource.Styleable.CardView_cardElevation = global::CIM.RemoteManager.Android.Resource.Styleable.CardView_cardElevation;
+			global::Syncfusion.XForms.Android.PopupLayout.Resource.Styleable.CardView_cardMaxElevation = global::CIM.RemoteManager.Android.Resource.Styleable.CardView_cardMaxElevation;
+			global::Syncfusion.XForms.Android.PopupLayout.Resource.Styleable.CardView_cardPreventCornerOverlap = global::CIM.RemoteManager.Android.Resource.Styleable.CardView_cardPreventCornerOverlap;
+			global::Syncfusion.XForms.Android.PopupLayout.Resource.Styleable.CardView_cardUseCompatPadding = global::CIM.RemoteManager.Android.Resource.Styleable.CardView_cardUseCompatPadding;
+			global::Syncfusion.XForms.Android.PopupLayout.Resource.Styleable.CardView_contentPadding = global::CIM.RemoteManager.Android.Resource.Styleable.CardView_contentPadding;
+			global::Syncfusion.XForms.Android.PopupLayout.Resource.Styleable.CardView_contentPaddingBottom = global::CIM.RemoteManager.Android.Resource.Styleable.CardView_contentPaddingBottom;
+			global::Syncfusion.XForms.Android.PopupLayout.Resource.Styleable.CardView_contentPaddingLeft = global::CIM.RemoteManager.Android.Resource.Styleable.CardView_contentPaddingLeft;
+			global::Syncfusion.XForms.Android.PopupLayout.Resource.Styleable.CardView_contentPaddingRight = global::CIM.RemoteManager.Android.Resource.Styleable.CardView_contentPaddingRight;
+			global::Syncfusion.XForms.Android.PopupLayout.Resource.Styleable.CardView_contentPaddingTop = global::CIM.RemoteManager.Android.Resource.Styleable.CardView_contentPaddingTop;
 			global::Xamarin.Forms.Platform.Android.Resource.Attribute.actionBarSize = global::CIM.RemoteManager.Android.Resource.Attribute.actionBarSize;
 		}
 		
@@ -4707,43 +4747,43 @@ namespace CIM.RemoteManager.Android
 			public const int abc_vector_test = 2130837586;
 			
 			// aapt resource value: 0x7f020053
-			public const int airflowSensor = 2130837587;
+			public const int airflowsensor = 2130837587;
 			
 			// aapt resource value: 0x7f020054
 			public const int avd_hide_password = 2130837588;
 			
-			// aapt resource value: 0x7f020137
-			public const int avd_hide_password_1 = 2130837815;
+			// aapt resource value: 0x7f02013a
+			public const int avd_hide_password_1 = 2130837818;
 			
-			// aapt resource value: 0x7f020138
-			public const int avd_hide_password_2 = 2130837816;
+			// aapt resource value: 0x7f02013b
+			public const int avd_hide_password_2 = 2130837819;
 			
-			// aapt resource value: 0x7f020139
-			public const int avd_hide_password_3 = 2130837817;
+			// aapt resource value: 0x7f02013c
+			public const int avd_hide_password_3 = 2130837820;
 			
 			// aapt resource value: 0x7f020055
 			public const int avd_show_password = 2130837589;
 			
-			// aapt resource value: 0x7f02013a
-			public const int avd_show_password_1 = 2130837818;
+			// aapt resource value: 0x7f02013d
+			public const int avd_show_password_1 = 2130837821;
 			
-			// aapt resource value: 0x7f02013b
-			public const int avd_show_password_2 = 2130837819;
+			// aapt resource value: 0x7f02013e
+			public const int avd_show_password_2 = 2130837822;
 			
-			// aapt resource value: 0x7f02013c
-			public const int avd_show_password_3 = 2130837820;
+			// aapt resource value: 0x7f02013f
+			public const int avd_show_password_3 = 2130837823;
 			
 			// aapt resource value: 0x7f020056
-			public const int baromicPressureSensor = 2130837590;
+			public const int baromicpressuresensor = 2130837590;
 			
 			// aapt resource value: 0x7f020057
 			public const int bluetoothinfo = 2130837591;
 			
 			// aapt resource value: 0x7f020058
-			public const int c02Sensor = 2130837592;
+			public const int c02sensor = 2130837592;
 			
 			// aapt resource value: 0x7f020059
-			public const int DA12 = 2130837593;
+			public const int da12 = 2130837593;
 			
 			// aapt resource value: 0x7f02005a
 			public const int defaultSensor = 2130837594;
@@ -4767,16 +4807,16 @@ namespace CIM.RemoteManager.Android
 			public const int design_snackbar_background = 2130837600;
 			
 			// aapt resource value: 0x7f020061
-			public const int differentialPressureSensor = 2130837601;
+			public const int differentialpressuresensor = 2130837601;
 			
 			// aapt resource value: 0x7f020062
-			public const int fridgeTemperatureSensor = 2130837602;
+			public const int fridgetemperaturesensor = 2130837602;
 			
 			// aapt resource value: 0x7f020063
 			public const int hockeyapp_btn_background = 2130837603;
 			
 			// aapt resource value: 0x7f020064
-			public const int humiditySensor = 2130837604;
+			public const int humiditysensor = 2130837604;
 			
 			// aapt resource value: 0x7f020065
 			public const int ic_audiotrack_dark = 2130837605;
@@ -4785,16 +4825,16 @@ namespace CIM.RemoteManager.Android
 			public const int ic_audiotrack_light = 2130837606;
 			
 			// aapt resource value: 0x7f020067
-			public const int ic_BluetoothConnected = 2130837607;
+			public const int ic_bluetoothconnected = 2130837607;
 			
 			// aapt resource value: 0x7f020068
-			public const int ic_BluetoothSearch = 2130837608;
+			public const int ic_bluetoothsearch = 2130837608;
 			
 			// aapt resource value: 0x7f020069
-			public const int ic_CimscanDevices = 2130837609;
+			public const int ic_cimscandevices = 2130837609;
 			
 			// aapt resource value: 0x7f02006a
-			public const int ic_ConnectPrevious = 2130837610;
+			public const int ic_connectprevious = 2130837610;
 			
 			// aapt resource value: 0x7f02006b
 			public const int ic_debug = 2130837611;
@@ -5214,199 +5254,208 @@ namespace CIM.RemoteManager.Android
 			public const int ic_mr_button_grey = 2130837749;
 			
 			// aapt resource value: 0x7f0200f6
-			public const int ic_OtherDevices = 2130837750;
+			public const int ic_otherdevices = 2130837750;
 			
 			// aapt resource value: 0x7f0200f7
-			public const int ic_RefreshSensorData = 2130837751;
+			public const int ic_refreshsensordata = 2130837751;
 			
 			// aapt resource value: 0x7f0200f8
-			public const int ic_RemoteSettings = 2130837752;
+			public const int ic_remotesettings = 2130837752;
 			
 			// aapt resource value: 0x7f0200f9
 			public const int ic_save = 2130837753;
 			
 			// aapt resource value: 0x7f0200fa
-			public const int ic_SensorLimits = 2130837754;
+			public const int ic_sensorlimits = 2130837754;
 			
 			// aapt resource value: 0x7f0200fb
-			public const int ic_SensorPlot = 2130837755;
+			public const int ic_sensorplot = 2130837755;
 			
 			// aapt resource value: 0x7f0200fc
-			public const int ic_SensorSettings = 2130837756;
+			public const int ic_sensorsettings = 2130837756;
 			
 			// aapt resource value: 0x7f0200fd
-			public const int ic_StopSearching = 2130837757;
+			public const int ic_sensorstatistics = 2130837757;
 			
 			// aapt resource value: 0x7f0200fe
-			public const int ic_successstatus = 2130837758;
+			public const int ic_stopsearching = 2130837758;
 			
 			// aapt resource value: 0x7f0200ff
-			public const int ic_vol_type_speaker_dark = 2130837759;
+			public const int ic_successstatus = 2130837759;
 			
 			// aapt resource value: 0x7f020100
-			public const int ic_vol_type_speaker_group_dark = 2130837760;
+			public const int ic_vol_type_speaker_dark = 2130837760;
 			
 			// aapt resource value: 0x7f020101
-			public const int ic_vol_type_speaker_group_light = 2130837761;
+			public const int ic_vol_type_speaker_group_dark = 2130837761;
 			
 			// aapt resource value: 0x7f020102
-			public const int ic_vol_type_speaker_light = 2130837762;
+			public const int ic_vol_type_speaker_group_light = 2130837762;
 			
 			// aapt resource value: 0x7f020103
-			public const int ic_vol_type_tv_dark = 2130837763;
+			public const int ic_vol_type_speaker_light = 2130837763;
 			
 			// aapt resource value: 0x7f020104
-			public const int ic_vol_type_tv_light = 2130837764;
+			public const int ic_vol_type_tv_dark = 2130837764;
 			
 			// aapt resource value: 0x7f020105
-			public const int icon = 2130837765;
+			public const int ic_vol_type_tv_light = 2130837765;
 			
 			// aapt resource value: 0x7f020106
-			public const int mr_button_connected_dark = 2130837766;
+			public const int icon = 2130837766;
 			
 			// aapt resource value: 0x7f020107
-			public const int mr_button_connected_light = 2130837767;
+			public const int mr_button_connected_dark = 2130837767;
 			
 			// aapt resource value: 0x7f020108
-			public const int mr_button_connecting_dark = 2130837768;
+			public const int mr_button_connected_light = 2130837768;
 			
 			// aapt resource value: 0x7f020109
-			public const int mr_button_connecting_light = 2130837769;
+			public const int mr_button_connecting_dark = 2130837769;
 			
 			// aapt resource value: 0x7f02010a
-			public const int mr_button_dark = 2130837770;
+			public const int mr_button_connecting_light = 2130837770;
 			
 			// aapt resource value: 0x7f02010b
-			public const int mr_button_light = 2130837771;
+			public const int mr_button_dark = 2130837771;
 			
 			// aapt resource value: 0x7f02010c
-			public const int mr_dialog_close_dark = 2130837772;
+			public const int mr_button_light = 2130837772;
 			
 			// aapt resource value: 0x7f02010d
-			public const int mr_dialog_close_light = 2130837773;
+			public const int mr_dialog_close_dark = 2130837773;
 			
 			// aapt resource value: 0x7f02010e
-			public const int mr_dialog_material_background_dark = 2130837774;
+			public const int mr_dialog_close_light = 2130837774;
 			
 			// aapt resource value: 0x7f02010f
-			public const int mr_dialog_material_background_light = 2130837775;
+			public const int mr_dialog_material_background_dark = 2130837775;
 			
 			// aapt resource value: 0x7f020110
-			public const int mr_group_collapse = 2130837776;
+			public const int mr_dialog_material_background_light = 2130837776;
 			
 			// aapt resource value: 0x7f020111
-			public const int mr_group_expand = 2130837777;
+			public const int mr_group_collapse = 2130837777;
 			
 			// aapt resource value: 0x7f020112
-			public const int mr_media_pause_dark = 2130837778;
+			public const int mr_group_expand = 2130837778;
 			
 			// aapt resource value: 0x7f020113
-			public const int mr_media_pause_light = 2130837779;
+			public const int mr_media_pause_dark = 2130837779;
 			
 			// aapt resource value: 0x7f020114
-			public const int mr_media_play_dark = 2130837780;
+			public const int mr_media_pause_light = 2130837780;
 			
 			// aapt resource value: 0x7f020115
-			public const int mr_media_play_light = 2130837781;
+			public const int mr_media_play_dark = 2130837781;
 			
 			// aapt resource value: 0x7f020116
-			public const int mr_media_stop_dark = 2130837782;
+			public const int mr_media_play_light = 2130837782;
 			
 			// aapt resource value: 0x7f020117
-			public const int mr_media_stop_light = 2130837783;
+			public const int mr_media_stop_dark = 2130837783;
 			
 			// aapt resource value: 0x7f020118
-			public const int mr_vol_type_audiotrack_dark = 2130837784;
+			public const int mr_media_stop_light = 2130837784;
 			
 			// aapt resource value: 0x7f020119
-			public const int mr_vol_type_audiotrack_light = 2130837785;
+			public const int mr_vol_type_audiotrack_dark = 2130837785;
 			
 			// aapt resource value: 0x7f02011a
-			public const int navigation_empty_icon = 2130837786;
+			public const int mr_vol_type_audiotrack_light = 2130837786;
 			
 			// aapt resource value: 0x7f02011b
-			public const int notification_action_background = 2130837787;
+			public const int navigation_empty_icon = 2130837787;
 			
 			// aapt resource value: 0x7f02011c
-			public const int notification_bg = 2130837788;
+			public const int notification_action_background = 2130837788;
 			
 			// aapt resource value: 0x7f02011d
-			public const int notification_bg_low = 2130837789;
+			public const int notification_bg = 2130837789;
 			
 			// aapt resource value: 0x7f02011e
-			public const int notification_bg_low_normal = 2130837790;
+			public const int notification_bg_low = 2130837790;
 			
 			// aapt resource value: 0x7f02011f
-			public const int notification_bg_low_pressed = 2130837791;
+			public const int notification_bg_low_normal = 2130837791;
 			
 			// aapt resource value: 0x7f020120
-			public const int notification_bg_normal = 2130837792;
+			public const int notification_bg_low_pressed = 2130837792;
 			
 			// aapt resource value: 0x7f020121
-			public const int notification_bg_normal_pressed = 2130837793;
+			public const int notification_bg_normal = 2130837793;
 			
 			// aapt resource value: 0x7f020122
-			public const int notification_icon_background = 2130837794;
-			
-			// aapt resource value: 0x7f020135
-			public const int notification_template_icon_bg = 2130837813;
-			
-			// aapt resource value: 0x7f020136
-			public const int notification_template_icon_low_bg = 2130837814;
+			public const int notification_bg_normal_pressed = 2130837794;
 			
 			// aapt resource value: 0x7f020123
-			public const int notification_tile_bg = 2130837795;
+			public const int notification_icon_background = 2130837795;
+			
+			// aapt resource value: 0x7f020138
+			public const int notification_template_icon_bg = 2130837816;
+			
+			// aapt resource value: 0x7f020139
+			public const int notification_template_icon_low_bg = 2130837817;
 			
 			// aapt resource value: 0x7f020124
-			public const int notify_panel_notification_icon_bg = 2130837796;
+			public const int notification_tile_bg = 2130837796;
 			
 			// aapt resource value: 0x7f020125
-			public const int ovenTempSensor = 2130837797;
+			public const int notify_panel_notification_icon_bg = 2130837797;
 			
 			// aapt resource value: 0x7f020126
-			public const int oxygenSensor = 2130837798;
+			public const int oventempsensor = 2130837798;
 			
 			// aapt resource value: 0x7f020127
-			public const int particleCountSensor = 2130837799;
+			public const int oxygensensor = 2130837799;
 			
 			// aapt resource value: 0x7f020128
-			public const int remote512 = 2130837800;
+			public const int particlecountsensor = 2130837800;
 			
 			// aapt resource value: 0x7f020129
-			public const int roundedbg = 2130837801;
+			public const int popup_forms_android_close_icon = 2130837801;
 			
 			// aapt resource value: 0x7f02012a
-			public const int roundedbgdark = 2130837802;
+			public const int popup_forms_android_shadow = 2130837802;
 			
 			// aapt resource value: 0x7f02012b
-			public const int rssi_1 = 2130837803;
+			public const int remote512 = 2130837803;
 			
 			// aapt resource value: 0x7f02012c
-			public const int rssi_2 = 2130837804;
+			public const int roundedbg = 2130837804;
 			
 			// aapt resource value: 0x7f02012d
-			public const int rssi_3 = 2130837805;
+			public const int roundedbgdark = 2130837805;
 			
 			// aapt resource value: 0x7f02012e
-			public const int rssi_4 = 2130837806;
+			public const int rssi_1 = 2130837806;
 			
 			// aapt resource value: 0x7f02012f
-			public const int rssi_5 = 2130837807;
+			public const int rssi_2 = 2130837807;
 			
 			// aapt resource value: 0x7f020130
-			public const int segmented_control_background = 2130837808;
+			public const int rssi_3 = 2130837808;
 			
 			// aapt resource value: 0x7f020131
-			public const int segmented_control_first_background = 2130837809;
+			public const int rssi_4 = 2130837809;
 			
 			// aapt resource value: 0x7f020132
-			public const int segmented_control_last_background = 2130837810;
+			public const int rssi_5 = 2130837810;
 			
 			// aapt resource value: 0x7f020133
-			public const int stop = 2130837811;
+			public const int segmented_control_background = 2130837811;
 			
 			// aapt resource value: 0x7f020134
-			public const int temperatureSensor = 2130837812;
+			public const int segmented_control_first_background = 2130837812;
+			
+			// aapt resource value: 0x7f020135
+			public const int segmented_control_last_background = 2130837813;
+			
+			// aapt resource value: 0x7f020136
+			public const int stop = 2130837814;
+			
+			// aapt resource value: 0x7f020137
+			public const int temperaturesensor = 2130837815;
 			
 			static Drawable()
 			{
@@ -5420,6 +5469,9 @@ namespace CIM.RemoteManager.Android
 		
 		public partial class Id
 		{
+			
+			// aapt resource value: 0x7f0900f0
+			public const int BorderView = 2131296496;
 			
 			// aapt resource value: 0x7f09000f
 			public const int MvvmCrossTagId = 2131296271;
@@ -5970,8 +6022,8 @@ namespace CIM.RemoteManager.Android
 			// aapt resource value: 0x7f090079
 			public const int seriesLayout = 2131296377;
 			
-			// aapt resource value: 0x7f0900f0
-			public const int shape_id = 2131296496;
+			// aapt resource value: 0x7f0900f1
+			public const int shape_id = 2131296497;
 			
 			// aapt resource value: 0x7f09005e
 			public const int shortcut = 2131296350;
