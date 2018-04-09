@@ -7,10 +7,6 @@ using Plugin.BLE.Abstractions.Contracts;
 
 namespace CIM.RemoteManager.Core.ViewModels
 {
-    /// <summary>
-    /// Class BaseViewModel.
-    /// </summary>
-    /// <seealso cref="MvvmCross.Core.ViewModels.MvxViewModel" />
     public class BaseViewModel : MvxViewModel
     {
         protected readonly IAdapter Adapter;
@@ -43,35 +39,21 @@ namespace CIM.RemoteManager.Core.ViewModels
         public static Guid DisHwrevUuid = Guid.Parse("00002a26-0000-1000-8000-00805f9b34fb");
         public static Guid DisSwrevUuid = Guid.Parse("00002a28-0000-1000-8000-00805f9b34fb");
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="BaseViewModel"/> class.
-        /// </summary>
-        /// <param name="adapter">The adapter.</param>
         public BaseViewModel(IAdapter adapter)
         {
             Adapter = adapter;
         }
 
-        /// <summary>
-        /// Resumes this instance.
-        /// </summary>
         public virtual void Resume()
         {
             Mvx.Trace("Resume {0}", GetType().Name);
         }
 
-        /// <summary>
-        /// Suspends this instance.
-        /// </summary>
         public virtual void Suspend()
         {
             Mvx.Trace("Suspend {0}", GetType().Name);
         }
 
-        /// <summary>
-        /// Initializes from bundle.
-        /// </summary>
-        /// <param name="parameters">The parameters.</param>
         protected override void InitFromBundle(IMvxBundle parameters)
         {
             base.InitFromBundle(parameters);
@@ -81,11 +63,6 @@ namespace CIM.RemoteManager.Core.ViewModels
 
         protected IMvxBundle Bundle { get; private set; }
 
-        /// <summary>
-        /// Gets the device from bundle.
-        /// </summary>
-        /// <param name="parameters">The parameters.</param>
-        /// <returns>IDevice.</returns>
         protected IDevice GetDeviceFromBundle(IMvxBundle parameters)
         {
             if (!parameters.Data.ContainsKey(DeviceIdKey)) return null;
@@ -94,11 +71,6 @@ namespace CIM.RemoteManager.Core.ViewModels
             return Adapter.ConnectedDevices.FirstOrDefault(d => d.Id.ToString().Equals(deviceId));
         }
 
-        /// <summary>
-        /// Gets the sensor device bundle.
-        /// </summary>
-        /// <param name="parameters">The parameters.</param>
-        /// <returns>IDevice.</returns>
         protected IDevice GetSensorDeviceBundle(IMvxBundle parameters)
         {
             var deviceId = parameters.Data[DeviceIdKey];
@@ -106,11 +78,6 @@ namespace CIM.RemoteManager.Core.ViewModels
             return Adapter.ConnectedDevices.FirstOrDefault(d => d.Id.ToString().Equals(deviceId));
         }
 
-        /// <summary>
-        /// Gets the service from bundle asynchronous.
-        /// </summary>
-        /// <param name="parameters">The parameters.</param>
-        /// <returns>Task&lt;IService&gt;.</returns>
         protected Task<IService> GetServiceFromBundleAsync(IMvxBundle parameters)
         {
             var device = GetDeviceFromBundle(parameters);
@@ -123,11 +90,6 @@ namespace CIM.RemoteManager.Core.ViewModels
             return device.GetServiceAsync(Guid.Parse(serviceId));
         }
 
-        /// <summary>
-        /// get characteristic from bundle as an asynchronous operation.
-        /// </summary>
-        /// <param name="parameters">The parameters.</param>
-        /// <returns>Task&lt;ICharacteristic&gt;.</returns>
         protected async Task<ICharacteristic> GetCharacteristicFromBundleAsync(IMvxBundle parameters)
         {
             var service = await GetServiceFromBundleAsync(parameters);
@@ -140,11 +102,6 @@ namespace CIM.RemoteManager.Core.ViewModels
             return await service.GetCharacteristicAsync(Guid.Parse(characteristicId));
         }
 
-        /// <summary>
-        /// get descriptor from bundle as an asynchronous operation.
-        /// </summary>
-        /// <param name="parameters">The parameters.</param>
-        /// <returns>Task&lt;IDescriptor&gt;.</returns>
         protected async Task<IDescriptor> GetDescriptorFromBundleAsync(IMvxBundle parameters)
         {
             var characteristic = await GetCharacteristicFromBundleAsync(parameters);

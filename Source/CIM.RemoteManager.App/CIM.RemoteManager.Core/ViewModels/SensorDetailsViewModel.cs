@@ -15,10 +15,6 @@ using Xamarin.Forms;
 
 namespace CIM.RemoteManager.Core.ViewModels
 {
-    /// <summary>
-    /// Class SensorDetailsViewModel.
-    /// </summary>
-    /// <seealso cref="CIM.RemoteManager.Core.ViewModels.BaseViewModel" />
     public class SensorDetailsViewModel : BaseViewModel
     {
         #region Properties

@@ -1,18 +1,13 @@
-﻿using CIM.RemoteManager.Core.ViewModels;
+﻿using System;
+using CIM.RemoteManager.Core.ViewModels;
+using MvvmCross.Platform;
+using MvvmCross.Plugins.Messenger;
 using Xamarin.Forms;
 
 namespace CIM.RemoteManager.Core.Pages
 {
-    /// <summary>
-    /// Class BasePage.
-    /// </summary>
-    /// <seealso cref="Xamarin.Forms.ContentPage" />
     public class BasePage : ContentPage
     {
-        /// <summary>
-        /// When overridden, allows application developers to customize behavior immediately prior to the <see cref="T:Xamarin.Forms.Page" /> becoming visible.
-        /// </summary>
-        /// <remarks>To be added.</remarks>
         protected override void OnAppearing()
         {
             base.OnAppearing();
@@ -20,16 +15,27 @@ namespace CIM.RemoteManager.Core.Pages
             viewModel?.Resume();
         }
 
-        /// <summary>
-        /// When overridden, allows the application developer to customize behavior as the <see cref="T:Xamarin.Forms.Page" /> disappears.
-        /// </summary>
-        /// <remarks>To be added.</remarks>
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
             var viewModel = BindingContext as BaseViewModel;
             viewModel?.Suspend();
         }
+
+        protected IMvxMessenger MvxMessenger => Mvx.Resolve<IMvxMessenger>();
+
+        protected MvxSubscriptionToken Subscribe<TMessage>(Action<TMessage> action)
+            where TMessage : MvxMessage
+        {
+            return MvxMessenger.Subscribe<TMessage>(action, MvxReference.Weak);
+        }
+
+        protected void Unsubscribe<TMessage>(MvxSubscriptionToken id)
+            where TMessage : MvxMessage
+        {
+            MvxMessenger.Unsubscribe<TMessage>(id);
+        }
+
     }
 
 }

@@ -7,16 +7,9 @@ using ValueChangedEventArgs = SegmentedControl.FormsPlugin.Abstractions.ValueCha
 
 namespace CIM.RemoteManager.Core.Pages
 {
-    /// <summary>
-    /// Class SensorDetailsPage.
-    /// </summary>
-    /// <seealso cref="CIM.RemoteManager.Core.Pages.BaseTabbedPage" />
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SensorDetailsPage
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SensorDetailsPage"/> class.
-        /// </summary>
         public SensorDetailsPage()
         {
             InitializeComponent();

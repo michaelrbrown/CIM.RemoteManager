@@ -16,10 +16,6 @@ using Xamarin.Forms;
 
 namespace CIM.RemoteManager.Core.ViewModels
 {
-    /// <summary>
-    /// Class SensorListViewModel.
-    /// </summary>
-    /// <seealso cref="CIM.RemoteManager.Core.ViewModels.BaseViewModel" />
     public class SensorListViewModel : BaseViewModel
     {
         #region Properties
@@ -413,7 +409,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                         TotalRecordsInHistoryBuffer = sensorValues.Substring(15, 2).SafeHexToInt();
                         CurrentDateTime = sensorValues.Substring(19, 8).SafeHexToInt();
 
-                        // Be certain we have an integer that can be parsed
+                        // Be certain we have a parsable integer
                         if (int.TryParse(CurrentDateTime.ToString(), out int currentDateTimeResult))
                         {
                             // New instance of station helper

@@ -1,6 +1,6 @@
 ﻿<pages:BasePage x:Class="CIM.RemoteManager.Core.Pages.SensorListPage"
                 xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                xmlns:dataSource="clr-namespace:Syncfusion.DataSource;assembly=Syncfusion.DataSource.Portable" xmlns:pages="clr-namespace:CIM.RemoteManager.Core.Pages;assembly=CIM.RemoteManager.Core" xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms" xmlns:templates="clr-namespace:CIM.RemoteManager.Core.Templates;assembly=CIM.RemoteManager.Core"
+                xmlns:dataSource="clr-namespace:Syncfusion.DataSource;assembly=Syncfusion.DataSource.Portable" xmlns:pages="clr-namespace:CIM.RemoteManager.Core.Pages;assembly=CIM.RemoteManager.Core" xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms" xmlns:templates="clr-namespace:CIM.RemoteManager.Core.Templates;assembly=CIM.RemoteManager.Core" xmlns:xForms="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
                 Title="Sensors"
                 Padding="0"
                 BackgroundColor="#FFFFFF">
@@ -23,6 +23,15 @@
                    VerticalOptions="Center" />
         </Grid>
     </StackLayout>
+
+    <!-- Chart Loading Indicator -->
+    <xForms:SfBusyIndicator x:Name="ChartBusyindicator" Title="Loading Sensor Data..."
+                            AnimationType="HorizontalPulsingBox" BackgroundColor="Transparent" HeightRequest="250"
+                            IsBusy="{Binding ProcessingSensorData}"
+                            IsVisible="{Binding ProcessingSensorData}"
+                            Opacity=".8"
+                            TextColor="{StaticResource BusyIndicatorColor}"
+                            ViewBoxHeight="250" ViewBoxWidth="250" WidthRequest="250" />
 
     <!-- Sensor ListView -->
     <syncfusion:SfListView x:Name="SensorLiistView"
@@ -106,7 +115,7 @@
                       HorizontalOptions="Fill" VerticalOptions="Fill">
                     <Grid HorizontalOptions="Center" VerticalOptions="Center">
                         <Image Grid.Row="0" Grid.Column="0"
-                               BackgroundColor="Transparent" HeightRequest="48" Source="ic_sensorsettings.png" WidthRequest="48" />
+                               BackgroundColor="Transparent" HeightRequest="48" Source="ic_sensor-settings.png" WidthRequest="48" />
                     </Grid>
                 </Grid>
             </DataTemplate>
