@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -75,8 +74,8 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// <summary>
         /// Sensor collection
         /// </summary>
-        ObservableCollection<Sensor> _sensorCollection;
-        public ObservableCollection<Sensor> SensorCollection
+        FullyObservableCollection<Sensor> _sensorCollection;
+        public FullyObservableCollection<Sensor> SensorCollection
         {
             get => _sensorCollection;
             set => SetProperty(ref _sensorCollection, value);
@@ -254,7 +253,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// Get message counters from remote.
         /// </summary>
         /// <param name="characteristicValue"></param>
-        private void GetMessageCounterValues(string characteristicValue)
+        private async Task GetMessageCounterValues(string characteristicValue)
         {
             if (String.IsNullOrEmpty(characteristicValue)) return;
 
@@ -265,7 +264,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 if (characteristicValue.Contains("}"))
                 {
                     MessageCounterValue.Append(characteristicValue);
-                    SerializeStringToSensor(MessageCounterValue.ToString(), "F");
+                    await SerializeStringToSensor(MessageCounterValue.ToString(), "F");
                     MessageCounterValue.Clear();
                     StartMessageCounterValueRecord = false;
                 }
@@ -282,7 +281,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 if (characteristicValue.Contains("}"))
                 {
                     MessageCounterValue.Append(characteristicValue.GetUntilOrEmpty());
-                    SerializeStringToSensor(MessageCounterValue.ToString(), "F");
+                    await SerializeStringToSensor(MessageCounterValue.ToString(), "F");
                     MessageCounterValue.Clear();
                     StartMessageCounterValueRecord = false;
                 }
@@ -298,7 +297,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// Get Full values for sensor from buffered data.
         /// </summary>
         /// <param name="characteristicValue"></param>
-        private void GetFullSensorValues(string characteristicValue)
+        private async Task GetFullSensorValues(string characteristicValue)
         {
             if (String.IsNullOrEmpty(characteristicValue)) return;
 
@@ -309,7 +308,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 if (characteristicValue.Contains("}"))
                 {
                     FullSensorValue.Append(characteristicValue);
-                    SerializeStringToSensor(FullSensorValue.ToString(), "A");
+                    await SerializeStringToSensor(FullSensorValue.ToString(), "A");
                     FullSensorValue.Clear();
                     StartFullSensorValueRecord = false;
                 }
@@ -326,7 +325,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 if (characteristicValue.Contains("}"))
                 {
                     FullSensorValue.Append(characteristicValue.GetUntilOrEmpty());
-                    SerializeStringToSensor(FullSensorValue.ToString(), "A");
+                    await SerializeStringToSensor(FullSensorValue.ToString(), "A");
                     FullSensorValue.Clear();
                     StartFullSensorValueRecord = false;
                 }
@@ -342,7 +341,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// Get Average values for sensor from buffered data.
         /// </summary>
         /// <param name="characteristicValue"></param>
-        private void GetAverageSensorValues(string characteristicValue)
+        private async Task GetAverageSensorValues(string characteristicValue)
         {
             if (String.IsNullOrEmpty(characteristicValue)) return;
 
@@ -353,7 +352,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 if (characteristicValue.Contains("}"))
                 {
                     AverageSensorValue.Append(characteristicValue.Replace("{", "").GetUntilOrEmpty());
-                    SerializeStringToSensor(AverageSensorValue.ToString(), "B");
+                    await SerializeStringToSensor(AverageSensorValue.ToString(), "B");
                     AverageSensorValue.Clear();
                     StartAverageSensorValueRecord = false;
                 }
@@ -370,7 +369,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 if (characteristicValue.Contains("}"))
                 {
                     AverageSensorValue.Append(characteristicValue.GetUntilOrEmpty());
-                    SerializeStringToSensor(AverageSensorValue.ToString(), "B");
+                    await SerializeStringToSensor(AverageSensorValue.ToString(), "B");
                     AverageSensorValue.Clear();
                     StartAverageSensorValueRecord = false;
                 }
@@ -387,7 +386,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// </summary>
         /// <param name="sensorValues"></param>
         /// <param name="conversionType"></param>
-        private async void SerializeStringToSensor(string sensorValues, string conversionType)
+        private async Task SerializeStringToSensor(string sensorValues, string conversionType)
         {
             try
             {
@@ -410,7 +409,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                         TotalRecordsInHistoryBuffer = sensorValues.Substring(15, 2).SafeHexToInt();
                         CurrentDateTime = sensorValues.Substring(19, 8).SafeHexToInt();
 
-                        // Be certain we have an integer we can parse
+                        // Be certain we have a parsable integer
                         if (int.TryParse(CurrentDateTime.ToString(), out int currentDateTimeResult))
                         {
                             // New instance of station helper
@@ -537,17 +536,17 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="characteristicUpdatedEventArgs"></param>
-        private void RxCharacteristicOnValueUpdated(object sender, CharacteristicUpdatedEventArgs characteristicUpdatedEventArgs)
+        private async void RxCharacteristicOnValueUpdatedAsync(object sender, CharacteristicUpdatedEventArgs characteristicUpdatedEventArgs)
         {
             try
             {
                 // Get message counter values from remote to determine if
                 // we have acquired or lost sensors.  Also grabs time stamp.
-                GetMessageCounterValues(CharacteristicValue);
+                await GetMessageCounterValues(CharacteristicValue);
                 // Get full sensor values
-                GetFullSensorValues(CharacteristicValue);
+                await GetFullSensorValues(CharacteristicValue);
                 // Get average sensor values
-                GetAverageSensorValues(CharacteristicValue);
+                await GetAverageSensorValues(CharacteristicValue);
 
                 // Notify property changed
                 RaisePropertyChanged(() => CharacteristicValue);
@@ -659,12 +658,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 TxCharacteristic = await _service.GetCharacteristicAsync(TxUuid).ConfigureAwait(true);
 
                 // Make sure we can write characteristic data to remote
-                if (TxCharacteristic.CanWrite)
-                {
-                    // Send a refresh command
-                    await TxCharacteristic.WriteAsync("{Y}".StrToByteArray()).ConfigureAwait(false);
-                }
-                else
+                if (!TxCharacteristic.CanWrite)
                 {
                     _userDialogs.Alert("Cannot write characteristic data to remote!", "CIMScan Remote Manager");
                 }
@@ -679,7 +673,7 @@ namespace CIM.RemoteManager.Core.ViewModels
 
                 _userDialogs.HideLoading();
                 HockeyApp.MetricsManager.TrackEvent($"(InitRemote) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
-                _userDialogs.Alert($"(InitRemote) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
+                //_userDialogs.Alert($"(InitRemote) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
             }
             finally
             {
@@ -823,8 +817,8 @@ namespace CIM.RemoteManager.Core.ViewModels
                 RaisePropertyChanged(() => UpdatesStarted);
 
                 // Subscribe to value updated events
-                RxCharacteristic.ValueUpdated -= RxCharacteristicOnValueUpdated;
-                RxCharacteristic.ValueUpdated += RxCharacteristicOnValueUpdated;
+                RxCharacteristic.ValueUpdated -= RxCharacteristicOnValueUpdatedAsync;
+                RxCharacteristic.ValueUpdated += RxCharacteristicOnValueUpdatedAsync;
 
                 // Send refresh command to remote
                 await TxCharacteristic.WriteAsync("{Y}".StrToByteArray()).ConfigureAwait(true);
@@ -860,7 +854,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 await RxCharacteristic.StopUpdatesAsync().ConfigureAwait(true);
 
                 // Subscribe to value updated events
-                RxCharacteristic.ValueUpdated -= RxCharacteristicOnValueUpdated;
+                RxCharacteristic.ValueUpdated -= RxCharacteristicOnValueUpdatedAsync;
 
                 // Let UI know mode we are in
                 RaisePropertyChanged(() => UpdateButtonText);
