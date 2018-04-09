@@ -30,7 +30,7 @@
     </NuGetPackageImportStamp>
     <AndroidTlsProvider>
     </AndroidTlsProvider>
-    <AndroidKeyStore>true</AndroidKeyStore>
+    <AndroidKeyStore>false</AndroidKeyStore>
     <AndroidSigningKeyStore>C:\Repos\GitHub\DCC\CIM.RemoteManager\Source\CIM.RemoteManager.App\CIM.RemoteManager.Android\dcc_keystore.keystore</AndroidSigningKeyStore>
     <AndroidSigningStorePass>mb1991</AndroidSigningStorePass>
     <AndroidSigningKeyAlias>dcc_keystore</AndroidSigningKeyAlias>

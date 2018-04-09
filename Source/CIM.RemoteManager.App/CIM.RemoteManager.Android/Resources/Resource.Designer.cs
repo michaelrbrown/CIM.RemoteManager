@@ -4786,7 +4786,7 @@ namespace CIM.RemoteManager.Android
 			public const int da12 = 2130837593;
 			
 			// aapt resource value: 0x7f02005a
-			public const int defaultSensor = 2130837594;
+			public const int defaultsensor = 2130837594;
 			
 			// aapt resource value: 0x7f02005b
 			public const int design_bottom_navigation_item_background = 2130837595;

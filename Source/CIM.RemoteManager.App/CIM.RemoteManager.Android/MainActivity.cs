@@ -1,7 +1,10 @@
 using Acr.UserDialogs;
+using Android;
 using Android.App;
 using Android.Content.PM;
 using Android.OS;
+using Android.Support.V4.App;
+using Android.Support.V4.Content;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.Forms.Droid.Presenters;
@@ -43,6 +46,23 @@ namespace CIM.RemoteManager.Android
             //SfPopupLayoutRenderer.Init();
 
             CheckForUpdates();
+        }
+
+        /// <summary>
+        /// Called when [start].
+        /// </summary>
+        protected override void OnStart()
+        {
+            base.OnStart();
+
+            if (ContextCompat.CheckSelfPermission(this, "") != Permission.Granted)
+            {
+                ActivityCompat.RequestPermissions(this, new string[] { Manifest.Permission.AccessCoarseLocation, Manifest.Permission.AccessFineLocation }, 0);
+            }
+            else
+            {
+                System.Diagnostics.Debug.WriteLine("Permission Granted!!!");
+            }
         }
 
         protected override void OnResume()

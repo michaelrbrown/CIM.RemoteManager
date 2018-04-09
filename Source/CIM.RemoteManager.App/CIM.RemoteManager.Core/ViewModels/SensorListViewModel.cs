@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -74,8 +75,8 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// <summary>
         /// Sensor collection
         /// </summary>
-        FullyObservableCollection<Sensor> _sensorCollection;
-        public FullyObservableCollection<Sensor> SensorCollection
+        ObservableCollection<Sensor> _sensorCollection;
+        public ObservableCollection<Sensor> SensorCollection
         {
             get => _sensorCollection;
             set => SetProperty(ref _sensorCollection, value);
@@ -409,7 +410,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                         TotalRecordsInHistoryBuffer = sensorValues.Substring(15, 2).SafeHexToInt();
                         CurrentDateTime = sensorValues.Substring(19, 8).SafeHexToInt();
 
-                        // Be certain we have a parsable integer
+                        // Be certain we have an integer we can parse
                         if (int.TryParse(CurrentDateTime.ToString(), out int currentDateTimeResult))
                         {
                             // New instance of station helper

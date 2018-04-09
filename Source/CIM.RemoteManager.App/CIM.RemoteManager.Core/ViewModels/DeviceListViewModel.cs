@@ -368,7 +368,7 @@ namespace CIM.RemoteManager.Core.ViewModels
 
             foreach (var connectedDevice in Adapter.ConnectedDevices)
             {
-                // update rssi for already connected devices (so tha 0 is not shown in the list)
+                // update rssi for already connected devices (so the 0 is not shown in the list)
                 try
                 {
                     await connectedDevice.UpdateRssiAsync().ConfigureAwait(true);
@@ -390,7 +390,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 }
             }
 
-            // Notify we stopped scanning
+            // Set token for task cancellation handling
             _cancellationTokenSource = new CancellationTokenSource();
             RaisePropertyChanged(() => StopScanCommand);
             // Notify we are refreshing
