@@ -285,7 +285,7 @@
 
     </pages:BasePage>
 
-    <pages:BasePage Title="Sensor Limits" Padding="0" BackgroundColor="#FFFFFF" Icon="nav_SenssorLimits.png">
+    <pages:BasePage Title="Sensor Limits" Padding="0" BackgroundColor="#FFFFFF" Icon="nav_SensorLimits.png">
 
         <!-- BTLE Status -->
         <StackLayout Padding="10" BackgroundColor="{StaticResource BTLEStatusBackgroundColor}" HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsStateOn, Converter={StaticResource BooleanToFalseConverter}}">

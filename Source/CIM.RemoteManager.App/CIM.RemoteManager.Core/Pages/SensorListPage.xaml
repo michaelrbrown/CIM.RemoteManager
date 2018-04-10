@@ -5,106 +5,115 @@
                 Padding="0"
                 BackgroundColor="#FFFFFF">
 
-    <!-- BTLE Status -->
-    <StackLayout Padding="10" BackgroundColor="{StaticResource BTLEStatusBackgroundColor}" HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsStateOn, Converter={StaticResource BooleanToFalseConverter}}">
-        <Grid HorizontalOptions="Center">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Image HorizontalOptions="End" Source="ic_BluetoothInfo.png" VerticalOptions="Center" />
-            <Label Grid.Column="1" FontSize="18" Text="{Binding StateText}" TextColor="{StaticResource BTLEStatusTextColor}" VerticalOptions="Center" />
-        </Grid>
-    </StackLayout>
+    <Grid Margin="0" Padding="0" HorizontalOptions="FillAndExpand" RowSpacing="0" VerticalOptions="FillAndExpand">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
-    <!-- Sensor ListView -->
-    <syncfusion:SfListView x:Name="SensorLiistView"
-                           Margin="0" Padding="0"
-                           AllowSwiping="False" HeaderSize="40" IsStickyFooter="True" IsStickyGroupHeader="True" ItemDoubleTapped="SensorListView_OnItemDoubleTapped"
-                           ItemSize="116" ItemSpacing="0"
-                           ItemsSource="{Binding SensorCollection}"
-                           SelectionBackgroundColor="Transparent">
+        <!-- BTLE Status -->
+        <StackLayout Grid.Row="0" Padding="10" BackgroundColor="{StaticResource BTLEStatusBackgroundColor}" HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsStateOn, Converter={StaticResource BooleanToFalseConverter}}">
+            <Grid HorizontalOptions="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Image HorizontalOptions="End" Source="ic_BluetoothInfo.png" VerticalOptions="Center" />
+                <Label Grid.Column="1" FontSize="18" Text="{Binding StateText}" TextColor="{StaticResource BTLEStatusTextColor}" VerticalOptions="Center" />
+            </Grid>
+        </StackLayout>
 
-        <!-- Sensor ListView Group DataSource -->
-        <syncfusion:SfListView.DataSource>
-            <dataSource:DataSource>
-                <dataSource:DataSource.GroupDescriptors>
-                    <dataSource:GroupDescriptor PropertyName="SensorTypeGroup" />
-                </dataSource:DataSource.GroupDescriptors>
-            </dataSource:DataSource>
-        </syncfusion:SfListView.DataSource>
+        <!-- Sensor ListView -->
+        <syncfusion:SfListView x:Name="SensorLiistView"
+                               Grid.Row="1"
+                               Margin="0" Padding="0"
+                               AllowSwiping="False" HeaderSize="40" IsStickyFooter="True" IsStickyGroupHeader="True" ItemDoubleTapped="SensorListView_OnItemDoubleTapped"
+                               ItemSize="116" ItemSpacing="0"
+                               ItemsSource="{Binding SensorCollection}"
+                               SelectionBackgroundColor="Transparent">
 
-        <!-- Layout Manager (provides columns on higher resolution devices) -->
-        <syncfusion:SfListView.LayoutManager>
-            <syncfusion:GridLayout>
-                <syncfusion:GridLayout.SpanCount>
-                    <OnPlatform x:TypeArguments="x:Int32">
-                        <OnPlatform.Android>
-                            <OnIdiom x:TypeArguments="x:Int32" Phone="1" Tablet="2" />
-                        </OnPlatform.Android>
-                        <OnPlatform.iOS>
-                            <OnIdiom x:TypeArguments="x:Int32" Phone="1" Tablet="2" />
-                        </OnPlatform.iOS>
-                    </OnPlatform>
-                </syncfusion:GridLayout.SpanCount>
-            </syncfusion:GridLayout>
-        </syncfusion:SfListView.LayoutManager>
+            <!-- Sensor ListView Group DataSource -->
+            <syncfusion:SfListView.DataSource>
+                <dataSource:DataSource>
+                    <dataSource:DataSource.GroupDescriptors>
+                        <dataSource:GroupDescriptor PropertyName="SensorTypeGroup" />
+                    </dataSource:DataSource.GroupDescriptors>
+                </dataSource:DataSource>
+            </syncfusion:SfListView.DataSource>
 
-        <!-- Sensor ListView Header Template -->
-        <syncfusion:SfListView.HeaderTemplate>
-            <DataTemplate>
-                <StackLayout BackgroundColor="{StaticResource RemoteNameBackgroundColor}"
-                             HeightRequest="40" HorizontalOptions="FillAndExpand" Orientation="Horizontal" Spacing="0" VerticalOptions="FillAndExpand">
-                    <Label FontSize="20" HorizontalOptions="CenterAndExpand" Text="{Binding DeviceName}" TextColor="{StaticResource HeaderTextColor}" VerticalOptions="Center" />
-                </StackLayout>
-            </DataTemplate>
-        </syncfusion:SfListView.HeaderTemplate>
+            <!-- Layout Manager (provides columns on higher resolution devices) -->
+            <syncfusion:SfListView.LayoutManager>
+                <syncfusion:GridLayout>
+                    <syncfusion:GridLayout.SpanCount>
+                        <OnPlatform x:TypeArguments="x:Int32">
+                            <OnPlatform.Android>
+                                <OnIdiom x:TypeArguments="x:Int32" Phone="1" Tablet="2" />
+                            </OnPlatform.Android>
+                            <OnPlatform.iOS>
+                                <OnIdiom x:TypeArguments="x:Int32" Phone="1" Tablet="2" />
+                            </OnPlatform.iOS>
+                        </OnPlatform>
+                    </syncfusion:GridLayout.SpanCount>
+                </syncfusion:GridLayout>
+            </syncfusion:SfListView.LayoutManager>
 
-        <!-- Sensor ListView Group Template -->
-        <syncfusion:SfListView.GroupHeaderTemplate>
-            <DataTemplate>
-                <ViewCell>
-                    <ViewCell.View>
-                        <Grid Margin="0" Padding="0"
-                              ColumnSpacing="0" HorizontalOptions="FillAndExpand" RowSpacing="0" VerticalOptions="FillAndExpand">
-                            <!-- Sensor Group Name -->
-                            <Label Margin="0,5,0,5"
-                                   FontSize="20" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center"
-                                   Text="{Binding Key, Converter={StaticResource UpperCaseConverter}}"
-                                   TextColor="{StaticResource GroupTextColor}"
-                                   VerticalOptions="Center" VerticalTextAlignment="Center" WidthRequest="225" />
-                        </Grid>
-                    </ViewCell.View>
-                </ViewCell>
-            </DataTemplate>
-        </syncfusion:SfListView.GroupHeaderTemplate>
+            <!-- Sensor ListView Header Template -->
+            <syncfusion:SfListView.HeaderTemplate>
+                <DataTemplate>
+                    <StackLayout BackgroundColor="{StaticResource RemoteNameBackgroundColor}"
+                                 HeightRequest="40" HorizontalOptions="FillAndExpand" Orientation="Horizontal" Spacing="0" VerticalOptions="FillAndExpand">
+                        <Label FontSize="20" HorizontalOptions="CenterAndExpand" Text="{Binding DeviceName}" TextColor="{StaticResource HeaderTextColor}" VerticalOptions="Center" />
+                    </StackLayout>
+                </DataTemplate>
+            </syncfusion:SfListView.HeaderTemplate>
 
-        <!-- Sensor ListView Item Template -->
-        <syncfusion:SfListView.ItemTemplate>
-            <DataTemplate>
-                <ViewCell>
-                    <!-- Sensor Detail Template -->
-                    <templates:SensorItemTemplate />
-                </ViewCell>
-            </DataTemplate>
-        </syncfusion:SfListView.ItemTemplate>
+            <!-- Sensor ListView Group Template -->
+            <syncfusion:SfListView.GroupHeaderTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ViewCell.View>
+                            <Grid Margin="0" Padding="0"
+                                  ColumnSpacing="0" HorizontalOptions="FillAndExpand" RowSpacing="0" VerticalOptions="FillAndExpand">
+                                <!-- Sensor Group Name -->
+                                <Label Margin="0,5,0,5"
+                                       FontSize="20" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center"
+                                       Text="{Binding Key, Converter={StaticResource UpperCaseConverter}}"
+                                       TextColor="{StaticResource GroupTextColor}"
+                                       VerticalOptions="Center" VerticalTextAlignment="Center" WidthRequest="225" />
+                            </Grid>
+                        </ViewCell.View>
+                    </ViewCell>
+                </DataTemplate>
+            </syncfusion:SfListView.GroupHeaderTemplate>
 
-        <!-- Sensor ListView Footer Template -->
-        <syncfusion:SfListView.FooterTemplate>
-            <DataTemplate>
-                <!-- Margin: left, top, right, bottom -->
-                <StackLayout BackgroundColor="{StaticResource RemoteNameBackgroundColor}"
-                             HeightRequest="60" HorizontalOptions="FillAndExpand" Orientation="Horizontal" Spacing="0" VerticalOptions="FillAndExpand">
-                    <!-- Sensor BTLE Characteristic Incoming Values -->
-                    <Label Margin="5"
-                           FontSize="16" HorizontalOptions="StartAndExpand" LineBreakMode="MiddleTruncation"
-                           Text="{Binding CharacteristicValue, StringFormat=' Incoming Value: {0:N}'}"
-                           TextColor="{StaticResource AppLightColor}"
-                           VerticalOptions="CenterAndExpand" VerticalTextAlignment="Center" />
-                </StackLayout>
-            </DataTemplate>
-        </syncfusion:SfListView.FooterTemplate>
+            <!-- Sensor ListView Item Template -->
+            <syncfusion:SfListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <!-- Sensor Detail Template -->
+                        <templates:SensorItemTemplate />
+                    </ViewCell>
+                </DataTemplate>
+            </syncfusion:SfListView.ItemTemplate>
 
-    </syncfusion:SfListView>
+            <!-- Sensor ListView Footer Template -->
+            <syncfusion:SfListView.FooterTemplate>
+                <DataTemplate>
+                    <!-- Margin: left, top, right, bottom -->
+                    <StackLayout BackgroundColor="{StaticResource RemoteNameBackgroundColor}"
+                                 HeightRequest="60" HorizontalOptions="FillAndExpand" Orientation="Horizontal" Spacing="0" VerticalOptions="FillAndExpand">
+                        <!-- Sensor BTLE Characteristic Incoming Values -->
+                        <Label Margin="5"
+                               FontSize="16" HorizontalOptions="StartAndExpand" LineBreakMode="MiddleTruncation"
+                               Text="{Binding CharacteristicValue, StringFormat=' Incoming Value: {0:N}'}"
+                               TextColor="{StaticResource AppLightColor}"
+                               VerticalOptions="CenterAndExpand" VerticalTextAlignment="Center" />
+                    </StackLayout>
+                </DataTemplate>
+            </syncfusion:SfListView.FooterTemplate>
+
+        </syncfusion:SfListView>
+
+    </Grid>
 
 </pages:BasePage>

@@ -373,112 +373,42 @@
     <AndroidResource Include="Resources\values\SplashStyle.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\icon.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\values\colors.xml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\style.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\airflowsensor.png" />
+    <EmbeddedResource Include="Resources\drawable\DA12.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\baromicpressuresensor.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\bluetoothinfo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\c02sensor.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\da12.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\defaultsensor.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\differentialpressuresensor.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\fridgetemperaturesensor.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\humiditysensor.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\ic_bluetoothconnected.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\ic_bluetoothsearch.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\ic_cimscandevices.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\ic_connectprevious.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\ic_debug.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\ic_otherdevices.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\ic_refreshsensordata.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\ic_remotesettings.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\ic_save.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\ic_sensorlimits.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\ic_sensorplot.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\ic_sensorsettings.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\ic_sensorstatistics.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\ic_stopsearching.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\oventempsensor.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\oxygensensor.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\particlecountsensor.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\remote512.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\rssi_1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\rssi_2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\rssi_3.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\rssi_4.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\rssi_5.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\temperaturesensor.png" />
+    <EmbeddedResource Include="Resources\drawable\ic_BluetoothInfo.png" />
+    <EmbeddedResource Include="Resources\drawable\ic_Debug.png" />
+    <EmbeddedResource Include="Resources\drawable\nav_CimscanDevices.png" />
+    <EmbeddedResource Include="Resources\drawable\nav_OtherDevices.png" />
+    <EmbeddedResource Include="Resources\drawable\nav_RefreshSensorData.png" />
+    <EmbeddedResource Include="Resources\drawable\nav_RemoteSettings.png" />
+    <EmbeddedResource Include="Resources\drawable\nav_SensorLimits.png" />
+    <EmbeddedResource Include="Resources\drawable\nav_SensorPlot.png" />
+    <EmbeddedResource Include="Resources\drawable\nav_SensorSettings.png" />
+    <EmbeddedResource Include="Resources\drawable\nav_SensorStatistics.png" />
+    <EmbeddedResource Include="Resources\drawable\remote512.png" />
+    <EmbeddedResource Include="Resources\drawable\rssi_1.png" />
+    <EmbeddedResource Include="Resources\drawable\rssi_2.png" />
+    <EmbeddedResource Include="Resources\drawable\rssi_3.png" />
+    <EmbeddedResource Include="Resources\drawable\rssi_4.png" />
+    <EmbeddedResource Include="Resources\drawable\rssi_5.png" />
+    <EmbeddedResource Include="Resources\drawable\SensorAirflow.png" />
+    <EmbeddedResource Include="Resources\drawable\SensorBaromicPressure.png" />
+    <EmbeddedResource Include="Resources\drawable\SensorC02.png" />
+    <EmbeddedResource Include="Resources\drawable\SensorDefault.png" />
+    <EmbeddedResource Include="Resources\drawable\SensorDifferentialPressure.png" />
+    <EmbeddedResource Include="Resources\drawable\SensorFridgeTemperature.png" />
+    <EmbeddedResource Include="Resources\drawable\SensorHumidity.png" />
+    <EmbeddedResource Include="Resources\drawable\SensorOvenTemperature.png" />
+    <EmbeddedResource Include="Resources\drawable\SensorOxygen.png" />
+    <EmbeddedResource Include="Resources\drawable\SensorParticleCount.png" />
+    <EmbeddedResource Include="Resources\drawable\SensorTemperature.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
