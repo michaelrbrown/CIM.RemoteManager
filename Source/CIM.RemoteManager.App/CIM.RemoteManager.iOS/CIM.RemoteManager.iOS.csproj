@@ -469,7 +469,7 @@
     <BundleResource Include="Resources\oxygensensor.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\defaultSensor.png" />
+    <BundleResource Include="Resources\defaultSensor.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\airflowsensor.png" />
