@@ -406,7 +406,7 @@
     <BundleResource Include="Resources\bluetoothinfo.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\temperaturesensor.png" />
+    <BundleResource Include="Resources\TemperatureSensor.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\baromicpressuresensor.png" />
@@ -451,16 +451,16 @@
     <BundleResource Include="Resources\ic_remotesettings.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_sensorstatistics.png" />
+    <BundleResource Include="Resources\nav_SensorStatistics.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_sensorplot.png" />
+    <BundleResource Include="Resources\nav_SensorPlot.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_sensorsettings.png" />
+    <BundleResource Include="Resources\nav_SensorSettings.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_sensorlimits.png" />
+    <BundleResource Include="Resources\nav_SensorLimits.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\ic_refreshsensordata.png" />
@@ -484,10 +484,10 @@
     <BundleResource Include="Resources\ic_debug.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_cimscandevices.png" />
+    <BundleResource Include="Resources\nav_CimscanDevices.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_otherdevices.png" />
+    <BundleResource Include="Resources\nav_OtherDevices.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

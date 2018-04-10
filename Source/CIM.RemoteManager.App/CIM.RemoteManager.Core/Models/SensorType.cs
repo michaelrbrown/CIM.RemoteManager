@@ -61,25 +61,25 @@ namespace CIM.RemoteManager.Core.Models
             switch (value)
             {
                 case "2800":
-                    return new SensorTypeResult("Temperature", "temperaturesensor.png", "CI10/CZ11 Temp.", "°C");
+                    return new SensorTypeResult("Temperature", "TemperatureSensor.png", "CI10/CZ11 Temp.", "°C");
 
                 case "7100":
-                    return new SensorTypeResult("Temperature", "temperaturesensor.png", "CI13 Temp.", "°C");
+                    return new SensorTypeResult("Temperature", "TemperatureSensor.png", "CI13 Temp.", "°C");
 
                 case "7000":
-                    return new SensorTypeResult("Temperature", "temperaturesensor.png", "CI15 Temp.", "°C");
+                    return new SensorTypeResult("Temperature", "TemperatureSensor.png", "CI15 Temp.", "°C");
 
                 case "7001":
                     return new SensorTypeResult("Humidity", "humiditysensor.png", "CI15H Humidity", "%RH");
 
                 case "6900":
-                    return new SensorTypeResult("Temperature", "temperaturesensor.png", "CI18 Temp.", "°C");
+                    return new SensorTypeResult("Temperature", "TemperatureSensor.png", "CI18 Temp.", "°C");
 
                 case "6800":
                     return new SensorTypeResult("Differential Pressure", "differentialpressuresensor.png", "CI22 Diff. Pres. ", "WC");
 
                 case "6700":
-                    return new SensorTypeResult("Temperature", "temperaturesensor.png", "CI19 Temp.", "°C");
+                    return new SensorTypeResult("Temperature", "TemperatureSensor.png", "CI19 Temp.", "°C");
 
                 case "1200":
                     return new SensorTypeResult("Value", "defaultsensor.png", "CI2X Value", "");
@@ -100,28 +100,28 @@ namespace CIM.RemoteManager.Core.Models
                     return new SensorTypeResult("State", "defaultsensor.png", "CI91 State", "");
 
                 case "8000":
-                    return new SensorTypeResult("Temperature", "temperaturesensor.png", "CT13 Temp.", "°C");
+                    return new SensorTypeResult("Temperature", "TemperatureSensor.png", "CT13 Temp.", "°C");
 
                 case "8100":
-                    return new SensorTypeResult("Temperature", "temperaturesensor.png", "CT14 Temp.", "°C");
+                    return new SensorTypeResult("Temperature", "TemperatureSensor.png", "CT14 Temp.", "°C");
 
                 case "8200":
-                    return new SensorTypeResult("Temperature", "temperaturesensor.png", "CT15 Temp.", "°C");
+                    return new SensorTypeResult("Temperature", "TemperatureSensor.png", "CT15 Temp.", "°C");
 
                 case "8201":
                     return new SensorTypeResult("Humidity", "humiditysensor.png", "CT15H Humidity", "%RH");
 
                 case "8300":
-                    return new SensorTypeResult("Temperature", "temperaturesensor.png", "CT16 Temp.", "°C");
+                    return new SensorTypeResult("Temperature", "TemperatureSensor.png", "CT16 Temp.", "°C");
 
                 case "8301":
-                    return new SensorTypeResult("Temperature", "temperaturesensor.png", "CT17 Temp.", "°C");
+                    return new SensorTypeResult("Temperature", "TemperatureSensor.png", "CT17 Temp.", "°C");
 
                 case "8001":
-                    return new SensorTypeResult("Temperature", "temperaturesensor.png", "CT18 Temp.", "°C");
+                    return new SensorTypeResult("Temperature", "TemperatureSensor.png", "CT18 Temp.", "°C");
 
                 case "8002":
-                    return new SensorTypeResult("Temperature", "temperaturesensor.png", "CT19 Temp.", "°C");
+                    return new SensorTypeResult("Temperature", "TemperatureSensor.png", "CT19 Temp.", "°C");
 
                 case "8400":
                     return new SensorTypeResult("CO2", "c02sensor.png", "CT21 CO2", "%");
@@ -178,13 +178,13 @@ namespace CIM.RemoteManager.Core.Models
                     return new SensorTypeResult("Count", "defaultsensor.png", "CT4X Count", "");
 
                 case "8A00":
-                    return new SensorTypeResult("Temperature", "temperaturesensor.png", "CZ25 Temp.", "°C");
+                    return new SensorTypeResult("Temperature", "TemperatureSensor.png", "CZ25 Temp.", "°C");
 
                 case "8A01":
                     return new SensorTypeResult("Humidity", "humiditysensor.png", "CZ25H Humidity", "%RH");
 
                 case "8B00":
-                    return new SensorTypeResult("Temperature", "temperaturesensor.png", "CZ15 Temp.", "°C");
+                    return new SensorTypeResult("Temperature", "TemperatureSensor.png", "CZ15 Temp.", "°C");
 
                 case "8B01":
                     return new SensorTypeResult("Humidity", "humiditysensor.png", "CZ15H Humidity", "%RH");

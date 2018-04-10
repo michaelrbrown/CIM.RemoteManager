@@ -61,7 +61,7 @@
 
     <pages:BaseTabbedPage.Children>
 
-        <pages:BasePage Title="CIMScan Devices" BackgroundColor="#FFFFFF" Icon="ic_cimscandevices.png">
+        <pages:BasePage Title="CIMScan Devices" BackgroundColor="#FFFFFF" Icon="nav_CimscanDevices.png">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -125,7 +125,7 @@
             </Grid>
         </pages:BasePage>
 
-        <pages:BasePage Title="All Other Devices" BackgroundColor="#FFFFFF" Icon="ic_otherdevices.png">
+        <pages:BasePage Title="All Other Devices" BackgroundColor="#FFFFFF" Icon="nav_OtherDevices.png">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
