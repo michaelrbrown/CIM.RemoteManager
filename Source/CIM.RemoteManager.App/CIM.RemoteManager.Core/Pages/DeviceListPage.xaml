@@ -78,7 +78,7 @@
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <Image HorizontalOptions="End" Source="bluetoothinfo.png" VerticalOptions="Center" />
+                        <Image HorizontalOptions="End" Source="ic_BluetoothInfo.png" VerticalOptions="Center" />
                         <Label Grid.Column="1" FontSize="18" Text="{Binding StateText}" TextColor="{StaticResource BTLEStatusTextColor}" VerticalOptions="Center" />
                     </Grid>
                 </StackLayout>
@@ -141,7 +141,7 @@
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <Image HorizontalOptions="End" IsVisible="False" Source="bluetoothinfo.png" VerticalOptions="Center" />
+                        <Image HorizontalOptions="End" IsVisible="False" Source="ic_BluetoothInfo.png" VerticalOptions="Center" />
                         <Label Grid.Column="1"
                                FontSize="18" IsVisible="False"
                                Text="{Binding StateText}"

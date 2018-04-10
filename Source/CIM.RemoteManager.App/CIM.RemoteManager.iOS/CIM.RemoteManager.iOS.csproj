@@ -391,40 +391,28 @@
     <BundleResource Include="Icon-Small-50%402x.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_bluetoothconnected.png" />
+    <Content Include="Resources\ic_BluetoothInfo.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_bluetoothsearch.png" />
+    <BundleResource Include="Resources\SensorTemperature.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_connectprevious.png" />
+    <BundleResource Include="Resources\SensorBaromicPressure.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_stopsearching.png" />
+    <BundleResource Include="Resources\SensorC02.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\bluetoothinfo.png" />
+    <BundleResource Include="Resources\SensorDifferentialPressure.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\TemperatureSensor.png" />
+    <BundleResource Include="Resources\SensorFridgeTemperature.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\baromicpressuresensor.png" />
+    <BundleResource Include="Resources\SensorHumidity.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\c02sensor.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\differentialpressuresensor.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\fridgetemperaturesensor.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\humiditysensor.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\oventempsensor.png" />
+    <BundleResource Include="Resources\SensorOvenTemperature.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\da12.png" />
@@ -448,7 +436,7 @@
     <BundleResource Include="Resources\remote512.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_remotesettings.png" />
+    <BundleResource Include="Resources\nav_RemoteSettings.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\nav_SensorStatistics.png" />
@@ -463,25 +451,22 @@
     <BundleResource Include="Resources\nav_SensorLimits.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_refreshsensordata.png" />
+    <BundleResource Include="Resources\nav_RefreshSensorData.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\oxygensensor.png" />
+    <BundleResource Include="Resources\SensorOxygen.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\defaultSensor.png" />
+    <BundleResource Include="Resources\SensorDefault.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\airflowsensor.png" />
+    <BundleResource Include="Resources\SensorAirflow.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\particlecountsensor.png" />
+    <BundleResource Include="Resources\SensorParticleCount.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\ic_save.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_debug.png" />
+    <BundleResource Include="Resources\ic_Debug.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\nav_CimscanDevices.png" />

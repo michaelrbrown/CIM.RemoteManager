@@ -145,7 +145,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                     return ImageSource.FromFile(SensorType.GetSensorTypeResult().SensorImage);
                 }
                 // Default image if nothing found
-                return ImageSource.FromFile("defaultSensor.png");
+                return ImageSource.FromFile("SensorDefault.png");
             }
         }
 
