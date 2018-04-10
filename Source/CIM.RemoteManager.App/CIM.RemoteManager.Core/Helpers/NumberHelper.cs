@@ -29,7 +29,8 @@ namespace CIM.RemoteManager.Core.Helpers
         /// <returns><code>Generic Type</code></returns>
         public static T SafeConvert<T>(this string stringValue, T defaultValue, bool isHex = false)
         {
-            if (string.IsNullOrEmpty(stringValue)) return defaultValue;
+            if (string.IsNullOrWhiteSpace(stringValue)) return defaultValue;
+            // Return converted value
             return (T)Convert.ChangeType(stringValue, typeof(T));
         }
 
@@ -40,8 +41,8 @@ namespace CIM.RemoteManager.Core.Helpers
         /// <returns>Float</returns>
         public static int SafeHexToInt(this string hexValue)
         {
-            if (String.IsNullOrEmpty(hexValue)) return 0;
-
+            if (String.IsNullOrWhiteSpace(hexValue)) return 0;
+            // Return converted value
             return int.Parse(hexValue, System.Globalization.NumberStyles.HexNumber);
         }
 
@@ -52,8 +53,8 @@ namespace CIM.RemoteManager.Core.Helpers
         /// <returns>double</returns>
         public static double SafeHexToDouble(this string hexValue)
         {
-            if (String.IsNullOrEmpty(hexValue)) return 0;
-
+            if (String.IsNullOrWhiteSpace(hexValue)) return 0;
+            // Return converted value
             hexValue = hexValue.Replace("x", string.Empty);
             int.TryParse(hexValue, System.Globalization.NumberStyles.HexNumber, null, out int result);
             return Convert.ToDouble(result);
@@ -66,8 +67,8 @@ namespace CIM.RemoteManager.Core.Helpers
         /// <returns>decimal</returns>
         public static decimal SafeHexToDecimal(this string hexValue)
         {
-            if (String.IsNullOrEmpty(hexValue)) return 0;
-
+            if (String.IsNullOrWhiteSpace(hexValue)) return 0;
+            // Return converted value
             hexValue = hexValue.Replace("x", string.Empty);
             int.TryParse(hexValue, System.Globalization.NumberStyles.HexNumber, null, out int result);
             return Convert.ToDecimal(result);

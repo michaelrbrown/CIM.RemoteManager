@@ -397,9 +397,6 @@
     <BundleResource Include="Resources\ic_bluetoothsearch.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\stop.png" />
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="Resources\ic_connectprevious.png" />
   </ItemGroup>
   <ItemGroup>
