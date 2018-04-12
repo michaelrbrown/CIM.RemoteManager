@@ -1,14 +1,14 @@
 using Acr.UserDialogs;
-using Android;
 using Android.App;
 using Android.Content.PM;
 using Android.OS;
-using Android.Support.V4.App;
-using Android.Support.V4.Content;
+using HockeyApp.Android;
+using HockeyApp.Android.Metrics;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Core.Views;
 using MvvmCross.Forms.Droid.Presenters;
 using MvvmCross.Platform;
+using Plugin.Permissions;
 using Syncfusion.SfBusyIndicator.XForms.Droid;
 using Syncfusion.SfChart.XForms.Droid;
 using Xamarin.Forms;
@@ -26,25 +26,28 @@ namespace CIM.RemoteManager.Android
 
             base.OnCreate(bundle);
 
-            UserDialogs.Init(this);
-            // FFImageloading init
-            //CachedImageRenderer.Init(enableFastRenderer: true);
             Forms.Init(this, bundle);
+
+            // Get instance of PCL
             var formsApp = new CIM.RemoteManager.Core.BleMvxFormsApp();
+            // Load app
             LoadApplication(formsApp);
 
-            var presenter = (MvxFormsDroidPagePresenter) Mvx.Resolve<IMvxViewPresenter>();
-            presenter.FormsApplication = formsApp;
-
-            Mvx.Resolve<IMvxAppStart>().Start();
-
+            // Init user dialogs
+            UserDialogs.Init(this);
             // Init SyncFusion controls
             new SfChartRenderer();
             new SfBusyIndicatorRenderer();
-            //SfListViewRenderer.Init();
-            //SegmentedControlRenderer.Init();
-            //SfPopupLayoutRenderer.Init();
 
+            // Inject MvxViewPresenter
+            var presenter = (MvxFormsDroidPagePresenter) Mvx.Resolve<IMvxViewPresenter>();
+            presenter.FormsApplication = formsApp;
+            // Now start the app
+            Mvx.Resolve<IMvxAppStart>().Start();
+
+
+
+            // HockeyApp
             CheckForUpdates();
         }
 
@@ -55,45 +58,68 @@ namespace CIM.RemoteManager.Android
         {
             base.OnStart();
 
-            if (ContextCompat.CheckSelfPermission(this, "") != Permission.Granted)
-            {
-                ActivityCompat.RequestPermissions(this, new string[] { Manifest.Permission.AccessCoarseLocation, Manifest.Permission.AccessFineLocation }, 0);
-            }
-            else
-            {
-                System.Diagnostics.Debug.WriteLine("Permission Granted!!!");
-            }
+            //if (ContextCompat.CheckSelfPermission(this, "") != Permission.Granted)
+            //{
+            //    ActivityCompat.RequestPermissions(this, new string[] { Manifest.Permission.AccessCoarseLocation, Manifest.Permission.AccessFineLocation }, 0);
+            //}
+            //else
+            //{
+            //    System.Diagnostics.Debug.WriteLine("Permission Granted!!!");
+            //}
         }
 
+        /// <summary>
+        /// Called when [resume].
+        /// </summary>
         protected override void OnResume()
         {
             base.OnResume();
-            //CrashManager.Register(this, "7941bf481049476ca868b71fb4deadaa");
-            // in your main activity OnCreate-method add:
-            //MetricsManager.Register(Application, "7941bf481049476ca868b71fb4deadaa");
+            CrashManager.Register(this, "7941bf481049476ca868b71fb4deadaa");
+            MetricsManager.Register(Application, "7941bf481049476ca868b71fb4deadaa");
         }
 
+        /// <summary>
+        /// Checks for updates.
+        /// </summary>
         private void CheckForUpdates()
         {
             // Remove this for store builds!
-            //UpdateManager.Register(this, "7941bf481049476ca868b71fb4deadaa");
+            UpdateManager.Register(this, "7941bf481049476ca868b71fb4deadaa");
         }
 
+        /// <summary>
+        /// Unregisters HockyApp update manager
+        /// </summary>
         private void UnregisterManagers()
         {
-            //UpdateManager.Unregister();
+            UpdateManager.Unregister();
         }
 
+        /// <summary>
+        /// Called when [pause].
+        /// </summary>
         protected override void OnPause()
         {
             base.OnPause();
             UnregisterManagers();
         }
 
+        /// <summary>
+        /// Called when [destroy].
+        /// </summary>
         protected override void OnDestroy()
         {
             base.OnDestroy();
             UnregisterManagers();
+        }
+
+        /// <summary>
+        /// Get our app's location permissions.
+        /// Prompt's the user for permission.
+        /// </summary>
+        private async void GetLocationPermissions()
+        {
+            await CrossPermissions.Current.CheckPermissionStatusAsync(Plugin.Permissions.Abstractions.Permission.LocationAlways);
         }
 
     }

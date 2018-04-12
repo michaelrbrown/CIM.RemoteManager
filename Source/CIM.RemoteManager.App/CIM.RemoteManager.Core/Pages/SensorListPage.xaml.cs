@@ -7,9 +7,16 @@ using ItemTappedEventArgs = Syncfusion.ListView.XForms.ItemTappedEventArgs;
 
 namespace CIM.RemoteManager.Core.Pages
 {
+    /// <summary>
+    /// Class SensorListPage.
+    /// </summary>
+    /// <seealso cref="CIM.RemoteManager.Core.Pages.BasePage" />
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SensorListPage
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SensorListPage"/> class.
+        /// </summary>
         public SensorListPage()
         {
             InitializeComponent();

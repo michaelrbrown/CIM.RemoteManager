@@ -150,13 +150,11 @@
     <Reference Include="MvvmCross.Plugins.Messenger, Version=5.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\MvvmCross.Plugin.Messenger.5.1.0\lib\MonoAndroid\MvvmCross.Plugins.Messenger.dll</HintPath>
     </Reference>
-    <Reference Include="Plugin.Permissions">
-      <HintPath>..\..\packages\Plugin.Permissions.2.0.1\lib\MonoAndroid10\Plugin.Permissions.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Plugin.Permissions, Version=2.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Plugin.Permissions.2.2.1\lib\MonoAndroid10\Plugin.Permissions.dll</HintPath>
     </Reference>
-    <Reference Include="Plugin.Permissions.Abstractions">
-      <HintPath>..\..\packages\Plugin.Permissions.2.0.1\lib\MonoAndroid10\Plugin.Permissions.Abstractions.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Plugin.Permissions.Abstractions, Version=2.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Plugin.Permissions.2.2.1\lib\MonoAndroid10\Plugin.Permissions.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="Plugin.Settings, Version=3.1.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Xam.Plugins.Settings.3.1.1\lib\MonoAndroid10\Plugin.Settings.dll</HintPath>
@@ -373,42 +371,44 @@
     <AndroidResource Include="Resources\values\SplashStyle.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\values\colors.xml" />
+    <AndroidResource Include="Resources\values\colors.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\style.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\drawable\DA12.png" />
+    <AndroidResource Include="Resources\drawable\DA12.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\drawable\ic_BluetoothInfo.png" />
-    <EmbeddedResource Include="Resources\drawable\ic_Debug.png" />
-    <EmbeddedResource Include="Resources\drawable\nav_CimscanDevices.png" />
-    <EmbeddedResource Include="Resources\drawable\nav_OtherDevices.png" />
-    <EmbeddedResource Include="Resources\drawable\nav_RefreshSensorData.png" />
-    <EmbeddedResource Include="Resources\drawable\nav_RemoteSettings.png" />
-    <EmbeddedResource Include="Resources\drawable\nav_SensorLimits.png" />
-    <EmbeddedResource Include="Resources\drawable\nav_SensorPlot.png" />
-    <EmbeddedResource Include="Resources\drawable\nav_SensorSettings.png" />
-    <EmbeddedResource Include="Resources\drawable\nav_SensorStatistics.png" />
-    <EmbeddedResource Include="Resources\drawable\remote512.png" />
-    <EmbeddedResource Include="Resources\drawable\rssi_1.png" />
-    <EmbeddedResource Include="Resources\drawable\rssi_2.png" />
-    <EmbeddedResource Include="Resources\drawable\rssi_3.png" />
-    <EmbeddedResource Include="Resources\drawable\rssi_4.png" />
-    <EmbeddedResource Include="Resources\drawable\rssi_5.png" />
-    <EmbeddedResource Include="Resources\drawable\SensorAirflow.png" />
-    <EmbeddedResource Include="Resources\drawable\SensorBaromicPressure.png" />
-    <EmbeddedResource Include="Resources\drawable\SensorC02.png" />
-    <EmbeddedResource Include="Resources\drawable\SensorDefault.png" />
-    <EmbeddedResource Include="Resources\drawable\SensorDifferentialPressure.png" />
-    <EmbeddedResource Include="Resources\drawable\SensorFridgeTemperature.png" />
-    <EmbeddedResource Include="Resources\drawable\SensorHumidity.png" />
-    <EmbeddedResource Include="Resources\drawable\SensorOvenTemperature.png" />
-    <EmbeddedResource Include="Resources\drawable\SensorOxygen.png" />
-    <EmbeddedResource Include="Resources\drawable\SensorParticleCount.png" />
-    <EmbeddedResource Include="Resources\drawable\SensorTemperature.png" />
+    <AndroidResource Include="Resources\drawable\ic_BluetoothInfo.png" />
+    <AndroidResource Include="Resources\drawable\ic_Debug.png" />
+    <AndroidResource Include="Resources\drawable\nav_CimscanDevices.png" />
+    <AndroidResource Include="Resources\drawable\nav_OtherDevices.png" />
+    <AndroidResource Include="Resources\drawable\nav_RefreshSensorData.png" />
+    <AndroidResource Include="Resources\drawable\nav_RemoteSettings.png" />
+    <AndroidResource Include="Resources\drawable\nav_SensorLimits.png" />
+    <AndroidResource Include="Resources\drawable\nav_SensorPlot.png" />
+    <AndroidResource Include="Resources\drawable\nav_SensorSettings.png" />
+    <AndroidResource Include="Resources\drawable\nav_SensorStatistics.png" />
+    <AndroidResource Include="Resources\drawable\remote512.png" />
+    <AndroidResource Include="Resources\drawable\rssi_1.png" />
+    <AndroidResource Include="Resources\drawable\rssi_2.png" />
+    <AndroidResource Include="Resources\drawable\rssi_3.png" />
+    <AndroidResource Include="Resources\drawable\rssi_4.png" />
+    <AndroidResource Include="Resources\drawable\rssi_5.png" />
+    <AndroidResource Include="Resources\drawable\SensorAirflow.png" />
+    <AndroidResource Include="Resources\drawable\SensorBaromicPressure.png" />
+    <AndroidResource Include="Resources\drawable\SensorC02.png" />
+    <AndroidResource Include="Resources\drawable\SensorDefault.png" />
+    <AndroidResource Include="Resources\drawable\SensorDifferentialPressure.png" />
+    <AndroidResource Include="Resources\drawable\SensorFridgeTemperature.png" />
+    <AndroidResource Include="Resources\drawable\SensorHumidity.png" />
+    <AndroidResource Include="Resources\drawable\SensorOvenTemperature.png" />
+    <AndroidResource Include="Resources\drawable\SensorOxygen.png" />
+    <AndroidResource Include="Resources\drawable\SensorParticleCount.png" />
+    <AndroidResource Include="Resources\drawable\SensorTemperature.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
