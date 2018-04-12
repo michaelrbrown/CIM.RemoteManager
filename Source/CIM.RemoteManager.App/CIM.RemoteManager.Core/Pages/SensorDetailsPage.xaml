@@ -55,7 +55,8 @@
 
                 <StackLayout Grid.Column="1"
                              Margin="0,10,5,10"
-                             HeightRequest="50" HorizontalOptions="FillAndExpand" Orientation="Vertical" Spacing="0" VerticalOptions="FillAndExpand">
+                             HeightRequest="50" HorizontalOptions="FillAndExpand" Orientation="Vertical" Spacing="0"
+                             VerticalOptions="FillAndExpand">
                     <!-- Sensor Name -->
                     <Label Margin="5,0,0,0"
                            FontSize="18" HorizontalOptions="Start" HorizontalTextAlignment="Center"
@@ -75,7 +76,8 @@
                              HorizontalOptions="FillAndExpand" Orientation="Vertical" Spacing="0" VerticalOptions="FillAndExpand">
                     <!-- Sensor Index -->
                     <Label Margin="5,5,10,0"
-                           FontSize="12" HorizontalOptions="Center" HorizontalTextAlignment="Center" LineBreakMode="NoWrap" Text="Sensor Index"
+                           FontSize="12" HorizontalOptions="Center" HorizontalTextAlignment="Center" LineBreakMode="NoWrap"
+                           Text="Sensor Index"
                            TextColor="{StaticResource HeaderTextColor}"
                            VerticalOptions="Center" />
                     <!-- Sensor Index -->
@@ -89,7 +91,8 @@
 
             <!-- Segmented Control -->
             <StackLayout Grid.Row="1"
-                         HeightRequest="50" HorizontalOptions="FillAndExpand" Orientation="Horizontal" Spacing="0" VerticalOptions="FillAndExpand">
+                         HeightRequest="50" HorizontalOptions="FillAndExpand" Orientation="Horizontal" Spacing="0"
+                         VerticalOptions="FillAndExpand">
 
                 <abstractions:SegmentedControl x:Name="SegControl"
                                                HorizontalOptions="CenterAndExpand" SelectedSegment="0"
@@ -192,7 +195,8 @@
 
                     <StackLayout Grid.Column="1"
                                  Margin="0,10,5,10"
-                                 HeightRequest="50" HorizontalOptions="FillAndExpand" Orientation="Vertical" Spacing="0" VerticalOptions="FillAndExpand">
+                                 HeightRequest="50" HorizontalOptions="FillAndExpand" Orientation="Vertical" Spacing="0"
+                                 VerticalOptions="FillAndExpand">
                         <!-- Sensor Name -->
                         <Label Margin="5,0,0,0"
                                FontSize="18" HorizontalOptions="Start" HorizontalTextAlignment="Center"
@@ -212,7 +216,8 @@
                                  HorizontalOptions="FillAndExpand" Orientation="Vertical" Spacing="0" VerticalOptions="FillAndExpand">
                         <!-- Sensor Index -->
                         <Label Margin="5,5,10,0"
-                               FontSize="12" HorizontalOptions="Center" HorizontalTextAlignment="Center" LineBreakMode="NoWrap" Text="Sensor Index"
+                               FontSize="12" HorizontalOptions="Center" HorizontalTextAlignment="Center" LineBreakMode="NoWrap"
+                               Text="Sensor Index"
                                TextColor="{StaticResource HeaderTextColor}"
                                VerticalOptions="Center" />
                         <!-- Sensor Index -->
@@ -330,7 +335,8 @@
 
                     <StackLayout Grid.Column="1"
                                  Margin="0,10,5,10"
-                                 HeightRequest="50" HorizontalOptions="FillAndExpand" Orientation="Vertical" Spacing="0" VerticalOptions="FillAndExpand">
+                                 HeightRequest="50" HorizontalOptions="FillAndExpand" Orientation="Vertical" Spacing="0"
+                                 VerticalOptions="FillAndExpand">
                         <!-- Sensor Name -->
                         <Label Margin="5,0,0,0"
                                FontSize="18" HorizontalOptions="Start" HorizontalTextAlignment="Center"
@@ -350,7 +356,8 @@
                                  HorizontalOptions="FillAndExpand" Orientation="Vertical" Spacing="0" VerticalOptions="FillAndExpand">
                         <!-- Sensor Index -->
                         <Label Margin="5,5,10,0"
-                               FontSize="12" HorizontalOptions="Center" HorizontalTextAlignment="Center" LineBreakMode="NoWrap" Text="Sensor Index"
+                               FontSize="12" HorizontalOptions="Center" HorizontalTextAlignment="Center" LineBreakMode="NoWrap"
+                               Text="Sensor Index"
                                TextColor="{StaticResource HeaderTextColor}"
                                VerticalOptions="Center" />
                         <!-- Sensor Index -->
@@ -463,7 +470,8 @@
 
                     <StackLayout Grid.Column="1"
                                  Margin="0,10,5,10"
-                                 HeightRequest="50" HorizontalOptions="FillAndExpand" Orientation="Vertical" Spacing="0" VerticalOptions="FillAndExpand">
+                                 HeightRequest="50" HorizontalOptions="FillAndExpand" Orientation="Vertical" Spacing="0"
+                                 VerticalOptions="FillAndExpand">
                         <!-- Sensor Name -->
                         <Label Margin="5,0,0,0"
                                FontSize="18" HorizontalOptions="Start" HorizontalTextAlignment="Center"
@@ -483,7 +491,8 @@
                                  HorizontalOptions="FillAndExpand" Orientation="Vertical" Spacing="0" VerticalOptions="FillAndExpand">
                         <!-- Sensor Index -->
                         <Label Margin="5,5,10,0"
-                               FontSize="12" HorizontalOptions="Center" HorizontalTextAlignment="Center" LineBreakMode="NoWrap" Text="Sensor Index"
+                               FontSize="12" HorizontalOptions="Center" HorizontalTextAlignment="Center" LineBreakMode="NoWrap"
+                               Text="Sensor Index"
                                TextColor="{StaticResource HeaderTextColor}"
                                VerticalOptions="Center" />
                         <!-- Sensor Index -->

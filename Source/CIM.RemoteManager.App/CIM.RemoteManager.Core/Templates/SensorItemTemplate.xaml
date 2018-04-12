@@ -18,7 +18,8 @@
                 <Frame Grid.Column="0"
                        Margin="0" Padding="0"
                        BackgroundColor="{Binding AlarmStatus, Converter={StaticResource AlarmStatusColorConverter}}"
-                       CornerRadius="0" HasShadow="False" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" WidthRequest="10" />
+                       CornerRadius="0" HasShadow="False" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                       WidthRequest="10" />
 
                 <!-- Sensor Inner Wrapper -->
                 <StackLayout Grid.Column="1" Margin="0" Padding="0" Spacing="0">

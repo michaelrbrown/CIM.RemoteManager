@@ -35,7 +35,8 @@
                                 <!-- Blue Indicator of Active Connection -->
                                 <Frame Grid.Column="0"
                                        BackgroundColor="{StaticResource DeviceFrameTextColor}"
-                                       CornerRadius="0" HasShadow="False" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" WidthRequest="5" />
+                                       CornerRadius="0" HasShadow="False" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                                       WidthRequest="5" />
 
                                 <!-- Device Name and GUID -->
                                 <StackLayout Grid.Column="1" Margin="5,0,0,0" Orientation="Vertical" VerticalOptions="CenterAndExpand">
