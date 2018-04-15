@@ -25,9 +25,9 @@ namespace CIM.RemoteManager.Core.Pages
             BindingContext = this;
 
             // Add device settings toolbar icon and handle selection
-            ToolbarItems.Add(new ToolbarItem("Device Settings", "nav_RemoteSettings.png", () =>
-            {
-            }, ToolbarItemOrder.Primary, 0));
+            //ToolbarItems.Add(new ToolbarItem("Device Settings", "nav_RemoteSettings.png", () =>
+            //{
+            //}, ToolbarItemOrder.Primary, 0));
         }
 
         /// <summary>
@@ -51,21 +51,23 @@ namespace CIM.RemoteManager.Core.Pages
         }
 
         /// <summary>
-        /// Get sensor index on item double tapped
+        /// Handles the ItemTapped event of the listView control.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="itemTappedEventArgs"></param>
-        private void SensorListView_OnItemDoubleTapped(object sender, ItemDoubleTappedEventArgs itemTappedEventArgs)
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="itemTappedEventArgs">The <see cref="Telerik.XamarinForms.DataControls.ListView.ItemTapEventArgs"/> instance containing the event data.</param>
+        private void listView_ItemTapped(object sender, Telerik.XamarinForms.DataControls.ListView.ItemTapEventArgs itemTappedEventArgs)
         {
             //var sensorPlotPage = new SensorPlotPage();
-            if (itemTappedEventArgs.ItemData is Sensor sensorItem)
+            if (itemTappedEventArgs.Item is Sensor sensorItem)
             {
                 //sensorPlotPage.BindingContext = sensorItem;
                 var sensorListViewModel = (SensorListViewModel)this.BindingContext;
                 // Navigate to sensor details view model (for plot, statistics, limits, and sensor settings)
+
+                DisplayAlert("mb", $"id: {sensorItem.SerialNumber}", "OK");
+
                 sensorListViewModel.NavigateToSensorDetailsPage(sensorItem);
             }
         }
-
     }
 }

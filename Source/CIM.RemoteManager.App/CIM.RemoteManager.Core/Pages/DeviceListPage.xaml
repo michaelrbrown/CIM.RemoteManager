@@ -13,7 +13,9 @@
                         <MenuItem Command="{Binding Path=BindingContext.DisconnectCommand, Source={x:Reference DevicePage}}" CommandParameter="{Binding .}" IsDestructive="True" Text="Disconnect" />
                     </ViewCell.ContextActions>
 
-                    <Grid>
+                    <!-- Device Outer Wrapper -->
+                    <!-- Margin: left, top, right, bottom -->
+                    <Grid Margin="0,0,5,0">
 
                         <!-- IsConnected Trigger (highlights background) -->
                         <Grid.Triggers>

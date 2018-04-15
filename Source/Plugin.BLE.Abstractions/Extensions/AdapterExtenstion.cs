@@ -47,11 +47,25 @@ namespace Plugin.BLE.Abstractions.Extensions
             return adapter.StartScanningForDevicesAsync(deviceFilter: deviceFilter, cancellationToken: cancellationToken);
         }
 
+        /// <summary>
+        /// Discovers the device asynchronous.
+        /// </summary>
+        /// <param name="adapter">The adapter.</param>
+        /// <param name="deviceId">The device identifier.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns>Task&lt;IDevice&gt;.</returns>
         public static Task<IDevice> DiscoverDeviceAsync(this IAdapter adapter, Guid deviceId, CancellationToken cancellationToken = default(CancellationToken))
         {
             return DiscoverDeviceAsync(adapter, device => device.Id == deviceId, cancellationToken);
         }
 
+        /// <summary>
+        /// discover device as an asynchronous operation.
+        /// </summary>
+        /// <param name="adapter">The adapter.</param>
+        /// <param name="deviceFilter">The device filter.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns>Task&lt;IDevice&gt;.</returns>
         public static async Task<IDevice> DiscoverDeviceAsync(this IAdapter adapter, Func<IDevice, bool> deviceFilter, CancellationToken cancellationToken = default(CancellationToken))
         {
             var device = adapter.DiscoveredDevices.FirstOrDefault(deviceFilter);

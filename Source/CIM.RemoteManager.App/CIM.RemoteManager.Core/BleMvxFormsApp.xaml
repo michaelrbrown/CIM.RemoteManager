@@ -35,14 +35,14 @@
 
             <!-- Sensor Colors -->
             <Color x:Key="DeviceFrameTextColor">#0097DF</Color>
-            <Color x:Key="DeviceNameTextColor">#01649D</Color>
+            <Color x:Key="DeviceNameTextColor">#FFFFFF</Color>
             <Color x:Key="DeviceIdTextColor">#7B7B7B</Color>
             <Color x:Key="BluetoothStatusTextColor">#01649D</Color>
             <Color x:Key="RemoteNameBackgroundColor">#01649D</Color>
-            <Color x:Key="GroupBackgroundColor">#FFFFFF</Color>
+            <Color x:Key="GroupBackgroundColor">#01649D</Color>
             <Color x:Key="CardBackgroundColor">#FFFFFF</Color>
             <Color x:Key="FooterBackgroundColor">#D8EDF9</Color>
-            <Color x:Key="GroupTextColor">#262E33</Color>
+            <Color x:Key="GroupTextColor">#FFFFFF</Color>
             <Color x:Key="NameTextColor">#01649D</Color>
             <Color x:Key="SensorTypeTextColor">#7B7B7B</Color>
             <Color x:Key="TimeStampTextColor">#3580C6</Color>
@@ -163,7 +163,7 @@
                 <Setter Property="WidthRequest" Value="160" />
                 <Setter Property="HeightRequest" Value="35" />
                 <Setter Property="Padding" Value="10" />
-                <Setter Property="Margin" Value="5" />
+                <Setter Property="Margin" Value="5,5,-20,5" />
                 <Setter Property="BackgroundColor" Value="{StaticResource FooterBackgroundColor}" />
                 <Setter Property="OutlineColor" Value="{StaticResource OutlineColor}" />
             </Style>

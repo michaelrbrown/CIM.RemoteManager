@@ -24,6 +24,9 @@
                 <!-- Sensor Inner Wrapper -->
                 <StackLayout Grid.Column="1" Margin="0" Padding="0" Spacing="0">
 
+                    <!-- Border Line -->
+                    <BoxView Style="{StaticResource LightShadowStyle}" />
+
                     <Grid Style="{StaticResource CardStyle}">
 
                         <!-- Sensor Image, Name/Type/Index/Status, Average Value/Unit -->
@@ -65,9 +68,6 @@
                         </StackLayout>
 
                     </Grid>
-
-                    <!-- Border Line -->
-                    <BoxView Style="{StaticResource LightShadowStyle}" />
 
                     <!-- Sensor Footer Wrapper -->
                     <Grid Style="{StaticResource Footer}">
