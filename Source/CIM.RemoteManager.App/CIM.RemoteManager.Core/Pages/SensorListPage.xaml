@@ -1,6 +1,7 @@
 ﻿<pages:BasePage x:Class="CIM.RemoteManager.Core.Pages.SensorListPage"
                 xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                xmlns:dataSource="clr-namespace:Syncfusion.DataSource;assembly=Syncfusion.DataSource.Portable" xmlns:pages="clr-namespace:CIM.RemoteManager.Core.Pages;assembly=CIM.RemoteManager.Core" xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms" xmlns:templates="clr-namespace:CIM.RemoteManager.Core.Templates;assembly=CIM.RemoteManager.Core"
+                xmlns:dataSource="clr-namespace:Syncfusion.DataSource;assembly=Syncfusion.DataSource.Portable" xmlns:pages="clr-namespace:CIM.RemoteManager.Core.Pages;assembly=CIM.RemoteManager.Core" xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms" xmlns:telerikDataControls="clr-namespace:Telerik.XamarinForms.DataControls;assembly=Telerik.XamarinForms.DataControls"
+                xmlns:telerikListView="clr-namespace:Telerik.XamarinForms.DataControls.ListView;assembly=Telerik.XamarinForms.DataControls" xmlns:templates="clr-namespace:CIM.RemoteManager.Core.Templates;assembly=CIM.RemoteManager.Core"
                 Title="Sensors"
                 Padding="0"
                 BackgroundColor="#FFFFFF">
@@ -9,6 +10,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="70" />
         </Grid.RowDefinitions>
 
         <!-- BTLE Status -->
@@ -24,97 +26,32 @@
         </StackLayout>
 
         <!-- Sensor ListView -->
-        <syncfusion:SfListView x:Name="SensorLiistView"
-                               Grid.Row="1"
-                               Margin="0" Padding="0"
-                               AllowSwiping="False" HeaderSize="40" IsStickyFooter="True" IsStickyGroupHeader="True"
-                               ItemDoubleTapped="SensorListView_OnItemDoubleTapped" ItemSize="116" ItemSpacing="0"
-                               ItemsSource="{Binding SensorCollection}"
-                               SelectionBackgroundColor="Transparent">
-
-            <!-- Sensor ListView Group DataSource -->
-            <syncfusion:SfListView.DataSource>
-                <dataSource:DataSource>
-                    <dataSource:DataSource.GroupDescriptors>
-                        <dataSource:GroupDescriptor PropertyName="SensorTypeGroup" />
-                    </dataSource:DataSource.GroupDescriptors>
-                </dataSource:DataSource>
-            </syncfusion:SfListView.DataSource>
-
-            <!-- Layout Manager (provides columns on higher resolution devices) -->
-            <syncfusion:SfListView.LayoutManager>
-                <syncfusion:GridLayout>
-                    <syncfusion:GridLayout.SpanCount>
-                        <OnPlatform x:TypeArguments="x:Int32">
-                            <OnPlatform.Android>
-                                <OnIdiom x:TypeArguments="x:Int32" Phone="1" Tablet="2" />
-                            </OnPlatform.Android>
-                            <OnPlatform.iOS>
-                                <OnIdiom x:TypeArguments="x:Int32" Phone="1" Tablet="2" />
-                            </OnPlatform.iOS>
-                        </OnPlatform>
-                    </syncfusion:GridLayout.SpanCount>
-                </syncfusion:GridLayout>
-            </syncfusion:SfListView.LayoutManager>
-
-            <!-- Sensor ListView Header Template -->
-            <syncfusion:SfListView.HeaderTemplate>
+        <telerikDataControls:RadListView x:Name="listView" Grid.Row="1" ItemsSource="{Binding SensorCollection}">
+            <telerikDataControls:RadListView.ItemTemplate>
                 <DataTemplate>
-                    <StackLayout BackgroundColor="{StaticResource RemoteNameBackgroundColor}"
-                                 HeightRequest="40" HorizontalOptions="FillAndExpand" Orientation="Horizontal" Spacing="0"
-                                 VerticalOptions="FillAndExpand">
-                        <Label FontSize="20" HorizontalOptions="CenterAndExpand" Text="{Binding DeviceName}" TextColor="{StaticResource HeaderTextColor}" VerticalOptions="Center" />
-                    </StackLayout>
+                    <telerikListView:ListViewTemplateCell>
+                        <telerikListView:ListViewTemplateCell.View>
+                            <StackLayout>
+                                <Label Text="{Binding Name}" />
+                            </StackLayout>
+                        </telerikListView:ListViewTemplateCell.View>
+                    </telerikListView:ListViewTemplateCell>
                 </DataTemplate>
-            </syncfusion:SfListView.HeaderTemplate>
+            </telerikDataControls:RadListView.ItemTemplate>
+        </telerikDataControls:RadListView>
 
-            <!-- Sensor ListView Group Template -->
-            <syncfusion:SfListView.GroupHeaderTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <ViewCell.View>
-                            <Grid Margin="0" Padding="0"
-                                  ColumnSpacing="0" HorizontalOptions="FillAndExpand" RowSpacing="0" VerticalOptions="FillAndExpand">
-                                <!-- Sensor Group Name -->
-                                <Label Margin="0,5,0,5"
-                                       FontSize="20" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center"
-                                       Text="{Binding Key, Converter={StaticResource UpperCaseConverter}}"
-                                       TextColor="{StaticResource GroupTextColor}"
-                                       VerticalOptions="Center" VerticalTextAlignment="Center" WidthRequest="225" />
-                            </Grid>
-                        </ViewCell.View>
-                    </ViewCell>
-                </DataTemplate>
-            </syncfusion:SfListView.GroupHeaderTemplate>
-
-            <!-- Sensor ListView Item Template -->
-            <syncfusion:SfListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <!-- Sensor Detail Template -->
-                        <templates:SensorItemTemplate />
-                    </ViewCell>
-                </DataTemplate>
-            </syncfusion:SfListView.ItemTemplate>
-
-            <!-- Sensor ListView Footer Template -->
-            <syncfusion:SfListView.FooterTemplate>
-                <DataTemplate>
-                    <!-- Margin: left, top, right, bottom -->
-                    <StackLayout BackgroundColor="{StaticResource RemoteNameBackgroundColor}"
-                                 HeightRequest="60" HorizontalOptions="FillAndExpand" Orientation="Horizontal" Spacing="0"
-                                 VerticalOptions="FillAndExpand">
-                        <!-- Sensor BTLE Characteristic Incoming Values -->
-                        <Label Margin="5"
-                               FontSize="16" HorizontalOptions="StartAndExpand" LineBreakMode="MiddleTruncation"
-                               Text="{Binding CharacteristicValue, StringFormat=' Incoming Value: {0:N}'}"
-                               TextColor="{StaticResource AppLightColor}"
-                               VerticalOptions="CenterAndExpand" VerticalTextAlignment="Center" />
-                    </StackLayout>
-                </DataTemplate>
-            </syncfusion:SfListView.FooterTemplate>
-
-        </syncfusion:SfListView>
+        <!-- Margin: left, top, right, bottom -->
+        <StackLayout Grid.Row="2"
+                     BackgroundColor="{StaticResource RemoteNameBackgroundColor}"
+                     HeightRequest="60" HorizontalOptions="FillAndExpand" Orientation="Horizontal" Spacing="0"
+                     VerticalOptions="FillAndExpand">
+            <!-- Sensor BTLE Characteristic Incoming Values -->
+            <Label Margin="5"
+                   FontSize="16" HorizontalOptions="StartAndExpand" LineBreakMode="MiddleTruncation"
+                   Text="{Binding CharacteristicValue, StringFormat=' Incoming Value: {0:N}'}"
+                   TextColor="{StaticResource AppLightColor}"
+                   VerticalOptions="CenterAndExpand" VerticalTextAlignment="Center" />
+        </StackLayout>
 
     </Grid>
 

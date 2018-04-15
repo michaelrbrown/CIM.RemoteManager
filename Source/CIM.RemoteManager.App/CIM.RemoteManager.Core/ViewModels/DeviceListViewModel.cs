@@ -301,7 +301,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             Adapter.ScanTimeoutElapsed += Adapter_ScanTimeoutElapsed;
             Adapter.DeviceDisconnected += OnDeviceDisconnected;
             Adapter.DeviceConnectionLost += OnDeviceConnectionLost;
-            //Adapter.DeviceConnected += (sender, e) => Adapter.DisconnectDeviceAsync(e.Device);
+            Adapter.DeviceConnected += (sender, e) => Adapter.DisconnectDeviceAsync(e.Device);
 
             // Kick off a scan on load
             TryStartScanning(false);
@@ -642,9 +642,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             }
             catch
             {
-                //_userDialogs.ErrorToast("Connection Error", $"Cannot connect to device, ensure it's not in use.", TimeSpan.FromSeconds(5));
                 _userDialogs.Alert($"Cannot connect to device, ensure it's not in use.", "Connection error");
-                //Mvx.Trace(ex.Message);
                 return false;
             }
             finally

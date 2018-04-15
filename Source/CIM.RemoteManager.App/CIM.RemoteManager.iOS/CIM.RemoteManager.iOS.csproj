@@ -55,7 +55,8 @@
     <MtouchArch>ARMv7, ARM64</MtouchArch>
     <CodesignKey>iPhone Developer</CodesignKey>
     <MtouchDebug>true</MtouchDebug>
-    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <CodesignEntitlements>
+    </CodesignEntitlements>
     <CodesignProvision>
     </CodesignProvision>
     <BuildIpa>true</BuildIpa>
@@ -242,14 +243,14 @@
     <Reference Include="Splat, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Splat.2.0.0\lib\Xamarin.iOS10\Splat.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.Core.XForms, Version=15.4451.0.20, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Syncfusion.Xamarin.Core.15.4.0.20\lib\Xamarin.iOS10\Syncfusion.Core.XForms.dll</HintPath>
+    <Reference Include="Syncfusion.Core.XForms, Version=16.1451.0.32, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Syncfusion.Xamarin.Core.16.1.0.32\lib\Xamarin.iOS10\Syncfusion.Core.XForms.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.DataSource.Portable, Version=15.4451.0.20, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Syncfusion.Xamarin.DataSource.15.4.0.20\lib\Xamarin.iOS10\Syncfusion.DataSource.Portable.dll</HintPath>
+    <Reference Include="Syncfusion.DataSource.Portable, Version=16.1451.0.32, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Syncfusion.Xamarin.DataSource.16.1.0.32\lib\Xamarin.iOS10\Syncfusion.DataSource.Portable.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.GridCommon.Portable, Version=15.4451.0.20, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Syncfusion.Xamarin.GridCommon.15.4.0.20\lib\Xamarin.iOS10\Syncfusion.GridCommon.Portable.dll</HintPath>
+    <Reference Include="Syncfusion.GridCommon.Portable, Version=16.1451.0.32, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Syncfusion.Xamarin.GridCommon.16.1.0.32\lib\Xamarin.iOS10\Syncfusion.GridCommon.Portable.dll</HintPath>
     </Reference>
     <Reference Include="Syncfusion.SfBusyIndicator.iOS, Version=15.4451.0.20, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Syncfusion.Xamarin.SfBusyIndicator.15.4.0.20\lib\Xamarin.iOS10\Syncfusion.SfBusyIndicator.iOS.dll</HintPath>
@@ -266,11 +267,11 @@
     <Reference Include="Syncfusion.SfChart.XForms.iOS, Version=16.1451.0.26, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Syncfusion.Xamarin.SfChart.16.1.0.26\lib\Xamarin.iOS10\Syncfusion.SfChart.XForms.iOS.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.SfListView.XForms, Version=15.4451.0.20, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Syncfusion.Xamarin.SfListView.15.4.0.20\lib\Xamarin.iOS10\Syncfusion.SfListView.XForms.dll</HintPath>
+    <Reference Include="Syncfusion.SfListView.XForms, Version=16.1451.0.32, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Syncfusion.Xamarin.SfListView.16.1.0.32\lib\Xamarin.iOS10\Syncfusion.SfListView.XForms.dll</HintPath>
     </Reference>
-    <Reference Include="Syncfusion.SfListView.XForms.iOS, Version=15.4451.0.20, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Syncfusion.Xamarin.SfListView.15.4.0.20\lib\Xamarin.iOS10\Syncfusion.SfListView.XForms.iOS.dll</HintPath>
+    <Reference Include="Syncfusion.SfListView.XForms.iOS, Version=16.1451.0.32, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Syncfusion.Xamarin.SfListView.16.1.0.32\lib\Xamarin.iOS10\Syncfusion.SfListView.XForms.iOS.dll</HintPath>
     </Reference>
     <Reference Include="Syncfusion.SfNumericTextBox.iOS, Version=15.4451.0.20, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Syncfusion.Xamarin.SfNumericTextBox.15.4.0.20\lib\Xamarin.iOS10\Syncfusion.SfNumericTextBox.iOS.dll</HintPath>
@@ -284,6 +285,21 @@
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
+    <Reference Include="Telerik.Xamarin.iOS">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Progress\Telerik UI for Xamarin R1 2018\Binaries\iOS\Telerik.Xamarin.iOS.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.XamarinForms.Common">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Progress\Telerik UI for Xamarin R1 2018\Binaries\iOS\Telerik.XamarinForms.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.XamarinForms.DataControls">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Progress\Telerik UI for Xamarin R1 2018\Binaries\iOS\Telerik.XamarinForms.DataControls.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.XamarinForms.Primitives">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Progress\Telerik UI for Xamarin R1 2018\Binaries\iOS\Telerik.XamarinForms.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.XamarinForms.SkiaSharp">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Progress\Telerik UI for Xamarin R1 2018\Binaries\iOS\Telerik.XamarinForms.SkiaSharp.dll</HintPath>
+    </Reference>
     <Reference Include="WebP.Touch, Version=1.0.6551.26920, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\WebP.Touch.1.0.7\lib\Xamarin.iOS10\WebP.Touch.dll</HintPath>
     </Reference>
