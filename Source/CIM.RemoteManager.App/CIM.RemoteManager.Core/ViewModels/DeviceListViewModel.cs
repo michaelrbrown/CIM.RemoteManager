@@ -259,17 +259,10 @@ namespace CIM.RemoteManager.Core.ViewModels
                     AddOrUpdateDevice(args.Device);
                 }
             }
-            catch { }
-        }
-
-        /// <summary>
-        /// Called when [device connected].
-        /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="DeviceEventArgs"/> instance containing the event data.</param>
-        private void OnDeviceConnected(object sender, DeviceEventArgs e)
-        {
-            _userDialogs.InfoToast($"Connected to {e.Device.Name}.", TimeSpan.FromSeconds(3));
+            catch (Exception)
+            {
+                //Application.Current.MainPage.DisplayAlert(ex.StackTrace, "", "Cancel");
+            }
         }
 
         /// <summary>
@@ -282,7 +275,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             Devices.FirstOrDefault(d => d.Id == e.Device.Id)?.Update();
             SystemDevices.FirstOrDefault(d => d.Id == e.Device.Id)?.Update();
             _userDialogs.HideLoading();
-            _userDialogs.InfoToast($"Disconnected from {e.Device.Name}.", TimeSpan.FromSeconds(3));
+            _userDialogs.InfoToast($"Disconnected {e.Device.Name}.", TimeSpan.FromSeconds(3));
         }
 
         #endregion
@@ -308,8 +301,8 @@ namespace CIM.RemoteManager.Core.ViewModels
             Adapter.ScanTimeoutElapsed += Adapter_ScanTimeoutElapsed;
             Adapter.DeviceDisconnected += OnDeviceDisconnected;
             Adapter.DeviceConnectionLost += OnDeviceConnectionLost;
-            Adapter.DeviceConnected += OnDeviceConnected;
-            
+            Adapter.DeviceConnected += (sender, e) => Adapter.DisconnectDeviceAsync(e.Device);
+
             // Kick off a scan on load
             TryStartScanning(false);
         }
@@ -343,29 +336,25 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// <param name="refresh">if set to <c>true</c> [refresh].</param>
         private async void TryStartScanning(bool refresh = false)
         {
-            try
+            if (Device.RuntimePlatform == Device.Android)
             {
-                if (Device.RuntimePlatform == Device.Android)
+                var status = await _permissions.CheckPermissionStatusAsync(Permission.Location).ConfigureAwait(true);
+                if (status != PermissionStatus.Granted)
                 {
-                    var status = await _permissions.CheckPermissionStatusAsync(Permission.Location).ConfigureAwait(true);
-                    if (status != PermissionStatus.Granted)
-                    {
-                        var permissionResult = await _permissions.RequestPermissionsAsync(Permission.Location).ConfigureAwait(true);
+                    var permissionResult = await _permissions.RequestPermissionsAsync(Permission.Location).ConfigureAwait(true);
 
-                        if (permissionResult.First().Value != PermissionStatus.Granted)
-                        {
-                            _userDialogs.ErrorToast("Error", " Permission denied. Not scanning.", TimeSpan.FromSeconds(5));
-                            return;
-                        }
+                    if (permissionResult.First().Value != PermissionStatus.Granted)
+                    {
+                        _userDialogs.ErrorToast("Error", " Permission denied. Not scanning.", TimeSpan.FromSeconds(5));
+                        return;
                     }
                 }
-
-                if (IsStateOn && (refresh || !Devices.Any()) && !IsRefreshing)
-                {
-                    ScanForDevices();
-                }
             }
-            catch { }
+
+            if (IsStateOn && (refresh || !Devices.Any()) && !IsRefreshing)
+            {
+                ScanForDevices();
+            }
         }
 
         /// <summary>
@@ -373,47 +362,43 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// </summary>
         private async void ScanForDevices()
         {
-            try
+            // Clear devices from list
+            Devices.Clear();
+            SystemDevices.Clear();
+
+            foreach (var connectedDevice in Adapter.ConnectedDevices)
             {
-                // Clear devices from list
-                Devices.Clear();
-                SystemDevices.Clear();
-
-                foreach (var connectedDevice in Adapter.ConnectedDevices)
+                // update rssi for already connected devices (so the 0 is not shown in the list)
+                try
                 {
-                    // update rssi for already connected devices (so the 0 is not shown in the list)
-                    try
-                    {
-                        await connectedDevice.UpdateRssiAsync().ConfigureAwait(true);
-                    }
-                    catch (Exception ex)
-                    {
-                        Mvx.Trace(ex.Message);
-                        _userDialogs.ErrorToast("Error", $" Failed to update RSSI for {connectedDevice.Name}", TimeSpan.FromSeconds(5));
-                    }
-
-                    // CIMScan devices
-                    if (connectedDevice.Name.IndexOf("adafruit", StringComparison.OrdinalIgnoreCase) > -1)
-                    {
-                        AddOrUpdateSystemDevice(connectedDevice);
-                    }
-                    else // All other devices
-                    {
-                        AddOrUpdateDevice(connectedDevice);
-                    }
+                    await connectedDevice.UpdateRssiAsync().ConfigureAwait(true);
+                }
+                catch (Exception ex)
+                {
+                    Mvx.Trace(ex.Message);
+                    _userDialogs.ErrorToast("Error", $" Failed to update RSSI for {connectedDevice.Name}", TimeSpan.FromSeconds(5));
                 }
 
-                // Set token for task cancellation handling
-                _cancellationTokenSource = new CancellationTokenSource(6000);
-                RaisePropertyChanged(() => StopScanCommand);
-                // Notify we are refreshing
-                RaisePropertyChanged(() => IsRefreshing);
-
-                // Set scan mode to low latency which is the highest battery usage but best scan mode (possibly make adjustable)
-                Adapter.ScanMode = ScanMode.LowLatency;
-                await Adapter.StartScanningForDevicesAsync(_cancellationTokenSource.Token);
+                // CIMScan devices
+                if (connectedDevice.Name.IndexOf("adafruit", StringComparison.OrdinalIgnoreCase) > -1)
+                {
+                    AddOrUpdateSystemDevice(connectedDevice);
+                }
+                else // All other devices
+                {
+                    AddOrUpdateDevice(connectedDevice);
+                }
             }
-            catch { }
+
+            // Set token for task cancellation handling
+            _cancellationTokenSource = new CancellationTokenSource();
+            RaisePropertyChanged(() => StopScanCommand);
+            // Notify we are refreshing
+            RaisePropertyChanged(() => IsRefreshing);
+
+            // Set scan mode to low latency which is the highest battery usage but best scan mode (possibly make adjustable)
+            Adapter.ScanMode = ScanMode.LowLatency;
+            await Adapter.StartScanningForDevicesAsync(_cancellationTokenSource.Token).ConfigureAwait(true);
         }
 
         /// <summary>
@@ -560,7 +545,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 // We are already connected so give option to navigate back to sensors
                 config.Add("Navigate to Sensors", () =>
                 {
-                     ShowViewModel<SensorListViewModel>(new MvxBundle(new Dictionary<string, string> { { DeviceIdKey, device.Device.Id.ToString() } }));
+                    ShowViewModel<SensorListViewModel>(new MvxBundle(new Dictionary<string, string> { { DeviceIdKey, device.Device.Id.ToString() } }));
                 });
 
                 // Updates RSSI for selected device

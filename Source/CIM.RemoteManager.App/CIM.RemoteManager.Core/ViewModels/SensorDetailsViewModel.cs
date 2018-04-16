@@ -774,10 +774,15 @@ namespace CIM.RemoteManager.Core.ViewModels
                 // If we hit an end char } then record all data up to it
                 if (characteristicValue.Contains("}"))
                 {
-                    UnfilteredSensorValue.Append(characteristicValue);
+                    UnfilteredSensorValue.Append(characteristicValue.GetUntilOrEmpty());
                     await SerializeStringToSensorAsync(UnfilteredSensorValue.ToString(), "C");
                     UnfilteredSensorValue.Clear();
                     StartUnfilteredSensorValueRecord = false;
+
+                    // We recorded the last record, now make sure we can pick up the rest of the data in 
+                    // this buffer for the next record, if there is any.
+                    // Get full sensor values
+                    if (!String.IsNullOrWhiteSpace(CharacteristicValue.GetAfterOrEmpty())) await GetUnfilteredSensorValuesAsync(CharacteristicValue.GetAfterOrEmpty());
                 }
                 else
                 {
@@ -795,6 +800,11 @@ namespace CIM.RemoteManager.Core.ViewModels
                     await SerializeStringToSensorAsync(UnfilteredSensorValue.ToString(), "C");
                     UnfilteredSensorValue.Clear();
                     StartUnfilteredSensorValueRecord = false;
+
+                    // We recorded the last record, now make sure we can pick up the rest of the data in 
+                    // this buffer for the next record, if there is any.
+                    // Get full sensor values
+                    if (!String.IsNullOrWhiteSpace(CharacteristicValue.GetAfterOrEmpty())) await GetUnfilteredSensorValuesAsync(CharacteristicValue.GetAfterOrEmpty());
                 }
                 else
                 {
@@ -818,10 +828,15 @@ namespace CIM.RemoteManager.Core.ViewModels
                 // If we hit an end char } then record all data up to it
                 if (characteristicValue.Contains("}"))
                 {
-                    MessageCounterValue.Append(characteristicValue);
+                    MessageCounterValue.Append(characteristicValue.GetUntilOrEmpty());
                     await SerializeStringToSensorAsync(MessageCounterValue.ToString(), "F");
                     MessageCounterValue.Clear();
                     StartMessageCounterValueRecord = false;
+
+                    // We recorded the last record, now make sure we can pick up the rest of the data in 
+                    // this buffer for the next record, if there is any.
+                    // Get full sensor values
+                    if (!String.IsNullOrWhiteSpace(CharacteristicValue.GetAfterOrEmpty())) await GetMessageCounterValuesAsync(CharacteristicValue.GetAfterOrEmpty());
                 }
                 else
                 {
@@ -839,6 +854,11 @@ namespace CIM.RemoteManager.Core.ViewModels
                     await SerializeStringToSensorAsync(MessageCounterValue.ToString(), "F");
                     MessageCounterValue.Clear();
                     StartMessageCounterValueRecord = false;
+
+                    // We recorded the last record, now make sure we can pick up the rest of the data in 
+                    // this buffer for the next record, if there is any.
+                    // Get full sensor values
+                    if (!String.IsNullOrWhiteSpace(CharacteristicValue.GetAfterOrEmpty())) await GetMessageCounterValuesAsync(CharacteristicValue.GetAfterOrEmpty());
                 }
                 else
                 {
@@ -862,10 +882,15 @@ namespace CIM.RemoteManager.Core.ViewModels
                 // If we hit an end char } then record all data up to it
                 if (characteristicValue.Contains("}"))
                 {
-                    BufferedSensorValue.Append(characteristicValue);
+                    BufferedSensorValue.Append(characteristicValue.GetUntilOrEmpty());
                     await SerializeStringToSensorAsync(BufferedSensorValue.ToString(), "J");
                     BufferedSensorValue.Clear();
                     StartSensorBufferedValueRecord = false;
+
+                    // We recorded the last record, now make sure we can pick up the rest of the data in 
+                    // this buffer for the next record, if there is any.
+                    // Get full sensor values
+                    if (!String.IsNullOrWhiteSpace(CharacteristicValue.GetAfterOrEmpty())) await GetSensorPlotValuesAsync(CharacteristicValue.GetAfterOrEmpty());
                 }
                 else
                 {
@@ -883,6 +908,11 @@ namespace CIM.RemoteManager.Core.ViewModels
                     await SerializeStringToSensorAsync(BufferedSensorValue.ToString(), "J");
                     BufferedSensorValue.Clear();
                     StartSensorBufferedValueRecord = false;
+
+                    // We recorded the last record, now make sure we can pick up the rest of the data in 
+                    // this buffer for the next record, if there is any.
+                    // Get full sensor values
+                    if (!String.IsNullOrWhiteSpace(CharacteristicValue.GetAfterOrEmpty())) await GetSensorPlotValuesAsync(CharacteristicValue.GetAfterOrEmpty());
                 }
                 else
                 {
@@ -906,10 +936,15 @@ namespace CIM.RemoteManager.Core.ViewModels
                 // If we hit an end char } then record all data up to it
                 if (characteristicValue.Contains("}"))
                 {
-                    StatisticsSensorValue.Append(characteristicValue);
+                    StatisticsSensorValue.Append(characteristicValue.GetUntilOrEmpty());
                     await SerializeStringToSensorAsync(StatisticsSensorValue.ToString(), "H");
                     StatisticsSensorValue.Clear();
                     StartSensorStatisticsValueRecord = false;
+
+                    // We recorded the last record, now make sure we can pick up the rest of the data in 
+                    // this buffer for the next record, if there is any.
+                    // Get full sensor values
+                    if (!String.IsNullOrWhiteSpace(CharacteristicValue.GetAfterOrEmpty())) await GetSensorStatisticsValuesAsync(CharacteristicValue.GetAfterOrEmpty());
                 }
                 else
                 {
@@ -927,6 +962,11 @@ namespace CIM.RemoteManager.Core.ViewModels
                     await SerializeStringToSensorAsync(StatisticsSensorValue.ToString(), "H");
                     StatisticsSensorValue.Clear();
                     StartSensorStatisticsValueRecord = false;
+
+                    // We recorded the last record, now make sure we can pick up the rest of the data in 
+                    // this buffer for the next record, if there is any.
+                    // Get full sensor values
+                    if (!String.IsNullOrWhiteSpace(CharacteristicValue.GetAfterOrEmpty())) await GetSensorStatisticsValuesAsync(CharacteristicValue.GetAfterOrEmpty());
                 }
                 else
                 {
@@ -950,10 +990,15 @@ namespace CIM.RemoteManager.Core.ViewModels
                 // If we hit an end char } then record all data up to it
                 if (characteristicValue.Contains("}"))
                 {
-                    StatisticsSensorValue.Append(characteristicValue);
+                    StatisticsSensorValue.Append(characteristicValue.GetUntilOrEmpty());
                     await SerializeStringToSensorAsync(StatisticsSensorValue.ToString(), "G");
                     StatisticsSensorValue.Clear();
                     StartSensorLimitValueRecord = false;
+
+                    // We recorded the last record, now make sure we can pick up the rest of the data in 
+                    // this buffer for the next record, if there is any.
+                    // Get full sensor values
+                    if (!String.IsNullOrWhiteSpace(CharacteristicValue.GetAfterOrEmpty())) await GetSensorLimitsValuesAsync(CharacteristicValue.GetAfterOrEmpty());
                 }
                 else
                 {
@@ -971,6 +1016,11 @@ namespace CIM.RemoteManager.Core.ViewModels
                     await SerializeStringToSensorAsync(StatisticsSensorValue.ToString(), "G");
                     StatisticsSensorValue.Clear();
                     StartSensorLimitValueRecord = false;
+
+                    // We recorded the last record, now make sure we can pick up the rest of the data in 
+                    // this buffer for the next record, if there is any.
+                    // Get full sensor values
+                    if (!String.IsNullOrWhiteSpace(CharacteristicValue.GetAfterOrEmpty())) await GetSensorLimitsValuesAsync(CharacteristicValue.GetAfterOrEmpty());
                 }
                 else
                 {

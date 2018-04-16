@@ -7,6 +7,26 @@ namespace CIM.RemoteManager.Core.Helpers
     public static class StringHelper
     {
         /// <summary>
+        /// Gets a string after a character is found.
+        /// </summary>
+        /// <param name="text">The text.</param>
+        /// <param name="stopAt">The start at.</param>
+        /// <returns>String of characters after a start character.</returns>
+        public static string GetAfterOrEmpty(this string text, string startAt = "}")
+        {
+            if (!String.IsNullOrEmpty(text))
+            {
+                int charLocation = text.LastIndexOf(startAt, StringComparison.Ordinal);
+                if (charLocation > 0)
+                {
+                    return text.Substring(charLocation + 1);
+                }
+            }
+            // Default
+            return String.Empty;
+        }
+
+        /// <summary>
         /// Gets a string up to a character is found.
         /// </summary>
         /// <param name="text">The text.</param>

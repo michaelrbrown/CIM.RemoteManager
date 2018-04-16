@@ -13,11 +13,10 @@
                         <MenuItem Command="{Binding Path=BindingContext.DisconnectCommand, Source={x:Reference DevicePage}}" CommandParameter="{Binding .}" IsDestructive="True" Text="Disconnect" />
                     </ViewCell.ContextActions>
 
-                    <!-- Device Outer Wrapper -->
-                    <!-- Margin: left, top, right, bottom -->
-                    <Grid Margin="0,0,5,0">
+                    <Grid>
 
                         <!-- IsConnected Trigger (highlights background) -->
+                        <!-- Indicator of Active Connection -->
                         <Grid.Triggers>
                             <DataTrigger Binding="{Binding IsConnected}" TargetType="Grid" Value="true">
                                 <Setter Property="BackgroundColor" Value="#B9DEF5" />
@@ -34,7 +33,7 @@
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
 
-                                <!-- Blue Indicator of Active Connection -->
+                                <!-- Blue Bar -->
                                 <Frame Grid.Column="0"
                                        BackgroundColor="{StaticResource DeviceFrameTextColor}"
                                        CornerRadius="0" HasShadow="False" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
@@ -71,6 +70,7 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
                 <!-- BTLE Status -->
@@ -89,7 +89,6 @@
                 <ListView Grid.Row="1"
                           Margin="10"
                           BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" IsPullToRefreshEnabled="True"
-                          IsRefreshing="{Binding IsRefreshing, Mode=OneWay}"
                           ItemTemplate="{StaticResource DeviceItemTemplate}"
                           ItemsSource="{Binding SystemDevices}"
                           RefreshCommand="{Binding RefreshCommand}"
@@ -97,8 +96,17 @@
                           SelectedItem="{Binding SelectedDevice, Mode=TwoWay}"
                           SeparatorColor="Transparent" VerticalOptions="FillAndExpand" />
 
+                <!-- Android AutoConnect -->
+                <StackLayout Grid.Row="2" HorizontalOptions="Fill" Orientation="Horizontal">
+                    <StackLayout.IsVisible>
+                        <OnPlatform x:TypeArguments="x:Boolean" Android="false" iOS="false" />
+                    </StackLayout.IsVisible>
+                    <Label HorizontalOptions="StartAndExpand" Text="Use Android AutoConnect" VerticalOptions="Center" />
+                    <Switch HorizontalOptions="End" IsToggled="{Binding UseAutoConnect}" />
+                </StackLayout>
+
                 <!-- Connect to Previous Button -->
-                <StackLayout Grid.Row="2" Margin="0,0,0,10" HorizontalOptions="CenterAndExpand" IsVisible="False" Orientation="Horizontal">
+                <StackLayout Grid.Row="3" Margin="0,0,0,10" HorizontalOptions="CenterAndExpand" IsVisible="False" Orientation="Horizontal">
                     <Button BackgroundColor="{StaticResource ButtonBackgroundColor}"
                             Command="{Binding ConnectToPreviousCommand}"
                             HorizontalOptions="FillAndExpand" IsVisible="True"
@@ -108,13 +116,12 @@
                 </StackLayout>
 
                 <!-- Stop Searching Button -->
-                <StackLayout Grid.Row="3" Margin="0,0,0,10" HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsRefreshing}" Orientation="Horizontal">
+                <StackLayout Grid.Row="4" Margin="0,0,0,10" HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsRefreshing}" Orientation="Horizontal">
                     <Button BackgroundColor="{StaticResource ButtonBackgroundColor}"
                             Command="{Binding StopScanCommand}"
                             HorizontalOptions="CenterAndExpand" Text="Stop Searching"
                             TextColor="{StaticResource ButtonTextColor}"
                             WidthRequest="175" />
-                    <ActivityIndicator HeightRequest="24" HorizontalOptions="End" IsRunning="{Binding IsRefreshing}" VerticalOptions="Center" WidthRequest="24" />
                 </StackLayout>
 
             </Grid>
@@ -125,6 +132,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
@@ -148,7 +156,6 @@
                 <ListView Grid.Row="1"
                           Margin="10"
                           BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" IsPullToRefreshEnabled="True"
-                          IsRefreshing="{Binding IsRefreshing, Mode=OneWay}"
                           ItemTemplate="{StaticResource DeviceItemTemplate}"
                           ItemsSource="{Binding Devices}"
                           RefreshCommand="{Binding RefreshCommand}"
@@ -156,14 +163,22 @@
                           SelectedItem="{Binding SelectedDevice, Mode=TwoWay}"
                           SeparatorColor="Transparent" VerticalOptions="FillAndExpand" />
 
+                <!-- Android AutoConnect -->
+                <StackLayout Grid.Row="2" HorizontalOptions="Fill" Orientation="Horizontal">
+                    <StackLayout.IsVisible>
+                        <OnPlatform x:TypeArguments="x:Boolean" Android="false" iOS="false" />
+                    </StackLayout.IsVisible>
+                    <Label HorizontalOptions="StartAndExpand" Text="Use Android AutoConnect" VerticalOptions="Center" />
+                    <Switch HorizontalOptions="End" IsToggled="{Binding UseAutoConnect}" />
+                </StackLayout>
+
                 <!-- Stop Searching Button -->
-                <StackLayout Grid.Row="2" Margin="0,0,0,10" HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsRefreshing}" Orientation="Horizontal">
+                <StackLayout Grid.Row="3" Margin="0,0,0,10" HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsRefreshing}" Orientation="Horizontal">
                     <Button BackgroundColor="{StaticResource ButtonBackgroundColor}"
                             Command="{Binding StopScanCommand}"
                             HorizontalOptions="CenterAndExpand" Text="Stop Searching"
                             TextColor="{StaticResource ButtonTextColor}"
                             WidthRequest="175" />
-                    <ActivityIndicator HeightRequest="24" HorizontalOptions="End" IsRunning="{Binding IsRefreshing}" VerticalOptions="Center" WidthRequest="24" />
                 </StackLayout>
 
             </Grid>
