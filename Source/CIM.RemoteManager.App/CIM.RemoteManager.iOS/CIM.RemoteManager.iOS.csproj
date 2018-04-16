@@ -140,8 +140,6 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Icon-60%403x.png" />
-    <BundleResource Include="Resources\Icon-Small-40%403x.png" />
-    <BundleResource Include="Resources\Icon-Small%403x.png" />
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
   </ItemGroup>
   <ItemGroup>
@@ -411,6 +409,9 @@
     <BundleResource Include="Icon-Small-50%402x.png" />
   </ItemGroup>
   <ItemGroup>
+    <BundleResource Include="Resources\Icon-Small-50%402x.png" />
+    <BundleResource Include="Resources\AppStoreIcon512.png" />
+    <BundleResource Include="Resources\AppStoreIcon.png" />
     <Content Include="Resources\ic_BluetoothInfo.png" />
     <BundleResource Include="Resources\nav_RefreshDevices.png" />
   </ItemGroup>

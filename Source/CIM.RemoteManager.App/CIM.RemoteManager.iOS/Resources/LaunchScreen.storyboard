@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="X5k-f2-b5h">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="X5k-f2-b5h">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -17,16 +17,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" image="Icon-60.png" translatesAutoresizingMaskIntoConstraints="NO" id="23">
-                                <rect key="frame" x="270" y="270" width="60" height="60"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" misplaced="YES" image="AppStoreIcon512.png" translatesAutoresizingMaskIntoConstraints="NO" id="23">
+                                <rect key="frame" x="160" y="267" width="95" height="112"/>
                                 <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="0.0"/>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="0.20392156862745098" green="0.59607843137254901" blue="0.85882352941176465" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="23" firstAttribute="centerY" secondItem="yd7-JS-zBw" secondAttribute="centerY" priority="1" id="39"/>
                             <constraint firstItem="23" firstAttribute="centerX" secondItem="yd7-JS-zBw" secondAttribute="centerX" priority="1" id="41"/>
                         </constraints>
+                        <color key="tintColor" colorSpace="calibratedWhite" white="1" alpha="1"/>
+                        <color key="backgroundColor" colorSpace="calibratedWhite" white="1" alpha="1"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XAI-xm-WK6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -37,45 +38,36 @@
     <resources>
         <image name="Icon-60.png" width="60" height="60"/>
         <image name="Icon-Small-50.png" width="50" height="50"/>
-        <image name="02Sensor.png" width="512" height="512"/>
-        <image name="airflowSensor.png" width="512" height="512"/>
-        <image name="app_bg_sensor.jpg" width="691" height="1921"/>
-        <image name="baromicPressureSensor.png" width="512" height="512"/>
-        <image name="bg_app.jpg" width="1080" height="1920"/>
-        <image name="bgapplication.png" width="425" height="1134"/>
-        <image name="bluetooth-info.png" width="24" height="24"/>
-        <image name="c02Sensor.png" width="512" height="512"/>
-        <image name="DA12.png" width="241" height="199"/>
-        <image name="defaultSensor.png" width="512" height="512"/>
-        <image name="differentialPressureSensor.png" width="512" height="512"/>
-        <image name="fridgeTemperatureSensor.png" width="512" height="512"/>
-        <image name="humiditySensor.png" width="512" height="512"/>
-        <image name="ic_bluetooth-connected.png" width="21" height="24"/>
-        <image name="ic_bluetooth-search.png" width="24" height="24"/>
-        <image name="ic_connect-previous.png" width="32" height="32"/>
-        <image name="ic_debug.png" width="32" height="32"/>
-        <image name="ic_refresh-sensordata.png" width="512" height="512"/>
-        <image name="ic_remote-settings.png" width="33" height="32"/>
-        <image name="ic_save.png" width="24" height="22"/>
-        <image name="ic_sensor-limits.png" width="32" height="32"/>
-        <image name="ic_sensor-plot.png" width="32" height="32"/>
-        <image name="ic_sensor-settings.png" width="32" height="32"/>
-        <image name="ic_sensor-statistics.png" width="32" height="32"/>
-        <image name="ic_stop-searching.png" width="32" height="32"/>
-        <image name="Icon-Small-40.png" width="40" height="40"/>
-        <image name="Icon-Small.png" width="29" height="29"/>
-        <image name="ovenTempSensor.png" width="512" height="512"/>
-        <image name="particleCountSensor.png" width="512" height="512"/>
-        <image name="remote512.2.png" width="512" height="512"/>
+        <image name="da12.png" width="241" height="199"/>
+        <image name="ic_BluetoothInfo.png" width="24" height="24"/>
+        <image name="ic_Debug.png" width="32" height="32"/>
+        <image name="nav_CimscanDevices.png" width="33" height="32"/>
+        <image name="nav_OtherDevices.png" width="32" height="32"/>
+        <image name="nav_RefreshDevices.png" width="32" height="32"/>
+        <image name="nav_RefreshSensorData.png" width="512" height="512"/>
+        <image name="nav_RemoteSettings.png" width="33" height="32"/>
+        <image name="nav_SensorLimits.png" width="32" height="32"/>
+        <image name="nav_SensorPlot.png" width="32" height="32"/>
+        <image name="nav_SensorSettings.png" width="32" height="32"/>
+        <image name="nav_SensorStatistics.png" width="32" height="32"/>
         <image name="remote512.png" width="955" height="552"/>
         <image name="rssi_1.png" width="40" height="40"/>
         <image name="rssi_2.png" width="40" height="40"/>
         <image name="rssi_3.png" width="40" height="40"/>
         <image name="rssi_4.png" width="40" height="40"/>
         <image name="rssi_5.png" width="40" height="40"/>
-        <image name="stop.png" width="20" height="20"/>
-        <image name="temperatureSensor.png" width="512" height="512"/>
-        <image name="ic_cimscan-devices.png" width="32" height="32"/>
-        <image name="ic_other-devices.png" width="32" height="32"/>
+        <image name="SensorAirflow.png" width="512" height="512"/>
+        <image name="SensorBaromicPressure.png" width="512" height="512"/>
+        <image name="SensorC02.png" width="512" height="512"/>
+        <image name="SensorDefault.png" width="512" height="512"/>
+        <image name="SensorDifferentialPressure.png" width="512" height="512"/>
+        <image name="SensorFridgeTemperature.png" width="512" height="512"/>
+        <image name="SensorHumidity.png" width="512" height="512"/>
+        <image name="SensorOvenTemperature.png" width="512" height="512"/>
+        <image name="SensorOxygen.png" width="512" height="512"/>
+        <image name="SensorParticleCount.png" width="512" height="512"/>
+        <image name="SensorTemperature.png" width="512" height="512"/>
+        <image name="AppStoreIcon.png" width="1024" height="1024"/>
+        <image name="AppStoreIcon512.png" width="512" height="512"/>
     </resources>
 </document>

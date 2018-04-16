@@ -17,7 +17,7 @@
             <Color x:Key="AppTextColor">#939393</Color>
             <Color x:Key="AppLightColor">#FFFFFF</Color>
             <Color x:Key="AppDarkColor">#969393</Color>
-            <Color x:Key="AppSeparatorColor">#333333</Color>
+            <Color x:Key="AppSeparatorColor">#D8EDF9</Color>
 
             <!-- Misc Colors -->
             <Color x:Key="IndicatorTextColor">#FF3C3C3C</Color>
@@ -35,8 +35,8 @@
             <Color x:Key="HeaderSubTextColor">#FFFFFF</Color>
             <Color x:Key="SegmentedControlTintColor">#01649D</Color>
             <Color x:Key="SegmentedControlTextColor">#FFFFFF</Color>
-            <Color x:Key="FooterBackgroundColor">#01649D</Color>
-            <Color x:Key="FooterTextColor">#FFFFFF</Color>
+            <Color x:Key="DebugBackgroundColor">#0097DF</Color>
+            <Color x:Key="DebugTextColor">#FFFFFF</Color>
 
             <!-- Device Colors -->
             <Color x:Key="DeviceFrameTextColor">#0097DF</Color>
@@ -44,9 +44,9 @@
             <Color x:Key="DeviceIdTextColor">#7B7B7B</Color>
 
             <!-- Sensor Colors -->
-            <Color x:Key="GroupBackgroundColor">#01649D</Color>
             <Color x:Key="CardBackgroundColor">#FFFFFF</Color>
-            <Color x:Key="GroupTextColor">#FFFFFF</Color>
+            <Color x:Key="GroupBackgroundColor">#FFFFFF</Color>
+            <Color x:Key="GroupTextColor">#262E33</Color>
             <Color x:Key="NameTextColor">#01649D</Color>
             <Color x:Key="SensorTypeTextColor">#7B7B7B</Color>
             <Color x:Key="TimeStampTextColor">#3580C6</Color>
@@ -55,6 +55,7 @@
             <Color x:Key="SensorIndexFrameColor">#01649D</Color>
             <Color x:Key="SensorIndexTextColor">#7B7B7B</Color>
             <Color x:Key="SerialNumberTextColor">#3580C6</Color>
+            <Color x:Key="FooterBackgroundColor">#D8EDF9</Color>
 
             <!-- Form Colors -->
             <Color x:Key="HeadingTextColor">#262E33</Color>

@@ -1,9 +1,6 @@
 ﻿using CIM.RemoteManager.Core.Models;
 using CIM.RemoteManager.Core.ViewModels;
-using Syncfusion.ListView.XForms;
-using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using ItemTappedEventArgs = Syncfusion.ListView.XForms.ItemTappedEventArgs;
 
 namespace CIM.RemoteManager.Core.Pages
 {
@@ -72,9 +69,6 @@ namespace CIM.RemoteManager.Core.Pages
                 //sensorPlotPage.BindingContext = sensorItem;
                 var sensorListViewModel = (SensorListViewModel)this.BindingContext;
                 // Navigate to sensor details view model (for plot, statistics, limits, and sensor settings)
-
-                DisplayAlert("mb", $"id: {sensorItem.SerialNumber}", "OK");
-
                 sensorListViewModel.NavigateToSensorDetailsPage(sensorItem);
             }
         }

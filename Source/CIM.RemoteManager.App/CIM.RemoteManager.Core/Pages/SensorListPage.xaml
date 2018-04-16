@@ -12,6 +12,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="1" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="1" />
             <RowDefinition Height="40" />
         </Grid.RowDefinitions>
 
@@ -79,16 +80,18 @@
             </telerikDataControls:RadListView.GroupHeaderTemplate>
         </telerikDataControls:RadListView>
 
+        <!-- Border Line -->
+        <BoxView Grid.Row="4" Style="{StaticResource DarkShadowStyle}" />
         <!-- Margin: left, top, right, bottom -->
-        <StackLayout Grid.Row="4"
-                     BackgroundColor="{StaticResource FooterBackgroundColor}"
+        <StackLayout Grid.Row="5"
+                     BackgroundColor="{StaticResource DebugBackgroundColor}"
                      HeightRequest="40" HorizontalOptions="FillAndExpand" Orientation="Horizontal" Spacing="0"
                      VerticalOptions="FillAndExpand">
             <!-- Sensor BTLE Characteristic Incoming Values -->
             <Label Margin="5"
                    FontSize="16" HorizontalOptions="StartAndExpand" LineBreakMode="MiddleTruncation"
                    Text="{Binding CharacteristicValue, StringFormat=' Incoming Value: {0:N}'}"
-                   TextColor="{StaticResource FooterTextColor}"
+                   TextColor="{StaticResource DebugTextColor}"
                    VerticalOptions="CenterAndExpand" VerticalTextAlignment="Center" />
         </StackLayout>
 

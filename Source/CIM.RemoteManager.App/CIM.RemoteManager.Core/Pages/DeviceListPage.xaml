@@ -86,7 +86,7 @@
                 </StackLayout>
 
                 <!-- Device Loading Indicator -->
-                <xForms:SfBusyIndicator x:Name="CIMScanDeviceBusyindicator" Title="Searching for Other Devices..."
+                <xForms:SfBusyIndicator x:Name="CIMScanDeviceBusyindicator" Title="Searching for CIMScan Devices..."
                                         Grid.Row="1"
                                         AnimationType="Ball" BackgroundColor="Transparent" HeightRequest="250"
                                         IsBusy="{Binding IsRefreshing}"
@@ -152,7 +152,7 @@
                 </StackLayout>
 
                 <!-- Device Loading Indicator -->
-                <xForms:SfBusyIndicator x:Name="OtherDeviceBusyindicator" Title="Searching for CIMScan Devices..."
+                <xForms:SfBusyIndicator x:Name="OtherDeviceBusyindicator" Title="Searching for Other Devices..."
                                         Grid.Row="1"
                                         AnimationType="Ball" BackgroundColor="Transparent" HeightRequest="250"
                                         IsBusy="{Binding IsRefreshing}"
