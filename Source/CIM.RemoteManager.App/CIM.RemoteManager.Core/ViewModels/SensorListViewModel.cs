@@ -865,7 +865,9 @@ namespace CIM.RemoteManager.Core.ViewModels
                 RaisePropertyChanged(() => UpdatesStarted);
 
                 HockeyApp.MetricsManager.TrackEvent($"(HandleUpdatesStarted) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
-                _userDialogs.Alert($"(HandleUpdatesStarted) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
+                _userDialogs.Alert($"Cannot read sensor data. Please ensure the device is a CIMScan BTLE compliant device.");
+                // Navigate back to device page
+                ShowViewModel<DeviceListViewModel>();
             }
         }
 

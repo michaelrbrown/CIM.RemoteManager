@@ -115,7 +115,6 @@
                                      AnimationType="ECG" BackgroundColor="Transparent" HeightRequest="250"
                                      IsBusy="{Binding ProcessingPlotData}"
                                      IsVisible="{Binding ProcessingPlotData}"
-                                     Opacity=".3"
                                      TextColor="{StaticResource ChartForeground}"
                                      ViewBoxHeight="250" ViewBoxWidth="250" WidthRequest="250" />
             <!-- Chart Control -->

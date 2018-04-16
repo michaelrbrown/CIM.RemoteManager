@@ -35,7 +35,7 @@
             <Color x:Key="HeaderSubTextColor">#FFFFFF</Color>
             <Color x:Key="SegmentedControlTintColor">#01649D</Color>
             <Color x:Key="SegmentedControlTextColor">#FFFFFF</Color>
-            <Color x:Key="DebugBackgroundColor">#0097DF</Color>
+            <Color x:Key="DebugBackgroundColor">#01649D</Color>
             <Color x:Key="DebugTextColor">#FFFFFF</Color>
 
             <!-- Device Colors -->

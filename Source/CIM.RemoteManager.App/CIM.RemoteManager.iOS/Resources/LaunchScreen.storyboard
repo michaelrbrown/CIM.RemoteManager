@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" misplaced="YES" image="AppStoreIcon512.png" translatesAutoresizingMaskIntoConstraints="NO" id="23">
-                                <rect key="frame" x="160" y="267" width="95" height="112"/>
+                                <rect key="frame" x="180" y="342" width="53" height="51"/>
                                 <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="0.0"/>
                             </imageView>
                         </subviews>
