@@ -27,21 +27,21 @@
 
             <!-- Page Colors -->
             <Color x:Key="BusyIndicatorColor">#01649D</Color>
+            <Color x:Key="BTLEStatusBackgroundColor">#AE2C3B</Color>
+            <Color x:Key="BTLEStatusTextColor">#FFFFFF</Color>
             <Color x:Key="HeaderBackgroundColor">#01649D</Color>
             <Color x:Key="HeaderTextColor">#FFFFFF</Color>
             <Color x:Key="HeaderSubTextColor">#FFFFFF</Color>
             <Color x:Key="SegmentedControlTintColor">#01649D</Color>
             <Color x:Key="SegmentedControlTextColor">#FFFFFF</Color>
+            <Color x:Key="FooterBackgroundColor">#D8EDF9</Color>
+            <Color x:Key="FooterTextColor">#D8EDF9</Color>
 
             <!-- Sensor Colors -->
             <Color x:Key="DeviceFrameTextColor">#0097DF</Color>
-            <Color x:Key="DeviceNameTextColor">#FFFFFF</Color>
             <Color x:Key="DeviceIdTextColor">#7B7B7B</Color>
-            <Color x:Key="BluetoothStatusTextColor">#01649D</Color>
-            <Color x:Key="RemoteNameBackgroundColor">#01649D</Color>
             <Color x:Key="GroupBackgroundColor">#01649D</Color>
             <Color x:Key="CardBackgroundColor">#FFFFFF</Color>
-            <Color x:Key="FooterBackgroundColor">#D8EDF9</Color>
             <Color x:Key="GroupTextColor">#FFFFFF</Color>
             <Color x:Key="NameTextColor">#01649D</Color>
             <Color x:Key="SensorTypeTextColor">#7B7B7B</Color>
@@ -59,8 +59,6 @@
             <Color x:Key="EntryBackgroundColor">#7778909c</Color>
             <Color x:Key="ButtonBackgroundColor">#01649D</Color>
             <Color x:Key="ButtonTextColor">#FFFFFF</Color>
-            <Color x:Key="BTLEStatusBackgroundColor">#AE2C3B</Color>
-            <Color x:Key="BTLEStatusTextColor">#FFFFFF</Color>
 
             <!-- Sensor List Styles -->
             <Style x:Key="RemoteBackgroundStyle" TargetType="Frame">

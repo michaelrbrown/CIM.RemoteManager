@@ -1504,6 +1504,10 @@ namespace CIM.RemoteManager.Core.ViewModels
             {
                 base.InitFromBundle(parameters);
 
+
+                _userDialogs.Alert($"(InitFromBundle) parameters.Data[SensorIdKey]: {parameters.Data[SensorIdKey]}");
+
+
                 // Get selected sensor index from device
                 SensorIndexSelected = parameters.Data[SensorIdKey];
                 // Notify property changed
@@ -1573,10 +1577,6 @@ namespace CIM.RemoteManager.Core.ViewModels
         public override void Resume()
         {
             base.Resume();
-            if (!UpdatesStarted)
-            {
-                //StartUpdates();
-            }
         }
 
         /// <summary>

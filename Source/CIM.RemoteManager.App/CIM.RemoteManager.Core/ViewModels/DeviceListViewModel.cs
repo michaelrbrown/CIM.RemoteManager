@@ -309,11 +309,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             Adapter.DeviceDisconnected += OnDeviceDisconnected;
             Adapter.DeviceConnectionLost += OnDeviceConnectionLost;
             Adapter.DeviceConnected += OnDeviceConnected;
-
-            // Clear devices from list
-            Devices.Clear();
-            SystemDevices.Clear();
-
+            
             // Kick off a scan on load
             TryStartScanning(false);
         }
@@ -408,7 +404,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 }
 
                 // Set token for task cancellation handling
-                _cancellationTokenSource = new CancellationTokenSource(2000);
+                _cancellationTokenSource = new CancellationTokenSource(6000);
                 RaisePropertyChanged(() => StopScanCommand);
                 // Notify we are refreshing
                 RaisePropertyChanged(() => IsRefreshing);
