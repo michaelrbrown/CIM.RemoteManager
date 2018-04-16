@@ -782,7 +782,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                     // We recorded the last record, now make sure we can pick up the rest of the data in 
                     // this buffer for the next record, if there is any.
                     // Get full sensor values
-                    if (!String.IsNullOrWhiteSpace(CharacteristicValue.GetAfterOrEmpty())) await GetUnfilteredSensorValuesAsync(CharacteristicValue.GetAfterOrEmpty());
+                    if (!String.IsNullOrWhiteSpace(CharacteristicValue.GetAfterOrEmpty())) await GetUnfilteredSensorValuesAsync(CharacteristicValue.GetAfterOrEmpty()).ConfigureAwait(true);
                 }
                 else
                 {
@@ -804,7 +804,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                     // We recorded the last record, now make sure we can pick up the rest of the data in 
                     // this buffer for the next record, if there is any.
                     // Get full sensor values
-                    if (!String.IsNullOrWhiteSpace(CharacteristicValue.GetAfterOrEmpty())) await GetUnfilteredSensorValuesAsync(CharacteristicValue.GetAfterOrEmpty());
+                    if (!String.IsNullOrWhiteSpace(CharacteristicValue.GetAfterOrEmpty())) await GetUnfilteredSensorValuesAsync(CharacteristicValue.GetAfterOrEmpty()).ConfigureAwait(true);
                 }
                 else
                 {
@@ -836,7 +836,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                     // We recorded the last record, now make sure we can pick up the rest of the data in 
                     // this buffer for the next record, if there is any.
                     // Get full sensor values
-                    if (!String.IsNullOrWhiteSpace(CharacteristicValue.GetAfterOrEmpty())) await GetMessageCounterValuesAsync(CharacteristicValue.GetAfterOrEmpty());
+                    if (!String.IsNullOrWhiteSpace(CharacteristicValue.GetAfterOrEmpty())) await GetMessageCounterValuesAsync(CharacteristicValue.GetAfterOrEmpty()).ConfigureAwait(true);
                 }
                 else
                 {
@@ -858,7 +858,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                     // We recorded the last record, now make sure we can pick up the rest of the data in 
                     // this buffer for the next record, if there is any.
                     // Get full sensor values
-                    if (!String.IsNullOrWhiteSpace(CharacteristicValue.GetAfterOrEmpty())) await GetMessageCounterValuesAsync(CharacteristicValue.GetAfterOrEmpty());
+                    if (!String.IsNullOrWhiteSpace(CharacteristicValue.GetAfterOrEmpty())) await GetMessageCounterValuesAsync(CharacteristicValue.GetAfterOrEmpty()).ConfigureAwait(true);
                 }
                 else
                 {
@@ -890,7 +890,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                     // We recorded the last record, now make sure we can pick up the rest of the data in 
                     // this buffer for the next record, if there is any.
                     // Get full sensor values
-                    if (!String.IsNullOrWhiteSpace(CharacteristicValue.GetAfterOrEmpty())) await GetSensorPlotValuesAsync(CharacteristicValue.GetAfterOrEmpty());
+                    if (!String.IsNullOrWhiteSpace(CharacteristicValue.GetAfterOrEmpty())) await GetSensorPlotValuesAsync(CharacteristicValue.GetAfterOrEmpty()).ConfigureAwait(true);
                 }
                 else
                 {
@@ -912,7 +912,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                     // We recorded the last record, now make sure we can pick up the rest of the data in 
                     // this buffer for the next record, if there is any.
                     // Get full sensor values
-                    if (!String.IsNullOrWhiteSpace(CharacteristicValue.GetAfterOrEmpty())) await GetSensorPlotValuesAsync(CharacteristicValue.GetAfterOrEmpty());
+                    if (!String.IsNullOrWhiteSpace(CharacteristicValue.GetAfterOrEmpty())) await GetSensorPlotValuesAsync(CharacteristicValue.GetAfterOrEmpty()).ConfigureAwait(true);
                 }
                 else
                 {
@@ -944,7 +944,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                     // We recorded the last record, now make sure we can pick up the rest of the data in 
                     // this buffer for the next record, if there is any.
                     // Get full sensor values
-                    if (!String.IsNullOrWhiteSpace(CharacteristicValue.GetAfterOrEmpty())) await GetSensorStatisticsValuesAsync(CharacteristicValue.GetAfterOrEmpty());
+                    if (!String.IsNullOrWhiteSpace(CharacteristicValue.GetAfterOrEmpty())) await GetSensorStatisticsValuesAsync(CharacteristicValue.GetAfterOrEmpty()).ConfigureAwait(true);
                 }
                 else
                 {
@@ -966,7 +966,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                     // We recorded the last record, now make sure we can pick up the rest of the data in 
                     // this buffer for the next record, if there is any.
                     // Get full sensor values
-                    if (!String.IsNullOrWhiteSpace(CharacteristicValue.GetAfterOrEmpty())) await GetSensorStatisticsValuesAsync(CharacteristicValue.GetAfterOrEmpty());
+                    if (!String.IsNullOrWhiteSpace(CharacteristicValue.GetAfterOrEmpty())) await GetSensorStatisticsValuesAsync(CharacteristicValue.GetAfterOrEmpty()).ConfigureAwait(true);
                 }
                 else
                 {
@@ -998,7 +998,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                     // We recorded the last record, now make sure we can pick up the rest of the data in 
                     // this buffer for the next record, if there is any.
                     // Get full sensor values
-                    if (!String.IsNullOrWhiteSpace(CharacteristicValue.GetAfterOrEmpty())) await GetSensorLimitsValuesAsync(CharacteristicValue.GetAfterOrEmpty());
+                    if (!String.IsNullOrWhiteSpace(CharacteristicValue.GetAfterOrEmpty())) await GetSensorLimitsValuesAsync(CharacteristicValue.GetAfterOrEmpty()).ConfigureAwait(true);
                 }
                 else
                 {
@@ -1020,7 +1020,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                     // We recorded the last record, now make sure we can pick up the rest of the data in 
                     // this buffer for the next record, if there is any.
                     // Get full sensor values
-                    if (!String.IsNullOrWhiteSpace(CharacteristicValue.GetAfterOrEmpty())) await GetSensorLimitsValuesAsync(CharacteristicValue.GetAfterOrEmpty());
+                    if (!String.IsNullOrWhiteSpace(CharacteristicValue.GetAfterOrEmpty())) await GetSensorLimitsValuesAsync(CharacteristicValue.GetAfterOrEmpty()).ConfigureAwait(true);
                 }
                 else
                 {

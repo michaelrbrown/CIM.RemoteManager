@@ -271,7 +271,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                     // We recorded the last record, now make sure we can pick up the rest of the data in 
                     // this buffer for the next record, if there is any.
                     // Get full sensor values
-                    if (!String.IsNullOrWhiteSpace(CharacteristicValue.GetAfterOrEmpty())) await GetMessageCounterValues(CharacteristicValue.GetAfterOrEmpty());
+                    if (!String.IsNullOrWhiteSpace(CharacteristicValue.GetAfterOrEmpty())) await GetMessageCounterValues(CharacteristicValue.GetAfterOrEmpty()).ConfigureAwait(true);
                 }
                 else
                 {
@@ -293,7 +293,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                     // We recorded the last record, now make sure we can pick up the rest of the data in 
                     // this buffer for the next record, if there is any.
                     // Get full sensor values
-                    if (!String.IsNullOrWhiteSpace(CharacteristicValue.GetAfterOrEmpty())) await GetMessageCounterValues(CharacteristicValue.GetAfterOrEmpty());
+                    if (!String.IsNullOrWhiteSpace(CharacteristicValue.GetAfterOrEmpty())) await GetMessageCounterValues(CharacteristicValue.GetAfterOrEmpty()).ConfigureAwait(true);
                 }
                 else
                 {
@@ -325,7 +325,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                     // We recorded the last record, now make sure we can pick up the rest of the data in 
                     // this buffer for the next record, if there is any.
                     // Get full sensor values
-                    if (!String.IsNullOrWhiteSpace(CharacteristicValue.GetAfterOrEmpty())) await GetFullSensorValues(CharacteristicValue.GetAfterOrEmpty());
+                    if (!String.IsNullOrWhiteSpace(CharacteristicValue.GetAfterOrEmpty())) await GetFullSensorValues(CharacteristicValue.GetAfterOrEmpty()).ConfigureAwait(true);
                 }
                 else
                 {
@@ -347,7 +347,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                     // We recorded the last record, now make sure we can pick up the rest of the data in 
                     // this buffer for the next record, if there is any.
                     // Get full sensor values
-                    if (!String.IsNullOrWhiteSpace(CharacteristicValue.GetAfterOrEmpty())) await GetFullSensorValues(CharacteristicValue.GetAfterOrEmpty());
+                    if (!String.IsNullOrWhiteSpace(CharacteristicValue.GetAfterOrEmpty())) await GetFullSensorValues(CharacteristicValue.GetAfterOrEmpty()).ConfigureAwait(true);
                 }
                 else
                 {
@@ -379,7 +379,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                     // We recorded the last record, now make sure we can pick up the rest of the data in 
                     // this buffer for the next record, if there is any.
                     // Get full sensor values
-                    if (!String.IsNullOrWhiteSpace(CharacteristicValue.GetAfterOrEmpty())) await GetAverageSensorValues(CharacteristicValue.GetAfterOrEmpty());
+                    if (!String.IsNullOrWhiteSpace(CharacteristicValue.GetAfterOrEmpty())) await GetAverageSensorValues(CharacteristicValue.GetAfterOrEmpty()).ConfigureAwait(true);
                 }
                 else
                 {
@@ -401,7 +401,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                     // We recorded the last record, now make sure we can pick up the rest of the data in 
                     // this buffer for the next record, if there is any.
                     // Get full sensor values
-                    if (!String.IsNullOrWhiteSpace(CharacteristicValue.GetAfterOrEmpty())) await GetAverageSensorValues(CharacteristicValue.GetAfterOrEmpty());
+                    if (!String.IsNullOrWhiteSpace(CharacteristicValue.GetAfterOrEmpty())) await GetAverageSensorValues(CharacteristicValue.GetAfterOrEmpty()).ConfigureAwait(true);
                 }
                 else
                 {

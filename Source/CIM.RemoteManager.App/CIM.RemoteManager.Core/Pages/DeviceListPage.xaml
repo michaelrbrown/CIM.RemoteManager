@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <pages:BaseTabbedPage x:Class="CIM.RemoteManager.Core.Pages.DeviceListPage"
                       xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                      xmlns:pages="clr-namespace:CIM.RemoteManager.Core.Pages;assembly=CIM.RemoteManager.Core"
+                      xmlns:pages="clr-namespace:CIM.RemoteManager.Core.Pages;assembly=CIM.RemoteManager.Core" xmlns:xForms="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
                       x:Name="DevicePage" Title="Discover Devices">
 
     <pages:BaseTabbedPage.Resources>
@@ -13,10 +13,11 @@
                         <MenuItem Command="{Binding Path=BindingContext.DisconnectCommand, Source={x:Reference DevicePage}}" CommandParameter="{Binding .}" IsDestructive="True" Text="Disconnect" />
                     </ViewCell.ContextActions>
 
-                    <Grid>
+                    <!-- Device Outer Wrapper -->
+                    <!-- Margin: left, top, right, bottom -->
+                    <Grid Margin="0,0,10,0">
 
                         <!-- IsConnected Trigger (highlights background) -->
-                        <!-- Indicator of Active Connection -->
                         <Grid.Triggers>
                             <DataTrigger Binding="{Binding IsConnected}" TargetType="Grid" Value="true">
                                 <Setter Property="BackgroundColor" Value="#B9DEF5" />
@@ -33,7 +34,7 @@
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
 
-                                <!-- Blue Bar -->
+                                <!-- Blue Indicator of Active Connection -->
                                 <Frame Grid.Column="0"
                                        BackgroundColor="{StaticResource DeviceFrameTextColor}"
                                        CornerRadius="0" HasShadow="False" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
@@ -70,7 +71,6 @@
                     <RowDefinition Height="*" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
                 <!-- BTLE Status -->
@@ -85,28 +85,28 @@
                     </Grid>
                 </StackLayout>
 
+                <!-- Device Loading Indicator -->
+                <xForms:SfBusyIndicator x:Name="CIMScanDeviceBusyindicator" Title="Searching for Other Devices..."
+                                        Grid.Row="1"
+                                        AnimationType="Ball" BackgroundColor="Transparent" HeightRequest="250"
+                                        IsBusy="{Binding IsRefreshing}"
+                                        IsVisible="{Binding IsRefreshing}"
+                                        Opacity="1"
+                                        TextColor="{StaticResource BusyIndicatorColor}"
+                                        ViewBoxHeight="250" ViewBoxWidth="250" WidthRequest="250" />
+
                 <!-- CIMScan Devices ListView -->
                 <ListView Grid.Row="1"
                           Margin="10"
-                          BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" IsPullToRefreshEnabled="True"
+                          BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" IsPullToRefreshEnabled="False"
                           ItemTemplate="{StaticResource DeviceItemTemplate}"
                           ItemsSource="{Binding SystemDevices}"
-                          RefreshCommand="{Binding RefreshCommand}"
                           RowHeight="75"
                           SelectedItem="{Binding SelectedDevice, Mode=TwoWay}"
                           SeparatorColor="Transparent" VerticalOptions="FillAndExpand" />
 
-                <!-- Android AutoConnect -->
-                <StackLayout Grid.Row="2" HorizontalOptions="Fill" Orientation="Horizontal">
-                    <StackLayout.IsVisible>
-                        <OnPlatform x:TypeArguments="x:Boolean" Android="false" iOS="false" />
-                    </StackLayout.IsVisible>
-                    <Label HorizontalOptions="StartAndExpand" Text="Use Android AutoConnect" VerticalOptions="Center" />
-                    <Switch HorizontalOptions="End" IsToggled="{Binding UseAutoConnect}" />
-                </StackLayout>
-
                 <!-- Connect to Previous Button -->
-                <StackLayout Grid.Row="3" Margin="0,0,0,10" HorizontalOptions="CenterAndExpand" IsVisible="False" Orientation="Horizontal">
+                <StackLayout Grid.Row="2" Margin="0,0,0,10" HorizontalOptions="CenterAndExpand" IsVisible="False" Orientation="Horizontal">
                     <Button BackgroundColor="{StaticResource ButtonBackgroundColor}"
                             Command="{Binding ConnectToPreviousCommand}"
                             HorizontalOptions="FillAndExpand" IsVisible="True"
@@ -116,7 +116,7 @@
                 </StackLayout>
 
                 <!-- Stop Searching Button -->
-                <StackLayout Grid.Row="4" Margin="0,0,0,10" HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsRefreshing}" Orientation="Horizontal">
+                <StackLayout Grid.Row="3" Margin="0,0,0,10" HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsRefreshing}" Orientation="Horizontal">
                     <Button BackgroundColor="{StaticResource ButtonBackgroundColor}"
                             Command="{Binding StopScanCommand}"
                             HorizontalOptions="CenterAndExpand" Text="Stop Searching"
@@ -132,7 +132,6 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
-                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
@@ -152,28 +151,28 @@
                     </Grid>
                 </StackLayout>
 
+                <!-- Device Loading Indicator -->
+                <xForms:SfBusyIndicator x:Name="OtherDeviceBusyindicator" Title="Searching for CIMScan Devices..."
+                                        Grid.Row="1"
+                                        AnimationType="Ball" BackgroundColor="Transparent" HeightRequest="250"
+                                        IsBusy="{Binding IsRefreshing}"
+                                        IsVisible="{Binding IsRefreshing}"
+                                        Opacity="1"
+                                        TextColor="{StaticResource BusyIndicatorColor}"
+                                        ViewBoxHeight="250" ViewBoxWidth="250" WidthRequest="250" />
+
                 <!-- All Devices ListView -->
                 <ListView Grid.Row="1"
                           Margin="10"
-                          BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" IsPullToRefreshEnabled="True"
+                          BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" IsPullToRefreshEnabled="False"
                           ItemTemplate="{StaticResource DeviceItemTemplate}"
                           ItemsSource="{Binding Devices}"
-                          RefreshCommand="{Binding RefreshCommand}"
                           RowHeight="75"
                           SelectedItem="{Binding SelectedDevice, Mode=TwoWay}"
                           SeparatorColor="Transparent" VerticalOptions="FillAndExpand" />
 
-                <!-- Android AutoConnect -->
-                <StackLayout Grid.Row="2" HorizontalOptions="Fill" Orientation="Horizontal">
-                    <StackLayout.IsVisible>
-                        <OnPlatform x:TypeArguments="x:Boolean" Android="false" iOS="false" />
-                    </StackLayout.IsVisible>
-                    <Label HorizontalOptions="StartAndExpand" Text="Use Android AutoConnect" VerticalOptions="Center" />
-                    <Switch HorizontalOptions="End" IsToggled="{Binding UseAutoConnect}" />
-                </StackLayout>
-
                 <!-- Stop Searching Button -->
-                <StackLayout Grid.Row="3" Margin="0,0,0,10" HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsRefreshing}" Orientation="Horizontal">
+                <StackLayout Grid.Row="2" Margin="0,0,0,10" HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsRefreshing}" Orientation="Horizontal">
                     <Button BackgroundColor="{StaticResource ButtonBackgroundColor}"
                             Command="{Binding StopScanCommand}"
                             HorizontalOptions="CenterAndExpand" Text="Stop Searching"

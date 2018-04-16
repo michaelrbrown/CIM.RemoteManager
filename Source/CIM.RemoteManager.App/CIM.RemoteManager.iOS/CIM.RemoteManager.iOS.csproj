@@ -412,6 +412,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\ic_BluetoothInfo.png" />
+    <BundleResource Include="Resources\nav_RefreshDevices.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\SensorTemperature.png" />

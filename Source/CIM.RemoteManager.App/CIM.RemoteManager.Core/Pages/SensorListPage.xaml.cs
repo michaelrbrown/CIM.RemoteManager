@@ -48,6 +48,15 @@ namespace CIM.RemoteManager.Core.Pages
                 sensorListViewModel.StopUpdatesCommand.Execute();
                 sensorListViewModel.StartUpdatesCommand.Execute();
             }
+            
+            //if (Xamarin.Forms.Device.Idiom == TargetIdiom.Phone)
+            //{
+            //    SensorListView.LayoutDefinition.Orientation = Telerik.XamarinForms.Common.Orientation.Vertical;
+            //}
+            //else if (Xamarin.Forms.Device.Idiom == TargetIdiom.Tablet)
+            //{
+            //    SensorListView.LayoutDefinition.Orientation = Telerik.XamarinForms.Common.Orientation.Horizontal;
+            //}
         }
 
         /// <summary>

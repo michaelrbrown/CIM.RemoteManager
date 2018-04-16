@@ -10,6 +10,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="1" />
             <RowDefinition Height="*" />
             <RowDefinition Height="40" />
         </Grid.RowDefinitions>
@@ -33,9 +34,12 @@
             </Grid>
         </StackLayout>
 
+        <!-- Border Line -->
+        <BoxView Grid.Row="2" Style="{StaticResource DarkShadowStyle}" />
+
         <!-- Chart Loading Indicator -->
-        <xForms:SfBusyIndicator x:Name="ChartBusyindicator" Title="Loading Sensor Data..."
-                                Grid.Row="2"
+        <xForms:SfBusyIndicator x:Name="SensorBusyindicator" Title="Loading Sensor Data..."
+                                Grid.Row="3"
                                 AnimationType="Ball" BackgroundColor="Transparent" HeightRequest="250"
                                 IsBusy="{Binding ProcessingSensorData}"
                                 IsVisible="{Binding ProcessingSensorData}"
@@ -44,7 +48,7 @@
                                 ViewBoxHeight="250" ViewBoxWidth="250" WidthRequest="250" />
 
         <!-- Sensor ListView -->
-        <telerikDataControls:RadListView x:Name="listView" Grid.Row="2" ItemTapped="listView_ItemTapped" ItemsSource="{Binding SensorCollection}">
+        <telerikDataControls:RadListView x:Name="SensorListView" Grid.Row="3" ItemTapped="listView_ItemTapped" ItemsSource="{Binding SensorCollection}">
             <telerikDataControls:RadListView.ItemTemplate>
                 <DataTemplate>
                     <telerikListView:ListViewTemplateCell>
@@ -76,7 +80,7 @@
         </telerikDataControls:RadListView>
 
         <!-- Margin: left, top, right, bottom -->
-        <StackLayout Grid.Row="3"
+        <StackLayout Grid.Row="4"
                      BackgroundColor="{StaticResource FooterBackgroundColor}"
                      HeightRequest="40" HorizontalOptions="FillAndExpand" Orientation="Horizontal" Spacing="0"
                      VerticalOptions="FillAndExpand">

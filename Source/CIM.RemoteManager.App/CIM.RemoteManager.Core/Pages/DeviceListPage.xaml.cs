@@ -1,4 +1,7 @@
-﻿namespace CIM.RemoteManager.Core.Pages
+﻿using CIM.RemoteManager.Core.ViewModels;
+using Xamarin.Forms;
+
+namespace CIM.RemoteManager.Core.Pages
 {
     /// <summary>
     /// Class DeviceListPage.
@@ -12,6 +15,13 @@
         public DeviceListPage()
         {
             InitializeComponent();
+
+            // Add device settings toolbar icon and handle selection
+            ToolbarItems.Add(new ToolbarItem("Refresh Devices", "nav_RefreshDevices.png", () =>
+            {
+                var deviceListViewModel = (DeviceListViewModel)this.BindingContext;
+                deviceListViewModel.RefreshCommand.Execute();
+            }, ToolbarItemOrder.Primary, 0));
         }
     }
 }
