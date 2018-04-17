@@ -199,17 +199,17 @@
     <Reference Include="Syncfusion.SfPopupLayout.XForms, Version=16.1451.0.32, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Syncfusion.Xamarin.SfPopupLayout.16.1.0.32\lib\portable-win+net45+wp80+win81+wpa81\Syncfusion.SfPopupLayout.XForms.dll</HintPath>
     </Reference>
-    <Reference Include="Telerik.XamarinForms.Common">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Progress\Telerik UI for Xamarin R1 2018\Binaries\Portable\Telerik.XamarinForms.Common.dll</HintPath>
+    <Reference Include="Telerik.XamarinForms.Common, Version=2018.1.405.240, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Telerik.UI.for.Xamarin.Common.2018.1.405.2\lib\portable-net45+win8+wpa81+wp8\Telerik.XamarinForms.Common.dll</HintPath>
     </Reference>
-    <Reference Include="Telerik.XamarinForms.DataControls">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Progress\Telerik UI for Xamarin R1 2018\Binaries\Portable\Telerik.XamarinForms.DataControls.dll</HintPath>
+    <Reference Include="Telerik.XamarinForms.DataControls, Version=2018.1.405.240, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Telerik.UI.for.Xamarin.DataControls.2018.1.405.2\lib\portable-net45+win8+wpa81+wp8\Telerik.XamarinForms.DataControls.dll</HintPath>
     </Reference>
-    <Reference Include="Telerik.XamarinForms.Primitives">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Progress\Telerik UI for Xamarin R1 2018\Binaries\Portable\Telerik.XamarinForms.Primitives.dll</HintPath>
+    <Reference Include="Telerik.XamarinForms.Primitives, Version=2018.1.405.240, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Telerik.UI.for.Xamarin.Primitives.2018.1.405.2\lib\portable-net45+win8+wpa81+wp8\Telerik.XamarinForms.Primitives.dll</HintPath>
     </Reference>
-    <Reference Include="Telerik.XamarinForms.SkiaSharp">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Progress\Telerik UI for Xamarin R1 2018\Binaries\Portable\Telerik.XamarinForms.SkiaSharp.dll</HintPath>
+    <Reference Include="Telerik.XamarinForms.SkiaSharp, Version=2018.1.405.240, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Telerik.UI.for.Xamarin.SkiaSharp.2018.1.405.2\lib\portable-net45+win8+wpa81+wp8\Telerik.XamarinForms.SkiaSharp.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Forms.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Xamarin.Forms.2.5.0.122203\lib\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.Core.dll</HintPath>

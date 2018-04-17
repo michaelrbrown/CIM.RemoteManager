@@ -11,7 +11,7 @@ namespace CIM.RemoteManager.Core.Helpers
         /// <returns>Validated result</returns>
         public static double ValidateNumber(this double number)
         {
-            if (Math.Abs(number - 3276.8) < 0.001)
+            if (Math.Abs(number - 3276.8) < 0.001 || Math.Abs(number - 32768) < 0.001)
             {
                 return 0;
             }

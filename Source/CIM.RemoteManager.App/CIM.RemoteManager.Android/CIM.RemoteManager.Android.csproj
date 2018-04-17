@@ -244,30 +244,29 @@
     <Reference Include="Plugin.CurrentActivity">
       <HintPath>..\..\packages\Plugin.CurrentActivity.1.0.1\lib\MonoAndroid10\Plugin.CurrentActivity.dll</HintPath>
     </Reference>
-    <Reference Include="Telerik.Xamarin.Android.Common">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Progress\Telerik UI for Xamarin R1 2018\Binaries\Android\Telerik.Xamarin.Android.Common.dll</HintPath>
+    <Reference Include="Telerik.Xamarin.Android.Common, Version=2018.1.405.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Telerik.UI.for.Xamarin.Common.2018.1.405.2\lib\MonoAndroid10\Telerik.Xamarin.Android.Common.dll</HintPath>
     </Reference>
-    <Reference Include="Telerik.Xamarin.Android.Data">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Progress\Telerik UI for Xamarin R1 2018\Binaries\Android\Telerik.Xamarin.Android.Data.dll</HintPath>
+    <Reference Include="Telerik.Xamarin.Android.Data, Version=2018.1.405.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Telerik.UI.for.Xamarin.DataControls.2018.1.405.2\lib\MonoAndroid10\Telerik.Xamarin.Android.Data.dll</HintPath>
     </Reference>
-    <Reference Include="Telerik.Xamarin.Android.List">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Progress\Telerik UI for Xamarin R1 2018\Binaries\Android\Telerik.Xamarin.Android.List.dll</HintPath>
+    <Reference Include="Telerik.Xamarin.Android.List, Version=2018.1.405.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Telerik.UI.for.Xamarin.DataControls.2018.1.405.2\lib\MonoAndroid10\Telerik.Xamarin.Android.List.dll</HintPath>
     </Reference>
     <Reference Include="Telerik.Xamarin.Android.Primitives, Version=2018.1.405.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Progress\Telerik UI for Xamarin R1 2018\Binaries\Android\Telerik.Xamarin.Android.Primitives.dll</HintPath>
+      <HintPath>..\..\packages\Telerik.UI.for.Xamarin.Primitives.2018.1.405.2\lib\MonoAndroid10\Telerik.Xamarin.Android.Primitives.dll</HintPath>
     </Reference>
-    <Reference Include="Telerik.XamarinForms.Common">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Progress\Telerik UI for Xamarin R1 2018\Binaries\Android\Telerik.XamarinForms.Common.dll</HintPath>
+    <Reference Include="Telerik.XamarinForms.Common, Version=2018.1.405.240, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Telerik.UI.for.Xamarin.Common.2018.1.405.2\lib\MonoAndroid10\Telerik.XamarinForms.Common.dll</HintPath>
     </Reference>
-    <Reference Include="Telerik.XamarinForms.DataControls">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Progress\Telerik UI for Xamarin R1 2018\Binaries\Android\Telerik.XamarinForms.DataControls.dll</HintPath>
+    <Reference Include="Telerik.XamarinForms.DataControls, Version=2018.1.405.240, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Telerik.UI.for.Xamarin.DataControls.2018.1.405.2\lib\MonoAndroid10\Telerik.XamarinForms.DataControls.dll</HintPath>
     </Reference>
-    <Reference Include="Telerik.XamarinForms.Primitives">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Progress\Telerik UI for Xamarin R1 2018\Binaries\Android\Telerik.XamarinForms.Primitives.dll</HintPath>
+    <Reference Include="Telerik.XamarinForms.Primitives, Version=2018.1.405.240, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Telerik.UI.for.Xamarin.Primitives.2018.1.405.2\lib\MonoAndroid10\Telerik.XamarinForms.Primitives.dll</HintPath>
     </Reference>
-    <Reference Include="Telerik.XamarinForms.SkiaSharp">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Progress\Telerik UI for Xamarin R1 2018\Binaries\Android\Telerik.XamarinForms.SkiaSharp.dll</HintPath>
+    <Reference Include="Telerik.XamarinForms.SkiaSharp, Version=2018.1.405.240, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Telerik.UI.for.Xamarin.SkiaSharp.2018.1.405.2\lib\MonoAndroid10\Telerik.XamarinForms.SkiaSharp.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Android.Support.Animated.Vector.Drawable">
       <HintPath>..\..\packages\Xamarin.Android.Support.Animated.Vector.Drawable.25.4.0.2\lib\MonoAndroid70\Xamarin.Android.Support.Animated.Vector.Drawable.dll</HintPath>
