@@ -1808,7 +1808,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 // Setup sensor scale command
                 string sensorScaleUpdateValue = "{C" +  SensorIndexSelected + "\t" + Convert.ToInt32(SensorScale * 10000) + "}";
 
-                _userDialogs.Alert($"sensorScaleUpdateValue: {Convert.ToInt32(SensorScale * 10000)}");
+                //_userDialogs.Alert($"sensorScaleUpdateValue: {Convert.ToInt32(SensorScale * 10000)}");
 
                 // Save scale and offset to remote
                 await TxCharacteristic.WriteAsync(sensorScaleUpdateValue.StrToByteArray()).ConfigureAwait(true);
@@ -1816,7 +1816,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                 // Setup sensor offset command
                 string sensorOffsetUpdateValue = "{D" + SensorIndexSelected + "\t" + Convert.ToInt32(SensorOffset * 10000) + "}";
 
-                _userDialogs.Alert($"sensorOffsetUpdateValue: {Convert.ToInt32(SensorOffset * 10000)}");
+                //_userDialogs.Alert($"sensorOffsetUpdateValue: {Convert.ToInt32(SensorOffset * 10000)}");
 
                 // Save scale and offset to remote
                 await TxCharacteristic.WriteAsync(sensorOffsetUpdateValue.StrToByteArray()).ConfigureAwait(true);
