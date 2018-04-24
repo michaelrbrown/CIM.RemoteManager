@@ -120,6 +120,8 @@
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <ITunesArtwork Include="iTunesArtwork" />
+    <ITunesArtwork Include="iTunesArtwork%402x" />
     <None Include="packages.config" />
     <Compile Include="LinkerPleaseInclude.cs" />
     <Compile Include="DebugTrace.cs" />
@@ -324,78 +326,71 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Contents.json">
+    <ImageAsset Include="XAssets.xcassets\AppIcons.appiconset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-1024.png">
+    <ImageAsset Include="XAssets.xcassets\AppIcons.appiconset\Icon-1024.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-120.png">
+    <ImageAsset Include="XAssets.xcassets\AppIcons.appiconset\Icon-120.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-152.png">
+    <ImageAsset Include="XAssets.xcassets\AppIcons.appiconset\Icon-152.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-167.png">
+    <ImageAsset Include="XAssets.xcassets\AppIcons.appiconset\Icon-167.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-180.png">
+    <ImageAsset Include="XAssets.xcassets\AppIcons.appiconset\Icon-180.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-20.png">
+    <ImageAsset Include="XAssets.xcassets\AppIcons.appiconset\Icon-20.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-29.png">
+    <ImageAsset Include="XAssets.xcassets\AppIcons.appiconset\Icon-29.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-40.png">
+    <ImageAsset Include="XAssets.xcassets\AppIcons.appiconset\Icon-40.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-58.png">
+    <ImageAsset Include="XAssets.xcassets\AppIcons.appiconset\Icon-58.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-60.png">
+    <ImageAsset Include="XAssets.xcassets\AppIcons.appiconset\Icon-60.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-76.png">
+    <ImageAsset Include="XAssets.xcassets\AppIcons.appiconset\Icon-76.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-80.png">
+    <ImageAsset Include="XAssets.xcassets\AppIcons.appiconset\Icon-80.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\AppIcons.appiconset\Icon-87.png">
+    <ImageAsset Include="XAssets.xcassets\AppIcons.appiconset\Icon-87.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\LaunchImages.launchimage\Contents.json">
+    <ImageAsset Include="XAssets.xcassets\LaunchImages.launchimage\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\LaunchImages.launchimage\LaunchImage-568h@2x~iphone_640x1136.png">
+    <ImageAsset Include="XAssets.xcassets\LaunchImages.launchimage\LaunchImage-568h@2x~iphone_640x1136.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\LaunchImages.launchimage\LaunchImage-Landscape@2x~ipad_2048x1536.png">
+    <ImageAsset Include="XAssets.xcassets\LaunchImages.launchimage\LaunchImage-Landscape@2x~ipad_2048x1536.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\LaunchImages.launchimage\LaunchImage-Landscape~ipad_1024x768.png">
+    <ImageAsset Include="XAssets.xcassets\LaunchImages.launchimage\LaunchImage-Landscape~ipad_1024x768.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\LaunchImages.launchimage\LaunchImage-Portrait@2x~ipad_1536x2048.png">
+    <ImageAsset Include="XAssets.xcassets\LaunchImages.launchimage\LaunchImage-Portrait@2x~ipad_1536x2048.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\LaunchImages.launchimage\LaunchImage-Portrait~ipad_768x1024.png">
+    <ImageAsset Include="XAssets.xcassets\LaunchImages.launchimage\LaunchImage-Portrait~ipad_768x1024.png">
       <Visible>false</Visible>
     </ImageAsset>
-    <ImageAsset Include="Assets.xcassets\LaunchImages.launchimage\LaunchImage~iphone_640x960.png">
+    <ImageAsset Include="XAssets.xcassets\LaunchImages.launchimage\LaunchImage~iphone_640x960.png">
       <Visible>false</Visible>
     </ImageAsset>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Icon-Small-50.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Icon-Small-50%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Icon-Small-50%402x.png" />
     <BundleResource Include="Resources\AppStoreIcon512.png" />
     <BundleResource Include="Resources\AppStoreIcon.png" />
     <BundleResource Include="Resources\Icon-76.png" />

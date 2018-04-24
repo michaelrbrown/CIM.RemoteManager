@@ -21,7 +21,11 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Image HorizontalOptions="End" Source="ic_BluetoothInfo.png" VerticalOptions="Center" />
-                <Label Grid.Column="1" FontSize="18" Text="{Binding StateText}" TextColor="{StaticResource BTLEStatusTextColor}" VerticalOptions="Center" />
+                <Label Grid.Column="1"
+                       FontSize="18"
+                       Text="{Binding StateText}"
+                       TextColor="{StaticResource BTLEStatusTextColor}"
+                       VerticalOptions="Center" />
             </Grid>
         </StackLayout>
 
@@ -45,7 +49,9 @@
                 </Grid.ColumnDefinitions>
 
                 <!-- Margin: left, top, right, bottom -->
-                <StackLayout Grid.Column="0" Margin="0" HorizontalOptions="FillAndExpand" Spacing="0" VerticalOptions="FillAndExpand">
+                <StackLayout Grid.Column="0"
+                             Margin="0"
+                             HorizontalOptions="FillAndExpand" Spacing="0" VerticalOptions="FillAndExpand">
                     <!-- Sensor Image -->
                     <Image Margin="10,10,0,5"
                            Aspect="AspectFit" HeightRequest="40" HorizontalOptions="Center"
@@ -55,8 +61,7 @@
 
                 <StackLayout Grid.Column="1"
                              Margin="0,10,5,10"
-                             HeightRequest="50" HorizontalOptions="FillAndExpand" Orientation="Vertical" Spacing="0"
-                             VerticalOptions="FillAndExpand">
+                             HeightRequest="50" HorizontalOptions="FillAndExpand" Orientation="Vertical" Spacing="0" VerticalOptions="FillAndExpand">
                     <!-- Sensor Name -->
                     <Label Margin="5,0,0,0"
                            FontSize="18" HorizontalOptions="Start" HorizontalTextAlignment="Center"
@@ -76,8 +81,7 @@
                              HorizontalOptions="FillAndExpand" Orientation="Vertical" Spacing="0" VerticalOptions="FillAndExpand">
                     <!-- Sensor Index -->
                     <Label Margin="5,5,10,0"
-                           FontSize="12" HorizontalOptions="Center" HorizontalTextAlignment="Center" LineBreakMode="NoWrap"
-                           Text="Sensor Index"
+                           FontSize="12" HorizontalOptions="Center" HorizontalTextAlignment="Center" LineBreakMode="NoWrap" Text="Sensor Index"
                            TextColor="{StaticResource HeaderTextColor}"
                            VerticalOptions="Center" />
                     <!-- Sensor Index -->
@@ -91,8 +95,7 @@
 
             <!-- Segmented Control -->
             <StackLayout Grid.Row="1"
-                         HeightRequest="50" HorizontalOptions="FillAndExpand" Orientation="Horizontal" Spacing="0"
-                         VerticalOptions="FillAndExpand">
+                         HeightRequest="50" HorizontalOptions="FillAndExpand" Orientation="Horizontal" Spacing="0" VerticalOptions="FillAndExpand">
 
                 <abstractions:SegmentedControl x:Name="SegControl"
                                                HorizontalOptions="CenterAndExpand" SelectedSegment="0"
@@ -159,7 +162,11 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Image HorizontalOptions="End" Source="ic_BluetoothInfo.png" VerticalOptions="Center" />
-                <Label Grid.Column="1" FontSize="18" Text="{Binding StateText}" TextColor="{StaticResource BTLEStatusTextColor}" VerticalOptions="Center" />
+                <Label Grid.Column="1"
+                       FontSize="18"
+                       Text="{Binding StateText}"
+                       TextColor="{StaticResource BTLEStatusTextColor}"
+                       VerticalOptions="Center" />
             </Grid>
         </StackLayout>
 
@@ -184,7 +191,9 @@
                     </Grid.ColumnDefinitions>
 
                     <!-- Margin: left, top, right, bottom -->
-                    <StackLayout Grid.Column="0" Margin="0" HorizontalOptions="FillAndExpand" Spacing="0" VerticalOptions="FillAndExpand">
+                    <StackLayout Grid.Column="0"
+                                 Margin="0"
+                                 HorizontalOptions="FillAndExpand" Spacing="0" VerticalOptions="FillAndExpand">
                         <!-- Sensor Image -->
                         <Image Margin="10,10,0,5"
                                Aspect="AspectFit" HeightRequest="40" HorizontalOptions="Center"
@@ -194,8 +203,7 @@
 
                     <StackLayout Grid.Column="1"
                                  Margin="0,10,5,10"
-                                 HeightRequest="50" HorizontalOptions="FillAndExpand" Orientation="Vertical" Spacing="0"
-                                 VerticalOptions="FillAndExpand">
+                                 HeightRequest="50" HorizontalOptions="FillAndExpand" Orientation="Vertical" Spacing="0" VerticalOptions="FillAndExpand">
                         <!-- Sensor Name -->
                         <Label Margin="5,0,0,0"
                                FontSize="18" HorizontalOptions="Start" HorizontalTextAlignment="Center"
@@ -215,8 +223,7 @@
                                  HorizontalOptions="FillAndExpand" Orientation="Vertical" Spacing="0" VerticalOptions="FillAndExpand">
                         <!-- Sensor Index -->
                         <Label Margin="5,5,10,0"
-                               FontSize="12" HorizontalOptions="Center" HorizontalTextAlignment="Center" LineBreakMode="NoWrap"
-                               Text="Sensor Index"
+                               FontSize="12" HorizontalOptions="Center" HorizontalTextAlignment="Center" LineBreakMode="NoWrap" Text="Sensor Index"
                                TextColor="{StaticResource HeaderTextColor}"
                                VerticalOptions="Center" />
                         <!-- Sensor Index -->
@@ -255,31 +262,52 @@
 
                     <!-- Average -->
                     <Label Grid.Row="1" Grid.Column="0" Style="{StaticResource FormLabelStyle}" Text="Average " />
-                    <Entry Grid.Row="1" Grid.Column="1" IsEnabled="False" Style="{StaticResource FormValueStyle}" Text="{Binding AverageValue}" />
+                    <Entry Grid.Row="1" Grid.Column="1"
+                           IsEnabled="False"
+                           Style="{StaticResource FormValueStyle}"
+                           Text="{Binding AverageValue}" />
 
                     <!-- Average Since -->
                     <Label Grid.Row="2" Grid.Column="0" Style="{StaticResource FormLabelStyle}" Text="Since " />
-                    <Entry Grid.Row="2" Grid.Column="1" IsEnabled="False" Style="{StaticResource FormValueStyle}" Text="{Binding SinceDateTimeStamp}" />
+                    <Entry Grid.Row="2" Grid.Column="1"
+                           IsEnabled="False"
+                           Style="{StaticResource FormValueStyle}"
+                           Text="{Binding SinceDateTimeStamp}" />
 
                     <!-- Minimum -->
                     <Label Grid.Row="3" Grid.Column="0" Style="{StaticResource FormLabelStyle}" Text="Minimum " />
-                    <Entry Grid.Row="3" Grid.Column="1" IsEnabled="False" Style="{StaticResource FormValueStyle}" Text="{Binding MinimumValue}" />
+                    <Entry Grid.Row="3" Grid.Column="1"
+                           IsEnabled="False"
+                           Style="{StaticResource FormValueStyle}"
+                           Text="{Binding MinimumValue}" />
 
                     <!-- Minimum Occurrence -->
                     <Label Grid.Row="4" Grid.Column="0" Style="{StaticResource FormLabelStyle}" Text="Occurrence " />
-                    <Entry Grid.Row="4" Grid.Column="1" IsEnabled="False" Style="{StaticResource FormValueStyle}" Text="{Binding MinimumOccuranceTimeStamp}" />
+                    <Entry Grid.Row="4" Grid.Column="1"
+                           IsEnabled="False"
+                           Style="{StaticResource FormValueStyle}"
+                           Text="{Binding MinimumOccuranceTimeStamp}" />
 
                     <!-- Maximum -->
                     <Label Grid.Row="5" Grid.Column="0" Style="{StaticResource FormLabelStyle}" Text="Maximum " />
-                    <Entry Grid.Row="5" Grid.Column="1" IsEnabled="False" Style="{StaticResource FormValueStyle}" Text="{Binding MaximumValue}" />
+                    <Entry Grid.Row="5" Grid.Column="1"
+                           IsEnabled="False"
+                           Style="{StaticResource FormValueStyle}"
+                           Text="{Binding MaximumValue}" />
 
                     <!-- Maximum Occurrence -->
                     <Label Grid.Row="6" Grid.Column="0" Style="{StaticResource FormLabelStyle}" Text="Occurrence " />
-                    <Entry Grid.Row="6" Grid.Column="1" IsEnabled="False" Style="{StaticResource FormValueStyle}" Text="{Binding MaximumOccuranceTimeStamp}" />
+                    <Entry Grid.Row="6" Grid.Column="1"
+                           IsEnabled="False"
+                           Style="{StaticResource FormValueStyle}"
+                           Text="{Binding MaximumOccuranceTimeStamp}" />
 
                     <!-- Variance -->
                     <Label Grid.Row="7" Grid.Column="0" Style="{StaticResource FormLabelStyle}" Text="Variance " />
-                    <Entry Grid.Row="7" Grid.Column="1" IsEnabled="False" Style="{StaticResource FormValueStyle}" Text="{Binding VarianceValue}" />
+                    <Entry Grid.Row="7" Grid.Column="1"
+                           IsEnabled="False"
+                           Style="{StaticResource FormValueStyle}"
+                           Text="{Binding VarianceValue}" />
 
                 </Grid>
 
@@ -299,7 +327,11 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Image HorizontalOptions="End" Source="ic_BluetoothInfo.png" VerticalOptions="Center" />
-                <Label Grid.Column="1" FontSize="18" Text="{Binding StateText}" TextColor="{StaticResource BTLEStatusTextColor}" VerticalOptions="Center" />
+                <Label Grid.Column="1"
+                       FontSize="18"
+                       Text="{Binding StateText}"
+                       TextColor="{StaticResource BTLEStatusTextColor}"
+                       VerticalOptions="Center" />
             </Grid>
         </StackLayout>
 
@@ -324,7 +356,9 @@
                     </Grid.ColumnDefinitions>
 
                     <!-- Margin: left, top, right, bottom -->
-                    <StackLayout Grid.Column="0" Margin="0" HorizontalOptions="FillAndExpand" Spacing="0" VerticalOptions="FillAndExpand">
+                    <StackLayout Grid.Column="0"
+                                 Margin="0"
+                                 HorizontalOptions="FillAndExpand" Spacing="0" VerticalOptions="FillAndExpand">
                         <!-- Sensor Image -->
                         <Image Margin="10,10,0,5"
                                Aspect="AspectFit" HeightRequest="40" HorizontalOptions="Center"
@@ -334,8 +368,7 @@
 
                     <StackLayout Grid.Column="1"
                                  Margin="0,10,5,10"
-                                 HeightRequest="50" HorizontalOptions="FillAndExpand" Orientation="Vertical" Spacing="0"
-                                 VerticalOptions="FillAndExpand">
+                                 HeightRequest="50" HorizontalOptions="FillAndExpand" Orientation="Vertical" Spacing="0" VerticalOptions="FillAndExpand">
                         <!-- Sensor Name -->
                         <Label Margin="5,0,0,0"
                                FontSize="18" HorizontalOptions="Start" HorizontalTextAlignment="Center"
@@ -355,8 +388,7 @@
                                  HorizontalOptions="FillAndExpand" Orientation="Vertical" Spacing="0" VerticalOptions="FillAndExpand">
                         <!-- Sensor Index -->
                         <Label Margin="5,5,10,0"
-                               FontSize="12" HorizontalOptions="Center" HorizontalTextAlignment="Center" LineBreakMode="NoWrap"
-                               Text="Sensor Index"
+                               FontSize="12" HorizontalOptions="Center" HorizontalTextAlignment="Center" LineBreakMode="NoWrap" Text="Sensor Index"
                                TextColor="{StaticResource HeaderTextColor}"
                                VerticalOptions="Center" />
                         <!-- Sensor Index -->
@@ -394,27 +426,45 @@
 
                     <!-- Alarms Active -->
                     <Label Grid.Row="1" Grid.Column="0" Style="{StaticResource FormLabelStyle}" Text="Alarms Active " />
-                    <Entry Grid.Row="1" Grid.Column="1" IsEnabled="False" Style="{StaticResource FormValueStyle}" Text="{Binding AlarmStatusBool}" />
+                    <Entry Grid.Row="1" Grid.Column="1"
+                           IsEnabled="False"
+                           Style="{StaticResource FormValueStyle}"
+                           Text="{Binding AlarmStatusBool}" />
 
                     <!-- Alarm Delay -->
                     <Label Grid.Row="2" Grid.Column="0" Style="{StaticResource FormLabelStyle}" Text="Alarm Delay " />
-                    <Entry Grid.Row="2" Grid.Column="1" IsEnabled="False" Style="{StaticResource FormValueStyle}" Text="{Binding AlarmDelay}" />
+                    <Entry Grid.Row="2" Grid.Column="1"
+                           IsEnabled="False"
+                           Style="{StaticResource FormValueStyle}"
+                           Text="{Binding AlarmDelay}" />
 
                     <!-- High Alarm -->
                     <Label Grid.Row="3" Grid.Column="0" Style="{StaticResource FormLabelStyle}" Text="High Alarm " />
-                    <Entry Grid.Row="3" Grid.Column="1" IsEnabled="False" Style="{StaticResource FormValueStyle}" Text="{Binding HighAlarmLimit}" />
+                    <Entry Grid.Row="3" Grid.Column="1"
+                           IsEnabled="False"
+                           Style="{StaticResource FormValueStyle}"
+                           Text="{Binding HighAlarmLimit}" />
 
                     <!-- High Warning -->
                     <Label Grid.Row="4" Grid.Column="0" Style="{StaticResource FormLabelStyle}" Text="High Warning " />
-                    <Entry Grid.Row="4" Grid.Column="1" IsEnabled="False" Style="{StaticResource FormValueStyle}" Text="{Binding HighWarningLimit}" />
+                    <Entry Grid.Row="4" Grid.Column="1"
+                           IsEnabled="False"
+                           Style="{StaticResource FormValueStyle}"
+                           Text="{Binding HighWarningLimit}" />
 
                     <!-- Low Warning -->
                     <Label Grid.Row="5" Grid.Column="0" Style="{StaticResource FormLabelStyle}" Text="Low Warning " />
-                    <Entry Grid.Row="5" Grid.Column="1" IsEnabled="False" Style="{StaticResource FormValueStyle}" Text="{Binding LowAlarmLimit}" />
+                    <Entry Grid.Row="5" Grid.Column="1"
+                           IsEnabled="False"
+                           Style="{StaticResource FormValueStyle}"
+                           Text="{Binding LowAlarmLimit}" />
 
                     <!-- Low Alarm -->
                     <Label Grid.Row="6" Grid.Column="0" Style="{StaticResource FormLabelStyle}" Text="Low Alarm " />
-                    <Entry Grid.Row="6" Grid.Column="1" IsEnabled="False" Style="{StaticResource FormValueStyle}" Text="{Binding LowWarningLimit}" />
+                    <Entry Grid.Row="6" Grid.Column="1"
+                           IsEnabled="False"
+                           Style="{StaticResource FormValueStyle}"
+                           Text="{Binding LowWarningLimit}" />
 
                 </Grid>
 
@@ -434,7 +484,11 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Image HorizontalOptions="End" Source="ic_BluetoothInfo.png" VerticalOptions="Center" />
-                <Label Grid.Column="1" FontSize="18" Text="{Binding StateText}" TextColor="{StaticResource BTLEStatusTextColor}" VerticalOptions="Center" />
+                <Label Grid.Column="1"
+                       FontSize="18"
+                       Text="{Binding StateText}"
+                       TextColor="{StaticResource BTLEStatusTextColor}"
+                       VerticalOptions="Center" />
             </Grid>
         </StackLayout>
 
@@ -459,7 +513,9 @@
                     </Grid.ColumnDefinitions>
 
                     <!-- Margin: left, top, right, bottom -->
-                    <StackLayout Grid.Column="0" Margin="0" HorizontalOptions="FillAndExpand" Spacing="0" VerticalOptions="FillAndExpand">
+                    <StackLayout Grid.Column="0"
+                                 Margin="0"
+                                 HorizontalOptions="FillAndExpand" Spacing="0" VerticalOptions="FillAndExpand">
                         <!-- Sensor Image -->
                         <Image Margin="10,10,0,5"
                                Aspect="AspectFit" HeightRequest="40" HorizontalOptions="Center"
@@ -469,8 +525,7 @@
 
                     <StackLayout Grid.Column="1"
                                  Margin="0,10,5,10"
-                                 HeightRequest="50" HorizontalOptions="FillAndExpand" Orientation="Vertical" Spacing="0"
-                                 VerticalOptions="FillAndExpand">
+                                 HeightRequest="50" HorizontalOptions="FillAndExpand" Orientation="Vertical" Spacing="0" VerticalOptions="FillAndExpand">
                         <!-- Sensor Name -->
                         <Label Margin="5,0,0,0"
                                FontSize="18" HorizontalOptions="Start" HorizontalTextAlignment="Center"
@@ -490,8 +545,7 @@
                                  HorizontalOptions="FillAndExpand" Orientation="Vertical" Spacing="0" VerticalOptions="FillAndExpand">
                         <!-- Sensor Index -->
                         <Label Margin="5,5,10,0"
-                               FontSize="12" HorizontalOptions="Center" HorizontalTextAlignment="Center" LineBreakMode="NoWrap"
-                               Text="Sensor Index"
+                               FontSize="12" HorizontalOptions="Center" HorizontalTextAlignment="Center" LineBreakMode="NoWrap" Text="Sensor Index"
                                TextColor="{StaticResource HeaderTextColor}"
                                VerticalOptions="Center" />
                         <!-- Sensor Index -->
@@ -533,11 +587,17 @@
 
                     <!-- Upper Calibration -->
                     <Label Grid.Row="1" Grid.Column="0" Style="{StaticResource FormLabelStyle}" Text="Upper " />
-                    <Entry Grid.Row="1" Grid.Column="1" Style="{StaticResource FormValueStyle}" Text="{Binding UpperCalibration, Mode=TwoWay}" TextChanged="UpperCalibrationEntry_OnTextChanged" />
+                    <Entry Grid.Row="1" Grid.Column="1"
+                           Style="{StaticResource FormValueStyle}"
+                           Text="{Binding UpperCalibration, Mode=TwoWay}"
+                           TextChanged="UpperCalibrationEntry_OnTextChanged" />
 
                     <!-- Upper Calibration Target -->
                     <Label Grid.Row="1" Grid.Column="2" Style="{StaticResource FormLabelStyle}" Text="Target " />
-                    <Entry Grid.Row="1" Grid.Column="3" Style="{StaticResource FormValueStyle}" Text="{Binding UpperCalibrationTarget, Mode=TwoWay}" TextChanged="UpperCalibrationTargetEntry_OnTextChanged" />
+                    <Entry Grid.Row="1" Grid.Column="3"
+                           Style="{StaticResource FormValueStyle}"
+                           Text="{Binding UpperCalibrationTarget, Mode=TwoWay}"
+                           TextChanged="UpperCalibrationTargetEntry_OnTextChanged" />
 
                     <!-- Lower Calibration -->
                     <Label Grid.Row="2" Grid.Column="0" Style="{StaticResource FormLabelStyle}" Text="Lower " />
@@ -571,7 +631,10 @@
 
                     <!-- Offset -->
                     <Label Grid.Row="5" Grid.Column="0" Style="{StaticResource FormLabelStyle}" Text="Value " />
-                    <Entry x:Name="OffsetEntry" Grid.Row="5" Grid.Column="1" Style="{StaticResource FormValueStyle}" Text="{Binding SensorOffset, Mode=TwoWay}" />
+                    <Entry x:Name="OffsetEntry"
+                           Grid.Row="5" Grid.Column="1"
+                           Style="{StaticResource FormValueStyle}"
+                           Text="{Binding SensorOffset, Mode=TwoWay}" />
 
                     <!-- Offset Trim -->
                     <Label Grid.Row="5" Grid.Column="2" Style="{StaticResource FormLabelStyle}" Text="Trim? " />
@@ -581,11 +644,15 @@
 
                     <!-- Output -->
                     <Label Grid.Row="6" Grid.Column="0" Style="{StaticResource FormLabelStyle}" Text="Output " />
-                    <Entry Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="3" Style="{StaticResource FormValueStyle}" Text="{Binding SensorOutput, Mode=TwoWay}" />
+                    <Entry Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="3"
+                           Style="{StaticResource FormValueStyle}"
+                           Text="{Binding SensorOutput, Mode=TwoWay}" />
 
                     <!-- Input -->
                     <Label Grid.Row="7" Grid.Column="0" Style="{StaticResource FormLabelStyle}" Text="Input " />
-                    <Entry Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="3" Style="{StaticResource FormValueStyle}" Text="{Binding CurrentValue, Mode=TwoWay}" />
+                    <Entry Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="3"
+                           Style="{StaticResource FormValueStyle}"
+                           Text="{Binding CurrentValue, Mode=TwoWay}" />
 
                     <!-- Save Button -->
                     <StackLayout Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="4"

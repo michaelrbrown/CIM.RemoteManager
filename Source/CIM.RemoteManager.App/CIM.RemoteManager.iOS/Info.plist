@@ -2,6 +2,14 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>CIMScan Remote Manager requires Bluetooth support.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>CIMScan Remote Manager requires Camera support.</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>CIMScan Remote Manager requires Calendar support.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>CIMScan Remote Manager requires Photo Library support.</string>
 	<key>UIDeviceFamily</key>
 	<array>
 		<integer>1</integer>
@@ -26,13 +34,15 @@
 	<key>CFBundleIdentifier</key>
 	<string>com.cimtechniques.remotemanagerapp</string>
 	<key>CFBundleVersion</key>
-	<string>1.1.5</string>
+	<string>1.1.18</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>CFBundleName</key>
 	<string>DA-12 Remote Manager</string>
+	<key>XSAppIconAssets</key>
+	<string>XAssets.xcassets/AppIcons.appiconset</string>
 	<key>XSLaunchImageAssets</key>
-	<string>Resources/Assets.xcassets/LaunchImages.launchimage</string>
+	<string>XAssets.xcassets/LaunchImages.launchimage</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>bluetooth-central</string>
@@ -42,8 +52,6 @@
 	<string>DA-12 Remote Manager</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0.0</string>
-	<key>XSAppIconAssets</key>
-	<string>Resources/Assets.xcassets/AppIcons.appiconset</string>
 	<key>CFBundleIcons</key>
 	<dict>
 		<key>CFBundlePrimaryIcon</key>

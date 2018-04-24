@@ -36,7 +36,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Icon-Small-50.png" width="50" height="50"/>
         <image name="da12.png" width="241" height="199"/>
         <image name="ic_BluetoothInfo.png" width="24" height="24"/>
         <image name="ic_Debug.png" width="32" height="32"/>
