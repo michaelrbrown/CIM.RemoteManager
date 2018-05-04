@@ -1,6 +1,6 @@
 ﻿<pages:BaseTabbedPage x:Class="CIM.RemoteManager.Core.Pages.SensorDetailsPage"
                       xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                      xmlns:abstractions="clr-namespace:SegmentedControl.FormsPlugin.Abstractions;assembly=SegmentedControl.FormsPlugin.Abstractions" xmlns:pages="clr-namespace:CIM.RemoteManager.Core.Pages;assembly=CIM.RemoteManager.Core" xmlns:xForms="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms" xmlns:xForms1="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
+                      xmlns:abstractions="clr-namespace:SegmentedControl.FormsPlugin.Abstractions;assembly=SegmentedControl.FormsPlugin.Abstractions" xmlns:controls="clr-namespace:CIM.RemoteManager.Core.Controls;assembly=CIM.RemoteManager.Core" xmlns:pages="clr-namespace:CIM.RemoteManager.Core.Pages;assembly=CIM.RemoteManager.Core" xmlns:xForms="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms" xmlns:xForms1="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
                       BackgroundColor="#FFFFFF">
 
     <pages:BaseTabbedPage.Resources>
@@ -312,6 +312,8 @@
                 </Grid>
 
             </Grid>
+
+            <controls:DebugPanel DebugText="Test" />
 
         </ScrollView>
 

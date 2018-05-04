@@ -1,7 +1,4 @@
-﻿using System;
-using System.Text;
-using System.Threading.Tasks;
-using Acr.UserDialogs;
+﻿using Acr.UserDialogs;
 using CIM.RemoteManager.Core.Extensions;
 using CIM.RemoteManager.Core.Helpers;
 using CIM.RemoteManager.Core.Models;
@@ -10,6 +7,9 @@ using MvvmCross.Platform;
 using Plugin.BLE.Abstractions.Contracts;
 using Plugin.BLE.Abstractions.EventArgs;
 using Syncfusion.SfChart.XForms;
+using System;
+using System.Text;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 
@@ -1810,7 +1810,7 @@ namespace CIM.RemoteManager.Core.ViewModels
 
                 //_userDialogs.Alert($"sensorScaleUpdateValue: {Convert.ToInt32(SensorScale * 10000)}");
 
-                // Save scale and offset to remote
+                // Save scale to remote
                 await TxCharacteristic.WriteAsync(sensorScaleUpdateValue.StrToByteArray()).ConfigureAwait(true);
 
                 // Setup sensor offset command
@@ -1818,7 +1818,7 @@ namespace CIM.RemoteManager.Core.ViewModels
 
                 //_userDialogs.Alert($"sensorOffsetUpdateValue: {Convert.ToInt32(SensorOffset * 10000)}");
 
-                // Save scale and offset to remote
+                // Save offset to remote
                 await TxCharacteristic.WriteAsync(sensorOffsetUpdateValue.StrToByteArray()).ConfigureAwait(true);
 
                 UpdatesStarted = false;

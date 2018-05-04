@@ -1,6 +1,7 @@
-﻿using System;
+﻿using CIM.RemoteManager.Core.Controls;
 using CIM.RemoteManager.Core.Helpers;
 using CIM.RemoteManager.Core.ViewModels;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using ValueChangedEventArgs = SegmentedControl.FormsPlugin.Abstractions.ValueChangedEventArgs;
@@ -23,6 +24,26 @@ namespace CIM.RemoteManager.Core.Pages
 
             // Set binding context to viewmodel
             BindingContext = this;
+
+            // You can add a ToolBar button to show the Menu.
+            this.ToolbarItems.Add(new ToolbarItem
+            {
+                Command = new Command(() => {
+                    if (this.SlideMenu.IsShown)
+                    {
+                        HideMenuAction?.Invoke();
+                    }
+                    else
+                    {
+                        ShowMenuAction?.Invoke();
+                    }
+                }),
+                Icon = "ic_Debug.png",
+                Text = "Debug",
+                Priority = 0
+            });
+
+            this.SlideMenu = new DebugPanel();
 
             // Set current paged changed event to handle sensor update types
             this.CurrentPageChanged += CurrentPageHasChanged;

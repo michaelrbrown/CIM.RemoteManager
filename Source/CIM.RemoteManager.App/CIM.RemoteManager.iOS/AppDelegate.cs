@@ -38,6 +38,7 @@ namespace CIM.RemoteManager.iOS
             new SfBusyIndicatorRenderer();
             SfListViewRenderer.Init();
             SegmentedControlRenderer.Init();
+            SlideOverKit.iOS.SlideOverKit.Init();
 
             // Make UIWindow they key window
             _window.MakeKeyAndVisible();
