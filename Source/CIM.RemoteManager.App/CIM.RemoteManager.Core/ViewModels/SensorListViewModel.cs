@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Acr.UserDialogs;
+﻿using Acr.UserDialogs;
 using CIM.RemoteManager.Core.Extensions;
 using CIM.RemoteManager.Core.Helpers;
 using CIM.RemoteManager.Core.Models;
@@ -11,6 +6,11 @@ using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
 using Plugin.BLE.Abstractions.Contracts;
 using Plugin.BLE.Abstractions.EventArgs;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 
@@ -40,11 +40,11 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// <summary>
         /// Write characteristic
         /// </summary>
-        public ICharacteristic TxCharacteristic { get; private set; }
+        public ICharacteristic TxSensorCharacteristic { get; private set; }
         /// <summary>
         /// Read characteristic
         /// </summary>
-        public ICharacteristic RxCharacteristic { get; private set; }
+        public ICharacteristic RxSensorCharacteristic { get; private set; }
 
         /// <summary>
         /// Let our UI know we have updates started / stopped
@@ -64,7 +64,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// <summary>
         /// Convert our characteristics values from bytes to string as they are incoming
         /// </summary>
-        public string CharacteristicValue => RxCharacteristic?.Value.BytesToStringConverted();
+        public string CharacteristicValue => RxSensorCharacteristic?.Value.BytesToStringConverted();
 
         /// <summary>
         /// Device name (from bluetooth name field)
@@ -446,14 +446,14 @@ namespace CIM.RemoteManager.Core.ViewModels
                             var stationHelper = new StationHelper();
                             // Validate our current remote Unix date time. Update to current Unix UTC date time
                             // if year < 2009.
-                            bool wasStationTimeSet = await stationHelper.HandleRemoteDateTimeValidation(TxCharacteristic, currentDateTimeResult).ConfigureAwait(true);
+                            bool wasStationTimeSet = await stationHelper.HandleRemoteDateTimeValidation(TxSensorCharacteristic, currentDateTimeResult).ConfigureAwait(true);
 
                             // Show updating station datetime message
                             if (wasStationTimeSet)
                             {
                                 _userDialogs.InfoToast("Updating Station DateTime...", TimeSpan.FromSeconds(2));
                                 // Send refresh command to remote after
-                                await TxCharacteristic.WriteAsync("{Y}".StrToByteArray()).ConfigureAwait(true);
+                                await TxSensorCharacteristic.WriteAsync("{Y}".StrToByteArray()).ConfigureAwait(true);
                                 // Wait a couple seconds for remote to process
                                 await Task.Delay(2000).ConfigureAwait(true);
                                 // Show refreshing message
@@ -566,7 +566,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="characteristicUpdatedEventArgs"></param>
-        private async void RxCharacteristicOnValueUpdatedAsync(object sender, CharacteristicUpdatedEventArgs characteristicUpdatedEventArgs)
+        private async void RxSensorCharacteristicOnValueUpdatedAsync(object sender, CharacteristicUpdatedEventArgs characteristicUpdatedEventArgs)
         {
             try
             {
@@ -685,16 +685,16 @@ namespace CIM.RemoteManager.Core.ViewModels
                 _service = await _device.GetServiceAsync(UartUuid).ConfigureAwait(true);
 
                 // Get write characteristic service
-                TxCharacteristic = await _service.GetCharacteristicAsync(TxUuid).ConfigureAwait(true);
+                TxSensorCharacteristic = await _service.GetCharacteristicAsync(TxUuid).ConfigureAwait(true);
 
                 // Make sure we can write characteristic data to remote
-                if (!TxCharacteristic.CanWrite)
+                if (!TxSensorCharacteristic.CanWrite)
                 {
                     _userDialogs.Alert("Cannot write characteristic data to remote!", "CIMScan Remote Manager");
                 }
 
                 // Get Characteristics service
-                RxCharacteristic = await _service.GetCharacteristicAsync(RxUuid).ConfigureAwait(true);
+                RxSensorCharacteristic = await _service.GetCharacteristicAsync(RxUuid).ConfigureAwait(true);
             }
             catch (Exception ex)
             {
@@ -844,25 +844,25 @@ namespace CIM.RemoteManager.Core.ViewModels
             {
                 UpdatesStarted = true;
                 // Notify property changed
-                RaisePropertyChanged(() => UpdatesStarted);
+                //RaisePropertyChanged(() => UpdatesStarted);
+                
+                // Send refresh command to remote
+                await TxSensorCharacteristic.WriteAsync("{Y}".StrToByteArray()).ConfigureAwait(true);
+                // Start updates from Bluetooth service
+                await RxSensorCharacteristic.StartUpdatesAsync().ConfigureAwait(true);
 
                 // Subscribe to value updated events
-                RxCharacteristic.ValueUpdated -= RxCharacteristicOnValueUpdatedAsync;
-                RxCharacteristic.ValueUpdated += RxCharacteristicOnValueUpdatedAsync;
-
-                // Send refresh command to remote
-                await TxCharacteristic.WriteAsync("{Y}".StrToByteArray()).ConfigureAwait(true);
-                // Start updates from Bluetooth service
-                await RxCharacteristic.StartUpdatesAsync().ConfigureAwait(true);
+                RxSensorCharacteristic.ValueUpdated -= RxSensorCharacteristicOnValueUpdatedAsync;
+                RxSensorCharacteristic.ValueUpdated += RxSensorCharacteristicOnValueUpdatedAsync;
 
                 // Let UI know mode we are in
-                RaisePropertyChanged(() => UpdateButtonText);
+                //RaisePropertyChanged(() => UpdateButtonText);
             }
             catch (Exception ex)
             {
                 UpdatesStarted = false;
                 // Notify property changed
-                RaisePropertyChanged(() => UpdatesStarted);
+                //RaisePropertyChanged(() => UpdatesStarted);
 
                 HockeyApp.MetricsManager.TrackEvent($"(HandleUpdatesStarted) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
                 _userDialogs.Alert($"Cannot read sensor data. Please ensure the device is a CIMScan BTLE compliant device.");
@@ -880,22 +880,22 @@ namespace CIM.RemoteManager.Core.ViewModels
             {
                 UpdatesStarted = false;
                 // Notify property changed
-                RaisePropertyChanged(() => UpdatesStarted);
+                //RaisePropertyChanged(() => UpdatesStarted);
 
                 // Stop updates from Bluetooth service
-                await RxCharacteristic.StopUpdatesAsync().ConfigureAwait(true);
+                await RxSensorCharacteristic.StopUpdatesAsync().ConfigureAwait(true);
 
                 // Subscribe to value updated events
-                RxCharacteristic.ValueUpdated -= RxCharacteristicOnValueUpdatedAsync;
+                RxSensorCharacteristic.ValueUpdated -= RxSensorCharacteristicOnValueUpdatedAsync;
 
                 // Let UI know mode we are in
-                RaisePropertyChanged(() => UpdateButtonText);
+                //RaisePropertyChanged(() => UpdateButtonText);
             }
             catch (Exception ex)
             {
                 UpdatesStarted = false;
                 // Notify property changed
-                RaisePropertyChanged(() => UpdatesStarted);
+                //RaisePropertyChanged(() => UpdatesStarted);
 
                 HockeyApp.MetricsManager.TrackEvent($"(StopUpdates) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
                 _userDialogs.Alert($"(StopUpdates) Message: {ex.Message}; StackTrace: {ex.StackTrace}");

@@ -65,6 +65,8 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// </summary>
         public string CharacteristicValue => RxCharacteristic?.Value.BytesToStringConverted();
 
+        private string _sensorCharacteristicValue = string.Empty;
+
         /// <summary>
         /// Device name (from bluetooth name field)
         /// </summary>
@@ -1248,26 +1250,29 @@ namespace CIM.RemoteManager.Core.ViewModels
         {
             try
             {
-                // Get data based on tab selected
-                //if (SensorCommandType == SensorCommand.Plot)
-                //{
-                    await GetSensorPlotValuesAsync(CharacteristicValue);
-                //}
-                //else if (SensorCommandType == SensorCommand.Statistics || SensorCommandType == SensorCommand.Limits)
-                //{
-                await GetSensorStatisticsValuesAsync(CharacteristicValue);
+                //string newValue = characteristicUpdatedEventArgs.Characteristic.StringValue;
+                
+                if (_sensorCharacteristicValue != CharacteristicValue)
+                {
+                    _sensorCharacteristicValue = CharacteristicValue;
+                    // Get sensor plot values
+                    await GetSensorPlotValuesAsync(_sensorCharacteristicValue).ConfigureAwait(true);
+                    // Get sensor statistic values
+                    await GetSensorStatisticsValuesAsync(_sensorCharacteristicValue).ConfigureAwait(true);
+                    // Get sensor limit values 
+                    await GetSensorLimitsValuesAsync(_sensorCharacteristicValue).ConfigureAwait(true);
+                    // Get unfiltered (current) sensor values
+                    await GetUnfilteredSensorValuesAsync(_sensorCharacteristicValue).ConfigureAwait(true);
+                    // Get message counter values from remote to determine if
+                    // we have acquired or lost sensors.  Also grabs time stamp.
+                    await GetMessageCounterValuesAsync(_sensorCharacteristicValue).ConfigureAwait(true);
+                    // Notify property changed
+                    RaisePropertyChanged(() => CharacteristicValue);
+                    // Wait a couple seconds before we fire off another request for plot data
+                    //await Task.Delay(200).ConfigureAwait(true);
+                }
 
-                await GetSensorLimitsValuesAsync(CharacteristicValue);
 
-                // Get unfiltered (current) sensor values
-                await GetUnfilteredSensorValuesAsync(CharacteristicValue);
-                // Get message counter values from remote to determine if
-                // we have acquired or lost sensors.  Also grabs time stamp.
-                //GetMessageCounterValues(CharacteristicValue);
-                // Notify property changed
-                RaisePropertyChanged(() => CharacteristicValue);
-                // Wait a couple seconds before we fire off another request for plot data
-                await Task.Delay(200).ConfigureAwait(true);
             }
             catch (Exception ex)
             {
@@ -1712,29 +1717,32 @@ namespace CIM.RemoteManager.Core.ViewModels
         {
             try
             {
-                UpdatesStarted = true;
-                // Notify property changed
-                RaisePropertyChanged(() => UpdatesStarted);
-
-                // Send plot or refresh command to remote
-                string updateValue = string.Empty;
-                if (SensorCommandType == SensorCommand.Plot)
+                if (!UpdatesStarted)
                 {
-                    // Plot 10 points
-                    updateValue = "{c0" + SensorIndexSelected + "00000064}";
+                    // Send plot or refresh command to remote
+                    string updateValue = string.Empty;
+                    if (SensorCommandType == SensorCommand.Plot)
+                    {
+                        // Plot 10 points
+                        updateValue = "{c0" + SensorIndexSelected + "00000064}";
+                    }
+
+                    // Send a refresh command
+                    await TxCharacteristic.WriteAsync(updateValue.StrToByteArray()).ConfigureAwait(true);
+                    // Start updates from bluetooth service
+                    await RxCharacteristic.StartUpdatesAsync().ConfigureAwait(true);
+
+                    // Subscribe to value updated events
+                    RxCharacteristic.ValueUpdated -= RxCharacteristicOnValueUpdated;
+                    RxCharacteristic.ValueUpdated += RxCharacteristicOnValueUpdated;
+
+                    UpdatesStarted = true;
+                    // Notify property changed
+                    RaisePropertyChanged(() => UpdatesStarted);
+
+                    // Let UI know mode we are in
+                    RaisePropertyChanged(() => UpdateButtonText);
                 }
-
-                // Send a refresh command
-                await TxCharacteristic.WriteAsync(updateValue.StrToByteArray()).ConfigureAwait(true);
-                // Start updates from bluetooth service
-                await RxCharacteristic.StartUpdatesAsync().ConfigureAwait(true);
-
-                // Subscribe to value updated events
-                RxCharacteristic.ValueUpdated -= RxCharacteristicOnValueUpdated;
-                RxCharacteristic.ValueUpdated += RxCharacteristicOnValueUpdated;
-
-                // Let UI know mode we are in
-                RaisePropertyChanged(() => UpdateButtonText);
             }
             catch (Exception ex)
             {
