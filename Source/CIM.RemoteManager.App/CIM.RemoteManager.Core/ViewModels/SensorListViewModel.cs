@@ -66,6 +66,8 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// </summary>
         public string CharacteristicValue => RxSensorCharacteristic?.Value.BytesToStringConverted();
 
+        private string _sensorCharacteristicValue = string.Empty;
+
         /// <summary>
         /// Device name (from bluetooth name field)
         /// </summary>
@@ -570,16 +572,19 @@ namespace CIM.RemoteManager.Core.ViewModels
         {
             try
             {
-                // Get message counter values from remote to determine if
-                // we have acquired or lost sensors.  Also grabs time stamp.
-                await GetMessageCounterValues(CharacteristicValue);
-                // Get full sensor values
-                await GetFullSensorValues(CharacteristicValue);
-                // Get average sensor values
-                await GetAverageSensorValues(CharacteristicValue);
+                if (_sensorCharacteristicValue != CharacteristicValue)
+                {
+                    // Get message counter values from remote to determine if
+                    // we have acquired or lost sensors.  Also grabs time stamp.
+                    await GetMessageCounterValues(CharacteristicValue);
+                    // Get full sensor values
+                    await GetFullSensorValues(CharacteristicValue);
+                    // Get average sensor values
+                    await GetAverageSensorValues(CharacteristicValue);
 
-                // Notify property changed
-                RaisePropertyChanged(() => CharacteristicValue);
+                    // Notify property changed
+                    RaisePropertyChanged(() => CharacteristicValue);
+                }
             }
             catch (Exception ex)
             {
