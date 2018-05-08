@@ -313,8 +313,6 @@
 
             </Grid>
 
-            <controls:DebugPanel DebugText="Test" />
-
         </ScrollView>
 
     </pages:BasePage>
