@@ -37,8 +37,7 @@
                                 <!-- Blue Indicator of Active Connection -->
                                 <Frame Grid.Column="0"
                                        BackgroundColor="{StaticResource DeviceFrameTextColor}"
-                                       CornerRadius="0" HasShadow="False" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
-                                       WidthRequest="5" />
+                                       CornerRadius="0" HasShadow="False" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" WidthRequest="5" />
 
                                 <!-- Device Name and GUID -->
                                 <StackLayout Grid.Column="1" Margin="5,0,0,0" Orientation="Vertical" VerticalOptions="CenterAndExpand">
@@ -74,19 +73,27 @@
                 </Grid.RowDefinitions>
 
                 <!-- BTLE Status -->
-                <StackLayout Grid.Row="0" Padding="10" BackgroundColor="{StaticResource BTLEStatusBackgroundColor}" HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsStateOn, Converter={StaticResource BooleanToFalseConverter}}">
+                <StackLayout Grid.Row="0"
+                             Padding="10"
+                             BackgroundColor="{StaticResource BTLEStatusBackgroundColor}"
+                             HorizontalOptions="CenterAndExpand"
+                             IsVisible="{Binding IsStateOn, Converter={StaticResource BooleanToFalseConverter}}">
                     <Grid HorizontalOptions="Center">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <Image HorizontalOptions="End" Source="ic_BluetoothInfo.png" VerticalOptions="Center" />
-                        <Label Grid.Column="1" FontSize="18" Text="{Binding StateText}" TextColor="{StaticResource BTLEStatusTextColor}" VerticalOptions="Center" />
+                        <Label Grid.Column="1"
+                               FontSize="18"
+                               Text="{Binding StateText}"
+                               TextColor="{StaticResource BTLEStatusTextColor}"
+                               VerticalOptions="Center" />
                     </Grid>
                 </StackLayout>
 
                 <!-- Device Loading Indicator -->
-                <xForms:SfBusyIndicator x:Name="CIMScanDeviceBusyindicator" Title="Searching for CIMScan Devices..."
+                <xForms:SfBusyIndicator x:Name="CIMScanDeviceBusyindicator" Title=""
                                         Grid.Row="1"
                                         AnimationType="Ball" BackgroundColor="Transparent" HeightRequest="250"
                                         IsBusy="{Binding IsRefreshing}"
@@ -106,7 +113,9 @@
                           SeparatorColor="Transparent" VerticalOptions="FillAndExpand" />
 
                 <!-- Connect to Previous Button -->
-                <StackLayout Grid.Row="2" Margin="0,0,0,10" HorizontalOptions="CenterAndExpand" IsVisible="False" Orientation="Horizontal">
+                <StackLayout Grid.Row="2"
+                             Margin="0,0,0,10"
+                             HorizontalOptions="CenterAndExpand" IsVisible="False" Orientation="Horizontal">
                     <Button BackgroundColor="{StaticResource ButtonBackgroundColor}"
                             Command="{Binding ConnectToPreviousCommand}"
                             HorizontalOptions="FillAndExpand" IsVisible="True"
@@ -116,7 +125,11 @@
                 </StackLayout>
 
                 <!-- Stop Searching Button -->
-                <StackLayout Grid.Row="3" Margin="0,0,0,10" HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsRefreshing}" Orientation="Horizontal">
+                <StackLayout Grid.Row="3"
+                             Margin="0,0,0,10"
+                             HorizontalOptions="CenterAndExpand"
+                             IsVisible="{Binding IsRefreshing}"
+                             Orientation="Horizontal">
                     <Button BackgroundColor="{StaticResource ButtonBackgroundColor}"
                             Command="{Binding StopScanCommand}"
                             HorizontalOptions="CenterAndExpand" Text="Stop Searching"
@@ -136,7 +149,10 @@
                 </Grid.RowDefinitions>
 
                 <!-- BTLE Status -->
-                <StackLayout Grid.Row="0" Padding="10" BackgroundColor="{StaticResource BTLEStatusBackgroundColor}" HorizontalOptions="CenterAndExpand" IsVisible="False">
+                <StackLayout Grid.Row="0"
+                             Padding="10"
+                             BackgroundColor="{StaticResource BTLEStatusBackgroundColor}"
+                             HorizontalOptions="CenterAndExpand" IsVisible="False">
                     <Grid HorizontalOptions="Center">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
@@ -152,7 +168,7 @@
                 </StackLayout>
 
                 <!-- Device Loading Indicator -->
-                <xForms:SfBusyIndicator x:Name="OtherDeviceBusyindicator" Title="Searching for Other Devices..."
+                <xForms:SfBusyIndicator x:Name="OtherDeviceBusyindicator" Title=""
                                         Grid.Row="1"
                                         AnimationType="Ball" BackgroundColor="Transparent" HeightRequest="250"
                                         IsBusy="{Binding IsRefreshing}"
@@ -172,7 +188,11 @@
                           SeparatorColor="Transparent" VerticalOptions="FillAndExpand" />
 
                 <!-- Stop Searching Button -->
-                <StackLayout Grid.Row="2" Margin="0,0,0,10" HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsRefreshing}" Orientation="Horizontal">
+                <StackLayout Grid.Row="2"
+                             Margin="0,0,0,10"
+                             HorizontalOptions="CenterAndExpand"
+                             IsVisible="{Binding IsRefreshing}"
+                             Orientation="Horizontal">
                     <Button BackgroundColor="{StaticResource ButtonBackgroundColor}"
                             Command="{Binding StopScanCommand}"
                             HorizontalOptions="CenterAndExpand" Text="Stop Searching"

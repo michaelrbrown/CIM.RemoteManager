@@ -417,7 +417,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         {
             get
             {
-                if (int.TryParse(_sinceTimeStamp.ToString(), out int sinceTimeStampResult))
+                if (_sinceTimeStamp > 0 && int.TryParse(_sinceTimeStamp.ToString(), out int sinceTimeStampResult))
                 {
                     return DateTime.ParseExact(sinceTimeStampResult.UnixTimeStampToDateTime().ToString(), "hh:mm:ss tt", CultureInfo.InvariantCulture);
                 }

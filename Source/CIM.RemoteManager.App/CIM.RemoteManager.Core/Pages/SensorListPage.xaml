@@ -49,7 +49,7 @@
         <BoxView Grid.Row="2" Style="{StaticResource DarkShadowStyle}" />
 
         <!-- Chart Loading Indicator -->
-        <xForms:SfBusyIndicator x:Name="SensorBusyindicator" Title="Loading Sensor Data..."
+        <xForms:SfBusyIndicator x:Name="SensorBusyindicator" Title=""
                                 Grid.Row="3"
                                 AnimationType="Ball" BackgroundColor="Transparent" HeightRequest="250"
                                 IsBusy="{Binding ProcessingSensorData}"
