@@ -687,6 +687,22 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
+        /// Low Alarm Limit value plus the value unit type appended.
+        /// </summary>
+        public string LowAlarmLimitPlusUnitValue
+        {
+            get
+            {
+                if (!String.IsNullOrWhiteSpace(LowAlarmLimit.ToString()))
+                {
+                    return $"{LowAlarmLimit} {SensorUnitType}";
+                }
+                // Default
+                return "";
+            }
+        }
+
+        /// <summary>
         /// Low warning limit.
         /// </summary>
         private double? _lowWarningLimit;
@@ -709,6 +725,22 @@ namespace CIM.RemoteManager.Core.ViewModels
                     this._lowWarningLimit = value;
                     RaisePropertyChanged(() => LowWarningLimit);
                 }
+            }
+        }
+
+        /// <summary>
+        /// Low Warning Limit value plus the value unit type appended.
+        /// </summary>
+        public string LowWarningLimitPlusUnitValue
+        {
+            get
+            {
+                if (!String.IsNullOrWhiteSpace(LowWarningLimit.ToString()))
+                {
+                    return $"{LowWarningLimit} {SensorUnitType}";
+                }
+                // Default
+                return "";
             }
         }
 
@@ -740,6 +772,22 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
+        /// High Alarm Limit value plus the value unit type appended.
+        /// </summary>
+        public string HighAlarmLimitPlusUnitValue
+        {
+            get
+            {
+                if (!String.IsNullOrWhiteSpace(HighAlarmLimit.ToString()))
+                {
+                    return $"{HighAlarmLimit} {SensorUnitType}";
+                }
+                // Default
+                return "";
+            }
+        }
+
+        /// <summary>
         /// High warning limit.
         /// </summary>
         private double? _highWarningLimit;
@@ -762,6 +810,22 @@ namespace CIM.RemoteManager.Core.ViewModels
                     this._highWarningLimit = value;
                     RaisePropertyChanged(() => HighWarningLimit);
                 }
+            }
+        }
+
+        /// <summary>
+        /// High Warning Limitvalue plus the value unit type appended.
+        /// </summary>
+        public string HighWarningLimitPlusUnitValue
+        {
+            get
+            {
+                if (!String.IsNullOrWhiteSpace(HighWarningLimit.ToString()))
+                {
+                    return $"{HighWarningLimit} {SensorUnitType}";
+                }
+                // Default
+                return "";
             }
         }
 
@@ -872,13 +936,12 @@ namespace CIM.RemoteManager.Core.ViewModels
                 if (characteristicValue.Contains("}"))
                 {
                     UnfilteredSensorValue.Append(characteristicValue.GetUntilOrEmpty());
-                    await SerializeStringToSensorAsync(UnfilteredSensorValue.ToString(), "C");
+                    await SerializeStringToModelAsync(UnfilteredSensorValue.ToString(), "C");
                     UnfilteredSensorValue.Clear();
                     StartUnfilteredSensorValueRecord = false;
 
                     // We recorded the last record, now make sure we can pick up the rest of the data in 
                     // this buffer for the next record, if there is any.
-                    // Get full sensor values
                     if (!String.IsNullOrWhiteSpace(CharacteristicValue.GetAfterOrEmpty())) await GetUnfilteredSensorValuesAsync(CharacteristicValue.GetAfterOrEmpty()).ConfigureAwait(true);
                 }
                 else
@@ -894,13 +957,12 @@ namespace CIM.RemoteManager.Core.ViewModels
                 if (characteristicValue.Contains("}"))
                 {
                     UnfilteredSensorValue.Append(characteristicValue.GetUntilOrEmpty());
-                    await SerializeStringToSensorAsync(UnfilteredSensorValue.ToString(), "C");
+                    await SerializeStringToModelAsync(UnfilteredSensorValue.ToString(), "C");
                     UnfilteredSensorValue.Clear();
                     StartUnfilteredSensorValueRecord = false;
 
                     // We recorded the last record, now make sure we can pick up the rest of the data in 
                     // this buffer for the next record, if there is any.
-                    // Get full sensor values
                     if (!String.IsNullOrWhiteSpace(CharacteristicValue.GetAfterOrEmpty())) await GetUnfilteredSensorValuesAsync(CharacteristicValue.GetAfterOrEmpty()).ConfigureAwait(true);
                 }
                 else
@@ -926,13 +988,12 @@ namespace CIM.RemoteManager.Core.ViewModels
                 if (characteristicValue.Contains("}"))
                 {
                     MessageCounterValue.Append(characteristicValue.GetUntilOrEmpty());
-                    await SerializeStringToSensorAsync(MessageCounterValue.ToString(), "F");
+                    await SerializeStringToModelAsync(MessageCounterValue.ToString(), "F");
                     MessageCounterValue.Clear();
                     StartMessageCounterValueRecord = false;
 
                     // We recorded the last record, now make sure we can pick up the rest of the data in 
                     // this buffer for the next record, if there is any.
-                    // Get full sensor values
                     if (!String.IsNullOrWhiteSpace(CharacteristicValue.GetAfterOrEmpty())) await GetMessageCounterValuesAsync(CharacteristicValue.GetAfterOrEmpty()).ConfigureAwait(true);
                 }
                 else
@@ -948,13 +1009,12 @@ namespace CIM.RemoteManager.Core.ViewModels
                 if (characteristicValue.Contains("}"))
                 {
                     MessageCounterValue.Append(characteristicValue.GetUntilOrEmpty());
-                    await SerializeStringToSensorAsync(MessageCounterValue.ToString(), "F");
+                    await SerializeStringToModelAsync(MessageCounterValue.ToString(), "F");
                     MessageCounterValue.Clear();
                     StartMessageCounterValueRecord = false;
 
                     // We recorded the last record, now make sure we can pick up the rest of the data in 
                     // this buffer for the next record, if there is any.
-                    // Get full sensor values
                     if (!String.IsNullOrWhiteSpace(CharacteristicValue.GetAfterOrEmpty())) await GetMessageCounterValuesAsync(CharacteristicValue.GetAfterOrEmpty()).ConfigureAwait(true);
                 }
                 else
@@ -980,13 +1040,12 @@ namespace CIM.RemoteManager.Core.ViewModels
                 if (characteristicValue.Contains("}"))
                 {
                     BufferedSensorValue.Append(characteristicValue.GetUntilOrEmpty());
-                    await SerializeStringToSensorAsync(BufferedSensorValue.ToString(), "J");
+                    await SerializeStringToModelAsync(BufferedSensorValue.ToString(), "J");
                     BufferedSensorValue.Clear();
                     StartSensorBufferedValueRecord = false;
 
                     // We recorded the last record, now make sure we can pick up the rest of the data in 
                     // this buffer for the next record, if there is any.
-                    // Get full sensor values
                     if (!String.IsNullOrWhiteSpace(CharacteristicValue.GetAfterOrEmpty())) await GetSensorPlotValuesAsync(CharacteristicValue.GetAfterOrEmpty()).ConfigureAwait(true);
                 }
                 else
@@ -1002,13 +1061,12 @@ namespace CIM.RemoteManager.Core.ViewModels
                 if (characteristicValue.Contains("}"))
                 {
                     BufferedSensorValue.Append(characteristicValue.GetUntilOrEmpty());
-                    await SerializeStringToSensorAsync(BufferedSensorValue.ToString(), "J");
+                    await SerializeStringToModelAsync(BufferedSensorValue.ToString(), "J");
                     BufferedSensorValue.Clear();
                     StartSensorBufferedValueRecord = false;
 
                     // We recorded the last record, now make sure we can pick up the rest of the data in 
                     // this buffer for the next record, if there is any.
-                    // Get full sensor values
                     if (!String.IsNullOrWhiteSpace(CharacteristicValue.GetAfterOrEmpty())) await GetSensorPlotValuesAsync(CharacteristicValue.GetAfterOrEmpty()).ConfigureAwait(true);
                 }
                 else
@@ -1034,13 +1092,12 @@ namespace CIM.RemoteManager.Core.ViewModels
                 if (characteristicValue.Contains("}"))
                 {
                     StatisticsSensorValue.Append(characteristicValue.GetUntilOrEmpty());
-                    await SerializeStringToSensorAsync(StatisticsSensorValue.ToString(), "H");
+                    await SerializeStringToModelAsync(StatisticsSensorValue.ToString(), "H");
                     StatisticsSensorValue.Clear();
                     StartSensorStatisticsValueRecord = false;
 
                     // We recorded the last record, now make sure we can pick up the rest of the data in 
                     // this buffer for the next record, if there is any.
-                    // Get full sensor values
                     if (!String.IsNullOrWhiteSpace(CharacteristicValue.GetAfterOrEmpty())) await GetSensorStatisticsValuesAsync(CharacteristicValue.GetAfterOrEmpty()).ConfigureAwait(true);
                 }
                 else
@@ -1056,13 +1113,12 @@ namespace CIM.RemoteManager.Core.ViewModels
                 if (characteristicValue.Contains("}"))
                 {
                     StatisticsSensorValue.Append(characteristicValue.GetUntilOrEmpty());
-                    await SerializeStringToSensorAsync(StatisticsSensorValue.ToString(), "H");
+                    await SerializeStringToModelAsync(StatisticsSensorValue.ToString(), "H");
                     StatisticsSensorValue.Clear();
                     StartSensorStatisticsValueRecord = false;
 
                     // We recorded the last record, now make sure we can pick up the rest of the data in 
                     // this buffer for the next record, if there is any.
-                    // Get full sensor values
                     if (!String.IsNullOrWhiteSpace(CharacteristicValue.GetAfterOrEmpty())) await GetSensorStatisticsValuesAsync(CharacteristicValue.GetAfterOrEmpty()).ConfigureAwait(true);
                 }
                 else
@@ -1088,13 +1144,12 @@ namespace CIM.RemoteManager.Core.ViewModels
                 if (characteristicValue.Contains("}"))
                 {
                     StatisticsSensorValue.Append(characteristicValue.GetUntilOrEmpty());
-                    await SerializeStringToSensorAsync(StatisticsSensorValue.ToString(), "G");
+                    await SerializeStringToModelAsync(StatisticsSensorValue.ToString(), "G");
                     StatisticsSensorValue.Clear();
                     StartSensorLimitValueRecord = false;
 
                     // We recorded the last record, now make sure we can pick up the rest of the data in 
                     // this buffer for the next record, if there is any.
-                    // Get full sensor values
                     if (!String.IsNullOrWhiteSpace(CharacteristicValue.GetAfterOrEmpty())) await GetSensorLimitsValuesAsync(CharacteristicValue.GetAfterOrEmpty()).ConfigureAwait(true);
                 }
                 else
@@ -1110,13 +1165,12 @@ namespace CIM.RemoteManager.Core.ViewModels
                 if (characteristicValue.Contains("}"))
                 {
                     StatisticsSensorValue.Append(characteristicValue.GetUntilOrEmpty());
-                    await SerializeStringToSensorAsync(StatisticsSensorValue.ToString(), "G");
+                    await SerializeStringToModelAsync(StatisticsSensorValue.ToString(), "G");
                     StatisticsSensorValue.Clear();
                     StartSensorLimitValueRecord = false;
 
                     // We recorded the last record, now make sure we can pick up the rest of the data in 
                     // this buffer for the next record, if there is any.
-                    // Get full sensor values
                     if (!String.IsNullOrWhiteSpace(CharacteristicValue.GetAfterOrEmpty())) await GetSensorLimitsValuesAsync(CharacteristicValue.GetAfterOrEmpty()).ConfigureAwait(true);
                 }
                 else
@@ -1132,7 +1186,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// </summary>
         /// <param name="sensorValues"></param>
         /// <param name="conversionType"></param>
-        private async Task SerializeStringToSensorAsync(string sensorValues, string conversionType)
+        private async Task SerializeStringToModelAsync(string sensorValues, string conversionType)
         {
             // Split by tab delimiter
             string[] splitSensorValues = sensorValues.Split('\t');
@@ -1218,9 +1272,13 @@ namespace CIM.RemoteManager.Core.ViewModels
                             AlarmDelay = splitSensorValues[2].SafeHexToDouble();
                             RaisePropertyChanged(() => AlarmDelayPlusTime);
                             LowAlarmLimit = splitSensorValues[3].SafeHexToInt();
+                            RaisePropertyChanged(() => LowAlarmLimitPlusUnitValue);
                             LowWarningLimit = splitSensorValues[4].SafeHexToDouble();
+                            RaisePropertyChanged(() => LowWarningLimitPlusUnitValue);
                             HighWarningLimit = splitSensorValues[5].SafeHexToInt();
+                            RaisePropertyChanged(() => HighWarningLimitPlusUnitValue);
                             HighAlarmLimit = splitSensorValues[6].SafeHexToDouble();
+                            RaisePropertyChanged(() => HighAlarmLimitPlusUnitValue);
 
                             // Show refreshing of chart via toast
                             _userDialogs.InfoToast("Refreshing Sensor Limits...", TimeSpan.FromSeconds(1));

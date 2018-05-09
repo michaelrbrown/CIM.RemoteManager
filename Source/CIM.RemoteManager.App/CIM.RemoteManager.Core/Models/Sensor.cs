@@ -1,5 +1,5 @@
-﻿using System;
-using CIM.RemoteManager.Core.Helpers;
+﻿using CIM.RemoteManager.Core.Helpers;
+using System;
 using Xamarin.Forms;
 
 namespace CIM.RemoteManager.Core.Models
@@ -81,21 +81,21 @@ namespace CIM.RemoteManager.Core.Models
         }
 
         /// <summary>
-        /// The sensor index plus the alarm status.
+        /// The sensor alarm status.
         /// </summary>
-        public string SensorIndexPlusStatus
+        public string SensorAlarmStatus
         {
             get
             {
                 // Validate
-                if (!string.IsNullOrEmpty(_sensorIndex.ToString()))
+                if (!string.IsNullOrEmpty(AlarmStatus.ToString()))
                 {
                     // Instance of station helper
                     var stationHelper = new StationHelper();
                     // Get alarm status from alarm flag (int)
-                    string alarmStatus = stationHelper.GetAlarmStatus(AlarmStatus);
-                    // Return combined sensor index plus alarm status
-                    return $"Index: {_sensorIndex} - {alarmStatus}";
+                    string alarmStatusDescription = stationHelper.GetAlarmStatus(AlarmStatus);
+                    // Return alarm status description
+                    return $"Status: {alarmStatusDescription}";
                 }
                 // Default
                 return _name;
@@ -272,11 +272,19 @@ namespace CIM.RemoteManager.Core.Models
             set => SetProperty(ref _statisticsTotalCalcSettings, value);
         }
 
+        /// <summary>
+        /// The alarm status.
+        /// </summary>
         private int _alarmStatus;
         public int AlarmStatus
         {
             get => _alarmStatus;
-            set => SetProperty(ref _alarmStatus, value);
+            set
+            {
+                SetProperty(ref _alarmStatus, value);
+                // Update UI to show alarm status description
+                this.OnPropertyChanged(SensorAlarmStatus);
+            }
         }
 
     }

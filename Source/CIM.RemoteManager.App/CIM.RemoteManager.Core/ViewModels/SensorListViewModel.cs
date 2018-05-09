@@ -266,13 +266,12 @@ namespace CIM.RemoteManager.Core.ViewModels
                 if (characteristicValue.Contains("}"))
                 {
                     MessageCounterValue.Append(characteristicValue.GetUntilOrEmpty());
-                    await SerializeStringToSensor(MessageCounterValue.ToString(), "F");
+                    await SerializeStringToModelAsync(MessageCounterValue.ToString(), "F");
                     MessageCounterValue.Clear();
                     StartMessageCounterValueRecord = false;
 
                     // We recorded the last record, now make sure we can pick up the rest of the data in 
                     // this buffer for the next record, if there is any.
-                    // Get full sensor values
                     if (!String.IsNullOrWhiteSpace(CharacteristicValue.GetAfterOrEmpty())) await GetMessageCounterValues(CharacteristicValue.GetAfterOrEmpty()).ConfigureAwait(true);
                 }
                 else
@@ -288,13 +287,12 @@ namespace CIM.RemoteManager.Core.ViewModels
                 if (characteristicValue.Contains("}"))
                 {
                     MessageCounterValue.Append(characteristicValue.GetUntilOrEmpty());
-                    await SerializeStringToSensor(MessageCounterValue.ToString(), "F");
+                    await SerializeStringToModelAsync(MessageCounterValue.ToString(), "F");
                     MessageCounterValue.Clear();
                     StartMessageCounterValueRecord = false;
 
                     // We recorded the last record, now make sure we can pick up the rest of the data in 
                     // this buffer for the next record, if there is any.
-                    // Get full sensor values
                     if (!String.IsNullOrWhiteSpace(CharacteristicValue.GetAfterOrEmpty())) await GetMessageCounterValues(CharacteristicValue.GetAfterOrEmpty()).ConfigureAwait(true);
                 }
                 else
@@ -320,13 +318,12 @@ namespace CIM.RemoteManager.Core.ViewModels
                 if (characteristicValue.Contains("}"))
                 {
                     FullSensorValue.Append(characteristicValue.GetUntilOrEmpty());
-                    await SerializeStringToSensor(FullSensorValue.ToString(), "A");
+                    await SerializeStringToModelAsync(FullSensorValue.ToString(), "A");
                     FullSensorValue.Clear();
                     StartFullSensorValueRecord = false;
 
                     // We recorded the last record, now make sure we can pick up the rest of the data in 
                     // this buffer for the next record, if there is any.
-                    // Get full sensor values
                     if (!String.IsNullOrWhiteSpace(CharacteristicValue.GetAfterOrEmpty())) await GetFullSensorValues(CharacteristicValue.GetAfterOrEmpty()).ConfigureAwait(true);
                 }
                 else
@@ -342,13 +339,12 @@ namespace CIM.RemoteManager.Core.ViewModels
                 if (characteristicValue.Contains("}"))
                 {
                     FullSensorValue.Append(characteristicValue.GetUntilOrEmpty());
-                    await SerializeStringToSensor(FullSensorValue.ToString(), "A");
+                    await SerializeStringToModelAsync(FullSensorValue.ToString(), "A");
                     FullSensorValue.Clear();
                     StartFullSensorValueRecord = false;
 
                     // We recorded the last record, now make sure we can pick up the rest of the data in 
                     // this buffer for the next record, if there is any.
-                    // Get full sensor values
                     if (!String.IsNullOrWhiteSpace(CharacteristicValue.GetAfterOrEmpty())) await GetFullSensorValues(CharacteristicValue.GetAfterOrEmpty()).ConfigureAwait(true);
                 }
                 else
@@ -374,13 +370,12 @@ namespace CIM.RemoteManager.Core.ViewModels
                 if (characteristicValue.Contains("}"))
                 {
                     AverageSensorValue.Append(characteristicValue.Replace("{", "").GetUntilOrEmpty());
-                    await SerializeStringToSensor(AverageSensorValue.ToString(), "B");
+                    await SerializeStringToModelAsync(AverageSensorValue.ToString(), "B");
                     AverageSensorValue.Clear();
                     StartAverageSensorValueRecord = false;
 
                     // We recorded the last record, now make sure we can pick up the rest of the data in 
                     // this buffer for the next record, if there is any.
-                    // Get full sensor values
                     if (!String.IsNullOrWhiteSpace(CharacteristicValue.GetAfterOrEmpty())) await GetAverageSensorValues(CharacteristicValue.GetAfterOrEmpty()).ConfigureAwait(true);
                 }
                 else
@@ -396,13 +391,12 @@ namespace CIM.RemoteManager.Core.ViewModels
                 if (characteristicValue.Contains("}"))
                 {
                     AverageSensorValue.Append(characteristicValue.GetUntilOrEmpty());
-                    await SerializeStringToSensor(AverageSensorValue.ToString(), "B");
+                    await SerializeStringToModelAsync(AverageSensorValue.ToString(), "B");
                     AverageSensorValue.Clear();
                     StartAverageSensorValueRecord = false;
 
                     // We recorded the last record, now make sure we can pick up the rest of the data in 
                     // this buffer for the next record, if there is any.
-                    // Get full sensor values
                     if (!String.IsNullOrWhiteSpace(CharacteristicValue.GetAfterOrEmpty())) await GetAverageSensorValues(CharacteristicValue.GetAfterOrEmpty()).ConfigureAwait(true);
                 }
                 else
@@ -416,18 +410,17 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// <summary>
         /// Serialize tab based sensor data to strongly typed Sensor model.
         /// </summary>
-        /// <param name="sensorValues"></param>
-        /// <param name="conversionType"></param>
-        private async Task SerializeStringToSensor(string sensorValues, string conversionType)
+        /// <param name="sensorValues">Sensor record string.</param>
+        /// <param name="conversionType">Type of station record to parse.</param>
+        private async Task SerializeStringToModelAsync(string sensorValues, string conversionType)
         {
             try
             {
+                // Split by tab delimiter
+                string[] splitSensorValues = sensorValues.Split('\t');
 
-            // Split by tab delimiter
-            string[] splitSensorValues = sensorValues.Split('\t');
-
-            // What type of record are we parsing / serializing?
-            switch (conversionType)
+                // What type of record are we parsing / serializing?
+                switch (conversionType)
                 {
                     case "F":
                         // "F" Message counter data serialization
@@ -531,7 +524,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             }
             catch (Exception ex)
             {
-                HockeyApp.MetricsManager.TrackEvent($"(SerializeStringToSensor) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
+                HockeyApp.MetricsManager.TrackEvent($"(SerializeStringToModelAsync) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
             }
         }
 
@@ -849,7 +842,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             {
                 UpdatesStarted = true;
                 // Notify property changed
-                //RaisePropertyChanged(() => UpdatesStarted);
+                RaisePropertyChanged(() => UpdatesStarted);
                 
                 // Send refresh command to remote
                 await TxSensorCharacteristic.WriteAsync("{Y}".StrToByteArray()).ConfigureAwait(true);
@@ -861,13 +854,13 @@ namespace CIM.RemoteManager.Core.ViewModels
                 RxSensorCharacteristic.ValueUpdated += RxSensorCharacteristicOnValueUpdatedAsync;
 
                 // Let UI know mode we are in
-                //RaisePropertyChanged(() => UpdateButtonText);
+                RaisePropertyChanged(() => UpdateButtonText);
             }
             catch (Exception ex)
             {
                 UpdatesStarted = false;
                 // Notify property changed
-                //RaisePropertyChanged(() => UpdatesStarted);
+                RaisePropertyChanged(() => UpdatesStarted);
 
                 HockeyApp.MetricsManager.TrackEvent($"(HandleUpdatesStarted) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
                 _userDialogs.Alert($"Cannot read sensor data. Please ensure the device is a CIMScan BTLE compliant device.");
@@ -885,7 +878,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             {
                 UpdatesStarted = false;
                 // Notify property changed
-                //RaisePropertyChanged(() => UpdatesStarted);
+                RaisePropertyChanged(() => UpdatesStarted);
 
                 // Stop updates from Bluetooth service
                 await RxSensorCharacteristic.StopUpdatesAsync().ConfigureAwait(true);
@@ -894,13 +887,13 @@ namespace CIM.RemoteManager.Core.ViewModels
                 RxSensorCharacteristic.ValueUpdated -= RxSensorCharacteristicOnValueUpdatedAsync;
 
                 // Let UI know mode we are in
-                //RaisePropertyChanged(() => UpdateButtonText);
+                RaisePropertyChanged(() => UpdateButtonText);
             }
             catch (Exception ex)
             {
                 UpdatesStarted = false;
                 // Notify property changed
-                //RaisePropertyChanged(() => UpdatesStarted);
+                RaisePropertyChanged(() => UpdatesStarted);
 
                 HockeyApp.MetricsManager.TrackEvent($"(StopUpdates) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
                 _userDialogs.Alert($"(StopUpdates) Message: {ex.Message}; StackTrace: {ex.StackTrace}");

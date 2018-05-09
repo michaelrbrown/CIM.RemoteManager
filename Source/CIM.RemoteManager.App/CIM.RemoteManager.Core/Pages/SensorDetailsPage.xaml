@@ -93,7 +93,7 @@
             </Grid>
 
             <!-- Chart Loading Indicator -->
-            <xForms1:SfBusyIndicator x:Name="ChartBusyindicator" Title="Loading Plot Data..."
+            <xForms1:SfBusyIndicator x:Name="ChartBusyindicator" Title=""
                                      Grid.Row="1"
                                      AnimationType="ECG" BackgroundColor="Transparent" HeightRequest="250"
                                      IsBusy="{Binding ProcessingPlotData}"
@@ -101,7 +101,7 @@
                                      TextColor="{StaticResource ChartForeground}"
                                      ViewBoxHeight="250" ViewBoxWidth="250" WidthRequest="250" />
             <!-- Chart Control -->
-            <xForms:SfChart x:Name="SensorPlotChart" Grid.Row="2" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <xForms:SfChart x:Name="SensorPlotChart" Grid.Row="1" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                 <xForms:SfChart.ColorModel>
                     <xForms:ChartColorModel CustomBrushes="{StaticResource Colors}" Palette="Custom" />
                 </xForms:SfChart.ColorModel>
@@ -423,28 +423,28 @@
                     <Entry Grid.Row="3" Grid.Column="1"
                            IsEnabled="False"
                            Style="{StaticResource FormValueStyle}"
-                           Text="{Binding HighAlarmLimit}" />
+                           Text="{Binding HighAlarmLimitPlusUnitValue}" />
 
                     <!-- High Warning -->
                     <Label Grid.Row="4" Grid.Column="0" Style="{StaticResource FormLabelStyle}" Text="High Warning " />
                     <Entry Grid.Row="4" Grid.Column="1"
                            IsEnabled="False"
                            Style="{StaticResource FormValueStyle}"
-                           Text="{Binding HighWarningLimit}" />
+                           Text="{Binding HighWarningLimitPlusUnitValue}" />
 
                     <!-- Low Warning -->
-                    <Label Grid.Row="5" Grid.Column="0" Style="{StaticResource FormLabelStyle}" Text="Low Warning " />
+                    <Label Grid.Row="5" Grid.Column="0" Style="{StaticResource FormLabelStyle}" Text="Low Alarm " />
                     <Entry Grid.Row="5" Grid.Column="1"
                            IsEnabled="False"
                            Style="{StaticResource FormValueStyle}"
-                           Text="{Binding LowAlarmLimit}" />
+                           Text="{Binding LowAlarmLimitPlusUnitValue}" />
 
                     <!-- Low Alarm -->
-                    <Label Grid.Row="6" Grid.Column="0" Style="{StaticResource FormLabelStyle}" Text="Low Alarm " />
+                    <Label Grid.Row="6" Grid.Column="0" Style="{StaticResource FormLabelStyle}" Text="Low Warning " />
                     <Entry Grid.Row="6" Grid.Column="1"
                            IsEnabled="False"
                            Style="{StaticResource FormValueStyle}"
-                           Text="{Binding LowWarningLimit}" />
+                           Text="{Binding LowWarningLimitPlusUnitValue}" />
 
                 </Grid>
 
