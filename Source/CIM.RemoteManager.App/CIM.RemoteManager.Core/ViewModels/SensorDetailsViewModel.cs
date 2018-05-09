@@ -418,7 +418,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             {
                 if (int.TryParse(_sinceTimeStamp.ToString(), out int sinceTimeStampResult))
                 {
-                    return Convert.ToDateTime(sinceTimeStampResult.UnixTimeStampToDateTime().ToString("MM/dd/yyyy hh:mm:ss.fff tt"));
+                    return Convert.ToDateTime(sinceTimeStampResult.UnixTimeStampToDateTime().ToString("hh:mm:ss tt"));
                 }
                 // Default
                 return null;
@@ -482,7 +482,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             {
                 if (int.TryParse(_minimumOccuranceTimeStamp.ToString(), out int minimumOccuranceTimeStampResult))
                 {
-                    return Convert.ToDateTime(minimumOccuranceTimeStampResult.UnixTimeStampToDateTime().ToString("MM/dd/yyyy hh:mm:ss.fff tt"));
+                    return Convert.ToDateTime(minimumOccuranceTimeStampResult.UnixTimeStampToDateTime().ToString("hh:mm:ss tt"));
                 }
                 // Default
                 return null;
@@ -546,7 +546,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             {
                 if (int.TryParse(_maximumOccuranceTimeStamp.ToString(), out int maximumOccuranceTimeStampResult))
                 {
-                    return Convert.ToDateTime(maximumOccuranceTimeStampResult.UnixTimeStampToDateTime().ToString("MM/dd/yyyy hh:mm:ss.fff tt"));
+                    return Convert.ToDateTime(maximumOccuranceTimeStampResult.UnixTimeStampToDateTime().ToString("hh:mm:ss tt"));
                 }
                 // Default
                 return null;

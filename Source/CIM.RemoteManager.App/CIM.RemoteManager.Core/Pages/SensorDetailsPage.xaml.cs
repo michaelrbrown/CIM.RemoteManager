@@ -68,11 +68,11 @@ namespace CIM.RemoteManager.Core.Pages
                 // Validate Sensor Calibration page by login
                 var result = await Acr.UserDialogs.UserDialogs.Instance.LoginAsync(new Acr.UserDialogs.LoginConfig
                 {
-                    Message = "Enter your user and password.",
-                    OkText = "Join",
+                    Message = "Enter a password to authenticate.",
+                    OkText = "Ok",
                     CancelText = "Cancel",
-                    Title = "App Name",
-                    LoginValue = "1215"
+                    Title = "Calibration Login",
+                    LoginValue = "admin"
                 });
                 if (result.Password != "1215")
                 {
