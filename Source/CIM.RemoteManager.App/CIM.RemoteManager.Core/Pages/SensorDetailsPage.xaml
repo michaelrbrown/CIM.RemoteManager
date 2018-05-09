@@ -265,7 +265,7 @@
                     <Entry Grid.Row="1" Grid.Column="1"
                            IsEnabled="False"
                            Style="{StaticResource FormValueStyle}"
-                           Text="{Binding AverageValue}" />
+                           Text="{Binding AveragePlusUnitValue}" />
 
                     <!-- Average Since -->
                     <Label Grid.Row="2" Grid.Column="0" Style="{StaticResource FormLabelStyle}" Text="Since " />
@@ -279,35 +279,35 @@
                     <Entry Grid.Row="3" Grid.Column="1"
                            IsEnabled="False"
                            Style="{StaticResource FormValueStyle}"
-                           Text="{Binding MinimumValue}" />
+                           Text="{Binding MinimumPlusUnitValue}" />
 
                     <!-- Minimum Occurrence -->
                     <Label Grid.Row="4" Grid.Column="0" Style="{StaticResource FormLabelStyle}" Text="Occurrence " />
                     <Entry Grid.Row="4" Grid.Column="1"
                            IsEnabled="False"
                            Style="{StaticResource FormValueStyle}"
-                           Text="{Binding MinimumOccuranceTimeStamp}" />
+                           Text="{Binding MinimumOccuranceDateTimeStamp}" />
 
                     <!-- Maximum -->
                     <Label Grid.Row="5" Grid.Column="0" Style="{StaticResource FormLabelStyle}" Text="Maximum " />
                     <Entry Grid.Row="5" Grid.Column="1"
                            IsEnabled="False"
                            Style="{StaticResource FormValueStyle}"
-                           Text="{Binding MaximumValue}" />
+                           Text="{Binding MaximumPlusUnitValue}" />
 
                     <!-- Maximum Occurrence -->
                     <Label Grid.Row="6" Grid.Column="0" Style="{StaticResource FormLabelStyle}" Text="Occurrence " />
                     <Entry Grid.Row="6" Grid.Column="1"
                            IsEnabled="False"
                            Style="{StaticResource FormValueStyle}"
-                           Text="{Binding MaximumOccuranceTimeStamp}" />
+                           Text="{Binding MaximumOccuranceDateTimeStamp}" />
 
                     <!-- Variance -->
                     <Label Grid.Row="7" Grid.Column="0" Style="{StaticResource FormLabelStyle}" Text="Variance " />
                     <Entry Grid.Row="7" Grid.Column="1"
                            IsEnabled="False"
                            Style="{StaticResource FormValueStyle}"
-                           Text="{Binding VarianceValue}" />
+                           Text="{Binding VariancePlusUnitValue}" />
 
                 </Grid>
 
@@ -436,7 +436,7 @@
                     <Entry Grid.Row="2" Grid.Column="1"
                            IsEnabled="False"
                            Style="{StaticResource FormValueStyle}"
-                           Text="{Binding AlarmDelay}" />
+                           Text="{Binding AlarmDelayPlusTime}" />
 
                     <!-- High Alarm -->
                     <Label Grid.Row="3" Grid.Column="0" Style="{StaticResource FormLabelStyle}" Text="High Alarm " />
@@ -474,7 +474,7 @@
 
     </pages:BasePage>
 
-    <pages:BasePage Title="Sensor Setup" Padding="0" BackgroundColor="#FFFFFF" Icon="nav_SensorSettings.png">
+    <pages:BasePage Title="Calibration" Padding="0" BackgroundColor="#FFFFFF" Icon="nav_SensorSettings.png">
 
         <!-- BTLE Status -->
         <StackLayout Padding="10" BackgroundColor="{StaticResource BTLEStatusBackgroundColor}" HorizontalOptions="CenterAndExpand" IsVisible="{Binding IsStateOn, Converter={StaticResource BooleanToFalseConverter}}">

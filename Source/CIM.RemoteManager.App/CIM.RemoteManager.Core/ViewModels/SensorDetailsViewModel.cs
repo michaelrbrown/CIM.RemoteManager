@@ -65,6 +65,9 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// </summary>
         public string CharacteristicValue => RxCharacteristic?.Value.BytesToStringConverted();
 
+        /// <summary>
+        /// The sensor characteristic value
+        /// </summary>
         private string _sensorCharacteristicValue = string.Empty;
 
         /// <summary>
@@ -90,90 +93,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             }
             set => SetProperty(ref _sensorIndexSelected, value);
         }
-
-        /// <summary>
-        /// Sensor index (unique id)
-        /// </summary>
-        public int SensorIndex { get; set; }
-
-        /// <summary>
-        /// Sensor name plus index
-        /// </summary>
-        public string SensorNameAndIndex
-        {
-            get
-            {
-                // Try to lookup hex to string
-                if (!String.IsNullOrEmpty(_sensorIndexSelected))
-                {
-                    return $"{SensorName} ({SensorIndexSelected})";
-                }
-                // Default
-                return SensorName;
-            }
-        }
-
-        /// <summary>
-        /// Sensor serial number plus index
-        /// </summary>
-        public string SensorSerialNumberAndIndex
-        {
-            get
-            {
-                // Try to lookup hex to string
-                if (!String.IsNullOrEmpty(_sensorIndexSelected))
-                {
-                    return $"{SensorSerialNumber} ({SensorIndexSelected})";
-                }
-                // Default
-                return SensorSerialNumber;
-            }
-        }
-
-        /// <summary>
-        /// Gets the sensor image based on the sensor type.
-        /// </summary>
-        /// <value>
-        /// The sensor image source from resource directory.
-        /// </value>
-        public ImageSource SensorImage
-        {
-            get
-            {
-                // Validate
-                if (!string.IsNullOrEmpty(SensorType.GetSensorTypeResult().SensorImage))
-                {
-                    // Return a non-cached image source
-                    return ImageSource.FromFile(SensorType.GetSensorTypeResult().SensorImage);
-                }
-                // Default image if nothing found
-                return ImageSource.FromFile("SensorDefault.png");
-            }
-        }
-
-        /// <summary>
-        /// Chart value title
-        /// </summary>
-        public string ChartValueTitle
-        {
-            get
-            {
-                // Validate
-                if (!string.IsNullOrEmpty(SensorType.GetSensorTypeResult().SensorUnitType))
-                {
-                    // Return a combined sensor group plus unit type (ex. Temperature °C)
-                    return $"{SensorType.GetSensorTypeResult().SensorGroup} {SensorType.GetSensorTypeResult().SensorUnitType}";
-                }
-                // Default
-                return SensorType.GetSensorTypeResult().SensorGroup;
-            }
-        }
-
-        /// <summary>
-        /// Sensor
-        /// </summary>
-        public Sensor Sensor { get; set; }
-
+        
         /// <summary>
         /// Sensor collection
         /// </summary>
@@ -295,6 +215,24 @@ namespace CIM.RemoteManager.Core.ViewModels
         public string SensorType { get; set; }
 
         /// <summary>
+        /// The sensor unit type (°C, %RH).
+        /// </summary>
+        public string SensorUnitType
+        {
+            get
+            {
+                // Validate
+                if (!string.IsNullOrEmpty(SensorType))
+                {
+                    // Return a sensor unit type
+                    return SensorType.GetSensorTypeResult().SensorUnitType;
+                }
+                // Default
+                return "";
+            }
+        }
+
+        /// <summary>
         /// Sensor Scale
         /// </summary>
         private double _upperCalibration;
@@ -400,6 +338,24 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
+        /// Average sensor value plus the value unit type appended.
+        /// </summary>
+        public string AveragePlusUnitValue
+        {
+            get
+            {
+                if (!String.IsNullOrWhiteSpace(AverageValue.ToString()))
+                {
+                    return $"{AverageValue} {SensorUnitType}";
+                }
+                // Default
+                return "";
+            }
+        }
+
+        /// <summary
+
+        /// <summary>
         /// Converting Unix to Windows DateTime
         /// </summary>
         private int _sinceTimeStamp;
@@ -412,9 +368,19 @@ namespace CIM.RemoteManager.Core.ViewModels
         /// <summary>
         /// Converting Unix to Windows DateTime
         /// </summary>
-        public DateTime? SinceDateTimeStamp => _sinceTimeStamp.UnixTimeStampToDateTime();
-
-
+        public DateTime? SinceDateTimeStamp
+        {
+            get
+            {
+                if (int.TryParse(_sinceTimeStamp.ToString(), out int sinceTimeStampResult))
+                {
+                    return Convert.ToDateTime(sinceTimeStampResult.UnixTimeStampToDateTime().ToString("MM/dd/yyyy hh:mm:ss.fff tt"));
+                }
+                // Default
+                return null;
+            }
+        }
+        
         /// <summary>
         /// Average sensor value.
         /// Make sure we divide by 10 to convert to appropriate value.
@@ -437,7 +403,21 @@ namespace CIM.RemoteManager.Core.ViewModels
             set => SetProperty(ref _minimumValue, value);
         }
 
-
+        /// <summary>
+        /// Minimum sensor value plus the value unit type appended.
+        /// </summary>
+        public string MinimumPlusUnitValue
+        {
+            get
+            {
+                if (!String.IsNullOrWhiteSpace(MinimumValue.ToString()))
+                {
+                    return $"{MinimumValue} {SensorUnitType}";
+                }
+                // Default
+                return "";
+            }
+        }
 
         /// <summary>
         /// Converting Unix to Windows DateTime
@@ -445,15 +425,26 @@ namespace CIM.RemoteManager.Core.ViewModels
         private int _minimumOccuranceTimeStamp;
         public int MinimumOccuranceTimeStamp
         {
-            get => _minimumOccuranceTimeStamp;
+            get => _minimumOccuranceTimeStamp + SinceTimeStamp;
             set => SetProperty(ref _minimumOccuranceTimeStamp, value);
         }
 
         /// <summary>
         /// Converting Unix to Windows DateTime
         /// </summary>
-        public DateTime? MinimumOccuranceDateTimeStamp => _minimumOccuranceTimeStamp.UnixTimeStampToDateTime();
-
+        public DateTime? MinimumOccuranceDateTimeStamp
+        {
+            get
+            {
+                if (int.TryParse(_minimumOccuranceTimeStamp.ToString(), out int minimumOccuranceTimeStampResult))
+                {
+                    return Convert.ToDateTime(minimumOccuranceTimeStampResult.UnixTimeStampToDateTime().ToString("MM/dd/yyyy hh:mm:ss.fff tt"));
+                }
+                // Default
+                return null;
+            }
+        }
+        
         /// <summary>
         /// Average sensor value.
         /// Make sure we divide by 10 to convert to appropriate value.
@@ -477,20 +468,47 @@ namespace CIM.RemoteManager.Core.ViewModels
         }
 
         /// <summary>
+        /// Maximum sensor value plus the value unit type appended.
+        /// </summary>
+        public string MaximumPlusUnitValue
+        {
+            get
+            {
+                if (!String.IsNullOrWhiteSpace(MaximumValue.ToString()))
+                {
+                    return $"{MaximumValue} {SensorUnitType}";
+                }
+                // Default
+                return "";
+            }
+        }
+        
+        /// <summary>
         /// Converting Unix to Windows DateTime
         /// </summary>
         private int _maximumOccuranceTimeStamp;
         public int MaximumOccuranceTimeStamp
         {
-            get => _maximumOccuranceTimeStamp;
+            get => _maximumOccuranceTimeStamp + SinceTimeStamp;
             set => SetProperty(ref _maximumOccuranceTimeStamp, value);
         }
 
         /// <summary>
         /// Converting Unix to Windows DateTime
         /// </summary>
-        public DateTime? MaximumOccuranceDateTimeStamp => _maximumOccuranceTimeStamp.UnixTimeStampToDateTime();
-
+        public DateTime? MaximumOccuranceDateTimeStamp
+        {
+            get
+            {
+                if (int.TryParse(_maximumOccuranceTimeStamp.ToString(), out int maximumOccuranceTimeStampResult))
+                {
+                    return Convert.ToDateTime(maximumOccuranceTimeStampResult.UnixTimeStampToDateTime().ToString("MM/dd/yyyy hh:mm:ss.fff tt"));
+                }
+                // Default
+                return null;
+            }
+        }
+        
         /// <summary>
         /// Average sensor value.
         /// Make sure we divide by 10 to convert to appropriate value.
@@ -509,6 +527,22 @@ namespace CIM.RemoteManager.Core.ViewModels
                 return 0;
             }
             set => SetProperty(ref _varianceValue, value);
+        }
+
+        /// <summary>
+        /// Variance sensor value plus the value unit type appended.
+        /// </summary>
+        public string VariancePlusUnitValue
+        {
+            get
+            {
+                if (!String.IsNullOrWhiteSpace(VarianceValue.ToString()))
+                {
+                    return $"{VarianceValue} {SensorUnitType}";
+                }
+                // Default
+                return "";
+            }
         }
 
         #endregion
@@ -563,6 +597,22 @@ namespace CIM.RemoteManager.Core.ViewModels
         {
             get => _alarmDelay.ValidateNumber();
             set => SetProperty(ref _alarmDelay, value);
+        }
+
+        /// <summary>
+        /// Alarm delay sensor value plus the value unit type appended.
+        /// </summary>
+        public string AlarmDelayPlusTime
+        {
+            get
+            {
+                if (!String.IsNullOrWhiteSpace(AlarmDelay.ToString()))
+                {
+                    return $"{AlarmDelay} seconds";
+                }
+                // Default
+                return "";
+            }
         }
 
         /// <summary>

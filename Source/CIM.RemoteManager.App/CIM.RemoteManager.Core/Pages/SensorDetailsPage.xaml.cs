@@ -51,7 +51,7 @@ namespace CIM.RemoteManager.Core.Pages
         /// Tabbed current page changed event to handle setting sensor update type.
         /// Also handles starting sensor updates based on type.
         /// </summary>
-        protected override void OnCurrentPageChanged()
+        protected override async void OnCurrentPageChanged()
         {
             // Get binding context of Sensor Details viewmodel
             var sensorDetailsViewModel = (SensorDetailsViewModel)this.BindingContext;
@@ -62,6 +62,22 @@ namespace CIM.RemoteManager.Core.Pages
             else if (this.CurrentPage.Title == "Sensor Limits")
             {
                 sensorDetailsViewModel?.SetSensorCommandType(SensorDetailsViewModel.SensorCommand.Limits);
+            }
+            else if (this.CurrentPage.Title == "Calibration")
+            {
+                // Validate Sensor Calibration page by login
+                var result = await Acr.UserDialogs.UserDialogs.Instance.LoginAsync(new Acr.UserDialogs.LoginConfig
+                {
+                    Message = "Enter your user and password.",
+                    OkText = "Join",
+                    CancelText = "Cancel",
+                    Title = "App Name",
+                    LoginValue = "1215"
+                });
+                if (result.Password != "1215")
+                {
+                    this.CurrentPage = this.Children[0];
+                }
             }
             else
             {
