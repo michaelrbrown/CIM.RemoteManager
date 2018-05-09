@@ -93,7 +93,51 @@ namespace CIM.RemoteManager.Core.ViewModels
             }
             set => SetProperty(ref _sensorIndexSelected, value);
         }
-        
+
+        /// <summary>
+        /// Gets the sensor image based on the sensor type.
+        /// </summary>
+        /// <value>
+        /// The sensor image source from resource directory.
+        /// </value>
+        public ImageSource SensorImage
+        {
+            get
+            {
+                // Validate
+                if (!string.IsNullOrEmpty(SensorType.GetSensorTypeResult().SensorImage))
+                {
+                    // Return a non-cached image source
+                    return ImageSource.FromFile(SensorType.GetSensorTypeResult().SensorImage);
+                }
+                // Default image if nothing found
+                return ImageSource.FromFile("SensorDefault.png");
+            }
+        }
+
+        /// <summary>
+        /// Chart value title
+        /// </summary>
+        public string ChartValueTitle
+        {
+            get
+            {
+                // Validate
+                if (!string.IsNullOrEmpty(SensorType.GetSensorTypeResult().SensorUnitType))
+                {
+                    // Return a combined sensor group plus unit type (ex. Temperature °C)
+                    return $"{SensorType.GetSensorTypeResult().SensorGroup} {SensorType.GetSensorTypeResult().SensorUnitType}";
+                }
+                // Default
+                return SensorType.GetSensorTypeResult().SensorGroup;
+            }
+        }
+
+        /// <summary>
+        /// Sensor
+        /// </summary>
+        public Sensor Sensor { get; set; }
+
         /// <summary>
         /// Sensor collection
         /// </summary>
@@ -1147,11 +1191,18 @@ namespace CIM.RemoteManager.Core.ViewModels
                         {
                             // "H" Sensor data serialization
                             MaximumValue = splitSensorValues[1].SafeHexToDouble();
+                            RaisePropertyChanged(() => MaximumPlusUnitValue);
                             MaximumOccuranceTimeStamp = splitSensorValues[2].SafeHexToInt();
+                            RaisePropertyChanged(() => MaximumOccuranceDateTimeStamp);
                             MinimumValue = splitSensorValues[3].SafeHexToDouble();
+                            RaisePropertyChanged(() => MinimumPlusUnitValue);
                             MinimumOccuranceTimeStamp = splitSensorValues[4].SafeHexToInt();
+                            RaisePropertyChanged(() => MinimumOccuranceDateTimeStamp);
                             AverageValue = splitSensorValues[5].SafeHexToDouble();
+                            RaisePropertyChanged(() => AveragePlusUnitValue);
                             SinceTimeStamp = splitSensorValues[6].SafeHexToInt();
+                            RaisePropertyChanged(() => SinceDateTimeStamp);
+                            RaisePropertyChanged(() => VariancePlusUnitValue);
 
                             // Show refreshing of chart via toast
                             _userDialogs.InfoToast("Refreshing Sensor Statistics...", TimeSpan.FromSeconds(1));
@@ -1164,6 +1215,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                             // "G" Sensor data serialization
                             AlarmStatus = splitSensorValues[1].SafeHexToInt();
                             AlarmDelay = splitSensorValues[2].SafeHexToDouble();
+                            RaisePropertyChanged(() => AlarmDelayPlusTime);
                             LowAlarmLimit = splitSensorValues[3].SafeHexToInt();
                             LowWarningLimit = splitSensorValues[4].SafeHexToDouble();
                             HighWarningLimit = splitSensorValues[5].SafeHexToInt();
@@ -1180,6 +1232,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                         {
                             TimeStamp = splitSensorValues[0].SafeHexToInt();
                             CurrentValue = splitSensorValues[1].SafeHexToDouble();
+                            RaisePropertyChanged(() => CurrentValue);
 
                             // Show refreshing of chart via toast
                             _userDialogs.InfoToast("Refreshing Sensor Settings...", TimeSpan.FromSeconds(1));
