@@ -33,7 +33,6 @@
         <Grid BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
             <Grid.RowDefinitions>
                 <RowDefinition Height="60" />
-                <RowDefinition Height="50" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
@@ -93,28 +92,9 @@
                 </StackLayout>
             </Grid>
 
-            <!-- Segmented Control -->
-            <StackLayout Grid.Row="1"
-                         HeightRequest="50" HorizontalOptions="FillAndExpand" Orientation="Horizontal" Spacing="0" VerticalOptions="FillAndExpand">
-
-                <abstractions:SegmentedControl x:Name="SegControl"
-                                               HorizontalOptions="CenterAndExpand" SelectedSegment="0"
-                                               SelectedTextColor="{StaticResource SegmentedControlTextColor}"
-                                               TintColor="{StaticResource SegmentedControlTintColor}"
-                                               ValueChanged="SegControl_OnValueChanged" VerticalOptions="CenterAndExpand" WidthRequest="325">
-                    <abstractions:SegmentedControl.Children>
-                        <abstractions:SegmentedControlOption HeightRequest="60" HorizontalOptions="Center" Text="50" />
-                        <abstractions:SegmentedControlOption HeightRequest="60" HorizontalOptions="Center" Text="100" />
-                        <abstractions:SegmentedControlOption HeightRequest="60" HorizontalOptions="Center" Text="200" />
-                        <abstractions:SegmentedControlOption HeightRequest="60" HorizontalOptions="Center" Text="500" />
-                    </abstractions:SegmentedControl.Children>
-                </abstractions:SegmentedControl>
-
-            </StackLayout>
-
             <!-- Chart Loading Indicator -->
             <xForms1:SfBusyIndicator x:Name="ChartBusyindicator" Title="Loading Plot Data..."
-                                     Grid.Row="2"
+                                     Grid.Row="1"
                                      AnimationType="ECG" BackgroundColor="Transparent" HeightRequest="250"
                                      IsBusy="{Binding ProcessingPlotData}"
                                      IsVisible="{Binding ProcessingPlotData}"
