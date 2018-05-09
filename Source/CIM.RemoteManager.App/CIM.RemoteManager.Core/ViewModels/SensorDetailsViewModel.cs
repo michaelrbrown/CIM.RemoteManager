@@ -8,6 +8,7 @@ using Plugin.BLE.Abstractions.Contracts;
 using Plugin.BLE.Abstractions.EventArgs;
 using Syncfusion.SfChart.XForms;
 using System;
+using System.Globalization;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -418,7 +419,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             {
                 if (int.TryParse(_sinceTimeStamp.ToString(), out int sinceTimeStampResult))
                 {
-                    return Convert.ToDateTime(sinceTimeStampResult.UnixTimeStampToDateTime().ToString("hh:mm:ss tt"));
+                    return DateTime.ParseExact(sinceTimeStampResult.UnixTimeStampToDateTime().ToString(), "hh:mm:ss tt", CultureInfo.InvariantCulture);
                 }
                 // Default
                 return null;
@@ -482,7 +483,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             {
                 if (int.TryParse(_minimumOccuranceTimeStamp.ToString(), out int minimumOccuranceTimeStampResult))
                 {
-                    return Convert.ToDateTime(minimumOccuranceTimeStampResult.UnixTimeStampToDateTime().ToString("hh:mm:ss tt"));
+                    return DateTime.ParseExact(minimumOccuranceTimeStampResult.UnixTimeStampToDateTime().ToString(), "hh:mm:ss tt", CultureInfo.InvariantCulture);
                 }
                 // Default
                 return null;
@@ -546,7 +547,7 @@ namespace CIM.RemoteManager.Core.ViewModels
             {
                 if (int.TryParse(_maximumOccuranceTimeStamp.ToString(), out int maximumOccuranceTimeStampResult))
                 {
-                    return Convert.ToDateTime(maximumOccuranceTimeStampResult.UnixTimeStampToDateTime().ToString("hh:mm:ss tt"));
+                    return DateTime.ParseExact(maximumOccuranceTimeStampResult.UnixTimeStampToDateTime().ToString(), "hh:mm:ss tt", CultureInfo.InvariantCulture);
                 }
                 // Default
                 return null;
