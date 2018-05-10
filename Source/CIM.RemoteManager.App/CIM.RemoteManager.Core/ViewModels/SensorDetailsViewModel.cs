@@ -1276,13 +1276,20 @@ namespace CIM.RemoteManager.Core.ViewModels
                         // Only update the values if we have a match
                         if (SensorIndexSelected.GetSensorIndexAsInt() == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('G') + 1).SafeConvert<int>(0))
                         {
-                            // "G" Sensor data serialization
-                            AlarmStatus = splitSensorValues[1].SafeHexToInt();
-                            AlarmDelay = splitSensorValues[2].SafeHexToDouble();
-                            LowAlarmLimit = splitSensorValues[3].SafeHexToInt();
-                            LowWarningLimit = splitSensorValues[4].SafeHexToDouble();
-                            HighWarningLimit = splitSensorValues[5].SafeHexToInt();
-                            HighAlarmLimit = splitSensorValues[6].SafeHexToDouble();
+                            try
+                            {
+                                // "G" Sensor data serialization
+                                AlarmStatus = splitSensorValues[1].SafeHexToInt();
+                                AlarmDelay = splitSensorValues[2].SafeHexToDouble();
+                                LowAlarmLimit = splitSensorValues[3].SafeHexToInt();
+                                LowWarningLimit = splitSensorValues[4].SafeHexToDouble();
+                                HighWarningLimit = splitSensorValues[5].SafeHexToInt();
+                                HighAlarmLimit = splitSensorValues[6].SafeHexToDouble();
+                            }
+                            catch (Exception)
+                            {
+                                // ignored
+                            }
                             // Update UI
                             RaisePropertyChanged(() => AlarmDelayPlusTime);
                             RaisePropertyChanged(() => LowAlarmLimitPlusUnitValue);

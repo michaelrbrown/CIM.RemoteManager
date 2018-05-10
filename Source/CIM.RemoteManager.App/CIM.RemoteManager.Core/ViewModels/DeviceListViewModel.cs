@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using Acr.UserDialogs;
+﻿using Acr.UserDialogs;
 using CIM.RemoteManager.Core.Extensions;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
@@ -14,6 +8,12 @@ using Plugin.BLE.Abstractions.EventArgs;
 using Plugin.BLE.Abstractions.Extensions;
 using Plugin.Permissions.Abstractions;
 using Plugin.Settings.Abstractions;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace CIM.RemoteManager.Core.ViewModels
@@ -489,7 +489,13 @@ namespace CIM.RemoteManager.Core.ViewModels
                 }
                 else
                 {
-                    Devices.Add(new DeviceListItemViewModel(device));
+                    bool deviceInList = false;
+                    foreach (var currentDevice in Devices)
+                    {
+                        if (currentDevice.Id != device.Id) deviceInList = true;
+                    }
+                    // Only add deivce in list if not there
+                    if (!deviceInList) Devices.Add(new DeviceListItemViewModel(device));
                 }
             });
         }
@@ -509,7 +515,13 @@ namespace CIM.RemoteManager.Core.ViewModels
                 }
                 else
                 {
-                    SystemDevices.Add(new DeviceListItemViewModel(device));
+                    bool deviceInList = false;
+                    foreach (var currentDevice in Devices)
+                    {
+                        if (currentDevice.Id != device.Id) deviceInList = true;
+                    }
+                    // Only add deivce in list if not there
+                    if (!deviceInList) SystemDevices.Add(new DeviceListItemViewModel(device));
                 }
             });
         }
