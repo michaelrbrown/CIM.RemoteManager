@@ -1244,18 +1244,27 @@ namespace CIM.RemoteManager.Core.ViewModels
                         // Only update the values if we have a match
                         if (SensorIndexSelected.GetSensorIndexAsInt() == splitSensorValues[0].Substring(splitSensorValues[0].LastIndexOf('H') + 1).SafeConvert<int>(0))
                         {
-                            // "H" Sensor data serialization
-                            MaximumValue = splitSensorValues[1].SafeHexToDouble();
+                            try
+                            {
+                                // "H" Sensor data serialization
+                                MaximumValue = splitSensorValues[1].SafeHexToDouble();
+                                MaximumOccuranceTimeStamp = splitSensorValues[2].SafeHexToInt();
+                                MinimumValue = splitSensorValues[3].SafeHexToDouble();
+                                MinimumOccuranceTimeStamp = splitSensorValues[4].SafeHexToInt();
+                                AverageValue = splitSensorValues[5].SafeHexToDouble();
+                                SinceTimeStamp = splitSensorValues[6].SafeHexToInt();
+                            }
+                            catch (Exception)
+                            {
+                                // ignored
+                            }
+
+                            // Update UI
                             RaisePropertyChanged(() => MaximumPlusUnitValue);
-                            MaximumOccuranceTimeStamp = splitSensorValues[2].SafeHexToInt();
                             RaisePropertyChanged(() => MaximumOccuranceDateTimeStamp);
-                            MinimumValue = splitSensorValues[3].SafeHexToDouble();
                             RaisePropertyChanged(() => MinimumPlusUnitValue);
-                            MinimumOccuranceTimeStamp = splitSensorValues[4].SafeHexToInt();
                             RaisePropertyChanged(() => MinimumOccuranceDateTimeStamp);
-                            AverageValue = splitSensorValues[5].SafeHexToDouble();
                             RaisePropertyChanged(() => AveragePlusUnitValue);
-                            SinceTimeStamp = splitSensorValues[6].SafeHexToInt();
                             RaisePropertyChanged(() => SinceDateTimeStamp);
                             RaisePropertyChanged(() => VariancePlusUnitValue);
 
@@ -1270,14 +1279,15 @@ namespace CIM.RemoteManager.Core.ViewModels
                             // "G" Sensor data serialization
                             AlarmStatus = splitSensorValues[1].SafeHexToInt();
                             AlarmDelay = splitSensorValues[2].SafeHexToDouble();
-                            RaisePropertyChanged(() => AlarmDelayPlusTime);
                             LowAlarmLimit = splitSensorValues[3].SafeHexToInt();
-                            RaisePropertyChanged(() => LowAlarmLimitPlusUnitValue);
                             LowWarningLimit = splitSensorValues[4].SafeHexToDouble();
-                            RaisePropertyChanged(() => LowWarningLimitPlusUnitValue);
                             HighWarningLimit = splitSensorValues[5].SafeHexToInt();
-                            RaisePropertyChanged(() => HighWarningLimitPlusUnitValue);
                             HighAlarmLimit = splitSensorValues[6].SafeHexToDouble();
+                            // Update UI
+                            RaisePropertyChanged(() => AlarmDelayPlusTime);
+                            RaisePropertyChanged(() => LowAlarmLimitPlusUnitValue);
+                            RaisePropertyChanged(() => LowWarningLimitPlusUnitValue);
+                            RaisePropertyChanged(() => HighWarningLimitPlusUnitValue);
                             RaisePropertyChanged(() => HighAlarmLimitPlusUnitValue);
 
                             // Show refreshing of chart via toast
@@ -1291,6 +1301,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                         {
                             TimeStamp = splitSensorValues[0].SafeHexToInt();
                             CurrentValue = splitSensorValues[1].SafeHexToDouble();
+                            // Update UI
                             RaisePropertyChanged(() => CurrentValue);
 
                             // Show refreshing of chart via toast
