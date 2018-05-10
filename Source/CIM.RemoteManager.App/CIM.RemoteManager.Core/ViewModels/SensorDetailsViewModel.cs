@@ -481,7 +481,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         {
             get
             {
-                if (int.TryParse(_minimumOccuranceTimeStamp.ToString(), out int minimumOccuranceTimeStampResult))
+                if (_minimumOccuranceTimeStamp > 0 && int.TryParse(_minimumOccuranceTimeStamp.ToString(), out int minimumOccuranceTimeStampResult))
                 {
                     return DateTime.ParseExact(minimumOccuranceTimeStampResult.UnixTimeStampToDateTime().ToString(), "hh:mm:ss tt", CultureInfo.InvariantCulture);
                 }
@@ -545,7 +545,7 @@ namespace CIM.RemoteManager.Core.ViewModels
         {
             get
             {
-                if (int.TryParse(_maximumOccuranceTimeStamp.ToString(), out int maximumOccuranceTimeStampResult))
+                if (_maximumOccuranceTimeStamp > 0 && int.TryParse(_maximumOccuranceTimeStamp.ToString(), out int maximumOccuranceTimeStampResult))
                 {
                     return DateTime.ParseExact(maximumOccuranceTimeStampResult.UnixTimeStampToDateTime().ToString(), "hh:mm:ss tt", CultureInfo.InvariantCulture);
                 }
