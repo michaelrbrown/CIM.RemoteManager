@@ -2,6 +2,9 @@
 
 namespace CIM.RemoteManager.Core.Helpers
 {
+    /// <summary>
+    /// Class NumberHelper.
+    /// </summary>
     public static class NumberHelper
     {
         /// <summary>
@@ -43,7 +46,11 @@ namespace CIM.RemoteManager.Core.Helpers
         {
             if (String.IsNullOrWhiteSpace(hexValue)) return 0;
             // Return converted value
-            return int.Parse(hexValue, System.Globalization.NumberStyles.HexNumber);
+            if (int.TryParse(hexValue, System.Globalization.NumberStyles.HexNumber, null, out int result))
+            {
+                return result;
+            }
+            return 0;
         }
 
         /// <summary>
@@ -56,8 +63,11 @@ namespace CIM.RemoteManager.Core.Helpers
             if (String.IsNullOrWhiteSpace(hexValue)) return 0;
             // Return converted value
             hexValue = hexValue.Replace("x", string.Empty);
-            int.TryParse(hexValue, System.Globalization.NumberStyles.HexNumber, null, out int result);
-            return Convert.ToDouble(result);
+            if (int.TryParse(hexValue, System.Globalization.NumberStyles.HexNumber, null, out int result))
+            {
+                return Convert.ToDouble(result);
+            }
+            return 0;
         }
 
         /// <summary>
@@ -70,8 +80,11 @@ namespace CIM.RemoteManager.Core.Helpers
             if (String.IsNullOrWhiteSpace(hexValue)) return 0;
             // Return converted value
             hexValue = hexValue.Replace("x", string.Empty);
-            int.TryParse(hexValue, System.Globalization.NumberStyles.HexNumber, null, out int result);
-            return Convert.ToDecimal(result);
+            if (int.TryParse(hexValue, System.Globalization.NumberStyles.HexNumber, null, out int result))
+            {
+                return Convert.ToDecimal(result);
+            }
+            return 0;
         }
 
     }
