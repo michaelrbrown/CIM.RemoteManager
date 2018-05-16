@@ -1254,9 +1254,9 @@ namespace CIM.RemoteManager.Core.ViewModels
                                 AverageValue = splitSensorValues[5].SafeHexToDouble();
                                 SinceTimeStamp = splitSensorValues[6].SafeHexToInt();
                             }
-                            catch (Exception)
+                            catch (Exception ex)
                             {
-                                // ignored
+                                HockeyApp.MetricsManager.TrackEvent($"(SerializeStringToSensor H Record) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
                             }
 
                             // Update UI
@@ -1286,9 +1286,9 @@ namespace CIM.RemoteManager.Core.ViewModels
                                 HighWarningLimit = splitSensorValues[5].SafeHexToInt();
                                 HighAlarmLimit = splitSensorValues[6].SafeHexToDouble();
                             }
-                            catch (Exception)
+                            catch (Exception ex)
                             {
-                                // ignored
+                                HockeyApp.MetricsManager.TrackEvent($"(SerializeStringToSensor G Record) Message: {ex.Message}; StackTrace: {ex.StackTrace}");
                             }
                             // Update UI
                             RaisePropertyChanged(() => AlarmDelayPlusTime);
