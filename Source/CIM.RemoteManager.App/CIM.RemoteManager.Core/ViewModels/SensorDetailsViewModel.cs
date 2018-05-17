@@ -1278,7 +1278,7 @@ namespace CIM.RemoteManager.Core.ViewModels
                         {
                             try
                             {
-                                // "G" Sensor data serialization
+                                // "G" Sensor data serialization 
                                 AlarmStatus = splitSensorValues[1].SafeHexToInt();
                                 AlarmDelay = splitSensorValues[2].SafeHexToDouble();
                                 LowAlarmLimit = splitSensorValues[3].SafeHexToInt();
